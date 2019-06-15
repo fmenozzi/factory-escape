@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/industrial.v2.png" type="Texture" id=1]
+
+[node name="BackgroundLarge" type="Node"]
+
+[node name="PipeCrossSectionDarkTop" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 0, 32, 16 )
+
+[node name="PipeCrossSectionDarkBottom" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 368, 16, 32, 16 )
+
+[node name="PipeCrossSectionLightTop" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 32, 32, 16 )
+
+[node name="PipeCrossSectionLightBottom" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 48, 32, 16 )
+
+[node name="LargeBoilerTop" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 184, 160, 32, 16 )
+
+[node name="LargeBoilerMiddle" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 184, 176, 32, 16 )
+
+[node name="LargeBoilerBottom" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 184, 192, 32, 16 )
+
+[node name="OldSiloTop" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 296, 160, 32, 16 )
+
+[node name="OldSiloMiddle" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 296, 176, 32, 16 )
+
+[node name="OldSiloBottom" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 296, 192, 32, 16 )
+
+[node name="SiloTop" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 336, 64, 32, 16 )
+
+[node name="SiloMiddleTop" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 336, 80, 32, 16 )
+
+[node name="SiloMiddleMiddle" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 336, 96, 32, 16 )
+
+[node name="SiloMiddleBottom" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 336, 112, 32, 16 )
+
+[node name="SiloBottom" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 336, 128, 32, 16 )
+

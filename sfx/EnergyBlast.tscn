@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://sfx/energy_blast.gd" type="Script" id=1]
+[ext_resource path="res://assets/energy_blast.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 8.0
+
+[sub_resource type="Curve" id=5]
+min_value = -360.0
+max_value = 360.0
+_data = [ Vector2( 0.0524691, 297.792 ), 0.0, 0.0, 0, 0, Vector2( 0.978395, -247.104 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.762346, 0.3537 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 300.0
+angular_velocity_random = 1.0
+angular_velocity_curve = SubResource( 6 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 10.0
+radial_accel = 20.0
+damping = 10.0
+damping_random = 0.5
+scale_curve = SubResource( 3 )
+
+[node name="EnergyBlast" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+amount = 32
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 2 )
+

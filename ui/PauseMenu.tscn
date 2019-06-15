@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/pause_menu.gd" type="Script" id=2]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="BlackOverlay" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+
+[node name="MenuBackground" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -45.0
+margin_right = 80.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 160, 90 )
+color = Color( 0, 0, 0, 0 )
+
+[node name="MainMenu" type="VBoxContainer" parent="MenuBackground"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 5
+alignment = 1
+
+[node name="Resume" type="Button" parent="MenuBackground/MainMenu"]
+margin_top = 17.0
+margin_right = 160.0
+margin_bottom = 32.0
+text = "Resume"
+
+[node name="Options" type="Button" parent="MenuBackground/MainMenu"]
+margin_top = 37.0
+margin_right = 160.0
+margin_bottom = 52.0
+text = "Options"
+
+[node name="Quit" type="Button" parent="MenuBackground/MainMenu"]
+margin_top = 57.0
+margin_right = 160.0
+margin_bottom = 72.0
+text = "Quit"
+
+[node name="OptionsMenu" type="VBoxContainer" parent="MenuBackground"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -80.0
+margin_top = -45.0
+margin_right = 80.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 160, 90 )
+alignment = 1
