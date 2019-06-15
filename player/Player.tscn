@@ -230,4 +230,3 @@ script = ExtResource( 8 )
 [node name="DashEcho" type="Timer" parent="States/Dash"]
 
 [node name="DashCooldown" type="Timer" parent="."]
-

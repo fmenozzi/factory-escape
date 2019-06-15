@@ -140,13 +140,21 @@ func set_player_direction(direction: int) -> void:
 	
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
-#
-# TODO: This doesn't seem to work for dashing. Might need to pause timers as well.
 func pause() -> void:
 	set_physics_process(false)
 	set_process_input(false)
+	
 	$AnimationPlayer.stop(false)
+	
+	$States/Dash/DashDuration.paused = true
+	$States/Dash/DashEcho.paused = true
+	$DashCooldown.paused = true
 func unpause() -> void:
 	set_physics_process(true)
 	set_process_input(true)
+	
 	$AnimationPlayer.play()
+	
+	$States/Dash/DashDuration.paused = false
+	$States/Dash/DashEcho.paused = false
+	$DashCooldown.paused = false
