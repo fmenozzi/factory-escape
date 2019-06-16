@@ -24,6 +24,8 @@ func exit(pause: Pause) -> void:
 func handle_input(pause: Pause, event: InputEvent) -> void:
 	if event.is_action_pressed('ui_pause'):
 		emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.UNPAUSED)
+	elif event.is_action_pressed('ui_cancel'):
+		emit_signal('menu_changed', pause.Menu.OPTIONS, pause.Menu.PAUSE)
 
 func _on_game_pressed(pause: Pause) -> void:
 	print('game button not yet implemented')
