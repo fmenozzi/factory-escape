@@ -1,4 +1,4 @@
-extends 'res://ui/menu.gd'
+extends 'res://ui/menus/menu.gd'
 
 onready var _resume: Button = $Resume
 onready var _options: Button = $Options

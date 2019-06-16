@@ -1,4 +1,4 @@
-extends 'res://ui/menu.gd'
+extends 'res://ui/menus/menu.gd'
 
 onready var _yes: Button = $Yes
 onready var _no: Button = $No

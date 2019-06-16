@@ -2,12 +2,12 @@
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/pause.gd" type="Script" id=2]
-[ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/OptionsMenu.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ui/QuitMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/menus/PauseMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/menus/OptionsMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/menus/QuitMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends 'res://ui/menu.gd'
+script/source = "extends 'res://ui/menus/menu.gd'
 
 func enter(pause: Pause) -> void:
 	pause._set_paused(false)
