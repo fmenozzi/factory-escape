@@ -11,5 +11,5 @@ func exit(pause: Pause) -> void:
 	pass
 
 # Called when handling input for this menu.
-func handle_input(pause: Pause, event: InputEvent):
+func handle_input(pause: Pause, event: InputEvent) -> void:
 	pass

@@ -15,7 +15,7 @@ func enter(pause: Pause) -> void:
 func exit(pause: Pause) -> void:
 	self.visible = false
 
-func handle_input(pause: Pause, event: InputEvent):
+func handle_input(pause: Pause, event: InputEvent) -> void:
 	if event.is_action_pressed('ui_pause'):
 		emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.UNPAUSED)
 
