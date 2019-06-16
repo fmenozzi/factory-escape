@@ -3,7 +3,7 @@ extends VBoxContainer
 signal menu_changed(old_menu, new_menu)
 
 # Called when this menu is entered.
-func enter(pause: Pause) -> void:
+func enter(pause: Pause, previous_menu: int) -> void:
 	pass
 
 # Called when this menu is exited.

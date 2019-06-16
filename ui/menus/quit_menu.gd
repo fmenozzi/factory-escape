@@ -3,7 +3,7 @@ extends 'res://ui/menus/menu.gd'
 onready var _yes: Button = $Yes
 onready var _no: Button = $No
 
-func enter(pause: Pause) -> void:
+func enter(pause: Pause, previous_menu: int) -> void:
 	_yes.connect('pressed', self, '_on_yes_pressed')
 
 	_no.connect('pressed', self, '_on_no_pressed', [pause])

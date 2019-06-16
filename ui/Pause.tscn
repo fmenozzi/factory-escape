@@ -10,7 +10,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends 'res://ui/menus/menu.gd'
 
-func enter(pause: Pause) -> void:
+func enter(pause: Pause, previous_menu: int) -> void:
 	pause._set_paused(false)
 
 func exit(pause: Pause) -> void:

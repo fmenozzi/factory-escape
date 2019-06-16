@@ -7,7 +7,7 @@ onready var _controller: Button = $Controller
 onready var _keyboard: Button = $Keyboard
 onready var _back: Button = $Back
 
-func enter(pause: Pause) -> void:
+func enter(pause: Pause, previous_menu: int) -> void:
 	_game.connect('pressed', self, '_on_game_pressed', [pause])
 	_audio.connect('pressed', self, '_on_audio_pressed', [pause])
 	_video.connect('pressed', self, '_on_video_pressed', [pause])

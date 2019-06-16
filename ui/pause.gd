@@ -27,11 +27,6 @@ var _current_menu: VBoxContainer = null
 
 onready var _black_overlay: ColorRect = $BlackOverlay
 
-# TODO: Ensure that we return focus appropriately when navigating back to
-#       previous menus (e.g. when you hit "No" in the quit menu and return to
-#       the pause menu, "Quit" should have focus and not "Resume"). The use of
-#       pushdown automata might help with this.
-
 func _ready() -> void:
 	# Intercept all menu_changed signals from individual submenus.
 	for menu in MENUS.values():
@@ -47,7 +42,7 @@ func _input(event: InputEvent) -> void:
 func _change_menu(old_menu: int, new_menu: int) -> void:
 	_current_menu.exit(self)
 	_current_menu = MENUS[new_menu]
-	_current_menu.enter(self)
+	_current_menu.enter(self, old_menu)
 
 func _set_paused(new_pause_state: bool) -> void:
 	get_tree().paused = new_pause_state

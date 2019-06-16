@@ -4,13 +4,20 @@ onready var _resume: Button = $Resume
 onready var _options: Button = $Options
 onready var _quit: Button = $Quit
 
-func enter(pause: Pause) -> void:
+func enter(pause: Pause, previous_menu: int) -> void:
 	_resume.connect('pressed', self, '_on_resume_pressed', [pause])
 	_options.connect('pressed', self, '_on_options_pressed', [pause])
 	_quit.connect('pressed', self, '_on_quit_pressed', [pause])
 
 	self.visible = true
-	_resume.grab_focus()
+
+	match previous_menu:
+		pause.Menu.OPTIONS:
+			_options.grab_focus()
+		pause.Menu.QUIT:
+			_quit.grab_focus()
+		_:
+			_resume.grab_focus()
 
 func exit(pause: Pause) -> void:
 	self.visible = false
