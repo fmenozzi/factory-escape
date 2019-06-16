@@ -9,15 +9,15 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends 'res://ui/menu.gd'
 
-func enter(pause_node) -> void:
-	pause_node._set_paused(false)
+func enter(pause: Pause) -> void:
+	pause._set_paused(false)
 
-func exit(pause_node) -> void:
-	pause_node._set_paused(true)
+func exit(pause: Pause) -> void:
+	pause._set_paused(true)
 
-func handle_input(pause_node, event: InputEvent):
+func handle_input(pause: Pause, event: InputEvent):
 	if event.is_action_pressed('ui_pause'):
-		emit_signal('menu_changed', pause_node.Menu.UNPAUSED, pause_node.Menu.PAUSE)
+		emit_signal('menu_changed', pause.Menu.UNPAUSED, pause.Menu.PAUSE)
 "
 
 [node name="Pause" type="Control"]

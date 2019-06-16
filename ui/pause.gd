@@ -1,4 +1,5 @@
 extends Control
+class_name Pause
 
 # The possible menus that the player can navigate to after pressing the pause
 # button. Starts in the UNPAUSED state.
