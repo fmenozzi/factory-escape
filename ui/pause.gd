@@ -45,11 +45,12 @@ func _ready() -> void:
 	_change_menu(Menu.UNPAUSED)
 
 func _input(event: InputEvent) -> void:
-	var new_menu = _current_menu.handle_input(self, event)
-	if new_menu != Menu.NO_CHANGE:
-		_change_menu(new_menu)
+	_change_menu(_current_menu.handle_input(self, event))
 
 func _change_menu(new_menu: int) -> void:
+	if new_menu == Menu.NO_CHANGE:
+		return
+
 	_current_menu.exit(self)
 	_current_menu = MENUS[new_menu]
 	_current_menu.enter(self)
