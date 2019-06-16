@@ -1,21 +1,19 @@
 extends VBoxContainer
 
+signal menu_changed(new_menu)
+
 # Called when this menu is entered.
 func enter(pause_node) -> void:
 	pass
-	
+
 # Called when this menu is exited.
 func exit(pause_node) -> void:
 	pass
-	
+
 # Called when handling input for this menu. Returns the new menu to transition
-# to, NO_CHANGE if remaining in current menu, or PREVIOUS if navigating back to
-# the previous menu.
-#
-# TODO: Consider changing this (and potentially the player state machine too) to
-#       a signals-based approach, rather than having to constantly return
-#       NO_CHANGE and having to do so in this function (as opposed to using a
-#       signals-based approach where you can change state from within e.g. a
-#       button callback).
+# to or NO_CHANGE if remaining in current menu. By default, pressing pause will
+# return to the unpaused state.
 func handle_input(pause_node, event: InputEvent) -> int:
-	return -1
+	if event.is_action_pressed('ui_pause'):
+		return pause_node.Menu.UNPAUSED
+	return pause_node.Menu.NO_CHANGE

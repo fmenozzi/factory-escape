@@ -18,8 +18,5 @@ layer = 2
 
 [node name="Pause" parent="PauseLayer" instance=ExtResource( 2 )]
 editor/display_folded = true
-visible = false
 
 [editable path="World"]
-
-[editable path="World/Player"]
