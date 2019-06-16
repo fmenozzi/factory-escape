@@ -15,10 +15,9 @@ func enter(pause_node) -> void:
 func exit(pause_node) -> void:
 	pause_node._set_paused(true)
 
-func handle_input(pause_node, event: InputEvent) -> int:
+func handle_input(pause_node, event: InputEvent):
 	if event.is_action_pressed('ui_pause'):
-		return pause_node.Menu.PAUSE
-	return pause_node.Menu.NO_CHANGE
+		emit_signal('menu_changed', pause_node.Menu.UNPAUSED, pause_node.Menu.PAUSE)
 "
 
 [node name="Pause" type="Control"]

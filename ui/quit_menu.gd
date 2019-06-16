@@ -14,8 +14,12 @@ func enter(pause_node) -> void:
 func exit(pause_node) -> void:
 	self.visible = false
 
+func handle_input(pause_node, event: InputEvent):
+	if event.is_action_pressed('ui_pause'):
+		emit_signal('menu_changed', pause_node.Menu.QUIT, pause_node.Menu.UNPAUSED)
+
 func _on_yes_pressed() -> void:
 	get_tree().quit()
 
 func _on_no_pressed(pause_node) -> void:
-	emit_signal('menu_changed', pause_node.Menu.PAUSE)
+	emit_signal('menu_changed', pause_node.Menu.QUIT, pause_node.Menu.PAUSE)

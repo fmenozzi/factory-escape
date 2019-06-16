@@ -6,10 +6,6 @@ extends Control
 # TODO: Consider changing this back to "State", rather than "Menu", given that
 #       UNPAUSED isn't a menu.
 enum Menu {
-	# Reserved for menus to indicate that the current menu should not be
-	# changed.
-	NO_CHANGE,
-
 	# Reserved for representing the unpaused state, in order to know when to
 	# toggle visibility of the main pause menu and actually pause the game.
 	UNPAUSED,
@@ -26,7 +22,7 @@ onready var MENUS = {
 	Menu.OPTIONS:  $MenuBackground/OptionsMenu,
 	Menu.QUIT:     $MenuBackground/QuitMenu,
 }
-var _current_menu = null
+var _current_menu: VBoxContainer = null
 
 onready var _black_overlay: ColorRect = $BlackOverlay
 
@@ -36,21 +32,18 @@ onready var _black_overlay: ColorRect = $BlackOverlay
 #       pushdown automata might help with this.
 
 func _ready() -> void:
-	# Allow for button callbacks within individual menus to call _change_menu().
+	# Intercept all menu_changed signals from individual submenus.
 	for menu in MENUS.values():
 		menu.connect('menu_changed', self, '_change_menu')
 
 	# Start in unpaused state.
 	_current_menu = MENUS[Menu.UNPAUSED]
-	_change_menu(Menu.UNPAUSED)
+	_change_menu(Menu.UNPAUSED, Menu.UNPAUSED)
 
 func _input(event: InputEvent) -> void:
-	_change_menu(_current_menu.handle_input(self, event))
+	_current_menu.handle_input(self, event)
 
-func _change_menu(new_menu: int) -> void:
-	if new_menu == Menu.NO_CHANGE:
-		return
-
+func _change_menu(old_menu: int, new_menu: int) -> void:
 	_current_menu.exit(self)
 	_current_menu = MENUS[new_menu]
 	_current_menu.enter(self)
