@@ -23,7 +23,7 @@ func _on_resume_pressed(pause: Pause) -> void:
 	emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.UNPAUSED)
 
 func _on_options_pressed(pause: Pause) -> void:
-	print('options button not yet implemented')
+	emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.OPTIONS)
 
 func _on_quit_pressed(pause: Pause) -> void:
 	emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.QUIT)
