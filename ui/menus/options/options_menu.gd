@@ -34,7 +34,7 @@ func _on_audio_pressed(pause: Pause) -> void:
 	print('audio button not yet implemented')
 
 func _on_video_pressed(pause: Pause) -> void:
-	print('video button not yet implemented')
+	emit_signal('menu_changed', pause.Menu.OPTIONS, pause.Menu.VIDEO_OPTIONS)
 
 func _on_controller_pressed(pause: Pause) -> void:
 	print('controller button not yet implemented')

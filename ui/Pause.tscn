@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/pause.gd" type="Script" id=2]
 [ext_resource path="res://ui/menus/pause/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/menus/options/OptionsMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/menus/quit/QuitMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/menus/options/video/VideoOptionsMenu.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends 'res://ui/menus/menu.gd'
@@ -58,4 +59,7 @@ visible = false
 visible = false
 
 [node name="QuitMenu" parent="MenuBackground" instance=ExtResource( 5 )]
+visible = false
+
+[node name="VideoOptionsMenu" parent="MenuBackground" instance=ExtResource( 6 )]
 visible = false
