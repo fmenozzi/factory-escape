@@ -16,12 +16,12 @@ func exit(pause: Pause) -> void:
 
 func handle_input(pause: Pause, event: InputEvent) -> void:
 	if event.is_action_pressed('ui_pause'):
-		emit_signal('menu_changed', pause.Menu.QUIT, pause.Menu.UNPAUSED)
+		change_menu(pause.Menu.QUIT, pause.Menu.UNPAUSED)
 	elif event.is_action_pressed('ui_cancel'):
-		emit_signal('menu_changed', pause.Menu.QUIT, pause.Menu.PAUSE)
+		change_menu(pause.Menu.QUIT, pause.Menu.PAUSE)
 
 func _on_yes_pressed() -> void:
 	get_tree().quit()
 
 func _on_no_pressed(pause: Pause) -> void:
-	emit_signal('menu_changed', pause.Menu.QUIT, pause.Menu.PAUSE)
+	change_menu(pause.Menu.QUIT, pause.Menu.PAUSE)

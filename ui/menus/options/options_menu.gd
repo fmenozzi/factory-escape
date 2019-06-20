@@ -23,9 +23,9 @@ func exit(pause: Pause) -> void:
 
 func handle_input(pause: Pause, event: InputEvent) -> void:
 	if event.is_action_pressed('ui_pause'):
-		emit_signal('menu_changed', pause.Menu.OPTIONS, pause.Menu.UNPAUSED)
+		change_menu(pause.Menu.OPTIONS, pause.Menu.UNPAUSED)
 	elif event.is_action_pressed('ui_cancel'):
-		emit_signal('menu_changed', pause.Menu.OPTIONS, pause.Menu.PAUSE)
+		change_menu(pause.Menu.OPTIONS, pause.Menu.PAUSE)
 
 func _on_game_pressed(pause: Pause) -> void:
 	print('game button not yet implemented')
@@ -34,7 +34,7 @@ func _on_audio_pressed(pause: Pause) -> void:
 	print('audio button not yet implemented')
 
 func _on_video_pressed(pause: Pause) -> void:
-	emit_signal('menu_changed', pause.Menu.OPTIONS, pause.Menu.VIDEO_OPTIONS)
+	change_menu(pause.Menu.OPTIONS, pause.Menu.VIDEO_OPTIONS)
 
 func _on_controller_pressed(pause: Pause) -> void:
 	print('controller button not yet implemented')
@@ -43,4 +43,4 @@ func _on_keyboard_pressed(pause: Pause) -> void:
 	print('keyboard button not yet implemented')
 
 func _on_back_pressed(pause: Pause) -> void:
-	emit_signal('menu_changed', pause.Menu.OPTIONS, pause.Menu.PAUSE)
+	change_menu(pause.Menu.OPTIONS, pause.Menu.PAUSE)

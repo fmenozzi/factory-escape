@@ -24,13 +24,13 @@ func exit(pause: Pause) -> void:
 
 func handle_input(pause: Pause, event: InputEvent) -> void:
 	if event.is_action_pressed('ui_pause') or event.is_action_pressed('ui_cancel'):
-		emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.UNPAUSED)
+		change_menu(pause.Menu.PAUSE, pause.Menu.UNPAUSED)
 
 func _on_resume_pressed(pause: Pause) -> void:
-	emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.UNPAUSED)
+	change_menu(pause.Menu.PAUSE, pause.Menu.UNPAUSED)
 
 func _on_options_pressed(pause: Pause) -> void:
-	emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.OPTIONS)
+	change_menu(pause.Menu.PAUSE, pause.Menu.OPTIONS)
 
 func _on_quit_pressed(pause: Pause) -> void:
-	emit_signal('menu_changed', pause.Menu.PAUSE, pause.Menu.QUIT)
+	change_menu(pause.Menu.PAUSE, pause.Menu.QUIT)

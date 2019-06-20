@@ -17,9 +17,9 @@ func exit(pause: Pause) -> void:
 
 func handle_input(pause: Pause, event: InputEvent) -> void:
 	if event.is_action_pressed('ui_pause'):
-		emit_signal('menu_changed', pause.Menu.VIDEO_OPTIONS, pause.Menu.UNPAUSED)
+		change_menu(pause.Menu.VIDEO_OPTIONS, pause.Menu.UNPAUSED)
 	elif event.is_action_pressed('ui_cancel'):
-		emit_signal('menu_changed', pause.Menu.VIDEO_OPTIONS, pause.Menu.OPTIONS)
+		change_menu(pause.Menu.VIDEO_OPTIONS, pause.Menu.OPTIONS)
 
 func _on_vsync_pressed() -> void:
 	# TODO: Save this somewhere persistent as well.
