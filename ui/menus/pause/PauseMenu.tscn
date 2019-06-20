@@ -22,6 +22,7 @@ align = 1
 margin_top = 71.0
 margin_right = 320.0
 margin_bottom = 86.0
+focus_neighbour_top = NodePath("../Quit")
 text = "Resume"
 
 [node name="Options" type="Button" parent="."]
@@ -34,4 +35,5 @@ text = "Options"
 margin_top = 111.0
 margin_right = 320.0
 margin_bottom = 126.0
+focus_neighbour_bottom = NodePath("../Paused")
 text = "Quit"

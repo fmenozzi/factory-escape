@@ -21,6 +21,7 @@ align = 1
 margin_top = 35.0
 margin_right = 320.0
 margin_bottom = 50.0
+focus_neighbour_top = NodePath("../Back")
 text = "Game"
 
 [node name="Audio" type="Button" parent="."]
@@ -56,4 +57,5 @@ margin_bottom = 143.0
 margin_top = 147.0
 margin_right = 320.0
 margin_bottom = 162.0
+focus_neighbour_bottom = NodePath("../Game")
 text = "Back"

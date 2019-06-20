@@ -21,6 +21,7 @@ align = 1
 margin_top = 78.0
 margin_right = 320.0
 margin_bottom = 96.0
+focus_neighbour_top = NodePath("../Fullscreen")
 text = "VSync"
 align = 1
 
@@ -28,5 +29,6 @@ align = 1
 margin_top = 100.0
 margin_right = 320.0
 margin_bottom = 118.0
+focus_neighbour_bottom = NodePath("../VSync")
 text = "Fullscreen"
 align = 1
