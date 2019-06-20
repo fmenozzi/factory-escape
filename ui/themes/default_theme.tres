@@ -1,13 +1,15 @@
-[gd_resource type="Theme" load_steps=6 format=2]
+[gd_resource type="Theme" load_steps=8 format=2]
 
 [ext_resource path="res://ui/themes/button/focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/themes/button/hover.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/themes/button/normal.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/themes/button/pressed.tres" type="StyleBox" id=4]
-[ext_resource path="res://ui/fonts/m5x7.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/checkbutton-on.png" type="Texture" id=5]
+[ext_resource path="res://assets/checkbutton-off.png" type="Texture" id=6]
+[ext_resource path="res://ui/fonts/m5x7.tres" type="DynamicFont" id=7]
 
 [resource]
-default_font = ExtResource( 5 )
+default_font = ExtResource( 7 )
 Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
 Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
@@ -19,3 +21,21 @@ Button/styles/focus = ExtResource( 1 )
 Button/styles/hover = ExtResource( 2 )
 Button/styles/normal = ExtResource( 3 )
 Button/styles/pressed = ExtResource( 4 )
+CheckBox/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckBox/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 1, 1, 1, 1 )
+CheckBox/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = null
+CheckBox/icons/checked = ExtResource( 5 )
+CheckBox/icons/radio_checked = null
+CheckBox/icons/radio_unchecked = null
+CheckBox/icons/unchecked = ExtResource( 6 )
+CheckBox/styles/disabled = null
+CheckBox/styles/focus = null
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
