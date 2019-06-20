@@ -16,16 +16,18 @@ enum Menu {
 	QUIT,
 
 	VIDEO_OPTIONS,
+	CONTROLLER_OPTIONS,
 }
 
 onready var MENUS = {
 	Menu.UNPAUSED: $MenuBackground/UnpausedState,
 
-	Menu.PAUSE:    $MenuBackground/PauseMenu,
-	Menu.OPTIONS:  $MenuBackground/OptionsMenu,
-	Menu.QUIT:     $MenuBackground/QuitMenu,
+	Menu.PAUSE:   $MenuBackground/PauseMenu,
+	Menu.OPTIONS: $MenuBackground/OptionsMenu,
+	Menu.QUIT:    $MenuBackground/QuitMenu,
 
-	Menu.VIDEO_OPTIONS: $MenuBackground/VideoOptionsMenu,
+	Menu.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
+	Menu.CONTROLLER_OPTIONS: $MenuBackground/ControllerOptionsMenu,
 }
 var _current_menu: VBoxContainer = null
 

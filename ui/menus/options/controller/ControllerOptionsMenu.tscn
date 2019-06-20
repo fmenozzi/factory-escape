@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/menus/options/controller/controller_options_menu.gd" type="Script" id=2]
+[ext_resource path="res://assets/xbox-a.png" type="Texture" id=3]
+[ext_resource path="res://assets/xbox-x.png" type="Texture" id=4]
+[ext_resource path="res://assets/xbox-rt.png" type="Texture" id=5]
+[ext_resource path="res://assets/xbox-dpad-up.png" type="Texture" id=6]
+
+[node name="ControllerOptionsMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+alignment = 1
+script = ExtResource( 2 )
+
+[node name="Controller" type="Label" parent="."]
+margin_top = 25.0
+margin_right = 320.0
+margin_bottom = 38.0
+text = "Controller"
+align = 1
+
+[node name="Jump" type="HBoxContainer" parent="."]
+margin_top = 42.0
+margin_right = 320.0
+margin_bottom = 58.0
+alignment = 1
+
+[node name="Jump" type="Button" parent="Jump"]
+margin_right = 158.0
+margin_bottom = 16.0
+focus_neighbour_top = NodePath("../../Back")
+size_flags_horizontal = 3
+text = "Jump"
+align = 2
+
+[node name="JumpButtonTexture" type="TextureRect" parent="Jump"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+texture = ExtResource( 3 )
+
+[node name="Attack" type="HBoxContainer" parent="."]
+margin_top = 62.0
+margin_right = 320.0
+margin_bottom = 78.0
+alignment = 1
+
+[node name="Attack" type="Button" parent="Attack"]
+margin_right = 158.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "Attack"
+align = 2
+
+[node name="AttackButtonTexture" type="TextureRect" parent="Attack"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+texture = ExtResource( 4 )
+
+[node name="Dash" type="HBoxContainer" parent="."]
+margin_top = 82.0
+margin_right = 320.0
+margin_bottom = 98.0
+alignment = 1
+
+[node name="Dash" type="Button" parent="Dash"]
+margin_right = 158.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "Dash"
+align = 2
+
+[node name="DashButtonTexture" type="TextureRect" parent="Dash"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+texture = ExtResource( 5 )
+
+[node name="Interact" type="HBoxContainer" parent="."]
+margin_top = 102.0
+margin_right = 320.0
+margin_bottom = 118.0
+alignment = 1
+
+[node name="Interact" type="Button" parent="Interact"]
+margin_right = 158.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+text = "Interact"
+align = 2
+
+[node name="InteractButtonTexture" type="TextureRect" parent="Interact"]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+texture = ExtResource( 6 )
+
+[node name="BlankSeparatorLabel" type="Label" parent="."]
+margin_top = 122.0
+margin_right = 320.0
+margin_bottom = 135.0
+
+[node name="Back" type="Button" parent="."]
+margin_top = 139.0
+margin_right = 320.0
+margin_bottom = 154.0
+focus_neighbour_bottom = NodePath("../Jump/Jump")
+text = "Back"
