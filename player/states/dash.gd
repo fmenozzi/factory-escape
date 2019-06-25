@@ -18,6 +18,7 @@ var DASH_ECHO_DELAY: float = 0.05
 var velocity: Vector2 = Vector2()
 
 const DashEcho = preload('res://player/DashEcho.tscn')
+const DashPuff = preload('res://sfx/DashPuff.tscn')
 
 func _ready() -> void:
 	# Set up dash duration timer.
@@ -36,7 +37,20 @@ func enter(player: Player) -> void:
 	$DashEcho.connect('timeout', self, '_on_dash_echo_timeout', [player])
 	$DashEcho.start()
 	player.get_dash_cooldown_timer().stop()
-	
+
+	# Instance a new dash puff on every dash.
+	var dash_puff = DashPuff.instance()
+	player.add_child(dash_puff)
+	dash_puff.position = Vector2(0, -8)
+	var dash_puff_speed := abs(dash_puff.process_material.initial_velocity)
+	dash_puff.process_material.initial_velocity =\
+		dash_puff_speed * player.get_player_direction()
+
+	var particles_manager := OneShotParticlesManager.new()
+	player.add_child(particles_manager)
+
+	particles_manager.start(dash_puff)
+
 	# Reset velocity.
 	velocity = Vector2()
 	

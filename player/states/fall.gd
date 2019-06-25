@@ -1,5 +1,8 @@
 extends 'res://scripts/state.gd'
 
+# Particle effect that emits once the player lands.
+const LandingPuff := preload('res://sfx/LandingPuff.tscn')
+
 # Vector denoting the 2D movement to be applied to the player during each 
 # update() call, measured in pixels per second.
 var velocity := Vector2()
@@ -31,8 +34,15 @@ func handle_input(player: Player, event: InputEvent) -> int:
 	return player.State.NO_CHANGE
 	
 func update(player: Player, delta: float) -> int:
-	# Switch to 'idle' state once we hit the ground.
+	# Once we hit the ground, emit the landing puff and switch to 'idle' state.
 	if player.is_on_ground():
+		var landing_puff = LandingPuff.instance()
+		player.add_child(landing_puff)
+
+		var particles_manager := OneShotParticlesManager.new()
+		player.add_child(particles_manager)
+		particles_manager.start(landing_puff)
+
 		return player.State.IDLE
 		
 	# Move left or right.

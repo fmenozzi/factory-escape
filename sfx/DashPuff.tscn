@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 0.309804, 0.470588, 1, 1, 0.309804, 0.470588, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=4]
+max_value = 0.25
+_data = [ Vector2( 0, 0.073025 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 4, 1 )
+flag_disable_z = true
+spread = 5.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 32.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 2 )
+hue_variation_random = 1.0
+hue_variation_curve = SubResource( 5 )
+
+[node name="DashPuff" type="Particles2D"]
+rotation = 3.14159
+emitting = false
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.7
+local_coords = false
+process_material = SubResource( 3 )

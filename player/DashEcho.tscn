@@ -9,4 +9,3 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="AlphaTween" type="Tween" parent="."]
-
