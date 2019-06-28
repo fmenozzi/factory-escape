@@ -66,6 +66,8 @@ onready var ORIGINAL_CAMERA_ANCHOR_POS: Vector2 = $CameraAnchor.get_position()
 var prev_room = null
 var curr_room = null
 
+var _can_dash: bool = true
+
 func _ready() -> void:
 	# Create a dash cooldown timer.
 	$DashCooldown.wait_time = DASH_COOLDOWN
@@ -158,3 +160,12 @@ func unpause() -> void:
 	$States/Dash/DashDuration.paused = false
 	$States/Dash/DashEcho.paused = false
 	$DashCooldown.paused = false
+
+# Functions providing a more readable and convenient interface for managing
+# dashes.
+func can_dash() -> bool:
+	return _can_dash
+func consume_dash() -> void:
+	_can_dash = false
+func reset_dash() -> void:
+	_can_dash = true

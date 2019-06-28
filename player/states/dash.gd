@@ -56,6 +56,9 @@ func enter(player: Player) -> void:
 	
 	# Play dash animation.
 	player.get_animation_player().play('dash')
+
+	# Consume the dash until it is reset by e.g. hitting the ground.
+	player.consume_dash()
 	
 func exit(player: Player) -> void:
 	# Start the cooldown timer once the dash finishes.

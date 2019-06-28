@@ -6,6 +6,9 @@ func enter(player: Player) -> void:
 	
 	# Play idle animation
 	player.get_animation_player().play('idle')
+
+	# Reset the dash once the player hits the ground.
+	player.reset_dash()
 	
 func exit(player: Player) -> void:
 	pass
@@ -17,7 +20,7 @@ func handle_input(player: Player, event: InputEvent) -> int:
 		# Play attack animation before returning to idle animation.
 		player.start_attack()
 		player.get_animation_player().queue('idle')
-	elif event.is_action_pressed('player_dash'):
+	elif event.is_action_pressed('player_dash') and player.can_dash():
 		# Only dash if the cooldown is done.
 		if player.get_dash_cooldown_timer().is_stopped():
 			return player.State.DASH

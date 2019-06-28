@@ -24,7 +24,7 @@ func handle_input(player: Player, event: InputEvent) -> int:
 		# Play attack animation before returning to walk animation.
 		player.start_attack()
 		player.get_animation_player().queue('walk')
-	elif event.is_action_pressed('player_dash'):
+	elif event.is_action_pressed('player_dash') and player.can_dash():
 		# Only dash if the cooldown is done.
 		if player.get_dash_cooldown_timer().is_stopped():
 			return player.State.DASH
