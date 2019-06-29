@@ -7,14 +7,15 @@ func enter(player: Player) -> void:
 	# Play idle animation
 	player.get_animation_player().play('idle')
 
-	# Reset the dash once the player hits the ground.
+	# Reset the dash and double jump once the player hits the ground.
 	player.reset_dash()
+	player.reset_jump()
 	
 func exit(player: Player) -> void:
 	pass
 	
 func handle_input(player: Player, event: InputEvent) -> int:
-	if event.is_action_pressed('player_jump'):
+	if event.is_action_pressed('player_jump') and player.can_jump():
 		return player.State.JUMP
 	elif event.is_action_pressed('player_attack'):
 		# Play attack animation before returning to idle animation.

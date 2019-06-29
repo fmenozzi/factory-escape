@@ -57,8 +57,18 @@ func enter(player: Player) -> void:
 	# Play dash animation.
 	player.get_animation_player().play('dash')
 
-	# Consume the dash until it is reset by e.g. hitting the ground.
+	# Consume the dash until it is reset be e.g. hitting the ground. Also,
+	# ensure that we get no more than one jump after a dash if we e.g. dash off
+	# of a ledge. We're really only doing this because Hollow Knight does it,
+	# and I can't really think of a reason why this limitation exists; maybe to
+	# limit player mobility given the pogo mechanic? That is, some platforming
+	# sections might have been harder to design if the player could double jump
+	# after a dash/pogo. Might revisit this if it becomes incompatible with this
+	# game's eventual design.
 	player.consume_dash()
+	if player.can_jump():
+		player.reset_jump()
+		player.consume_jump()
 	
 func exit(player: Player) -> void:
 	# Start the cooldown timer once the dash finishes.

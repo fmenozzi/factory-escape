@@ -30,6 +30,8 @@ func handle_input(player: Player, event: InputEvent) -> int:
 		# Only dash if the cooldown is done.
 		if player.get_dash_cooldown_timer().is_stopped():
 			return player.State.DASH
+	elif event.is_action_pressed('player_jump') and player.can_jump():
+		return player.State.JUMP
 		
 	return player.State.NO_CHANGE
 	

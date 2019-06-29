@@ -68,6 +68,8 @@ var curr_room = null
 
 var _can_dash: bool = true
 
+var _jumps_remaining: int = 2
+
 func _ready() -> void:
 	# Create a dash cooldown timer.
 	$DashCooldown.wait_time = DASH_COOLDOWN
@@ -169,3 +171,10 @@ func consume_dash() -> void:
 	_can_dash = false
 func reset_dash() -> void:
 	_can_dash = true
+
+func can_jump() -> bool:
+	return _jumps_remaining > 0
+func consume_jump() -> void:
+	_jumps_remaining -= 1
+func reset_jump() -> void:
+	_jumps_remaining = 2

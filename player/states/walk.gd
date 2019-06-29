@@ -18,7 +18,7 @@ func exit(player: Player) -> void:
 	pass
 	
 func handle_input(player: Player, event: InputEvent) -> int:
-	if event.is_action_pressed('player_jump'):
+	if event.is_action_pressed('player_jump') and player.can_jump():
 		return player.State.JUMP
 	elif event.is_action_pressed('player_attack'):
 		# Play attack animation before returning to walk animation.

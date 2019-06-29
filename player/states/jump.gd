@@ -14,6 +14,9 @@ func enter(player: Player) -> void:
 	
 	# Play jump animation.
 	player.get_animation_player().play('jump')
+
+	# Consume the jump until it is reset by e.g. hitting the ground.
+	player.consume_jump()
 	
 func exit(player: Player) -> void:
 	pass
@@ -23,6 +26,9 @@ func handle_input(player: Player, event: InputEvent) -> int:
 	if event.is_action_released('player_jump') and \
 	   velocity.y < player.MIN_JUMP_VELOCITY:
 		velocity.y = player.MIN_JUMP_VELOCITY
+	elif event.is_action_pressed('player_jump') and player.can_jump():
+		# Double jump.
+		return player.State.JUMP
 	elif event.is_action_pressed('player_attack'):
 		player.start_attack()
 		player.get_animation_player().queue('jump')
