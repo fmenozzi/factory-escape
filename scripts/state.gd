@@ -1,7 +1,7 @@
 extends Node
 
 # Called when host enters this state.
-func enter(host) -> void:
+func enter(host, previous_state: int) -> void:
 	pass
 
 # Called when host exits this state.

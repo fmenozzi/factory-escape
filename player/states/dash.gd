@@ -31,7 +31,7 @@ func _ready() -> void:
 	# Calculate dash speed from the specified dash distance and duration.
 	DASH_SPEED = DASH_DISTANCE / DASH_DURATION
 	
-func enter(player: Player) -> void:
+func enter(player: Player, previous_state: int) -> void:
 	# Reset dash duration, dash cooldown, and dash echo timers.
 	$DashDuration.start()
 	$DashEcho.connect('timeout', self, '_on_dash_echo_timeout', [player])

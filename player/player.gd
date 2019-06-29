@@ -25,6 +25,7 @@ onready var STATES = {
 }
 
 var current_state: Node = null
+var current_state_enum: int = -1
 
 # The speed at which the player can move the character left and right, measured
 # in pixels per second.
@@ -76,8 +77,9 @@ func _ready() -> void:
 	$DashCooldown.one_shot = true
 	
 	# Begin in fall state
-	current_state = STATES[State.FALL]
-	_change_state(State.FALL)
+	current_state_enum = State.FALL
+	current_state = STATES[current_state_enum]
+	_change_state(current_state_enum)
 	
 	# Initialize current room
 	curr_room = get_parent().get_node('Rooms/FactoryEntrance')
@@ -95,13 +97,16 @@ func _physics_process(delta: float) -> void:
 		_change_state(new_state)
 	
 # Change from one state in the state machine to another.
-func _change_state(new_state: int) -> void:
+func _change_state(new_state_enum: int) -> void:
+	var previous_state_enum := current_state_enum
+
 	current_state.exit(self)
-	current_state = STATES[new_state]
-	current_state.enter(self)
-	
+	current_state_enum = new_state_enum
+	current_state = STATES[new_state_enum]
+	current_state.enter(self, previous_state_enum)
+
 	emit_signal('player_state_changed', current_state.get_name())
-	
+
 func is_on_ground() -> bool:
 	return .is_on_floor()
 	

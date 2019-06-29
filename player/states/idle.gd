@@ -1,6 +1,6 @@
 extends 'res://scripts/state.gd'
 
-func enter(player: Player) -> void:
+func enter(player: Player, previous_state: int) -> void:
 	# Stop attack animation, in case we were attacking in previous state.
 	player.stop_attack()
 	

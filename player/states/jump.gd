@@ -4,7 +4,7 @@ extends 'res://scripts/state.gd'
 # update() call, measured in pixels per second.
 var velocity := Vector2()
 
-func enter(player: Player) -> void:
+func enter(player: Player, previous_state: int) -> void:
 	# Set initial jump velocity to max jump velocity (releasing the jump button
 	# will cause the velocity to "cut", allowing for variable-height jumps).
 	velocity.y = player.MAX_JUMP_VELOCITY

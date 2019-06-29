@@ -4,7 +4,7 @@ extends 'res://scripts/state.gd'
 # update() call, measured in pixels per second.
 var velocity: Vector2 = Vector2()
 
-func enter(player: Player) -> void:
+func enter(player: Player, previous_state: int) -> void:
 	# Reset player velocity.
 	velocity = Vector2()
 	

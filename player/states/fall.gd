@@ -7,7 +7,7 @@ const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 # update() call, measured in pixels per second.
 var velocity := Vector2()
 
-func enter(player: Player) -> void:
+func enter(player: Player, previous_state: int) -> void:
 	# Reset velocity.
 	velocity = Vector2()
 	
