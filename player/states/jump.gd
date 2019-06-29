@@ -1,5 +1,7 @@
 extends 'res://scripts/state.gd'
 
+const LandingPuff := preload('res://sfx/LandingPuff.tscn')
+
 # Vector denoting the 2D movement to be applied to the player during each 
 # update() call, measured in pixels per second.
 var velocity := Vector2()
@@ -8,16 +10,25 @@ func enter(player: Player, previous_state: int) -> void:
 	# Set initial jump velocity to max jump velocity (releasing the jump button
 	# will cause the velocity to "cut", allowing for variable-height jumps).
 	velocity.y = player.MAX_JUMP_VELOCITY
-	
+
 	# Stop attack animation, in case we were attacking in previous state.
 	player.stop_attack()
-	
+
 	# Play jump animation.
 	player.get_animation_player().play('jump')
 
+	# If we jumped from the ground, emit a puff.
+	if previous_state in [player.State.IDLE, player.State.WALK]:
+		var landing_puff = LandingPuff.instance()
+		player.add_child(landing_puff)
+
+		var particles_manager := OneShotParticlesManager.new()
+		player.add_child(particles_manager)
+		particles_manager.start(landing_puff)
+
 	# Consume the jump until it is reset by e.g. hitting the ground.
 	player.consume_jump()
-	
+
 func exit(player: Player) -> void:
 	pass
 	
