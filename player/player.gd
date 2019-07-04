@@ -27,6 +27,10 @@ onready var STATES = {
 var current_state: Node = null
 var current_state_enum: int = -1
 
+# Vector denoting the 2D movement to be applied to the player during each
+# update() call, measured in pixels per second.
+var velocity: Vector2 = Vector2.ZERO
+
 # The speed at which the player can move the character left and right, measured
 # in pixels per second.
 var MOVEMENT_SPEED: float = 6 * Globals.TILE_SIZE_PIXELS
@@ -106,6 +110,9 @@ func _change_state(new_state_enum: int) -> void:
 	current_state.enter(self, previous_state_enum)
 
 	emit_signal('player_state_changed', current_state.get_name())
+
+func move(new_velocity: Vector2) -> void:
+	self.velocity = .move_and_slide(new_velocity, Globals.FLOOR_NORMAL)
 
 func is_on_ground() -> bool:
 	return .is_on_floor()

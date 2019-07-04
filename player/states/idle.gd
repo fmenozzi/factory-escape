@@ -1,6 +1,9 @@
 extends 'res://scripts/state.gd'
 
 func enter(player: Player, previous_state: int) -> void:
+	# Reset player velocity.
+	player.velocity = Vector2.ZERO
+
 	# Stop attack animation, in case we were attacking in previous state.
 	player.stop_attack()
 	

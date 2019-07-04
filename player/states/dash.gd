@@ -13,10 +13,6 @@ var DASH_SPEED: float
 # The delay between emissions of the dash echo.
 var DASH_ECHO_DELAY: float = 0.05
 
-# Vector denoting the 2D movement to be applied to the player during each 
-# update() call, measured in pixels per second.
-var velocity: Vector2 = Vector2()
-
 const DashEcho = preload('res://player/DashEcho.tscn')
 const DashPuff = preload('res://sfx/DashPuff.tscn')
 
@@ -51,8 +47,8 @@ func enter(player: Player, previous_state: int) -> void:
 
 	particles_manager.start(dash_puff)
 
-	# Reset velocity.
-	velocity = Vector2()
+	# Reset player velocity.
+	player.velocity = Vector2.ZERO
 	
 	# Play dash animation.
 	player.get_animation_player().play('dash')
@@ -88,9 +84,9 @@ func update(player: Player, delta: float) -> int:
 		return player.State.FALL if player.is_in_air() else player.State.IDLE
 		
 	# Dash in the direction the player is currently facing.
-	velocity.x = player.get_player_direction() * DASH_SPEED
-	velocity = player.move_and_slide(velocity, Globals.FLOOR_NORMAL)
-		
+	player.velocity.x = player.get_player_direction() * DASH_SPEED
+	player.move(player.velocity)
+
 	return player.State.NO_CHANGE
 	
 func _on_dash_echo_timeout(player: Player) -> void:

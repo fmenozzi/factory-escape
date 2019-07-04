@@ -3,13 +3,9 @@ extends 'res://scripts/state.gd'
 # Particle effect that emits once the player lands.
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 
-# Vector denoting the 2D movement to be applied to the player during each 
-# update() call, measured in pixels per second.
-var velocity := Vector2()
-
 func enter(player: Player, previous_state: int) -> void:
 	# Reset velocity.
-	velocity = Vector2()
+	player.velocity = Vector2.ZERO
 	
 	# Stop attack animation, in case we were attacking in previous state.
 	# TODO: Don't do this if previous state was JUMP (otherwise, attacks that
@@ -51,10 +47,11 @@ func update(player: Player, delta: float) -> int:
 	var input_direction = Globals.get_input_direction()
 	if input_direction != 0:
 		player.set_player_direction(input_direction)
-	velocity.x = input_direction * player.MOVEMENT_SPEED
+	player.velocity.x = input_direction * player.MOVEMENT_SPEED
 	
 	# Fall.
-	velocity.y += player.GRAVITY * delta
-	velocity = player.move_and_slide(velocity, Globals.FLOOR_NORMAL)
-	
+	player.velocity.y += player.GRAVITY * delta
+
+	player.move(player.velocity)
+
 	return player.State.NO_CHANGE

@@ -1,12 +1,8 @@
 extends 'res://scripts/state.gd'
 
-# Vector denoting the 2D movement to be applied to the player during each 
-# update() call, measured in pixels per second.
-var velocity: Vector2 = Vector2()
-
 func enter(player: Player, previous_state: int) -> void:
 	# Reset player velocity.
-	velocity = Vector2()
+	player.velocity = Vector2.ZERO
 	
 	# Stop attack animation, in case we were attacking in previous state.
 	player.stop_attack()
@@ -40,15 +36,12 @@ func update(player: Player, delta: float) -> int:
 	# If we've walked off a platform, start falling.
 	if player.is_in_air():
 		return player.State.FALL
-		
+
+	player.set_player_direction(input_direction)
+
 	# Move left or right. Add in sufficient downward movement so that
 	# is_on_floor() detects collisions with the floor and doesn't erroneously
 	# report that we're in the air.
-	velocity.x = input_direction * player.MOVEMENT_SPEED
-	velocity.y = 10
-	
-	player.set_player_direction(input_direction)
-	
-	velocity = player.move_and_slide(velocity, Globals.FLOOR_NORMAL)
-	
+	player.move(Vector2(input_direction * player.MOVEMENT_SPEED, 10))
+
 	return player.State.NO_CHANGE
