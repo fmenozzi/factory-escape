@@ -14,24 +14,24 @@ const FLOOR_NORMAL: Vector2 = Vector2.UP
 # Get the current x-axis input direction. Returns +1 if player is moving right,
 # -1 if player is moving left, and 0 if player is not moving.
 func get_input_direction() -> int:
-	# For now, just calculate movement on the x-axis.
-	return int(Input.is_action_pressed('player_move_right')) - \
-		   int(Input.is_action_pressed('player_move_left'))
-		
+    # For now, just calculate movement on the x-axis.
+    return int(Input.is_action_pressed('player_move_right')) - \
+           int(Input.is_action_pressed('player_move_left'))
+
 # Gets the in-game resolution from the project settings.
 func get_ingame_resolution() -> Vector2:
-	var w = ProjectSettings.get_setting('display/window/size/width')
-	var h = ProjectSettings.get_setting('display/window/size/height')
-	
-	return Vector2(w, h)
+    var w = ProjectSettings.get_setting('display/window/size/width')
+    var h = ProjectSettings.get_setting('display/window/size/height')
+
+    return Vector2(w, h)
 
 # Start the one-shot particle effect and then wait for it to finish before
 # freeing it.
 func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
-	assert particles.one_shot
+    assert particles.one_shot
 
-	parent.add_child(particles)
+    parent.add_child(particles)
 
-	particles.emitting = true
-	yield(get_tree().create_timer(particles.lifetime * 2), 'timeout')
-	particles.queue_free()
+    particles.emitting = true
+    yield(get_tree().create_timer(particles.lifetime * 2), 'timeout')
+    particles.queue_free()

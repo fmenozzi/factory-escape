@@ -7,23 +7,23 @@ signal player_state_changed
 # for states indicating that the current state should not be changed and does
 # not itself constitute a valid player state.
 enum State {
-	NO_CHANGE,
-	IDLE,
-	WALK,
-	JUMP,
-	DOUBLE_JUMP,
-	FALL,
-	DASH,
+    NO_CHANGE,
+    IDLE,
+    WALK,
+    JUMP,
+    DOUBLE_JUMP,
+    FALL,
+    DASH,
 }
 
 # Maps State enum to corresponding state scripts.
 onready var STATES = {
-	State.IDLE:        $States/Idle,
-	State.WALK:        $States/Walk,
-	State.JUMP:        $States/Jump,
-	State.DOUBLE_JUMP: $States/DoubleJump,
-	State.FALL:        $States/Fall,
-	State.DASH:        $States/Dash,
+    State.IDLE:        $States/Idle,
+    State.WALK:        $States/Walk,
+    State.JUMP:        $States/Jump,
+    State.DOUBLE_JUMP: $States/DoubleJump,
+    State.FALL:        $States/Fall,
+    State.DASH:        $States/Dash,
 }
 
 var current_state: Node = null
@@ -78,117 +78,117 @@ var _can_dash: bool = true
 var _jumps_remaining: int = 2
 
 func _ready() -> void:
-	# Create a dash cooldown timer.
-	$DashCooldown.wait_time = DASH_COOLDOWN
-	$DashCooldown.one_shot = true
-	
-	# Begin in fall state
-	current_state_enum = State.FALL
-	current_state = STATES[current_state_enum]
-	_change_state(current_state_enum)
-	
-	# Initialize current room
-	curr_room = get_parent().get_node('Rooms/FactoryEntrance')
-	prev_room = curr_room
-	get_camera().fit_camera_limits_to_room(curr_room)
-	
+    # Create a dash cooldown timer.
+    $DashCooldown.wait_time = DASH_COOLDOWN
+    $DashCooldown.one_shot = true
+
+    # Begin in fall state
+    current_state_enum = State.FALL
+    current_state = STATES[current_state_enum]
+    _change_state(current_state_enum)
+
+    # Initialize current room
+    curr_room = get_parent().get_node('Rooms/FactoryEntrance')
+    prev_room = curr_room
+    get_camera().fit_camera_limits_to_room(curr_room)
+
 func _input(event: InputEvent) -> void:
-	var new_state = current_state.handle_input(self, event)
-	if new_state != State.NO_CHANGE:
-		_change_state(new_state)
-	
+    var new_state = current_state.handle_input(self, event)
+    if new_state != State.NO_CHANGE:
+        _change_state(new_state)
+
 func _physics_process(delta: float) -> void:
-	var new_state = current_state.update(self, delta)
-	if new_state != State.NO_CHANGE:
-		_change_state(new_state)
-	
+    var new_state = current_state.update(self, delta)
+    if new_state != State.NO_CHANGE:
+        _change_state(new_state)
+
 # Change from one state in the state machine to another.
 func _change_state(new_state_enum: int) -> void:
-	var previous_state_enum := current_state_enum
+    var previous_state_enum := current_state_enum
 
-	current_state.exit(self)
-	current_state_enum = new_state_enum
-	current_state = STATES[new_state_enum]
-	current_state.enter(self, previous_state_enum)
+    current_state.exit(self)
+    current_state_enum = new_state_enum
+    current_state = STATES[new_state_enum]
+    current_state.enter(self, previous_state_enum)
 
-	emit_signal('player_state_changed', current_state.get_name())
+    emit_signal('player_state_changed', current_state.get_name())
 
 func move(new_velocity: Vector2) -> void:
-	self.velocity = .move_and_slide(new_velocity, Globals.FLOOR_NORMAL)
+    self.velocity = .move_and_slide(new_velocity, Globals.FLOOR_NORMAL)
 
 func is_on_ground() -> bool:
-	return .is_on_floor()
-	
+    return .is_on_floor()
+
 func is_in_air() -> bool:
-	return not is_on_ground()
-	
+    return not is_on_ground()
+
 func start_attack() -> void:
-	$AnimationPlayer.play('attack')
-	
+    $AnimationPlayer.play('attack')
+
 # Flush animation queue and make attack sprite invisible so that we can cancel
 # attack animations cleanly.
 func stop_attack() -> void:
-	$AnimationPlayer.clear_queue()
-	$AttackHitbox/Sprite.set_visible(false)
-	
+    $AnimationPlayer.clear_queue()
+    $AttackHitbox/Sprite.set_visible(false)
+
 func get_animation_player() -> AnimationPlayer:
-	return $AnimationPlayer as AnimationPlayer
-	
+    return $AnimationPlayer as AnimationPlayer
+
 func get_camera() -> Camera2D:
-	return $CameraAnchor/Camera2D as Camera2D
-	
+    return $CameraAnchor/Camera2D as Camera2D
+
 func get_dash_cooldown_timer() -> Timer:
-	return $DashCooldown as Timer
-	
+    return $DashCooldown as Timer
+
 func get_player_direction() -> int:
-	return -1 if $Sprite.flip_h else 1
-	
+    return -1 if $Sprite.flip_h else 1
+
 func set_player_direction(direction: int) -> void:
-	# Flip player sprite.
-	$Sprite.flip_h = (direction == -1)
-	
-	# Mirror attack hitbox on y-axis.
-	if direction in [-1, 1]:
-		$AttackHitbox.position.x = ORIGINAL_ATTACK_HITBOX_POS.x * direction
-	$AttackHitbox/Sprite.flip_h = (direction == -1)
-	
-	# Flip camera pivot.
-	if direction in [-1, 1]:
-		$CameraAnchor.position.x = ORIGINAL_CAMERA_ANCHOR_POS.x * direction
-	
+    # Flip player sprite.
+    $Sprite.flip_h = (direction == -1)
+
+    # Mirror attack hitbox on y-axis.
+    if direction in [-1, 1]:
+        $AttackHitbox.position.x = ORIGINAL_ATTACK_HITBOX_POS.x * direction
+    $AttackHitbox/Sprite.flip_h = (direction == -1)
+
+    # Flip camera pivot.
+    if direction in [-1, 1]:
+        $CameraAnchor.position.x = ORIGINAL_CAMERA_ANCHOR_POS.x * direction
+
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
 func pause() -> void:
-	set_physics_process(false)
-	set_process_input(false)
-	
-	$AnimationPlayer.stop(false)
-	
-	$States/Dash/DashDuration.paused = true
-	$States/Dash/DashEcho.paused = true
-	$DashCooldown.paused = true
+    set_physics_process(false)
+    set_process_input(false)
+
+    $AnimationPlayer.stop(false)
+
+    $States/Dash/DashDuration.paused = true
+    $States/Dash/DashEcho.paused = true
+    $DashCooldown.paused = true
 func unpause() -> void:
-	set_physics_process(true)
-	set_process_input(true)
-	
-	$AnimationPlayer.play()
-	
-	$States/Dash/DashDuration.paused = false
-	$States/Dash/DashEcho.paused = false
-	$DashCooldown.paused = false
+    set_physics_process(true)
+    set_process_input(true)
+
+    $AnimationPlayer.play()
+
+    $States/Dash/DashDuration.paused = false
+    $States/Dash/DashEcho.paused = false
+    $DashCooldown.paused = false
 
 # Functions providing a more readable and convenient interface for managing
 # dashes.
 func can_dash() -> bool:
-	return _can_dash
+    return _can_dash
 func consume_dash() -> void:
-	_can_dash = false
+    _can_dash = false
 func reset_dash() -> void:
-	_can_dash = true
+    _can_dash = true
 
 func can_jump() -> bool:
-	return _jumps_remaining > 0
+    return _jumps_remaining > 0
 func consume_jump() -> void:
-	_jumps_remaining -= 1
+    _jumps_remaining -= 1
 func reset_jump() -> void:
-	_jumps_remaining = 2
+    _jumps_remaining = 2
