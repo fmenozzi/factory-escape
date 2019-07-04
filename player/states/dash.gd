@@ -36,16 +36,12 @@ func enter(player: Player, previous_state: int) -> void:
 
 	# Instance a new dash puff on every dash.
 	var dash_puff = DashPuff.instance()
-	player.add_child(dash_puff)
 	dash_puff.position = Vector2(0, -8)
 	var dash_puff_speed := abs(dash_puff.process_material.initial_velocity)
 	dash_puff.process_material.initial_velocity =\
 		dash_puff_speed * player.get_player_direction()
 
-	var particles_manager := OneShotParticlesManager.new()
-	player.add_child(particles_manager)
-
-	particles_manager.start(dash_puff)
+	Globals.spawn_particles(dash_puff, player)
 
 	# Reset player velocity.
 	player.velocity = Vector2.ZERO

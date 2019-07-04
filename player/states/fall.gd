@@ -34,13 +34,7 @@ func handle_input(player: Player, event: InputEvent) -> int:
 func update(player: Player, delta: float) -> int:
 	# Once we hit the ground, emit the landing puff and switch to 'idle' state.
 	if player.is_on_ground():
-		var landing_puff = LandingPuff.instance()
-		player.add_child(landing_puff)
-
-		var particles_manager := OneShotParticlesManager.new()
-		player.add_child(particles_manager)
-		particles_manager.start(landing_puff)
-
+		Globals.spawn_particles(LandingPuff.instance(), player)
 		return player.State.IDLE
 		
 	# Move left or right.

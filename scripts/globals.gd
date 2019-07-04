@@ -24,3 +24,14 @@ func get_ingame_resolution() -> Vector2:
 	var h = ProjectSettings.get_setting('display/window/size/height')
 	
 	return Vector2(w, h)
+
+# Start the one-shot particle effect and then wait for it to finish before
+# freeing it.
+func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
+	assert particles.one_shot
+
+	parent.add_child(particles)
+
+	particles.emitting = true
+	yield(get_tree().create_timer(particles.lifetime * 2), 'timeout')
+	particles.queue_free()

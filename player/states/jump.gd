@@ -15,12 +15,7 @@ func enter(player: Player, previous_state: int) -> void:
 
 	# If we jumped from the ground, emit a puff.
 	if previous_state in [player.State.IDLE, player.State.WALK]:
-		var landing_puff = LandingPuff.instance()
-		player.add_child(landing_puff)
-
-		var particles_manager := OneShotParticlesManager.new()
-		player.add_child(particles_manager)
-		particles_manager.start(landing_puff)
+		Globals.spawn_particles(LandingPuff.instance(), player)
 
 	# Consume the jump until it is reset by e.g. hitting the ground.
 	player.consume_jump()
