@@ -11,17 +11,19 @@ enum State {
 	IDLE,
 	WALK,
 	JUMP,
+	DOUBLE_JUMP,
 	FALL,
 	DASH,
 }
 
 # Maps State enum to corresponding state scripts.
 onready var STATES = {
-	State.IDLE: $States/Idle,
-	State.WALK: $States/Walk,
-	State.JUMP: $States/Jump,
-	State.FALL: $States/Fall,
-	State.DASH: $States/Dash,
+	State.IDLE:        $States/Idle,
+	State.WALK:        $States/Walk,
+	State.JUMP:        $States/Jump,
+	State.DOUBLE_JUMP: $States/DoubleJump,
+	State.FALL:        $States/Fall,
+	State.DASH:        $States/Dash,
 }
 
 var current_state: Node = null
