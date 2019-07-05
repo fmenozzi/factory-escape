@@ -96,6 +96,11 @@ player_interact={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="environment"
+
 [rendering]
 
 environment/default_clear_color=Color( 0.113725, 0.129412, 0.176471, 1 )

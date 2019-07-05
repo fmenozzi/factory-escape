@@ -28,8 +28,8 @@ __meta__ = {
 [node name="Platforms" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
+collision_layer = 2
 format = 1
 __meta__ = {
 "_edit_lock_": true
 }
-
