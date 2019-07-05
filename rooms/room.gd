@@ -29,11 +29,6 @@ export(CameraBehavior) var camera_behavior := CameraBehavior.ROOM_FIXED
 
 # TODO: Do we still need this?
 func setup_room(room_boundaries: Area2D) -> void:
-    # Call each room's specific _on_room_entered() function when the player
-    # enters that room's room boundaries (i.e. Area2D bounding box).
-    #
-    # TODO: Maybe try and get a specific type for room_boundaries.
-    #room_boundaries.connect('body_entered', self, '_on_room_entered')
     pass
 
 # Get global positions of all camera anchors in each room. During a transition,
@@ -64,17 +59,3 @@ func get_room_dimensions() -> Vector2:
     var half_extents = get_node('RoomBoundaries').get_node('CollisionShape2D').shape.extents
 
     return 2 * half_extents
-
-func _on_room_entered(player: Player):
-    if not player:
-        return
-
-    # Update the player's current and previous rooms, taking into account the
-    # scenario where the player spawns in a room without having a previous room.
-    if not player.curr_room:
-        player.curr_room = self
-    player.prev_room = player.curr_room
-    player.curr_room = self
-
-    # Transition the camera from the previous room to the current room.
-    player.get_camera().transition(player.prev_room, player.curr_room)
