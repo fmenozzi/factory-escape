@@ -1,7 +1,7 @@
 extends Camera2D
 
 onready var _player: Player = get_parent().get_parent()
-onready var _tween: Tween = $GlobalPositionTween
+onready var _tween: Tween = $PositionTween
 
 var _original_local_anchor_pos = 0
 
