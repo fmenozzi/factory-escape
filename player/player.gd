@@ -14,6 +14,7 @@ enum State {
     DOUBLE_JUMP,
     FALL,
     DASH,
+    WALL_SLIDE,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -24,6 +25,7 @@ onready var STATES = {
     State.DOUBLE_JUMP: $States/DoubleJump,
     State.FALL:        $States/Fall,
     State.DASH:        $States/Dash,
+    State.WALL_SLIDE:  $States/WallSlide,
 }
 
 var current_state: Node = null
@@ -65,6 +67,9 @@ const DASH_COOLDOWN: float = 0.30
 # The original positions of all "y-axis mirrored" nodes.
 var _mirror_y_axis_node_original_positions: Dictionary = {}
 
+# Use to encapsulate a pair of raycasts to detect collisions with the wall.
+onready var _wall_detector: Node2D = $WallDetector
+
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -93,6 +98,9 @@ func _ready() -> void:
     # all be mirrored at once when the player changes direction.
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
+
+    # Make sure player doesn't collide with wall detection raycasts.
+    _wall_detector.add_exception_for_player(self)
 
 func _input(event: InputEvent) -> void:
     var new_state = current_state.handle_input(self, event)
@@ -123,6 +131,13 @@ func is_on_ground() -> bool:
 
 func is_in_air() -> bool:
     return not is_on_ground()
+
+func is_on_wall() -> bool:
+    print(_wall_detector.is_on_wall())
+    if _wall_detector.is_on_wall():
+        print(_wall_detector._top.get_collider().get_name())
+        print(_wall_detector._bot.get_collider().get_name())
+    return _wall_detector.is_on_wall()
 
 func start_attack() -> void:
     $AnimationPlayer.play('attack')
@@ -157,6 +172,10 @@ func set_player_direction(direction: int) -> void:
         for node in get_tree().get_nodes_in_group('mirror_y_axis'):
             var original_position = _mirror_y_axis_node_original_positions[node]
             node.position.x = original_position.x * direction
+
+    # Flip wall detector raycasts.
+    if direction in [-1, 1]:
+        _wall_detector.set_direction(direction)
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.

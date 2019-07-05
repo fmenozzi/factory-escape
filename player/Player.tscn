@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/character-spritesheet.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://player/states/double_jump.gd" type="Script" id=8]
 [ext_resource path="res://player/states/fall.gd" type="Script" id=9]
 [ext_resource path="res://player/states/dash.gd" type="Script" id=10]
+[ext_resource path="res://player/states/wall_slide.gd" type="Script" id=11]
+[ext_resource path="res://player/wall_detector.gd" type="Script" id=12]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -143,7 +145,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=7]
 resource_name = "wall_slide"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -158,10 +160,10 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 10, 4 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -175,14 +177,14 @@ anims/fall = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
 anims/walk = SubResource( 6 )
-anims/wall_slide = SubResource( 9 )
+anims/wall_slide = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
+flip_h = true
 vframes = 8
 hframes = 8
-frame = 48
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 128 )
 __meta__ = {
@@ -192,7 +194,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -1, -7 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -230,7 +232,7 @@ region_enabled = true
 region_rect = Rect2( 64, 288, 128, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 disabled = true
 
 [node name="States" type="Node" parent="."]
@@ -257,4 +259,20 @@ script = ExtResource( 10 )
 
 [node name="DashEcho" type="Timer" parent="States/Dash"]
 
+[node name="WallSlide" type="Node" parent="States"]
+script = ExtResource( 11 )
+
 [node name="DashCooldown" type="Timer" parent="."]
+
+[node name="WallDetector" type="Node2D" parent="."]
+script = ExtResource( 12 )
+
+[node name="Top" type="RayCast2D" parent="WallDetector"]
+position = Vector2( 0, -12 )
+rotation = -1.5708
+cast_to = Vector2( 0, 6 )
+
+[node name="Bottom" type="RayCast2D" parent="WallDetector"]
+position = Vector2( 0, -2 )
+rotation = -1.5708
+cast_to = Vector2( 0, 6 )

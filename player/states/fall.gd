@@ -37,6 +37,10 @@ func update(player: Player, delta: float) -> int:
         Globals.spawn_particles(LandingPuff.instance(), player)
         return player.State.IDLE
 
+    # Start wall sliding if we're on a wall.
+    if player.is_on_wall():
+        return player.State.WALL_SLIDE
+
     # Move left or right.
     var input_direction = Globals.get_input_direction()
     if input_direction != 0:
