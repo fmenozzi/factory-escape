@@ -62,11 +62,8 @@ var MAX_JUMP_VELOCITY: float = -sqrt(2 * GRAVITY * MAX_JUMP_HEIGHT)
 # The amount of time to wait after completing a dash before dashing again.
 const DASH_COOLDOWN: float = 0.30
 
-# The original position of the attack anchor node relative to the parent.
-onready var ORIGINAL_ATTACK_HITBOX_POS: Vector2 = $AttackHitbox.get_position()
-
-# The original position of the camera anchor node relative to the parent.
-onready var ORIGINAL_CAMERA_ANCHOR_POS: Vector2 = $CameraAnchor.get_position()
+# The original positions of all "y-axis mirrored" nodes.
+var _mirror_y_axis_node_original_positions: Dictionary = {}
 
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
@@ -91,6 +88,11 @@ func _ready() -> void:
     curr_room = get_parent().get_node('Rooms/FactoryEntrance')
     prev_room = curr_room
     get_camera().fit_camera_limits_to_room(curr_room)
+
+    # Save the current positions of all "y-axis mirrored" nodes so that they can
+    # all be mirrored at once when the player changes direction.
+    for node in get_tree().get_nodes_in_group('mirror_y_axis'):
+        _mirror_y_axis_node_original_positions[node] = node.get_position()
 
 func _input(event: InputEvent) -> void:
     var new_state = current_state.handle_input(self, event)
@@ -147,14 +149,14 @@ func set_player_direction(direction: int) -> void:
     # Flip player sprite.
     $Sprite.flip_h = (direction == -1)
 
-    # Mirror attack hitbox on y-axis.
-    if direction in [-1, 1]:
-        $AttackHitbox.position.x = ORIGINAL_ATTACK_HITBOX_POS.x * direction
+    # Flip attack sprite.
     $AttackHitbox/Sprite.flip_h = (direction == -1)
 
-    # Flip camera pivot.
+    # Flip all "y-axis mirrored" nodes.
     if direction in [-1, 1]:
-        $CameraAnchor.position.x = ORIGINAL_CAMERA_ANCHOR_POS.x * direction
+        for node in get_tree().get_nodes_in_group('mirror_y_axis'):
+            var original_position = _mirror_y_axis_node_original_positions[node]
+            node.position.x = original_position.x * direction
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
