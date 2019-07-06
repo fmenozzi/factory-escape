@@ -150,6 +150,9 @@ func get_camera() -> Camera2D:
 func get_dash_cooldown_timer() -> Timer:
     return $DashCooldown as Timer
 
+func get_sfx() -> Node2D:
+    return $SFX as Node2D
+
 func get_player_direction() -> int:
     return -1 if $Sprite.flip_h else 1
 

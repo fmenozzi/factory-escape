@@ -13,10 +13,11 @@ func enter(player: Player, previous_state: int) -> void:
     # Play wall slide animation.
     player.get_animation_player().play('wall_slide')
 
-    # TODO: Emit wall slide puff
+    # Start wall slide trail effect.
+    player.get_sfx().start_wall_slide_trail()
 
 func exit(player: Player) -> void:
-    pass
+    player.get_sfx().stop_wall_slide_trail()
 
 func handle_input(player: Player, event: InputEvent) -> int:
     # TODO: Handle jumping off the wall.
