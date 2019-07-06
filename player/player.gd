@@ -130,10 +130,6 @@ func is_in_air() -> bool:
     return not is_on_ground()
 
 func is_on_wall() -> bool:
-    print(_wall_detector.is_on_wall())
-    if _wall_detector.is_on_wall():
-        print(_wall_detector._top.get_collider().get_name())
-        print(_wall_detector._bot.get_collider().get_name())
     return _wall_detector.is_on_wall()
 
 func start_attack() -> void:

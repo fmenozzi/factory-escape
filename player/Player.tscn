@@ -192,12 +192,8 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, -7 )
+position = Vector2( 0, -7 )
 shape = SubResource( 8 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -269,11 +265,11 @@ script = ExtResource( 12 )
 [node name="Top" type="RayCast2D" parent="WallDetector"]
 position = Vector2( 0, -12 )
 rotation = -1.5708
-cast_to = Vector2( 0, 7 )
+cast_to = Vector2( 0, 6 )
 collision_mask = 2
 
 [node name="Bottom" type="RayCast2D" parent="WallDetector"]
 position = Vector2( 0, -2 )
 rotation = -1.5708
-cast_to = Vector2( 0, 7 )
+cast_to = Vector2( 0, 6 )
 collision_mask = 2
