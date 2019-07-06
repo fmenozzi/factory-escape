@@ -34,7 +34,10 @@ func update(player: Player, delta: float) -> int:
     if not player.is_on_wall():
         return player.State.FALL
 
-    # Slide down with reduced gravity.
+    # Slide down with reduced gravity. Also move the character slightly into the
+    # wall to maintain collision with the wall so that is_on_wall() continues to
+    # return true.
+    player.velocity.x = 10 * player.get_player_direction()
     player.velocity.y += GRAVITY_MULTIPLIER * player.GRAVITY * delta
     player.move(player.velocity)
 

@@ -35,4 +35,11 @@ func update(player: Player, delta: float) -> int:
     if Globals.get_input_direction() != 0:
         return player.State.WALK
 
+    # Apply slight downward movement. This is important mostly for ensuring that
+    # move_and_slide() is called on every frame, which updates collisions. This
+    # allows us to e.g. idle next to a wall (without pressing into it) and have
+    # is_on_wall() correctly report that we're NOT on a wall, which is important
+    # for not triggering wall slide when jumping up from idling next to a wall.
+    player.move(Vector2(0, 10))
+
     return player.State.NO_CHANGE

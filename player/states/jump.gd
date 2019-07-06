@@ -44,10 +44,6 @@ func update(player: Player, delta: float) -> int:
     if player.velocity.y >= 0:
         return player.State.FALL
 
-    # Start wall sliding if we're on a wall.
-    if player.is_on_wall():
-        return player.State.WALL_SLIDE
-
     # Move left or right.
     var input_direction = Globals.get_input_direction()
     if input_direction != 0:

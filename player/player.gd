@@ -67,9 +67,6 @@ const DASH_COOLDOWN: float = 0.30
 # The original positions of all "y-axis mirrored" nodes.
 var _mirror_y_axis_node_original_positions: Dictionary = {}
 
-# Use to encapsulate a pair of raycasts to detect collisions with the wall.
-onready var _wall_detector: Node2D = $WallDetector
-
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -129,8 +126,12 @@ func is_on_ground() -> bool:
 func is_in_air() -> bool:
     return not is_on_ground()
 
+# Detects whether the player is currently colliding with the way (i.e. whether
+# the player is actively pressing up against it). This is useful for initiating
+# a wall slide so that e.g. the player can jump near walls if they're not
+# pressed up against them.
 func is_on_wall() -> bool:
-    return _wall_detector.is_on_wall()
+    return .is_on_wall()
 
 func start_attack() -> void:
     $AnimationPlayer.play('attack')
@@ -168,10 +169,6 @@ func set_player_direction(direction: int) -> void:
         for node in get_tree().get_nodes_in_group('mirror_y_axis'):
             var original_position = _mirror_y_axis_node_original_positions[node]
             node.position.x = original_position.x * direction
-
-    # Flip wall detector raycasts.
-    if direction in [-1, 1]:
-        _wall_detector.set_direction(direction)
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
