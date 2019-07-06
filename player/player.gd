@@ -49,7 +49,7 @@ var MIN_JUMP_HEIGHT: float = 0.50 * Globals.TILE_SIZE_PIXELS
 var JUMP_DURATION: float = 0.4
 
 # The downward speed applied to the player when falling, measured in pixels per
-# second. This is calculated using basic kinematics with MAX_JUMP_HEIGHT and 
+# second. This is calculated using basic kinematics with MAX_JUMP_HEIGHT and
 # JUMP_DURATION. Note that "gravity" is a bit of a misnomer here, since we do
 # not actually accelerate while falling, and rather fall at a constant speed.
 var GRAVITY: float = 2 * MAX_JUMP_HEIGHT / pow(JUMP_DURATION, 2)
@@ -98,9 +98,6 @@ func _ready() -> void:
     # all be mirrored at once when the player changes direction.
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
-
-    # Make sure player doesn't collide with wall detection raycasts.
-    _wall_detector.add_exception_for_player(self)
 
 func _input(event: InputEvent) -> void:
     var new_state = current_state.handle_input(self, event)
