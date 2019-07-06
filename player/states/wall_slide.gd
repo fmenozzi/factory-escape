@@ -28,6 +28,11 @@ func update(player: Player, delta: float) -> int:
     if player.is_on_ground():
         return player.State.IDLE
 
+    # If we're not on the ground or the wall, the wall must have disappeared out
+    # from under us, so we transition to falling.
+    if not player.is_on_wall():
+        return player.State.FALL
+
     # Slide down with reduced gravity.
     player.velocity.y += GRAVITY_MULTIPLIER * player.GRAVITY * delta
     player.move(player.velocity)
