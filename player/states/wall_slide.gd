@@ -36,8 +36,12 @@ func update(player: Player, delta: float) -> int:
         return player.State.IDLE
 
     # If we're not on the ground or the wall, the wall must have disappeared out
-    # from under us, so we transition to falling.
+    # from under us, so we transition to falling. Because we've been pushing
+    # into the wall in order to get is_on_wall() to return true, correct by the
+    # same distance away from the wall so that when we land we can jump up onto
+    # the wall without hitting our heads.
     if not player.is_on_wall():
+        player.move(Vector2(-10 * player.get_player_direction(), 0))
         return player.State.FALL
 
     # Slide down with constant speed after a slight acceleration. Also move the 
