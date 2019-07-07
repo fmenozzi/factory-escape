@@ -1,5 +1,7 @@
 extends "res://scripts/state.gd"
 
+const TakeoffPuff = preload('res://sfx/LandingPuff.tscn')
+
 # Timer for controlling how long during the wall jump the player does not have
 # directional control.
 onready var _fixed_velocity_timer: Timer = $FixedVelocityTimer
@@ -18,6 +20,7 @@ func _ready() -> void:
 
 func enter(player: Player, previous_state: int) -> void:
     # TODO: Add wall jump puff.
+    Globals.spawn_particles(TakeoffPuff.instance(), player)
 
     # Set initial jump velocity to max jump velocity (releasing the jump button
     # will cause the velocity to "cut", allowing for variable-height jumps).

@@ -1,5 +1,7 @@
 extends "res://scripts/state.gd"
 
+const TakeoffPuff := preload('res://sfx/LandingPuff.tscn')
+
 func enter(player: Player, previous_state: int) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
@@ -27,6 +29,7 @@ func handle_input(player: Player, event: InputEvent) -> int:
     elif event.is_action_pressed('player_dash'):
         # Flip the player to face away from the wall before dashing.
         player.set_player_direction(-1 * player.get_player_direction())
+        Globals.spawn_particles(TakeoffPuff.instance(), player)
         return player.State.DASH
 
     return player.State.NO_CHANGE
