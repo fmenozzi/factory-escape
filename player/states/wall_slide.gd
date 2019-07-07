@@ -11,14 +11,15 @@ func enter(player: Player, previous_state: int) -> void:
     player.get_animation_player().play('wall_slide')
 
     # Start wall slide trail effect.
-    player.get_sfx().start_wall_slide_trail()
+    player.get_wall_slide_trail().emitting = true
 
     # Reset the dash and double jump.
     player.reset_dash()
     player.reset_jump()
 
 func exit(player: Player) -> void:
-    player.get_sfx().stop_wall_slide_trail()
+    # Stop wall slide trail effect.
+    player.get_wall_slide_trail().emitting = false
 
 func handle_input(player: Player, event: InputEvent) -> int:
     if event.is_action_pressed('player_jump'):

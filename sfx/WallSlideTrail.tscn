@@ -8,7 +8,7 @@ gradient = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
-emission_box_extents = Vector3( 3, 1, 1 )
+emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 5, 0 )
 orbit_velocity = 0.0
