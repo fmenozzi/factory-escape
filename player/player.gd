@@ -69,6 +69,8 @@ const DASH_COOLDOWN: float = 0.30
 # The original positions of all "y-axis mirrored" nodes.
 var _mirror_y_axis_node_original_positions: Dictionary = {}
 
+onready var _wall_proximity_detector: Node2D = $WallProximityDetector
+
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -135,6 +137,13 @@ func is_in_air() -> bool:
 func is_on_wall() -> bool:
     return .is_on_wall()
 
+# Detects whether the player is close to a wall without necessarily directly
+# colliding with it. This is useful for making quick consecutive wall jumps feel
+# more comfortable by not requiring the player to connect with the wall for a
+# frame before continuing the wall jump chain.
+func is_near_wall() -> bool:
+    return _wall_proximity_detector.is_near_wall()
+
 func start_attack() -> void:
     $AnimationPlayer.play('attack')
 
@@ -165,6 +174,10 @@ func set_player_direction(direction: int) -> void:
 
     # Flip attack sprite.
     $AttackHitbox/Sprite.flip_h = (direction == -1)
+
+    # Flip wall detector raycasts.
+    if direction in [-1, 1]:
+        _wall_proximity_detector.set_direction(direction)
 
     # Flip all "y-axis mirrored" nodes.
     if direction in [-1, 1]:
