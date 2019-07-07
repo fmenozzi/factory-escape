@@ -11,7 +11,7 @@ onready var _jump_cut_timer: Timer = $JumpCutTimer
 
 func _ready() -> void:
     _fixed_velocity_timer.one_shot = true
-    _fixed_velocity_timer.wait_time = 0.2
+    _fixed_velocity_timer.wait_time = 0.3
 
     _jump_cut_timer.one_shot = true
     _jump_cut_timer.wait_time = 0.1
@@ -43,8 +43,9 @@ func handle_input(player: Player, event: InputEvent) -> int:
     if event.is_action_released('player_jump') and _jump_cut_timer.is_stopped():
         _jump_cut(player)
     elif event.is_action_pressed('player_jump') and player.can_jump():
-        # Double jump.
-        return player.State.DOUBLE_JUMP
+        # Double jump once we have control again.
+        if _fixed_velocity_timer.is_stopped():
+            return player.State.DOUBLE_JUMP
     elif event.is_action_pressed('player_attack'):
         player.start_attack()
         player.get_animation_player().queue('jump')
