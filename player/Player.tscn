@@ -262,6 +262,10 @@ script = ExtResource( 11 )
 [node name="WallJump" type="Node" parent="States"]
 script = ExtResource( 12 )
 
+[node name="FixedVelocityTimer" type="Timer" parent="States/WallJump"]
+
+[node name="JumpCutTimer" type="Timer" parent="States/WallJump"]
+
 [node name="DashCooldown" type="Timer" parent="."]
 
 [node name="SFX" type="Node2D" parent="."]

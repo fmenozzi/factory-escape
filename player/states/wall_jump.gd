@@ -2,11 +2,19 @@ extends "res://scripts/state.gd"
 
 # Timer for controlling how long during the wall jump the player does not have
 # directional control.
-var _fixed_velocity_timer := Timer.new()
+onready var _fixed_velocity_timer: Timer = $FixedVelocityTimer
+
+# Timer for controlling how long the player must wait before the jump cut takes
+# effect. This is primarily to prevent the player from spamming jump while wall
+# sliding to scale walls very quickly.
+onready var _jump_cut_timer: Timer = $JumpCutTimer
 
 func _ready() -> void:
     _fixed_velocity_timer.one_shot = true
     _fixed_velocity_timer.wait_time = 0.2
+
+    _jump_cut_timer.one_shot = true
+    _jump_cut_timer.wait_time = 0.1
 
 func enter(player: Player, previous_state: int) -> void:
     # TODO: Add wall jump puff.
@@ -24,18 +32,16 @@ func enter(player: Player, previous_state: int) -> void:
     # Play jump animation.
     player.get_animation_player().play('jump')
 
-    # Start the fixed velocity timer.
+    # Start the timers.
     _fixed_velocity_timer.start()
+    _jump_cut_timer.start()
 
 func exit(player: Player) -> void:
     pass
 
 func handle_input(player: Player, event: InputEvent) -> int:
-    if event.is_action_released('player_jump'):
-        # "Jump cut" if the jump button is released. This will also stop the
-        # fixed velocity timer and therefore return control to the player.
-        player.velocity.y = max(player.velocity.y, player.MIN_JUMP_VELOCITY)
-        _fixed_velocity_timer.stop()
+    if event.is_action_released('player_jump') and _jump_cut_timer.is_stopped():
+        _jump_cut(player)
     elif event.is_action_pressed('player_jump') and player.can_jump():
         # Double jump.
         return player.State.DOUBLE_JUMP
@@ -53,6 +59,10 @@ func update(player: Player, delta: float) -> int:
     # Switch to 'fall' state once we reach apex of jump.
     if player.velocity.y >= 0:
         return player.State.FALL
+
+    if not Input.is_action_pressed('player_jump'):
+        if _jump_cut_timer.is_stopped():
+            _jump_cut(player)
 
     # Until the timer is done, fix the x-velocity to a constant amount so that
     # the player travels up and away from the wall. After the timer times out,
@@ -73,3 +83,9 @@ func update(player: Player, delta: float) -> int:
     player.move(player.velocity)
 
     return player.State.NO_CHANGE
+
+# "Jump cut" if the jump button is released. This will also stop the
+# fixed velocity timer and therefore return control to the player.
+func _jump_cut(player: Player) -> void:
+    player.velocity.y = max(player.velocity.y, player.MIN_JUMP_VELOCITY)
+    _fixed_velocity_timer.stop()
