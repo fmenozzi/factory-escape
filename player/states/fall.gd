@@ -3,6 +3,9 @@ extends 'res://scripts/state.gd'
 # Particle effect that emits once the player lands.
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 
+# Max falling speed the player can achieve in pixels per second.
+var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE_PIXELS
+
 func enter(player: Player, previous_state: int) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
@@ -48,7 +51,8 @@ func update(player: Player, delta: float) -> int:
     player.velocity.x = input_direction * player.MOVEMENT_SPEED
 
     # Fall.
-    player.velocity.y += player.GRAVITY * delta
+    player.velocity.y =\
+        min(player.velocity.y + player.GRAVITY * delta, TERMINAL_VELOCITY)
 
     player.move(player.velocity)
 
