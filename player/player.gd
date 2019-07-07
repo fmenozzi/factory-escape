@@ -15,6 +15,7 @@ enum State {
     FALL,
     DASH,
     WALL_SLIDE,
+    WALL_JUMP,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -26,6 +27,7 @@ onready var STATES = {
     State.FALL:        $States/Fall,
     State.DASH:        $States/Dash,
     State.WALL_SLIDE:  $States/WallSlide,
+    State.WALL_JUMP:   $States/WallJump,
 }
 
 var current_state: Node = null

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/character-spritesheet.png" type="Texture" id=2]
@@ -11,8 +11,9 @@
 [ext_resource path="res://player/states/fall.gd" type="Script" id=9]
 [ext_resource path="res://player/states/dash.gd" type="Script" id=10]
 [ext_resource path="res://player/states/wall_slide.gd" type="Script" id=11]
-[ext_resource path="res://player/sfx.gd" type="Script" id=12]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=13]
+[ext_resource path="res://player/states/wall_jump.gd" type="Script" id=12]
+[ext_resource path="res://player/sfx.gd" type="Script" id=13]
+[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -258,13 +259,16 @@ script = ExtResource( 10 )
 [node name="WallSlide" type="Node" parent="States"]
 script = ExtResource( 11 )
 
+[node name="WallJump" type="Node" parent="States"]
+script = ExtResource( 12 )
+
 [node name="DashCooldown" type="Timer" parent="."]
 
 [node name="SFX" type="Node2D" parent="."]
 show_behind_parent = true
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
-[node name="WallSlideTrail" parent="SFX" instance=ExtResource( 13 )]
+[node name="WallSlideTrail" parent="SFX" instance=ExtResource( 14 )]
 show_behind_parent = true
 position = Vector2( 0, -10 )
 emitting = false

@@ -13,11 +13,20 @@ func enter(player: Player, previous_state: int) -> void:
     # Start wall slide trail effect.
     player.get_sfx().start_wall_slide_trail()
 
+    # Reset the dash and double jump.
+    player.reset_dash()
+    player.reset_jump()
+
 func exit(player: Player) -> void:
     player.get_sfx().stop_wall_slide_trail()
 
 func handle_input(player: Player, event: InputEvent) -> int:
-    # TODO: Handle jumping off the wall.
+    if event.is_action_pressed('player_jump'):
+        return player.State.WALL_JUMP
+    elif event.is_action_pressed('player_dash'):
+        # Flip the player to face away from the wall before dashing.
+        player.set_player_direction(-1 * player.get_player_direction())
+        return player.State.DASH
 
     return player.State.NO_CHANGE
 

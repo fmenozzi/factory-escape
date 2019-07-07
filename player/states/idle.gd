@@ -10,7 +10,7 @@ func enter(player: Player, previous_state: int) -> void:
     # Play idle animation
     player.get_animation_player().play('idle')
 
-    # Reset the dash and double jump once the player hits the ground.
+    # Reset the dash and double jump.
     player.reset_dash()
     player.reset_jump()
 
