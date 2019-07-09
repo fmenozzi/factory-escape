@@ -31,6 +31,17 @@ func handle_input(player: Player, event: InputEvent) -> int:
         player.set_player_direction(-1 * player.get_player_direction())
         Globals.spawn_particles(TakeoffPuff.instance(), player)
         return player.State.DASH
+    # Let the player exit wall slide by moving away from the wall.
+    elif event.is_action_pressed('player_move_left'):
+        if player.get_player_direction() == 1:
+            player.set_player_direction(-1)
+            player.move(Vector2(-10, 0))
+            return player.State.FALL
+    elif event.is_action_pressed('player_move_right'):
+        if player.get_player_direction() == -1:
+            player.set_player_direction(1)
+            player.move(Vector2(10, 0))
+            return player.State.FALL
 
     return player.State.NO_CHANGE
 
