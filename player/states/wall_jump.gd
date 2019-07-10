@@ -26,8 +26,9 @@ func enter(player: Player, previous_state: int) -> void:
     # will cause the velocity to "cut", allowing for variable-height jumps).
     player.velocity.y = player.MAX_JUMP_VELOCITY
 
-    # Flip the player to face away from the wall.
-    player.set_player_direction(-1 * player.get_player_direction())
+    # Flip the player to face away from the wall if necessary.
+    if player.is_near_wall_front():
+        player.set_player_direction(player.get_wall_normal_front().x)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.consume_jump()
@@ -45,10 +46,14 @@ func exit(player: Player) -> void:
 func handle_input(player: Player, event: InputEvent) -> int:
     if event.is_action_released('player_jump') and _jump_cut_timer.is_stopped():
         _jump_cut(player)
-    elif event.is_action_pressed('player_jump') and player.can_jump():
-        # Double jump once we have control again.
+    elif event.is_action_pressed('player_jump'):
         if _fixed_velocity_timer.is_stopped():
-            return player.State.DOUBLE_JUMP
+            # Once we regain control, either wall jump or double jump, depending
+            # on whether we're near a wall.
+            if player.is_near_wall_front() or player.is_near_wall_back():
+                return player.State.WALL_JUMP
+            elif player.can_jump():
+                return player.State.DOUBLE_JUMP
     elif event.is_action_pressed('player_attack'):
         player.start_attack()
         player.get_animation_player().queue('jump')
@@ -71,14 +76,12 @@ func update(player: Player, delta: float) -> int:
     # Until the timer is done, fix the x-velocity to a constant amount so that
     # the player travels up and away from the wall. After the timer times out,
     # the player is given full control of the character.
-    var direction := 0
-    if not _fixed_velocity_timer.is_stopped():
-        direction = player.get_player_direction()
-    else:
+    var direction := player.get_player_direction()
+    if _fixed_velocity_timer.is_stopped():
         var input_direction = Globals.get_input_direction()
         if input_direction != 0:
             player.set_player_direction(input_direction)
-        direction = input_direction
+            direction = input_direction
     player.velocity.x = direction * player.MOVEMENT_SPEED
 
     # Move due to gravity.

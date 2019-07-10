@@ -278,14 +278,26 @@ emitting = false
 [node name="WallProximityDetector" type="Node2D" parent="."]
 script = ExtResource( 14 )
 
-[node name="Top" type="RayCast2D" parent="WallProximityDetector"]
+[node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -12 )
 enabled = true
 cast_to = Vector2( 1, 0 )
 collision_mask = 2
 
-[node name="Bottom" type="RayCast2D" parent="WallProximityDetector"]
+[node name="BottomFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -2 )
 enabled = true
 cast_to = Vector2( 1, 0 )
+collision_mask = 2
+
+[node name="TopBack" type="RayCast2D" parent="WallProximityDetector"]
+position = Vector2( 0, -12 )
+enabled = true
+cast_to = Vector2( -1, 0 )
+collision_mask = 2
+
+[node name="BottomBack" type="RayCast2D" parent="WallProximityDetector"]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( -1, 0 )
 collision_mask = 2

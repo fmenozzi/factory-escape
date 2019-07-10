@@ -143,8 +143,18 @@ func is_on_wall() -> bool:
 # colliding with it. This is useful for making quick consecutive wall jumps feel
 # more comfortable by not requiring the player to connect with the wall for a
 # frame before continuing the wall jump chain.
-func is_near_wall() -> bool:
-    return _wall_proximity_detector.is_near_wall()
+func is_near_wall_front() -> bool:
+    return _wall_proximity_detector.is_near_wall_front()
+func is_near_wall_back() -> bool:
+    return _wall_proximity_detector.is_near_wall_back()
+
+# Gets the wall normal if either set of raycasts is colliding with the wall, or
+# Vector2.ZERO otherwise. Useful for ensuring proper player direction when
+# performing wall jumps.
+func get_wall_normal_front() -> Vector2:
+    return _wall_proximity_detector.get_wall_normal_front()
+func get_wall_normal_back() -> Vector2:
+    return _wall_proximity_detector.get_wall_normal_back()
 
 func start_attack() -> void:
     $AnimationPlayer.play('attack')

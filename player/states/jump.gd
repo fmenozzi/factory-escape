@@ -26,9 +26,13 @@ func handle_input(player: Player, event: InputEvent) -> int:
     if event.is_action_released('player_jump'):
         # "Jump cut" if the jump button is released.
         player.velocity.y = max(player.velocity.y, player.MIN_JUMP_VELOCITY)
-    elif event.is_action_pressed('player_jump') and player.can_jump():
-        # Double jump.
-        return player.State.DOUBLE_JUMP
+    elif event.is_action_pressed('player_jump'):
+        if player.is_near_wall_front() or player.is_near_wall_back():
+            # Wall jump.
+            return player.State.WALL_JUMP
+        elif player.can_jump():
+            # Double jump.
+            return player.State.DOUBLE_JUMP
     elif event.is_action_pressed('player_attack'):
         player.start_attack()
         player.get_animation_player().queue('jump')
