@@ -3,6 +3,7 @@ extends 'res://ui/menus/menu.gd'
 onready var _jump_button: Button = $Jump/Jump
 onready var _attack_button: Button = $Attack/Attack
 onready var _dash_button: Button = $Dash/Dash
+onready var _grapple_button: Button = $Grapple/Grapple
 onready var _interact_button: Button = $Interact/Interact
 
 onready var _back_button: Button = $Back
@@ -11,6 +12,7 @@ enum PlayerAction {
     JUMP,
     ATTACK,
     DASH,
+    GRAPPLE,
     INTERACT,
 }
 
@@ -32,6 +34,12 @@ onready var PLAYER_ACTION_DATA: Dictionary = {
         'ui_texture_button': $Dash/DashButtonTexture,
         'ui_button_text':    'Dash',
         'input_action':      'player_dash',
+    },
+    PlayerAction.GRAPPLE: {
+        'ui_button':         _grapple_button,
+        'ui_texture_button': $Grapple/GrappleButtonTexture,
+        'ui_button_text':    'Grapple',
+        'input_action':      'player_grapple',
     },
     PlayerAction.INTERACT: {
         'ui_button':         _interact_button,
@@ -74,6 +82,7 @@ func enter(pause: Pause, previous_menu: int) -> void:
     _jump_button.connect('pressed', self, '_on_jump_pressed')
     _attack_button.connect('pressed', self, '_on_attack_pressed')
     _dash_button.connect('pressed', self, '_on_dash_pressed')
+    _grapple_button.connect('pressed', self, '_on_grapple_pressed')
     _interact_button.connect('pressed', self, '_on_interact_pressed')
 
     _back_button.connect('pressed', self, '_on_back_pressed', [pause])
@@ -150,7 +159,10 @@ func _on_attack_pressed() -> void:
 func _on_dash_pressed() -> void:
     setup_remap(PlayerAction.DASH)
 
-func _on_interact_pressed() -> void:
+func _on_grapple_pressed() -> void:
+    setup_remap(PlayerAction.GRAPPLE)
+
+func _on_interact_pressed(pause: Pause) -> void:
     setup_remap(PlayerAction.INTERACT)
 
 func _on_back_pressed(pause: Pause) -> void:
