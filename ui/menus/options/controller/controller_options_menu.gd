@@ -5,11 +5,6 @@ onready var _attack_button: Button = $Attack/Attack
 onready var _dash_button: Button = $Dash/Dash
 onready var _interact_button: Button = $Interact/Interact
 
-onready var _jump_texture_button: TextureButton = $Jump/JumpButtonTexture
-onready var _attack_texture_button: TextureButton = $Attack/AttackButtonTexture
-onready var _dash_texture_button: TextureButton = $Dash/DashButtonTexture
-onready var _interact_texture_button: TextureButton = $Interact/InteractButtonTexture
-
 onready var _back_button: Button = $Back
 
 enum PlayerAction {
@@ -22,25 +17,25 @@ enum PlayerAction {
 onready var PLAYER_ACTION_DATA: Dictionary = {
     PlayerAction.JUMP: {
         'ui_button':         _jump_button,
-        'ui_texture_button': _jump_texture_button,
+        'ui_texture_button': $Jump/JumpButtonTexture,
         'ui_button_text':    'Jump',
         'input_action':      'player_jump',
     },
     PlayerAction.ATTACK: {
         'ui_button':         _attack_button,
-        'ui_texture_button': _attack_texture_button,
+        'ui_texture_button': $Attack/AttackButtonTexture,
         'ui_button_text':    'Attack',
         'input_action':      'player_attack',
     },
     PlayerAction.DASH: {
         'ui_button':         _dash_button,
-        'ui_texture_button': _dash_texture_button,
+        'ui_texture_button': $Dash/DashButtonTexture,
         'ui_button_text':    'Dash',
         'input_action':      'player_dash',
     },
     PlayerAction.INTERACT: {
         'ui_button':         _interact_button,
-        'ui_texture_button': _interact_texture_button,
+        'ui_texture_button': $Interact/InteractButtonTexture,
         'ui_button_text':    'Interact',
         'input_action':      'player_interact',
     },
@@ -76,10 +71,11 @@ const JOYPAD_BUTTONS_TO_TEXTURES: Dictionary = {
 func enter(pause: Pause, previous_menu: int) -> void:
     self.visible = true
 
-    _jump_button.connect('pressed', self, '_on_jump_pressed', [pause])
-    _attack_button.connect('pressed', self, '_on_attack_pressed', [pause])
-    _dash_button.connect('pressed', self, '_on_dash_pressed', [pause])
-    _interact_button.connect('pressed', self, '_on_interact_pressed', [pause])
+    _jump_button.connect('pressed', self, '_on_jump_pressed')
+    _attack_button.connect('pressed', self, '_on_attack_pressed')
+    _dash_button.connect('pressed', self, '_on_dash_pressed')
+    _interact_button.connect('pressed', self, '_on_interact_pressed')
+
     _back_button.connect('pressed', self, '_on_back_pressed', [pause])
 
     _jump_button.grab_focus()
@@ -145,16 +141,16 @@ func remap(event: InputEventJoypadButton) -> void:
     var ui_button = current_action_data['ui_button']
     ui_button.set_text(current_action_data['ui_button_text'])
 
-func _on_jump_pressed(pause: Pause) -> void:
+func _on_jump_pressed() -> void:
     setup_remap(PlayerAction.JUMP)
 
-func _on_attack_pressed(pause: Pause) -> void:
+func _on_attack_pressed() -> void:
     setup_remap(PlayerAction.ATTACK)
 
-func _on_dash_pressed(pause: Pause) -> void:
+func _on_dash_pressed() -> void:
     setup_remap(PlayerAction.DASH)
 
-func _on_interact_pressed(pause: Pause) -> void:
+func _on_interact_pressed() -> void:
     setup_remap(PlayerAction.INTERACT)
 
 func _on_back_pressed(pause: Pause) -> void:
