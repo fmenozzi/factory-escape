@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/character-spritesheet.png" type="Texture" id=2]
@@ -12,9 +12,10 @@
 [ext_resource path="res://player/states/dash.gd" type="Script" id=10]
 [ext_resource path="res://player/states/wall_slide.gd" type="Script" id=11]
 [ext_resource path="res://player/states/wall_jump.gd" type="Script" id=12]
-[ext_resource path="res://player/states/grapple.gd" type="Script" id=13]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=14]
-[ext_resource path="res://player/wall_proximity_detector.gd" type="Script" id=15]
+[ext_resource path="res://player/states/grapple_start.gd" type="Script" id=13]
+[ext_resource path="res://player/states/grapple.gd" type="Script" id=14]
+[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=15]
+[ext_resource path="res://player/wall_proximity_detector.gd" type="Script" id=16]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -99,6 +100,40 @@ tracks/0/keys = {
 "values": [ 24 ]
 }
 
+[sub_resource type="Animation" id=10]
+resource_name = "grapple_launch"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 56, 57, 58, 59 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "grapple_pull"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 59, 58, 57 ]
+}
+
 [sub_resource type="Animation" id=4]
 length = 1.4
 loop = true
@@ -117,7 +152,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-length = 0.15
+length = 0.1
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -126,10 +161,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 16, 17, 18 ]
+"values": [ 17, 18 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -177,6 +212,8 @@ script = ExtResource( 1 )
 anims/attack = SubResource( 1 )
 anims/dash = SubResource( 2 )
 anims/fall = SubResource( 3 )
+anims/grapple_launch = SubResource( 10 )
+anims/grapple_pull = SubResource( 11 )
 anims/idle = SubResource( 4 )
 anims/jump = SubResource( 5 )
 anims/walk = SubResource( 6 )
@@ -187,6 +224,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
 vframes = 8
 hframes = 8
+frame = 59
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 128 )
 __meta__ = {
@@ -267,20 +305,23 @@ script = ExtResource( 12 )
 
 [node name="JumpCutTimer" type="Timer" parent="States/WallJump"]
 
-[node name="Grapple" type="Node" parent="States"]
+[node name="GrappleStart" type="Node" parent="States"]
 script = ExtResource( 13 )
+
+[node name="Grapple" type="Node" parent="States"]
+script = ExtResource( 14 )
 
 [node name="DashCooldown" type="Timer" parent="."]
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
-] instance=ExtResource( 14 )]
+] instance=ExtResource( 15 )]
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
-script = ExtResource( 15 )
+script = ExtResource( 16 )
 
 [node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -12 )
