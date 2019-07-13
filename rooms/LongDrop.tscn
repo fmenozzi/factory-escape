@@ -29,4 +29,6 @@ shape = SubResource( 1 )
 [node name="Top Anchor" type="Position2D" parent="CameraAnchors"]
 position = Vector2( 160, 90 )
 
+[node name="GrapplePoints" type="Node2D" parent="."]
+
 [editable path="TileMaps"]

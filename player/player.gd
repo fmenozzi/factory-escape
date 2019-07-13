@@ -16,6 +16,7 @@ enum State {
     DASH,
     WALL_SLIDE,
     WALL_JUMP,
+    GRAPPLE,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -28,6 +29,7 @@ onready var STATES = {
     State.DASH:        $States/Dash,
     State.WALL_SLIDE:  $States/WallSlide,
     State.WALL_JUMP:   $States/WallJump,
+    State.GRAPPLE:     $States/Grapple,
 }
 
 var current_state: Node = null
@@ -240,3 +242,13 @@ func consume_jump() -> void:
     _jumps_remaining -= 1
 func reset_jump() -> void:
     _jumps_remaining = 2
+
+func get_closest_grapple_point() -> Vector2:
+    var closest_grapple_point := Vector2.ZERO
+    var closest_grapple_point_dist := INF
+    for grapple_point in curr_room.get_grapple_points():
+        var dist := global_position.distance_to(grapple_point)
+        if dist < closest_grapple_point_dist:
+            closest_grapple_point_dist = dist
+            closest_grapple_point = grapple_point
+    return closest_grapple_point

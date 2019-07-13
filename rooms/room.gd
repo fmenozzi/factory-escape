@@ -24,6 +24,12 @@ func get_closest_camera_anchor(player: Player) -> Vector2:
 
     return min_dist_anchor
 
+func get_grapple_points() -> Array:
+    var grapple_points = []
+    for grapple_point in get_node('GrapplePoints').get_children():
+        grapple_points.push_back(grapple_point.global_position)
+    return grapple_points
+
 # TODO: don't rely on inherited node strucutres for getting Area2D.
 func get_room_dimensions() -> Vector2:
     var half_extents = get_node('RoomBoundaries').get_node('CollisionShape2D').shape.extents

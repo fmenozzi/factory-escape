@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://rooms/factory_entrance.gd" type="Script" id=1]
 [ext_resource path="res://TileMaps.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GrapplePoint.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -32,5 +33,9 @@ shape = SubResource( 1 )
 [node name="Anchor" type="Position2D" parent="CameraAnchors"]
 position = Vector2( 160, 90 )
 
+[node name="GrapplePoints" type="Node2D" parent="."]
+
+[node name="GrapplePoint" parent="GrapplePoints" instance=ExtResource( 3 )]
+position = Vector2( 280, 96 )
 
 [editable path="TileMaps"]
