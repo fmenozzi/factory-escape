@@ -39,6 +39,10 @@ func exit(player: Player) -> void:
     pass
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    if event.is_action_pressed('player_grapple'):
+        if player.get_closest_grapple_point() != Vector2.ZERO:
+            return {'new_state': player.State.GRAPPLE_START}
+
     return {'new_state': player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
