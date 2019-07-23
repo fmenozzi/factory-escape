@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://world.gd" type="Script" id=1]
 [ext_resource path="res://rooms/FactoryEntrance.tscn" type="PackedScene" id=2]
 [ext_resource path="res://rooms/LobbyConnector.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/LongHallway.tscn" type="PackedScene" id=4]
 [ext_resource path="res://rooms/LongDrop.tscn" type="PackedScene" id=5]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://rooms/GrapplePlayground.tscn" type="PackedScene" id=6]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,6 +33,27 @@ camera_behavior = 1
 position = Vector2( 1136, 0 )
 camera_behavior = 2
 
-[node name="Player" parent="." instance=ExtResource( 6 )]
+[node name="GrapplePlayground" parent="Rooms" instance=ExtResource( 6 )]
+position = Vector2( 0, -360 )
+
+[node name="BackgroundSmall" parent="Rooms/GrapplePlayground/TileMaps" index="0"]
+position = Vector2( 0, 8 )
+
+[node name="BackgroundLarge" parent="Rooms/GrapplePlayground/TileMaps" index="1"]
+position = Vector2( 0, 8 )
+
+[node name="Platforms" parent="Rooms/GrapplePlayground/TileMaps" index="2"]
+position = Vector2( 0, 8 )
+
+[node name="CollisionShape2D" parent="Rooms/GrapplePlayground/RoomBoundaries" index="0"]
+visible = true
+
+[node name="GrapplePoints" parent="Rooms/GrapplePlayground" index="3"]
+position = Vector2( 0, 8 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 56, 144 )
 
+[editable path="Rooms/GrapplePlayground"]
+
+[editable path="Rooms/GrapplePlayground/TileMaps"]

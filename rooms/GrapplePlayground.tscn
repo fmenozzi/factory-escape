@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://rooms/grapple_playground.gd" type="Script" id=1]
+[ext_resource path="res://TileMaps.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GrapplePoint.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 160, 180 )
+
+[node name="GrapplePlayground" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMaps" parent="." instance=ExtResource( 2 )]
+
+[node name="BackgroundSmall" parent="TileMaps" index="0"]
+tile_data = PoolIntArray( 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65548, 536870970, 0, 65549, 61, 0, 65550, 64, 0, 65551, 61, 0, 65552, 58, 0, 131079, 2, 0, 131080, 1, 0, 131081, 1, 0, 196616, 1, 0, 196617, 3, 0, 262152, 3, 0, 1179657, 0, 0, 1179658, 0, 0, 1179665, 48, 0, 1245193, 0, 0, 1245194, 0, 0, 1245201, 50, 0, 1310729, 0, 0, 1310730, 0, 0, 1310736, 9, 0, 1310737, 19, 0 )
+
+[node name="BackgroundLarge" parent="TileMaps" index="1"]
+tile_data = PoolIntArray( 65537, 2, 0, 65538, 2, 0, 131073, 3, 0, 131074, 3, 0 )
+
+[node name="Platforms" parent="TileMaps" index="2"]
+tile_data = PoolIntArray( -65536, 28, 0, -65535, 28, 0, -65534, 28, 0, -65533, 28, 0, -65532, 28, 0, -65531, 28, 0, -65530, 28, 0, -65529, 28, 0, -65528, 28, 0, -65527, 28, 0, -65526, 28, 0, -65525, 28, 0, -65524, 28, 0, -65523, 28, 0, -65522, 28, 0, -65521, 28, 0, -65520, 28, 0, -65519, 28, 0, -65518, 28, 0, -65517, 28, 0, 0, 28, 0, 1, 28, 0, 2, 28, 0, 3, 28, 0, 4, 28, 0, 5, 28, 0, 6, 28, 0, 7, 28, 0, 8, 28, 0, 9, 28, 0, 10, 28, 0, 11, 28, 0, 12, 28, 0, 13, 28, 0, 14, 28, 0, 15, 28, 0, 16, 28, 0, 17, 28, 0, 18, 28, 0, 19, 28, 0, 65536, 28, 0, 65537, 28, 0, 65553, 34, 0, 65554, 28, 0, 65555, 28, 0, 131072, 28, 0, 131073, 28, 0, 131090, 28, 0, 131091, 28, 0, 196608, 28, 0, 196609, 28, 0, 196626, 28, 0, 196627, 28, 0, 262144, 28, 0, 262145, 28, 0, 262162, 28, 0, 262163, 28, 0, 327680, 28, 0, 327681, 28, 0, 327698, 28, 0, 327699, 28, 0, 393216, 28, 0, 393217, 28, 0, 393225, 24, 0, 393226, 27, 0, 393234, 28, 0, 393235, 28, 0, 458752, 28, 0, 458753, 28, 0, 458761, 30, 0, 458762, 30, 0, 458770, 28, 0, 458771, 28, 0, 524288, 28, 0, 524289, 28, 0, 524297, 30, 0, 524298, 30, 0, 524306, 28, 0, 524307, 28, 0, 589824, 28, 0, 589825, 28, 0, 589842, 28, 0, 589843, 28, 0, 655360, 28, 0, 655361, 28, 0, 655378, 28, 0, 655379, 28, 0, 720896, 28, 0, 720897, 28, 0, 720914, 28, 0, 720915, 28, 0, 786432, 28, 0, 786433, 28, 0, 786450, 28, 0, 786451, 28, 0, 851968, 28, 0, 851969, 28, 0, 851972, 19, 0, 851973, 19, 0, 851982, 19, 0, 851983, 19, 0, 851986, 28, 0, 851987, 28, 0, 917504, 28, 0, 917505, 28, 0, 917522, 28, 0, 917523, 28, 0, 983040, 28, 0, 983041, 28, 0, 983058, 28, 0, 983059, 28, 0, 1048576, 28, 0, 1048577, 28, 0, 1048594, 28, 0, 1048595, 28, 0, 1114112, 28, 0, 1114113, 28, 0, 1114121, 20, 0, 1114122, 20, 0, 1114130, 28, 0, 1114131, 28, 0, 1179648, 28, 0, 1179649, 28, 0, 1179666, 28, 0, 1179667, 28, 0, 1245184, 28, 0, 1245185, 28, 0, 1245199, 23, 0, 1245202, 28, 0, 1245203, 28, 0, 1310720, 28, 0, 1310721, 28, 0, 1310734, 23, 0, 1310735, 23, 0, 1310738, 28, 0, 1310739, 28, 0, 1376256, 28, 0, 1376257, 28, 0, 1376260, 28, 0, 1376261, 28, 0, 1376262, 28, 0, 1376263, 28, 0, 1376264, 28, 0, 1376265, 28, 0, 1376266, 28, 0, 1376267, 28, 0, 1376268, 28, 0, 1376269, 28, 0, 1376270, 28, 0, 1376271, 28, 0, 1376272, 28, 0, 1376273, 28, 0, 1376274, 28, 0, 1376275, 28, 0 )
+
+[node name="RoomBoundaries" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomBoundaries"]
+position = Vector2( 160, 180 )
+shape = SubResource( 1 )
+
+[node name="CameraAnchors" type="Node2D" parent="."]
+
+[node name="TopAnchor" type="Position2D" parent="CameraAnchors"]
+position = Vector2( 160, 90 )
+
+[node name="BottomAnchor" type="Position2D" parent="CameraAnchors"]
+position = Vector2( 160, 270 )
+
+[node name="GrapplePoints" type="Node2D" parent="."]
+
+[node name="LowerCenter" parent="GrapplePoints" instance=ExtResource( 3 )]
+position = Vector2( 160, 272 )
+
+[node name="MidLeft" parent="GrapplePoints" instance=ExtResource( 3 )]
+position = Vector2( 80, 208 )
+
+[node name="MidRight" parent="GrapplePoints" instance=ExtResource( 3 )]
+position = Vector2( 240, 208 )
+
+[node name="UpperCenter" parent="GrapplePoints" instance=ExtResource( 3 )]
+position = Vector2( 160, 96 )
+
+[editable path="TileMaps"]
