@@ -77,6 +77,8 @@ onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 
+onready var _grapple_rope: Line2D = $GrappleRope
+
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -187,6 +189,9 @@ func get_dash_cooldown_timer() -> Timer:
 
 func get_wall_slide_trail() -> Particles2D:
     return _wall_slide_trail_effect
+
+func get_grapple_rope() -> Line2D:
+    return _grapple_rope
 
 func get_player_direction() -> int:
     return -1 if $Sprite.flip_h else 1

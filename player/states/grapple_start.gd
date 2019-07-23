@@ -8,8 +8,13 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     var grapple_direction := sign((grapple_point - player.global_position).x)
     player.set_player_direction(grapple_direction)
 
+    # Draw grapple rope from player to grapple point.
+    var grapple_rope := player.get_grapple_rope()
+    grapple_rope.add_point(Vector2.ZERO)
+    grapple_rope.add_point(grapple_point - player.position)
+
 func exit(player: Player) -> void:
-    pass
+    player.get_grapple_rope().clear_points()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': player.State.NO_CHANGE}
