@@ -1,7 +1,7 @@
 extends 'res://scripts/state.gd'
 
 # The distance covered by the dash in pixels.
-var DASH_DISTANCE: float = 4 * Globals.TILE_SIZE_PIXELS
+var DASH_DISTANCE: float = 4 * Globals.TILE_SIZE
 
 # The duration of the dash in seconds.
 const DASH_DURATION: float = 0.20

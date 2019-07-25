@@ -1,10 +1,10 @@
 extends Node
 
-# The size of a basic "tile" in the game. Distances (e.g jump heights) and
-# speeds (e.g. walk speed, fall speed) will be calculated in units of this tile
-# size to make it easier to design the world around the player's movement
-# capabilities (e.g. ensure that the player can clear certain jumps).
-const TILE_SIZE_PIXELS: int = 16
+# The size of a basic "tile" in the game, in pixels. Distances (e.g jump 
+# heights) and speeds (e.g. walk speed, fall speed) will be calculated in units
+# of this tile size to make it easier to design the world around the player's
+# movement capabilities (e.g. ensure that the player can clear certain jumps).
+const TILE_SIZE: int = 16
 
 # Floor normal indicating "up" direction, used in move_and_slide() so that
 # future invocations of functions like is_on_floor() and is_on_wall(), etc.

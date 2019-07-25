@@ -39,13 +39,13 @@ var velocity: Vector2 = Vector2.ZERO
 
 # The speed at which the player can move the character left and right, measured
 # in pixels per second.
-var MOVEMENT_SPEED: float = 6 * Globals.TILE_SIZE_PIXELS
+var MOVEMENT_SPEED: float = 6 * Globals.TILE_SIZE
 
 # The min/max jump heights the player can achieve in pixels. Releasing the jump
 # button early will "cut" the jump somewhere between these two values, allowing
 # for variable-height jumps.
-var MAX_JUMP_HEIGHT: float = 3.50 * Globals.TILE_SIZE_PIXELS
-var MIN_JUMP_HEIGHT: float = 0.50 * Globals.TILE_SIZE_PIXELS
+var MAX_JUMP_HEIGHT: float = 3.50 * Globals.TILE_SIZE
+var MIN_JUMP_HEIGHT: float = 0.50 * Globals.TILE_SIZE
 
 # The duration of the max-height jump in seconds from ground to peak.
 var JUMP_DURATION: float = 0.4

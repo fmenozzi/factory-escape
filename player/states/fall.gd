@@ -4,7 +4,7 @@ extends 'res://scripts/state.gd'
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 
 # Max falling speed the player can achieve in pixels per second.
-var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE_PIXELS
+var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE
 
 func enter(player: Player, previous_state: int) -> void:
     # Reset velocity.
