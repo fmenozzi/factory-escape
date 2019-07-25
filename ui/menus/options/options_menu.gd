@@ -16,7 +16,15 @@ func enter(pause: Pause, previous_menu: int) -> void:
     _back.connect('pressed', self, '_on_back_pressed', [pause])
 
     self.visible = true
-    _game.grab_focus()
+
+    match previous_menu:
+        pause.Menu.VIDEO_OPTIONS:
+            _video.grab_focus()
+        pause.Menu.CONTROLLER_OPTIONS:
+            _controller.grab_focus()
+        _:
+            # Default to first option.
+            _game.grab_focus()
 
 func exit(pause: Pause) -> void:
     self.visible = false
