@@ -254,8 +254,9 @@ func get_closest_grapple_point() -> Vector2:
     var closest_grapple_point := Vector2.ZERO
     var closest_grapple_point_dist := INF
     for grapple_point in curr_room.get_grapple_points():
-        var dist := global_position.distance_to(grapple_point)
+        var grapple_point_pos = grapple_point.global_position
+        var dist := global_position.distance_to(grapple_point_pos)
         if dist < closest_grapple_point_dist:
             closest_grapple_point_dist = dist
-            closest_grapple_point = grapple_point
+            closest_grapple_point = grapple_point_pos
     return closest_grapple_point

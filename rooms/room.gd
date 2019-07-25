@@ -24,10 +24,11 @@ func get_closest_camera_anchor(player: Player) -> Vector2:
 
     return min_dist_anchor
 
+# Get all the GrapplePoint nodes in the current room.
 func get_grapple_points() -> Array:
     var grapple_points = []
     for grapple_point in get_node('GrapplePoints').get_children():
-        grapple_points.push_back(grapple_point.global_position)
+        grapple_points.push_back(grapple_point)
     return grapple_points
 
 # TODO: don't rely on inherited node strucutres for getting Area2D.
