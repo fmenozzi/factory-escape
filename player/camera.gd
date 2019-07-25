@@ -63,8 +63,8 @@ func _interpolate_camera_pos(old_global_pos, new_global_pos) -> void:
     var easing := Tween.EASE_IN_OUT
 
     # Convert tween start and end position from global to local coordinates.
-    var old: Vector2 = self.position - (self.global_position - old_global_pos)
-    var new: Vector2 = self.position + (new_global_pos - self.global_position)
+    var old := self.to_local(old_global_pos)
+    var new := self.to_local(new_global_pos)
 
     _tween.stop_all()
     _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
