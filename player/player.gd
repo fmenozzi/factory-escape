@@ -270,8 +270,17 @@ func grapple_line_of_sight_occluded(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.force_raycast_update()
     return _grapple_line_of_sight.is_colliding()
 
+func grapple_point_in_range(grapple_point: GrapplePoint) -> bool:
+    return grapple_point.get_grapple_range_area().overlaps_body(self)
+
 func can_grapple_to(grapple_point: GrapplePoint) -> bool:
-    return not grapple_line_of_sight_occluded(grapple_point)
+    if grapple_line_of_sight_occluded(grapple_point):
+        return false
+
+    if not grapple_point_in_range(grapple_point):
+        return false
+
+    return true
 
 func update_closest_grapple_point() -> void:
     var closest_grapple_point: GrapplePoint = null

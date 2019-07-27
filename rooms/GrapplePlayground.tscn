@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://rooms/grapple_playground.gd" type="Script" id=1]
 [ext_resource path="res://TileMaps.tscn" type="PackedScene" id=2]
@@ -6,6 +6,18 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 100, 50 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 80, 60 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 80, 60 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 110, 68 )
 
 [node name="GrapplePlayground" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,15 +51,40 @@ position = Vector2( 160, 270 )
 [node name="GrapplePoints" type="Node2D" parent="."]
 
 [node name="LowerCenter" parent="GrapplePoints" instance=ExtResource( 3 )]
+editor/display_folded = true
 position = Vector2( 160, 272 )
+
+[node name="CollisionShape2D" parent="GrapplePoints/LowerCenter/GrappleRangeArea" index="0"]
+position = Vector2( 0, 18 )
+shape = SubResource( 2 )
 
 [node name="MidLeft" parent="GrapplePoints" instance=ExtResource( 3 )]
 position = Vector2( 80, 208 )
 
+[node name="CollisionShape2D" parent="GrapplePoints/MidLeft/GrappleRangeArea" index="0"]
+position = Vector2( 0, 2 )
+shape = SubResource( 3 )
+
 [node name="MidRight" parent="GrapplePoints" instance=ExtResource( 3 )]
 position = Vector2( 240, 208 )
+
+[node name="CollisionShape2D" parent="GrapplePoints/MidRight/GrappleRangeArea" index="0"]
+position = Vector2( 0, 2 )
+shape = SubResource( 4 )
 
 [node name="UpperCenter" parent="GrapplePoints" instance=ExtResource( 3 )]
 position = Vector2( 160, 96 )
 
+[node name="CollisionShape2D" parent="GrapplePoints/UpperCenter/GrappleRangeArea" index="0"]
+position = Vector2( 0, -8 )
+shape = SubResource( 5 )
+
 [editable path="TileMaps"]
+
+[editable path="GrapplePoints/LowerCenter"]
+
+[editable path="GrapplePoints/MidLeft"]
+
+[editable path="GrapplePoints/MidRight"]
+
+[editable path="GrapplePoints/UpperCenter"]

@@ -6,3 +6,6 @@ func _ready() -> void:
 
 func get_attachment_pos() -> Vector2:
     return $AttachmentPoint.global_position
+
+func get_grapple_range_area() -> Area2D:
+    return $GrappleRangeArea as Area2D
