@@ -4,14 +4,14 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('grapple_launch')
 
     # Make the player face the grapple point.
-    var grapple_point := player.get_closest_grapple_point()
-    var grapple_direction := sign((grapple_point - player.global_position).x)
+    var grapple_point_pos := player.get_closest_grapple_point().global_position
+    var grapple_direction := sign((grapple_point_pos - player.global_position).x)
     player.set_player_direction(grapple_direction)
 
     # Draw grapple rope from player to grapple point.
     var grapple_rope := player.get_grapple_rope()
     grapple_rope.add_point(Vector2.ZERO)
-    grapple_rope.add_point(grapple_point - player.position)
+    grapple_rope.add_point(grapple_point_pos - player.global_position)
 
 func exit(player: Player) -> void:
     player.get_grapple_rope().clear_points()

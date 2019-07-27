@@ -79,6 +79,8 @@ onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 
 onready var _grapple_rope: Line2D = $GrappleRope
 
+var _closest_grapple_point: GrapplePoint = null
+
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -250,13 +252,16 @@ func consume_jump() -> void:
 func reset_jump() -> void:
     _jumps_remaining = 2
 
-func get_closest_grapple_point() -> Vector2:
-    var closest_grapple_point := Vector2.ZERO
+func get_closest_grapple_point() -> GrapplePoint:
+    return _closest_grapple_point
+
+func update_closest_grapple_point() -> void:
+    var closest_grapple_point: GrapplePoint = null
     var closest_grapple_point_dist := INF
     for grapple_point in curr_room.get_grapple_points():
         var grapple_point_pos = grapple_point.global_position
         var dist := global_position.distance_to(grapple_point_pos)
         if dist < closest_grapple_point_dist:
             closest_grapple_point_dist = dist
-            closest_grapple_point = grapple_point_pos
-    return closest_grapple_point
+            closest_grapple_point = grapple_point
+    _closest_grapple_point = closest_grapple_point

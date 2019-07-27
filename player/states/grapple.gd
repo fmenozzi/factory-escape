@@ -6,8 +6,8 @@ var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE
 
 var velocity: Vector2 = Vector2.ZERO
 
-func grapple_velocity(player: Player, grapple_point: Vector2) -> Vector2:
-    var disp := grapple_point - player.global_position
+func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
+    var disp := grapple_point.global_position - player.global_position
 
     # The height from the higher of the two points to the highest point in the
     # arc.
@@ -40,7 +40,8 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_grapple'):
-        if player.get_closest_grapple_point() != Vector2.ZERO:
+        player.update_closest_grapple_point()
+        if player.get_closest_grapple_point() != null:
             return {'new_state': player.State.GRAPPLE_START}
 
     return {'new_state': player.State.NO_CHANGE}

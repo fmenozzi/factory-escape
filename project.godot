@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "GrapplePoint",
+"language": "GDScript",
+"path": "res://grapple_point.gd"
+}, {
 "base": "Control",
 "class": "Pause",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://rooms/room.gd"
 } ]
 _global_script_class_icons={
+"GrapplePoint": "",
 "Pause": "",
 "Player": "",
 "Room": ""
