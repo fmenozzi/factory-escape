@@ -34,3 +34,6 @@ region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/shimmer = SubResource( 1 )
+
+[node name="AttachmentPoint" type="Position2D" parent="."]
+position = Vector2( 0, -8 )
