@@ -111,6 +111,14 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
+func _process(delta: float) -> void:
+    for grapple_point in curr_room.get_grapple_points():
+        var grapple_point_sprite: Sprite = grapple_point.get_node('Sprite')
+        if can_grapple_to(grapple_point):
+            grapple_point_sprite.modulate = Color.green
+        else:
+            grapple_point_sprite.modulate = Color.red
+
 func _input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
