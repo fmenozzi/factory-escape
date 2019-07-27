@@ -270,7 +270,7 @@ func _update_next_grapple_point() -> void:
     var candidate_grapple_points := []
     for grapple_point in curr_room.get_grapple_points():
         var grapple_point_sprite: Sprite = grapple_point.get_node('Sprite')
-        if can_grapple_to(grapple_point):
+        if _can_grapple_to(grapple_point):
             candidate_grapple_points.append(grapple_point)
             grapple_point_sprite.modulate = Color.green
         else:
@@ -278,29 +278,29 @@ func _update_next_grapple_point() -> void:
 
     # Sort candidate grapple points by distance to player and select the closest
     # one.
-    candidate_grapple_points.sort_custom(self, 'grapple_distance_comparator')
+    candidate_grapple_points.sort_custom(self, '_grapple_distance_comparator')
     if not candidate_grapple_points.empty():
         _next_grapple_point = candidate_grapple_points[0]
 
-func grapple_line_of_sight_occluded(grapple_point: GrapplePoint) -> bool:
+func _grapple_line_of_sight_occluded(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
         _grapple_line_of_sight.to_local(grapple_point.get_attachment_pos()))
     _grapple_line_of_sight.force_raycast_update()
     return _grapple_line_of_sight.is_colliding()
 
-func grapple_point_in_range(grapple_point: GrapplePoint) -> bool:
+func _grapple_point_in_range(grapple_point: GrapplePoint) -> bool:
     return grapple_point.get_grapple_range_area().overlaps_body(self)
 
-func can_grapple_to(grapple_point: GrapplePoint) -> bool:
-    if grapple_line_of_sight_occluded(grapple_point):
+func _can_grapple_to(grapple_point: GrapplePoint) -> bool:
+    if _grapple_line_of_sight_occluded(grapple_point):
         return false
 
-    if not grapple_point_in_range(grapple_point):
+    if not _grapple_point_in_range(grapple_point):
         return false
 
     return true
 
-func grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
+func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
     var distance_to_a := a.global_position.distance_to(self.global_position)
     var distance_to_b := b.global_position.distance_to(self.global_position)
     return distance_to_a < distance_to_b
