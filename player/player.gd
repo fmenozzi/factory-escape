@@ -282,17 +282,17 @@ func _update_next_grapple_point() -> void:
     if not candidate_grapple_points.empty():
         _next_grapple_point = candidate_grapple_points[0]
 
-func _grapple_line_of_sight_occluded(grapple_point: GrapplePoint) -> bool:
+func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
         _grapple_line_of_sight.to_local(grapple_point.get_attachment_pos()))
     _grapple_line_of_sight.force_raycast_update()
-    return _grapple_line_of_sight.is_colliding()
+    return not _grapple_line_of_sight.is_colliding()
 
 func _grapple_point_in_range(grapple_point: GrapplePoint) -> bool:
     return grapple_point.get_grapple_range_area().overlaps_body(self)
 
 func _can_grapple_to(grapple_point: GrapplePoint) -> bool:
-    if _grapple_line_of_sight_occluded(grapple_point):
+    if not _grapple_point_in_line_of_sight(grapple_point):
         return false
 
     if not _grapple_point_in_range(grapple_point):
