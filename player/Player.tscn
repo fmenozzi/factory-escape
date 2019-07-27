@@ -352,3 +352,9 @@ width = 2.0
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
+
+[node name="GrappleLineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+collision_mask = 2

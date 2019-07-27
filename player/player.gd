@@ -78,6 +78,7 @@ onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 
 onready var _grapple_rope: Line2D = $GrappleRope
+onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
 var _closest_grapple_point: GrapplePoint = null
 
@@ -255,13 +256,22 @@ func reset_jump() -> void:
 func get_closest_grapple_point() -> GrapplePoint:
     return _closest_grapple_point
 
+func grapple_line_of_sight_occluded(grapple_point: GrapplePoint) -> bool:
+    _grapple_line_of_sight.set_cast_to(
+        _grapple_line_of_sight.to_local(grapple_point.get_attachment_pos()))
+    _grapple_line_of_sight.force_raycast_update()
+    return _grapple_line_of_sight.is_colliding()
+
+func can_grapple_to(grapple_point: GrapplePoint) -> bool:
+    return not grapple_line_of_sight_occluded(grapple_point)
+
 func update_closest_grapple_point() -> void:
     var closest_grapple_point: GrapplePoint = null
     var closest_grapple_point_dist := INF
     for grapple_point in curr_room.get_grapple_points():
         var grapple_point_pos = grapple_point.global_position
         var dist := global_position.distance_to(grapple_point_pos)
-        if dist < closest_grapple_point_dist:
+        if dist < closest_grapple_point_dist and can_grapple_to(grapple_point):
             closest_grapple_point_dist = dist
             closest_grapple_point = grapple_point
     _closest_grapple_point = closest_grapple_point
