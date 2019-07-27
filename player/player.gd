@@ -80,7 +80,11 @@ onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
-var _closest_grapple_point: GrapplePoint = null
+# The grapple point to be used the next time the player presses the grapple
+# button. This is updated on every frame based on several candidacy rules. If
+# there are no valid grapple points for the player on a given frame, this is set
+# to null and grappling has no effect.
+var _next_grapple_point: GrapplePoint = null
 
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
@@ -112,12 +116,7 @@ func _ready() -> void:
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
 func _process(delta: float) -> void:
-    for grapple_point in curr_room.get_grapple_points():
-        var grapple_point_sprite: Sprite = grapple_point.get_node('Sprite')
-        if can_grapple_to(grapple_point):
-            grapple_point_sprite.modulate = Color.green
-        else:
-            grapple_point_sprite.modulate = Color.red
+    _update_next_grapple_point()
 
 func _input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
@@ -261,8 +260,27 @@ func consume_jump() -> void:
 func reset_jump() -> void:
     _jumps_remaining = 2
 
-func get_closest_grapple_point() -> GrapplePoint:
-    return _closest_grapple_point
+func get_next_grapple_point() -> GrapplePoint:
+    return _next_grapple_point
+
+func _update_next_grapple_point() -> void:
+    _next_grapple_point = null
+
+    # Determine candidate set of grapple points.
+    var candidate_grapple_points := []
+    for grapple_point in curr_room.get_grapple_points():
+        var grapple_point_sprite: Sprite = grapple_point.get_node('Sprite')
+        if can_grapple_to(grapple_point):
+            candidate_grapple_points.append(grapple_point)
+            grapple_point_sprite.modulate = Color.green
+        else:
+            grapple_point_sprite.modulate = Color.red
+
+    # Sort candidate grapple points by distance to player and select the closest
+    # one.
+    candidate_grapple_points.sort_custom(self, 'grapple_distance_comparator')
+    if not candidate_grapple_points.empty():
+        _next_grapple_point = candidate_grapple_points[0]
 
 func grapple_line_of_sight_occluded(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
@@ -282,13 +300,7 @@ func can_grapple_to(grapple_point: GrapplePoint) -> bool:
 
     return true
 
-func update_closest_grapple_point() -> void:
-    var closest_grapple_point: GrapplePoint = null
-    var closest_grapple_point_dist := INF
-    for grapple_point in curr_room.get_grapple_points():
-        var grapple_point_pos = grapple_point.global_position
-        var dist := global_position.distance_to(grapple_point_pos)
-        if dist < closest_grapple_point_dist and can_grapple_to(grapple_point):
-            closest_grapple_point_dist = dist
-            closest_grapple_point = grapple_point
-    _closest_grapple_point = closest_grapple_point
+func grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
+    var distance_to_a := a.global_position.distance_to(self.global_position)
+    var distance_to_b := b.global_position.distance_to(self.global_position)
+    return distance_to_a < distance_to_b

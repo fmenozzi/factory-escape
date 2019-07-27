@@ -30,7 +30,7 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     return velocity
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    velocity = grapple_velocity(player, player.get_closest_grapple_point())
+    velocity = grapple_velocity(player, player.get_next_grapple_point())
 
     player.get_animation_player().play('grapple_pull')
     player.get_animation_player().queue('jump')
@@ -40,8 +40,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_grapple'):
-        player.update_closest_grapple_point()
-        if player.get_closest_grapple_point() != null:
+        if player.get_next_grapple_point() != null:
             return {'new_state': player.State.GRAPPLE_START}
 
     return {'new_state': player.State.NO_CHANGE}

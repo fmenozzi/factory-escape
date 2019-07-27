@@ -41,8 +41,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if player.get_dash_cooldown_timer().is_stopped():
             return {'new_state': player.State.DASH}
     elif event.is_action_pressed('player_grapple'):
-        player.update_closest_grapple_point()
-        if player.get_closest_grapple_point() != null:
+        if player.get_next_grapple_point() != null:
             return {'new_state': player.State.GRAPPLE_START}
 
     return {'new_state': player.State.NO_CHANGE}
