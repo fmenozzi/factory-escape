@@ -146,7 +146,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=5]
 resource_name = "grapple_launch_short"
 length = 0.16
 step = 0.01
@@ -192,8 +192,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "grapple_pull"
+[sub_resource type="Animation" id=6]
 length = 0.15
 step = 0.05
 tracks/0/type = "value"
@@ -209,7 +208,7 @@ tracks/0/keys = {
 "values": [ 59, 58, 57 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 1.4
 loop = true
 step = 0.2
@@ -226,7 +225,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
@@ -242,7 +241,7 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -258,7 +257,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -272,10 +271,10 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 10, 4 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -287,12 +286,12 @@ anims/attack = SubResource( 1 )
 anims/dash = SubResource( 2 )
 anims/fall = SubResource( 3 )
 anims/grapple_launch_long = SubResource( 4 )
-anims/grapple_launch_short = SubResource( 12 )
-anims/grapple_pull = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/walk = SubResource( 8 )
-anims/wall_slide = SubResource( 9 )
+anims/grapple_launch_short = SubResource( 5 )
+anims/grapple_pull = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/walk = SubResource( 9 )
+anims/wall_slide = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -309,7 +308,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -343,7 +342,7 @@ region_enabled = true
 region_rect = Rect2( 64, 288, 128, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 disabled = true
 
 [node name="States" type="Node" parent="."]

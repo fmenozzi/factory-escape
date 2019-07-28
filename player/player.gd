@@ -115,15 +115,14 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
-func _process(delta: float) -> void:
-    _update_next_grapple_point()
-
 func _input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
 
 func _physics_process(delta: float) -> void:
+    _update_next_grapple_point()
+
     var new_state_dict = current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)

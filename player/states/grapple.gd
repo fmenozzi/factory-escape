@@ -32,7 +32,8 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     return velocity
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    grapple_point = player.get_next_grapple_point()
+    grapple_point = previous_state_dict['grapple_point']
+    assert grapple_point != null
 
     velocity = grapple_velocity(player, grapple_point)
 
@@ -46,7 +47,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null and next_grapple_point != grapple_point:
-            return {'new_state': player.State.GRAPPLE_START}
+            return {
+                'new_state': player.State.GRAPPLE_START,
+                'grapple_point': next_grapple_point,
+            }
 
     return {'new_state': player.State.NO_CHANGE}
 

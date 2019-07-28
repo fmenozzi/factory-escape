@@ -37,8 +37,12 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             # Double jump.
             return {'new_state': player.State.DOUBLE_JUMP}
     elif event.is_action_pressed('player_grapple'):
-        if player.get_next_grapple_point() != null:
-            return {'new_state': player.State.GRAPPLE_START}
+        var next_grapple_point := player.get_next_grapple_point()
+        if next_grapple_point != null:
+            return {
+                'new_state': player.State.GRAPPLE_START,
+                'grapple_point': next_grapple_point,
+            }
 
     return {'new_state': player.State.NO_CHANGE}
 
