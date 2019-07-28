@@ -6,6 +6,8 @@ var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE
 
 var velocity: Vector2 = Vector2.ZERO
 
+var grapple_point: GrapplePoint = null
+
 func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     var disp := grapple_point.global_position - player.global_position
 
@@ -30,17 +32,20 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     return velocity
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    velocity = grapple_velocity(player, player.get_next_grapple_point())
+    grapple_point = player.get_next_grapple_point()
+
+    velocity = grapple_velocity(player, grapple_point)
 
     player.get_animation_player().play('grapple_pull')
     player.get_animation_player().queue('jump')
 
 func exit(player: Player) -> void:
-    pass
+    grapple_point = null
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_grapple'):
-        if player.get_next_grapple_point() != null:
+        var next_grapple_point := player.get_next_grapple_point()
+        if next_grapple_point != null and next_grapple_point != grapple_point:
             return {'new_state': player.State.GRAPPLE_START}
 
     return {'new_state': player.State.NO_CHANGE}
