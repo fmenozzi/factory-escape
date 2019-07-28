@@ -276,11 +276,19 @@ func _update_next_grapple_point() -> void:
         else:
             grapple_point_sprite.modulate = Color.red
 
-    # Sort candidate grapple points by distance to player and select the closest
-    # one.
+    # Sort candidate grapple points by distance to player.
     candidate_grapple_points.sort_custom(self, '_grapple_distance_comparator')
+
+    # Pick the first grapple point that the player is facing. If the player is
+    # facing away from all available grapple points, pick the closest one.
     if not candidate_grapple_points.empty():
         _next_grapple_point = candidate_grapple_points[0]
+        for grapple_point in candidate_grapple_points:
+            var grapple_point_direction := \
+                sign((grapple_point.global_position - self.global_position).x)
+            if self.get_player_direction() == grapple_point_direction:
+                _next_grapple_point = grapple_point
+                break
 
 func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(

@@ -11,10 +11,10 @@ extents = Vector2( 160, 180 )
 extents = Vector2( 100, 50 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 80, 60 )
+extents = Vector2( 140, 60 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 80, 60 )
+extents = Vector2( 140, 60 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 110, 68 )
