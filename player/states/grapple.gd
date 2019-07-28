@@ -58,6 +58,10 @@ func update(player: Player, delta: float) -> Dictionary:
         Globals.spawn_particles(LandingPuff.instance(), player)
         return {'new_state': player.State.IDLE}
 
+    if player.is_on_wall():
+        Globals.spawn_particles(LandingPuff.instance(), player)
+        return {'new_state': player.State.WALL_SLIDE}
+
     if velocity.y > 0:
         player.get_animation_player().play('fall')
 
