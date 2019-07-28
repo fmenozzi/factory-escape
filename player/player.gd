@@ -291,11 +291,17 @@ func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
 func _grapple_point_in_range(grapple_point: GrapplePoint) -> bool:
     return grapple_point.get_grapple_range_area().overlaps_body(self)
 
+func _grapple_point_on_screen(grapple_point: GrapplePoint) -> bool:
+    return grapple_point.is_on_screen()
+
 func _can_grapple_to(grapple_point: GrapplePoint) -> bool:
     if not _grapple_point_in_line_of_sight(grapple_point):
         return false
 
     if not _grapple_point_in_range(grapple_point):
+        return false
+
+    if not _grapple_point_on_screen(grapple_point):
         return false
 
     return true
