@@ -1,7 +1,10 @@
 extends "res://scripts/state.gd"
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    player.get_animation_player().play('grapple_launch')
+    if player.is_on_ground():
+        player.get_animation_player().play('grapple_launch_long')
+    else:
+        player.get_animation_player().play('grapple_launch_short')
 
     # Make the player face the grapple point.
     var grapple_point_pos := \
