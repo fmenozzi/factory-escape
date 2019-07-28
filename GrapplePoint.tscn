@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://grapple_point.gd" type="Script" id=1]
 [ext_resource path="res://assets/grapple-points.png" type="Texture" id=2]
@@ -19,6 +19,9 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 28 )
 
 [node name="GrapplePoint" type="Node2D"]
 script = ExtResource( 1 )
@@ -42,6 +45,12 @@ position = Vector2( 0, -8 )
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleRangeArea"]
+
+[node name="NoGrappleArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoGrappleArea"]
+position = Vector2( 0, -28 )
+shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -8, 8, 8 )
