@@ -1,7 +1,8 @@
 extends Node
 
-# Called when host enters this state.
-func enter(host, previous_state: int) -> void:
+# Called when host enters this state. The metadata data of the previous state is
+# also passed in.
+func enter(host, previous_state_dict: Dictionary) -> void:
     pass
 
 # Called when host exits this state.
@@ -10,14 +11,16 @@ func exit(host) -> void:
 
 # Called when handling input from the host.
 #
-# Returns the new state to transition to or NO_CHANGE if remaining in current
-# state.
-func handle_input(host, event: InputEvent) -> int:
-    return -1
+# Returns a dictionary with at least the new state to transition to (in the
+# 'new_state' key). If the new state is NO_CHANGE, remain in current state. Can
+# also pass additional metadata via other keys.
+func handle_input(host, event: InputEvent) -> Dictionary:
+    return {}
 
 # Called on every frame.
 #
-# Returns the new state to transition to or NO_CHANGE if remaining in current
-# state.
-func update(host, delta: float) -> int:
-    return -1
+# Returns a dictionary with at least the new state to transition to (in the
+# 'new_state' key). If the new state is NO_CHANGE, remain in current state. Can
+# also pass additional metadata via other keys.
+func update(host, delta: float) -> Dictionary:
+    return {}

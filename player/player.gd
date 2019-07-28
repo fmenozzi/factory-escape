@@ -90,7 +90,7 @@ func _ready() -> void:
     # Begin in fall state
     current_state_enum = State.FALL
     current_state = STATES[current_state_enum]
-    _change_state(current_state_enum)
+    _change_state({'new_state': State.FALL})
 
     # Initialize current room
     curr_room = get_parent().get_node('Rooms/FactoryEntrance')
@@ -103,23 +103,30 @@ func _ready() -> void:
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
 func _input(event: InputEvent) -> void:
-    var new_state = current_state.handle_input(self, event)
-    if new_state != State.NO_CHANGE:
-        _change_state(new_state)
+    var new_state_dict = current_state.handle_input(self, event)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
 func _physics_process(delta: float) -> void:
-    var new_state = current_state.update(self, delta)
-    if new_state != State.NO_CHANGE:
-        _change_state(new_state)
+    var new_state_dict = current_state.update(self, delta)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
 # Change from one state in the state machine to another.
-func _change_state(new_state_enum: int) -> void:
+func _change_state(new_state_dict: Dictionary) -> void:
+    var new_state_enum: int = new_state_dict['new_state']
     var previous_state_enum := current_state_enum
+
+    # Before passing along the new_state_dict to the new state (since we want
+    # any additional metadata keys passed too), rename the 'new_state' key to
+    # 'previous_state'.
+    new_state_dict.erase('new_state')
+    new_state_dict['previous_state'] = previous_state_enum
 
     current_state.exit(self)
     current_state_enum = new_state_enum
     current_state = STATES[new_state_enum]
-    current_state.enter(self, previous_state_enum)
+    current_state.enter(self, new_state_dict)
 
     emit_signal('player_state_changed', current_state.get_name())
 

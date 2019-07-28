@@ -6,7 +6,7 @@ const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 # Max falling speed the player can achieve in pixels per second.
 var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE
 
-func enter(player: Player, previous_state: int) -> void:
+func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
 
@@ -21,33 +21,33 @@ func enter(player: Player, previous_state: int) -> void:
 func exit(player: Player) -> void:
     pass
 
-func handle_input(player: Player, event: InputEvent) -> int:
+func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_attack'):
         player.start_attack()
         player.get_animation_player().queue('fall')
     elif event.is_action_pressed('player_dash') and player.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
-            return player.State.DASH
+            return {'new_state': player.State.DASH}
     elif event.is_action_pressed('player_jump'):
         if player.is_near_wall_front() or player.is_near_wall_back():
             # Wall jump.
-            return player.State.WALL_JUMP
+            return {'new_state': player.State.WALL_JUMP}
         elif player.can_jump():
             # Double jump.
-            return player.State.DOUBLE_JUMP
+            return {'new_state': player.State.DOUBLE_JUMP}
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}
 
-func update(player: Player, delta: float) -> int:
+func update(player: Player, delta: float) -> Dictionary:
     # Once we hit the ground, emit the landing puff and switch to 'idle' state.
     if player.is_on_ground():
         Globals.spawn_particles(LandingPuff.instance(), player)
-        return player.State.IDLE
+        return {'new_state': player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
     if player.is_on_wall():
-        return player.State.WALL_SLIDE
+        return {'new_state': player.State.WALL_SLIDE}
 
     # Move left or right.
     var input_direction = Globals.get_input_direction()
@@ -61,4 +61,4 @@ func update(player: Player, delta: float) -> int:
 
     player.move(player.velocity)
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}

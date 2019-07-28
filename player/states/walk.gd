@@ -1,6 +1,6 @@
 extends 'res://scripts/state.gd'
 
-func enter(player: Player, previous_state: int) -> void:
+func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
@@ -13,9 +13,9 @@ func enter(player: Player, previous_state: int) -> void:
 func exit(player: Player) -> void:
     pass
 
-func handle_input(player: Player, event: InputEvent) -> int:
+func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and player.can_jump():
-        return player.State.JUMP
+        return {'new_state': player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
         # Play attack animation before returning to walk animation.
         player.start_attack()
@@ -23,19 +23,19 @@ func handle_input(player: Player, event: InputEvent) -> int:
     elif event.is_action_pressed('player_dash') and player.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
-            return player.State.DASH
+            return {'new_state': player.State.DASH}
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}
 
-func update(player: Player, delta: float) -> int:
+func update(player: Player, delta: float) -> Dictionary:
     # Change to idle state if we stop moving.
     var input_direction = Globals.get_input_direction()
     if input_direction == 0:
-        return player.State.IDLE
+        return {'new_state': player.State.IDLE}
 
     # If we've walked off a platform, start falling.
     if player.is_in_air():
-        return player.State.FALL
+        return {'new_state': player.State.FALL}
 
     player.set_player_direction(input_direction)
 
@@ -44,4 +44,4 @@ func update(player: Player, delta: float) -> int:
     # report that we're in the air.
     player.move(Vector2(input_direction * player.MOVEMENT_SPEED, 10))
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}

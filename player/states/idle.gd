@@ -1,6 +1,6 @@
 extends 'res://scripts/state.gd'
 
-func enter(player: Player, previous_state: int) -> void:
+func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
@@ -17,9 +17,9 @@ func enter(player: Player, previous_state: int) -> void:
 func exit(player: Player) -> void:
     pass
 
-func handle_input(player: Player, event: InputEvent) -> int:
+func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and player.can_jump():
-        return player.State.JUMP
+        return {'new_state': player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
         # Play attack animation before returning to idle animation.
         player.start_attack()
@@ -27,13 +27,13 @@ func handle_input(player: Player, event: InputEvent) -> int:
     elif event.is_action_pressed('player_dash') and player.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
-            return player.State.DASH
+            return {'new_state': player.State.DASH}
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}
 
-func update(player: Player, delta: float) -> int:
+func update(player: Player, delta: float) -> Dictionary:
     if Globals.get_input_direction() != 0:
-        return player.State.WALK
+        return {'new_state': player.State.WALK}
 
     # Apply slight downward movement. This is important mostly for ensuring that
     # move_and_slide() is called on every frame, which updates collisions. This
@@ -42,4 +42,4 @@ func update(player: Player, delta: float) -> int:
     # for not triggering wall slide when jumping up from idling next to a wall.
     player.move(Vector2(0, 10))
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}

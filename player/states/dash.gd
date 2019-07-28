@@ -27,7 +27,7 @@ func _ready() -> void:
     # Calculate dash speed from the specified dash distance and duration.
     DASH_SPEED = DASH_DISTANCE / DASH_DURATION
 
-func enter(player: Player, previous_state: int) -> void:
+func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset dash duration, dash cooldown, and dash echo timers.
     $DashDuration.start()
     $DashEcho.connect('timeout', self, '_on_dash_echo_timeout', [player])
@@ -70,20 +70,23 @@ func exit(player: Player) -> void:
     $DashEcho.disconnect('timeout', self, '_on_dash_echo_timeout')
     $DashEcho.stop()
 
-func handle_input(player: Player, event: InputEvent) -> int:
-    return player.State.NO_CHANGE
+func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    return {'new_state': player.State.NO_CHANGE}
 
-func update(player: Player, delta: float) -> int:
+func update(player: Player, delta: float) -> Dictionary:
     # Once the dash is complete, we either fall if we're currently airborne or
     # idle otherwise.
     if $DashDuration.is_stopped():
-        return player.State.FALL if player.is_in_air() else player.State.IDLE
+        if player.is_in_air():
+            return {'new_state': player.State.FALL}
+        else:
+            return {'new_state': player.State.IDLE}
 
     # Dash in the direction the player is currently facing.
     player.velocity.x = player.get_player_direction() * DASH_SPEED
     player.move(player.velocity)
 
-    return player.State.NO_CHANGE
+    return {'new_state': player.State.NO_CHANGE}
 
 func _on_dash_echo_timeout(player: Player) -> void:
     # TODO: Configure dash in terms of how many echoes to emit and consider not
