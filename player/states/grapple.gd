@@ -41,6 +41,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().queue('jump')
 
 func exit(player: Player) -> void:
+    grapple_point.set_available(true)
     grapple_point = null
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:

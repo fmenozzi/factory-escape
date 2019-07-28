@@ -305,6 +305,9 @@ func _grapple_point_on_screen(grapple_point: GrapplePoint) -> bool:
     return grapple_point.is_on_screen()
 
 func _can_grapple_to(grapple_point: GrapplePoint) -> bool:
+    if not grapple_point.is_available():
+        return false
+
     if not _grapple_point_in_line_of_sight(grapple_point):
         return false
 

@@ -1,6 +1,8 @@
 extends Node2D
 class_name GrapplePoint
 
+var _available: bool = true
+
 func _ready() -> void:
     $AnimationPlayer.play('shimmer')
 
@@ -17,3 +19,10 @@ func is_on_screen() -> bool:
     # TODO: This doesn't work sometimes, likely because the granularity of the
     #       grid used for doing these calculations is too small.
     return $VisibilityNotifier2D.is_on_screen()
+
+# Grapple points can be marked as unavailable to be excluded from consideration
+# during grapple point selection.
+func set_available(available: bool) -> void:
+    _available = available
+func is_available() -> bool:
+    return _available
