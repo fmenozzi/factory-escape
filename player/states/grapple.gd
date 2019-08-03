@@ -11,7 +11,16 @@ var grapple_point: GrapplePoint = null
 func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     var dest := grapple_point.global_position
     if grapple_point.get_grapple_type() == GrapplePoint.GrappleType.LAUNCH:
-        print('LAUNCH grapple type not yet supported.')
+        # Use the player direction to grapple point to decide whether to use the
+        # left or right launch point as the grapple destination.
+        var launch_points := grapple_point.get_launch_grapple_points()
+        match sign((grapple_point.global_position - player.global_position).x):
+            -1.0:
+                # Left; use left grapple launch point.
+                dest = launch_points[0].global_position
+            1.0:
+                # Right; use right grapple launch point.
+                dest = launch_points[1].global_position
 
     var disp := dest - player.global_position
 

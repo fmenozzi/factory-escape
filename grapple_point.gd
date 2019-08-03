@@ -29,6 +29,9 @@ func get_no_grapple_area() -> Area2D:
 func get_grapple_type() -> int:
     return grapple_type
 
+func get_launch_grapple_points() -> Array:
+    return [$LaunchGrapplePoints/Left, $LaunchGrapplePoints/Right]
+
 func is_on_screen() -> bool:
     # TODO: This doesn't work sometimes, likely because the granularity of the
     #       grid used for doing these calculations is too small.

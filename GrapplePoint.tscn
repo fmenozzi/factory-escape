@@ -54,3 +54,11 @@ shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -8, 8, 8 )
+
+[node name="LaunchGrapplePoints" type="Node2D" parent="."]
+
+[node name="Left" type="Position2D" parent="LaunchGrapplePoints"]
+position = Vector2( -8, 0 )
+
+[node name="Right" type="Position2D" parent="LaunchGrapplePoints"]
+position = Vector2( 8, 0 )

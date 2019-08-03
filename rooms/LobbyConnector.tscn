@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://rooms/lobby_connector.gd" type="Script" id=1]
 [ext_resource path="res://TileMaps.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GrapplePoint.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 130, 60 )
 
 [node name="LobbyConnector" type="Node2D"]
 script = ExtResource( 1 )
@@ -31,4 +35,21 @@ position = Vector2( 160, 90 )
 
 [node name="GrapplePoints" type="Node2D" parent="."]
 
+[node name="GrapplePoint" parent="GrapplePoints" instance=ExtResource( 3 )]
+position = Vector2( 150, 0 )
+scale = Vector2( 1, -1 )
+grapple_type = 1
+
+[node name="CollisionShape2D" parent="GrapplePoints/GrapplePoint/GrappleRangeArea" index="0"]
+position = Vector2( 1.52588e-05, -60 )
+shape = SubResource( 2 )
+
+[node name="Left" parent="GrapplePoints/GrapplePoint/LaunchGrapplePoints" index="0"]
+position = Vector2( -90, -80 )
+
+[node name="Right" parent="GrapplePoints/GrapplePoint/LaunchGrapplePoints" index="1"]
+position = Vector2( 40, -80 )
+
 [editable path="TileMaps"]
+
+[editable path="GrapplePoints/GrapplePoint"]
