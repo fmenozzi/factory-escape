@@ -1,6 +1,17 @@
 extends Node2D
 class_name GrapplePoint
 
+enum GrappleType {
+    # When the player grapples to this point, they are pulled to the grapple
+    # point itself.
+    NORMAL,
+
+    # When the player grapples to this point, they are launched to another point
+    # that is NOT the grapple point itself.
+    LAUNCH,
+}
+export(GrappleType) var grapple_type := GrappleType.NORMAL
+
 var _available: bool = true
 
 func _ready() -> void:
@@ -14,6 +25,9 @@ func get_grapple_range_area() -> Area2D:
 
 func get_no_grapple_area() -> Area2D:
     return $NoGrappleArea as Area2D
+
+func get_grapple_type() -> int:
+    return grapple_type
 
 func is_on_screen() -> bool:
     # TODO: This doesn't work sometimes, likely because the granularity of the

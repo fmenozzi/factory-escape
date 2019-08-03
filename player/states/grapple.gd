@@ -9,7 +9,11 @@ var velocity: Vector2 = Vector2.ZERO
 var grapple_point: GrapplePoint = null
 
 func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
-    var disp := grapple_point.global_position - player.global_position
+    var dest := grapple_point.global_position
+    if grapple_point.get_grapple_type() == GrapplePoint.GrappleType.LAUNCH:
+        print('LAUNCH grapple type not yet supported.')
+
+    var disp := dest - player.global_position
 
     # The height from the higher of the two points to the highest point in the
     # arc.
@@ -21,14 +25,14 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
 
     var g := player.GRAVITY
 
-    var player_below_grapple_point := disp.y < 0
+    var player_below_dest := disp.y < 0
 
-    var time_up := sqrt(2 * (H if player_below_grapple_point else h) / g)
-    var time_down := sqrt(2 * (h if player_below_grapple_point else H) / g)
+    var time_up := sqrt(2 * (H if player_below_dest else h) / g)
+    var time_down := sqrt(2 * (h if player_below_dest else H) / g)
 
-    var velocity :=  Vector2.ZERO
+    var velocity := Vector2.ZERO
     velocity.x = disp.x / float(time_up + time_down)
-    velocity.y = -sqrt(2 * (H if player_below_grapple_point else h) * g)
+    velocity.y = -sqrt(2 * (H if player_below_dest else h) * g)
     return velocity
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
