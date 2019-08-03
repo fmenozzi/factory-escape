@@ -35,6 +35,13 @@ func update(player: Player, delta: float) -> Dictionary:
     if Globals.get_input_direction() != 0:
         return {'new_state': player.State.WALK}
 
+    # It's possible to inch off a ledge and no longer be on the ground directly
+    # from the idle state (i.e. without having to first transition to the walk
+    # state), so include direct transition to fall state. Otherwise, the slight
+    # downward movement below will cause us to fall very slowly in the air.
+    if player.is_in_air():
+        return {'new_state': player.State.FALL}
+
     # Apply slight downward movement. This is important mostly for ensuring that
     # move_and_slide() is called on every frame, which updates collisions. This
     # allows us to e.g. idle next to a wall (without pressing into it) and have
