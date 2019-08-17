@@ -265,15 +265,12 @@ func get_next_grapple_point() -> GrapplePoint:
 func _update_next_grapple_point() -> void:
     _next_grapple_point = null
 
-    # Determine candidate set of grapple points.
+    # Determine candidate set of grapple points and reset grapple point colors.
     var candidate_grapple_points := []
     for grapple_point in curr_room.get_grapple_points():
-        var grapple_point_sprite: Sprite = grapple_point.get_node('Sprite')
+        grapple_point.get_node('Sprite').modulate = Color.white
         if _can_grapple_to(grapple_point):
             candidate_grapple_points.append(grapple_point)
-            grapple_point_sprite.modulate = Color.green
-        else:
-            grapple_point_sprite.modulate = Color.red
 
     # Sort candidate grapple points by distance to player.
     candidate_grapple_points.sort_custom(self, '_grapple_distance_comparator')
@@ -288,6 +285,10 @@ func _update_next_grapple_point() -> void:
             if self.get_player_direction() == grapple_point_direction:
                 _next_grapple_point = grapple_point
                 break
+
+    # Color the next grapple point green.
+    if _next_grapple_point:
+        _next_grapple_point.get_node('Sprite').modulate = Color.green
 
 func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
