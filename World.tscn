@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://world.gd" type="Script" id=1]
-[ext_resource path="res://rooms/FactoryEntrance.tscn" type="PackedScene" id=2]
-[ext_resource path="res://rooms/LobbyConnector.tscn" type="PackedScene" id=3]
-[ext_resource path="res://rooms/LongHallway.tscn" type="PackedScene" id=4]
-[ext_resource path="res://rooms/LongDrop.tscn" type="PackedScene" id=5]
-[ext_resource path="res://rooms/GrapplePlayground.tscn" type="PackedScene" id=6]
+[ext_resource path="res://rooms/FactoryEntranceOld.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rooms/LobbyConnectorOld.tscn" type="PackedScene" id=3]
+[ext_resource path="res://rooms/LongHallwayOld.tscn" type="PackedScene" id=4]
+[ext_resource path="res://rooms/LongDropOld.tscn" type="PackedScene" id=5]
+[ext_resource path="res://rooms/GrapplePlaygroundOld.tscn" type="PackedScene" id=6]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
@@ -16,44 +16,22 @@ __meta__ = {
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="FactoryEntrance" parent="Rooms" instance=ExtResource( 2 )]
+[node name="FactoryEntranceOld" parent="Rooms" instance=ExtResource( 2 )]
 
-[node name="LobbyConnector" parent="Rooms" instance=ExtResource( 3 )]
+[node name="LobbyConnectorOld" parent="Rooms" instance=ExtResource( 3 )]
 position = Vector2( 320, 0 )
 
-[node name="LongHallway" parent="Rooms" instance=ExtResource( 4 )]
+[node name="LongHallwayOld" parent="Rooms" instance=ExtResource( 4 )]
 position = Vector2( 640, 0 )
-camera_behavior = 2
 
-[node name="LongDrop" parent="Rooms" instance=ExtResource( 5 )]
+[node name="LongDropOld" parent="Rooms" instance=ExtResource( 5 )]
 position = Vector2( 400, 192 )
-camera_behavior = 1
 
-[node name="LongHallway2" parent="Rooms" instance=ExtResource( 4 )]
+[node name="LongHallway2Old" parent="Rooms" instance=ExtResource( 4 )]
 position = Vector2( 1136, 0 )
-camera_behavior = 2
 
-[node name="GrapplePlayground" parent="Rooms" instance=ExtResource( 6 )]
+[node name="GrapplePlaygroundOld" parent="Rooms" instance=ExtResource( 6 )]
 position = Vector2( 0, -360 )
-
-[node name="BackgroundSmall" parent="Rooms/GrapplePlayground/TileMaps" index="0"]
-position = Vector2( 0, 8 )
-
-[node name="BackgroundLarge" parent="Rooms/GrapplePlayground/TileMaps" index="1"]
-position = Vector2( 0, 8 )
-
-[node name="Platforms" parent="Rooms/GrapplePlayground/TileMaps" index="2"]
-position = Vector2( 0, 8 )
-
-[node name="CollisionShape2D" parent="Rooms/GrapplePlayground/RoomBoundaries" index="0"]
-visible = true
-
-[node name="GrapplePoints" parent="Rooms/GrapplePlayground" index="3"]
-position = Vector2( 0, 8 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 56, 144 )
-
-[editable path="Rooms/GrapplePlayground"]
-
-[editable path="Rooms/GrapplePlayground/TileMaps"]

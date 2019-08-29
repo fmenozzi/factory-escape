@@ -106,7 +106,7 @@ func _ready() -> void:
     _change_state({'new_state': State.FALL})
 
     # Initialize current room
-    curr_room = get_parent().get_node('Rooms/FactoryEntrance')
+    curr_room = get_parent().get_node('Rooms/FactoryEntranceOld')
     prev_room = curr_room
     get_camera().fit_camera_limits_to_room(curr_room)
 
