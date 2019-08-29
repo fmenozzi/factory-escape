@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://world.gd" type="Script" id=1]
-[ext_resource path="res://rooms/FactoryEntranceOld.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rooms/FactoryEntrance.tscn" type="PackedScene" id=2]
 [ext_resource path="res://rooms/LobbyConnectorOld.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/LongHallwayOld.tscn" type="PackedScene" id=4]
 [ext_resource path="res://rooms/LongDropOld.tscn" type="PackedScene" id=5]
@@ -16,7 +16,7 @@ __meta__ = {
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="FactoryEntranceOld" parent="Rooms" instance=ExtResource( 2 )]
+[node name="FactoryEntrance" parent="Rooms" instance=ExtResource( 2 )]
 
 [node name="LobbyConnectorOld" parent="Rooms" instance=ExtResource( 3 )]
 position = Vector2( 320, 0 )
