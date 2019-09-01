@@ -115,7 +115,7 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
@@ -226,7 +226,7 @@ func set_direction(direction: int) -> void:
 # transitions.
 func pause() -> void:
     set_physics_process(false)
-    set_process_input(false)
+    set_process_unhandled_input(false)
 
     $AnimationPlayer.stop(false)
 
@@ -235,7 +235,7 @@ func pause() -> void:
     $DashCooldown.paused = true
 func unpause() -> void:
     set_physics_process(true)
-    set_process_input(true)
+    set_process_unhandled_input(true)
 
     $AnimationPlayer.play()
 
