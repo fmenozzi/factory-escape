@@ -5,7 +5,7 @@
 [ext_resource path="res://rooms/LobbyConnector.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/LongHallway.tscn" type="PackedScene" id=4]
 [ext_resource path="res://rooms/LongDrop.tscn" type="PackedScene" id=5]
-[ext_resource path="res://rooms/GrapplePlaygroundOld.tscn" type="PackedScene" id=6]
+[ext_resource path="res://rooms/GrapplePlayground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
@@ -27,8 +27,17 @@ position = Vector2( 640, 0 )
 [node name="LongDrop" parent="Rooms" instance=ExtResource( 5 )]
 position = Vector2( 400, 192 )
 
-[node name="GrapplePlaygroundOld" parent="Rooms" instance=ExtResource( 6 )]
+[node name="GrapplePlayground" parent="Rooms" instance=ExtResource( 6 )]
+editor/display_folded = true
 position = Vector2( 0, -360 )
+
+[node name="TileMaps" parent="Rooms/GrapplePlayground" index="0"]
+position = Vector2( 0, 8 )
+
+[node name="GrapplePoints" parent="Rooms/GrapplePlayground" index="3"]
+position = Vector2( 0, 8 )
 
 [node name="Player" parent="." instance=ExtResource( 7 )]
 position = Vector2( 56, 144 )
+
+[editable path="Rooms/GrapplePlayground"]
