@@ -23,7 +23,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Make the player face the grapple point.
     var grapple_point_pos := _grapple_point.get_attachment_pos()
     var grapple_direction := sign((grapple_point_pos - player.global_position).x)
-    player.set_player_direction(grapple_direction)
+    player.set_direction(grapple_direction)
 
 func exit(player: Player) -> void:
     _grapple_point = null

@@ -28,18 +28,18 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         return {'new_state': player.State.WALL_JUMP}
     elif event.is_action_pressed('player_dash'):
         # Flip the player to face away from the wall before dashing.
-        player.set_player_direction(-1 * player.get_player_direction())
+        player.set_direction(-1 * player.get_direction())
         Globals.spawn_particles(TakeoffPuff.instance(), player)
         return {'new_state': player.State.DASH}
     # Let the player exit wall slide by moving away from the wall.
     elif event.is_action_pressed('player_move_left'):
-        if player.get_player_direction() == 1:
-            player.set_player_direction(-1)
+        if player.get_direction() == 1:
+            player.set_direction(-1)
             player.move(Vector2(-10, 0))
             return {'new_state': player.State.FALL}
     elif event.is_action_pressed('player_move_right'):
-        if player.get_player_direction() == -1:
-            player.set_player_direction(1)
+        if player.get_direction() == -1:
+            player.set_direction(1)
             player.move(Vector2(10, 0))
             return {'new_state': player.State.FALL}
     elif event.is_action_pressed('player_grapple'):
@@ -63,13 +63,13 @@ func update(player: Player, delta: float) -> Dictionary:
     # same distance away from the wall so that when we land we can jump up onto
     # the wall without hitting our heads.
     if not player.is_on_wall():
-        player.move(Vector2(-10 * player.get_player_direction(), 0))
+        player.move(Vector2(-10 * player.get_direction(), 0))
         return {'new_state': player.State.FALL}
 
     # Slide down with constant speed after a slight acceleration. Also move the 
     # character slightly into the wall to maintain collision with the wall so
     # that is_on_wall() continues to return true.
-    player.velocity.x = 10 * player.get_player_direction()
+    player.velocity.x = 10 * player.get_direction()
     player.velocity.y = min(player.velocity.y + 5, player.MOVEMENT_SPEED)
     player.move(player.velocity)
 

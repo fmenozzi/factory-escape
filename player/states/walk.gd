@@ -44,7 +44,7 @@ func update(player: Player, delta: float) -> Dictionary:
     if player.is_in_air():
         return {'new_state': player.State.FALL}
 
-    player.set_player_direction(input_direction)
+    player.set_direction(input_direction)
 
     # Move left or right. Add in sufficient downward movement so that
     # is_on_floor() detects collisions with the floor and doesn't erroneously

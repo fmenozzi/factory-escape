@@ -39,7 +39,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     dash_puff.position = Vector2(0, -8)
     var dash_puff_speed := abs(dash_puff.process_material.initial_velocity)
     dash_puff.process_material.initial_velocity =\
-        dash_puff_speed * player.get_player_direction()
+        dash_puff_speed * player.get_direction()
 
     Globals.spawn_particles(dash_puff, player)
 
@@ -83,7 +83,7 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': player.State.IDLE}
 
     # Dash in the direction the player is currently facing.
-    player.velocity.x = player.get_player_direction() * DASH_SPEED
+    player.velocity.x = player.get_direction() * DASH_SPEED
     player.move(player.velocity)
 
     return {'new_state': player.State.NO_CHANGE}
@@ -94,6 +94,6 @@ func _on_dash_echo_timeout(player: Player) -> void:
 
     var echo = DashEcho.instance()
     player.get_parent().add_child(echo)
-    echo.flip_h = (player.get_player_direction() == -1)
+    echo.flip_h = (player.get_direction() == -1)
     # TODO: Why is there this 8 pixel offset?
     echo.set_global_position(player.get_global_position() + Vector2(0, -8))

@@ -202,10 +202,10 @@ func get_wall_slide_trail() -> Particles2D:
 func get_grapple_rope() -> Line2D:
     return _grapple_rope
 
-func get_player_direction() -> int:
+func get_direction() -> int:
     return -1 if $Sprite.flip_h else 1
 
-func set_player_direction(direction: int) -> void:
+func set_direction(direction: int) -> void:
     # Flip player sprite.
     $Sprite.flip_h = (direction == -1)
 
@@ -282,7 +282,7 @@ func _update_next_grapple_point() -> void:
         for grapple_point in candidate_grapple_points:
             var grapple_point_direction := \
                 sign((grapple_point.global_position - self.global_position).x)
-            if self.get_player_direction() == grapple_point_direction:
+            if self.get_direction() == grapple_point_direction:
                 _next_grapple_point = grapple_point
                 break
 

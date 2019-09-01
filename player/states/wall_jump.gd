@@ -28,7 +28,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     # Flip the player to face away from the wall if necessary.
     if player.is_near_wall_front():
-        player.set_player_direction(player.get_wall_normal_front().x)
+        player.set_direction(player.get_wall_normal_front().x)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.consume_jump()
@@ -83,11 +83,11 @@ func update(player: Player, delta: float) -> Dictionary:
     # Until the timer is done, fix the x-velocity to a constant amount so that
     # the player travels up and away from the wall. After the timer times out,
     # the player is given full control of the character.
-    var direction := player.get_player_direction()
+    var direction := player.get_direction()
     if _fixed_velocity_timer.is_stopped():
         var input_direction = Globals.get_input_direction()
         if input_direction != 0:
-            player.set_player_direction(input_direction)
+            player.set_direction(input_direction)
             direction = input_direction
     player.velocity.x = direction * player.MOVEMENT_SPEED
 
