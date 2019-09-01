@@ -4,7 +4,7 @@
 [ext_resource path="res://rooms/FactoryEntrance.tscn" type="PackedScene" id=2]
 [ext_resource path="res://rooms/LobbyConnector.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/LongHallwayOld.tscn" type="PackedScene" id=4]
-[ext_resource path="res://rooms/LongDropOld.tscn" type="PackedScene" id=5]
+[ext_resource path="res://rooms/LongDrop.tscn" type="PackedScene" id=5]
 [ext_resource path="res://rooms/GrapplePlaygroundOld.tscn" type="PackedScene" id=6]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=7]
 
@@ -24,7 +24,7 @@ position = Vector2( 320, 0 )
 [node name="LongHallwayOld" parent="Rooms" instance=ExtResource( 4 )]
 position = Vector2( 640, 0 )
 
-[node name="LongDropOld" parent="Rooms" instance=ExtResource( 5 )]
+[node name="LongDrop" parent="Rooms" instance=ExtResource( 5 )]
 position = Vector2( 400, 192 )
 
 [node name="LongHallway2Old" parent="Rooms" instance=ExtResource( 4 )]
