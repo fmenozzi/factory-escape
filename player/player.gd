@@ -86,6 +86,8 @@ onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 # to null and grappling has no effect.
 var _next_grapple_point: GrapplePoint = null
 
+var _nearby_sign = null
+
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -221,6 +223,11 @@ func set_direction(direction: int) -> void:
         for node in get_tree().get_nodes_in_group('mirror_y_axis'):
             var original_position = _mirror_y_axis_node_original_positions[node]
             node.position.x = original_position.x * direction
+
+func set_nearby_sign(new_sign: Area2D) -> void:
+    _nearby_sign = new_sign
+func get_nearby_sign() -> Area2D:
+    return _nearby_sign
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.

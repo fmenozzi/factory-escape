@@ -23,6 +23,9 @@ func _unhandled_input(event: InputEvent) -> void:
                 _current_state = State.DISABLED
 
         State.DISABLED:
+            if not _player.get_nearby_sign():
+                return
+
             if event.is_action_pressed('player_interact'):
                 _black_overlay.visible = true
                 _rich_text_label.visible = true
