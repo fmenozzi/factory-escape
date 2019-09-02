@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/dialog_box.gd" type="Script" id=2]
+
+[node name="DialogBox" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="BlackOverlay" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = 72.0
+color = Color( 0, 0, 0, 0.501961 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+anchor_right = 1.0
+margin_left = 24.0
+margin_top = 16.0
+margin_right = -24.0
+margin_bottom = 64.0
+bbcode_enabled = true
+bbcode_text = "Hello World!
+This is an example of some dialog in a dialog box that may wrap around."
+text = "Hello World!
+This is an example of some dialog in a dialog box that may wrap around."

@@ -46,6 +46,16 @@ func _input(event: InputEvent) -> void:
     _current_menu.handle_input(self, event)
 
 func _change_menu(old_menu: int, new_menu: int) -> void:
+    # All inputs while paused should not be propagated out of the pause menu to
+    # things like the player controller, dialog boxes, etc.
+    #
+    # TODO: This doesn't work when placed after the handle_input() call in the
+    #       _input() method above, see if you can figure out why. The issue is
+    #       that using the dpad to navigate the menu no longer works in that
+    #       case.
+    if get_tree().paused:
+        accept_event()
+
     _current_menu.exit(self)
     _current_menu = MENUS[new_menu]
     _current_menu.enter(self, old_menu)
