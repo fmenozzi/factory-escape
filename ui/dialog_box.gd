@@ -37,11 +37,18 @@ func _unhandled_input(event: InputEvent) -> void:
                         _advance_dialog_to_next_page()
                     else:
                         # End dialog if there is no more left to display.
+                        var nearby_sign := _player.get_nearby_sign()
+                        nearby_sign.modulate_label_visibility(
+                            nearby_sign.LABEL_NOT_VISIBLE,
+                            nearby_sign.LABEL_VISIBLE)
                         _stop_dialog()
                         _current_state = State.DISABLED
 
             # ui_cancel to exit the dialog box
             if event.is_action_pressed('ui_cancel'):
+                var nearby_sign := _player.get_nearby_sign()
+                nearby_sign.modulate_label_visibility(
+                    nearby_sign.LABEL_NOT_VISIBLE, nearby_sign.LABEL_VISIBLE)
                 _stop_dialog()
                 _current_state = State.DISABLED
 
@@ -54,6 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
             # player_interact to open up the dialog box when near a sign.
             if event.is_action_pressed('player_interact'):
+                nearby_sign.modulate_label_visibility(
+                    nearby_sign.LABEL_VISIBLE, nearby_sign.LABEL_NOT_VISIBLE)
                 _start_dialog()
                 _current_state = State.ENABLED
 
