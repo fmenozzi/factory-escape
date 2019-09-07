@@ -1,5 +1,7 @@
 extends Area2D
 
+export(Array, String) var dialog
+
 onready var _sprite: Sprite = $Sprite
 onready var _tween: Tween = $OutlineTween
 

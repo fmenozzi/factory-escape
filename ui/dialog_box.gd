@@ -16,11 +16,8 @@ enum State {
 }
 var _current_state: int = State.DISABLED
 
-var _dialog = [
-    "Hello World!",
-    "This is a test of my basic dialog system with multiple pages and fast-forwarding on a page.",
-    "Ok it's done now.",
-]
+var _dialog: Array
+
 var _page = 0
 
 func _ready() -> void:
@@ -49,8 +46,11 @@ func _unhandled_input(event: InputEvent) -> void:
                 _current_state = State.DISABLED
 
         State.DISABLED:
-            if not _player.get_nearby_sign():
+            var nearby_sign := _player.get_nearby_sign()
+            if not nearby_sign:
                 return
+
+            _dialog = nearby_sign.dialog
 
             # player_interact to open up the dialog box when near a sign.
             if event.is_action_pressed('player_interact'):
