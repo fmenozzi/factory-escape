@@ -57,7 +57,7 @@ func update(player: Player, delta: float) -> Dictionary:
 
     # Move left or right.
     var input_direction = Util.get_input_direction()
-    if input_direction != 0:
+    if input_direction != Util.Direction.NONE:
         player.set_direction(input_direction)
     player.velocity.x = input_direction * player.MOVEMENT_SPEED
 

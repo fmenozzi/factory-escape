@@ -33,13 +33,13 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         return {'new_state': player.State.DASH}
     # Let the player exit wall slide by moving away from the wall.
     elif event.is_action_pressed('player_move_left'):
-        if player.get_direction() == 1:
-            player.set_direction(-1)
+        if player.get_direction() == Util.Direction.RIGHT:
+            player.set_direction(Util.Direction.LEFT)
             player.move(Vector2(-10, 0))
             return {'new_state': player.State.FALL}
     elif event.is_action_pressed('player_move_right'):
-        if player.get_direction() == -1:
-            player.set_direction(1)
+        if player.get_direction() == Util.Direction.LEFT:
+            player.set_direction(Util.Direction.RIGHT)
             player.move(Vector2(10, 0))
             return {'new_state': player.State.FALL}
     elif event.is_action_pressed('player_grapple'):

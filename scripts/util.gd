@@ -11,6 +11,12 @@ const TILE_SIZE: int = 16
 # execute correctly.
 const FLOOR_NORMAL: Vector2 = Vector2.UP
 
+enum Direction {
+    LEFT = -1,
+    NONE = 0,
+    RIGHT = 1,
+}
+
 # Get the current x-axis input direction. Returns +1 if player is moving right,
 # -1 if player is moving left, and 0 if player is not moving.
 func get_input_direction() -> int:
