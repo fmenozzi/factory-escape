@@ -43,13 +43,13 @@ var velocity: Vector2 = Vector2.ZERO
 
 # The speed at which the player can move the character left and right, measured
 # in pixels per second.
-var MOVEMENT_SPEED: float = 6 * Globals.TILE_SIZE
+var MOVEMENT_SPEED: float = 6 * Util.TILE_SIZE
 
 # The min/max jump heights the player can achieve in pixels. Releasing the jump
 # button early will "cut" the jump somewhere between these two values, allowing
 # for variable-height jumps.
-var MAX_JUMP_HEIGHT: float = 3.50 * Globals.TILE_SIZE
-var MIN_JUMP_HEIGHT: float = 0.50 * Globals.TILE_SIZE
+var MAX_JUMP_HEIGHT: float = 3.50 * Util.TILE_SIZE
+var MIN_JUMP_HEIGHT: float = 0.50 * Util.TILE_SIZE
 
 # The duration of the max-height jump in seconds from ground to peak.
 var JUMP_DURATION: float = 0.4
@@ -146,7 +146,7 @@ func _change_state(new_state_dict: Dictionary) -> void:
     emit_signal('player_state_changed', current_state.get_name())
 
 func move(new_velocity: Vector2) -> void:
-    self.velocity = .move_and_slide(new_velocity, Globals.FLOOR_NORMAL)
+    self.velocity = .move_and_slide(new_velocity, Util.FLOOR_NORMAL)
 
 func is_on_ground() -> bool:
     return .is_on_floor()

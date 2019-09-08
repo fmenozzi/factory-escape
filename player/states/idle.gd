@@ -39,7 +39,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
-    if Globals.get_input_direction() != 0:
+    if Util.get_input_direction() != 0:
         return {'new_state': player.State.WALK}
 
     # It's possible to inch off a ledge and no longer be on the ground directly

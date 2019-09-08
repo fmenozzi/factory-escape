@@ -2,7 +2,7 @@ extends "res://scripts/state.gd"
 
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 
-var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE
+var TERMINAL_VELOCITY: float = 20 * Util.TILE_SIZE
 
 var velocity: Vector2 = Vector2.ZERO
 
@@ -26,7 +26,7 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
 
     # The height from the higher of the two points to the highest point in the
     # arc.
-    var h := Globals.TILE_SIZE
+    var h := Util.TILE_SIZE
 
     # The total height from the lower of the two points to the highest point in
     # the arc.
@@ -73,11 +73,11 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(velocity)
 
     if player.is_on_ground():
-        Globals.spawn_particles(LandingPuff.instance(), player)
+        Util.spawn_particles(LandingPuff.instance(), player)
         return {'new_state': player.State.IDLE}
 
     if player.is_on_wall():
-        Globals.spawn_particles(LandingPuff.instance(), player)
+        Util.spawn_particles(LandingPuff.instance(), player)
         return {'new_state': player.State.WALL_SLIDE}
 
     if velocity.y > 0:

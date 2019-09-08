@@ -4,7 +4,7 @@ extends 'res://scripts/state.gd'
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 
 # Max falling speed the player can achieve in pixels per second.
-var TERMINAL_VELOCITY: float = 20 * Globals.TILE_SIZE
+var TERMINAL_VELOCITY: float = 20 * Util.TILE_SIZE
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -49,7 +49,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     # Once we hit the ground, emit the landing puff and switch to 'idle' state.
     if player.is_on_ground():
-        Globals.spawn_particles(LandingPuff.instance(), player)
+        Util.spawn_particles(LandingPuff.instance(), player)
         return {'new_state': player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
@@ -57,7 +57,7 @@ func update(player: Player, delta: float) -> Dictionary:
         return {'new_state': player.State.WALL_SLIDE}
 
     # Move left or right.
-    var input_direction = Globals.get_input_direction()
+    var input_direction = Util.get_input_direction()
     if input_direction != 0:
         player.set_direction(input_direction)
     player.velocity.x = input_direction * player.MOVEMENT_SPEED

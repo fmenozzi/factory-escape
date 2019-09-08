@@ -14,7 +14,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('jump')
 
     # Emit a jump puff.
-    Globals.spawn_particles(LandingPuff.instance(), player)
+    Util.spawn_particles(LandingPuff.instance(), player)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.consume_jump()
@@ -56,7 +56,7 @@ func update(player: Player, delta: float) -> Dictionary:
         return {'new_state': player.State.FALL}
 
     # Move left or right.
-    var input_direction = Globals.get_input_direction()
+    var input_direction = Util.get_input_direction()
     if input_direction != 0:
         player.set_direction(input_direction)
     player.velocity.x = input_direction * player.MOVEMENT_SPEED

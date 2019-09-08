@@ -29,7 +29,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_dash'):
         # Flip the player to face away from the wall before dashing.
         player.set_direction(-1 * player.get_direction())
-        Globals.spawn_particles(TakeoffPuff.instance(), player)
+        Util.spawn_particles(TakeoffPuff.instance(), player)
         return {'new_state': player.State.DASH}
     # Let the player exit wall slide by moving away from the wall.
     elif event.is_action_pressed('player_move_left'):

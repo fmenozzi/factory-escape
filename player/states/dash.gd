@@ -1,7 +1,7 @@
 extends 'res://scripts/state.gd'
 
 # The distance covered by the dash in pixels.
-var DASH_DISTANCE: float = 4 * Globals.TILE_SIZE
+var DASH_DISTANCE: float = 4 * Util.TILE_SIZE
 
 # The duration of the dash in seconds.
 const DASH_DURATION: float = 0.20
@@ -41,7 +41,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     dash_puff.process_material.initial_velocity =\
         dash_puff_speed * player.get_direction()
 
-    Globals.spawn_particles(dash_puff, player)
+    Util.spawn_particles(dash_puff, player)
 
     # Reset player velocity.
     player.velocity = Vector2.ZERO
