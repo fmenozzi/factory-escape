@@ -33,3 +33,4 @@ text = "Hello World!
 This is an example of some dialog in a dialog box that may wrap around."
 
 [node name="TextScrollTimer" type="Timer" parent="."]
+pause_mode = 1
