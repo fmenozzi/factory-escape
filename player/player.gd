@@ -292,7 +292,8 @@ func _update_next_grapple_point() -> void:
 
 func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
-        _grapple_line_of_sight.to_local(grapple_point.get_attachment_pos()))
+        _grapple_line_of_sight.to_local(
+            grapple_point.get_attachment_pos().global_position))
     _grapple_line_of_sight.force_raycast_update()
     return not _grapple_line_of_sight.is_colliding()
 

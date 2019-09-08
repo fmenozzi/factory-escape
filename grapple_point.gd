@@ -17,8 +17,8 @@ var _available: bool = true
 func _ready() -> void:
     $AnimationPlayer.play('shimmer')
 
-func get_attachment_pos() -> Vector2:
-    return $AttachmentPoint.global_position
+func get_attachment_pos() -> Position2D:
+    return $AttachmentPoint as Position2D
 
 func get_grapple_range_area() -> Area2D:
     return $GrappleRangeArea as Area2D
