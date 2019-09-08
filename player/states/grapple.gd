@@ -14,11 +14,11 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
         # Use the player direction to grapple point to decide whether to use the
         # left or right launch point as the grapple destination.
         var launch_points := grapple_point.get_launch_grapple_points()
-        match sign((grapple_point.global_position - player.global_position).x):
-            -1.0:
+        match Util.direction(player, grapple_point):
+            -1:
                 # Left; use left grapple launch point.
                 dest = launch_points[0].global_position
-            1.0:
+            1:
                 # Right; use right grapple launch point.
                 dest = launch_points[1].global_position
 

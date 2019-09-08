@@ -280,8 +280,7 @@ func _update_next_grapple_point() -> void:
     if not candidate_grapple_points.empty():
         _next_grapple_point = candidate_grapple_points[0]
         for grapple_point in candidate_grapple_points:
-            var grapple_point_direction := \
-                sign((grapple_point.global_position - self.global_position).x)
+            var grapple_point_direction := Util.direction(self, grapple_point)
             if self.get_direction() == grapple_point_direction:
                 _next_grapple_point = grapple_point
                 break

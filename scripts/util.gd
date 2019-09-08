@@ -35,3 +35,7 @@ func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
     particles.emitting = true
     yield(get_tree().create_timer(particles.lifetime * 2), 'timeout')
     particles.queue_free()
+
+# Gets the x-direction of the "to" node relative to the "from" node.
+func direction(from: Node2D, to: Node2D) -> int:
+    return int(sign((to.global_position - from.global_position).x))
