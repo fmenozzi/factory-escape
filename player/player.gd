@@ -150,8 +150,8 @@ func _change_state(new_state_dict: Dictionary) -> void:
 func current_state() -> int:
     return current_state_enum
 
-func move(new_velocity: Vector2) -> void:
-    self.velocity = .move_and_slide(new_velocity, Util.FLOOR_NORMAL)
+func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
+    self.velocity = .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
 func is_on_ground() -> bool:
     return .is_on_floor()

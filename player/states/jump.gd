@@ -64,6 +64,7 @@ func update(player: Player, delta: float) -> Dictionary:
     # Move due to gravity.
     player.velocity.y += player.GRAVITY * delta
 
-    player.move(player.velocity)
+    # Don't snap while jumping.
+    player.move(player.velocity, Util.NO_SNAP)
 
     return {'new_state': Player.State.NO_CHANGE}

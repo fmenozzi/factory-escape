@@ -11,6 +11,10 @@ const TILE_SIZE: int = 16
 # execute correctly.
 const FLOOR_NORMAL: Vector2 = Vector2.UP
 
+# Constants passed as the snap value to move_and_slide_with_snap().
+const SNAP: Vector2 = 10.0 * Vector2.DOWN
+const NO_SNAP: Vector2 = Vector2.ZERO
+
 enum Direction {
     LEFT = -1,
     NONE = 0,

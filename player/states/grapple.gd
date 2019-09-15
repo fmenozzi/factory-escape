@@ -69,8 +69,9 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    # Apply gravity with terminal velocity. Don't snap while grappling.
     velocity.y = min(velocity.y + player.GRAVITY * delta, TERMINAL_VELOCITY)
-    player.move(velocity)
+    player.move(velocity, Util.NO_SNAP)
 
     if player.is_on_ground():
         Util.spawn_particles(LandingPuff.instance(), player)
