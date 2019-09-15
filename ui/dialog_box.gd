@@ -53,14 +53,16 @@ func _unhandled_input(event: InputEvent) -> void:
                 _current_state = State.DISABLED
 
         State.DISABLED:
+            # Ensure player is idle near a sign.
             var nearby_sign := _player.get_nearby_sign()
-            if not nearby_sign:
+            if not nearby_sign or _player.current_state() != _player.State.IDLE:
                 return
 
             _dialog = nearby_sign.dialog
 
             # player_interact to open up the dialog box when near a sign.
             if event.is_action_pressed('player_interact'):
+                _player.set_direction(Util.direction(_player, nearby_sign))
                 nearby_sign.modulate_label_visibility(
                     nearby_sign.LABEL_VISIBLE, nearby_sign.LABEL_NOT_VISIBLE)
                 _start_dialog()

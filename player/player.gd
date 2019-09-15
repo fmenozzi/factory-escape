@@ -147,6 +147,9 @@ func _change_state(new_state_dict: Dictionary) -> void:
 
     emit_signal('player_state_changed', current_state.get_name())
 
+func current_state() -> int:
+    return current_state_enum
+
 func move(new_velocity: Vector2) -> void:
     self.velocity = .move_and_slide(new_velocity, Util.FLOOR_NORMAL)
 
