@@ -71,22 +71,22 @@ func exit(player: Player) -> void:
     $DashEcho.stop()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
     # Once the dash is complete, we either fall if we're currently airborne or
     # idle otherwise.
     if $DashDuration.is_stopped():
         if player.is_in_air():
-            return {'new_state': player.State.FALL}
+            return {'new_state': Player.State.FALL}
         else:
-            return {'new_state': player.State.IDLE}
+            return {'new_state': Player.State.IDLE}
 
     # Dash in the direction the player is currently facing.
     player.velocity.x = player.get_direction() * DASH_SPEED
     player.move(player.velocity)
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func _on_dash_echo_timeout(player: Player) -> void:
     # TODO: Configure dash in terms of how many echoes to emit and consider not

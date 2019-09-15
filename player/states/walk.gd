@@ -15,7 +15,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and player.can_jump():
-        return {'new_state': player.State.JUMP}
+        return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
         # Play attack animation before returning to walk animation.
         player.start_attack()
@@ -23,26 +23,26 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_dash') and player.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
-            return {'new_state': player.State.DASH}
+            return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:
             return {
-                'new_state': player.State.GRAPPLE_START,
+                'new_state': Player.State.GRAPPLE_START,
                 'grapple_point': next_grapple_point,
             }
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
     # Change to idle state if we stop moving.
     var input_direction = Util.get_input_direction()
     if input_direction == Util.Direction.NONE:
-        return {'new_state': player.State.IDLE}
+        return {'new_state': Player.State.IDLE}
 
     # If we've walked off a platform, start falling.
     if player.is_in_air():
-        return {'new_state': player.State.FALL}
+        return {'new_state': Player.State.FALL}
 
     player.set_direction(input_direction)
 
@@ -51,4 +51,4 @@ func update(player: Player, delta: float) -> Dictionary:
     # report that we're in the air.
     player.move(Vector2(input_direction * player.MOVEMENT_SPEED, 10))
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}

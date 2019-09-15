@@ -29,17 +29,17 @@ func exit(player: Player) -> void:
     _grapple_point = null
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
     # Once we finish the grapple animation, switch to the actual grapple state.
     if not player.get_animation_player().is_playing():
         return {
-            'new_state': player.State.GRAPPLE,
+            'new_state': Player.State.GRAPPLE,
             'grapple_point': _grapple_point,
         }
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func draw_grapple_rope() -> void:
     var grapple_point_pos := _grapple_point.get_attachment_pos().global_position

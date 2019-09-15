@@ -25,37 +25,37 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump'):
-        return {'new_state': player.State.WALL_JUMP}
+        return {'new_state': Player.State.WALL_JUMP}
     elif event.is_action_pressed('player_dash'):
         # Flip the player to face away from the wall before dashing.
         player.set_direction(-1 * player.get_direction())
         Util.spawn_particles(TakeoffPuff.instance(), player)
-        return {'new_state': player.State.DASH}
+        return {'new_state': Player.State.DASH}
     # Let the player exit wall slide by moving away from the wall.
     elif event.is_action_pressed('player_move_left'):
         if player.get_direction() == Util.Direction.RIGHT:
             player.set_direction(Util.Direction.LEFT)
             player.move(Vector2(-10, 0))
-            return {'new_state': player.State.FALL}
+            return {'new_state': Player.State.FALL}
     elif event.is_action_pressed('player_move_right'):
         if player.get_direction() == Util.Direction.LEFT:
             player.set_direction(Util.Direction.RIGHT)
             player.move(Vector2(10, 0))
-            return {'new_state': player.State.FALL}
+            return {'new_state': Player.State.FALL}
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:
             return {
-                'new_state': player.State.GRAPPLE_START,
+                'new_state': Player.State.GRAPPLE_START,
                 'grapple_point': next_grapple_point,
             }
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
     # Once we hit the ground, return to idle state.
     if player.is_on_ground():
-        return {'new_state': player.State.IDLE}
+        return {'new_state': Player.State.IDLE}
 
     # If we're not on the ground or the wall, the wall must have disappeared out
     # from under us, so we transition to falling. Because we've been pushing
@@ -64,7 +64,7 @@ func update(player: Player, delta: float) -> Dictionary:
     # the wall without hitting our heads.
     if not player.is_on_wall():
         player.move(Vector2(-10 * player.get_direction(), 0))
-        return {'new_state': player.State.FALL}
+        return {'new_state': Player.State.FALL}
 
     # Slide down with constant speed after a slight acceleration. Also move the 
     # character slightly into the wall to maintain collision with the wall so
@@ -73,4 +73,4 @@ func update(player: Player, delta: float) -> Dictionary:
     player.velocity.y = min(player.velocity.y + 5, player.MOVEMENT_SPEED)
     player.move(player.velocity)
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}

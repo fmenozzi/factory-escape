@@ -51,30 +51,30 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             # Once we regain control, either wall jump or double jump, depending
             # on whether we're near a wall.
             if player.is_near_wall_front() or player.is_near_wall_back():
-                return {'new_state': player.State.WALL_JUMP}
+                return {'new_state': Player.State.WALL_JUMP}
             elif player.can_jump():
-                return {'new_state': player.State.DOUBLE_JUMP}
+                return {'new_state': Player.State.DOUBLE_JUMP}
     elif event.is_action_pressed('player_attack'):
         player.start_attack()
         player.get_animation_player().queue('jump')
     elif event.is_action_pressed('player_dash') and player.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
-            return {'new_state': player.State.DASH}
+            return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:
             return {
-                'new_state': player.State.GRAPPLE_START,
+                'new_state': Player.State.GRAPPLE_START,
                 'grapple_point': next_grapple_point,
             }
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
     # Switch to 'fall' state once we reach apex of jump.
     if player.velocity.y >= 0:
-        return {'new_state': player.State.FALL}
+        return {'new_state': Player.State.FALL}
 
     if not Input.is_action_pressed('player_jump'):
         if _jump_cut_timer.is_stopped():
@@ -96,7 +96,7 @@ func update(player: Player, delta: float) -> Dictionary:
 
     player.move(player.velocity)
 
-    return {'new_state': player.State.NO_CHANGE}
+    return {'new_state': Player.State.NO_CHANGE}
 
 # "Jump cut" if the jump button is released. This will also stop the
 # fixed velocity timer and therefore return control to the player.
