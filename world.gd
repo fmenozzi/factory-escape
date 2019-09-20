@@ -19,8 +19,13 @@ func _process(delta: float) -> void:
             _player.prev_room = _player.curr_room
             _player.curr_room = room
 
+            # Pause processing on the old room, transition to the new one, and
+            # then begin processing on the new room once the transition is
+            # complete.
+            _player.prev_room.pause()
             _camera.transition(_player.prev_room, _player.curr_room)
             yield(_camera, 'transition_completed')
+            _player.curr_room.resume()
 
             emit_signal('room_changed', _player.prev_room, _player.curr_room)
 

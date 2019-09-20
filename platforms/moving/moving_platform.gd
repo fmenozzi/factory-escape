@@ -39,3 +39,11 @@ func _physics_process(delta: float) -> void:
     # point with the move tween.
     _platform.position = _platform.position.linear_interpolate(
         _follow_point, 0.1)
+
+# Stop/start moving platforms. Useful for screen transitions.
+func pause() -> void:
+    set_physics_process(false)
+    _tween.stop_all()
+func resume() -> void:
+    set_physics_process(true)
+    _tween.resume_all()
