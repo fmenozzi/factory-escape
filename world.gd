@@ -10,7 +10,7 @@ onready var _rooms: Array = $Rooms.get_children()
 #       involve iterating over every room in every frame. Maybe some kind of
 #       map or otherwise more advanced data structure?
 #
-#		e.g. maybe you can use thin, one-way collision boxes at each room
+#       e.g. maybe you can use thin, one-way collision boxes at each room
 #       entrance to signal room changes.
 func _process(delta: float) -> void:
     for room in _rooms:
@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
             _player.curr_room = room
 
             _camera.transition(_player.prev_room, _player.curr_room)
+            yield(_camera, 'transition_completed')
 
             emit_signal('room_changed', _player.prev_room, _player.curr_room)
 

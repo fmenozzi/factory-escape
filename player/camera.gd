@@ -1,5 +1,7 @@
 extends Camera2D
 
+signal transition_completed
+
 onready var _player: Player = get_parent().get_parent()
 onready var _tween: Tween = $PositionTween
 
@@ -22,6 +24,8 @@ func transition(old_room, new_room) -> void:
 
     yield(_tween, 'tween_completed')
     _transition_teardown(new_room)
+
+    emit_signal('transition_completed')
 
 func fit_camera_limits_to_room(room: Room) -> void:
     var room_dims := room.get_room_dimensions()
