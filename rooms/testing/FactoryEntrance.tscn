@@ -47,10 +47,10 @@ dialog = [ "Hello", "This is a test of whether exporting arrays works", "Pls wor
 position = Vector2( 304, 96 )
 dialog = [ "Man I hope this works...", "Maybe it did?" ]
 
-[node name="MovingPlatformSmall" parent="." index="6" instance=ExtResource( 4 )]
+[node name="MovingPlatformSmall" parent="MovingPlatforms" index="0" instance=ExtResource( 4 )]
 position = Vector2( 128, 72 )
 
-[node name="MovingPlatformSmall2" parent="." index="7" instance=ExtResource( 4 )]
+[node name="MovingPlatformSmall2" parent="MovingPlatforms" index="1" instance=ExtResource( 4 )]
 position = Vector2( 80, 72 )
 MOVE_TO = Vector2( 0, 64 )
 
