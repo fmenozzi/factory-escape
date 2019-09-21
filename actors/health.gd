@@ -2,15 +2,19 @@ extends Node
 
 signal health_changed(old_health, new_health)
 
-export(int) var MAX_HEALTH = 3
+export(int) var MAX_HEALTH = 5
 
-var _current_health: int = MAX_HEALTH
+var _current_health: int
 
 enum Status {
     NONE,
     INVINCIBLE,
 }
-var _current_status: int = Status.NONE
+var _current_status: int
+
+func _ready() -> void:
+    _current_health = MAX_HEALTH
+    _current_status = Status.NONE
 
 func take_damage(damage_amount: int) -> void:
     if _current_status == Status.INVINCIBLE:
