@@ -192,6 +192,9 @@ func stop_attack() -> void:
     $AnimationPlayer.clear_queue()
     $AttackHitbox/Sprite.set_visible(false)
 
+func get_health() -> Node:
+    return $Health as Node
+
 func get_animation_player() -> AnimationPlayer:
     return $AnimationPlayer as AnimationPlayer
 
