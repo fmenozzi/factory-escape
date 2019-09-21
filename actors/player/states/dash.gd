@@ -13,7 +13,7 @@ var DASH_SPEED: float
 # The delay between emissions of the dash echo.
 var DASH_ECHO_DELAY: float = 0.05
 
-const DashEcho = preload('res://player/DashEcho.tscn')
+const DashEcho = preload('res://actors/player/DashEcho.tscn')
 const DashPuff = preload('res://sfx/DashPuff.tscn')
 
 func _ready() -> void:
