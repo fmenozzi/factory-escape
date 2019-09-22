@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -15,8 +15,9 @@
 [ext_resource path="res://actors/player/states/wall_jump.gd" type="Script" id=13]
 [ext_resource path="res://actors/player/states/grapple_start.gd" type="Script" id=14]
 [ext_resource path="res://actors/player/states/grapple.gd" type="Script" id=15]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=16]
-[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=17]
+[ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=16]
+[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=17]
+[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=18]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -387,17 +388,22 @@ script = ExtResource( 14 )
 [node name="Grapple" type="Node" parent="States"]
 script = ExtResource( 15 )
 
+[node name="Stagger" type="Node" parent="States"]
+script = ExtResource( 16 )
+
+[node name="StaggerDuration" type="Timer" parent="States/Stagger"]
+
 [node name="DashCooldown" type="Timer" parent="."]
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
-] instance=ExtResource( 16 )]
+] instance=ExtResource( 17 )]
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
-script = ExtResource( 17 )
+script = ExtResource( 18 )
 
 [node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -12 )
@@ -426,7 +432,6 @@ collision_mask = 2
 [node name="GrappleRope" type="Line2D" parent="."]
 position = Vector2( -1, -8 )
 width = 2.0
-texture_mode = 333674592
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2

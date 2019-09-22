@@ -18,6 +18,7 @@ enum State {
     WALL_JUMP,
     GRAPPLE_START,
     GRAPPLE,
+    STAGGER,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -32,6 +33,7 @@ onready var STATES = {
     State.WALL_JUMP:     $States/WallJump,
     State.GRAPPLE_START: $States/GrappleStart,
     State.GRAPPLE:       $States/Grapple,
+    State.STAGGER:       $States/Stagger,
 }
 
 var current_state: Node = null
@@ -246,6 +248,7 @@ func pause() -> void:
     $States/Dash/DashDuration.paused = true
     $States/Dash/DashEcho.paused = true
     $DashCooldown.paused = true
+    $States/Stagger/StaggerDuration.paused = true
 func unpause() -> void:
     set_physics_process(true)
     set_process_unhandled_input(true)
@@ -255,6 +258,7 @@ func unpause() -> void:
     $States/Dash/DashDuration.paused = false
     $States/Dash/DashEcho.paused = false
     $DashCooldown.paused = false
+    $States/Stagger/StaggerDuration.paused = false
 
 # Functions providing a more readable and convenient interface for managing
 # dashes.
