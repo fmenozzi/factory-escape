@@ -25,6 +25,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     $StaggerDuration.start()
 
+    player.get_animation_player().play('stagger')
+
 func exit(player: Player) -> void:
     pass
 
