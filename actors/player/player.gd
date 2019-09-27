@@ -119,6 +119,8 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
+    $Hurtbox.connect('area_entered', self, '_on_hit_taken')
+
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -344,3 +346,8 @@ func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
     var distance_to_a := a.global_position.distance_to(self.global_position)
     var distance_to_b := b.global_position.distance_to(self.global_position)
     return distance_to_a < distance_to_b
+
+func _on_hit_taken(hitbox: Area2D) -> void:
+    # Take damage and stagger when hit.
+    get_health().take_damage(1)
+    _change_state({'new_state': State.STAGGER})
