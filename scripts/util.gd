@@ -21,6 +21,34 @@ enum Direction {
     RIGHT = 1,
 }
 
+# Maps collision layer names to their bit indices, to be used in conjunction
+# with calls to get_collision_layer_bit() in the in_collision_layer() function
+# below.
+const _LAYER_NAMES := {
+    'player': 0,
+    'environment': 1,
+    'grapple_range_area': 2,
+    'platforms': 3,
+    'player_hitbox': 4,
+    'player_hurtbox': 5,
+    'enemy_hitbox': 6,
+    'enemy_hurtbox': 7,
+    'hazards': 8,
+}
+
+func _ready() -> void:
+    # Assert that the layer names/bits in _LAYER_NAMES are correct by comparing
+    # to the project settings. Note that layers use 1-based indexing in the
+    # project settings, despite the fact that the bits themselves start at 0.
+    var i := 1
+    for layer_name in _LAYER_NAMES:
+        var layer_path := str('layer_names/2d_physics/layer_', i)
+
+        assert _LAYER_NAMES[layer_name] == i-1
+        assert ProjectSettings.get_setting(layer_path) == layer_name
+
+        i += 1
+
 # Get the current x-axis input direction. Returns +1 if player is moving right,
 # -1 if player is moving left, and 0 if player is not moving.
 func get_input_direction() -> int:
@@ -49,3 +77,14 @@ func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
 # Gets the x-direction of the "to" node relative to the "from" node.
 func direction(from: Node2D, to: Node2D) -> int:
     return int(sign((to.global_position - from.global_position).x))
+
+# Convenience method for checking whether a given collision object is in a layer
+# with the given name. Note the lack of type for the collision_object param and
+# the extra assert on the existence of the get_collision_layer_bit() method; it
+# turns out that that method is defined separately in both KinematicBody2D and
+# Area2D, despite both of those classes inheriting from CollisionObject2D.
+func in_collision_layer(collision_object, layer_name: String) -> bool:
+    assert layer_name in _LAYER_NAMES
+    assert collision_object.has_method('get_collision_layer_bit')
+
+    return collision_object.get_collision_layer_bit(_LAYER_NAMES[layer_name])
