@@ -1,23 +1,24 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/character-spritesheet.png" type="Texture" id=3]
-[ext_resource path="res://actors/player/camera.gd" type="Script" id=4]
-[ext_resource path="res://assets/industrial.v2.png" type="Texture" id=5]
-[ext_resource path="res://actors/player/states/idle.gd" type="Script" id=6]
-[ext_resource path="res://actors/player/states/walk.gd" type="Script" id=7]
-[ext_resource path="res://actors/player/states/jump.gd" type="Script" id=8]
-[ext_resource path="res://actors/player/states/double_jump.gd" type="Script" id=9]
-[ext_resource path="res://actors/player/states/fall.gd" type="Script" id=10]
-[ext_resource path="res://actors/player/states/dash.gd" type="Script" id=11]
-[ext_resource path="res://actors/player/states/wall_slide.gd" type="Script" id=12]
-[ext_resource path="res://actors/player/states/wall_jump.gd" type="Script" id=13]
-[ext_resource path="res://actors/player/states/grapple_start.gd" type="Script" id=14]
-[ext_resource path="res://actors/player/states/grapple.gd" type="Script" id=15]
-[ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=16]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=17]
-[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=18]
+[ext_resource path="res://actors/player/invincibility_flash_manager.gd" type="Script" id=3]
+[ext_resource path="res://assets/character-spritesheet.png" type="Texture" id=4]
+[ext_resource path="res://actors/player/camera.gd" type="Script" id=5]
+[ext_resource path="res://assets/industrial.v2.png" type="Texture" id=6]
+[ext_resource path="res://actors/player/states/idle.gd" type="Script" id=7]
+[ext_resource path="res://actors/player/states/walk.gd" type="Script" id=8]
+[ext_resource path="res://actors/player/states/jump.gd" type="Script" id=9]
+[ext_resource path="res://actors/player/states/double_jump.gd" type="Script" id=10]
+[ext_resource path="res://actors/player/states/fall.gd" type="Script" id=11]
+[ext_resource path="res://actors/player/states/dash.gd" type="Script" id=12]
+[ext_resource path="res://actors/player/states/wall_slide.gd" type="Script" id=13]
+[ext_resource path="res://actors/player/states/wall_jump.gd" type="Script" id=14]
+[ext_resource path="res://actors/player/states/grapple_start.gd" type="Script" id=15]
+[ext_resource path="res://actors/player/states/grapple.gd" type="Script" id=16]
+[ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=17]
+[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=18]
+[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -305,10 +306,10 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 10, 4 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -316,6 +317,15 @@ collision_mask = 10
 script = ExtResource( 1 )
 
 [node name="Health" parent="." instance=ExtResource( 2 )]
+
+[node name="InvincibilityFlashManager" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="InvincibilityFlashManager"]
+
+[node name="SpriteFlashTween" type="Tween" parent="InvincibilityFlashManager"]
+repeat = true
+playback/repeat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 1 )
@@ -332,7 +342,7 @@ anims/wall_slide = SubResource( 11 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 vframes = 9
 hframes = 8
 frame = 64
@@ -353,7 +363,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 14 )
+shape = SubResource( 13 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -367,7 +377,7 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="PositionTween" type="Tween" parent="CameraAnchor/Camera2D"]
 
@@ -379,58 +389,58 @@ position = Vector2( 18, -7 )
 
 [node name="Sprite" type="Sprite" parent="AttackHitbox"]
 visible = false
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 hframes = 4
 frame = 3
 region_enabled = true
 region_rect = Rect2( 64, 288, 128, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 disabled = true
 
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
-script = ExtResource( 6 )
-
-[node name="Walk" type="Node" parent="States"]
 script = ExtResource( 7 )
 
-[node name="Jump" type="Node" parent="States"]
+[node name="Walk" type="Node" parent="States"]
 script = ExtResource( 8 )
 
-[node name="DoubleJump" type="Node" parent="States"]
+[node name="Jump" type="Node" parent="States"]
 script = ExtResource( 9 )
 
-[node name="Fall" type="Node" parent="States"]
+[node name="DoubleJump" type="Node" parent="States"]
 script = ExtResource( 10 )
 
-[node name="Dash" type="Node" parent="States"]
+[node name="Fall" type="Node" parent="States"]
 script = ExtResource( 11 )
+
+[node name="Dash" type="Node" parent="States"]
+script = ExtResource( 12 )
 
 [node name="DashDuration" type="Timer" parent="States/Dash"]
 
 [node name="DashEcho" type="Timer" parent="States/Dash"]
 
 [node name="WallSlide" type="Node" parent="States"]
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
 [node name="WallJump" type="Node" parent="States"]
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 
 [node name="FixedVelocityTimer" type="Timer" parent="States/WallJump"]
 
 [node name="JumpCutTimer" type="Timer" parent="States/WallJump"]
 
 [node name="GrappleStart" type="Node" parent="States"]
-script = ExtResource( 14 )
-
-[node name="Grapple" type="Node" parent="States"]
 script = ExtResource( 15 )
 
-[node name="Stagger" type="Node" parent="States"]
+[node name="Grapple" type="Node" parent="States"]
 script = ExtResource( 16 )
+
+[node name="Stagger" type="Node" parent="States"]
+script = ExtResource( 17 )
 
 [node name="StaggerDuration" type="Timer" parent="States/Stagger"]
 
@@ -438,13 +448,13 @@ script = ExtResource( 16 )
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
-] instance=ExtResource( 17 )]
+] instance=ExtResource( 18 )]
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
-script = ExtResource( 18 )
+script = ExtResource( 19 )
 
 [node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -12 )

@@ -121,6 +121,10 @@ func _ready() -> void:
 
     $Hurtbox.connect('area_entered', self, '_on_hit_taken')
 
+    $InvincibilityFlashManager.setup($Sprite)
+    $InvincibilityFlashManager.connect(
+        'flashing_ended', self, '_on_invincibility_flashing_ended')
+
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -196,8 +200,8 @@ func stop_attack() -> void:
     $AnimationPlayer.clear_queue()
     $AttackHitbox/Sprite.set_visible(false)
 
-func get_health() -> Node:
-    return $Health as Node
+func get_health() -> Health:
+    return $Health as Health
 
 func get_animation_player() -> AnimationPlayer:
     return $AnimationPlayer as AnimationPlayer
@@ -247,6 +251,8 @@ func pause() -> void:
 
     $AnimationPlayer.stop(false)
 
+    $InvincibilityFlashManager.pause_timer()
+
     $States/Dash/DashDuration.paused = true
     $States/Dash/DashEcho.paused = true
     $DashCooldown.paused = true
@@ -256,6 +262,8 @@ func unpause() -> void:
     set_process_unhandled_input(true)
 
     $AnimationPlayer.play()
+
+    $InvincibilityFlashManager.resume_timer()
 
     $States/Dash/DashDuration.paused = false
     $States/Dash/DashEcho.paused = false
@@ -347,7 +355,16 @@ func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
     var distance_to_b := b.global_position.distance_to(self.global_position)
     return distance_to_a < distance_to_b
 
+func _on_invincibility_flashing_ended() -> void:
+    get_health().set_status(Health.Status.NONE)
+
 func _on_hit_taken(hitbox: Area2D) -> void:
-    # Take damage and stagger when hit.
-    get_health().take_damage(1)
-    _change_state({'new_state': State.STAGGER})
+    var player_health := get_health()
+    if Util.in_collision_layer(hitbox, 'hazards'):
+        # Take damage and stagger when hit.
+        var damage_taken := player_health.take_damage(1)
+        if damage_taken:
+            _change_state({'new_state': State.STAGGER})
+            player_health.set_status(Health.Status.INVINCIBLE)
+            $InvincibilityFlashManager.start_flashing()
+
