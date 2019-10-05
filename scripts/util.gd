@@ -1,6 +1,6 @@
 extends Node
 
-# The size of a basic "tile" in the game, in pixels. Distances (e.g jump 
+# The size of a basic "tile" in the game, in pixels. Distances (e.g jump
 # heights) and speeds (e.g. walk speed, fall speed) will be calculated in units
 # of this tile size to make it easier to design the world around the player's
 # movement capabilities (e.g. ensure that the player can clear certain jumps).
@@ -79,12 +79,15 @@ func direction(from: Node2D, to: Node2D) -> int:
     return int(sign((to.global_position - from.global_position).x))
 
 # Convenience method for checking whether a given collision object is in a layer
-# with the given name. Note the lack of type for the collision_object param and
-# the extra assert on the existence of the get_collision_layer_bit() method; it
-# turns out that that method is defined separately in both KinematicBody2D and
-# Area2D, despite both of those classes inheriting from CollisionObject2D.
-func in_collision_layer(collision_object, layer_name: String) -> bool:
-    assert layer_name in _LAYER_NAMES
+# with any of the given names. Note the lack of type for the collision_object
+# param and the extra assert on the existence of the get_collision_layer_bit()
+# method; it turns out that that method is defined separately in both
+# KinematicBody2D and Area2D, despite both of those classes inheriting from
+# CollisionObject2D.
+func in_collision_layer(collision_object, layer_names: Array) -> bool:
     assert collision_object.has_method('get_collision_layer_bit')
-
-    return collision_object.get_collision_layer_bit(_LAYER_NAMES[layer_name])
+    for layer_name in layer_names:
+        assert layer_name in _LAYER_NAMES
+        if collision_object.get_collision_layer_bit(_LAYER_NAMES[layer_name]):
+            return true
+    return false

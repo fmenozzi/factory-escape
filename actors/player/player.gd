@@ -360,8 +360,7 @@ func _on_invincibility_flashing_ended() -> void:
 
 func _on_hit_taken(hitbox: Area2D) -> void:
     var player_health := get_health()
-    # TODO: Have in_collision_layer() accept an array of layer names.
-    if Util.in_collision_layer(hitbox, 'hazards') or Util.in_collision_layer(hitbox, 'enemy_hitbox'):
+    if Util.in_collision_layer(hitbox, ['hazards', 'enemy_hitbox']):
         # Take damage and stagger when hit.
         var damage_taken := player_health.take_damage(1)
         if damage_taken:

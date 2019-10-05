@@ -28,7 +28,7 @@ func _is_touching_hazard() -> bool:
     # collisions with hazards like spikes, taking advantage of the fact that the
     # collision shapes are the same.
     for area in _hurtbox.get_overlapping_areas():
-        if Util.in_collision_layer(area, 'hazards'):
+        if Util.in_collision_layer(area, ['hazards']):
             return true
     return false
 
