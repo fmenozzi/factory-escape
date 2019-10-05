@@ -56,3 +56,17 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -6 )
 shape = SubResource( 1 )
+
+[node name="LedgeDetectorRaycasts" type="Node2D" parent="."]
+
+[node name="Left" type="RayCast2D" parent="LedgeDetectorRaycasts"]
+position = Vector2( -7, 0 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 10
+
+[node name="Right" type="RayCast2D" parent="LedgeDetectorRaycasts"]
+position = Vector2( 7, 0 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 10
