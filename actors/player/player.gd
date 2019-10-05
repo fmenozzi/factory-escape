@@ -82,6 +82,8 @@ onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
+onready var _hurtbox: Area2D = $Hurtbox
+
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
 # there are no valid grapple points for the player on a given frame, this is set
@@ -119,8 +121,6 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
-    $Hurtbox.connect('area_entered', self, '_on_hit_taken')
-
     $InvincibilityFlashManager.setup($Sprite)
     $InvincibilityFlashManager.connect(
         'flashing_ended', self, '_on_invincibility_flashing_ended')
@@ -132,6 +132,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
     _update_next_grapple_point()
+
+    _check_for_hits()
 
     var new_state_dict = current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -286,6 +288,17 @@ func consume_jump() -> void:
 func reset_jump() -> void:
     _jumps_remaining = 2
 
+func _check_for_hits() -> void:
+    var player_health := get_health()
+    for hitbox in _hurtbox.get_overlapping_areas():
+        if Util.in_collision_layer(hitbox, ['hazards', 'enemy_hitbox']):
+            # Take damage and stagger when hit.
+            var damage_taken := player_health.take_damage(1)
+            if damage_taken:
+                _change_state({'new_state': State.STAGGER})
+                player_health.set_status(Health.Status.INVINCIBLE)
+                $InvincibilityFlashManager.start_flashing()
+
 func get_next_grapple_point() -> GrapplePoint:
     return _next_grapple_point
 
@@ -357,14 +370,3 @@ func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
 
 func _on_invincibility_flashing_ended() -> void:
     get_health().set_status(Health.Status.NONE)
-
-func _on_hit_taken(hitbox: Area2D) -> void:
-    var player_health := get_health()
-    if Util.in_collision_layer(hitbox, ['hazards', 'enemy_hitbox']):
-        # Take damage and stagger when hit.
-        var damage_taken := player_health.take_damage(1)
-        if damage_taken:
-            _change_state({'new_state': State.STAGGER})
-            player_health.set_status(Health.Status.INVINCIBLE)
-            $InvincibilityFlashManager.start_flashing()
-
