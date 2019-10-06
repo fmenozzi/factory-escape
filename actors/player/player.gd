@@ -20,6 +20,7 @@ enum State {
     GRAPPLE_START,
     GRAPPLE,
     STAGGER,
+    HAZARD_HIT,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -35,6 +36,7 @@ onready var STATES = {
     State.GRAPPLE_START: $States/GrappleStart,
     State.GRAPPLE:       $States/Grapple,
     State.STAGGER:       $States/Stagger,
+    State.HAZARD_HIT:    $States/HazardHit,
 }
 
 var current_state: Node = null
@@ -247,7 +249,7 @@ func get_nearby_sign() -> Area2D:
     return _nearby_sign
 
 func get_hazard_checkpoint() -> Vector2:
-    return Vector2(272, 144)
+    return Vector2(56, 144)
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
@@ -299,12 +301,14 @@ func _check_for_hits() -> void:
             # Take damage and stagger when hit.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
-                _change_state({'new_state': State.STAGGER})
                 player_health.set_status(Health.Status.INVINCIBLE)
                 $InvincibilityFlashManager.start_flashing()
 
                 if Util.in_collision_layer(hitbox, ['hazards']):
+                    _change_state({'new_state': State.HAZARD_HIT})
                     emit_signal('player_hit_hazard')
+                elif Util.in_collision_layer(hitbox, ['enemy_hitbox']):
+                    _change_state({'new_state': State.STAGGER})
 
 func get_next_grapple_point() -> GrapplePoint:
     return _next_grapple_point
