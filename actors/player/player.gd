@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 signal player_state_changed
+signal player_hit_hazard
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
@@ -245,6 +246,9 @@ func set_nearby_sign(new_sign: Area2D) -> void:
 func get_nearby_sign() -> Area2D:
     return _nearby_sign
 
+func get_hazard_checkpoint() -> Vector2:
+    return Vector2(272, 144)
+
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
 func pause() -> void:
@@ -298,6 +302,9 @@ func _check_for_hits() -> void:
                 _change_state({'new_state': State.STAGGER})
                 player_health.set_status(Health.Status.INVINCIBLE)
                 $InvincibilityFlashManager.start_flashing()
+
+                if Util.in_collision_layer(hitbox, ['hazards']):
+                    emit_signal('player_hit_hazard')
 
 func get_next_grapple_point() -> GrapplePoint:
     return _next_grapple_point
