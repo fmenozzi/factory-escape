@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GrapplePoint.tscn" type="PackedScene" id=2]
@@ -6,12 +6,16 @@
 [ext_resource path="res://platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hazards/Spikes.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/enemies/Slime.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hazards/HazardCheckpoint.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 110, 80 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 24 )
 
 [node name="FactoryEntrance" instance=ExtResource( 1 )]
 
@@ -69,6 +73,15 @@ position = Vector2( 192, 144 )
 position = Vector2( 296, 96 )
 direction = -1
 
+[node name="HazardCheckpoint" parent="HazardCheckpoints" index="0" instance=ExtResource( 7 )]
+position = Vector2( 56, 144 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/HazardCheckpoint" index="0"]
+position = Vector2( 0, -24 )
+shape = SubResource( 3 )
+
 [editable path="TileMaps"]
 
 [editable path="GrapplePoints/GrapplePoint"]
+
+[editable path="HazardCheckpoints/HazardCheckpoint"]

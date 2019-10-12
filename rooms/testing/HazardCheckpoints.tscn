@@ -1,11 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://platforms/moving/MovingPlatformLarge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://hazards/Spikes.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 88 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 88 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 88 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 88 )
 
 [node name="HazardCheckpoints" index="0" instance=ExtResource( 1 )]
 
@@ -153,4 +166,40 @@ position = Vector2( 13, 180 )
 [node name="Spikes39" parent="Hazards" index="38" instance=ExtResource( 3 )]
 position = Vector2( -2, 180 )
 
+[node name="Entrance" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
+position = Vector2( 568, 144 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/Entrance" index="0"]
+position = Vector2( 8, -56 )
+shape = SubResource( 2 )
+
+[node name="FirstIsland" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
+position = Vector2( 384, 144 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/FirstIsland" index="0"]
+position = Vector2( 0, -56 )
+shape = SubResource( 3 )
+
+[node name="SecondIsland" parent="HazardCheckpoints" index="2" instance=ExtResource( 4 )]
+position = Vector2( 112, 144 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/SecondIsland" index="0"]
+position = Vector2( 0, -56 )
+shape = SubResource( 4 )
+
+[node name="End" parent="HazardCheckpoints" index="3" instance=ExtResource( 4 )]
+position = Vector2( 40, 112 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/End" index="0"]
+position = Vector2( 0, -24 )
+shape = SubResource( 5 )
+
 [editable path="TileMaps"]
+
+[editable path="HazardCheckpoints/Entrance"]
+
+[editable path="HazardCheckpoints/FirstIsland"]
+
+[editable path="HazardCheckpoints/SecondIsland"]
+
+[editable path="HazardCheckpoints/End"]
