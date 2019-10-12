@@ -4,8 +4,8 @@
 [ext_resource path="res://GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sign.tscn" type="PackedScene" id=3]
 [ext_resource path="res://platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=4]
-[ext_resource path="res://actors/enemies/Slime.tscn" type="PackedScene" id=5]
-[ext_resource path="res://hazards/Spikes.tscn" type="PackedScene" id=6]
+[ext_resource path="res://hazards/Spikes.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/Slime.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -56,18 +56,18 @@ position = Vector2( 128, 72 )
 position = Vector2( 80, 72 )
 MOVE_TO = Vector2( 0, 64 )
 
-[node name="Slime" parent="." index="7" instance=ExtResource( 5 )]
-position = Vector2( 192, 144 )
-
-[node name="Slime2" parent="." index="8" instance=ExtResource( 5 )]
-position = Vector2( 296, 96 )
-direction = -1
-
-[node name="Spikes" parent="Hazards" index="0" instance=ExtResource( 6 )]
+[node name="Spikes" parent="Hazards" index="0" instance=ExtResource( 5 )]
 position = Vector2( 232, 144 )
 
-[node name="Spikes2" parent="Hazards" index="1" instance=ExtResource( 6 )]
+[node name="Spikes2" parent="Hazards" index="1" instance=ExtResource( 5 )]
 position = Vector2( 248, 144 )
+
+[node name="Slime" parent="Enemies" index="0" instance=ExtResource( 6 )]
+position = Vector2( 192, 144 )
+
+[node name="Slime2" parent="Enemies" index="1" instance=ExtResource( 6 )]
+position = Vector2( 296, 96 )
+direction = -1
 
 [editable path="TileMaps"]
 

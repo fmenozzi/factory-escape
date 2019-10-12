@@ -19,3 +19,5 @@ script = ExtResource( 1 )
 [node name="MovingPlatforms" type="Node2D" parent="."]
 
 [node name="Hazards" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
