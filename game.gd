@@ -20,6 +20,6 @@ func _on_player_hit_hazard() -> void:
 
     player.set_global_position(player.get_hazard_checkpoint())
 
-    var fade_in_delay := 0.15
+    var fade_in_delay := 0.25
     screen_fadeout.fade_in(fade_in_delay)
     yield(screen_fadeout, 'fade_in_completed')
