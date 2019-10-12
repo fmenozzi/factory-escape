@@ -80,6 +80,14 @@ const DASH_COOLDOWN: float = 0.30
 # The original positions of all "y-axis mirrored" nodes.
 var _mirror_y_axis_node_original_positions: Dictionary = {}
 
+onready var _sprite: Sprite = $Sprite
+
+onready var _animation_player: AnimationPlayer = $AnimationPlayer
+
+onready var _dash_cooldown_timer: Timer = $DashCooldown
+
+onready var _camera_anchor: Position2D = $CameraAnchor
+
 onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
@@ -87,7 +95,11 @@ onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
+onready var _health: Health = $Health
 onready var _hurtbox: Area2D = $Hurtbox
+onready var _hitbox: Area2D = $AttackHitbox
+
+onready var _invincibility_flash_manager: Node = $InvincibilityFlashManager
 
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
@@ -110,8 +122,8 @@ var _jumps_remaining: int = 2
 
 func _ready() -> void:
     # Create a dash cooldown timer.
-    $DashCooldown.wait_time = DASH_COOLDOWN
-    $DashCooldown.one_shot = true
+    _dash_cooldown_timer.wait_time = DASH_COOLDOWN
+    _dash_cooldown_timer.one_shot = true
 
     # Begin in fall state
     current_state_enum = State.FALL
@@ -128,8 +140,8 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
-    $InvincibilityFlashManager.setup($Sprite)
-    $InvincibilityFlashManager.connect(
+    _invincibility_flash_manager.setup(_sprite)
+    _invincibility_flash_manager.connect(
         'flashing_ended', self, '_on_invincibility_flashing_ended')
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -201,25 +213,25 @@ func get_wall_normal_back() -> Vector2:
     return _wall_proximity_detector.get_wall_normal_back()
 
 func start_attack() -> void:
-    $AnimationPlayer.play('attack')
+    get_animation_player().play('attack')
 
 # Flush animation queue and make attack sprite invisible so that we can cancel
 # attack animations cleanly.
 func stop_attack() -> void:
-    $AnimationPlayer.clear_queue()
-    $AttackHitbox/Sprite.set_visible(false)
+    get_animation_player().clear_queue()
+    _hitbox.get_node('Sprite').set_visible(false)
 
 func get_health() -> Health:
-    return $Health as Health
+    return _health
 
 func get_animation_player() -> AnimationPlayer:
-    return $AnimationPlayer as AnimationPlayer
+    return _animation_player
 
 func get_camera() -> Camera2D:
-    return $CameraAnchor/Camera2D as Camera2D
+    return _camera_anchor.get_node('Camera2D') as Camera2D
 
 func get_dash_cooldown_timer() -> Timer:
-    return $DashCooldown as Timer
+    return _dash_cooldown_timer as Timer
 
 func get_wall_slide_trail() -> Particles2D:
     return _wall_slide_trail_effect
@@ -228,14 +240,14 @@ func get_grapple_rope() -> Line2D:
     return _grapple_rope
 
 func get_direction() -> int:
-    return -1 if $Sprite.flip_h else 1
+    return -1 if _sprite.flip_h else 1
 
 func set_direction(direction: int) -> void:
     # Flip player sprite.
-    $Sprite.flip_h = (direction == -1)
+    _sprite.flip_h = (direction == -1)
 
     # Flip attack sprite.
-    $AttackHitbox/Sprite.flip_h = (direction == -1)
+    _hitbox.get_node('Sprite').flip_h = (direction == -1)
 
     # Flip wall detector raycasts.
     if direction in [-1, 1]:
@@ -263,25 +275,27 @@ func pause() -> void:
     set_physics_process(false)
     set_process_unhandled_input(false)
 
-    $AnimationPlayer.stop(false)
+    get_animation_player().stop(false)
 
-    $InvincibilityFlashManager.pause_timer()
+    _invincibility_flash_manager.pause_timer()
+
+    _dash_cooldown_timer.paused = true
 
     $States/Dash/DashDuration.paused = true
     $States/Dash/DashEcho.paused = true
-    $DashCooldown.paused = true
     $States/Stagger/StaggerDuration.paused = true
 func unpause() -> void:
     set_physics_process(true)
     set_process_unhandled_input(true)
 
-    $AnimationPlayer.play()
+    get_animation_player().play()
 
-    $InvincibilityFlashManager.resume_timer()
+    _invincibility_flash_manager.resume_timer()
+
+    _dash_cooldown_timer.paused = false
 
     $States/Dash/DashDuration.paused = false
     $States/Dash/DashEcho.paused = false
-    $DashCooldown.paused = false
     $States/Stagger/StaggerDuration.paused = false
 
 # Functions providing a more readable and convenient interface for managing
@@ -308,7 +322,7 @@ func _check_for_hits() -> void:
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
                 player_health.set_status(Health.Status.INVINCIBLE)
-                $InvincibilityFlashManager.start_flashing()
+                _invincibility_flash_manager.start_flashing()
 
                 if Util.in_collision_layer(hitbox, ['hazards']):
                     change_state({'new_state': State.HAZARD_HIT})
