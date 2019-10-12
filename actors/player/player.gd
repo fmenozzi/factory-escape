@@ -95,7 +95,7 @@ var _next_grapple_point: GrapplePoint = null
 
 var _nearby_sign = null
 
-var _current_hazard_checkpoint = null
+var _current_hazard_checkpoint: Area2D = null
 
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
@@ -250,9 +250,9 @@ func set_nearby_sign(new_sign: Area2D) -> void:
 func get_nearby_sign() -> Area2D:
     return _nearby_sign
 
-func set_hazard_checkpoint(hazard_checkpoint: Vector2) -> void:
+func set_hazard_checkpoint(hazard_checkpoint: Area2D) -> void:
     _current_hazard_checkpoint = hazard_checkpoint
-func get_hazard_checkpoint() -> Vector2:
+func get_hazard_checkpoint() -> Area2D:
     return _current_hazard_checkpoint
 
 # Pause/resume processing for player node specifically. Used during room

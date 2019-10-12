@@ -18,7 +18,12 @@ func _on_player_hit_hazard() -> void:
     screen_fadeout.fade_out()
     yield(screen_fadeout, 'fade_out_completed')
 
-    player.set_global_position(player.get_hazard_checkpoint())
+    # Reset player at the last hazard checkpoint. Set the player's direction to
+    # be the direction from the checkpoint to the player's impact point with the
+    # hazard.
+    var hazard_checkpoint := player.get_hazard_checkpoint()
+    player.set_direction(Util.direction(hazard_checkpoint, player))
+    player.set_global_position(hazard_checkpoint.get_global_position())
 
     var fade_in_delay := 0.25
     screen_fadeout.fade_in(fade_in_delay)

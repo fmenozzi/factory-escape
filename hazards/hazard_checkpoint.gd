@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
     if _player and _player.is_on_ground():
-        _player.set_hazard_checkpoint(self.global_position)
+        _player.set_hazard_checkpoint(self)
         set_process(false)
 
 func _on_player_entered(player: Player) -> void:
