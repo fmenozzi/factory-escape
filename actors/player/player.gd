@@ -21,22 +21,24 @@ enum State {
     GRAPPLE,
     STAGGER,
     HAZARD_HIT,
+    HAZARD_RECOVER,
 }
 
 # Maps State enum to corresponding state scripts.
 onready var STATES = {
-    State.IDLE:          $States/Idle,
-    State.WALK:          $States/Walk,
-    State.JUMP:          $States/Jump,
-    State.DOUBLE_JUMP:   $States/DoubleJump,
-    State.FALL:          $States/Fall,
-    State.DASH:          $States/Dash,
-    State.WALL_SLIDE:    $States/WallSlide,
-    State.WALL_JUMP:     $States/WallJump,
-    State.GRAPPLE_START: $States/GrappleStart,
-    State.GRAPPLE:       $States/Grapple,
-    State.STAGGER:       $States/Stagger,
-    State.HAZARD_HIT:    $States/HazardHit,
+    State.IDLE:           $States/Idle,
+    State.WALK:           $States/Walk,
+    State.JUMP:           $States/Jump,
+    State.DOUBLE_JUMP:    $States/DoubleJump,
+    State.FALL:           $States/Fall,
+    State.DASH:           $States/Dash,
+    State.WALL_SLIDE:     $States/WallSlide,
+    State.WALL_JUMP:      $States/WallJump,
+    State.GRAPPLE_START:  $States/GrappleStart,
+    State.GRAPPLE:        $States/Grapple,
+    State.STAGGER:        $States/Stagger,
+    State.HAZARD_HIT:     $States/HazardHit,
+    State.HAZARD_RECOVER: $States/HazardRecover,
 }
 
 var current_state: Node = null
