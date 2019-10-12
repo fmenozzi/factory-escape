@@ -20,7 +20,7 @@ extents = Vector2( 10, 88 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 10, 88 )
 
-[node name="HazardCheckpoints" index="0" instance=ExtResource( 1 )]
+[node name="HazardCheckpoints" instance=ExtResource( 1 )]
 
 [node name="BackgroundSmall" parent="TileMaps" index="0"]
 tile_data = PoolIntArray( 13, 65, 0, 14, 65, 0, 15, 1, 0, 27, 65, 0, 28, 65, 0, 65549, 65, 0, 65550, 65, 0, 65551, 1, 0, 65563, 65, 0, 65564, 66, 0, 131085, 65, 0, 131086, 65, 0, 131087, 2, 0, 131099, 65, 0, 196621, 66, 0, 196622, 65, 0, 196635, 66, 0, 262158, 66, 0, 524324, 8, 0 )
