@@ -116,7 +116,7 @@ func _ready() -> void:
     # Begin in fall state
     current_state_enum = State.FALL
     current_state = STATES[current_state_enum]
-    _change_state({'new_state': State.FALL})
+    change_state({'new_state': State.FALL})
 
     # Initialize current room
     curr_room = get_parent().get_node('Rooms/FactoryEntrance')
@@ -135,7 +135,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
-        _change_state(new_state_dict)
+        change_state(new_state_dict)
 
 func _physics_process(delta: float) -> void:
     _update_next_grapple_point()
@@ -144,10 +144,10 @@ func _physics_process(delta: float) -> void:
 
     var new_state_dict = current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
-        _change_state(new_state_dict)
+        change_state(new_state_dict)
 
 # Change from one state in the state machine to another.
-func _change_state(new_state_dict: Dictionary) -> void:
+func change_state(new_state_dict: Dictionary) -> void:
     var new_state_enum: int = new_state_dict['new_state']
     var previous_state_enum := current_state_enum
 
@@ -311,10 +311,10 @@ func _check_for_hits() -> void:
                 $InvincibilityFlashManager.start_flashing()
 
                 if Util.in_collision_layer(hitbox, ['hazards']):
-                    _change_state({'new_state': State.HAZARD_HIT})
+                    change_state({'new_state': State.HAZARD_HIT})
                     emit_signal('player_hit_hazard')
                 elif Util.in_collision_layer(hitbox, ['enemy_hitbox']):
-                    _change_state({'new_state': State.STAGGER})
+                    change_state({'new_state': State.STAGGER})
 
 func get_next_grapple_point() -> GrapplePoint:
     return _next_grapple_point
