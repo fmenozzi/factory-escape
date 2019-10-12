@@ -28,7 +28,7 @@ func _on_player_hit_hazard() -> void:
     # Kind of a hack, but we want to make sure we're not still in the HAZARD_HIT
     # animation while the screen is fading back in, so set the player sprite to
     # be the first frame of the 'hazard_recover' animation.
-    player.get_node('Sprite').frame = 80
+    player.get_node('Sprite').frame = 72
 
     var fade_in_delay := 0.25
     screen_fadeout.fade_in(fade_in_delay)
