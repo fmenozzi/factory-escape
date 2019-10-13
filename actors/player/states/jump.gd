@@ -7,11 +7,12 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # will cause the velocity to "cut", allowing for variable-height jumps).
     player.velocity.y = player.MAX_JUMP_VELOCITY
 
-    # Stop attack animation, in case we were attacking in previous state.
-    player.stop_attack()
-
-    # Play jump animation.
-    player.get_animation_player().play('jump')
+    # Let attack animation play out before switching to jump animation.
+    if player.is_attacking():
+        player.get_animation_player().clear_queue()
+        player.get_animation_player().queue('jump')
+    else:
+        player.get_animation_player().play('jump')
 
     # Emit a jump puff.
     Util.spawn_particles(LandingPuff.instance(), player)
@@ -20,7 +21,11 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.consume_jump()
 
 func exit(player: Player) -> void:
-    pass
+    # In case we exit the jump state before the previously-playing attack
+    # animation finishes, stop the attack, which has the effect of both flushing
+    # the animation queue and hiding the attack sprite.
+    if player.is_attacking():
+        player.stop_attack()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_released('player_jump'):

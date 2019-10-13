@@ -4,18 +4,23 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
-    # Stop attack animation, in case we were attacking in previous state.
-    player.stop_attack()
-
-    # Play idle animation
-    player.get_animation_player().play('idle')
+    # Let attack animation play out before switching to idle animation.
+    if player.is_attacking():
+        player.get_animation_player().clear_queue()
+        player.get_animation_player().queue('idle')
+    else:
+        player.get_animation_player().play('idle')
 
     # Reset the dash and double jump.
     player.reset_dash()
     player.reset_jump()
 
 func exit(player: Player) -> void:
-    pass
+    # In case we exit the idle state before the previously-playing attack
+    # animation finishes, stop the attack, which has the effect of both flushing
+    # the animation queue and hiding the attack sprite.
+    if player.is_attacking():
+        player.stop_attack()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and player.can_jump():
