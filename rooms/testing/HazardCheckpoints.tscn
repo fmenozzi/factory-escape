@@ -9,16 +9,16 @@
 extents = Vector2( 320, 90 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 88 )
+extents = Vector2( 16, 88 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 88 )
+extents = Vector2( 16, 88 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 10, 88 )
+extents = Vector2( 16, 88 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 10, 88 )
+extents = Vector2( 16, 88 )
 
 [node name="HazardCheckpoints" index="0" instance=ExtResource( 1 )]
 
@@ -179,7 +179,7 @@ shape = SubResource( 4 )
 position = Vector2( 40, 112 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/End" index="0"]
-position = Vector2( 0, -24 )
+position = Vector2( -8, -24 )
 shape = SubResource( 5 )
 
 [editable path="TileMaps"]
