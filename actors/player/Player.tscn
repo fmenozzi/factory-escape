@@ -230,7 +230,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=8]
 resource_name = "hazard_recover"
 length = 2.0
 step = 0.05
@@ -247,7 +247,7 @@ tracks/0/keys = {
 "values": [ 72, 73, 74, 75, 76, 77, 78, 79, 76, 77, 78, 79 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 1.4
 loop = true
 step = 0.2
@@ -264,7 +264,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
@@ -280,7 +280,7 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -308,7 +308,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.309804, 0.470588, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.309804, 0.470588, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -324,7 +324,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -338,13 +338,13 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=14]
+[sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 10, 4 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -370,19 +370,18 @@ anims/grapple_launch_long = SubResource( 4 )
 anims/grapple_launch_short = SubResource( 5 )
 anims/grapple_pull = SubResource( 6 )
 anims/hazard_hit = SubResource( 7 )
-anims/hazard_recover = SubResource( 16 )
-anims/idle = SubResource( 8 )
-anims/jump = SubResource( 9 )
-anims/stagger = SubResource( 10 )
-anims/walk = SubResource( 11 )
-anims/wall_slide = SubResource( 12 )
+anims/hazard_recover = SubResource( 8 )
+anims/idle = SubResource( 9 )
+anims/jump = SubResource( 10 )
+anims/stagger = SubResource( 11 )
+anims/walk = SubResource( 12 )
+anims/wall_slide = SubResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 4 )
 vframes = 10
 hframes = 8
-frame = 80
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 160 )
 __meta__ = {
@@ -392,7 +391,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -400,7 +399,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -433,7 +432,7 @@ region_enabled = true
 region_rect = Rect2( 64, 288, 128, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 disabled = true
 
 [node name="States" type="Node" parent="."]
