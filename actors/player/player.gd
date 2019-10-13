@@ -98,7 +98,7 @@ onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 onready var _health: Health = $Health
 onready var _hurtbox: Area2D = $Hurtbox
 
-onready var _invincibility_flash_manager: Node = $InvincibilityFlashManager
+onready var _invincibility_flash_manager: Node = $FlashManager
 
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
@@ -139,9 +139,8 @@ func _ready() -> void:
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
 
-    _invincibility_flash_manager.setup(_sprite)
     _invincibility_flash_manager.connect(
-        'flashing_ended', self, '_on_invincibility_flashing_ended')
+        'flashing_finished', self, '_on_invincibility_flashing_finished')
 
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
@@ -396,5 +395,5 @@ func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
     var distance_to_b := b.global_position.distance_to(self.global_position)
     return distance_to_a < distance_to_b
 
-func _on_invincibility_flashing_ended() -> void:
+func _on_invincibility_flashing_finished() -> void:
     get_health().set_status(Health.Status.NONE)
