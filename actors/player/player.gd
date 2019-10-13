@@ -97,7 +97,6 @@ onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
 onready var _health: Health = $Health
 onready var _hurtbox: Area2D = $Hurtbox
-onready var _hitbox: Area2D = $AttackHitbox
 
 onready var _invincibility_flash_manager: Node = $InvincibilityFlashManager
 
@@ -218,11 +217,9 @@ func start_attack() -> void:
 func is_attacking() -> bool:
     return get_animation_player().current_animation == 'attack'
 
-# Flush animation queue and make attack sprite invisible so that we can cancel
-# attack animations cleanly.
+# Flush animation queue so that we can cancel attack animations cleanly.
 func stop_attack() -> void:
     get_animation_player().clear_queue()
-    _hitbox.get_node('Sprite').set_visible(false)
 
 func get_health() -> Health:
     return _health
@@ -248,9 +245,6 @@ func get_direction() -> int:
 func set_direction(direction: int) -> void:
     # Flip player sprite.
     _sprite.flip_h = (direction == -1)
-
-    # Flip attack sprite.
-    _hitbox.get_node('Sprite').flip_h = (direction == -1)
 
     # Flip wall detector raycasts.
     if direction in [-1, 1]:
