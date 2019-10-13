@@ -383,7 +383,7 @@ texture = ExtResource( 4 )
 vframes = 10
 hframes = 8
 region_enabled = true
-region_rect = Rect2( 0, 0, 128, 160 )
+region_rect = Rect2( 0, 0, 640, 800 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
