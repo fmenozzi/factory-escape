@@ -215,6 +215,9 @@ func get_wall_normal_back() -> Vector2:
 func start_attack() -> void:
     get_animation_player().play('attack')
 
+func is_attacking() -> bool:
+    return get_animation_player().current_animation == 'attack'
+
 # Flush animation queue and make attack sprite invisible so that we can cancel
 # attack animations cleanly.
 func stop_attack() -> void:
