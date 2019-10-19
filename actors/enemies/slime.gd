@@ -40,6 +40,11 @@ func _physics_process(delta: float) -> void:
             _move(Vector2(_direction_from_hit * SPEED * 30, 1))
             _current_state = State.WALK
 
+func take_hit(damage: int) -> void:
+    _health.take_damage(damage)
+    _flash_manager.start_flashing()
+    _current_state = State.STAGGER
+
 func _move(velocity: Vector2) -> void:
     move_and_slide(velocity, Util.FLOOR_NORMAL)
 
@@ -70,10 +75,8 @@ func _on_hit_taken(hitbox: Area2D) -> void:
     # TODO: Do we need to use the RID method to ensure no hits get
     #       double-counted? Is there a way to automatically detect whether this
     #       has happened in the meantime?
-    _health.take_damage(1)
-    _flash_manager.start_flashing()
     _direction_from_hit = Util.direction(hitbox, self)
-    _current_state = State.STAGGER
+    take_hit(1)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('SLIME HIT (new health: ', new_health, ')')
