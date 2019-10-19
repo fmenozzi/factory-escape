@@ -4,8 +4,11 @@ export(Util.Direction) var direction := Util.Direction.RIGHT
 
 const SPEED := 0.25 * Util.TILE_SIZE
 
+onready var _flash_manager: Node = $FlashManager
+
 onready var _health: Health = $Health
 onready var _hurtbox: Area2D = $Hurtbox
+
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
@@ -52,6 +55,7 @@ func _on_hit_taken(hitbox: Area2D) -> void:
     #       double-counted? Is there a way to automatically detect whether this
     #       has happened in the meantime?
     _health.take_damage(1)
+    _flash_manager.start_flashing()
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('SLIME HIT (new health: ', new_health, ')')
