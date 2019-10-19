@@ -80,6 +80,13 @@ const DASH_COOLDOWN: float = 0.30
 # The original positions of all "y-axis mirrored" nodes.
 var _mirror_y_axis_node_original_positions: Dictionary = {}
 
+# An array of body RIDs that the player hits during an attack. This is used to
+# prevent enemies taking more than one hit per attack, which is possible if e.g.
+# an enemy is staggers out of the player's hitbox and then moves back into it
+# before the hitbox is disabled. This array is cleared at the start of each
+# attack animation.
+var _enemies_hit := []
+
 onready var _sprite: Sprite = $Sprite
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -96,6 +103,7 @@ onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
 onready var _health: Health = $Health
+onready var _hitbox: Area2D = $AttackHitbox
 onready var _hurtbox: Area2D = $Hurtbox
 
 onready var _invincibility_flash_manager: Node = $FlashManager
@@ -141,6 +149,8 @@ func _ready() -> void:
 
     _invincibility_flash_manager.connect(
         'flashing_finished', self, '_on_invincibility_flashing_finished')
+
+    _hitbox.connect('area_entered', self, '_on_attack_connected')
 
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
@@ -211,6 +221,7 @@ func get_wall_normal_back() -> Vector2:
     return _wall_proximity_detector.get_wall_normal_back()
 
 func start_attack() -> void:
+    _enemies_hit.clear()
     get_animation_player().play('attack')
 
 func is_attacking() -> bool:
@@ -397,3 +408,12 @@ func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
 
 func _on_invincibility_flashing_finished() -> void:
     get_health().set_status(Health.Status.NONE)
+
+func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
+    var enemy_hurtbox_rid := enemy_hurtbox.get_rid().get_id()
+    if enemy_hurtbox_rid in _enemies_hit:
+        return
+    _enemies_hit.append(enemy_hurtbox_rid)
+
+    # TODO: This is kind of hacky, find a way around this.
+    enemy_hurtbox.get_parent().take_hit(1, self)

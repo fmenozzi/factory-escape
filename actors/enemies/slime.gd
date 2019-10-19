@@ -24,8 +24,6 @@ func _ready() -> void:
     $AnimationPlayer.play('walk')
     _set_direction(direction)
 
-    _hurtbox.connect('area_entered', self, '_on_hit_taken')
-
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
@@ -40,10 +38,11 @@ func _physics_process(delta: float) -> void:
             _move(Vector2(_direction_from_hit * SPEED * 30, 1))
             _current_state = State.WALK
 
-func take_hit(damage: int) -> void:
+func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
     _current_state = State.STAGGER
+    _direction_from_hit = Util.direction(player, self)
 
 func _move(velocity: Vector2) -> void:
     move_and_slide(velocity, Util.FLOOR_NORMAL)
@@ -67,16 +66,6 @@ func _is_near_ledge() -> bool:
     var near_right := not _edge_raycast_right.is_colliding()
 
     return (near_left and not near_right) or (near_right and not near_left)
-
-func _on_hit_taken(hitbox: Area2D) -> void:
-    if Util.in_collision_layer(hitbox, ['hazards']):
-        return
-
-    # TODO: Do we need to use the RID method to ensure no hits get
-    #       double-counted? Is there a way to automatically detect whether this
-    #       has happened in the meantime?
-    _direction_from_hit = Util.direction(hitbox, self)
-    take_hit(1)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('SLIME HIT (new health: ', new_health, ')')
