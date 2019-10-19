@@ -4,6 +4,14 @@ export(Util.Direction) var direction := Util.Direction.RIGHT
 
 const SPEED := 0.25 * Util.TILE_SIZE
 
+enum State {
+    WALK,
+    STAGGER,
+}
+var _current_state: int = State.WALK
+
+var _direction_from_hit: int = Util.Direction.NONE
+
 onready var _flash_manager: Node = $FlashManager
 
 onready var _health: Health = $Health
@@ -22,10 +30,18 @@ func _ready() -> void:
     _health.connect('died', self, '_on_died')
 
 func _physics_process(delta: float) -> void:
-    if is_on_wall() or _is_touching_hazard() or _is_near_ledge():
-        _set_direction(-1 * direction)
+    match _current_state:
+        State.WALK:
+            if is_on_wall() or _is_touching_hazard() or _is_near_ledge():
+                _set_direction(-1 * direction)
+            _move(Vector2(direction * SPEED, 1))
 
-    move_and_slide(Vector2(direction * SPEED, 1), Util.FLOOR_NORMAL)
+        State.STAGGER:
+            _move(Vector2(_direction_from_hit * SPEED * 30, 1))
+            _current_state = State.WALK
+
+func _move(velocity: Vector2) -> void:
+    move_and_slide(velocity, Util.FLOOR_NORMAL)
 
 func _set_direction(new_direction: int) -> void:
     direction = new_direction
@@ -56,6 +72,8 @@ func _on_hit_taken(hitbox: Area2D) -> void:
     #       has happened in the meantime?
     _health.take_damage(1)
     _flash_manager.start_flashing()
+    _direction_from_hit = Util.direction(hitbox, self)
+    _current_state = State.STAGGER
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('SLIME HIT (new health: ', new_health, ')')
