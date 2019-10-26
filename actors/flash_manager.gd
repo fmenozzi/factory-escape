@@ -6,6 +6,7 @@ signal flashing_finished
 export(NodePath) var sprite_path = ""
 export(float) var total_duration := 2.0
 export(float) var single_flash_duration := 0.075
+export(Color) var flash_color := Color.white
 
 onready var _timer: Timer = $Timer
 onready var _tween: Tween = $Tween
@@ -28,7 +29,11 @@ func _ready() -> void:
     # Setup flash tween.
     var prop := 'modulate'
     var old := Color(1, 1, 1, 1)
-    var new := Color(10, 10, 10, 1)
+    var new := Color(
+        10 * flash_color.r,
+        10 * flash_color.g,
+        10 * flash_color.b,
+        flash_color.a)
     var trans := Tween.TRANS_LINEAR
     var easing := Tween.EASE_IN
     var delay := single_flash_duration
