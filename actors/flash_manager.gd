@@ -26,14 +26,14 @@ func _ready() -> void:
     assert sprite_path != ""
     var sprite: Sprite = get_node(sprite_path)
 
+    # Need to modulate past 1 in order to flash white.
+    if flash_color == Color.white:
+        flash_color = Color(10, 10, 10, 1)
+
     # Setup flash tween.
     var prop := 'modulate'
     var old := Color(1, 1, 1, 1)
-    var new := Color(
-        10 * flash_color.r,
-        10 * flash_color.g,
-        10 * flash_color.b,
-        flash_color.a)
+    var new := flash_color
     var trans := Tween.TRANS_LINEAR
     var easing := Tween.EASE_IN
     var delay := single_flash_duration
