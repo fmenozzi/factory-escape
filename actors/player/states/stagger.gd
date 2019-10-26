@@ -9,8 +9,6 @@ const STAGGER_DURATION: float = 0.25
 # The speed, in pixels per second, at which the player is knocked back.
 const STAGGER_SPEED: float = 10.0 * Util.TILE_SIZE
 
-var TERMINAL_VELOCITY: float = 20 * Util.TILE_SIZE
-
 var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
@@ -34,6 +32,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    var physics_manager := player.get_physics_manager()
+
     # Once the stagger finishes, we either fall if we're currently airborne or
     # idle otherwise.
     if $StaggerDuration.is_stopped():
@@ -43,7 +43,9 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': Player.State.IDLE}
 
     # Apply gravity with terminal velocity. Don't snap while staggering.
-    velocity.y = min(velocity.y + player.GRAVITY * delta, TERMINAL_VELOCITY)
+    velocity.y = min(
+        velocity.y + physics_manager.get_gravity() * delta,
+        physics_manager.get_terminal_velocity())
     player.move(velocity, Util.NO_SNAP)
 
     return {'new_state': Player.State.NO_CHANGE}

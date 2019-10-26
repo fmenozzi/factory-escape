@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/pause.gd"
 }, {
+"base": "Node",
+"class": "PhysicsManager",
+"language": "GDScript",
+"path": "res://actors/player/physics_manager.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "GrapplePoint": "",
 "Health": "",
 "Pause": "",
+"PhysicsManager": "",
 "Player": "",
 "Room": ""
 }

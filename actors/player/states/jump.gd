@@ -5,7 +5,7 @@ const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Set initial jump velocity to max jump velocity (releasing the jump button
     # will cause the velocity to "cut", allowing for variable-height jumps).
-    player.velocity.y = player.MAX_JUMP_VELOCITY
+    player.velocity.y = player.get_physics_manager().get_max_jump_velocity()
 
     # Let attack animation play out before switching to jump animation.
     if player.is_attacking():
@@ -28,9 +28,12 @@ func exit(player: Player) -> void:
         player.stop_attack()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    var physics_manager := player.get_physics_manager()
+
     if event.is_action_released('player_jump'):
         # "Jump cut" if the jump button is released.
-        player.velocity.y = max(player.velocity.y, player.MIN_JUMP_VELOCITY)
+        player.velocity.y = max(
+            player.velocity.y, physics_manager.get_min_jump_velocity())
     elif event.is_action_pressed('player_jump'):
         if player.is_near_wall_front() or player.is_near_wall_back():
             # Wall jump.
@@ -56,6 +59,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    var physics_manager := player.get_physics_manager()
+
     # Switch to 'fall' state once we reach apex of jump.
     if player.velocity.y >= 0:
         return {'new_state': Player.State.FALL}
@@ -64,10 +69,10 @@ func update(player: Player, delta: float) -> Dictionary:
     var input_direction = Util.get_input_direction()
     if input_direction != Util.Direction.NONE:
         player.set_direction(input_direction)
-    player.velocity.x = input_direction * player.MOVEMENT_SPEED
+    player.velocity.x = input_direction * physics_manager.get_movement_speed()
 
     # Move due to gravity.
-    player.velocity.y += player.GRAVITY * delta
+    player.velocity.y += physics_manager.get_gravity() * delta
 
     # Don't snap while jumping.
     player.move(player.velocity, Util.NO_SNAP)

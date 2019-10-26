@@ -2,8 +2,6 @@ extends "res://scripts/state.gd"
 
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')
 
-var TERMINAL_VELOCITY: float = 20 * Util.TILE_SIZE
-
 var velocity: Vector2 = Vector2.ZERO
 
 var grapple_point: GrapplePoint = null
@@ -32,7 +30,7 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     # the arc.
     var H := abs(disp.y) + h
 
-    var g := player.GRAVITY
+    var g := player.get_physics_manager().get_gravity()
 
     var player_below_dest := disp.y < 0
 
@@ -69,8 +67,12 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    var physics_manager := player.get_physics_manager()
+
     # Apply gravity with terminal velocity. Don't snap while grappling.
-    velocity.y = min(velocity.y + player.GRAVITY * delta, TERMINAL_VELOCITY)
+    velocity.y = min(
+        velocity.y + physics_manager.get_gravity() * delta,
+        physics_manager.get_terminal_velocity())
     player.move(velocity, Util.NO_SNAP)
 
     if player.is_on_ground():

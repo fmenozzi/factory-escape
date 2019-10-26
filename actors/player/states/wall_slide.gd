@@ -53,6 +53,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    var physics_manager := player.get_physics_manager()
+
     # Once we hit the ground, return to idle state.
     if player.is_on_ground():
         return {'new_state': Player.State.IDLE}
@@ -66,11 +68,12 @@ func update(player: Player, delta: float) -> Dictionary:
         player.move(Vector2(-10 * player.get_direction(), 0))
         return {'new_state': Player.State.FALL}
 
-    # Slide down with constant speed after a slight acceleration. Also move the 
+    # Slide down with constant speed after a slight acceleration. Also move the
     # character slightly into the wall to maintain collision with the wall so
     # that is_on_wall() continues to return true.
     player.velocity.x = 10 * player.get_direction()
-    player.velocity.y = min(player.velocity.y + 5, player.MOVEMENT_SPEED)
+    player.velocity.y = min(
+        player.velocity.y + 5, physics_manager.get_movement_speed())
     player.move(player.velocity)
 
     return {'new_state': Player.State.NO_CHANGE}

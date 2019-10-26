@@ -48,32 +48,6 @@ var current_state_enum: int = -1
 # update() call, measured in pixels per second.
 var velocity: Vector2 = Vector2.ZERO
 
-# The speed at which the player can move the character left and right, measured
-# in pixels per second.
-var MOVEMENT_SPEED: float = 6 * Util.TILE_SIZE
-
-# The min/max jump heights the player can achieve in pixels. Releasing the jump
-# button early will "cut" the jump somewhere between these two values, allowing
-# for variable-height jumps.
-var MAX_JUMP_HEIGHT: float = 3.50 * Util.TILE_SIZE
-var MIN_JUMP_HEIGHT: float = 0.50 * Util.TILE_SIZE
-
-# The duration of the max-height jump in seconds from ground to peak.
-var JUMP_DURATION: float = 0.4
-
-# The downward speed applied to the player when falling, measured in pixels per
-# second. This is calculated using basic kinematics with MAX_JUMP_HEIGHT and
-# JUMP_DURATION. Note that "gravity" is a bit of a misnomer here, since we do
-# not actually accelerate while falling, and rather fall at a constant speed.
-var GRAVITY: float = 2 * MAX_JUMP_HEIGHT / pow(JUMP_DURATION, 2)
-
-# The minimum and maximum y-axis velocities achievable by the player when
-# jumping. The default jump velocity is MAX_JUMP_VELOCITY, but if the player
-# releases the jump button during a jump, the velocity will "cut" and be reduced
-# to MIN_JUMP_VELOCITY. This allows for variable-height jumps.
-var MIN_JUMP_VELOCITY: float = -sqrt(2 * GRAVITY * MIN_JUMP_HEIGHT)
-var MAX_JUMP_VELOCITY: float = -sqrt(2 * GRAVITY * MAX_JUMP_HEIGHT)
-
 # The amount of time to wait after completing a dash before dashing again.
 const DASH_COOLDOWN: float = 0.30
 
@@ -107,6 +81,8 @@ onready var _hitbox: Area2D = $AttackHitbox
 onready var _hurtbox: Area2D = $Hurtbox
 
 onready var _invincibility_flash_manager: Node = $FlashManager
+
+onready var _physics_manager: PhysicsManager = $PhysicsManager
 
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
@@ -186,6 +162,9 @@ func change_state(new_state_dict: Dictionary) -> void:
 
 func current_state() -> int:
     return current_state_enum
+
+func get_physics_manager() -> PhysicsManager:
+    return _physics_manager
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     self.velocity = .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)

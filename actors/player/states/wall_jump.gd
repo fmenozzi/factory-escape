@@ -24,7 +24,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     # Set initial jump velocity to max jump velocity (releasing the jump button
     # will cause the velocity to "cut", allowing for variable-height jumps).
-    player.velocity.y = player.MAX_JUMP_VELOCITY
+    player.velocity.y = player.get_physics_manager().get_max_jump_velocity()
 
     # Flip the player to face away from the wall if necessary.
     if player.is_near_wall_front():
@@ -72,6 +72,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    var physics_manager := player.get_physics_manager()
+
     # Switch to 'fall' state once we reach apex of jump.
     if player.velocity.y >= 0:
         return {'new_state': Player.State.FALL}
@@ -89,10 +91,10 @@ func update(player: Player, delta: float) -> Dictionary:
         if input_direction != Util.Direction.NONE:
             player.set_direction(input_direction)
             direction = input_direction
-    player.velocity.x = direction * player.MOVEMENT_SPEED
+    player.velocity.x = direction * physics_manager.get_movement_speed()
 
     # Move due to gravity.
-    player.velocity.y += player.GRAVITY * delta
+    player.velocity.y += physics_manager.get_gravity() * delta
 
     player.move(player.velocity)
 
@@ -101,5 +103,6 @@ func update(player: Player, delta: float) -> Dictionary:
 # "Jump cut" if the jump button is released. This will also stop the
 # fixed velocity timer and therefore return control to the player.
 func _jump_cut(player: Player) -> void:
-    player.velocity.y = max(player.velocity.y, player.MIN_JUMP_VELOCITY)
+    player.velocity.y = max(
+        player.velocity.y, player.get_physics_manager().get_min_jump_velocity())
     _fixed_velocity_timer.stop()
