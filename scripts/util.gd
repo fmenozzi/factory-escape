@@ -29,12 +29,11 @@ const _LAYER_NAMES := {
     'enemy': 1,
     'environment': 2,
     'grapple_range_area': 3,
-    'platforms': 4,
-    'player_hitbox': 5,
-    'player_hurtbox': 6,
-    'enemy_hitbox': 7,
-    'enemy_hurtbox': 8,
-    'hazards': 9,
+    'player_hitbox': 4,
+    'player_hurtbox': 5,
+    'enemy_hitbox': 6,
+    'enemy_hurtbox': 7,
+    'hazards': 8,
 }
 
 func _ready() -> void:
