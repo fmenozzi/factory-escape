@@ -1,7 +1,7 @@
 extends KinematicBody2D
 class_name Player
 
-signal player_state_changed
+signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved
@@ -182,7 +182,7 @@ func change_state(new_state_dict: Dictionary) -> void:
     current_state = STATES[new_state_enum]
     current_state.enter(self, new_state_dict)
 
-    emit_signal('player_state_changed', current_state.get_name())
+    emit_signal('player_state_changed', previous_state_enum, current_state_enum)
 
 func current_state() -> int:
     return current_state_enum
