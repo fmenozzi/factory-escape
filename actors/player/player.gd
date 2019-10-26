@@ -168,21 +168,21 @@ func _physics_process(delta: float) -> void:
 
 # Change from one state in the state machine to another.
 func change_state(new_state_dict: Dictionary) -> void:
+    var old_state_enum := current_state_enum
     var new_state_enum: int = new_state_dict['new_state']
-    var previous_state_enum := current_state_enum
 
     # Before passing along the new_state_dict to the new state (since we want
     # any additional metadata keys passed too), rename the 'new_state' key to
     # 'previous_state'.
     new_state_dict.erase('new_state')
-    new_state_dict['previous_state'] = previous_state_enum
+    new_state_dict['previous_state'] = old_state_enum
 
     current_state.exit(self)
     current_state_enum = new_state_enum
     current_state = STATES[new_state_enum]
     current_state.enter(self, new_state_dict)
 
-    emit_signal('player_state_changed', previous_state_enum, current_state_enum)
+    emit_signal('player_state_changed', old_state_enum, new_state_enum)
 
 func current_state() -> int:
     return current_state_enum
