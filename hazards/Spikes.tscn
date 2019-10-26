@@ -9,8 +9,8 @@ extents = Vector2( 8, 1 )
 extents = Vector2( 8, 2 )
 
 [node name="Spikes" type="Area2D"]
-collision_layer = 256
-collision_mask = 32
+collision_layer = 512
+collision_mask = 64
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -21,7 +21,8 @@ position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
 [node name="SolidGround" type="StaticBody2D" parent="."]
-collision_layer = 2
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SolidGround"]
 position = Vector2( 0, 2 )

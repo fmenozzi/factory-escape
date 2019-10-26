@@ -42,7 +42,7 @@ anims/shimmer = SubResource( 1 )
 position = Vector2( 0, -8 )
 
 [node name="GrappleRangeArea" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleRangeArea"]
 
