@@ -149,6 +149,7 @@ player_grapple={
 2d_physics/layer_7="enemy_hitbox"
 2d_physics/layer_8="enemy_hurtbox"
 2d_physics/layer_9="hazards"
+2d_physics/layer_10="enemy_barrier"
 
 [rendering]
 
