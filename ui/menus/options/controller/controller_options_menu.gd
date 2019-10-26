@@ -162,7 +162,7 @@ func _on_dash_pressed() -> void:
 func _on_grapple_pressed() -> void:
     setup_remap(PlayerAction.GRAPPLE)
 
-func _on_interact_pressed(pause: Pause) -> void:
+func _on_interact_pressed() -> void:
     setup_remap(PlayerAction.INTERACT)
 
 func _on_back_pressed(pause: Pause) -> void:
