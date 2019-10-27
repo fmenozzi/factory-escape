@@ -1,4 +1,4 @@
-extends 'res://scripts/state.gd'
+extends 'res://actors/player/states/state.gd'
 
 # Particle effect that emits once the player lands.
 const LandingPuff := preload('res://sfx/LandingPuff.tscn')

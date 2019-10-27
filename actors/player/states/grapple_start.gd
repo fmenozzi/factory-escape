@@ -1,4 +1,4 @@
-extends "res://scripts/state.gd"
+extends 'res://actors/player/states/state.gd'
 
 # Reference to the player. Needed for draw_grapple_rope() and
 # clear_grapple_rope(), which are called from the animation player.

@@ -1,4 +1,4 @@
-extends "res://scripts/state.gd"
+extends 'res://actors/player/states/state.gd'
 
 # The duration of the stagger state. Note that this does not necessarily align
 # with the number of invincibility frames that the player will have after being

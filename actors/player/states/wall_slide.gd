@@ -1,4 +1,4 @@
-extends "res://scripts/state.gd"
+extends 'res://actors/player/states/state.gd'
 
 const TakeoffPuff := preload('res://sfx/LandingPuff.tscn')
 
