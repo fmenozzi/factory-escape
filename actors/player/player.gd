@@ -71,6 +71,8 @@ onready var _camera_anchor: Position2D = $CameraAnchor
 
 onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 
+onready var _platform_crush_detector: Area2D = $PlatformCrushDetector
+
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 
 onready var _grapple_rope: Line2D = $GrappleRope
@@ -300,8 +302,22 @@ func consume_jump() -> void:
 func reset_jump() -> void:
     _jumps_remaining = 2
 
+func _is_being_crushed() -> bool:
+    var bodies_on_head := _platform_crush_detector.get_overlapping_bodies()
+    return not bodies_on_head.empty() and is_on_ground()
+
 func _check_for_hits() -> void:
     var player_health := get_health()
+
+    # Treat being crushed by e.g. moving platform as a hazard hit.
+    if _is_being_crushed():
+        var damage_taken := player_health.take_damage(1)
+        if damage_taken:
+            player_health.set_status(Health.Status.INVINCIBLE)
+            _invincibility_flash_manager.start_flashing()
+            change_state({'new_state': State.HAZARD_HIT})
+            emit_signal('player_hit_hazard')
+
     for hitbox in _hurtbox.get_overlapping_areas():
         if Util.in_collision_layer(hitbox, ['hazards', 'enemy_hitbox']):
             # Take damage and stagger when hit.
