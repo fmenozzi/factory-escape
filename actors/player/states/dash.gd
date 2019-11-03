@@ -16,22 +16,25 @@ var DASH_ECHO_DELAY: float = 0.05
 const DashEcho = preload('res://actors/player/DashEcho.tscn')
 const DashPuff = preload('res://sfx/DashPuff.tscn')
 
+onready var _dash_duration_timer: Timer = $DashDurationTimer
+onready var _dash_echo_timer: Timer = $DashEchoTimer
+
 func _ready() -> void:
     # Set up dash duration timer.
-    $DashDuration.wait_time = DASH_DURATION
-    $DashDuration.one_shot = true
+    _dash_duration_timer.wait_time = DASH_DURATION
+    _dash_duration_timer.one_shot = true
 
     # Set up dash echo timer.
-    $DashEcho.wait_time = DASH_ECHO_DELAY
+    _dash_echo_timer.wait_time = DASH_ECHO_DELAY
 
     # Calculate dash speed from the specified dash distance and duration.
     DASH_SPEED = DASH_DISTANCE / DASH_DURATION
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset dash duration, dash cooldown, and dash echo timers.
-    $DashDuration.start()
-    $DashEcho.connect('timeout', self, '_on_dash_echo_timeout', [player])
-    $DashEcho.start()
+    _dash_duration_timer.start()
+    _dash_echo_timer.connect('timeout', self, '_on_dash_echo_timeout', [player])
+    _dash_echo_timer.start()
     player.get_dash_cooldown_timer().stop()
 
     # Instance a new dash puff on every dash.
@@ -67,8 +70,8 @@ func exit(player: Player) -> void:
     player.get_dash_cooldown_timer().start()
 
     # Stop the dash echo timer.
-    $DashEcho.disconnect('timeout', self, '_on_dash_echo_timeout')
-    $DashEcho.stop()
+    _dash_echo_timer.disconnect('timeout', self, '_on_dash_echo_timeout')
+    _dash_echo_timer.stop()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
@@ -76,7 +79,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     # Once the dash is complete, we either fall if we're currently airborne or
     # idle otherwise.
-    if $DashDuration.is_stopped():
+    if _dash_duration_timer.is_stopped():
         if player.is_in_air():
             return {'new_state': Player.State.FALL}
         else:

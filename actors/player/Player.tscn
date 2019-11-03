@@ -415,9 +415,9 @@ script = ExtResource( 11 )
 [node name="Dash" type="Node" parent="States"]
 script = ExtResource( 12 )
 
-[node name="DashDuration" type="Timer" parent="States/Dash"]
+[node name="DashDurationTimer" type="Timer" parent="States/Dash"]
 
-[node name="DashEcho" type="Timer" parent="States/Dash"]
+[node name="DashEchoTimer" type="Timer" parent="States/Dash"]
 
 [node name="WallSlide" type="Node" parent="States"]
 script = ExtResource( 13 )

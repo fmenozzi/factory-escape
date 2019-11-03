@@ -86,6 +86,9 @@ onready var _invincibility_flash_manager: Node = $FlashManager
 
 onready var _physics_manager: PhysicsManager = $PhysicsManager
 
+onready var _dash_duration_timer: Timer = $States/Dash/DashDurationTimer
+onready var _dash_echo_timer: Timer = $States/Dash/DashEchoTimer
+
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
 # there are no valid grapple points for the player on a given frame, this is set
@@ -269,8 +272,8 @@ func pause() -> void:
 
     _dash_cooldown_timer.paused = true
 
-    $States/Dash/DashDuration.paused = true
-    $States/Dash/DashEcho.paused = true
+    _dash_duration_timer.paused = true
+    _dash_echo_timer.paused = true
     $States/Stagger/StaggerDuration.paused = true
 func unpause() -> void:
     set_physics_process(true)
@@ -282,8 +285,8 @@ func unpause() -> void:
 
     _dash_cooldown_timer.paused = false
 
-    $States/Dash/DashDuration.paused = false
-    $States/Dash/DashEcho.paused = false
+    _dash_duration_timer.paused = false
+    _dash_echo_timer.paused = false
     $States/Stagger/StaggerDuration.paused = false
 
 # Functions providing a more readable and convenient interface for managing
