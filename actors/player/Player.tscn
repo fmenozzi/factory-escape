@@ -438,7 +438,7 @@ script = ExtResource( 16 )
 [node name="Stagger" type="Node" parent="States"]
 script = ExtResource( 17 )
 
-[node name="StaggerDuration" type="Timer" parent="States/Stagger"]
+[node name="StaggerDurationTimer" type="Timer" parent="States/Stagger"]
 
 [node name="HazardHit" type="Node" parent="States"]
 script = ExtResource( 18 )
