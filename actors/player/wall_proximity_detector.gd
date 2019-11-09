@@ -18,7 +18,7 @@ func _ready() -> void:
     _bot_back.set_cast_to(Vector2(-CAST_DISTANCE, 0))
 
 func set_direction(new_direction: int) -> void:
-    assert new_direction in [-1, 1]
+    assert(new_direction in [-1, 1])
 
     _direction = new_direction
 

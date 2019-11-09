@@ -45,8 +45,8 @@ func _ready() -> void:
     for layer_name in _LAYER_NAMES:
         var layer_path := str('layer_names/2d_physics/layer_', i)
 
-        assert _LAYER_NAMES[layer_name] == i-1
-        assert ProjectSettings.get_setting(layer_path) == layer_name
+        assert(_LAYER_NAMES[layer_name] == i-1)
+        assert(ProjectSettings.get_setting(layer_path) == layer_name)
 
         i += 1
 
@@ -67,7 +67,7 @@ func get_ingame_resolution() -> Vector2:
 # Start the one-shot particle effect and then wait for it to finish before
 # freeing it.
 func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
-    assert particles.one_shot
+    assert(particles.one_shot)
 
     parent.add_child(particles)
 
@@ -86,9 +86,9 @@ func direction(from: Node2D, to: Node2D) -> int:
 # KinematicBody2D and Area2D, despite both of those classes inheriting from
 # CollisionObject2D.
 func in_collision_layer(collision_object, layer_names: Array) -> bool:
-    assert collision_object.has_method('get_collision_layer_bit')
+    assert(collision_object.has_method('get_collision_layer_bit'))
     for layer_name in layer_names:
-        assert layer_name in _LAYER_NAMES
+        assert(layer_name in _LAYER_NAMES)
         if collision_object.get_collision_layer_bit(_LAYER_NAMES[layer_name]):
             return true
     return false

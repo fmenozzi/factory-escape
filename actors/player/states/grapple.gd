@@ -44,7 +44,7 @@ func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     grapple_point = previous_state_dict['grapple_point']
-    assert grapple_point != null
+    assert(grapple_point != null)
 
     velocity = grapple_velocity(player, grapple_point)
 

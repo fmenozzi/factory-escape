@@ -8,7 +8,7 @@ onready var _health_nodes: VBoxContainer = $HealthNodes
 var _current_health: int = 5
 
 func set_health(new_health: int) -> void:
-    assert new_health <= _health_nodes.get_child_count()
+    assert(new_health <= _health_nodes.get_child_count())
 
     for health_node in _health_nodes.get_children():
         health_node.texture = EMPTY_HEALTH_TEXTURE

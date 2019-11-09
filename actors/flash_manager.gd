@@ -23,7 +23,7 @@ func _ready() -> void:
     _timer.connect('timeout', self, '_on_flashing_timeout')
 
     # Get the sprite to flash.
-    assert sprite_path != ""
+    assert(sprite_path != "")
     var sprite: Sprite = get_node(sprite_path)
 
     # Need to modulate past 1 in order to flash white.

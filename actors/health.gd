@@ -43,5 +43,5 @@ func heal(heal_amount: int) -> void:
     emit_signal('health_changed', old_health, new_health)
 
 func set_status(new_status: int) -> void:
-    assert new_status in [Status.NONE, Status.INVINCIBLE]
+    assert(new_status in [Status.NONE, Status.INVINCIBLE])
     _current_status = new_status

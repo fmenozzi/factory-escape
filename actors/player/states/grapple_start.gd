@@ -10,7 +10,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _player = player
 
     _grapple_point = previous_state_dict['grapple_point']
-    assert _grapple_point != null
+    assert(_grapple_point != null)
 
     # This grapple point is no longer available for the duration of the grapple.
     _grapple_point.set_available(false)
