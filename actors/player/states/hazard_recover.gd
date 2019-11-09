@@ -40,4 +40,13 @@ func update(player: Player, delta: float) -> Dictionary:
     if Util.get_input_direction() != Util.Direction.NONE:
         return {'new_state': Player.State.WALK}
 
+    # Apply slight downward movement. This is important mostly for ensuring that
+    # move_and_slide() is called on every frame, which updates collisions. This
+    # is important for platform crush detection, where we use is_on_ceiling() as
+    # part of the check to see if we're being crushed by platforms. Without the
+    # additional calls to move_and_slide(), is_on_ceiling() would continue to be
+    # true even after we've teleported to the hazard checkpoint and entered the
+    # HAZARD_RECOVER state.
+    player.move(Vector2(0, 10))
+
     return {'new_state': Player.State.NO_CHANGE}
