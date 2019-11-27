@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/enemies/slime/slime.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/slime.png" type="Texture" id=4]
+[ext_resource path="res://actors/enemies/slime/states/walk.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/slime/states/stagger.gd" type="Script" id=5]
+[ext_resource path="res://assets/slime.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -36,12 +38,19 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 3 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
-single_flash_duration = 0.075
 flash_color = Color( 10, 10, 10, 1 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="Walk" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="Stagger" type="Node" parent="States"]
+script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 hframes = 8
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 16 )
