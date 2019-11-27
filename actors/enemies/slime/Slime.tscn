@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://actors/enemies/slime.gd" type="Script" id=1]
+[ext_resource path="res://actors/enemies/slime/slime.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/slime.png" type="Texture" id=4]
@@ -37,6 +37,7 @@ MAX_HEALTH = 3
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
 single_flash_duration = 0.075
+flash_color = Color( 10, 10, 10, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
