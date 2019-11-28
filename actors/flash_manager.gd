@@ -24,6 +24,21 @@ func _ready() -> void:
     _timer.wait_time = total_duration
     _timer.connect('timeout', self, '_on_flashing_timeout')
 
+    _setup_tween()
+
+func start_flashing() -> void:
+    _timer.start()
+    _tween.resume_all()
+func stop_flashing() -> void:
+    _tween.reset_all()
+    _tween.stop_all()
+
+func pause_timer() -> void:
+    _timer.paused = true
+func resume_timer() -> void:
+    _timer.paused = false
+
+func _setup_tween() -> void:
     # Get the sprite to flash.
     assert(sprite_path != "")
     var sprite: Sprite = get_node(sprite_path)
@@ -46,18 +61,6 @@ func _ready() -> void:
         material, param, old, new, single_flash_duration, trans, easing)
     _tween.interpolate_property(
         material, param, new, old, single_flash_duration, trans, easing, delay)
-
-func start_flashing() -> void:
-    _timer.start()
-    _tween.resume_all()
-func stop_flashing() -> void:
-    _tween.reset_all()
-    _tween.stop_all()
-
-func pause_timer() -> void:
-    _timer.paused = true
-func resume_timer() -> void:
-    _timer.paused = false
 
 func _on_flashing_timeout() -> void:
     stop_flashing()
