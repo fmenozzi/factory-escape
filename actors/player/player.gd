@@ -4,6 +4,8 @@ class_name Player
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
 
+export(NodePath) var starting_room_path = ""
+
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
 # not itself constitute a valid player state.
@@ -110,6 +112,11 @@ var _can_dash: bool = true
 
 var _jumps_remaining: int = 2
 
+func _get_configuration_warning() -> String:
+    if starting_room_path == '':
+        return "Please specify the player's starting room."
+    return ''
+
 func _ready() -> void:
     # Create a dash cooldown timer.
     _dash_cooldown_timer.wait_time = DASH_COOLDOWN
@@ -121,7 +128,8 @@ func _ready() -> void:
     change_state({'new_state': State.FALL})
 
     # Initialize current room
-    curr_room = get_parent().get_node('Rooms/FactoryEntrance')
+    assert(starting_room_path != '')
+    curr_room = get_node(starting_room_path)
     prev_room = curr_room
     get_camera().fit_camera_limits_to_room(curr_room)
 

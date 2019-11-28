@@ -43,5 +43,6 @@ position = Vector2( -640, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
 position = Vector2( 56, 144 )
+starting_room_path = NodePath("../Rooms/FactoryEntrance")
 
 [editable path="Rooms/GrapplePlayground"]
