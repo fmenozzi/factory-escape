@@ -3,6 +3,8 @@ extends Node
 
 signal flashing_finished
 
+const flash_shader := preload('res://shaders/flash.shader')
+
 export(NodePath) var sprite_path = ""
 export(float) var total_duration := 2.0
 export(float) var single_flash_duration := 0.075
@@ -26,21 +28,24 @@ func _ready() -> void:
     assert(sprite_path != "")
     var sprite: Sprite = get_node(sprite_path)
 
-    # Need to modulate past 1 in order to flash white.
-    if flash_color == Color.white:
-        flash_color = Color(10, 10, 10, 1)
+    # Attach flash shader to sprite and set flash color shader param.
+    var shader_material := ShaderMaterial.new()
+    shader_material.set_shader(flash_shader)
+    shader_material.set_shader_param('flash_color', flash_color)
+    sprite.set_material(shader_material)
 
-    # Setup flash tween.
-    var prop := 'modulate'
-    var old := Color(1, 1, 1, 1)
-    var new := flash_color
+    # Setup flash tween to animate lerp amount in flash shader.
+    var material := sprite.get_material()
+    var param := 'shader_param/lerp_amount'
+    var old := 0.0
+    var new := 1.0
     var trans := Tween.TRANS_LINEAR
     var easing := Tween.EASE_IN
     var delay := single_flash_duration
     _tween.interpolate_property(
-        sprite, prop, old, new, single_flash_duration, trans, easing)
+        material, param, old, new, single_flash_duration, trans, easing)
     _tween.interpolate_property(
-        sprite, prop, new, old, single_flash_duration, trans, easing, delay)
+        material, param, new, old, single_flash_duration, trans, easing, delay)
 
 func start_flashing() -> void:
     _timer.start()
