@@ -38,6 +38,7 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 3 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
+single_flash_duration = 0.075
 flash_color = Color( 10, 10, 10, 1 )
 
 [node name="States" type="Node" parent="."]
@@ -47,6 +48,8 @@ script = ExtResource( 4 )
 
 [node name="Stagger" type="Node" parent="States"]
 script = ExtResource( 5 )
+
+[node name="StaggerDurationTimer" type="Timer" parent="States/Stagger"]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )

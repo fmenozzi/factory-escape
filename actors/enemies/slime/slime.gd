@@ -1,14 +1,23 @@
 extends KinematicBody2D
+class_name Slime
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
 const SPEED := 0.25 * Util.TILE_SIZE
 
 enum State {
+    NO_CHANGE,
     WALK,
     STAGGER,
 }
-var _current_state: int = State.WALK
+
+onready var STATES := {
+    State.WALK:    $States/Walk,
+    State.STAGGER: $States/Stagger,
+}
+
+var _current_state: Node = null
+var _current_state_enum: int = -1
 
 var _direction_from_hit: int = Util.Direction.NONE
 
@@ -21,37 +30,52 @@ onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
-    $AnimationPlayer.play('walk')
-    _set_direction(direction)
+    set_direction(direction)
+
+    _current_state_enum = State.WALK
+    _current_state = STATES[_current_state_enum]
+    _change_state({'new_state': _current_state_enum})
 
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
 func _physics_process(delta: float) -> void:
-    match _current_state:
-        State.WALK:
-            if is_on_wall() or _is_touching_hazard() or _is_near_ledge():
-                _set_direction(-1 * direction)
-            _move(Vector2(direction * SPEED, 1))
-
-        State.STAGGER:
-            _move(Vector2(_direction_from_hit * SPEED * 30, 1))
-            _current_state = State.WALK
+    var new_state_dict = _current_state.update(self, delta)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _current_state = State.STAGGER
     _direction_from_hit = Util.direction(player, self)
+    _change_state({
+        'new_state': State.STAGGER,
+        'direction_from_hit': _direction_from_hit,
+    })
 
-func _move(velocity: Vector2) -> void:
+func move(velocity: Vector2) -> void:
     move_and_slide(velocity, Util.FLOOR_NORMAL)
 
-func _set_direction(new_direction: int) -> void:
+func _change_state(new_state_dict: Dictionary) -> void:
+    var old_state_enum := _current_state_enum
+    var new_state_enum: int = new_state_dict['new_state']
+
+    # Before passing along the new_state_dict to the new state (since we want
+    # any additional metadata keys passed too), rename the 'new_state' key to
+    # 'previous_state'.
+    new_state_dict.erase('new_state')
+    new_state_dict['previous_state'] = old_state_enum
+
+    _current_state.exit(self)
+    _current_state_enum = new_state_enum
+    _current_state = STATES[new_state_enum]
+    _current_state.enter(self, new_state_dict)
+
+func set_direction(new_direction: int) -> void:
     direction = new_direction
     $Sprite.flip_h = (new_direction == Util.Direction.LEFT)
 
-func _is_touching_hazard() -> bool:
+func is_touching_hazard() -> bool:
     # Since there doesn't seem to be a way for a KinematicBody2D to query the
     # Area2Ds that overlap it, we just use the hurtbox Area2D to detect
     # collisions with hazards like spikes, taking advantage of the fact that the
@@ -61,7 +85,7 @@ func _is_touching_hazard() -> bool:
             return true
     return false
 
-func _is_near_ledge() -> bool:
+func is_near_ledge() -> bool:
     var near_left := not _edge_raycast_left.is_colliding()
     var near_right := not _edge_raycast_right.is_colliding()
 
