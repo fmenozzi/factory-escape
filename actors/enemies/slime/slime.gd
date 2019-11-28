@@ -62,8 +62,8 @@ func take_hit(damage: int, player: Player) -> void:
         'direction_from_hit': Util.direction(player, self),
     })
 
-func move(velocity: Vector2) -> void:
-    move_and_slide(velocity, Util.FLOOR_NORMAL)
+func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
+    .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
