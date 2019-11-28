@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformLarge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/slime/Slime.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -35,8 +36,14 @@ position = Vector2( 128, 64 )
 position = Vector2( 24, 144 )
 direction = -1
 
+[node name="Health" parent="Enemies/GroundLeft" index="0"]
+MAX_HEALTH = 999
+
 [node name="GroundRight" parent="Enemies" index="1" instance=ExtResource( 3 )]
 position = Vector2( 296, 144 )
+
+[node name="Health" parent="Enemies/GroundRight" index="0"]
+MAX_HEALTH = 999
 
 [node name="PlatformLeft" parent="Enemies" index="2" instance=ExtResource( 3 )]
 position = Vector2( 32, 32 )
@@ -80,6 +87,14 @@ rotation = -1.5708
 shape = SubResource( 3 )
 one_way_collision = true
 
+[node name="Player" parent="." index="9" instance=ExtResource( 4 )]
+position = Vector2( 112, 96 )
+starting_room_path = NodePath("..")
+
 [editable path="TileMaps"]
+
+[editable path="Enemies/GroundLeft"]
+
+[editable path="Enemies/GroundRight"]
 
 [editable path="Enemies/Center"]
