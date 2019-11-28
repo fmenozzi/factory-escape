@@ -7,8 +7,11 @@ func exit(slime: Slime) -> void:
     pass
 
 func update(slime: Slime, delta: float) -> Dictionary:
-    if slime.is_on_wall() or slime.is_touching_hazard() or slime.is_near_ledge():
+    slime.move(Vector2(slime.direction * slime.SPEED, 10))
+
+    if slime.is_on_wall() or slime.is_touching_hazard():
         slime.set_direction(-1 * slime.direction)
-    slime.move(Vector2(slime.direction * slime.SPEED, 1))
+    elif not slime.is_on_floor():
+        return {'new_state': Slime.State.FALL}
 
     return {'new_state': Slime.State.NO_CHANGE}

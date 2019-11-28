@@ -9,11 +9,13 @@ enum State {
     NO_CHANGE,
     WALK,
     STAGGER,
+    FALL,
 }
 
 onready var STATES := {
     State.WALK:    $States/Walk,
     State.STAGGER: $States/Stagger,
+    State.FALL:    $States/Fall,
 }
 
 var _current_state: Node = null
@@ -47,10 +49,9 @@ func _physics_process(delta: float) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _direction_from_hit = Util.direction(player, self)
     _change_state({
         'new_state': State.STAGGER,
-        'direction_from_hit': _direction_from_hit,
+        'direction_from_hit': Util.direction(player, self),
     })
 
 func move(velocity: Vector2) -> void:

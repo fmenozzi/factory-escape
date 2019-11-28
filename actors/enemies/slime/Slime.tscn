@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://actors/enemies/slime/slime.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/enemies/slime/states/walk.gd" type="Script" id=4]
 [ext_resource path="res://actors/enemies/slime/states/stagger.gd" type="Script" id=5]
-[ext_resource path="res://assets/slime.png" type="Texture" id=6]
+[ext_resource path="res://actors/enemies/slime/states/fall.gd" type="Script" id=6]
+[ext_resource path="res://assets/slime.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -51,9 +52,12 @@ script = ExtResource( 5 )
 
 [node name="StaggerDurationTimer" type="Timer" parent="States/Stagger"]
 
+[node name="Fall" type="Node" parent="States"]
+script = ExtResource( 6 )
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 hframes = 8
 region_enabled = true
 region_rect = Rect2( 0, 0, 128, 16 )
