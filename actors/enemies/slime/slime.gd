@@ -10,12 +10,14 @@ enum State {
     WALK,
     STAGGER,
     FALL,
+    RETURN_TO_LEDGE,
 }
 
 onready var STATES := {
-    State.WALK:    $States/Walk,
-    State.STAGGER: $States/Stagger,
-    State.FALL:    $States/Fall,
+    State.WALK:            $States/Walk,
+    State.STAGGER:         $States/Stagger,
+    State.FALL:            $States/Fall,
+    State.RETURN_TO_LEDGE: $States/ReturnToLedge,
 }
 
 var _current_state: Node = null
@@ -86,11 +88,11 @@ func is_touching_hazard() -> bool:
             return true
     return false
 
-func is_near_ledge() -> bool:
-    var near_left := not _edge_raycast_left.is_colliding()
-    var near_right := not _edge_raycast_right.is_colliding()
+func is_off_ledge() -> bool:
+    var off_left := not _edge_raycast_left.is_colliding()
+    var off_right := not _edge_raycast_right.is_colliding()
 
-    return (near_left and not near_right) or (near_right and not near_left)
+    return (off_left and not off_right) or (off_right and not off_left)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('SLIME HIT (new health: ', new_health, ')')
