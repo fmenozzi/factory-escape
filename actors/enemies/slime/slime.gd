@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Slime
 
+signal slime_died
+
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
 const SPEED := 0.25 * Util.TILE_SIZE
@@ -43,6 +45,10 @@ func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
+    _hurtbox.connect('area_entered', self, '_on_hazard_hit')
+
+    self.connect('slime_died', self, '_on_died')
+
 func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -58,21 +64,6 @@ func take_hit(damage: int, player: Player) -> void:
 
 func move(velocity: Vector2) -> void:
     move_and_slide(velocity, Util.FLOOR_NORMAL)
-
-func _change_state(new_state_dict: Dictionary) -> void:
-    var old_state_enum := _current_state_enum
-    var new_state_enum: int = new_state_dict['new_state']
-
-    # Before passing along the new_state_dict to the new state (since we want
-    # any additional metadata keys passed too), rename the 'new_state' key to
-    # 'previous_state'.
-    new_state_dict.erase('new_state')
-    new_state_dict['previous_state'] = old_state_enum
-
-    _current_state.exit(self)
-    _current_state_enum = new_state_enum
-    _current_state = STATES[new_state_enum]
-    _current_state.enter(self, new_state_dict)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
@@ -94,9 +85,31 @@ func is_off_ledge() -> bool:
 
     return (off_left and not off_right) or (off_right and not off_left)
 
+func _change_state(new_state_dict: Dictionary) -> void:
+    var old_state_enum := _current_state_enum
+    var new_state_enum: int = new_state_dict['new_state']
+
+    # Before passing along the new_state_dict to the new state (since we want
+    # any additional metadata keys passed too), rename the 'new_state' key to
+    # 'previous_state'.
+    new_state_dict.erase('new_state')
+    new_state_dict['previous_state'] = old_state_enum
+
+    _current_state.exit(self)
+    _current_state_enum = new_state_enum
+    _current_state = STATES[new_state_enum]
+    _current_state.enter(self, new_state_dict)
+
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('SLIME HIT (new health: ', new_health, ')')
 
+# Slimes insta-die when touching hazards.
+func _on_hazard_hit(area: Area2D) -> void:
+    if not area or not Util.in_collision_layer(area, ['hazards']):
+        return
+    emit_signal('slime_died')
+
+# TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
     print('SLIME DIED')
     queue_free()
