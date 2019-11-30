@@ -17,8 +17,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/type = "method"
+tracks/1/path = NodePath("CollisionShape2D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -26,8 +26,13 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
+"values": [ {
+"args": [ "disabled", false ],
+"method": "set_deferred"
+}, {
+"args": [ "disabled", true ],
+"method": "set_deferred"
+} ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
