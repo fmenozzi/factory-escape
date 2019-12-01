@@ -1,19 +1,20 @@
 extends StaticBody2D
 
+# The time in seconds that the platform spends in its collapsed state before
+# resetting itself.
 const COLLAPSED_DURATION: float = 2.0
+
+# The time in seconds that the platform will wait for, once the player lands on
+# it, until collapsing.
+const WARNING_DURATION: float = 1.0
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _trigger_area: Area2D = $TriggerArea
-onready var _reset_timer: Timer = $ResetTimer
 
 var _active: bool = true
 
 func _ready() -> void:
     _trigger_area.connect('body_entered', self, '_on_player_contact')
-
-    _reset_timer.wait_time = COLLAPSED_DURATION
-    _reset_timer.one_shot = true
-    _reset_timer.connect('timeout', self, '_on_reset_timeout')
 
 func _on_player_contact(player: Player) -> void:
     if not player:
@@ -24,15 +25,20 @@ func _on_player_contact(player: Player) -> void:
     # already collapsed.
     if not _active:
         return
+
     _active = false
 
-    # Once the collapse animation finishes, start the reset timer.
+    # Wait for the warning time to run out before collapsing the platform.
+    yield(get_tree().create_timer(WARNING_DURATION), 'timeout')
     _animation_player.play('collapse')
-    yield(_animation_player, 'animation_finished')
-    _reset_timer.start()
 
-func _on_reset_timeout() -> void:
-    # Reset the platform and reactivate platform.
+    # Once the animation finishes, wait for the collapse time to run out before
+    # resetting the platform.
+    yield(_animation_player, 'animation_finished')
+    yield(get_tree().create_timer(COLLAPSED_DURATION), 'timeout')
     _animation_player.play_backwards('collapse')
+
+    # Once that animation finishes, mark the platform as active so that the
+    # player can interact with it again.
     yield(_animation_player, 'animation_finished')
     _active = true
