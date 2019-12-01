@@ -5,16 +5,20 @@ extends StaticBody2D
 const COLLAPSED_DURATION: float = 2.0
 
 # The time in seconds that the platform will wait for, once the player lands on
-# it, until collapsing.
+# it, until collapsing. The platform will flash during this period as a visual
+# indicator for the player.
 const WARNING_DURATION: float = 1.0
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _trigger_area: Area2D = $TriggerArea
+onready var _flash_manager: Node = $FlashManager
 
 var _active: bool = true
 
 func _ready() -> void:
     _trigger_area.connect('body_entered', self, '_on_player_contact')
+
+    _flash_manager.set_total_duration(WARNING_DURATION)
 
 func _on_player_contact(player: Player) -> void:
     if not player:
@@ -28,8 +32,9 @@ func _on_player_contact(player: Player) -> void:
 
     _active = false
 
-    # Wait for the warning time to run out before collapsing the platform.
-    yield(get_tree().create_timer(WARNING_DURATION), 'timeout')
+    # Wait for the flashing to finish before collapsing the platform.
+    _flash_manager.start_flashing()
+    yield(_flash_manager, 'flashing_finished')
     _animation_player.play('collapse')
 
     # Once the animation finishes, wait for the collapse time to run out before

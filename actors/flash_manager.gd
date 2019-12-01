@@ -29,6 +29,9 @@ func _ready() -> void:
     assert(sprite_path != "")
     _sprite = get_node(sprite_path)
 
+func set_total_duration(new_duration: float) -> void:
+    _timer.wait_time = new_duration
+
 func start_flashing() -> void:
     _setup_tween()
 
