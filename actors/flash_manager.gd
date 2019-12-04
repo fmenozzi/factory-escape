@@ -14,6 +14,8 @@ onready var _sprite: Sprite = null
 onready var _timer: Timer = $Timer
 onready var _tween: Tween = $Tween
 
+var _shader_manager := ShaderManager.new()
+
 func _get_configuration_warning() -> String:
     if sprite_path == "":
         return "Please specify the sprite to flash."
@@ -48,13 +50,11 @@ func resume_timer() -> void:
 
 func _setup_tween() -> void:
     # Attach flash shader to sprite and set flash color shader param.
-    var shader_material := ShaderMaterial.new()
-    shader_material.set_shader(flash_shader)
-    shader_material.set_shader_param('flash_color', flash_color)
-    _sprite.set_material(shader_material)
+    _shader_manager.add_shader(flash_shader, _sprite)
+    _shader_manager.set_shader_param('flash_color', flash_color)
 
     # Reset flash tween to animate lerp amount in flash shader.
-    var material := _sprite.get_material()
+    var material := _shader_manager.get_shader_material()
     var param := 'shader_param/lerp_amount'
     var old := 0.0
     var new := 1.0
@@ -72,6 +72,6 @@ func _on_flashing_timeout() -> void:
 
     # Remove shader from sprite. This is primarily to allow for other shaders to
     # be used on the sprite afterwards if necessary.
-    _sprite.set_material(null)
+    _shader_manager.clear_shader()
 
     emit_signal('flashing_finished')
