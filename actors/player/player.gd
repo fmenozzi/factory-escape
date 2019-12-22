@@ -338,17 +338,17 @@ func _check_for_hits() -> void:
             emit_signal('player_hit_hazard')
 
     for hitbox in _hurtbox.get_overlapping_areas():
-        if Util.in_collision_layer(hitbox, ['hazards', 'enemy_hitbox']):
+        if Util.in_collision_layers(hitbox, ['hazards', 'enemy_hitbox']):
             # Take damage and stagger when hit.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
                 player_health.set_status(Health.Status.INVINCIBLE)
                 _invincibility_flash_manager.start_flashing()
 
-                if Util.in_collision_layer(hitbox, ['hazards']):
+                if Util.in_collision_layer(hitbox, 'hazards'):
                     change_state({'new_state': State.HAZARD_HIT})
                     emit_signal('player_hit_hazard')
-                elif Util.in_collision_layer(hitbox, ['enemy_hitbox']):
+                elif Util.in_collision_layer(hitbox, 'enemy_hitbox'):
                     change_state({'new_state': State.STAGGER})
 
 func get_next_grapple_point() -> GrapplePoint:

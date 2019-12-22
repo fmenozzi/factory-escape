@@ -75,7 +75,7 @@ func is_touching_hazard() -> bool:
     # collisions with hazards like spikes, taking advantage of the fact that the
     # collision shapes are the same.
     for area in _hurtbox.get_overlapping_areas():
-        if Util.in_collision_layer(area, ['hazards']):
+        if Util.in_collision_layer(area, 'hazards'):
             return true
     return false
 
@@ -105,7 +105,7 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 
 # Slimes insta-die when touching hazards.
 func _on_hazard_hit(area: Area2D) -> void:
-    if not area or not Util.in_collision_layer(area, ['hazards']):
+    if not area or not Util.in_collision_layer(area, 'hazards'):
         return
     emit_signal('slime_died')
 

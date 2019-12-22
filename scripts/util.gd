@@ -79,13 +79,15 @@ func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
 func direction(from: Node2D, to: Node2D) -> int:
     return int(sign((to.global_position - from.global_position).x))
 
-# Convenience method for checking whether a given collision object is in a layer
-# with any of the given names. Note the lack of type for the collision_object
-# param and the extra assert on the existence of the get_collision_layer_bit()
-# method; it turns out that that method is defined separately in both
-# KinematicBody2D and Area2D, despite both of those classes inheriting from
-# CollisionObject2D.
-func in_collision_layer(collision_object, layer_names: Array) -> bool:
+# Convenience methods for checking whether a given collision object is in a
+# layer with any of the given names. Note the lack of type for the
+# collision_object param and the extra assert on the existence of the
+# get_collision_layer_bit() method; it turns out that that method is defined
+# separately in both KinematicBody2D and Area2D, despite both of those classes
+# inheriting from CollisionObject2D.
+func in_collision_layer(collision_object, layer_name: String) -> bool:
+    return in_collision_layers(collision_object, [layer_name])
+func in_collision_layers(collision_object, layer_names: Array) -> bool:
     assert(collision_object.has_method('get_collision_layer_bit'))
     for layer_name in layer_names:
         assert(layer_name in _LAYER_NAMES)
