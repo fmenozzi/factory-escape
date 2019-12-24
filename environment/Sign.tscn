@@ -2,7 +2,7 @@
 
 [ext_resource path="res://environment/sign.gd" type="Script" id=1]
 [ext_resource path="res://assets/sign.png" type="Texture" id=2]
-[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 8 )
@@ -21,14 +21,5 @@ texture = ExtResource( 2 )
 
 [node name="OutlineTween" type="Tween" parent="Sprite"]
 
-[node name="Label" type="Label" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-margin_left = -24.0
-margin_top = -28.0
-margin_right = 24.0
-margin_bottom = -14.0
-theme = ExtResource( 3 )
+[node name="FadeInOutLabel" parent="." instance=ExtResource( 3 )]
 text = "Read"
-align = 1
-
-[node name="LabelTween" type="Tween" parent="Label"]
