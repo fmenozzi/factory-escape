@@ -94,3 +94,10 @@ func in_collision_layers(collision_object, layer_names: Array) -> bool:
         if collision_object.get_collision_layer_bit(_LAYER_NAMES[layer_name]):
             return true
     return false
+
+# Convenience function for getting the player object from anywhere in the
+# current scene tree.
+func get_player():
+    var nodes_in_player_group := get_tree().get_nodes_in_group('player')
+    assert(nodes_in_player_group.size() == 1)
+    return nodes_in_player_group[0]
