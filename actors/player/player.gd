@@ -100,6 +100,7 @@ onready var _stagger_duration_timer: Timer = $States/Stagger/StaggerDurationTime
 var _next_grapple_point: GrapplePoint = null
 
 var _nearby_sign = null
+var _nearby_lamp = null
 
 var _current_hazard_checkpoint: Area2D = null
 
@@ -264,6 +265,11 @@ func set_nearby_sign(new_sign: Area2D) -> void:
     _nearby_sign = new_sign
 func get_nearby_sign() -> Area2D:
     return _nearby_sign
+
+func set_nearby_lamp(new_lamp: Area2D) -> void:
+    _nearby_lamp = new_lamp
+func get_nearby_lamp() -> Area2D:
+    return _nearby_lamp
 
 func set_hazard_checkpoint(hazard_checkpoint: Area2D) -> void:
     _current_hazard_checkpoint = hazard_checkpoint
