@@ -1,6 +1,6 @@
 extends Node
 
-onready var player: Player = $World/Player
+onready var player: Player = Util.get_player()
 onready var health_bar: Control = $UILayer/Healthbar
 onready var screen_fadeout: Control = $ScreenFadeoutLayer/ScreenFadeout
 

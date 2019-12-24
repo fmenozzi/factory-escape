@@ -2,7 +2,7 @@ extends Node2D
 
 signal room_changed(old_room, new_room)
 
-onready var _player: Player = $Player
+onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
 onready var _rooms: Array = $Rooms.get_children()
 

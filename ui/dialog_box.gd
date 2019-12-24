@@ -8,7 +8,7 @@ onready var _black_overlay: TextureRect = $BlackOverlay
 onready var _label: RichTextLabel = $RichTextLabel
 onready var _timer: Timer = $TextScrollTimer
 
-onready var _player: Player = get_parent().get_parent().get_node('World').get_node('Player')
+onready var _player: Player = Util.get_player()
 
 enum State {
     ENABLED,

@@ -1,6 +1,6 @@
 extends Area2D
 
-var _player: Player = null
+onready var _player: Player = Util.get_player()
 
 func _ready() -> void:
     self.connect('body_entered', self, '_on_player_entered')
@@ -9,7 +9,7 @@ func _ready() -> void:
     set_process(false)
 
 func _process(delta: float) -> void:
-    if _player and _player.is_on_ground():
+    if _player.is_on_ground():
         _player.set_hazard_checkpoint(self)
         set_process(false)
 
@@ -17,7 +17,6 @@ func _on_player_entered(player: Player) -> void:
     if not player:
         return
 
-    _player = player
     set_process(true)
 
 func _on_player_exited(player: Player) -> void:
