@@ -50,3 +50,8 @@ func pause() -> void:
 func resume() -> void:
     for moving_platform in get_moving_platforms():
         moving_platform.resume()
+
+func contains(obj: Node2D) -> bool:
+    var bounds := Rect2(get_global_position(), get_room_dimensions())
+
+    return bounds.has_point(obj.get_global_position())
