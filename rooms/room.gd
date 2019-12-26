@@ -1,7 +1,6 @@
 extends Node2D
 class_name Room
 
-onready var _collision_shape: CollisionShape2D = $RoomBoundaries/CollisionShape2D
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
@@ -36,8 +35,11 @@ func get_grapple_points() -> Array:
         grapple_points.push_back(grapple_point)
     return grapple_points
 
+# TODO: Investigate why the collision shape is sometimes null when cached using
+#       onready (seems to always only occur in standalone playground rooms).
+#       Maybe it has something to do with the fact that Room is a base scene?
 func get_room_dimensions() -> Vector2:
-    var half_extents = _collision_shape.shape.extents
+    var half_extents = get_node('RoomBoundaries/CollisionShape2D').shape.extents
 
     return 2 * half_extents
 
