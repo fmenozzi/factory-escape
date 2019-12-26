@@ -31,6 +31,9 @@ func _on_player_exited(player: Player) -> void:
     _modulate_sign_color(SIGN_HIGHLIGHTED, SIGN_UNHIGHLIGHTED)
     label_fade_out()
 
+# TODO: For some reason, when tweening just the sprite's modulate instead of the
+# entire Sign scene's modulate, the tweening becomes slightly out-of-sync with
+# the fade label's tween visually-speaking.
 func _modulate_sign_color(old: Color, new: Color) -> void:
     var prop := 'modulate'
     var duration := 0.25
@@ -39,7 +42,7 @@ func _modulate_sign_color(old: Color, new: Color) -> void:
 
     var tween := _outline_tween
     tween.stop_all()
-    tween.interpolate_property(self, prop, old, new, duration, trans, easing)
+    tween.interpolate_property(_sprite, prop, old, new, duration, trans, easing)
     tween.start()
 
 func label_fade_in() -> void:
