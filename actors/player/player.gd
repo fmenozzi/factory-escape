@@ -24,6 +24,7 @@ enum State {
     STAGGER,
     HAZARD_HIT,
     HAZARD_RECOVER,
+    REST,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -41,6 +42,7 @@ onready var STATES = {
     State.STAGGER:        $States/Stagger,
     State.HAZARD_HIT:     $States/HazardHit,
     State.HAZARD_RECOVER: $States/HazardRecover,
+    State.REST:           $States/Rest,
 }
 
 var current_state: Node = null

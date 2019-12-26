@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -19,8 +19,9 @@
 [ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=17]
 [ext_resource path="res://actors/player/states/hazard_hit.gd" type="Script" id=18]
 [ext_resource path="res://actors/player/states/hazard_recover.gd" type="Script" id=19]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=20]
-[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=21]
+[ext_resource path="res://actors/player/states/rest.gd" type="Script" id=20]
+[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=21]
+[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -261,6 +262,23 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "rest"
+length = 1.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 80, 81, 82, 81 ]
+}
+
 [sub_resource type="Animation" id=11]
 length = 0.25
 step = 0.05
@@ -344,6 +362,7 @@ anims/hazard_hit = SubResource( 7 )
 anims/hazard_recover = SubResource( 8 )
 anims/idle = SubResource( 9 )
 anims/jump = SubResource( 10 )
+anims/rest = SubResource( 17 )
 anims/stagger = SubResource( 11 )
 anims/walk = SubResource( 12 )
 anims/wall_slide = SubResource( 13 )
@@ -351,11 +370,11 @@ anims/wall_slide = SubResource( 13 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
-vframes = 10
+vframes = 11
 hframes = 8
-frame = 8
+frame = 80
 region_enabled = true
-region_rect = Rect2( 0, 0, 640, 800 )
+region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -451,17 +470,20 @@ script = ExtResource( 18 )
 [node name="HazardRecover" type="Node" parent="States"]
 script = ExtResource( 19 )
 
+[node name="Rest" type="Node" parent="States"]
+script = ExtResource( 20 )
+
 [node name="DashCooldown" type="Timer" parent="."]
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
-] instance=ExtResource( 20 )]
+] instance=ExtResource( 21 )]
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
-script = ExtResource( 21 )
+script = ExtResource( 22 )
 
 [node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -12 )
