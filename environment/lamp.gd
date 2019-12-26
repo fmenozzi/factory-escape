@@ -16,7 +16,6 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('player_interact'):
         if _player.get_nearby_lamp() == self:
             emit_signal('rested_at_lamp', self)
-            print('Game Saved')
 
 func _on_player_entered(player: Player) -> void:
     if not player:
