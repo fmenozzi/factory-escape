@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformLarge.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/platforms/CollapsablePlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/platforms/ConveyorBelt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/Lamp.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
@@ -208,6 +209,9 @@ position = Vector2( 200, 120 )
 [node name="ConveyorBeltRight" parent="." index="12" instance=ExtResource( 6 )]
 position = Vector2( 296, 120 )
 direction = -1
+
+[node name="Lamp" parent="." index="13" instance=ExtResource( 7 )]
+position = Vector2( 24, 112 )
 
 [editable path="TileMaps"]
 
