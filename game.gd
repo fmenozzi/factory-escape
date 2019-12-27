@@ -2,6 +2,7 @@ extends Node
 
 onready var player: Player = Util.get_player()
 onready var health_bar: Control = $UILayer/Healthbar
+onready var saving_indicator: Node2D = $UILayer/SavingIndicator
 onready var screen_fadeout: Control = $ScreenFadeoutLayer/ScreenFadeout
 
 func _ready() -> void:
@@ -10,6 +11,9 @@ func _ready() -> void:
     player_health.connect('died', self, '_on_player_died')
 
     player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
+
+    for lamp in get_tree().get_nodes_in_group('lamps'):
+        lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
 
 func _on_player_died() -> void:
     print('YOU DIED')
@@ -40,3 +44,17 @@ func _on_player_hit_hazard() -> void:
     # do so here. This is done to prevent the player from jumping and being in
     # the air while the HAZARD_RECOVER animation plays.
     player.change_state({'new_state': Player.State.HAZARD_RECOVER})
+
+func _on_player_rested_at_lamp(lamp: Area2D) -> void:
+    print('Game Saved')
+
+    player.change_state({'new_state': Player.State.REST})
+
+    # For now, simulate time spent saving game to disk by yielding for two
+    # seconds as we start up the saving indicator. Once we actually have a save
+    # system in place, it's likely that there will still be a "minimum time"
+    # spent spinning, even if the actual save takes less time. This allows the
+    # player to notice the saving indicator.
+    saving_indicator.start_spinning()
+    yield(get_tree().create_timer(2.0), 'timeout')
+    saving_indicator.stop_spinning()

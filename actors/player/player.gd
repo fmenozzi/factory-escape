@@ -146,9 +146,6 @@ func _ready() -> void:
 
     _hitbox.connect('area_entered', self, '_on_attack_connected')
 
-    for lamp in get_tree().get_nodes_in_group('lamps'):
-        lamp.connect('rested_at_lamp', self, '_on_rested_at_lamp')
-
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -442,7 +439,3 @@ func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
 
     # TODO: This is kind of hacky, find a way around this.
     enemy_hurtbox.get_parent().take_hit(1, self)
-
-func _on_rested_at_lamp(lamp: Area2D) -> void:
-    print('Game Saved')
-    change_state({'new_state': State.REST})
