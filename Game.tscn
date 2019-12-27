@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://World.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/ScreenFadeout.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/DialogBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/interface/Healthbar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/interface/SavingIndicator.tscn" type="PackedScene" id=7]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -34,5 +35,8 @@ layer = 2
 layer = 0
 
 [node name="Healthbar" parent="UILayer" instance=ExtResource( 6 )]
+
+[node name="SavingIndicator" parent="UILayer" instance=ExtResource( 7 )]
+position = Vector2( 296, 162 )
 
 [editable path="World"]

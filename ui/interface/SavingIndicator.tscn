@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/interface/saving_indicator.gd" type="Script" id=1]
+
+[node name="SavingIndicator" type="Node2D"]
+modulate = Color( 1, 1, 1, 0 )
+script = ExtResource( 1 )
+
+[node name="UpperLeft" type="Polygon2D" parent="."]
+color = Color( 1, 0.309804, 0.470588, 1 )
+antialiased = true
+polygon = PoolVector2Array( -1, -5, -1, -1, -5, -1 )
+
+[node name="UpperRight" type="Polygon2D" parent="."]
+position = Vector2( -1, 0 )
+color = Color( 1, 0.309804, 0.470588, 1 )
+antialiased = true
+polygon = PoolVector2Array( 1, -5, 5, -1, 1, -1 )
+
+[node name="LowerRight" type="Polygon2D" parent="."]
+position = Vector2( -1, -1 )
+color = Color( 1, 0.309804, 0.470588, 1 )
+antialiased = true
+polygon = PoolVector2Array( 5, 1, 1, 5, 1, 1 )
+
+[node name="LowerLeft" type="Polygon2D" parent="."]
+position = Vector2( 0, -1 )
+color = Color( 1, 0.309804, 0.470588, 1 )
+antialiased = true
+polygon = PoolVector2Array( -1, 1, -1, 5, -5, 1 )
+
+[node name="AlphaTween" type="Tween" parent="."]
