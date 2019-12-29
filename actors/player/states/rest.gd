@@ -12,6 +12,7 @@ const MOVE_ACTIONS := [
 onready var _resting_timer: Timer = $RestingTimer
 
 var _lamp: Area2D = null
+var _zzz: Sprite = null
 
 func _ready() -> void:
     _resting_timer.one_shot = true
@@ -29,6 +30,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     assert(previous_state_dict['lamp'] != null)
     _lamp = previous_state_dict['lamp']
 
+    _zzz = player.get_node('Zzz')
+
     # Turn player to face lamp.
     player.set_direction(Util.direction(player, _lamp))
 
@@ -41,6 +44,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
 func exit(player: Player) -> void:
     player.get_animation_player().clear_queue()
+
+    _zzz.visible = false
 
     # Fade lamp's label back in.
     _lamp.fade_in_label()
@@ -59,4 +64,5 @@ func update(player: Player, delta: float) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func _on_resting_timeout(player: Player) -> void:
+    _zzz.visible = true
     player.get_animation_player().play('sleep')

@@ -1,27 +1,28 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/player/physics_manager.gd" type="Script" id=4]
 [ext_resource path="res://assets/character-spritesheet.png" type="Texture" id=5]
-[ext_resource path="res://actors/player/camera.gd" type="Script" id=6]
-[ext_resource path="res://actors/player/states/idle.gd" type="Script" id=7]
-[ext_resource path="res://actors/player/states/walk.gd" type="Script" id=8]
-[ext_resource path="res://actors/player/states/jump.gd" type="Script" id=9]
-[ext_resource path="res://actors/player/states/double_jump.gd" type="Script" id=10]
-[ext_resource path="res://actors/player/states/fall.gd" type="Script" id=11]
-[ext_resource path="res://actors/player/states/dash.gd" type="Script" id=12]
-[ext_resource path="res://actors/player/states/wall_slide.gd" type="Script" id=13]
-[ext_resource path="res://actors/player/states/wall_jump.gd" type="Script" id=14]
-[ext_resource path="res://actors/player/states/grapple_start.gd" type="Script" id=15]
-[ext_resource path="res://actors/player/states/grapple.gd" type="Script" id=16]
-[ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=17]
-[ext_resource path="res://actors/player/states/hazard_hit.gd" type="Script" id=18]
-[ext_resource path="res://actors/player/states/hazard_recover.gd" type="Script" id=19]
-[ext_resource path="res://actors/player/states/rest.gd" type="Script" id=20]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=21]
-[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=22]
+[ext_resource path="res://assets/zzz.png" type="Texture" id=6]
+[ext_resource path="res://actors/player/camera.gd" type="Script" id=7]
+[ext_resource path="res://actors/player/states/idle.gd" type="Script" id=8]
+[ext_resource path="res://actors/player/states/walk.gd" type="Script" id=9]
+[ext_resource path="res://actors/player/states/jump.gd" type="Script" id=10]
+[ext_resource path="res://actors/player/states/double_jump.gd" type="Script" id=11]
+[ext_resource path="res://actors/player/states/fall.gd" type="Script" id=12]
+[ext_resource path="res://actors/player/states/dash.gd" type="Script" id=13]
+[ext_resource path="res://actors/player/states/wall_slide.gd" type="Script" id=14]
+[ext_resource path="res://actors/player/states/wall_jump.gd" type="Script" id=15]
+[ext_resource path="res://actors/player/states/grapple_start.gd" type="Script" id=16]
+[ext_resource path="res://actors/player/states/grapple.gd" type="Script" id=17]
+[ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=18]
+[ext_resource path="res://actors/player/states/hazard_hit.gd" type="Script" id=19]
+[ext_resource path="res://actors/player/states/hazard_recover.gd" type="Script" id=20]
+[ext_resource path="res://actors/player/states/rest.gd" type="Script" id=21]
+[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=22]
+[ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=23]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -294,7 +295,7 @@ tracks/0/keys = {
 "values": [ 80, 81, 82, 81 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=20]
 resource_name = "sleep"
 length = 1.6
 loop = true
@@ -310,8 +311,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 83, 84, 85, 84 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Zzz:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1 ]
+}
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=21]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -327,7 +340,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=22]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -343,7 +356,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=23]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -357,10 +370,10 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 4, 6 )
 
 [sub_resource type="RectangleShape2D" id=19]
@@ -396,17 +409,17 @@ anims/idle = SubResource( 9 )
 anims/jump = SubResource( 10 )
 anims/pre_rest = SubResource( 11 )
 anims/rest = SubResource( 12 )
-anims/sleep = SubResource( 13 )
-anims/stagger = SubResource( 14 )
-anims/walk = SubResource( 15 )
-anims/wall_slide = SubResource( 16 )
+anims/sleep = SubResource( 20 )
+anims/stagger = SubResource( 21 )
+anims/walk = SubResource( 22 )
+anims/wall_slide = SubResource( 23 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 84
+frame = 83
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -414,9 +427,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Zzz" type="Sprite" parent="." groups=[
+"mirror_y_axis",
+]]
+visible = false
+position = Vector2( 10, -20 )
+texture = ExtResource( 6 )
+hframes = 3
+region_enabled = true
+region_rect = Rect2( 0, 0, 48, 16 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 17 )
+shape = SubResource( 24 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -424,7 +447,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 18 )
+shape = SubResource( 25 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -438,7 +461,7 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="PositionTween" type="Tween" parent="CameraAnchor/Camera2D"]
 
@@ -456,56 +479,56 @@ disabled = true
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
-script = ExtResource( 7 )
-
-[node name="Walk" type="Node" parent="States"]
 script = ExtResource( 8 )
 
-[node name="Jump" type="Node" parent="States"]
+[node name="Walk" type="Node" parent="States"]
 script = ExtResource( 9 )
 
-[node name="DoubleJump" type="Node" parent="States"]
+[node name="Jump" type="Node" parent="States"]
 script = ExtResource( 10 )
 
-[node name="Fall" type="Node" parent="States"]
+[node name="DoubleJump" type="Node" parent="States"]
 script = ExtResource( 11 )
 
-[node name="Dash" type="Node" parent="States"]
+[node name="Fall" type="Node" parent="States"]
 script = ExtResource( 12 )
+
+[node name="Dash" type="Node" parent="States"]
+script = ExtResource( 13 )
 
 [node name="DashDurationTimer" type="Timer" parent="States/Dash"]
 
 [node name="DashEchoTimer" type="Timer" parent="States/Dash"]
 
 [node name="WallSlide" type="Node" parent="States"]
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 
 [node name="WallJump" type="Node" parent="States"]
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 
 [node name="FixedVelocityTimer" type="Timer" parent="States/WallJump"]
 
 [node name="JumpCutTimer" type="Timer" parent="States/WallJump"]
 
 [node name="GrappleStart" type="Node" parent="States"]
-script = ExtResource( 15 )
-
-[node name="Grapple" type="Node" parent="States"]
 script = ExtResource( 16 )
 
-[node name="Stagger" type="Node" parent="States"]
+[node name="Grapple" type="Node" parent="States"]
 script = ExtResource( 17 )
+
+[node name="Stagger" type="Node" parent="States"]
+script = ExtResource( 18 )
 
 [node name="StaggerDurationTimer" type="Timer" parent="States/Stagger"]
 
 [node name="HazardHit" type="Node" parent="States"]
-script = ExtResource( 18 )
-
-[node name="HazardRecover" type="Node" parent="States"]
 script = ExtResource( 19 )
 
-[node name="Rest" type="Node" parent="States"]
+[node name="HazardRecover" type="Node" parent="States"]
 script = ExtResource( 20 )
+
+[node name="Rest" type="Node" parent="States"]
+script = ExtResource( 21 )
 
 [node name="RestingTimer" type="Timer" parent="States/Rest"]
 
@@ -513,13 +536,13 @@ script = ExtResource( 20 )
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
-] instance=ExtResource( 21 )]
+] instance=ExtResource( 22 )]
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
-script = ExtResource( 22 )
+script = ExtResource( 23 )
 
 [node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
 position = Vector2( 0, -12 )
