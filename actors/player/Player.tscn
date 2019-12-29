@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -263,7 +263,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=11]
-resource_name = "rest"
+resource_name = "pre_rest"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 73, 72 ]
+}
+
+[sub_resource type="Animation" id=12]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -279,7 +294,7 @@ tracks/0/keys = {
 "values": [ 80, 81, 82, 81 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -295,7 +310,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -311,7 +326,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -325,13 +340,13 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 14, 7 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -362,17 +377,18 @@ anims/hazard_hit = SubResource( 7 )
 anims/hazard_recover = SubResource( 8 )
 anims/idle = SubResource( 9 )
 anims/jump = SubResource( 10 )
-anims/rest = SubResource( 11 )
-anims/stagger = SubResource( 12 )
-anims/walk = SubResource( 13 )
-anims/wall_slide = SubResource( 14 )
+anims/pre_rest = SubResource( 11 )
+anims/rest = SubResource( 12 )
+anims/stagger = SubResource( 13 )
+anims/walk = SubResource( 14 )
+anims/wall_slide = SubResource( 15 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 80
+frame = 73
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -382,7 +398,7 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 15 )
+shape = SubResource( 16 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -390,7 +406,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 16 )
+shape = SubResource( 17 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -416,7 +432,7 @@ collision_layer = 16
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
-shape = SubResource( 17 )
+shape = SubResource( 18 )
 disabled = true
 
 [node name="States" type="Node" parent="."]

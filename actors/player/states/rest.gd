@@ -7,10 +7,15 @@ const MOVE_ACTIONS := [
 ]
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    player.get_animation_player().play('rest')
+    # Play pre-rest animation and queue up main rest animation when entering the
+    # rest state. This is a workaround to the fact that I cannot loop only part
+    # of an animation in Godot, as far as I know.
+    var animation_player := player.get_animation_player()
+    animation_player.play('pre_rest')
+    animation_player.queue('rest')
 
 func exit(player: Player) -> void:
-    pass
+    player.get_animation_player().clear_queue()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     for action in MOVE_ACTIONS:
