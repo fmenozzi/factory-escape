@@ -3,7 +3,6 @@ extends 'res://actors/player/states/state.gd'
 const MOVE_ACTIONS := [
     'player_jump',
     'player_dash',
-    'player_interact',
 ]
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:

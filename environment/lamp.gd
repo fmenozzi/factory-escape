@@ -14,6 +14,10 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('player_interact'):
+        if _player.current_state() == Player.State.REST:
+            _player.change_state({'new_state': Player.State.IDLE})
+            return
+
         if _player.get_nearby_lamp() == self:
             emit_signal('rested_at_lamp', self)
 
