@@ -13,6 +13,10 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     animation_player.play('pre_rest')
     animation_player.queue('rest')
 
+    assert(previous_state_dict.has('lamp'))
+    assert(previous_state_dict['lamp'] != null)
+    player.set_direction(Util.direction(player, previous_state_dict['lamp']))
+
 func exit(player: Player) -> void:
     player.get_animation_player().clear_queue()
 
