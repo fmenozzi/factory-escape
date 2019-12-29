@@ -27,7 +27,7 @@ func _on_player_entered(player: Player) -> void:
 
     player.set_nearby_lamp(self)
 
-    _fade_in_out_label.fade_in()
+    fade_in_label()
 
 func _on_player_exited(player: Player) -> void:
     if not player:
@@ -35,4 +35,10 @@ func _on_player_exited(player: Player) -> void:
 
     player.set_nearby_lamp(null)
 
+    fade_out_label()
+
+func fade_in_label() -> void:
+    _fade_in_out_label.fade_in()
+
+func fade_out_label() -> void:
     _fade_in_out_label.fade_out()

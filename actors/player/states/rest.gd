@@ -5,6 +5,8 @@ const MOVE_ACTIONS := [
     'player_dash',
 ]
 
+var _lamp: Area2D = null
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Play pre-rest animation and queue up main rest animation when entering the
     # rest state. This is a workaround to the fact that I cannot loop only part
@@ -15,10 +17,19 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     assert(previous_state_dict.has('lamp'))
     assert(previous_state_dict['lamp'] != null)
-    player.set_direction(Util.direction(player, previous_state_dict['lamp']))
+    _lamp = previous_state_dict['lamp']
+
+    # Turn player to face lamp.
+    player.set_direction(Util.direction(player, _lamp))
+
+    # Fade lamp's label out.
+    _lamp.fade_out_label()
 
 func exit(player: Player) -> void:
     player.get_animation_player().clear_queue()
+
+    # Fade lamp's label back in.
+    _lamp.fade_in_label()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     for action in MOVE_ACTIONS:
