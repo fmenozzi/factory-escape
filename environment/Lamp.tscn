@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://environment/lamp.gd" type="Script" id=1]
 [ext_resource path="res://shaders/lamp_light.shader" type="Shader" id=2]
@@ -45,6 +45,34 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "unlit_to_lit"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("LampSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LightSprite:material:shader_param/radius_uv")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5 ]
+}
+
 [node name="Lamp" type="Area2D" groups=[
 "lamps",
 ]]
@@ -66,11 +94,12 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 4 )
 vframes = 2
 hframes = 16
-frame = 1
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/lit = SubResource( 3 )
 anims/unlit = SubResource( 4 )
+anims/unlit_to_lit = SubResource( 5 )
 
 [node name="FadeInOutLabel" parent="." instance=ExtResource( 5 )]
 margin_left = -32.0
