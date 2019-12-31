@@ -45,6 +45,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 func exit(player: Player) -> void:
     player.get_animation_player().clear_queue()
 
+    _resting_timer.stop()
     _zzz.visible = false
 
     # Fade lamp's label back in.
