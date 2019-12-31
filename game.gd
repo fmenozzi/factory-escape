@@ -48,6 +48,8 @@ func _on_player_hit_hazard() -> void:
 func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     print('Game Saved')
 
+    player.get_health().heal_to_full()
+
     player.change_state({
         'new_state': Player.State.REST,
         'lamp': lamp,
