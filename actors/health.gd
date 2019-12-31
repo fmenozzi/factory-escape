@@ -4,7 +4,7 @@ class_name Health
 signal health_changed(old_health, new_health)
 signal died
 
-export(int) var MAX_HEALTH = 5
+export(int) var MAX_HEALTH := 5
 
 var _current_health: int
 
@@ -39,6 +39,14 @@ func heal(heal_amount: int) -> void:
     var new_health := min(_current_health + heal_amount, MAX_HEALTH)
 
     _current_health = new_health
+
+    emit_signal('health_changed', old_health, new_health)
+
+func heal_to_full() -> void:
+    var old_health := _current_health
+    var new_health := MAX_HEALTH
+
+    _current_health = MAX_HEALTH
 
     emit_signal('health_changed', old_health, new_health)
 
