@@ -27,10 +27,14 @@ func _unhandled_input(event: InputEvent) -> void:
         if _player.get_nearby_lamp() == self:
             if not _is_lit:
                 _is_lit = true
+
+                _player.set_direction(Util.direction(_player, self))
+
                 _fade_in_out_label.set_text('Rest')
                 _light_sprite.visible = true
                 _animation_player.play('unlit_to_lit')
                 _animation_player.queue('lit')
+
                 emit_signal('lamp_lit', self)
             else:
                 emit_signal('rested_at_lamp', self)
