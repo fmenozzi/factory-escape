@@ -16,6 +16,9 @@ func _modulate_label_visibility(old: Color, new: Color) -> void:
     _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
     _tween.start()
 
+func set_text(new_text: String) -> void:
+    self.text = new_text
+
 func fade_in() -> void:
     _modulate_label_visibility(LABEL_NOT_VISIBLE, LABEL_VISIBLE)
 
