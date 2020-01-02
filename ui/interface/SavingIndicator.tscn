@@ -2,31 +2,34 @@
 
 [ext_resource path="res://ui/interface/saving_indicator.gd" type="Script" id=1]
 
-[node name="SavingIndicator" type="Node2D"]
+[node name="SavingIndicator" type="Control"]
 modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_top = -28.0
 script = ExtResource( 1 )
 
 [node name="UpperLeft" type="Polygon2D" parent="."]
 color = Color( 1, 0.309804, 0.470588, 1 )
 antialiased = true
-polygon = PoolVector2Array( -1, -5, -1, -1, -5, -1 )
+polygon = PoolVector2Array( 8, 6, 8, 10, 4, 10 )
 
 [node name="UpperRight" type="Polygon2D" parent="."]
-position = Vector2( -1, 0 )
 color = Color( 1, 0.309804, 0.470588, 1 )
 antialiased = true
-polygon = PoolVector2Array( 1, -5, 5, -1, 1, -1 )
+polygon = PoolVector2Array( 9, 6, 13, 10, 9, 10 )
 
 [node name="LowerRight" type="Polygon2D" parent="."]
-position = Vector2( -1, -1 )
 color = Color( 1, 0.309804, 0.470588, 1 )
 antialiased = true
-polygon = PoolVector2Array( 5, 1, 1, 5, 1, 1 )
+polygon = PoolVector2Array( 13, 11, 9, 15, 9, 11 )
 
 [node name="LowerLeft" type="Polygon2D" parent="."]
-position = Vector2( 0, -1 )
 color = Color( 1, 0.309804, 0.470588, 1 )
 antialiased = true
-polygon = PoolVector2Array( -1, 1, -1, 5, -5, 1 )
+polygon = PoolVector2Array( 8, 11, 8, 15, 4, 11 )
 
 [node name="AlphaTween" type="Tween" parent="."]

@@ -37,6 +37,5 @@ layer = 0
 [node name="Healthbar" parent="UILayer" instance=ExtResource( 6 )]
 
 [node name="SavingIndicator" parent="UILayer" instance=ExtResource( 7 )]
-position = Vector2( 296, 162 )
 
 [editable path="World"]
