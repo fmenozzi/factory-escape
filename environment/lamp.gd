@@ -6,6 +6,7 @@ signal rested_at_lamp(lamp)
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _light_sprite: Sprite = $LightSprite
+onready var _lamp_embers: Particles2D = $LampEmbers
 onready var _player: Player = Util.get_player()
 
 var _is_lit := false
@@ -34,6 +35,8 @@ func _unhandled_input(event: InputEvent) -> void:
                 _light_sprite.visible = true
                 _animation_player.play('unlit_to_lit')
                 _animation_player.queue('lit')
+
+                _lamp_embers.emitting = true
 
                 emit_signal('lamp_lit', self)
             else:

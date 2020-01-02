@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://environment/lamp.gd" type="Script" id=1]
 [ext_resource path="res://shaders/lamp_light.shader" type="Shader" id=2]
 [ext_resource path="res://assets/lamp-light.png" type="Texture" id=3]
 [ext_resource path="res://assets/lamp.png" type="Texture" id=4]
 [ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sfx/LampEmbers.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 2 )
 shader_param/radius_uv = 0.5
 
@@ -80,12 +81,13 @@ collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -8 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="LightSprite" type="Sprite" parent="."]
 modulate = Color( 1, 0.309804, 0.470588, 0.501961 )
-material = SubResource( 1 )
+material = SubResource( 2 )
 position = Vector2( 0, -24 )
 texture = ExtResource( 3 )
 
@@ -104,3 +106,8 @@ anims/unlit_to_lit = SubResource( 5 )
 [node name="FadeInOutLabel" parent="." instance=ExtResource( 5 )]
 margin_left = -32.0
 margin_right = 32.0
+
+[node name="LampEmbers" parent="." instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( 0, -8 )
+emitting = false
