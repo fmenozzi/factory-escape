@@ -1,17 +1,26 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://environment/lamp.gd" type="Script" id=1]
-[ext_resource path="res://shaders/lamp_light.shader" type="Shader" id=2]
-[ext_resource path="res://assets/lamp-light.png" type="Texture" id=3]
-[ext_resource path="res://assets/lamp.png" type="Texture" id=4]
-[ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=5]
-[ext_resource path="res://sfx/LampEmbers.tscn" type="PackedScene" id=6]
+[ext_resource path="res://shaders/lamp_ripple.shader" type="Shader" id=2]
+[ext_resource path="res://assets/lamp-ripple.png" type="Texture" id=3]
+[ext_resource path="res://shaders/lamp_light.shader" type="Shader" id=4]
+[ext_resource path="res://assets/lamp-light.png" type="Texture" id=5]
+[ext_resource path="res://assets/lamp.png" type="Texture" id=6]
+[ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sfx/LampEmbers.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 2 )
+shader_param/ripple_radius_uv = 0.5
+shader_param/ripple_width_uv = 0.1
+shader_param/ripple_color = Color( 1, 0.309804, 0.470588, 1 )
+shader_param/alpha_multiplier = 0.0
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 4 )
 shader_param/radius_uv = 0.5
 
 [sub_resource type="Animation" id=3]
@@ -49,6 +58,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=5]
 resource_name = "unlit_to_lit"
 length = 0.6
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("LampSprite:frame")
 tracks/0/interp = 1
@@ -73,6 +83,42 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0.0, 0.5 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("RippleSprite:material:shader_param/ripple_width_uv")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.1 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RippleSprite:material:shader_param/ripple_radius_uv")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RippleSprite:material:shader_param/alpha_multiplier")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
 
 [node name="Lamp" type="Area2D" groups=[
 "lamps",
@@ -85,15 +131,19 @@ visible = false
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
+[node name="RippleSprite" type="Sprite" parent="."]
+material = SubResource( 6 )
+texture = ExtResource( 3 )
+
 [node name="LightSprite" type="Sprite" parent="."]
 modulate = Color( 1, 0.309804, 0.470588, 0.501961 )
 material = SubResource( 2 )
 position = Vector2( 0, -24 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="LampSprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 vframes = 2
 hframes = 16
 frame = 5
@@ -103,11 +153,11 @@ anims/lit = SubResource( 3 )
 anims/unlit = SubResource( 4 )
 anims/unlit_to_lit = SubResource( 5 )
 
-[node name="FadeInOutLabel" parent="." instance=ExtResource( 5 )]
+[node name="FadeInOutLabel" parent="." instance=ExtResource( 7 )]
 margin_left = -32.0
 margin_right = 32.0
 
-[node name="LampEmbers" parent="." instance=ExtResource( 6 )]
+[node name="LampEmbers" parent="." instance=ExtResource( 8 )]
 show_behind_parent = true
 position = Vector2( 0, -8 )
 emitting = false
