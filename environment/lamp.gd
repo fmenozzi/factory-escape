@@ -26,14 +26,27 @@ func _unhandled_input(event: InputEvent) -> void:
 
         if _player.get_nearby_lamp() == self:
             if not _is_lit:
+                set_process_unhandled_input(false)
                 _is_lit = true
 
                 _player.set_direction(Util.direction(_player, self))
 
                 _fade_in_out_label.set_text('Rest')
+
+                # Play light_lamp animation and wait for that to finish before
+                # the lamp actually lights.
+                #
+                # TODO: This might be better served as its own state.
+                var player_animation_player := _player.get_animation_player()
+                _player.get_animation_player().play('light_lamp')
+                yield(_player.get_animation_player(), 'animation_finished')
+                _player.get_animation_player().play('idle')
+
                 _light_sprite.visible = true
                 _animation_player.play('unlit_to_lit')
                 _animation_player.queue('lit')
+
+                set_process_unhandled_input(true)
 
                 emit_signal('lamp_lit', self)
             else:
