@@ -12,18 +12,18 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 2 )
 shader_param/ripple_radius_uv = 0.5
 shader_param/ripple_width_uv = 0.1
 shader_param/ripple_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/alpha_multiplier = 0.0
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
 shader_param/radius_uv = 0.5
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=4]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -39,7 +39,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=5]
 tracks/0/type = "value"
 tracks/0/path = NodePath("LampSprite:frame")
 tracks/0/interp = 1
@@ -141,12 +141,12 @@ position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="RippleSprite" type="Sprite" parent="."]
-material = SubResource( 7 )
+material = SubResource( 2 )
 texture = ExtResource( 3 )
 
 [node name="LightSprite" type="Sprite" parent="."]
 modulate = Color( 1, 0.309804, 0.470588, 0.501961 )
-material = SubResource( 8 )
+material = SubResource( 3 )
 position = Vector2( 0, -24 )
 texture = ExtResource( 5 )
 
@@ -158,8 +158,8 @@ hframes = 16
 frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/lit = SubResource( 9 )
-anims/unlit = SubResource( 10 )
+anims/lit = SubResource( 4 )
+anims/unlit = SubResource( 5 )
 anims/unlit_to_lit = SubResource( 6 )
 
 [node name="FadeInOutLabel" parent="." instance=ExtResource( 7 )]
