@@ -20,6 +20,7 @@ func exit(pause: Pause) -> void:
 func handle_input(pause: Pause, event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
         change_menu(pause.Menu.UNPAUSED, pause.Menu.PAUSE)
+        accept_event()
 "
 
 [node name="Pause" type="Control"]
