@@ -45,7 +45,22 @@ func _spawn_slime_at(position: Vector2) -> void:
     var slime := Slime.instance()
     slime.set_position(position)
     slime.get_node('Health').connect('died', self, '_on_slime_death', [slime])
+
+    # Tween transparency so that slimes fade in as they spawn.
+    var prop := 'modulate'
+    var old := Color(1, 1, 1, 0) # Transparent
+    var new := Color(1, 1, 1, 1) # Opaque
+    var duration := 0.5
+    var trans := Tween.TRANS_LINEAR
+    var easing := Tween.EASE_IN
+
+    var alpha_tween := Tween.new()
+    alpha_tween.interpolate_property(
+        slime, prop, old, new, duration, trans, easing)
+    slime.add_child(alpha_tween)
+
     _room.add_child(slime)
+    alpha_tween.start()
     _slimes.append(slime)
 
 func _on_slime_death(slime: Slime) -> void:
