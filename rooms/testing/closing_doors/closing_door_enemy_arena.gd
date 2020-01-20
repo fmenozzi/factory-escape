@@ -31,8 +31,9 @@ func _on_player_entered(player: Player) -> void:
 
             _camera.detach_and_move_to_global(Vector2(320, 88))
 
-            _spawn_slime_at(Vector2(288, 32))
-            _spawn_slime_at(Vector2(384, 32))
+            _spawn_slime_at(Vector2(320, 32))
+            _spawn_slime_at(Vector2(248, 64))
+            _spawn_slime_at(Vector2(392, 64))
 
         RoomState.FIGHT:
             pass
