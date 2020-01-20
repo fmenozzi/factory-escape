@@ -5,7 +5,32 @@ signal transition_completed
 onready var _player: Player = get_parent().get_parent()
 onready var _tween: Tween = $PositionTween
 
-var _original_local_anchor_pos = 0
+var _original_local_anchor_pos: Vector2 = Vector2.ZERO
+
+func detach_and_move_to_global(new_global_pos: Vector2) -> void:
+    self.set_as_toplevel(true)
+
+    # Save the original local anchor position so we know where to go back to
+    # when we reattach the camera.
+    _original_local_anchor_pos = self.position
+
+    self.global_position = new_global_pos
+
+func reattach() -> void:
+    self.set_as_toplevel(false)
+
+    # Smoothly reattach the camera to the player by tweening to the original
+    # local anchor position.
+    var prop := 'position'
+    var duration := 1.0
+    var trans := Tween.TRANS_QUAD
+    var easing := Tween.EASE_IN_OUT
+    var old := self.position
+    var new := _original_local_anchor_pos
+
+    _tween.remove_all()
+    _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
+    _tween.start()
 
 func transition(old_room, new_room) -> void:
     _transition_setup()
@@ -70,7 +95,7 @@ func _interpolate_camera_pos(old_global_pos, new_global_pos) -> void:
     var old := self.to_local(old_global_pos)
     var new := self.to_local(new_global_pos)
 
-    _tween.stop_all()
+    _tween.remove_all()
     _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
     _tween.start()
 

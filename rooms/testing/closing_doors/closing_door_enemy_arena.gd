@@ -29,10 +29,7 @@ func _on_player_entered(player: Player) -> void:
 
             _closing_door.close()
 
-            # TODO: instead of messing with camera limits again, just pin the
-            #       camera to the center of the arena portion of the room and
-            #       re-attach to player after the fight ends.
-            _camera.limit_left = 160
+            _camera.detach_and_move_to_global(Vector2(320, 88))
 
             _spawn_slime_at(Vector2(288, 32))
             _spawn_slime_at(Vector2(384, 32))
@@ -57,5 +54,5 @@ func _on_slime_death(slime: Slime) -> void:
     _slimes.erase(slime)
     if _slimes.empty():
         _current_room_state = RoomState.POST_FIGHT
-        _camera.fit_camera_limits_to_room(_room)
+        _camera.reattach()
         _closing_door.open()
