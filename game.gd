@@ -60,6 +60,6 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     # system in place, it's likely that there will still be a "minimum time"
     # spent spinning, even if the actual save takes less time. This allows the
     # player to notice the saving indicator.
-    saving_indicator.start_spinning()
+    saving_indicator.show()
     yield(get_tree().create_timer(2.0), 'timeout')
-    saving_indicator.stop_spinning()
+    saving_indicator.hide()

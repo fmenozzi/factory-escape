@@ -11,20 +11,20 @@ onready var _lower_left: Polygon2D = $LowerLeft
 
 onready var _tween: Tween = $AlphaTween
 
-var _is_spinning := false
+func _ready() -> void:
+    hide()
+    _start_spinning()
 
-func start_spinning() -> void:
-    self.modulate.a = 1.0
-    _is_spinning = true
+func show() -> void:
+    self.visible = true
+
+func hide() -> void:
+    self.visible = false
+
+func _start_spinning() -> void:
     while true:
-        if not _is_spinning:
-            return
         _spin_once()
         yield(self, 'one_spin_completed')
-
-func stop_spinning() -> void:
-    self.modulate.a = 0.0
-    _is_spinning = false
 
 func _spin_once() -> void:
     _tween.remove_all()
