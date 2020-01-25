@@ -2,6 +2,7 @@ extends Node2D
 
 enum Location {
     START,
+    MOVING,
     END,
 }
 var _location: int = Location.START
@@ -22,10 +23,11 @@ var _follow_point: Vector2 = Vector2.ZERO
 var _move_duration: float = MOVE_TO.length() / SPEED
 
 onready var _platform: KinematicBody2D = $Platform
+onready var _trigger_area: Area2D = $Platform/TriggerArea
 onready var _tween: Tween = $MoveTween
 
 func _ready() -> void:
-    move_to_end()
+    _trigger_area.connect('body_entered', self, '_on_player_contact')
 
 func _physics_process(delta: float) -> void:
     # Rather than interpolate the platform's position directly, which can cause
@@ -41,6 +43,8 @@ func move_to_end() -> void:
         self, '_follow_point', Vector2.ZERO, MOVE_TO, _move_duration,
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
+    yield(_tween, 'tween_completed')
+    _location = Location.END
 
 func move_back_to_start() -> void:
     _tween.remove_all()
@@ -48,3 +52,18 @@ func move_back_to_start() -> void:
         self, '_follow_point', MOVE_TO, Vector2.ZERO, _move_duration,
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
+    yield(_tween, 'tween_completed')
+    _location = Location.START
+
+func _on_player_contact(player: Player) -> void:
+    if not player:
+        return
+
+    match _location:
+        Location.START:
+            _location = Location.MOVING
+            move_to_end()
+
+        Location.END:
+            _location = Location.MOVING
+            move_back_to_start()
