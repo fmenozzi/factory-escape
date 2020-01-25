@@ -17,11 +17,19 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 func take_hit(damage: int, player: Player) -> void:
     match direction:
         Util.Direction.LEFT:
-            _animation_player.play('left_to_right')
-            direction = Util.Direction.RIGHT
-            emit_signal('direction_changed_to', direction)
+            change_direction_to(Util.Direction.RIGHT)
 
         Util.Direction.RIGHT:
+            change_direction_to(Util.Direction.LEFT)
+
+func change_direction_to(new_direction: int) -> void:
+    match new_direction:
+        Util.Direction.LEFT:
             _animation_player.play_backwards('left_to_right')
-            direction = Util.Direction.LEFT
-            emit_signal('direction_changed_to', direction)
+
+        Util.Direction.RIGHT:
+            _animation_player.play('left_to_right')
+
+    direction = new_direction
+
+    emit_signal('direction_changed_to', direction)
