@@ -29,7 +29,7 @@ func _on_player_entered(player: Player) -> void:
 
             _closing_door.close()
 
-            _camera.detach_and_move_to_global(Vector2(320, 88))
+            _camera.detach_and_move_to_global(Vector2(320, 90))
 
             _spawn_slime_at(Vector2(320, 32))
             _spawn_slime_at(Vector2(248, 64))
