@@ -44,6 +44,7 @@ func move_to_end() -> void:
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
     yield(_tween, 'tween_completed')
+    yield(get_tree().create_timer(1.0), 'timeout')
     _location = Location.END
 
 func move_back_to_start() -> void:
@@ -53,6 +54,7 @@ func move_back_to_start() -> void:
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
     yield(_tween, 'tween_completed')
+    yield(get_tree().create_timer(1.0), 'timeout')
     _location = Location.START
 
 func _on_player_contact(player: Player) -> void:
