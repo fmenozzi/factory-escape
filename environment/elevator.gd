@@ -23,13 +23,13 @@ var _follow_point: Vector2 = Vector2.ZERO
 var _move_duration: float = MOVE_TO.length() / SPEED
 
 onready var _platform: KinematicBody2D = $Platform
-onready var _trigger_area: Area2D = $Platform/TriggerArea
+onready var _pressure_plate: Node2D = $Platform/PressurePlate
 onready var _summon_to_start_lever: Node2D = $SummonToStartLever
 onready var _summon_to_end_lever: Node2D = $SummonToEndLever
 onready var _tween: Tween = $MoveTween
 
 func _ready() -> void:
-    _trigger_area.connect('body_entered', self, '_on_player_contact')
+    _pressure_plate.connect('pressed', self, '_on_player_pressed_plate')
 
     _summon_to_start_lever.connect(
         'direction_changed_to', self, '_on_start_lever_activated')
@@ -70,10 +70,7 @@ func move_back_to_start() -> void:
     yield(get_tree().create_timer(1.0), 'timeout')
     _location = Location.START
 
-func _on_player_contact(player: Player) -> void:
-    if not player:
-        return
-
+func _on_player_pressed_plate() -> void:
     match _location:
         Location.START:
             move_to_end()
