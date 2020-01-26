@@ -19,6 +19,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 1 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("PlateBody/CollisionPolygon2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.03 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "disabled", true ],
+"method": "set_deferred"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "released"
@@ -35,6 +49,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("PlateBody/CollisionPolygon2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "disabled", false ],
+"method": "set_deferred"
+} ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -59,3 +87,12 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
 position = Vector2( 0, 6 )
 shape = SubResource( 2 )
+
+[node name="PlateBody" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlateBody"]
+position = Vector2( 0, 6 )
+rotation = -1.5708
+polygon = PoolVector2Array( 1, -5, 1, 5, -2, 8, -2, -8 )
