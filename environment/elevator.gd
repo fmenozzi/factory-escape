@@ -24,10 +24,17 @@ var _move_duration: float = MOVE_TO.length() / SPEED
 
 onready var _platform: KinematicBody2D = $Platform
 onready var _trigger_area: Area2D = $Platform/TriggerArea
+onready var _summon_to_start_lever: Node2D = $SummonToStartLever
+onready var _summon_to_end_lever: Node2D = $SummonToEndLever
 onready var _tween: Tween = $MoveTween
 
 func _ready() -> void:
     _trigger_area.connect('body_entered', self, '_on_player_contact')
+
+    _summon_to_start_lever.connect(
+        'direction_changed_to', self, '_on_start_lever_activated')
+    _summon_to_end_lever.connect(
+        'direction_changed_to', self, '_on_end_lever_activated')
 
 func _physics_process(delta: float) -> void:
     # Rather than interpolate the platform's position directly, which can cause
@@ -38,21 +45,27 @@ func _physics_process(delta: float) -> void:
         _follow_point, 0.1)
 
 func move_to_end() -> void:
+    _location = Location.MOVING
+
     _tween.remove_all()
     _tween.interpolate_property(
         self, '_follow_point', Vector2.ZERO, MOVE_TO, _move_duration,
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
+
     yield(_tween, 'tween_completed')
     yield(get_tree().create_timer(1.0), 'timeout')
     _location = Location.END
 
 func move_back_to_start() -> void:
+    _location = Location.MOVING
+
     _tween.remove_all()
     _tween.interpolate_property(
         self, '_follow_point', MOVE_TO, Vector2.ZERO, _move_duration,
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
+
     yield(_tween, 'tween_completed')
     yield(get_tree().create_timer(1.0), 'timeout')
     _location = Location.START
@@ -63,9 +76,15 @@ func _on_player_contact(player: Player) -> void:
 
     match _location:
         Location.START:
-            _location = Location.MOVING
             move_to_end()
 
         Location.END:
-            _location = Location.MOVING
             move_back_to_start()
+
+func _on_start_lever_activated(new_direction: int) -> void:
+    if _location == Location.END:
+        move_back_to_start()
+
+func _on_end_lever_activated(new_direction: int) -> void:
+    if _location == Location.START:
+        move_to_end()
