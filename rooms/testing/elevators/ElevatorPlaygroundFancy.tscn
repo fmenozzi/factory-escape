@@ -11,7 +11,7 @@ extents = Vector2( 160, 180 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 88, 72 )
 
-[node name="ElevatorPlaygroundFancy" index="0" instance=ExtResource( 1 )]
+[node name="ElevatorPlaygroundFancy" instance=ExtResource( 1 )]
 
 [node name="BackgroundSmall" parent="TileMaps" index="0"]
 tile_data = PoolIntArray( 65538, 65, 0, 65539, 65, 0, 65540, 1, 0, 65541, 1, 0, 65542, 65, 0, 65543, 65, 0, 131074, 66, 0, 131075, 65, 0, 131076, 1, 0, 131077, 3, 0, 131078, 65, 0, 131079, 65, 0, 196611, 66, 0, 196612, 2, 0, 196614, 66, 0, 196615, 65, 0, 262151, 66, 0, 327698, 55, 0, 393234, 56, 0, 458770, 62, 0, 524293, 26, 0, 524294, 27, 0, 524306, 62, 0, 589842, 19, 0, 1310728, 6, 0 )
