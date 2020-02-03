@@ -1,6 +1,9 @@
 tool
 extends Node2D
 
+signal started_shaking
+signal stopped_shaking
+
 const SHAKE_DURATION_SHORT := 0.1
 const SHAKE_DURATION_MEDIUM := 0.5
 const SHAKE_DURATION_LONG := 1.0
@@ -45,9 +48,13 @@ func shake(duration: float, freq: float, amplitude: float) -> void:
 
     _shake_once()
 
+    emit_signal('started_shaking')
+
 func stop() -> void:
     _reset_camera_offset()
     _shake_frequency_timer.stop()
+
+    emit_signal('stopped_shaking')
 
 func _shake_once() -> void:
     var damping := ease(
