@@ -1,18 +1,19 @@
 tool
 extends Node2D
+class_name Screenshake
 
 signal started_shaking
 signal stopped_shaking
 
-const SHAKE_DURATION_SHORT := 0.1
-const SHAKE_DURATION_MEDIUM := 0.5
-const SHAKE_DURATION_LONG := 1.0
+const DURATION_SHORT := 0.1
+const DURATION_MEDIUM := 0.5
+const DURATION_LONG := 1.0
 
-const SHAKE_FREQ := 20.0
+const FREQ := 20.0
 
-const SHAKE_AMPL_SMALL := 0.25 * Util.TILE_SIZE
-const SHAKE_AMPL_MEDIUM := 1.0 * Util.TILE_SIZE
-const SHAKE_AMPL_LARGE := 2.0 * Util.TILE_SIZE
+const AMPLITUDE_SMALL := 0.25 * Util.TILE_SIZE
+const AMPLITUDE_MEDIUM := 1.0 * Util.TILE_SIZE
+const AMPLITUDE_LARGE := 2.0 * Util.TILE_SIZE
 
 export(float, EASE) var damp_easing := 1.0
 

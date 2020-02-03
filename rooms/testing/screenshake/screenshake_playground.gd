@@ -35,22 +35,22 @@ func _start_shaking() -> void:
     var duration := 0.0
     match _duration_options.selected:
         0:
-            duration = _screenshake.SHAKE_DURATION_SHORT
+            duration = Screenshake.DURATION_SHORT
         1:
-            duration = _screenshake.SHAKE_DURATION_MEDIUM
+            duration = Screenshake.DURATION_MEDIUM
         2:
-            duration = _screenshake.SHAKE_DURATION_LONG
+            duration = Screenshake.DURATION_LONG
 
     var amplitude := 0.0
     match _amplitude_options.selected:
         0:
-            amplitude = _screenshake.SHAKE_AMPL_SMALL
+            amplitude = Screenshake.AMPLITUDE_SMALL
         1:
-            amplitude = _screenshake.SHAKE_AMPL_MEDIUM
+            amplitude = Screenshake.AMPLITUDE_MEDIUM
         2:
-            amplitude = _screenshake.SHAKE_AMPL_LARGE
+            amplitude = Screenshake.AMPLITUDE_LARGE
 
-    _camera.shake(duration, _screenshake.SHAKE_FREQ, amplitude)
+    _camera.shake(duration, Screenshake.FREQ, amplitude)
 
 func _stop_shaking() -> void:
     _screenshake.stop()
