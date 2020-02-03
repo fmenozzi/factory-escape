@@ -45,6 +45,10 @@ func shake(duration: float, freq: float, amplitude: float) -> void:
 
     _shake_once()
 
+func stop() -> void:
+    _reset_camera_offset()
+    _shake_frequency_timer.stop()
+
 func _shake_once() -> void:
     var damping := ease(
         _shake_duration_timer.time_left / _shake_duration_timer.wait_time,
@@ -70,5 +74,4 @@ func _on_frequency_timeout() -> void:
     _shake_once()
 
 func _on_duration_timeout() -> void:
-    _reset_camera_offset()
-    _shake_frequency_timer.stop()
+    stop()
