@@ -1,8 +1,5 @@
 extends 'res://actors/enemies/state.gd'
 
-# Particle effect that emits once the slime lands.
-const LandingPuff := preload('res://sfx/LandingPuff.tscn')
-
 # TODO: Use same gravity as player.
 const GRAVITY: float = 700.0
 const TERMINAL_VELOCITY: float = 20.0 * Util.TILE_SIZE
@@ -17,7 +14,7 @@ func exit(slime: Slime) -> void:
 
 func update(slime: Slime, delta: float) -> Dictionary:
     if slime.is_on_floor():
-        Util.spawn_particles(LandingPuff.instance(), slime)
+        slime.emit_dust_puff()
         return {'new_state': Slime.State.WALK}
 
     _velocity.y = min(_velocity.y + GRAVITY * delta, TERMINAL_VELOCITY)

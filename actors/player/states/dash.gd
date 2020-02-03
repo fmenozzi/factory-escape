@@ -14,7 +14,6 @@ var DASH_SPEED: float
 var DASH_ECHO_DELAY: float = 0.05
 
 const DashEcho = preload('res://actors/player/DashEcho.tscn')
-const DashPuff = preload('res://sfx/DashPuff.tscn')
 
 onready var _dash_duration_timer: Timer = $DashDurationTimer
 onready var _dash_echo_timer: Timer = $DashEchoTimer
@@ -37,14 +36,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _dash_echo_timer.start()
     player.get_dash_cooldown_timer().stop()
 
-    # Instance a new dash puff on every dash.
-    var dash_puff = DashPuff.instance()
-    dash_puff.position = Vector2(0, -8)
-    var dash_puff_speed := abs(dash_puff.process_material.initial_velocity)
-    dash_puff.process_material.initial_velocity =\
-        dash_puff_speed * player.get_direction()
-
-    Util.spawn_particles(dash_puff, player)
+    player.emit_dash_puff()
 
     # Reset player velocity.
     player.velocity = Vector2.ZERO

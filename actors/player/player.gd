@@ -78,6 +78,8 @@ onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 onready var _floor_proximity_detector: RayCast2D = $FloorProximityDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
+onready var _landing_puff: Particles2D = $LandingPuff
+onready var _dash_puff: Particles2D = $DashPuff
 
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
@@ -217,6 +219,12 @@ func get_wall_normal_front() -> Vector2:
 func get_wall_normal_back() -> Vector2:
     return _wall_proximity_detector.get_wall_normal_back()
 
+func emit_landing_puff() -> void:
+    _landing_puff.restart()
+
+func emit_dash_puff() -> void:
+    _dash_puff.restart()
+
 func start_attack() -> void:
     _enemies_hit.clear()
     get_animation_player().play('attack')
@@ -256,6 +264,10 @@ func set_direction(direction: int) -> void:
     # Flip wall detector raycasts.
     if direction in [-1, 1]:
         _wall_proximity_detector.set_direction(direction)
+
+    # Flip emission direction of dash puff.
+    var dash_puff_speed := abs(_dash_puff.process_material.initial_velocity)
+    _dash_puff.process_material.initial_velocity = dash_puff_speed * direction
 
     # Flip all "y-axis mirrored" nodes.
     if direction in [-1, 1]:

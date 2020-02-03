@@ -1,7 +1,5 @@
 extends 'res://actors/player/states/state.gd'
 
-const LandingPuff := preload('res://sfx/LandingPuff.tscn')
-
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Set initial jump velocity to max jump velocity (releasing the jump button
     # will cause the velocity to "cut", allowing for variable-height jumps).
@@ -15,7 +13,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.get_animation_player().play('jump')
 
     # Emit a jump puff.
-    Util.spawn_particles(LandingPuff.instance(), player)
+    player.emit_landing_puff()
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.consume_jump()

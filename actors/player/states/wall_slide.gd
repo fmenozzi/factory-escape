@@ -1,7 +1,5 @@
 extends 'res://actors/player/states/state.gd'
 
-const TakeoffPuff := preload('res://sfx/LandingPuff.tscn')
-
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
@@ -29,7 +27,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_dash'):
         # Flip the player to face away from the wall before dashing.
         player.set_direction(-1 * player.get_direction())
-        Util.spawn_particles(TakeoffPuff.instance(), player)
+        player.emit_landing_puff()
         return {'new_state': Player.State.DASH}
     # Let the player exit wall slide by moving away from the wall.
     elif event.is_action_pressed('player_move_left'):

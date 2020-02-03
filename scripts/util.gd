@@ -64,17 +64,6 @@ func get_ingame_resolution() -> Vector2:
 
     return Vector2(w, h)
 
-# Start the one-shot particle effect and then wait for it to finish before
-# freeing it.
-func spawn_particles(particles: Particles2D, parent: Node2D) -> void:
-    assert(particles.one_shot)
-
-    parent.add_child(particles)
-
-    particles.emitting = true
-    yield(get_tree().create_timer(particles.lifetime * 2), 'timeout')
-    particles.queue_free()
-
 # Gets the x-direction of the "to" node relative to the "from" node.
 func direction(from: Node2D, to: Node2D) -> int:
     return int(sign((to.global_position - from.global_position).x))

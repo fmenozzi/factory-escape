@@ -1,7 +1,5 @@
 extends 'res://actors/player/states/state.gd'
 
-const LandingPuff := preload('res://sfx/LandingPuff.tscn')
-
 var velocity: Vector2 = Vector2.ZERO
 
 var grapple_point: GrapplePoint = null
@@ -76,11 +74,11 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(velocity, Util.NO_SNAP)
 
     if player.is_on_ground():
-        Util.spawn_particles(LandingPuff.instance(), player)
+        player.emit_landing_puff()
         return {'new_state': Player.State.IDLE}
 
     if player.is_on_wall():
-        Util.spawn_particles(LandingPuff.instance(), player)
+        player.emit_landing_puff()
         return {'new_state': Player.State.WALL_SLIDE}
 
     if velocity.y > 0:

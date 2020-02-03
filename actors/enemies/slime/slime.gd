@@ -29,6 +29,8 @@ var _direction_from_hit: int = Util.Direction.NONE
 
 onready var _flash_manager: Node = $FlashManager
 
+onready var _dust_puff: Particles2D = $DustPuff
+
 onready var _health: Health = $Health
 onready var _hurtbox: Area2D = $Hurtbox
 
@@ -84,6 +86,9 @@ func is_off_ledge() -> bool:
     var off_right := not _edge_raycast_right.is_colliding()
 
     return (off_left and not off_right) or (off_right and not off_left)
+
+func emit_dust_puff() -> void:
+    _dust_puff.restart()
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum

@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -23,6 +23,8 @@
 [ext_resource path="res://actors/player/states/rest.gd" type="Script" id=21]
 [ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=22]
 [ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=23]
+[ext_resource path="res://sfx/LandingPuff.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sfx/DashPuff.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -404,6 +406,8 @@ script = ExtResource( 1 )
 
 [node name="FlashManager" parent="." instance=ExtResource( 3 )]
 sprite_path = NodePath("../Sprite")
+total_duration = 2.0
+single_flash_duration = 0.075
 flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
 [node name="PhysicsManager" type="Node" parent="."]
@@ -554,6 +558,11 @@ script = ExtResource( 21 )
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
+
+[node name="LandingPuff" parent="." instance=ExtResource( 24 )]
+
+[node name="DashPuff" parent="." instance=ExtResource( 25 )]
+position = Vector2( 0, -8 )
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
 script = ExtResource( 23 )

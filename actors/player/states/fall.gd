@@ -1,8 +1,5 @@
 extends 'res://actors/player/states/state.gd'
 
-# Particle effect that emits once the player lands.
-const LandingPuff := preload('res://sfx/LandingPuff.tscn')
-
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
@@ -51,7 +48,7 @@ func update(player: Player, delta: float) -> Dictionary:
 
     # Once we hit the ground, emit the landing puff and switch to 'idle' state.
     if player.is_on_ground():
-        Util.spawn_particles(LandingPuff.instance(), player)
+        player.emit_landing_puff()
         return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
