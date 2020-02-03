@@ -18,7 +18,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 color_ramp = SubResource( 2 )
 
-[node name="LandingPuff" type="Particles2D"]
+[node name="DustPuff" type="Particles2D"]
 show_behind_parent = true
 rotation = -1.5708
 emitting = false

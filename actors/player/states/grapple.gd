@@ -74,11 +74,11 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(velocity, Util.NO_SNAP)
 
     if player.is_on_ground():
-        player.emit_landing_puff()
+        player.emit_dust_puff()
         return {'new_state': Player.State.IDLE}
 
     if player.is_on_wall():
-        player.emit_landing_puff()
+        player.emit_dust_puff()
         return {'new_state': Player.State.WALL_SLIDE}
 
     if velocity.y > 0:

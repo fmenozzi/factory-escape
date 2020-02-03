@@ -23,7 +23,7 @@
 [ext_resource path="res://actors/player/states/rest.gd" type="Script" id=21]
 [ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=22]
 [ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=23]
-[ext_resource path="res://sfx/LandingPuff.tscn" type="PackedScene" id=24]
+[ext_resource path="res://sfx/DustPuff.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sfx/DashPuff.tscn" type="PackedScene" id=25]
 
 [sub_resource type="Animation" id=1]
@@ -559,7 +559,7 @@ show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
 
-[node name="LandingPuff" parent="." instance=ExtResource( 24 )]
+[node name="DustPuff" parent="." instance=ExtResource( 24 )]
 
 [node name="DashPuff" parent="." instance=ExtResource( 25 )]
 position = Vector2( 0, -8 )

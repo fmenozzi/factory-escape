@@ -48,7 +48,7 @@ func update(player: Player, delta: float) -> Dictionary:
 
     # Once we hit the ground, emit the landing puff and switch to 'idle' state.
     if player.is_on_ground():
-        player.emit_landing_puff()
+        player.emit_dust_puff()
         return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.

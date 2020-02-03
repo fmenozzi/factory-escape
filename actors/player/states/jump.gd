@@ -13,7 +13,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.get_animation_player().play('jump')
 
     # Emit a jump puff.
-    player.emit_landing_puff()
+    player.emit_dust_puff()
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.consume_jump()

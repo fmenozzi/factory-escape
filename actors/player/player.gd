@@ -78,7 +78,7 @@ onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 onready var _floor_proximity_detector: RayCast2D = $FloorProximityDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
-onready var _landing_puff: Particles2D = $LandingPuff
+onready var _dust_puff: Particles2D = $DustPuff
 onready var _dash_puff: Particles2D = $DashPuff
 
 onready var _grapple_rope: Line2D = $GrappleRope
@@ -219,8 +219,8 @@ func get_wall_normal_front() -> Vector2:
 func get_wall_normal_back() -> Vector2:
     return _wall_proximity_detector.get_wall_normal_back()
 
-func emit_landing_puff() -> void:
-    _landing_puff.restart()
+func emit_dust_puff() -> void:
+    _dust_puff.restart()
 
 func emit_dash_puff() -> void:
     _dash_puff.restart()

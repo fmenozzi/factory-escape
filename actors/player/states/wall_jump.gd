@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # TODO: Add wall jump puff.
-    player.emit_landing_puff()
+    player.emit_dust_puff()
 
     # Set initial jump velocity to max jump velocity (releasing the jump button
     # will cause the velocity to "cut", allowing for variable-height jumps).
