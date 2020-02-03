@@ -11,6 +11,8 @@ const SHAKE_AMPL_SMALL := 0.25 * Util.TILE_SIZE
 const SHAKE_AMPL_MEDIUM := 1.0 * Util.TILE_SIZE
 const SHAKE_AMPL_LARGE := 2.0 * Util.TILE_SIZE
 
+export(float, EASE) var damp_easing := 1.0
+
 export(NodePath) var camera_path := NodePath('')
 var _camera: Camera2D = null
 
@@ -44,9 +46,13 @@ func shake(duration: float, freq: float, amplitude: float) -> void:
     _shake_once()
 
 func _shake_once() -> void:
+    var damping := ease(
+        _shake_duration_timer.time_left / _shake_duration_timer.wait_time,
+        damp_easing)
+
     var rand := Vector2(
-        rand_range(-_amplitude, _amplitude),
-        rand_range(-_amplitude, _amplitude))
+        damping * rand_range(-_amplitude, _amplitude),
+        damping * rand_range(-_amplitude, _amplitude))
 
     _offset_tween.interpolate_property(
         _camera, 'offset', _camera.offset, rand,
