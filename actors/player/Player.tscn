@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=23]
 [ext_resource path="res://sfx/DustPuff.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sfx/DashPuff.tscn" type="PackedScene" id=25]
+[ext_resource path="res://actors/player/Screenshake.tscn" type="PackedScene" id=26]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -482,6 +483,8 @@ drag_margin_bottom = 0.0
 script = ExtResource( 7 )
 
 [node name="PositionTween" type="Tween" parent="CameraAnchor/Camera2D"]
+
+[node name="Screenshake" parent="CameraAnchor/Camera2D" instance=ExtResource( 26 )]
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=[
 "mirror_y_axis",
