@@ -61,7 +61,9 @@ position = Vector2( 128, 72 )
 
 [node name="MovingPlatformSmall2" parent="MovingPlatforms" index="1" instance=ExtResource( 4 )]
 position = Vector2( 80, 72 )
-MOVE_TO = Vector2( 0, 64 )
+
+[node name="Destination" parent="MovingPlatforms/MovingPlatformSmall2" index="2"]
+position = Vector2( 0, 64 )
 
 [node name="Spikes" parent="Hazards" index="0" instance=ExtResource( 5 )]
 position = Vector2( 232, 144 )
@@ -96,5 +98,7 @@ one_way_collision = true
 [editable path="TileMaps"]
 
 [editable path="GrapplePoints/GrapplePoint"]
+
+[editable path="MovingPlatforms/MovingPlatformSmall2"]
 
 [editable path="HazardCheckpoints/HazardCheckpoint"]

@@ -7,9 +7,6 @@ enum Location {
 }
 var _location: int = Location.START
 
-# The local offset defining where the elevator will move to.
-export(Vector2) var MOVE_TO := 8 * Util.TILE_SIZE * Vector2.UP
-
 # The speed in pixels per second at which the platform travels.
 export(float) var SPEED := 2.0 * Util.TILE_SIZE
 
@@ -20,15 +17,18 @@ var _follow_point: Vector2 = Vector2.ZERO
 
 # The time in seconds it takes the elevator to move from its origin to its
 # destination (or vice versa).
-var _move_duration: float = MOVE_TO.length() / SPEED
+var _move_duration: float
 
 onready var _platform: KinematicBody2D = $Platform
 onready var _pressure_plate: Node2D = $Platform/PressurePlate
+onready var _destination: Position2D = $Destination
 onready var _summon_to_start_lever: Node2D = $SummonToStartLever
 onready var _summon_to_end_lever: Node2D = $SummonToEndLever
 onready var _tween: Tween = $MoveTween
 
 func _ready() -> void:
+    _move_duration = _destination.position.length() / SPEED
+
     _pressure_plate.connect('pressed', self, '_on_player_pressed_plate')
 
     _summon_to_start_lever.connect(
@@ -49,8 +49,8 @@ func move_to_end() -> void:
 
     _tween.remove_all()
     _tween.interpolate_property(
-        self, '_follow_point', Vector2.ZERO, MOVE_TO, _move_duration,
-        Tween.TRANS_LINEAR, Tween.EASE_IN)
+        self, '_follow_point', Vector2.ZERO, _destination.position,
+        _move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
 
     yield(_tween, 'tween_completed')
@@ -62,8 +62,8 @@ func move_back_to_start() -> void:
 
     _tween.remove_all()
     _tween.interpolate_property(
-        self, '_follow_point', MOVE_TO, Vector2.ZERO, _move_duration,
-        Tween.TRANS_LINEAR, Tween.EASE_IN)
+        self, '_follow_point', _destination.position, Vector2.ZERO,
+        _move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
 
     yield(_tween, 'tween_completed')

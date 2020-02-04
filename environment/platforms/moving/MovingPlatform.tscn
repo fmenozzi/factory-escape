@@ -18,3 +18,6 @@ motion/sync_to_physics = true
 repeat = true
 playback_process_mode = 0
 playback/repeat = true
+
+[node name="Destination" type="Position2D" parent="."]
+position = Vector2( 64, 0 )

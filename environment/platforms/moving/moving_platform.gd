@@ -3,9 +3,6 @@ extends Node2D
 # The amount of time in seconds that the platform will idle before moving again.
 export(float) var IDLE_DURATION := 1.0
 
-# The local offset defining where the platform will move.
-export(Vector2) var MOVE_TO := 4 * Util.TILE_SIZE * Vector2.RIGHT
-
 # The speed in pixels per second at which the platform travels.
 export(float) var SPEED := 2.0 * Util.TILE_SIZE
 
@@ -15,20 +12,22 @@ export(float) var SPEED := 2.0 * Util.TILE_SIZE
 var _follow_point: Vector2 = Vector2.ZERO
 
 onready var _platform: KinematicBody2D = $Platform
+onready var _destination: Position2D = $Destination
 onready var _tween: Tween = $MoveTween
 
 func _ready() -> void:
-    var move_duration := MOVE_TO.length() / SPEED
+    var move_duration := _destination.position.length() / SPEED
 
     # Idle and then move the platform to the MOVE_TO point.
     _tween.interpolate_property(
-        self, "_follow_point", Vector2.ZERO, MOVE_TO, move_duration,
-        Tween.TRANS_LINEAR, Tween.EASE_IN, IDLE_DURATION)
+        self, "_follow_point", Vector2.ZERO, _destination.position,
+        move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN, IDLE_DURATION)
 
     # Idle and then move the platform back to the starting point.
     _tween.interpolate_property(
-        self, "_follow_point", MOVE_TO, Vector2.ZERO, move_duration,
-        Tween.TRANS_LINEAR, Tween.EASE_IN, move_duration + (2 * IDLE_DURATION))
+        self, "_follow_point", _destination.position, Vector2.ZERO,
+        move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN,
+        move_duration + (2 * IDLE_DURATION))
 
     _tween.start()
 

@@ -27,6 +27,9 @@ shape = SubResource( 1 )
 
 [node name="MoveTween" type="Tween" parent="."]
 
+[node name="Destination" type="Position2D" parent="."]
+position = Vector2( 0, -128 )
+
 [node name="SummonToStartLever" parent="." instance=ExtResource( 4 )]
 position = Vector2( -32, 0 )
 

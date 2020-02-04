@@ -38,9 +38,11 @@ shape = SubResource( 2 )
 
 [node name="Elevator" parent="." index="9" instance=ExtResource( 3 )]
 position = Vector2( 240, 160 )
-MOVE_TO = Vector2( 0, 144 )
 
-[node name="SummonToEndLever" parent="Elevator" index="3"]
+[node name="Destination" parent="Elevator" index="2"]
+position = Vector2( 0, 144 )
+
+[node name="SummonToEndLever" parent="Elevator" index="4"]
 position = Vector2( -32, 144 )
 
 [node name="Player" parent="." index="10" instance=ExtResource( 4 )]
