@@ -5,6 +5,11 @@ class_name Screenshake
 signal started_shaking
 signal stopped_shaking
 
+enum Priority {
+    LOW,
+    HIGH,
+}
+
 const DURATION_SHORT := 0.1
 const DURATION_MEDIUM := 0.5
 const DURATION_LONG := 1.0
@@ -21,6 +26,7 @@ export(NodePath) var camera_path := NodePath('')
 var _camera: Camera2D = null
 
 var _amplitude: float
+var _priority: int = Priority.LOW
 
 onready var _offset_tween: Tween = $OffsetTween
 onready var _shake_frequency_timer: Timer = $FrequencyTimer
@@ -38,11 +44,19 @@ func _ready() -> void:
     _shake_frequency_timer.connect('timeout', self, '_on_frequency_timeout')
     _shake_duration_timer.connect('timeout', self, '_on_duration_timeout')
 
-func shake(duration: float, freq: float, amplitude: float) -> void:
+func shake(
+    duration: float,
+    frequency: float,
+    amplitude: float,
+    priority: int = Priority.LOW
+) -> void:
+    if priority < _priority:
+        return
+
     _amplitude = amplitude
 
     _shake_duration_timer.wait_time = duration
-    _shake_frequency_timer.wait_time = 1.0 / freq
+    _shake_frequency_timer.wait_time = 1.0 / frequency
 
     _shake_duration_timer.start()
     _shake_frequency_timer.start()
@@ -54,6 +68,8 @@ func shake(duration: float, freq: float, amplitude: float) -> void:
 func stop() -> void:
     _reset_camera_offset()
     _shake_frequency_timer.stop()
+
+    _priority = Priority.LOW
 
     emit_signal('stopped_shaking')
 
