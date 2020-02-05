@@ -8,6 +8,12 @@ enum Type {
     STRONG,
 }
 
+enum Priority {
+    LOW,
+    HIGH,
+}
+var _priority: int = Priority.LOW
+
 var _timer: Timer
 
 var _is_rumbling := false
@@ -17,8 +23,13 @@ func _ready() -> void:
     _timer.one_shot = true
     add_child(_timer)
 
-func start(type: int, duration: float) -> void:
+func start(type: int, duration: float, priority: int = Priority.LOW) -> void:
     assert(type in [Type.WEAK, Type.STRONG])
+
+    if priority < _priority:
+        return
+
+    _priority = priority
 
     match type:
         Type.WEAK:
