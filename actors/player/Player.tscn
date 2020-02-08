@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://sfx/DashPuff.tscn" type="PackedScene" id=25]
 [ext_resource path="res://actors/player/Screenshake.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/grapple-rope.png" type="Texture" id=27]
+[ext_resource path="res://assets/grapple-hook.png" type="Texture" id=28]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -439,7 +440,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 87
+frame = 56
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -602,6 +603,10 @@ width = 16.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 27 )
 texture_mode = 1
+
+[node name="GrappleHook" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 28 )
 
 [node name="GrappleLineOfSight" type="RayCast2D" parent="."]
 position = Vector2( 0, -8 )

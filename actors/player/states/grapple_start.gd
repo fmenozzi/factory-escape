@@ -48,5 +48,15 @@ func draw_grapple_rope() -> void:
     grapple_rope.add_point(Vector2.ZERO)
     grapple_rope.add_point(grapple_point_pos - grapple_rope.global_position)
 
+    var grapple_hook: Sprite = _player.get_grapple_hook()
+    grapple_hook.position = grapple_point_pos - grapple_hook.global_position
+    grapple_hook.rotation = grapple_hook.position.angle()
+    grapple_hook.visible = true
+
 func clear_grapple_rope() -> void:
     _player.get_grapple_rope().clear_points()
+
+    var grapple_hook = _player.get_grapple_hook()
+    grapple_hook.visible = false
+    grapple_hook.position = Vector2.ZERO
+

@@ -82,6 +82,7 @@ onready var _dust_puff: Particles2D = $DustPuff
 onready var _dash_puff: Particles2D = $DashPuff
 
 onready var _grapple_rope: Line2D = $GrappleRope
+onready var _grapple_hook: Sprite = $GrappleHook
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
 onready var _health: Health = $Health
@@ -253,6 +254,9 @@ func get_wall_slide_trail() -> Particles2D:
 
 func get_grapple_rope() -> Line2D:
     return _grapple_rope
+
+func get_grapple_hook() -> Sprite:
+    return _grapple_hook
 
 func get_direction() -> int:
     return -1 if _sprite.flip_h else 1
