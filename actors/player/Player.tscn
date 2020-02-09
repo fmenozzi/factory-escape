@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://actors/player/Screenshake.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/grapple-rope.png" type="Texture" id=27]
 [ext_resource path="res://assets/grapple-hook.png" type="Texture" id=28]
+[ext_resource path="res://actors/player/states/walk_to_point.gd" type="Script" id=29]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -487,6 +488,7 @@ script = ExtResource( 7 )
 [node name="PositionTween" type="Tween" parent="CameraAnchor/Camera2D"]
 
 [node name="Screenshake" parent="CameraAnchor/Camera2D" instance=ExtResource( 26 )]
+damp_easing = 1.0
 
 [node name="AttackHitbox" type="Area2D" parent="." groups=[
 "mirror_y_axis",
@@ -554,6 +556,9 @@ script = ExtResource( 20 )
 script = ExtResource( 21 )
 
 [node name="RestingTimer" type="Timer" parent="States/Rest"]
+
+[node name="WalkToPoint" type="Node" parent="States"]
+script = ExtResource( 29 )
 
 [node name="DashCooldown" type="Timer" parent="."]
 
