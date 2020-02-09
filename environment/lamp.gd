@@ -6,10 +6,8 @@ signal rested_at_lamp(lamp)
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _light_sprite: Sprite = $LightSprite
-onready var _left_walk_to_point: Position2D = $LeftWalkToPoint
-onready var _right_walk_to_point: Position2D = $RightWalkToPoint
-onready var _left_light_point: Position2D = $LeftLightPoint
-onready var _right_light_point: Position2D = $RightLightPoint
+onready var _rest_walk_to_points: Node2D = $RestPoints
+onready var _light_walk_to_points: Node2D = $LightPoints
 onready var _player: Player = Util.get_player()
 
 var _is_lit := false
@@ -66,31 +64,11 @@ func light() -> void:
 func is_lit() -> bool:
     return _is_lit
 
-func get_closest_walk_to_point() -> Position2D:
-    var player_pos := _player.global_position
+func get_closest_rest_walk_to_point() -> Position2D:
+    return _rest_walk_to_points.get_closest_point()
 
-    var distance_to_left := player_pos.distance_to(
-        _left_walk_to_point.global_position)
-    var distance_to_right := player_pos.distance_to(
-        _right_walk_to_point.global_position)
-
-    if distance_to_left <= distance_to_right:
-        return _left_walk_to_point
-    else:
-        return _right_walk_to_point
-
-func get_closest_light_point() -> Position2D:
-    var player_pos := _player.global_position
-
-    var distance_to_left := player_pos.distance_to(
-        _left_light_point.global_position)
-    var distance_to_right := player_pos.distance_to(
-        _right_light_point.global_position)
-
-    if distance_to_left <= distance_to_right:
-        return _left_light_point
-    else:
-        return _right_light_point
+func get_closest_light_walk_to_point() -> Position2D:
+    return _light_walk_to_points.get_closest_point()
 
 func fade_in_label() -> void:
     _fade_in_out_label.fade_in()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://environment/lamp.gd" type="Script" id=1]
 [ext_resource path="res://shaders/lamp_ripple.shader" type="Shader" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/lamp.png" type="Texture" id=6]
 [ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sfx/LampEmbers.tscn" type="PackedScene" id=8]
+[ext_resource path="res://environment/WalkToPoints.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
@@ -171,14 +172,16 @@ show_behind_parent = true
 position = Vector2( 0, -8 )
 emitting = false
 
-[node name="LeftWalkToPoint" type="Position2D" parent="."]
-position = Vector2( -16, 0 )
+[node name="RestPoints" parent="." instance=ExtResource( 9 )]
 
-[node name="RightWalkToPoint" type="Position2D" parent="."]
-position = Vector2( 16, 0 )
+[node name="LightPoints" parent="." instance=ExtResource( 9 )]
 
-[node name="LeftLightPoint" type="Position2D" parent="."]
+[node name="Left" parent="LightPoints" index="0"]
 position = Vector2( -10, 0 )
 
-[node name="RightLightPoint" type="Position2D" parent="."]
+[node name="Right" parent="LightPoints" index="1"]
 position = Vector2( 10, 0 )
+
+[editable path="RestPoints"]
+
+[editable path="LightPoints"]

@@ -56,7 +56,7 @@ func _on_player_lit_lamp(lamp: Area2D) -> void:
 
     player.change_state({
         'new_state': Player.State.WALK_TO_POINT,
-        'stopping_point': lamp.get_closest_light_point(),
+        'stopping_point': lamp.get_closest_light_walk_to_point(),
     })
     yield(player, 'player_walked_to_point')
     yield(get_tree(), 'physics_frame')
@@ -81,7 +81,7 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
 
     player.change_state({
         'new_state': Player.State.WALK_TO_POINT,
-        'stopping_point': lamp.get_closest_walk_to_point(),
+        'stopping_point': lamp.get_closest_rest_walk_to_point(),
     })
     yield(player, 'player_walked_to_point')
     yield(get_tree(), 'physics_frame')
