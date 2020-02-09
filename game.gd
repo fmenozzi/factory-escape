@@ -13,6 +13,7 @@ func _ready() -> void:
     player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
 
     for lamp in get_tree().get_nodes_in_group('lamps'):
+        lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
 
 func _on_player_died() -> void:
@@ -44,6 +45,33 @@ func _on_player_hit_hazard() -> void:
     # do so here. This is done to prevent the player from jumping and being in
     # the air while the HAZARD_RECOVER animation plays.
     player.change_state({'new_state': Player.State.HAZARD_RECOVER})
+
+func _on_player_lit_lamp(lamp: Area2D) -> void:
+    lamp.set_process_unhandled_input(false)
+
+    # Fade out label text so that it can be changed and faded back
+    # in.
+    lamp.fade_out_label()
+
+    player.change_state({
+        'new_state': Player.State.WALK_TO_POINT,
+        'stopping_point': lamp.get_closest_light_point(),
+    })
+    yield(player, 'player_walked_to_point')
+    yield(get_tree(), 'physics_frame')
+
+    # Play light_lamp animation and wait for that to finish before
+    # the lamp actually lights.
+    #
+    # TODO: This might be better served as its own state.
+    var player_animation_player := player.get_animation_player()
+    player_animation_player.play('light_lamp')
+    yield(player_animation_player, 'animation_finished')
+    player_animation_player.play('idle')
+
+    lamp.light()
+
+    lamp.set_process_unhandled_input(true)
 
 func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     lamp.set_process_unhandled_input(false)

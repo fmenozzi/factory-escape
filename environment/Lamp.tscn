@@ -176,3 +176,9 @@ position = Vector2( -16, 0 )
 
 [node name="RightWalkToPoint" type="Position2D" parent="."]
 position = Vector2( 16, 0 )
+
+[node name="LeftLightPoint" type="Position2D" parent="."]
+position = Vector2( -10, 0 )
+
+[node name="RightLightPoint" type="Position2D" parent="."]
+position = Vector2( 10, 0 )

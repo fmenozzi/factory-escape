@@ -8,6 +8,8 @@ onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _light_sprite: Sprite = $LightSprite
 onready var _left_walk_to_point: Position2D = $LeftWalkToPoint
 onready var _right_walk_to_point: Position2D = $RightWalkToPoint
+onready var _left_light_point: Position2D = $LeftLightPoint
+onready var _right_light_point: Position2D = $RightLightPoint
 onready var _player: Player = Util.get_player()
 
 var _is_lit := false
@@ -28,37 +30,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
         if _player.get_nearby_lamp() == self:
             if not _is_lit:
-                set_process_unhandled_input(false)
-                _is_lit = true
-
-                # Make sure player is facing lamp.
-                _player.set_direction(Util.direction(_player, self))
-
-                # Fade out label text so that it can be changed and faded back
-                # in.
-                _fade_in_out_label.fade_out()
-
-                # Play light_lamp animation and wait for that to finish before
-                # the lamp actually lights.
-                #
-                # TODO: This might be better served as its own state.
-                var player_animation_player := _player.get_animation_player()
-                player_animation_player.play('light_lamp')
-                yield(player_animation_player, 'animation_finished')
-                player_animation_player.play('idle')
-
-                _light_sprite.visible = true
-                _animation_player.play('unlit_to_lit')
-                _animation_player.queue('lit')
-
-                # Wait until we've started the 'lit' animation before fading in
-                # new label text.
-                yield(_animation_player, 'animation_started')
-                _fade_in_out_label.set_text('Rest')
-                _fade_in_out_label.fade_in()
-
-                set_process_unhandled_input(true)
-
                 emit_signal('lamp_lit', self)
             else:
                 emit_signal('rested_at_lamp', self)
@@ -79,6 +50,22 @@ func _on_player_exited(player: Player) -> void:
 
     fade_out_label()
 
+func light() -> void:
+    _light_sprite.visible = true
+    _animation_player.play('unlit_to_lit')
+    _animation_player.queue('lit')
+
+    # Wait until we've started the 'lit' animation before fading in
+    # new label text.
+    yield(_animation_player, 'animation_started')
+    _fade_in_out_label.set_text('Rest')
+    fade_in_label()
+
+    _is_lit = true
+
+func is_lit() -> bool:
+    return _is_lit
+
 func get_closest_walk_to_point() -> Position2D:
     var player_pos := _player.global_position
 
@@ -91,6 +78,19 @@ func get_closest_walk_to_point() -> Position2D:
         return _left_walk_to_point
     else:
         return _right_walk_to_point
+
+func get_closest_light_point() -> Position2D:
+    var player_pos := _player.global_position
+
+    var distance_to_left := player_pos.distance_to(
+        _left_light_point.global_position)
+    var distance_to_right := player_pos.distance_to(
+        _right_light_point.global_position)
+
+    if distance_to_left <= distance_to_right:
+        return _left_light_point
+    else:
+        return _right_light_point
 
 func fade_in_label() -> void:
     _fade_in_out_label.fade_in()
