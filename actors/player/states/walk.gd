@@ -36,7 +36,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 
 func update(player: Player, delta: float) -> Dictionary:
     # Change to idle state if we stop moving.
-    var input_direction = Util.get_input_direction()
+    var input_direction = player.get_input_direction()
     if input_direction == Util.Direction.NONE:
         return {'new_state': Player.State.IDLE}
 

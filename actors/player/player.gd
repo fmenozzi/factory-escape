@@ -190,6 +190,15 @@ func current_state() -> int:
 func get_physics_manager() -> PhysicsManager:
     return _physics_manager
 
+# Get the current x-axis input direction. Returns +1 if player is moving right,
+# -1 if player is moving left, and 0 if player is not moving. These conveniently
+# correspond to Util.Direction.RIGHT, Util.Direction.LEFT, and
+# Util.Direction.NONE, respectively.
+func get_input_direction() -> int:
+    # For now, just calculate movement on the x-axis.
+    return int(Input.is_action_pressed('player_move_right')) - \
+           int(Input.is_action_pressed('player_move_left'))
+
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     self.velocity = .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 

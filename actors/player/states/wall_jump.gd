@@ -85,7 +85,7 @@ func update(player: Player, delta: float) -> Dictionary:
     # the player is given full control of the character.
     var direction := player.get_direction()
     if _fixed_velocity_timer.is_stopped():
-        var input_direction = Util.get_input_direction()
+        var input_direction = player.get_input_direction()
         if input_direction != Util.Direction.NONE:
             player.set_direction(input_direction)
             direction = input_direction

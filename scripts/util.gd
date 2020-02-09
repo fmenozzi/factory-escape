@@ -50,13 +50,6 @@ func _ready() -> void:
 
         i += 1
 
-# Get the current x-axis input direction. Returns +1 if player is moving right,
-# -1 if player is moving left, and 0 if player is not moving.
-func get_input_direction() -> int:
-    # For now, just calculate movement on the x-axis.
-    return int(Input.is_action_pressed('player_move_right')) - \
-           int(Input.is_action_pressed('player_move_left'))
-
 # Gets the in-game resolution from the project settings.
 func get_ingame_resolution() -> Vector2:
     var w = ProjectSettings.get_setting('display/window/size/width')

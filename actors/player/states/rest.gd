@@ -59,7 +59,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
-    if Util.get_input_direction() != Util.Direction.NONE:
+    if player.get_input_direction() != Util.Direction.NONE:
         return {'new_state': Player.State.IDLE}
 
     return {'new_state': Player.State.NO_CHANGE}

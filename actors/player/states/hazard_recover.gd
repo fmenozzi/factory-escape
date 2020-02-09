@@ -37,7 +37,7 @@ func update(player: Player, delta: float) -> Dictionary:
         return {'new_state': Player.State.IDLE}
 
     # Allow exiting early if player tries to move.
-    if Util.get_input_direction() != Util.Direction.NONE:
+    if player.get_input_direction() != Util.Direction.NONE:
         return {'new_state': Player.State.WALK}
 
     # Apply slight downward movement. This is important mostly for ensuring that

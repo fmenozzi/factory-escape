@@ -56,7 +56,7 @@ func update(player: Player, delta: float) -> Dictionary:
         return {'new_state': Player.State.WALL_SLIDE}
 
     # Move left or right.
-    var input_direction = Util.get_input_direction()
+    var input_direction = player.get_input_direction()
     if input_direction != Util.Direction.NONE:
         player.set_direction(input_direction)
     player.velocity.x = input_direction * physics_manager.get_movement_speed()
