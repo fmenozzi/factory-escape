@@ -23,7 +23,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.set_direction(_direction_to_stopping_point)
 
 func exit(player: Player) -> void:
-    pass
+    player.emit_signal('player_walked_to_point')
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}

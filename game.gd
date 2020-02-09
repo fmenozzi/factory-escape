@@ -46,14 +46,21 @@ func _on_player_hit_hazard() -> void:
     player.change_state({'new_state': Player.State.HAZARD_RECOVER})
 
 func _on_player_rested_at_lamp(lamp: Area2D) -> void:
-    print('Game Saved')
+    lamp.set_process_unhandled_input(false)
 
-    player.get_health().heal_to_full()
+    player.change_state({
+        'new_state': Player.State.WALK_TO_POINT,
+        'stopping_point': lamp.get_closest_walk_to_point(),
+    })
+    yield(player, 'player_walked_to_point')
+    yield(get_tree(), 'physics_frame')
 
     player.change_state({
         'new_state': Player.State.REST,
         'lamp': lamp,
     })
+
+    player.get_health().heal_to_full()
 
     # For now, simulate time spent saving game to disk by yielding for two
     # seconds as we start up the saving indicator. Once we actually have a save
@@ -63,3 +70,7 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     saving_indicator.show()
     yield(get_tree().create_timer(2.0), 'timeout')
     saving_indicator.hide()
+
+    lamp.set_process_unhandled_input(true)
+
+    print('Game Saved')

@@ -6,6 +6,8 @@ signal rested_at_lamp(lamp)
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _light_sprite: Sprite = $LightSprite
+onready var _left_walk_to_point: Position2D = $LeftWalkToPoint
+onready var _right_walk_to_point: Position2D = $RightWalkToPoint
 onready var _player: Player = Util.get_player()
 
 var _is_lit := false
@@ -76,6 +78,19 @@ func _on_player_exited(player: Player) -> void:
     player.set_nearby_lamp(null)
 
     fade_out_label()
+
+func get_closest_walk_to_point() -> Position2D:
+    var player_pos := _player.global_position
+
+    var distance_to_left := player_pos.distance_to(
+        _left_walk_to_point.global_position)
+    var distance_to_right := player_pos.distance_to(
+        _right_walk_to_point.global_position)
+
+    if distance_to_left <= distance_to_right:
+        return _left_walk_to_point
+    else:
+        return _right_walk_to_point
 
 func fade_in_label() -> void:
     _fade_in_out_label.fade_in()

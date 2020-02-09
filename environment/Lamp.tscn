@@ -170,3 +170,9 @@ margin_right = 32.0
 show_behind_parent = true
 position = Vector2( 0, -8 )
 emitting = false
+
+[node name="LeftWalkToPoint" type="Position2D" parent="."]
+position = Vector2( -16, 0 )
+
+[node name="RightWalkToPoint" type="Position2D" parent="."]
+position = Vector2( 16, 0 )

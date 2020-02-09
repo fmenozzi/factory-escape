@@ -3,6 +3,7 @@ class_name Player
 
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
+signal player_walked_to_point
 
 export(NodePath) var starting_room_path = ""
 
