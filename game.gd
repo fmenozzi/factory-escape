@@ -48,6 +48,7 @@ func _on_player_hit_hazard() -> void:
 
 func _on_player_lit_lamp(lamp: Area2D) -> void:
     lamp.set_process_unhandled_input(false)
+    player.set_process_unhandled_input(false)
 
     # Fade out label text so that it can be changed and faded back
     # in.
@@ -71,10 +72,12 @@ func _on_player_lit_lamp(lamp: Area2D) -> void:
 
     lamp.light()
 
+    player.set_process_unhandled_input(true)
     lamp.set_process_unhandled_input(true)
 
 func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     lamp.set_process_unhandled_input(false)
+    player.set_process_unhandled_input(false)
 
     player.change_state({
         'new_state': Player.State.WALK_TO_POINT,
@@ -100,5 +103,6 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     saving_indicator.hide()
 
     lamp.set_process_unhandled_input(true)
+    player.set_process_unhandled_input(true)
 
     print('Game Saved')

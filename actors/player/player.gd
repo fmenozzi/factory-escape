@@ -195,6 +195,13 @@ func get_physics_manager() -> PhysicsManager:
 # correspond to Util.Direction.RIGHT, Util.Direction.LEFT, and
 # Util.Direction.NONE, respectively.
 func get_input_direction() -> int:
+    # In situations where we explicitly set_process_unhandled_input(false), we
+    # also want to disable movement inputs as well, since those calls to
+    # get_input_direction() happen in each state's update() function instead of
+    # the handle_input() function that _unhandled_input(event) forwards to.
+    if not is_processing_unhandled_input():
+        return 0
+
     # For now, just calculate movement on the x-axis.
     return int(Input.is_action_pressed('player_move_right')) - \
            int(Input.is_action_pressed('player_move_left'))
