@@ -59,7 +59,19 @@ func _unhandled_input(event: InputEvent) -> void:
 
             # player_interact to open up the dialog box when near a sign.
             if event.is_action_pressed('player_interact'):
+                # Walk to closest reading point for sign.
+                set_process_unhandled_input(false)
+                _player.change_state({
+                    'new_state': Player.State.WALK_TO_POINT,
+                    'stopping_point': nearby_sign.get_closest_reading_point(),
+                })
+                yield(_player, 'player_walked_to_point')
+                yield(get_tree(), 'physics_frame')
+                set_process_unhandled_input(true)
+
+                # Ensure player is facing sign.
                 _player.set_direction(Util.direction(_player, nearby_sign))
+
                 nearby_sign.label_fade_out()
                 _start_dialog()
                 _current_state = State.ENABLED

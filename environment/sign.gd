@@ -9,6 +9,7 @@ const HIGHLIGHTED_LERP_AMOUNT := 1.0
 onready var _sprite: Sprite = $Sprite
 onready var _outline_tween: Tween = $Sprite/OutlineTween
 onready var _fade_in_out_label: Label = $FadeInOutLabel
+onready var _reading_points: Node2D = $WalkToPoints
 
 var _shader_manager: ShaderManager = ShaderManager.new()
 
@@ -55,6 +56,9 @@ func _modulate_sign_color(old: float, new: float) -> void:
     tween.interpolate_property(
         material, param, old, new, duration, trans, easing)
     tween.start()
+
+func get_closest_reading_point() -> Position2D:
+    return _reading_points.get_closest_point()
 
 func label_fade_in() -> void:
     _fade_in_out_label.fade_in()
