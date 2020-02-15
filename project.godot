@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "ElapsedTimer",
-"language": "GDScript",
-"path": "res://custom/scripts/elapsed_timer.gd"
-}, {
 "base": "Node2D",
 "class": "GrapplePoint",
 "language": "GDScript",
@@ -58,9 +53,13 @@ _global_script_classes=[ {
 "class": "Slime",
 "language": "GDScript",
 "path": "res://actors/enemies/slime/slime.gd"
+}, {
+"base": "Node",
+"class": "Stopwatch",
+"language": "GDScript",
+"path": "res://custom/nodes/stopwatch.gd"
 } ]
 _global_script_class_icons={
-"ElapsedTimer": "",
 "GrapplePoint": "",
 "Health": "",
 "Pause": "",
@@ -69,7 +68,8 @@ _global_script_class_icons={
 "Room": "",
 "Screenshake": "",
 "ShaderManager": "",
-"Slime": ""
+"Slime": "",
+"Stopwatch": ""
 }
 
 [application]

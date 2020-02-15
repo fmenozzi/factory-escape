@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/grapple-hook.png" type="Texture" id=28]
 [ext_resource path="res://actors/player/states/walk_to_point.gd" type="Script" id=29]
 [ext_resource path="res://actors/player/states/hard_landing.gd" type="Script" id=30]
+[ext_resource path="res://custom/nodes/Stopwatch.tscn" type="PackedScene" id=31]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -534,6 +535,8 @@ script = ExtResource( 11 )
 
 [node name="Fall" type="Node" parent="States"]
 script = ExtResource( 12 )
+
+[node name="FallTimeStopwatch" parent="States/Fall" instance=ExtResource( 31 )]
 
 [node name="Dash" type="Node" parent="States"]
 script = ExtResource( 13 )

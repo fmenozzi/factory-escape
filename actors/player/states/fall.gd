@@ -4,10 +4,7 @@ extends 'res://actors/player/states/state.gd'
 # instead of idle state upon touching the ground.
 const HARD_LANDING_FALL_DURATION: float = 1.0
 
-var _elapsed_timer := ElapsedTimer.new()
-
-func _ready() -> void:
-    add_child(_elapsed_timer)
+onready var _fall_time_stopwatch: Stopwatch = $FallTimeStopwatch
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -20,8 +17,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     else:
         player.get_animation_player().play('fall')
 
-    # Start the falling elapsed timer.
-    _elapsed_timer.start(ElapsedTimer.Process.PHYSICS)
+    # Start the fall time stopwatch.
+    _fall_time_stopwatch.start()
 
 func exit(player: Player) -> void:
     # In case we exit the fall state before the previously-playing attack
@@ -62,9 +59,7 @@ func update(player: Player, delta: float) -> Dictionary:
     # or 'hard landing' state, depending on how long we've been falling.
     if player.is_on_ground():
         player.emit_dust_puff()
-        var fall_time := _elapsed_timer.get_elapsed_time()
-        _elapsed_timer.stop()
-        if fall_time >= HARD_LANDING_FALL_DURATION:
+        if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
         else:
             return {'new_state': Player.State.IDLE}
