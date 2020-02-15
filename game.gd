@@ -69,6 +69,9 @@ func _on_player_lit_lamp(lamp: Area2D) -> void:
     yield(player, 'player_walked_to_point')
     yield(get_tree(), 'physics_frame')
 
+    # Ensure player is facing lamp.
+    player.set_direction(Util.direction(player, lamp))
+
     # Play light_lamp animation and wait for that to finish before
     # the lamp actually lights.
     #
