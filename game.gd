@@ -20,6 +20,14 @@ func _on_player_died() -> void:
     print('YOU DIED')
 
 func _on_player_hit_hazard() -> void:
+    player.get_camera().shake(
+        Screenshake.DURATION_MEDIUM,
+        Screenshake.FREQ,
+        Screenshake.AMPLITUDE_SMALL,
+        Screenshake.Priority.HIGH)
+
+    Rumble.start(Rumble.Type.STRONG, 0.25, Rumble.Priority.HIGH)
+
     screen_fadeout.fade_out()
     yield(screen_fadeout, 'fade_out_completed')
 
