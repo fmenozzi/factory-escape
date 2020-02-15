@@ -103,6 +103,8 @@ onready var _dash_echo_timer: Timer = $States/Dash/DashEchoTimer
 
 onready var _stagger_duration_timer: Timer = $States/Stagger/StaggerDurationTimer
 
+onready var _fall_time_stopwatch: Stopwatch = $States/Fall/FallTimeStopwatch
+
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
 # there are no valid grapple points for the player on a given frame, this is set
@@ -330,6 +332,8 @@ func pause() -> void:
     _dash_duration_timer.paused = true
     _dash_echo_timer.paused = true
     _stagger_duration_timer.paused = true
+
+    _fall_time_stopwatch.pause()
 func unpause() -> void:
     set_physics_process(true)
     set_process_unhandled_input(true)
@@ -343,6 +347,8 @@ func unpause() -> void:
     _dash_duration_timer.paused = false
     _dash_echo_timer.paused = false
     _stagger_duration_timer.paused = false
+
+    _fall_time_stopwatch.resume()
 
 # Functions providing a more readable and convenient interface for managing
 # dashes.

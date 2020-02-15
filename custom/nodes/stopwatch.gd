@@ -3,6 +3,8 @@ class_name Stopwatch
 
 signal stopwatch_started
 signal stopwatch_stopped
+signal stopwatch_paused
+signal stopwatch_resumed
 
 enum Process {
     IDLE,
@@ -38,6 +40,22 @@ func stop() -> float:
     emit_signal('stopwatch_stopped')
 
     return elapsed_time
+
+func pause() -> void:
+    set_process(false)
+    set_physics_process(false)
+
+    emit_signal('stopwatch_paused')
+
+func resume() -> void:
+    match process_mode:
+        Process.IDLE:
+            set_process(true)
+
+        Process.PHYSICS:
+            set_physics_process(true)
+
+    emit_signal('stopwatch_resumed')
 
 func get_elapsed_time() -> float:
     return _elapsed_time
