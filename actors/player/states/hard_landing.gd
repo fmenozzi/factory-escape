@@ -3,13 +3,11 @@ extends 'res://actors/player/states/state.gd'
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('hard_landing')
 
-    player.emit_dust_puff()
-
     # TODO: Maybe use the animation duration for the screenshake duration.
     player.get_camera().shake(
         Screenshake.DURATION_MEDIUM,
         Screenshake.FREQ,
-        Screenshake.AMPLITUDE_MEDIUM)
+        Screenshake.AMPLITUDE_SMALL)
 
 func exit(player: Player) -> void:
     pass

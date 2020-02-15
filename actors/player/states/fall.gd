@@ -1,5 +1,14 @@
 extends 'res://actors/player/states/state.gd'
 
+# If we fall for longer than this duration, transition to hard landing state
+# instead of idle state upon touching the ground.
+const HARD_LANDING_FALL_DURATION: float = 1.0
+
+var _elapsed_timer := ElapsedTimer.new()
+
+func _ready() -> void:
+    add_child(_elapsed_timer)
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
@@ -10,6 +19,9 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.get_animation_player().queue('fall')
     else:
         player.get_animation_player().play('fall')
+
+    # Start the falling elapsed timer.
+    _elapsed_timer.start(ElapsedTimer.Process.PHYSICS)
 
 func exit(player: Player) -> void:
     # In case we exit the fall state before the previously-playing attack
@@ -46,10 +58,16 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
 
-    # Once we hit the ground, emit the landing puff and switch to 'idle' state.
+    # Once we hit the ground, emit the landing puff and switch to either 'idle'
+    # or 'hard landing' state, depending on how long we've been falling.
     if player.is_on_ground():
         player.emit_dust_puff()
-        return {'new_state': Player.State.IDLE}
+        var fall_time := _elapsed_timer.get_elapsed_time()
+        _elapsed_timer.stop()
+        if fall_time >= HARD_LANDING_FALL_DURATION:
+            return {'new_state': Player.State.HARD_LANDING}
+        else:
+            return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
     if player.is_on_wall():
