@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/grapple-rope.png" type="Texture" id=27]
 [ext_resource path="res://assets/grapple-hook.png" type="Texture" id=28]
 [ext_resource path="res://actors/player/states/walk_to_point.gd" type="Script" id=29]
+[ext_resource path="res://actors/player/states/hard_landing.gd" type="Script" id=30]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -559,6 +560,9 @@ script = ExtResource( 21 )
 
 [node name="WalkToPoint" type="Node" parent="States"]
 script = ExtResource( 29 )
+
+[node name="HardLanding" type="Node" parent="States"]
+script = ExtResource( 30 )
 
 [node name="DashCooldown" type="Timer" parent="."]
 

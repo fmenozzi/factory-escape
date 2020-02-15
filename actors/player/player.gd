@@ -27,6 +27,7 @@ enum State {
     HAZARD_RECOVER,
     REST,
     WALK_TO_POINT,
+    HARD_LANDING,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -46,6 +47,7 @@ onready var STATES = {
     State.HAZARD_RECOVER: $States/HazardRecover,
     State.REST:           $States/Rest,
     State.WALK_TO_POINT:  $States/WalkToPoint,
+    State.HARD_LANDING:   $States/HardLanding,
 }
 
 var current_state: Node = null
