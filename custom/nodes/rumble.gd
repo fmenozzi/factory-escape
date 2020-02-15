@@ -34,7 +34,7 @@ func start(type: int, duration: float, priority: int = Priority.LOW) -> void:
             Input.start_joy_vibration(0, 0.25, 0, duration)
 
         Type.STRONG:
-            Input.start_joy_vibration(0, 0, 0.25, duration)
+            Input.start_joy_vibration(0, 0.50, 0, duration)
 
     _timer.wait_time = duration
     _timer.start()
