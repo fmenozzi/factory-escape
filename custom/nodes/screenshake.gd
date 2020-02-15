@@ -32,7 +32,7 @@ func _ready() -> void:
     _shake_frequency_timer.connect('timeout', self, '_on_frequency_timeout')
     _shake_duration_timer.connect('timeout', self, '_on_duration_timeout')
 
-func shake(
+func start(
     duration: float,
     frequency: float,
     amplitude: float,
