@@ -50,6 +50,7 @@ func stop() -> void:
     Input.stop_joy_vibration(0)
 
     _is_rumbling = false
+    _priority = Priority.LOW
 
     emit_signal('rumble_stopped')
 
