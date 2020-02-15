@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -201,6 +201,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 59, 58, 57 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "hard_landing"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 17, 16, 17 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -425,6 +440,7 @@ anims/fall = SubResource( 3 )
 anims/grapple_launch_long = SubResource( 4 )
 anims/grapple_launch_short = SubResource( 5 )
 anims/grapple_pull = SubResource( 6 )
+anims/hard_landing = SubResource( 21 )
 anims/hazard_hit = SubResource( 7 )
 anims/hazard_recover = SubResource( 8 )
 anims/idle = SubResource( 9 )
@@ -442,7 +458,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 56
+frame = 17
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
