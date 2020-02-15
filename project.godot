@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Screenshake",
 "language": "GDScript",
-"path": "res://actors/player/screenshake.gd"
+"path": "res://custom/nodes/screenshake.gd"
 }, {
 "base": "Node",
 "class": "ShaderManager",

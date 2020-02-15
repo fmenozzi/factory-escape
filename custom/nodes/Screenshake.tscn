@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://actors/player/screenshake.gd" type="Script" id=1]
+[ext_resource path="res://custom/nodes/screenshake.gd" type="Script" id=1]
+
 
 [node name="Screenshake" type="Node2D"]
 script = ExtResource( 1 )
