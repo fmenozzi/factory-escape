@@ -14,14 +14,12 @@ enum Priority {
 }
 var _priority: int = Priority.LOW
 
-var _timer: Timer
-
 var _is_rumbling := false
 
+onready var _timer: Timer = $Timer
+
 func _ready() -> void:
-    _timer = Timer.new()
-    _timer.one_shot = true
-    add_child(_timer)
+    _timer.connect('timeout', self, '_on_rumble_timeout')
 
 func start(type: int, duration: float, priority: int = Priority.LOW) -> void:
     assert(type in [Type.WEAK, Type.STRONG])
@@ -39,7 +37,6 @@ func start(type: int, duration: float, priority: int = Priority.LOW) -> void:
             Input.start_joy_vibration(0, 0, 0.25, duration)
 
     _timer.wait_time = duration
-    _timer.connect('timeout', self, '_on_rumble_timeout')
     _timer.start()
 
     _is_rumbling = true

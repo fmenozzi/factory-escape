@@ -81,7 +81,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Util="*res://custom/scripts/util.gd"
-Rumble="*res://custom/scripts/rumble.gd"
+Rumble="*res://custom/nodes/Rumble.tscn"
 
 [display]
 
