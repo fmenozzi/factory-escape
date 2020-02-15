@@ -3,6 +3,8 @@ extends 'res://actors/player/states/state.gd'
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('hard_landing')
 
+    Rumble.start(Rumble.Type.WEAK, 0.25)
+
     # TODO: Maybe use the animation duration for the screenshake duration.
     player.get_camera().shake(
         Screenshake.DURATION_MEDIUM,
