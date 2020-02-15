@@ -2,10 +2,8 @@
 
 [ext_resource path="res://custom/nodes/screenshake.gd" type="Script" id=1]
 
-
-[node name="Screenshake" type="Node2D"]
+[node name="Screenshake" type="Node"]
 script = ExtResource( 1 )
-camera_path = NodePath("..")
 
 [node name="OffsetTween" type="Tween" parent="."]
 

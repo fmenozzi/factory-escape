@@ -20,7 +20,7 @@ func _on_player_died() -> void:
     print('YOU DIED')
 
 func _on_player_hit_hazard() -> void:
-    player.get_camera().shake(
+    Screenshake.shake(
         Screenshake.DURATION_MEDIUM,
         Screenshake.FREQ,
         Screenshake.AMPLITUDE_SMALL,

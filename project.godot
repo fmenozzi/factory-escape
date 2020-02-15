@@ -39,11 +39,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://rooms/room.gd"
 }, {
-"base": "Node2D",
-"class": "Screenshake",
-"language": "GDScript",
-"path": "res://custom/nodes/screenshake.gd"
-}, {
 "base": "Node",
 "class": "ShaderManager",
 "language": "GDScript",
@@ -66,7 +61,6 @@ _global_script_class_icons={
 "PhysicsManager": "",
 "Player": "",
 "Room": "",
-"Screenshake": "",
 "ShaderManager": "",
 "Slime": "",
 "Stopwatch": ""
@@ -82,6 +76,7 @@ config/icon="res://icon.png"
 
 Util="*res://custom/scripts/util.gd"
 Rumble="*res://custom/nodes/Rumble.tscn"
+Screenshake="*res://custom/nodes/Screenshake.tscn"
 
 [display]
 

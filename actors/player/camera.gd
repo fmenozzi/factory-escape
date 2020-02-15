@@ -3,18 +3,9 @@ extends Camera2D
 signal transition_completed
 
 onready var _player: Player = get_parent().get_parent()
-onready var _screenshake: Node2D = $Screenshake
 onready var _tween: Tween = $PositionTween
 
 var _original_local_anchor_pos: Vector2 = Vector2.ZERO
-
-func shake(
-    duration: float,
-    frequency: float,
-    amplitude: float,
-    priority: int = Screenshake.Priority.LOW
-) -> void:
-    _screenshake.shake(duration, frequency, amplitude, priority)
 
 func detach_and_move_to_global(new_global_pos: Vector2) -> void:
     self.set_as_toplevel(true)

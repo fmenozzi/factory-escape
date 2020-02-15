@@ -6,7 +6,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     Rumble.start(Rumble.Type.WEAK, 0.25)
 
     # TODO: Maybe use the animation duration for the screenshake duration.
-    player.get_camera().shake(
+    Screenshake.shake(
         Screenshake.DURATION_MEDIUM,
         Screenshake.FREQ,
         Screenshake.AMPLITUDE_SMALL)

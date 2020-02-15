@@ -76,7 +76,7 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 onready var _dash_cooldown_timer: Timer = $DashCooldown
 
-onready var _camera_anchor: Position2D = $CameraAnchor
+onready var _camera: Camera2D = $CameraAnchor/Camera2D
 
 onready var _wall_proximity_detector: Node2D = $WallProximityDetector
 
@@ -265,7 +265,7 @@ func get_animation_player() -> AnimationPlayer:
     return _animation_player
 
 func get_camera() -> Camera2D:
-    return _camera_anchor.get_node('Camera2D') as Camera2D
+    return _camera
 
 func get_dash_cooldown_timer() -> Timer:
     return _dash_cooldown_timer as Timer

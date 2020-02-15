@@ -1,6 +1,4 @@
-tool
-extends Node2D
-class_name Screenshake
+extends Node
 
 signal started_shaking
 signal stopped_shaking
@@ -22,25 +20,15 @@ const AMPLITUDE_LARGE := 2.0 * Util.TILE_SIZE
 
 export(float, EASE) var damp_easing := 1.0
 
-export(NodePath) var camera_path := NodePath('')
-var _camera: Camera2D = null
-
 var _amplitude: float
 var _priority: int = Priority.LOW
 
 onready var _offset_tween: Tween = $OffsetTween
 onready var _shake_frequency_timer: Timer = $FrequencyTimer
 onready var _shake_duration_timer: Timer = $DurationTimer
-
-func _get_configuration_warning() -> String:
-    if camera_path.is_empty():
-        return 'Must provide path to Camera2D to shake!'
-
-    return ''
+onready var _camera: Camera2D
 
 func _ready() -> void:
-    _camera = get_node(camera_path)
-
     _shake_frequency_timer.connect('timeout', self, '_on_frequency_timeout')
     _shake_duration_timer.connect('timeout', self, '_on_duration_timeout')
 
@@ -52,6 +40,8 @@ func shake(
 ) -> void:
     if priority < _priority:
         return
+
+    _camera = Util.get_player().get_camera()
 
     _amplitude = amplitude
 
