@@ -27,7 +27,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
         # Play attack animation before returning to idle animation.
-        player.start_attack()
+        if Input.is_action_pressed("player_move_up"):
+            player.start_attack('attack_up')
+        else:
+            player.start_attack('attack')
         player.get_animation_player().queue('idle')
     elif event.is_action_pressed('player_dash') and player.can_dash():
         # Only dash if the cooldown is done.

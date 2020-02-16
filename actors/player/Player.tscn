@@ -549,6 +549,8 @@ shape = SubResource( 22 )
 disabled = true
 
 [node name="UpAttack" type="Area2D" parent="Hitboxes"]
+collision_layer = 16
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/UpAttack"]
 position = Vector2( 0, -30 )
