@@ -101,7 +101,7 @@ onready var _grapple_hook: Sprite = $GrappleHook
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 
 onready var _health: Health = $Health
-onready var _hitbox: Area2D = $AttackHitbox
+onready var _hitboxes: Node2D = $Hitboxes
 onready var _hurtbox: Area2D = $Hurtbox
 
 onready var _invincibility_flash_manager: Node = $FlashManager
@@ -164,7 +164,8 @@ func _ready() -> void:
     _invincibility_flash_manager.connect(
         'flashing_finished', self, '_on_invincibility_flashing_finished')
 
-    _hitbox.connect('area_entered', self, '_on_attack_connected')
+    for hitbox in _hitboxes.get_children():
+        hitbox.connect('area_entered', self, '_on_attack_connected')
 
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)

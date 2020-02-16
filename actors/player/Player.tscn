@@ -48,7 +48,7 @@ tracks/0/keys = {
 "values": [ 40, 41, 42, 43 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("AttackHitbox/CollisionShape2D")
+tracks/1/path = NodePath("Hitboxes/SideAttack/CollisionShape2D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -501,14 +501,16 @@ script = ExtResource( 7 )
 
 [node name="PositionTween" type="Tween" parent="CameraAnchor/Camera2D"]
 
-[node name="AttackHitbox" type="Area2D" parent="." groups=[
+[node name="Hitboxes" type="Node2D" parent="."]
+
+[node name="SideAttack" type="Area2D" parent="Hitboxes" groups=[
 "mirror_y_axis",
 ]]
 position = Vector2( 22, -8 )
 collision_layer = 16
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/SideAttack"]
 shape = SubResource( 21 )
 disabled = true
 
