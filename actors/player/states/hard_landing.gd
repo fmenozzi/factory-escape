@@ -21,4 +21,10 @@ func update(player: Player, delta: float) -> Dictionary:
     if not player.get_animation_player().is_playing():
         return {'new_state': Player.State.IDLE}
 
+    # Apply slight downward movement. This is important mostly for ensuring that
+    # move_and_slide() is called on every frame, which updates collisions. This
+    # ensures that we move along with moving platforms if we hard land on top of
+    # one.
+    player.move(Vector2(0, 10))
+
     return {'new_state': Player.State.NO_CHANGE}
