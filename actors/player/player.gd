@@ -260,12 +260,12 @@ func emit_dust_puff() -> void:
 func emit_dash_puff() -> void:
     _dash_puff.restart()
 
-func start_attack() -> void:
+func start_attack(attack_animation_name: String = 'attack') -> void:
     _enemies_hit.clear()
-    get_animation_player().play('attack')
+    get_animation_player().play(attack_animation_name)
 
 func is_attacking() -> bool:
-    return get_animation_player().current_animation == 'attack'
+    return get_animation_player().current_animation in ['attack', 'attack_up']
 
 # Flush animation queue so that we can cancel attack animations cleanly.
 func stop_attack() -> void:
