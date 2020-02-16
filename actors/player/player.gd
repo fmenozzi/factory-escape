@@ -485,5 +485,7 @@ func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
         return
     _enemies_hit.append(enemy_hurtbox_rid)
 
+    Rumble.start(Rumble.Type.WEAK, 0.10)
+
     # TODO: This is kind of hacky, find a way around this.
     enemy_hurtbox.get_parent().take_hit(1, self)
