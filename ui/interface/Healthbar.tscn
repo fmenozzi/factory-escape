@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/interface/health_bar.gd" type="Script" id=1]
-[ext_resource path="res://assets/health-node-full.png" type="Texture" id=2]
+[ext_resource path="res://ui/interface/textures/health-node-full.png" type="Texture" id=2]
+
 
 [node name="Healthbar" type="Control"]
 anchor_right = 1.0

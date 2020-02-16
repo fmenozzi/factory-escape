@@ -7,8 +7,9 @@
 [ext_resource path="res://actors/enemies/slime/states/stagger.gd" type="Script" id=5]
 [ext_resource path="res://actors/enemies/slime/states/fall.gd" type="Script" id=6]
 [ext_resource path="res://actors/enemies/slime/states/return_to_ledge.gd" type="Script" id=7]
-[ext_resource path="res://assets/slime.png" type="Texture" id=8]
+[ext_resource path="res://actors/enemies/slime/textures/slime.png" type="Texture" id=8]
 [ext_resource path="res://sfx/DustPuff.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )

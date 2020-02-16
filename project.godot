@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "GrapplePoint",
 "language": "GDScript",
-"path": "res://environment/grapple_point.gd"
+"path": "res://environment/grapple_point/grapple_point.gd"
 }, {
 "base": "Node",
 "class": "Health",

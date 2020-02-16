@@ -1,7 +1,7 @@
 extends Control
 
-const EMPTY_HEALTH_TEXTURE := preload('res://assets/health-node-empty.png')
-const FULL_HEALTH_TEXTURE := preload('res://assets/health-node-full.png')
+const EMPTY_HEALTH_TEXTURE := preload('res://ui/interface/textures/health-node-empty.png')
+const FULL_HEALTH_TEXTURE := preload('res://ui/interface/textures/health-node-full.png')
 
 onready var _health_nodes: VBoxContainer = $HealthNodes
 

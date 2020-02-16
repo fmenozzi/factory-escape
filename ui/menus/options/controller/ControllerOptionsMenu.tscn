@@ -2,11 +2,13 @@
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/options/controller/controller_options_menu.gd" type="Script" id=2]
-[ext_resource path="res://assets/xbox-a.png" type="Texture" id=3]
-[ext_resource path="res://assets/xbox-x.png" type="Texture" id=4]
-[ext_resource path="res://assets/xbox-rt.png" type="Texture" id=5]
-[ext_resource path="res://assets/xbox-lt.png" type="Texture" id=6]
-[ext_resource path="res://assets/xbox-dpad-up.png" type="Texture" id=7]
+[ext_resource path="res://ui/menus/options/controller/textures/xbox-a.png" type="Texture" id=3]
+[ext_resource path="res://ui/menus/options/controller/textures/xbox-x.png" type="Texture" id=4]
+[ext_resource path="res://ui/menus/options/controller/textures/xbox-rt.png" type="Texture" id=5]
+[ext_resource path="res://ui/menus/options/controller/textures/xbox-lt.png" type="Texture" id=6]
+[ext_resource path="res://ui/menus/options/controller/textures/xbox-dpad-up.png" type="Texture" id=7]
+
+
 
 [node name="ControllerOptionsMenu" type="VBoxContainer"]
 anchor_right = 1.0
