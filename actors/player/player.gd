@@ -70,6 +70,16 @@ var _mirror_y_axis_node_original_positions: Dictionary = {}
 # attack animation.
 var _enemies_hit := []
 
+# For some reason, calling AnimationPlayer::stop(false) in pause() causes the
+# animation queue to flush. This is problematic if attacking into a screen
+# transition, as the queued animation (usually walk) is never played after
+# resume() is called. Use this array to manually save and restore the animation
+# queue when pausing and resuming.
+#
+# TODO: Submitted https://github.com/godotengine/godot/issues/36279, so if that
+#       gets addressed then remove this workaround.
+var _animation_queue := []
+
 onready var _sprite: Sprite = $Sprite
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -323,6 +333,8 @@ func pause() -> void:
     set_physics_process(false)
     set_process_unhandled_input(false)
 
+    for animation in get_animation_player().get_queue():
+        _animation_queue.append(animation)
     get_animation_player().stop(false)
 
     _invincibility_flash_manager.pause_timer()
@@ -339,6 +351,9 @@ func unpause() -> void:
     set_process_unhandled_input(true)
 
     get_animation_player().play()
+    for animation in _animation_queue:
+        get_animation_player().queue(animation)
+    _animation_queue.clear()
 
     _invincibility_flash_manager.resume_timer()
 
