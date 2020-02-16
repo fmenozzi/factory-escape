@@ -400,6 +400,11 @@ func _check_for_hits() -> void:
                     change_state({'new_state': State.HAZARD_HIT})
                     emit_signal('player_hit_hazard')
                 elif Util.in_collision_layer(hitbox, 'enemy_hitbox'):
+                    Rumble.start(Rumble.Type.WEAK, 0.15)
+                    Screenshake.start(
+                        Screenshake.DURATION_SHORT,
+                        Screenshake.FREQ,
+                        Screenshake.AMPLITUDE_SMALL)
                     change_state({'new_state': State.STAGGER})
 
 func get_next_grapple_point() -> GrapplePoint:
