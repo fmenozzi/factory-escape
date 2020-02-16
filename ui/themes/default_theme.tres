@@ -8,7 +8,6 @@
 [ext_resource path="res://ui/themes/textures/checkbutton-off.png" type="Texture" id=6]
 [ext_resource path="res://ui/fonts/m5x7.tres" type="DynamicFont" id=7]
 
-
 [resource]
 default_font = ExtResource( 7 )
 Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
