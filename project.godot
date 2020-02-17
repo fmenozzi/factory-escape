@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "Stopwatch",
 "language": "GDScript",
 "path": "res://custom/nodes/stopwatch.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "WorkerDrone",
+"language": "GDScript",
+"path": "res://actors/enemies/worker_drone/worker_drone.gd"
 } ]
 _global_script_class_icons={
 "GrapplePoint": "",
@@ -63,7 +68,8 @@ _global_script_class_icons={
 "Room": "",
 "ShaderManager": "",
 "Slime": "",
-"Stopwatch": ""
+"Stopwatch": "",
+"WorkerDrone": ""
 }
 
 [application]
