@@ -22,19 +22,17 @@ shape = SubResource( 1 )
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
 
+[node name="WorkerDrone" parent="Enemies" index="0" instance=ExtResource( 3 )]
+position = Vector2( 80, 80 )
+
+[node name="WorkerDrone2" parent="Enemies" index="1" instance=ExtResource( 3 )]
+position = Vector2( 160, 112 )
+
+[node name="WorkerDrone3" parent="Enemies" index="2" instance=ExtResource( 3 )]
+position = Vector2( 240, 80 )
+
 [node name="Player" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 96, 160 )
 starting_room_path = NodePath("..")
-
-[node name="WorkerDrone" parent="." index="10" instance=ExtResource( 3 )]
-position = Vector2( 80, 80 )
-
-[node name="WorkerDrone2" parent="." index="11" instance=ExtResource( 3 )]
-position = Vector2( 160, 112 )
-direction = -1
-
-[node name="WorkerDrone3" parent="." index="12" instance=ExtResource( 3 )]
-position = Vector2( 240, 80 )
-direction = -1
 
 [editable path="TileMaps"]

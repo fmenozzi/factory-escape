@@ -7,11 +7,13 @@ enum State {
     NO_CHANGE,
     IDLE,
     STAGGER,
+    FLY_TO_POINT,
 }
 
 onready var STATES := {
-    State.IDLE:    $States/Idle,
-    State.STAGGER: $States/Stagger,
+    State.IDLE:         $States/Idle,
+    State.STAGGER:      $States/Stagger,
+    State.FLY_TO_POINT: $States/FlyToPoint,
 }
 
 var _current_state: Node = null
@@ -46,14 +48,17 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    var direction := (global_position - player.global_position).normalized()
+    var direction := player.global_position.direction_to(global_position)
     _change_state({
         'new_state': State.STAGGER,
         'direction_from_hit': direction,
     })
 
-func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
+func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
+
+func is_hitting_obstacle() -> bool:
+    return .is_on_floor() or .is_on_ceiling() or .is_on_wall()
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
