@@ -1,22 +1,19 @@
 extends 'res://actors/enemies/state.gd'
 
-# The time in seconds that the drone remains idle before flying to another
-# point.
-const IDLE_DURATION := 1.0
-
 var _room: Room = null
 
 onready var _idle_duration_timer: Timer = $IdleDurationTimer
 
 func _ready() -> void:
     _idle_duration_timer.one_shot = true
-    _idle_duration_timer.wait_time = IDLE_DURATION
 
 func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
     _idle_duration_timer.start()
 
     _room = worker_drone.get_parent().get_parent()
     assert(_room != null)
+
+    _idle_duration_timer.wait_time = rand_range(0.5, 2.0)
 
 func exit(worker_drone: WorkerDrone) -> void:
     pass
