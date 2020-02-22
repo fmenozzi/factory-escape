@@ -23,6 +23,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 
 func _ready() -> void:
     _animation_player.play('idle')
@@ -56,6 +57,9 @@ func take_hit(damage: int, player: Player) -> void:
 
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
+
+func get_obstacle_detector() -> RayCast2D:
+    return _obstacle_detector
 
 func is_hitting_obstacle() -> bool:
     return .is_on_floor() or .is_on_ceiling() or .is_on_wall()
