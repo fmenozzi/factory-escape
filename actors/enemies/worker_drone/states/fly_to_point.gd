@@ -2,23 +2,30 @@ extends 'res://actors/enemies/state.gd'
 
 const FLY_SPEED := 2.0 * Util.TILE_SIZE
 
+const ACCEL_DISTANCE := 1.0 * Util.TILE_SIZE
+const DECEL_DISTANCE := 1.0 * Util.TILE_SIZE
+
+export(float, EASE) var accel_easing := 0.05
+
 var _global_fly_to_point := Vector2.ZERO
 var _direction_to_point := Vector2.ZERO
+var _distance_to_point := 0.0
 
 func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
     assert('fly_to_point' in previous_state_dict)
     _global_fly_to_point = previous_state_dict['fly_to_point']
     assert(_global_fly_to_point != null)
 
-    _direction_to_point = worker_drone.global_position.direction_to(_global_fly_to_point)
+    var drone_global_pos := worker_drone.global_position
+    _direction_to_point = drone_global_pos.direction_to(_global_fly_to_point)
+    _distance_to_point = drone_global_pos.distance_to(_global_fly_to_point)
 
 func exit(worker_drone: WorkerDrone) -> void:
     pass
 
 func update(worker_drone: WorkerDrone, delta: float) -> Dictionary:
-    # TODO: Maybe use some kind of easing/acceleration to make the movement
-    #       smoother. Might even be possible to use a tween to move the drone.
-    worker_drone.move(FLY_SPEED * _direction_to_point)
+    var speed_multiplier := _get_speed_multiplier(worker_drone)
+    worker_drone.move(speed_multiplier * FLY_SPEED * _direction_to_point)
 
     # Once we reach the point, return to idle.
     if worker_drone.global_position.distance_to(_global_fly_to_point) < 2.0:
@@ -35,3 +42,23 @@ func update(worker_drone: WorkerDrone, delta: float) -> Dictionary:
         return {'new_state': WorkerDrone.State.IDLE}
 
     return {'new_state': WorkerDrone.State.NO_CHANGE}
+
+func _get_speed_multiplier(worker_drone: WorkerDrone) -> float:
+    var current_distance_to_point := worker_drone.global_position.distance_to(
+        _global_fly_to_point)
+    var distance_travelled := _distance_to_point - current_distance_to_point
+
+    var speed_multiplier := 1.0
+
+    if distance_travelled <= ACCEL_DISTANCE:
+        # Acceleration for the first ACCEL_DISTANCE pixels travelled.
+        speed_multiplier = ease(
+            distance_travelled / ACCEL_DISTANCE, accel_easing)
+    elif current_distance_to_point <= DECEL_DISTANCE:
+        # Deceleration for the last DECEL_DISTANCE pixels travelled.
+        speed_multiplier = ease(
+            current_distance_to_point / DECEL_DISTANCE, 1.0 - accel_easing)
+
+    # Ensure our speed is non-zero, since the ease-in curve starts at zero and
+    # would result in the drone never moving.
+    return clamp(speed_multiplier, 0.2, 1.0)
