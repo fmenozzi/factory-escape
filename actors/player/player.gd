@@ -270,6 +270,10 @@ func is_attacking() -> bool:
 # Flush animation queue so that we can cancel attack animations cleanly.
 func stop_attack() -> void:
     get_animation_player().clear_queue()
+    for hitbox in _hitboxes.get_children():
+        assert(hitbox.get_child_count() == 1)
+        var collision_shape: CollisionShape2D = hitbox.get_child(0)
+        collision_shape.set_deferred('disabled', true)
 
 func get_health() -> Health:
     return _health
