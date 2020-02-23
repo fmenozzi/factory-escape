@@ -8,15 +8,17 @@ enum Priority {
     HIGH,
 }
 
-const DURATION_SHORT := 0.1
-const DURATION_MEDIUM := 0.5
-const DURATION_LONG := 1.0
+enum Duration {
+    SHORT,
+    MEDIUM,
+    LONG,
+}
 
-const FREQ := 20.0
-
-const AMPLITUDE_SMALL := 0.25 * Util.TILE_SIZE
-const AMPLITUDE_MEDIUM := 1.0 * Util.TILE_SIZE
-const AMPLITUDE_LARGE := 2.0 * Util.TILE_SIZE
+enum Amplitude {
+    SMALL,
+    MEDIUM,
+    LARGE,
+}
 
 export(float, EASE) var damp_easing := 1.0
 
@@ -32,21 +34,16 @@ func _ready() -> void:
     _shake_frequency_timer.connect('timeout', self, '_on_frequency_timeout')
     _shake_duration_timer.connect('timeout', self, '_on_duration_timeout')
 
-func start(
-    duration: float,
-    frequency: float,
-    amplitude: float,
-    priority: int = Priority.LOW
-) -> void:
+func start(duration: int, amplitude: int, priority: int = Priority.LOW) -> void:
     if priority < _priority:
         return
 
     _camera = Util.get_player().get_camera()
 
-    _amplitude = amplitude
+    _amplitude = _get_amplitude(amplitude)
 
-    _shake_duration_timer.wait_time = duration
-    _shake_frequency_timer.wait_time = 1.0 / frequency
+    _shake_duration_timer.wait_time = _get_duration(duration)
+    _shake_frequency_timer.wait_time = 1.0 / 20.0  # 20 Hz frequency
 
     _shake_duration_timer.start()
     _shake_frequency_timer.start()
@@ -83,6 +80,32 @@ func _reset_camera_offset() -> void:
         _camera, 'offset', _camera.offset, Vector2.ZERO,
         _shake_frequency_timer.wait_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
     _offset_tween.start()
+
+func _get_duration(duration: int) -> float:
+    match duration:
+        Duration.SHORT:
+            return 0.1
+
+        Duration.MEDIUM:
+            return 0.5
+
+        Duration.LONG:
+            return 1.0
+
+    return 0.0
+
+func _get_amplitude(amplitude: int) -> float:
+    match amplitude:
+        Amplitude.SMALL:
+            return 0.25 * Util.TILE_SIZE
+
+        Amplitude.MEDIUM:
+            return 1.0 * Util.TILE_SIZE
+
+        Amplitude.LARGE:
+            return 2.0 * Util.TILE_SIZE
+
+    return 0.0
 
 func _on_frequency_timeout() -> void:
     _shake_once()

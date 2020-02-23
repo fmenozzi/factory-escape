@@ -1,11 +1,6 @@
 extends Room
 
-onready var _player: Player = $Player
-onready var _camera: Camera2D = _player.get_camera()
-onready var _screenshake: Node2D = _camera.get_node('Screenshake')
-
 onready var _duration_options: OptionButton = $OptionButtons/DurationOptions
-onready var _frequency_options: OptionButton = $OptionButtons/FrequencyOptions
 onready var _amplitude_options: OptionButton = $OptionButtons/AmplitudeOptions
 
 var _is_shaking := false
@@ -15,14 +10,12 @@ func _ready() -> void:
     _duration_options.add_item('duration medium', 1)
     _duration_options.add_item('duration long', 2)
 
-    _frequency_options.add_item('frequency standard', 0)
-
     _amplitude_options.add_item('amplitude small', 0)
     _amplitude_options.add_item('amplitude medium', 1)
     _amplitude_options.add_item('amplitude large', 2)
 
-    _screenshake.connect('started_shaking', self, '_on_started_shaking')
-    _screenshake.connect('stopped_shaking', self, '_on_stopped_shaking')
+    Screenshake.connect('started_shaking', self, '_on_started_shaking')
+    Screenshake.connect('stopped_shaking', self, '_on_stopped_shaking')
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('player_interact'):
@@ -32,28 +25,28 @@ func _unhandled_input(event: InputEvent) -> void:
             _start_shaking()
 
 func _start_shaking() -> void:
-    var duration := 0.0
+    var duration := -1
     match _duration_options.selected:
         0:
-            duration = Screenshake.DURATION_SHORT
+            duration = Screenshake.Duration.SHORT
         1:
-            duration = Screenshake.DURATION_MEDIUM
+            duration = Screenshake.Duration.MEDIUM
         2:
-            duration = Screenshake.DURATION_LONG
+            duration = Screenshake.Duration.LONG
 
-    var amplitude := 0.0
+    var amplitude := -1
     match _amplitude_options.selected:
         0:
-            amplitude = Screenshake.AMPLITUDE_SMALL
+            amplitude = Screenshake.Amplitude.SMALL
         1:
-            amplitude = Screenshake.AMPLITUDE_MEDIUM
+            amplitude = Screenshake.Amplitude.MEDIUM
         2:
-            amplitude = Screenshake.AMPLITUDE_LARGE
+            amplitude = Screenshake.Amplitude.LARGE
 
-    _camera.shake(duration, Screenshake.FREQ, amplitude)
+    Screenshake.start(duration, amplitude)
 
 func _stop_shaking() -> void:
-    _screenshake.stop()
+    Screenshake.stop()
 
 func _on_started_shaking() -> void:
     _is_shaking = true
