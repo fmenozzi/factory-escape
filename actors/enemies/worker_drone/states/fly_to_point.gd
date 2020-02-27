@@ -20,6 +20,11 @@ func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
     _direction_to_point = drone_global_pos.direction_to(_global_fly_to_point)
     _distance_to_point = drone_global_pos.distance_to(_global_fly_to_point)
 
+    if _direction_to_point.x > 0:
+        worker_drone.set_direction(Util.Direction.RIGHT)
+    else:
+        worker_drone.set_direction(Util.Direction.LEFT)
+
 func exit(worker_drone: WorkerDrone) -> void:
     pass
 
