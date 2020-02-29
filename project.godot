@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://rooms/room.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "SentryDrone",
+"language": "GDScript",
+"path": "res://actors/enemies/sentry_drone/sentry_drone.gd"
+}, {
 "base": "Node",
 "class": "ShaderManager",
 "language": "GDScript",
@@ -66,6 +71,7 @@ _global_script_class_icons={
 "PhysicsManager": "",
 "Player": "",
 "Room": "",
+"SentryDrone": "",
 "ShaderManager": "",
 "Slime": "",
 "Stopwatch": "",
