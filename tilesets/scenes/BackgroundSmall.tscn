@@ -473,6 +473,36 @@ region_enabled = true
 region_rect = Rect2( 224, 16, 16, 16 )
 
 [node name="SteelGirderMoss3" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 240, 16, 16, 16 )
+
+[node name="HangingMossLeft" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 192, 224, 16, 16 )
+
+[node name="HangingMossRight" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 208, 224, 16, 16 )
+
+[node name="HangingMoss0" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 224, 224, 16, 16 )
+
+[node name="HangingMoss1" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 240, 224, 16, 16 )
+
+[node name="HangingMoss2" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 256, 224, 16, 16 )
