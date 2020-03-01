@@ -4,10 +4,12 @@ class_name SentryDrone
 enum State {
     NO_CHANGE,
     IDLE,
+    BASH_TELEGRAPH,
 }
 
 onready var STATES := {
-    State.IDLE: $States/Idle,
+    State.IDLE:           $States/Idle,
+    State.BASH_TELEGRAPH: $States/BashTelegraph,
 }
 
 var _current_state: Node = null
