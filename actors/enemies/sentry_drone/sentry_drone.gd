@@ -6,6 +6,7 @@ enum State {
     IDLE,
     BASH_TELEGRAPH_SHAKE,
     BASH_TELEGRAPH_PAUSE,
+    BASH,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
@@ -14,6 +15,7 @@ onready var STATES := {
     State.IDLE:                 $States/Idle,
     State.BASH_TELEGRAPH_SHAKE: $States/BashTelegraphShake,
     State.BASH_TELEGRAPH_PAUSE: $States/BashTelegraphPause,
+    State.BASH:                 $States/Bash,
 }
 
 var _current_state: Node = null
@@ -33,6 +35,9 @@ func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
+
+func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
+    .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction

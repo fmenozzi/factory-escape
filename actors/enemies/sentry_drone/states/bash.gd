@@ -1,29 +1,21 @@
 extends 'res://actors/enemies/state.gd'
 
-# The time spent pausing before initiating the bash attack.
-const PAUSE_DURATION: float = 0.5
+const BASH_SPEED: float = 16.0 * Util.TILE_SIZE
 
 var _direction_to_player: Vector2 = Vector2.ZERO
-
-onready var _pause_timer: Timer = $PauseTimer
 
 func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     assert('direction_to_player' in previous_state_dict)
     _direction_to_player = previous_state_dict['direction_to_player']
     assert(_direction_to_player != null)
 
-    _pause_timer.one_shot = true
-    _pause_timer.wait_time = PAUSE_DURATION
-    _pause_timer.start()
-
 func exit(sentry_drone: SentryDrone) -> void:
     pass
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
-    if _pause_timer.is_stopped():
-        return {
-            'new_state': SentryDrone.State.BASH,
-            'direction_to_player': _direction_to_player,
-        }
+    sentry_drone.move(_direction_to_player * BASH_SPEED)
+
+    if sentry_drone.is_on_floor() or sentry_drone.is_on_ceiling() or sentry_drone.is_on_wall():
+        return {'new_state': SentryDrone.State.IDLE}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
