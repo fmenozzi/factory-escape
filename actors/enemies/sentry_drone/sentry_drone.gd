@@ -7,6 +7,8 @@ enum State {
     BASH_TELEGRAPH,
 }
 
+export(Util.Direction) var direction := Util.Direction.RIGHT
+
 onready var STATES := {
     State.IDLE:           $States/Idle,
     State.BASH_TELEGRAPH: $States/BashTelegraph,
@@ -17,6 +19,7 @@ var _current_state_enum: int = -1
 
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
+onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
@@ -28,6 +31,10 @@ func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
+
+func set_direction(new_direction: int) -> void:
+    direction = new_direction
+    _sprite.flip_h = (new_direction == Util.Direction.LEFT)
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
