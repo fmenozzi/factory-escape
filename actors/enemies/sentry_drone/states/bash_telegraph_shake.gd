@@ -31,7 +31,7 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
 
     if _shake_timer.is_stopped():
         _sentry_drone_sprite.position = Vector2.ZERO
-        return {'new_state': SentryDrone.State.IDLE}
+        return {'new_state': SentryDrone.State.BASH_TELEGRAPH_PAUSE}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
 
