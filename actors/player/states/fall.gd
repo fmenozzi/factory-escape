@@ -10,11 +10,7 @@ const HARD_LANDING_FALL_DURATION: float = 1.0
 const JUMP_BUFFER_DURATION: float = 0.1
 
 onready var _fall_time_stopwatch: Stopwatch = $FallTimeStopwatch
-onready var _jump_buffer_timer: Timer = $JumpBufferTimer
-
-func _ready() -> void:
-    _jump_buffer_timer.one_shot = true
-    _jump_buffer_timer.wait_time = JUMP_BUFFER_DURATION
+onready var _jump_buffer_stopwatch: Stopwatch = $JumpBufferStopwatch
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -30,7 +26,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Start the fall time stopwatch.
     _fall_time_stopwatch.start()
 
-    _jump_buffer_timer.stop()
+    _jump_buffer_stopwatch.stop()
 
 func exit(player: Player) -> void:
     # In case we exit the fall state before the previously-playing attack
@@ -58,13 +54,13 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             # Double jump.
             return {'new_state': Player.State.DOUBLE_JUMP}
         else:
-            # Start jump buffer timer if player presses jump while falling and
-            # cannot jump.
-            _jump_buffer_timer.start()
+            # Start jump buffer stopwatch if player presses jump while falling
+            # and cannot jump.
+            _jump_buffer_stopwatch.start()
     elif event.is_action_released('player_jump'):
-        # Stop jump buffer timer if the player releases the jump button before
-        # hitting the ground.
-        _jump_buffer_timer.stop()
+        # Stop jump buffer stopwatch if the player releases the jump button
+        # before hitting the ground.
+        _jump_buffer_stopwatch.stop()
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:
@@ -84,11 +80,13 @@ func update(player: Player, delta: float) -> Dictionary:
         player.emit_dust_puff()
         if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
-        elif _jump_buffer_timer.is_stopped():
-            return {'new_state': Player.State.IDLE}
         else:
-            # Buffer jump.
-            return {'new_state': Player.State.JUMP}
+            var jump_buffer_elapsed_time := _jump_buffer_stopwatch.stop()
+            if jump_buffer_elapsed_time == 0.0:
+                return {'new_state': Player.State.IDLE}
+            elif jump_buffer_elapsed_time <= JUMP_BUFFER_DURATION:
+                # Buffer jump.
+                return {'new_state': Player.State.JUMP}
 
     # Start wall sliding if we're on a wall.
     if player.is_on_wall():
