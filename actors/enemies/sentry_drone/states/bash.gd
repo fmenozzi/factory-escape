@@ -16,6 +16,8 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     sentry_drone.move(_direction_to_player * BASH_SPEED)
 
     if sentry_drone.is_colliding():
+        Screenshake.start(
+            Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
         sentry_drone.move(-_direction_to_player * BASH_SPEED)
         return {'new_state': SentryDrone.State.BASH_RECOVER}
 
