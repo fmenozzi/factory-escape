@@ -27,6 +27,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -67,6 +68,9 @@ func reset_sprite_position() -> void:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_obstacle_detector() -> RayCast2D:
+    return _obstacle_detector
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
