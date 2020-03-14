@@ -576,6 +576,9 @@ script = ExtResource( 12 )
 
 [node name="FallTimeStopwatch" parent="States/Fall" instance=ExtResource( 31 )]
 
+[node name="JumpBufferTimer" type="Timer" parent="States/Fall"]
+process_mode = 0
+
 [node name="Dash" type="Node" parent="States"]
 script = ExtResource( 13 )
 
