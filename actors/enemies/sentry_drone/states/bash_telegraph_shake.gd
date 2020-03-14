@@ -30,11 +30,17 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     sentry_drone.set_direction(Util.direction(sentry_drone, _player))
 
     if _shake_timer.is_stopped():
+        # Since the player's origin is at its feet, player.global_position will
+        # refer to that point, and not the center of the player sprite. Using
+        # the center for distance and direction calculations ensures that e.g.
+        # drones flush with the ground (such as immediately after having hit it)
+        # will not immediately ram into the ground when trying to bash the
+        # nearby player who is also flush with the ground.
         _sentry_drone_sprite.position = Vector2.ZERO
         return {
             'new_state': SentryDrone.State.BASH_TELEGRAPH_PAUSE,
             'direction_to_player': sentry_drone.global_position.direction_to(
-                _player.global_position),
+                _player.get_center()),
         }
 
     return {'new_state': SentryDrone.State.NO_CHANGE}

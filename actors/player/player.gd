@@ -332,6 +332,9 @@ func set_hazard_checkpoint(hazard_checkpoint: Area2D) -> void:
 func get_hazard_checkpoint() -> Area2D:
     return _current_hazard_checkpoint
 
+func get_center() -> Vector2:
+    return self.global_position + Vector2(0, -8)
+
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
 func pause() -> void:

@@ -39,8 +39,6 @@ script = ExtResource( 4 )
 [node name="FlashManager" parent="." instance=ExtResource( 2 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
-single_flash_duration = 0.075
-flash_color = Color( 1, 1, 1, 1 )
 
 [node name="States" type="Node" parent="."]
 
