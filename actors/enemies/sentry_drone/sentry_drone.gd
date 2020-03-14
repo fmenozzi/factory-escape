@@ -7,6 +7,7 @@ enum State {
     BASH_TELEGRAPH_SHAKE,
     BASH_TELEGRAPH_PAUSE,
     BASH,
+    BASH_RECOVER,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
@@ -16,6 +17,7 @@ onready var STATES := {
     State.BASH_TELEGRAPH_SHAKE: $States/BashTelegraphShake,
     State.BASH_TELEGRAPH_PAUSE: $States/BashTelegraphPause,
     State.BASH:                 $States/Bash,
+    State.BASH_RECOVER:         $States/BashRecover,
 }
 
 var _current_state: Node = null
@@ -46,6 +48,19 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+
+func is_colliding() -> bool:
+    return .is_on_ceiling() or .is_on_floor() or .is_on_wall()
+
+# Offset the sprite's position from the sentry drone itself, similar to how
+# screenshake is implemented.
+func shake_once(damping: float = 1.0) -> void:
+    _sprite.position = Vector2(
+        damping * rand_range(-1.0, 1.0),
+        damping * rand_range(-1.0, 1.0))
+
+func reset_sprite_position() -> void:
+    _sprite.position = Vector2.ZERO
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player

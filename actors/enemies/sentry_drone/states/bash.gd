@@ -15,8 +15,8 @@ func exit(sentry_drone: SentryDrone) -> void:
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     sentry_drone.move(_direction_to_player * BASH_SPEED)
 
-    if sentry_drone.is_on_floor() or sentry_drone.is_on_ceiling() or sentry_drone.is_on_wall():
+    if sentry_drone.is_colliding():
         sentry_drone.move(-_direction_to_player * BASH_SPEED)
-        return {'new_state': SentryDrone.State.IDLE}
+        return {'new_state': SentryDrone.State.BASH_RECOVER}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
