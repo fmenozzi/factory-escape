@@ -20,7 +20,7 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     _shake_timer.start()
 
 func exit(sentry_drone: SentryDrone) -> void:
-    pass
+    sentry_drone.reset_sprite_position()
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     sentry_drone.shake_once(_get_damping())

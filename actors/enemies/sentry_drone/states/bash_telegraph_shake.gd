@@ -19,7 +19,7 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     _shake_timer.start()
 
 func exit(sentry_drone: SentryDrone) -> void:
-    pass
+    sentry_drone.reset_sprite_position()
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var damping := ease(
@@ -35,7 +35,6 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
         # drones flush with the ground (such as immediately after having hit it)
         # will not immediately ram into the ground when trying to bash the
         # nearby player who is also flush with the ground.
-        sentry_drone.reset_sprite_position()
         return {
             'new_state': SentryDrone.State.BASH_TELEGRAPH_PAUSE,
             'direction_to_player': sentry_drone.global_position.direction_to(
