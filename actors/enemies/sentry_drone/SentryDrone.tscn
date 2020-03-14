@@ -36,6 +36,7 @@ collision_mask = 260
 script = ExtResource( 4 )
 
 [node name="Health" parent="." instance=ExtResource( 1 )]
+MAX_HEALTH = 3
 
 [node name="FlashManager" parent="." instance=ExtResource( 2 )]
 sprite_path = NodePath("../Sprite")
