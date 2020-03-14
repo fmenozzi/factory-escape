@@ -29,7 +29,6 @@ position = Vector2( 640, 0 )
 position = Vector2( 400, 192 )
 
 [node name="GrapplePlayground" parent="Rooms" instance=ExtResource( 6 )]
-editor/display_folded = true
 position = Vector2( 0, -360 )
 
 [node name="TileMaps" parent="Rooms/GrapplePlayground" index="0"]
