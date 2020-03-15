@@ -97,6 +97,7 @@ func update(player: Player, delta: float) -> Dictionary:
     if player.is_on_ground():
         player.emit_dust_puff()
         if _buffer_jump_enabled:
+            player.reset_jump()
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
             return {'new_state': Player.State.DASH}

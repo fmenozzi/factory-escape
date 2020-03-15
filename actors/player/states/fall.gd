@@ -87,6 +87,7 @@ func update(player: Player, delta: float) -> Dictionary:
         if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
+            player.reset_jump()
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
             return {'new_state': Player.State.DASH}
