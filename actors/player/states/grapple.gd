@@ -4,6 +4,18 @@ var velocity: Vector2 = Vector2.ZERO
 
 var grapple_point: GrapplePoint = null
 
+# If true, transition to jump state immediately upon landing (buffer jump). This
+# is only enabled if the player presses the jump button while falling (when
+# unable to jump normally) and the player is close to the ground (as determined
+# by the jump buffer raycast attached to the player).
+var _buffer_jump_enabled := false
+
+# If true, transition to dash state immediately upon landing (buffer dash). This
+# is only enabled if the player presses the dash button while falling (when
+# unable to dash normally) and the player is close to the ground (as determined
+# by the dash buffer raycast attached to the player).
+var _buffer_dash_enabled := false
+
 func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
     var dest := grapple_point.global_position
     if grapple_point.get_grapple_type() == GrapplePoint.GrappleType.LAUNCH:
@@ -49,6 +61,9 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('grapple_pull')
     player.get_animation_player().queue('jump')
 
+    _buffer_jump_enabled = false
+    _buffer_dash_enabled = false
+
 func exit(player: Player) -> void:
     grapple_point.set_available(true)
     grapple_point = null
@@ -61,6 +76,12 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
                 'new_state': Player.State.GRAPPLE_START,
                 'grapple_point': next_grapple_point,
             }
+    elif event.is_action_pressed('player_jump') and velocity.y > 0:
+        if player.get_jump_buffer_raycast().is_colliding():
+            _buffer_jump_enabled = true
+    elif event.is_action_pressed('player_dash') and velocity.y > 0:
+        if player.get_dash_buffer_raycast().is_colliding():
+            _buffer_dash_enabled = true
 
     return {'new_state': Player.State.NO_CHANGE}
 
@@ -75,7 +96,12 @@ func update(player: Player, delta: float) -> Dictionary:
 
     if player.is_on_ground():
         player.emit_dust_puff()
-        return {'new_state': Player.State.IDLE}
+        if _buffer_jump_enabled:
+            return {'new_state': Player.State.JUMP}
+        elif _buffer_dash_enabled:
+            return {'new_state': Player.State.DASH}
+        else:
+            return {'new_state': Player.State.IDLE}
 
     if player.is_on_wall():
         player.emit_dust_puff()
