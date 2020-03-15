@@ -80,8 +80,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
 
-    # Once we hit the ground, emit the landing puff and switch to either 'idle'
-    # or 'hard landing' state, depending on how long we've been falling.
+    # Once we hit the ground, emit the landing puff and either switch to idle,
+    # "hard land", or perform a buffer action.
     if player.is_on_ground():
         player.emit_dust_puff()
         if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
