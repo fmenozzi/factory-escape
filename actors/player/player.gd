@@ -115,6 +115,8 @@ onready var _stagger_duration_timer: Timer = $States/Stagger/StaggerDurationTime
 
 onready var _fall_time_stopwatch: Stopwatch = $States/Fall/FallTimeStopwatch
 
+onready var _jump_buffer_raycast: RayCast2D = $JumpBufferRaycast
+
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
 # there are no valid grapple points for the player on a given frame, this is set
@@ -334,6 +336,9 @@ func get_hazard_checkpoint() -> Area2D:
 
 func get_center() -> Vector2:
     return self.global_position + Vector2(0, -8)
+
+func get_jump_buffer_raycast() -> RayCast2D:
+    return _jump_buffer_raycast
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.

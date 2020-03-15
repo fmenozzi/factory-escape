@@ -4,13 +4,13 @@ extends 'res://actors/player/states/state.gd'
 # instead of idle state upon touching the ground.
 const HARD_LANDING_FALL_DURATION: float = 1.0
 
-# If the player is unable to jump and presses jump during the fall, the player
-# will jump upon hitting the ground if they do so within this period of time
-# after hitting the jump button.
-const JUMP_BUFFER_DURATION: float = 0.1
+# If true, transition to jump state immediately upon landing (buffer jump). This
+# is only enabled if the player presses the jump button while falling (when
+# unable to jump normally) and the player is close to the ground (as determined
+# by the jump buffer raycast attached to the player).
+var _buffer_jump_enabled := false
 
 onready var _fall_time_stopwatch: Stopwatch = $FallTimeStopwatch
-onready var _jump_buffer_stopwatch: Stopwatch = $JumpBufferStopwatch
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -26,7 +26,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Start the fall time stopwatch.
     _fall_time_stopwatch.start()
 
-    _jump_buffer_stopwatch.stop()
+    _buffer_jump_enabled = false
 
 func exit(player: Player) -> void:
     # In case we exit the fall state before the previously-playing attack
@@ -53,14 +53,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         elif player.can_jump():
             # Double jump.
             return {'new_state': Player.State.DOUBLE_JUMP}
-        else:
-            # Start jump buffer stopwatch if player presses jump while falling
-            # and cannot jump.
-            _jump_buffer_stopwatch.start()
-    elif event.is_action_released('player_jump'):
-        # Stop jump buffer stopwatch if the player releases the jump button
-        # before hitting the ground.
-        _jump_buffer_stopwatch.stop()
+        elif player.get_jump_buffer_raycast().is_colliding():
+            # Enable buffer jump if the player is close to the ground and
+            # presses the jump button (and is unable to otherwise jump).
+            _buffer_jump_enabled = true
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:
@@ -80,13 +76,10 @@ func update(player: Player, delta: float) -> Dictionary:
         player.emit_dust_puff()
         if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
+        elif _buffer_jump_enabled:
+            return {'new_state': Player.State.JUMP}
         else:
-            var jump_buffer_elapsed_time := _jump_buffer_stopwatch.stop()
-            if jump_buffer_elapsed_time == 0.0:
-                return {'new_state': Player.State.IDLE}
-            elif jump_buffer_elapsed_time <= JUMP_BUFFER_DURATION:
-                # Buffer jump.
-                return {'new_state': Player.State.JUMP}
+            return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
     if player.is_on_wall():
