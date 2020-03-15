@@ -10,6 +10,12 @@ const HARD_LANDING_FALL_DURATION: float = 1.0
 # by the jump buffer raycast attached to the player).
 var _buffer_jump_enabled := false
 
+# If true, transition to dash state immediately upon landing (buffer dash). This
+# is only enabled if the player presses the dash button while falling (when
+# unable to dash normally) and the player is close to the ground (as determined
+# by the dash buffer raycast attached to the player).
+var _buffer_dash_enabled := false
+
 onready var _fall_time_stopwatch: Stopwatch = $FallTimeStopwatch
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
@@ -27,6 +33,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _fall_time_stopwatch.start()
 
     _buffer_jump_enabled = false
+    _buffer_dash_enabled = false
 
 func exit(player: Player) -> void:
     # In case we exit the fall state before the previously-playing attack
@@ -42,10 +49,13 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         else:
             player.start_attack('attack')
         player.get_animation_player().queue('fall')
-    elif event.is_action_pressed('player_dash') and player.can_dash():
-        # Only dash if the cooldown is done.
-        if player.get_dash_cooldown_timer().is_stopped():
-            return {'new_state': Player.State.DASH}
+    elif event.is_action_pressed('player_dash'):
+        if player.can_dash():
+            # Only dash if the cooldown is done.
+            if player.get_dash_cooldown_timer().is_stopped():
+                return {'new_state': Player.State.DASH}
+        elif player.get_dash_buffer_raycast().is_colliding():
+            _buffer_dash_enabled = true
     elif event.is_action_pressed('player_jump'):
         if player.is_near_wall_front() or player.is_near_wall_back():
             # Wall jump.
@@ -78,6 +88,8 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
             return {'new_state': Player.State.JUMP}
+        elif _buffer_dash_enabled:
+            return {'new_state': Player.State.DASH}
         else:
             return {'new_state': Player.State.IDLE}
 
