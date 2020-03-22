@@ -43,6 +43,8 @@ func exit(player: Player) -> void:
         player.stop_attack()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    var jump_manager := player.get_jump_manager()
+
     if event.is_action_pressed('player_attack'):
         if Input.is_action_pressed("player_move_up"):
             player.start_attack('attack_up')
@@ -60,10 +62,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if player.is_near_wall_front() or player.is_near_wall_back():
             # Wall jump.
             return {'new_state': Player.State.WALL_JUMP}
-        elif player.can_jump():
+        elif jump_manager.can_jump():
             # Double jump.
             return {'new_state': Player.State.DOUBLE_JUMP}
-        elif player.get_jump_buffer_raycast().is_colliding():
+        elif jump_manager.get_jump_buffer_raycast().is_colliding():
             # Enable buffer jump if the player is close to the ground and
             # presses the jump button (and is unable to otherwise jump).
             _buffer_jump_enabled = true
@@ -87,7 +89,7 @@ func update(player: Player, delta: float) -> Dictionary:
         if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
-            player.reset_jump()
+            player.get_jump_manager().reset_jump()
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
             return {'new_state': Player.State.DASH}

@@ -52,10 +52,11 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # sections might have been harder to design if the player could double jump
     # after a dash/pogo. Might revisit this if it becomes incompatible with this
     # game's eventual design.
+    var jump_manager := player.get_jump_manager()
     player.consume_dash()
-    if player.can_jump():
-        player.reset_jump()
-        player.consume_jump()
+    if jump_manager.can_jump():
+        jump_manager.reset_jump()
+        jump_manager.consume_jump()
 
 func exit(player: Player) -> void:
     # Start the cooldown timer once the dash finishes.

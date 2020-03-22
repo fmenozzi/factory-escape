@@ -29,7 +29,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.set_direction(player.get_wall_normal_front().x)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
-    player.consume_jump()
+    player.get_jump_manager().consume_jump()
 
     # Play jump animation.
     player.get_animation_player().play('jump')
@@ -42,6 +42,8 @@ func exit(player: Player) -> void:
     pass
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    var jump_manager := player.get_jump_manager()
+
     if event.is_action_released('player_jump') and _jump_cut_timer.is_stopped():
         _jump_cut(player)
     elif event.is_action_pressed('player_jump'):
@@ -50,7 +52,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             # on whether we're near a wall.
             if player.is_near_wall_front() or player.is_near_wall_back():
                 return {'new_state': Player.State.WALL_JUMP}
-            elif player.can_jump():
+            elif jump_manager.can_jump():
                 return {'new_state': Player.State.DOUBLE_JUMP}
     elif event.is_action_pressed('player_attack'):
         player.start_attack()

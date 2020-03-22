@@ -16,7 +16,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.emit_dust_puff()
 
     # Consume the jump until it is reset by e.g. hitting the ground.
-    player.consume_jump()
+    player.get_jump_manager().consume_jump()
 
 func exit(player: Player) -> void:
     # In case we exit the jump state before the previously-playing attack
@@ -27,6 +27,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var physics_manager := player.get_physics_manager()
+    var jump_manager := player.get_jump_manager()
 
     if event.is_action_released('player_jump'):
         # "Jump cut" if the jump button is released.
@@ -36,7 +37,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if player.is_near_wall_front() or player.is_near_wall_back():
             # Wall jump.
             return {'new_state': Player.State.WALL_JUMP}
-        elif player.can_jump():
+        elif jump_manager.can_jump():
             # Double jump.
             return {'new_state': Player.State.DOUBLE_JUMP}
     elif event.is_action_pressed('player_attack'):

@@ -77,7 +77,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
                 'grapple_point': next_grapple_point,
             }
     elif event.is_action_pressed('player_jump') and velocity.y > 0:
-        if player.get_jump_buffer_raycast().is_colliding():
+        if player.get_jump_manager().get_jump_buffer_raycast().is_colliding():
             _buffer_jump_enabled = true
     elif event.is_action_pressed('player_dash') and velocity.y > 0:
         if player.get_dash_buffer_raycast().is_colliding():
@@ -97,7 +97,7 @@ func update(player: Player, delta: float) -> Dictionary:
     if player.is_on_ground():
         player.emit_dust_puff()
         if _buffer_jump_enabled:
-            player.reset_jump()
+            player.get_jump_manager().reset_jump()
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
             return {'new_state': Player.State.DASH}

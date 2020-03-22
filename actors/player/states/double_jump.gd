@@ -29,7 +29,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.get_animation_player().play('jump')
 
     # Consume the jump until it is reset by e.g. hitting the ground.
-    player.consume_jump()
+    player.get_jump_manager().consume_jump()
 
 func exit(player: Player) -> void:
     # In case we exit the double jump state before the previously-playing attack

@@ -15,7 +15,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     # Reset the dash and double jump.
     player.reset_dash()
-    player.reset_jump()
+    player.get_jump_manager().reset_jump()
 
 func exit(player: Player) -> void:
     # Stop wall slide trail effect.

@@ -5,13 +5,15 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     # Reset the dash and double jump.
     player.reset_dash()
-    player.reset_jump()
+    player.get_jump_manager().reset_jump()
 
 func exit(player: Player) -> void:
     pass
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
-    if event.is_action_pressed('player_jump') and player.can_jump():
+    var jump_manager := player.get_jump_manager()
+
+    if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
         # Play attack animation before returning to idle animation.

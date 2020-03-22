@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=23]
 [ext_resource path="res://sfx/DustPuff.tscn" type="PackedScene" id=24]
 [ext_resource path="res://sfx/DashPuff.tscn" type="PackedScene" id=25]
+[ext_resource path="res://actors/player/jump_manager.gd" type="Script" id=26]
 [ext_resource path="res://actors/player/textures/grapple-rope.png" type="Texture" id=27]
 [ext_resource path="res://actors/player/textures/grapple-hook.png" type="Texture" id=28]
 [ext_resource path="res://actors/player/states/walk_to_point.gd" type="Script" id=29]
@@ -685,12 +686,15 @@ enabled = true
 cast_to = Vector2( 0, 0.5 )
 collision_mask = 4
 
-[node name="JumpBufferRaycast" type="RayCast2D" parent="."]
+[node name="DashBufferRaycast" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 8 )
 collision_mask = 260
 
-[node name="DashBufferRaycast" type="RayCast2D" parent="."]
+[node name="JumpManager" type="Node2D" parent="."]
+script = ExtResource( 26 )
+
+[node name="JumpBufferRaycast" type="RayCast2D" parent="JumpManager"]
 enabled = true
 cast_to = Vector2( 0, 8 )
 collision_mask = 260
