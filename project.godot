@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "DashManager",
+"language": "GDScript",
+"path": "res://actors/player/dash_manager.gd"
+}, {
+"base": "Node2D",
 "class": "GrapplePoint",
 "language": "GDScript",
 "path": "res://environment/grapple_point/grapple_point.gd"
@@ -70,6 +75,7 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/worker_drone/worker_drone.gd"
 } ]
 _global_script_class_icons={
+"DashManager": "",
 "GrapplePoint": "",
 "Health": "",
 "JumpManager": "",

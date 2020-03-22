@@ -115,9 +115,8 @@ onready var _stagger_duration_timer: Timer = $States/Stagger/StaggerDurationTime
 
 onready var _fall_time_stopwatch: Stopwatch = $States/Fall/FallTimeStopwatch
 
-onready var _dash_buffer_raycast: RayCast2D = $DashBufferRaycast
-
 onready var _jump_manager: JumpManager = $JumpManager
+onready var _dash_manager: DashManager = $DashManager
 
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
@@ -134,8 +133,6 @@ var _current_hazard_checkpoint: Area2D = null
 # the player was in, to assist in room transitions.
 var prev_room = null
 var curr_room = null
-
-var _can_dash: bool = true
 
 func _get_configuration_warning() -> String:
     if starting_room_path == '':
@@ -337,11 +334,11 @@ func get_hazard_checkpoint() -> Area2D:
 func get_center() -> Vector2:
     return self.global_position + Vector2(0, -8)
 
-func get_dash_buffer_raycast() -> RayCast2D:
-    return _dash_buffer_raycast
-
 func get_jump_manager() -> JumpManager:
     return _jump_manager
+
+func get_dash_manager() -> DashManager:
+    return _dash_manager
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.
@@ -380,15 +377,6 @@ func unpause() -> void:
     _stagger_duration_timer.paused = false
 
     _fall_time_stopwatch.resume()
-
-# Functions providing a more readable and convenient interface for managing
-# dashes.
-func can_dash() -> bool:
-    return _can_dash
-func consume_dash() -> void:
-    _can_dash = false
-func reset_dash() -> void:
-    _can_dash = true
 
 # Conceptually, we want to know whether the player is simultaneously on the
 # floor and on the ceiling to detect whether we're being crushed by a moving

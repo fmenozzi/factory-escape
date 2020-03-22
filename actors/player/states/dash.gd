@@ -53,7 +53,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # after a dash/pogo. Might revisit this if it becomes incompatible with this
     # game's eventual design.
     var jump_manager := player.get_jump_manager()
-    player.consume_dash()
+    var dash_manager := player.get_dash_manager()
+    dash_manager.consume_dash()
     if jump_manager.can_jump():
         jump_manager.reset_jump()
         jump_manager.consume_jump()

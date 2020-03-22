@@ -44,6 +44,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
+    var dash_manager := player.get_dash_manager()
 
     if event.is_action_pressed('player_attack'):
         if Input.is_action_pressed("player_move_up"):
@@ -52,11 +53,11 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             player.start_attack('attack')
         player.get_animation_player().queue('fall')
     elif event.is_action_pressed('player_dash'):
-        if player.can_dash():
+        if dash_manager.can_dash():
             # Only dash if the cooldown is done.
             if player.get_dash_cooldown_timer().is_stopped():
                 return {'new_state': Player.State.DASH}
-        elif player.get_dash_buffer_raycast().is_colliding():
+        elif dash_manager.get_dash_buffer_raycast().is_colliding():
             _buffer_dash_enabled = true
     elif event.is_action_pressed('player_jump'):
         if player.is_near_wall_front() or player.is_near_wall_back():

@@ -12,7 +12,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.get_animation_player().play('idle')
 
     # Reset the dash and double jump.
-    player.reset_dash()
+    player.get_dash_manager().reset_dash()
     player.get_jump_manager().reset_jump()
 
 func exit(player: Player) -> void:
@@ -24,6 +24,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
+    var dash_manager := player.get_dash_manager()
 
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
@@ -34,7 +35,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         else:
             player.start_attack('attack')
         player.get_animation_player().queue('idle')
-    elif event.is_action_pressed('player_dash') and player.can_dash():
+    elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
             return {'new_state': Player.State.DASH}

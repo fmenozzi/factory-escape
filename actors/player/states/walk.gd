@@ -15,6 +15,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
+    var dash_manager := player.get_dash_manager()
 
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
@@ -22,7 +23,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         # Play attack animation before returning to walk animation.
         player.start_attack()
         player.get_animation_player().queue('walk')
-    elif event.is_action_pressed('player_dash') and player.can_dash():
+    elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         # Only dash if the cooldown is done.
         if player.get_dash_cooldown_timer().is_stopped():
             return {'new_state': Player.State.DASH}
