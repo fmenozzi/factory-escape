@@ -57,9 +57,6 @@ var current_state_enum: int = -1
 # update() call, measured in pixels per second.
 var velocity: Vector2 = Vector2.ZERO
 
-# The amount of time to wait after completing a dash before dashing again.
-const DASH_COOLDOWN: float = 0.30
-
 # The original positions of all "y-axis mirrored" nodes.
 var _mirror_y_axis_node_original_positions: Dictionary = {}
 
@@ -83,8 +80,6 @@ var _animation_queue := []
 onready var _sprite: Sprite = $Sprite
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-
-onready var _dash_cooldown_timer: Timer = $DashCooldown
 
 onready var _camera: Camera2D = $CameraAnchor/Camera2D
 
@@ -140,10 +135,6 @@ func _get_configuration_warning() -> String:
     return ''
 
 func _ready() -> void:
-    # Create a dash cooldown timer.
-    _dash_cooldown_timer.wait_time = DASH_COOLDOWN
-    _dash_cooldown_timer.one_shot = true
-
     # Begin in fall state
     current_state_enum = State.FALL
     current_state = STATES[current_state_enum]
@@ -283,9 +274,6 @@ func get_animation_player() -> AnimationPlayer:
 func get_camera() -> Camera2D:
     return _camera
 
-func get_dash_cooldown_timer() -> Timer:
-    return _dash_cooldown_timer as Timer
-
 func get_wall_slide_trail() -> Particles2D:
     return _wall_slide_trail_effect
 
@@ -352,7 +340,7 @@ func pause() -> void:
 
     _invincibility_flash_manager.pause_timer()
 
-    _dash_cooldown_timer.paused = true
+    _dash_manager.get_dash_cooldown_timer().paused = true
 
     _dash_duration_timer.paused = true
     _dash_echo_timer.paused = true
@@ -370,7 +358,7 @@ func unpause() -> void:
 
     _invincibility_flash_manager.resume_timer()
 
-    _dash_cooldown_timer.paused = false
+    _dash_manager.get_dash_cooldown_timer().paused = false
 
     _dash_duration_timer.paused = false
     _dash_echo_timer.paused = false

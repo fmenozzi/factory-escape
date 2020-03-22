@@ -30,11 +30,13 @@ func _ready() -> void:
     DASH_SPEED = DASH_DISTANCE / DASH_DURATION
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
+    var dash_manager := player.get_dash_manager()
+
     # Reset dash duration, dash cooldown, and dash echo timers.
     _dash_duration_timer.start()
     _dash_echo_timer.connect('timeout', self, '_on_dash_echo_timeout', [player])
     _dash_echo_timer.start()
-    player.get_dash_cooldown_timer().stop()
+    dash_manager.get_dash_cooldown_timer().stop()
 
     player.emit_dash_puff()
 
@@ -53,7 +55,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # after a dash/pogo. Might revisit this if it becomes incompatible with this
     # game's eventual design.
     var jump_manager := player.get_jump_manager()
-    var dash_manager := player.get_dash_manager()
     dash_manager.consume_dash()
     if jump_manager.can_jump():
         jump_manager.reset_jump()
@@ -61,7 +62,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
 func exit(player: Player) -> void:
     # Start the cooldown timer once the dash finishes.
-    player.get_dash_cooldown_timer().start()
+    player.get_dash_manager().get_dash_cooldown_timer().start()
 
     # Stop the dash echo timer.
     _dash_echo_timer.disconnect('timeout', self, '_on_dash_echo_timeout')

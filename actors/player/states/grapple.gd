@@ -80,7 +80,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if player.get_jump_manager().get_jump_buffer_raycast().is_colliding():
             _buffer_jump_enabled = true
     elif event.is_action_pressed('player_dash') and velocity.y > 0:
-        if player.get_dash_manager().get_dash_buffer_raycast().is_colliding():
+        if player.get_dash_buffer_raycast().is_colliding():
             _buffer_dash_enabled = true
 
     return {'new_state': Player.State.NO_CHANGE}
