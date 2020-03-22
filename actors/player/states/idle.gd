@@ -36,9 +36,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             player.start_attack('attack')
         player.get_animation_player().queue('idle')
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
-        # Only dash if the cooldown is done.
-        if dash_manager.get_dash_cooldown_timer().is_stopped():
-            return {'new_state': Player.State.DASH}
+        return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:

@@ -54,9 +54,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         player.get_animation_player().queue('fall')
     elif event.is_action_pressed('player_dash'):
         if dash_manager.can_dash():
-            # Only dash if the cooldown is done.
-            if dash_manager.get_dash_cooldown_timer().is_stopped():
-                return {'new_state': Player.State.DASH}
+            return {'new_state': Player.State.DASH}
         elif dash_manager.get_dash_buffer_raycast().is_colliding():
             _buffer_dash_enabled = true
     elif event.is_action_pressed('player_jump'):

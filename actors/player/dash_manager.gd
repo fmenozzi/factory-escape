@@ -14,7 +14,7 @@ func _ready() -> void:
     _dash_cooldown_timer.one_shot = true
 
 func can_dash() -> bool:
-    return _can_dash
+    return _can_dash and get_dash_cooldown_timer().is_stopped()
 
 func consume_dash() -> void:
     _can_dash = false
