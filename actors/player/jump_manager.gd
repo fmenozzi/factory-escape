@@ -36,8 +36,7 @@ func has_double_jump() -> bool:
     return _has_double_jump
 
 func consume_jump() -> void:
-    # Shouldn't be consuming jump if we've already double-jumped.
-    assert(_state in [State.NOT_JUMPED, State.JUMPED])
+    assert(_state in [State.NOT_JUMPED, State.JUMPED, State.DOUBLE_JUMPED])
 
     match _state:
         State.NOT_JUMPED:

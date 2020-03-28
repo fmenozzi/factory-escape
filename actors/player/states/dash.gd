@@ -13,6 +13,8 @@ var DASH_SPEED: float
 # The delay between emissions of the dash echo.
 var DASH_ECHO_DELAY: float = 0.05
 
+var _previous_state_enum: int
+
 const DashEcho = preload('res://actors/player/DashEcho.tscn')
 
 onready var _dash_duration_timer: Timer = $DashDurationTimer
@@ -46,19 +48,9 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Play dash animation.
     player.get_animation_player().play('dash')
 
-    # Consume the dash until it is reset be e.g. hitting the ground. Also,
-    # ensure that we get no more than one jump after a dash if we e.g. dash off
-    # of a ledge. We're really only doing this because Hollow Knight does it,
-    # and I can't really think of a reason why this limitation exists; maybe to
-    # limit player mobility given the pogo mechanic? That is, some platforming
-    # sections might have been harder to design if the player could double jump
-    # after a dash/pogo. Might revisit this if it becomes incompatible with this
-    # game's eventual design.
-    var jump_manager := player.get_jump_manager()
     dash_manager.consume_dash()
-    if jump_manager.can_jump():
-        jump_manager.reset_jump()
-        jump_manager.consume_jump()
+
+    _previous_state_enum = previous_state_dict['previous_state']
 
 func exit(player: Player) -> void:
     # Start the cooldown timer once the dash finishes.
@@ -76,6 +68,13 @@ func update(player: Player, delta: float) -> Dictionary:
     # idle otherwise.
     if _dash_duration_timer.is_stopped():
         if player.is_in_air():
+            # We want to treat dashing off a ledge as similar to walking off a
+            # ledge (i.e. if we dash off a ledge we can only jump again if we
+            # have the double jump). Importantly, this should not happen if we
+            # dash in midair.
+            if _previous_state_enum in [Player.State.IDLE, Player.State.WALK]:
+                player.get_jump_manager().consume_jump()
+
             return {'new_state': Player.State.FALL}
         else:
             return {'new_state': Player.State.IDLE}

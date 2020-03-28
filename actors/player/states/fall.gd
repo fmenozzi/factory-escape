@@ -29,6 +29,18 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     else:
         player.get_animation_player().play('fall')
 
+    # Treat falling off a ledge as consuming a jump (i.e. can only jump again if
+    # we have the double jump).
+    var previous_state: int = previous_state_dict['previous_state']
+    if not previous_state in [
+        Player.State.JUMP,
+        Player.State.DOUBLE_JUMP,
+        Player.State.DASH
+    ]:
+        var jump_manager := player.get_jump_manager()
+        jump_manager.reset_jump()
+        jump_manager.consume_jump()
+
     # Start the fall time stopwatch.
     _fall_time_stopwatch.start()
 
