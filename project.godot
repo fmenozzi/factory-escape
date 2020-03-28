@@ -101,6 +101,7 @@ config/icon="res://icon.png"
 Util="*res://custom/scripts/util.gd"
 Rumble="*res://custom/nodes/Rumble.tscn"
 Screenshake="*res://custom/nodes/Screenshake.tscn"
+Collision="*res://custom/scripts/collision.gd"
 
 [display]
 

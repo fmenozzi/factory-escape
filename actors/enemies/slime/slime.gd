@@ -101,7 +101,7 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 
 # Slimes insta-die when touching hazards.
 func _on_hazard_hit(area: Area2D) -> void:
-    if not area or not Util.in_collision_layer(area, 'hazards'):
+    if not area or not Collision.in_layer(area, 'hazards'):
         return
     emit_signal('slime_died')
 
