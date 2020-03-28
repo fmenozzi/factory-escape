@@ -27,8 +27,12 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     player.get_animation_player().play('stagger')
 
+    # Make the player collidable with enemy barriers for the duration of the
+    # stagger so that the player is not knocked into the adjacent room.
+    Util.set_collision_mask(player, 'enemy_barrier', true)
+
 func exit(player: Player) -> void:
-    pass
+    Util.set_collision_mask(player, 'enemy_barrier', false)
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}

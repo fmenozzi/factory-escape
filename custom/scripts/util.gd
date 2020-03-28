@@ -77,6 +77,11 @@ func in_collision_layers(collision_object, layer_names: Array) -> bool:
             return true
     return false
 
+func set_collision_mask(collision_object, mask_name: String, val: bool) -> void:
+    assert(collision_object.has_method('set_collision_mask_bit'))
+
+    collision_object.set_collision_mask_bit(_LAYER_NAMES[mask_name], val)
+
 # Convenience function for getting the player object from anywhere in the
 # current scene tree.
 func get_player():
