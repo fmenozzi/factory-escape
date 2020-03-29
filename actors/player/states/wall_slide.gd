@@ -68,10 +68,18 @@ func update(player: Player, delta: float) -> Dictionary:
 
     # Slide down with constant speed after a slight acceleration. Also move the
     # character slightly into the wall to maintain collision with the wall so
-    # that is_on_wall() continues to return true.
+    # that is_on_wall() continues to return true. Snap to the wall to make wall
+    # sliding on moving platforms look slightly less janky when not pressing
+    # into the direction of the moving platform.
+    var snap := Util.NO_SNAP
+    match player.get_direction():
+        Util.Direction.LEFT:
+            snap = Vector2.LEFT
+        Util.Direction.RIGHT:
+            snap = Vector2.RIGHT
     player.velocity.x = 10 * player.get_direction()
     player.velocity.y = min(
         player.velocity.y + 5, physics_manager.get_movement_speed())
-    player.move(player.velocity)
+    player.move(player.velocity, snap)
 
     return {'new_state': Player.State.NO_CHANGE}
