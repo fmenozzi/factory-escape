@@ -4,6 +4,11 @@ extends 'res://actors/player/states/state.gd'
 # instead of idle state upon touching the ground.
 const HARD_LANDING_FALL_DURATION: float = 1.0
 
+# If the player presses jump within this time period of entering the fall state
+# from the idle/walk state, allow the jump to proceed even though they've
+# already fallen off the edge.
+const COYOTE_TIME_DURATION: float = 0.1
+
 # If true, transition to jump state immediately upon landing (buffer jump). This
 # is only enabled if the player presses the jump button while falling (when
 # unable to jump normally) and the player is close to the ground (as determined
@@ -17,6 +22,11 @@ var _buffer_jump_enabled := false
 var _buffer_dash_enabled := false
 
 onready var _fall_time_stopwatch: Stopwatch = $FallTimeStopwatch
+onready var _coyote_timer: Timer = $CoyoteTimer
+
+func _ready() -> void:
+    _coyote_timer.one_shot = true
+    _coyote_timer.wait_time = COYOTE_TIME_DURATION
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -30,7 +40,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.get_animation_player().play('fall')
 
     # Treat falling off a ledge as consuming a jump (i.e. can only jump again if
-    # we have the double jump).
+    # we have the double jump). Also, start the coyote timer to allow for jumps
+    # after walking off a ledge.
     var previous_state: int = previous_state_dict['previous_state']
     if not previous_state in [
         Player.State.JUMP,
@@ -41,8 +52,11 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         jump_manager.reset_jump()
         jump_manager.consume_jump()
 
+        _coyote_timer.start()
+
     # Start the fall time stopwatch.
     _fall_time_stopwatch.start()
+
 
     _buffer_jump_enabled = false
     _buffer_dash_enabled = false
@@ -53,6 +67,8 @@ func exit(player: Player) -> void:
     # the animation queue and hiding the attack sprite.
     if player.is_attacking():
         player.stop_attack()
+
+    _coyote_timer.stop()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
@@ -73,6 +89,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if player.is_near_wall_front() or player.is_near_wall_back():
             # Wall jump.
             return {'new_state': Player.State.WALL_JUMP}
+        elif not _coyote_timer.is_stopped():
+            # Coyote time jump.
+            jump_manager.reset_jump()
+            return {'new_state': Player.State.JUMP}
         elif jump_manager.can_jump():
             # Double jump.
             return {'new_state': Player.State.DOUBLE_JUMP}
