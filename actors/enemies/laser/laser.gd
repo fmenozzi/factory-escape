@@ -1,6 +1,7 @@
+tool
 extends Node2D
 
-export(float) var hitbox_width := 16.0
+export(float, 0.0, 16.0) var hitbox_width := 8.0 setget set_hitbox_width
 
 onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
@@ -21,6 +22,19 @@ func shoot() -> void:
     _hitbox_collision_shape.shape = _make_collision_shape(collision_point_local)
     _hitbox_collision_shape.rotation = collision_point_local.angle()
     _hitbox_collision_shape.position = collision_point_local / 2.0
+
+func set_hitbox_width(new_hitbox_width: float) -> void:
+    # Hack to get around the fact that we need the beam sprite to be loaded in
+    # the tree before we can access it below.
+    if not is_inside_tree():
+        yield(self, 'ready')
+
+    hitbox_width = new_hitbox_width
+
+    # Convert hitbox_width from pixels into UV-space for the beam shader.
+    var outer_beam_width_uv := hitbox_width / _beam_sprite.texture.get_height()
+    _beam_sprite.get_material().set_shader_param(
+        'outer_beam_half_width_uv', 0.5 * outer_beam_width_uv)
 
 func _get_collision_point_local() -> Vector2:
     _raycast.cast_to = _target.position
