@@ -39,8 +39,9 @@ func shoot() -> void:
     _is_shooting = true
 
     # Get the local coordinates of the point where the laser actually makes
-    # contact.
+    # contact and move target to that location.
     var collision_point_local = _get_collision_point_local()
+    _target.position = collision_point_local
 
     _update_beam_sprite(collision_point_local)
     _update_shader_params()
