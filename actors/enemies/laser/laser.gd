@@ -167,6 +167,18 @@ func _start_shooting_wobble(num_wobbles: int) -> void:
             self, 'inner_beam_width', inner_beam_width - 1, inner_beam_width,
             SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
             Tween.EASE_IN_OUT, (i+1) * (SHOT_DURATION / float(num_wobbles)))
+
+        # Wobble impact sprite radius.
+        var mat: ShaderMaterial = _impact_sprite.get_material()
+        var current_radius_uv: float = mat.get_shader_param('impact_radius_uv')
+        _tween.interpolate_property(mat, 'shader_param/impact_radius_uv',
+            current_radius_uv, current_radius_uv - 0.05,
+            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, i * (SHOT_DURATION / float(num_wobbles)))
+        _tween.interpolate_property(mat, 'shader_param/impact_radius_uv',
+            current_radius_uv - 0.05, current_radius_uv,
+            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, (i+1) * (SHOT_DURATION / float(num_wobbles)))
     _tween.start()
 
 func _on_wobble_tween_step(_obj, _key, _elapsed, _val) -> void:
