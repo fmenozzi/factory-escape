@@ -1,19 +1,41 @@
 tool
 extends Node2D
 
+signal telegraph_finished
+signal shot_finished
+
 export(float, 0, 16) var outer_beam_width := 8.0 setget set_outer_beam_width
 export(float, 0, 16) var inner_beam_width := 4.0 setget set_inner_beam_width
+
+# The amount of time the laser spends telegraphing the subsequent shot, during
+# which the player cannot be harmed.
+const TELEGRAPH_DURATION: float = 1.0
+
+# The amount of time the laser spends shooting, during which it remains active
+# and can harm the player.
+const SHOT_DURATION: float = 1.0
 
 onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
 onready var _target: Position2D = $Target
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 
+var _is_shooting := false
+
+# Temp variables used to save the
+var _outer_beam_width := 0.0
+var _inner_beam_width := 0.0
+
 func _ready() -> void:
     # Make sure each instance gets its own shader material.
     _beam_sprite.set_material(_beam_sprite.get_material().duplicate(true))
 
 func shoot() -> void:
+    if _is_shooting:
+        return
+
+    _is_shooting = true
+
     # Get the local coordinates of the point where the laser actually makes
     # contact.
     var collision_point_local := _get_collision_point_local()
@@ -24,6 +46,17 @@ func shoot() -> void:
     # Set hitbox collision shape dynamically based on the laser's contact point
     # and the desired width of the hitbox.
     _update_collision_shape(collision_point_local)
+
+    # Start the telegraph for the laser shot.
+    _start_laser_telegraph()
+
+    # Wait for telegraph to finish before firing the actual shot.
+    yield(self, 'telegraph_finished')
+    _start_laser_shot()
+
+    # Once the shot is finished, we're able to shoot again.
+    yield(self, 'shot_finished')
+    _is_shooting = false
 
 func set_outer_beam_width(new_outer_beam_width: float) -> void:
     # Hack to get around the fact that we need the beam sprite to be loaded in
@@ -77,3 +110,20 @@ func _make_collision_shape(collision_point: Vector2) -> RectangleShape2D:
     shape.extents = Vector2(
         collision_point.length() / 2.0, outer_beam_width / 2.0)
     return shape
+
+func _start_laser_telegraph() -> void:
+    _outer_beam_width = self.outer_beam_width
+    _inner_beam_width = self.inner_beam_width
+
+    self.outer_beam_width = 1.0
+    self.inner_beam_width = 0.0
+
+    yield(get_tree().create_timer(TELEGRAPH_DURATION), 'timeout')
+    emit_signal('telegraph_finished')
+
+func _start_laser_shot() -> void:
+    self.outer_beam_width = _outer_beam_width
+    self.inner_beam_width = _inner_beam_width
+
+    yield(get_tree().create_timer(SHOT_DURATION), 'timeout')
+    emit_signal('shot_finished')

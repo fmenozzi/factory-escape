@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
-[sub_resource type="Shader" id=11]
+[sub_resource type="Shader" id=2]
 code = "shader_type canvas_item;
 
 // The color of the outer beam.
@@ -49,17 +49,17 @@ void fragment() {
     COLOR = beam(dist_to_center_line_y);
 }"
 
-[sub_resource type="ShaderMaterial" id=12]
-shader = SubResource( 11 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/outer_beam_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/outer_beam_half_width_uv = 0.3125
 shader_param/inner_beam_color = Color( 1, 1, 1, 1 )
 shader_param/inner_beam_half_width_uv = 0.15625
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 5 )
 
-[sub_resource type="Shader" id=13]
+[sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
 
 // The color of the outer beam.
@@ -100,17 +100,17 @@ void fragment() {
     COLOR = beam(dist_to_center_line_y);
 }"
 
-[sub_resource type="ShaderMaterial" id=14]
-shader = SubResource( 13 )
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 shader_param/outer_beam_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/outer_beam_half_width_uv = 0.1875
 shader_param/inner_beam_color = Color( 1, 1, 1, 1 )
 shader_param/inner_beam_half_width_uv = 0.0625
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 56, 3 )
 
-[sub_resource type="Shader" id=15]
+[sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
 
 // The color of the outer beam.
@@ -151,14 +151,14 @@ void fragment() {
     COLOR = beam(dist_to_center_line_y);
 }"
 
-[sub_resource type="ShaderMaterial" id=16]
-shader = SubResource( 15 )
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
 shader_param/outer_beam_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/outer_beam_half_width_uv = 0.5
 shader_param/inner_beam_color = Color( 1, 1, 1, 1 )
 shader_param/inner_beam_half_width_uv = 0.09375
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 29.1204, 8 )
 
 [node name="LaserPlayground" instance=ExtResource( 1 )]
@@ -180,12 +180,12 @@ outer_beam_width = 10.0
 inner_beam_width = 5.0
 
 [node name="Beam" parent="Enemies/Laser" index="0"]
-material = SubResource( 12 )
+material = SubResource( 3 )
 
 [node name="CollisionShape2D" parent="Enemies/Laser/Hitbox" index="0"]
 position = Vector2( 0, 8 )
 rotation = 1.5708
-shape = SubResource( 17 )
+shape = SubResource( 4 )
 
 [node name="Laser2" parent="Enemies" index="1" instance=ExtResource( 2 )]
 position = Vector2( 16, 128 )
@@ -193,7 +193,7 @@ outer_beam_width = 6.0
 inner_beam_width = 2.0
 
 [node name="Beam" parent="Enemies/Laser2" index="0"]
-material = SubResource( 14 )
+material = SubResource( 6 )
 
 [node name="Offset" parent="Enemies/Laser2" index="1"]
 position = Vector2( 1, 0 )
@@ -206,7 +206,7 @@ position = Vector2( 232, 0 )
 
 [node name="CollisionShape2D" parent="Enemies/Laser2/Hitbox" index="0"]
 position = Vector2( 56, 0 )
-shape = SubResource( 18 )
+shape = SubResource( 7 )
 
 [node name="Laser3" parent="Enemies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 128, 64 )
@@ -214,7 +214,7 @@ outer_beam_width = 16.0
 inner_beam_width = 3.0
 
 [node name="Beam" parent="Enemies/Laser3" index="0"]
-material = SubResource( 16 )
+material = SubResource( 9 )
 
 [node name="RayCast2D" parent="Enemies/Laser3/Offset" index="0"]
 cast_to = Vector2( 56, 16 )
@@ -225,7 +225,7 @@ position = Vector2( 56, 16 )
 [node name="CollisionShape2D" parent="Enemies/Laser3/Hitbox" index="0"]
 position = Vector2( 28, 8 )
 rotation = 0.2783
-shape = SubResource( 19 )
+shape = SubResource( 10 )
 
 [node name="Player" parent="." index="9" instance=ExtResource( 4 )]
 position = Vector2( 248, 160 )
