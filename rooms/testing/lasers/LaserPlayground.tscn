@@ -23,9 +23,11 @@ shape = SubResource( 1 )
 
 [node name="Laser" parent="Enemies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 64, 32 )
+hitbox_width = 7.0
 
 [node name="Laser2" parent="Enemies" index="1" instance=ExtResource( 2 )]
 position = Vector2( 16, 128 )
+hitbox_width = 10.0
 
 [node name="Offset" parent="Enemies/Laser2" index="1"]
 position = Vector2( 1, 0 )
@@ -35,6 +37,7 @@ position = Vector2( 232, 0 )
 
 [node name="Laser3" parent="Enemies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 128, 64 )
+hitbox_width = 16.0
 
 [node name="Target" parent="Enemies/Laser3" index="2"]
 position = Vector2( 56, 16 )
