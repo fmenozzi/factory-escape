@@ -68,9 +68,11 @@ func _get_collision_point_local() -> Vector2:
         return _raycast.cast_to
 
 func _make_collision_shape(collision_point: Vector2) -> RectangleShape2D:
+    # Make the collision shape slightly narrower than the width of the outer
+    # beam.
     var shape := RectangleShape2D.new()
     shape.extents = Vector2(
-        collision_point.length() / 2.0, outer_beam_width / 2.0)
+        collision_point.length() / 2.0, (outer_beam_width / 2.0) - 1)
     return shape
 
 func _update_beam_sprite(collision_point_local: Vector2) -> void:
