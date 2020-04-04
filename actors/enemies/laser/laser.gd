@@ -38,13 +38,21 @@ func shoot() -> void:
 
     _is_shooting = true
 
-    _update()
+    # Get the local coordinates of the point where the laser actually makes
+    # contact.
+    var collision_point_local = _get_collision_point_local()
+
+    _update_beam_sprite(collision_point_local)
+    _update_shader_params()
+    _update_collision_shape(collision_point_local)
 
     # Start the telegraph for the laser shot.
+    _hitbox_collision_shape.set_deferred('disabled', true)
     _start_laser_telegraph()
 
     # Wait for telegraph to finish before firing the actual shot.
     yield(self, 'telegraph_finished')
+    _hitbox_collision_shape.set_deferred('disabled', false)
     _start_laser_shot()
 
     # Once the shot is finished, we're able to shoot again.
@@ -65,15 +73,12 @@ func _make_collision_shape(collision_point: Vector2) -> RectangleShape2D:
         collision_point.length() / 2.0, outer_beam_width / 2.0)
     return shape
 
-func _update() -> void:
-    # Get the local coordinates of the point where the laser actually makes
-    # contact.
-    var collision_point_local = _get_collision_point_local()
-
+func _update_beam_sprite(collision_point_local: Vector2) -> void:
     # Rotate and extend beam sprite to point to collision point.
     _beam_sprite.rotation = collision_point_local.angle()
     _beam_sprite.region_rect.end.x = collision_point_local.length()
 
+func _update_shader_params() -> void:
     # Update beam rendering by setting shader params.
     var beam_width_px := _beam_sprite.texture.get_height()
 
@@ -86,6 +91,7 @@ func _update() -> void:
     shader_material.set_shader_param(
         'inner_beam_half_width_uv', inner_beam_width_uv / 2.0)
 
+func _update_collision_shape(collision_point_local: Vector2) -> void:
     # Set hitbox collision shape dynamically based on the laser's contact point
     # and the desired width of the hitbox.
     _hitbox_collision_shape.shape = _make_collision_shape(collision_point_local)
@@ -159,6 +165,7 @@ func _start_shooting_wobble(num_wobbles: int) -> void:
     _tween.start()
 
 func _on_wobble_tween_step(_obj, _key, _elapsed, _val) -> void:
-    # Ensure that we're updating the collision shape and shader params on each
-    # tween step.
-    _update()
+    # Ensure that we're updating the shader params on each tween step. Note that
+    # we DON'T update the collision shape because this causes collisions not to
+    # occur.
+    _update_shader_params()

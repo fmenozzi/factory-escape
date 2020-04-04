@@ -209,18 +209,21 @@ position = Vector2( 56, 0 )
 shape = SubResource( 7 )
 
 [node name="Laser3" parent="Enemies" index="2" instance=ExtResource( 2 )]
-position = Vector2( 128, 64 )
+position = Vector2( 160, 16 )
 outer_beam_width = 16.0
 inner_beam_width = 3.0
 
 [node name="Beam" parent="Enemies/Laser3" index="0"]
 material = SubResource( 9 )
 
+[node name="Offset" parent="Enemies/Laser3" index="1"]
+position = Vector2( 0, 1 )
+
 [node name="RayCast2D" parent="Enemies/Laser3/Offset" index="0"]
 cast_to = Vector2( 56, 16 )
 
 [node name="Target" parent="Enemies/Laser3" index="2"]
-position = Vector2( 56, 16 )
+position = Vector2( 0, 88 )
 
 [node name="CollisionShape2D" parent="Enemies/Laser3/Hitbox" index="0"]
 position = Vector2( 28, 8 )
@@ -228,7 +231,7 @@ rotation = 0.2783
 shape = SubResource( 10 )
 
 [node name="Player" parent="." index="9" instance=ExtResource( 4 )]
-position = Vector2( 248, 160 )
+position = Vector2( 160, 96 )
 starting_room_path = NodePath("..")
 
 [editable path="TileMaps"]
