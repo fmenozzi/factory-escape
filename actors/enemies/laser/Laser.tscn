@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://actors/enemies/laser/laser.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/laser/textures/beam.png" type="Texture" id=2]
 [ext_resource path="res://shaders/laser_beam.shader" type="Shader" id=3]
+[ext_resource path="res://shaders/laser_impact.shader" type="Shader" id=4]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
@@ -10,6 +11,11 @@ shader_param/outer_beam_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/outer_beam_half_width_uv = 0.25
 shader_param/inner_beam_color = Color( 1, 1, 1, 1 )
 shader_param/inner_beam_half_width_uv = 0.15
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 4 )
+shader_param/impact_color = Color( 1, 0.309804, 0.470588, 1 )
+shader_param/impact_radius_uv = 0.5
 
 [node name="Laser" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,6 +38,11 @@ collision_mask = 516
 
 [node name="Target" type="Position2D" parent="."]
 position = Vector2( 0, 64 )
+
+[node name="BeamImpact" type="Sprite" parent="Target"]
+visible = false
+material = SubResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 256

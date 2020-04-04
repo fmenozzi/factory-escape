@@ -17,6 +17,7 @@ const SHOT_DURATION: float = 1.0
 onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
 onready var _target: Position2D = $Target
+onready var _impact_sprite: Sprite = $Target/BeamImpact
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _tween: Tween = $WobbleTween
 
@@ -54,6 +55,7 @@ func shoot() -> void:
     # Wait for telegraph to finish before firing the actual shot.
     yield(self, 'telegraph_finished')
     _hitbox_collision_shape.set_deferred('disabled', false)
+    _impact_sprite.visible = true
     _start_laser_shot()
 
     # Once the shot is finished, we're able to shoot again.
