@@ -18,6 +18,7 @@ onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
 onready var _target: Position2D = $Target
 onready var _impact_sprite: Sprite = $Target/BeamImpact
+onready var _impact_sparks: Particles2D = $Target/BeamImpactSparks
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _tween: Tween = $WobbleTween
 
@@ -42,8 +43,8 @@ func shoot() -> void:
     # Get the local coordinates of the point where the laser actually makes
     # contact and move target to that location.
     var collision_point_local = _get_collision_point_local()
-    _target.position = collision_point_local
 
+    _update_target(collision_point_local)
     _update_beam_sprite(collision_point_local)
     _update_shader_params()
     _update_collision_shape(collision_point_local)
@@ -56,6 +57,7 @@ func shoot() -> void:
     yield(self, 'telegraph_finished')
     _hitbox_collision_shape.set_deferred('disabled', false)
     _impact_sprite.visible = true
+    _impact_sparks.emitting = true
     _start_laser_shot()
 
     # Once the shot is finished, we're able to shoot again.
@@ -77,6 +79,10 @@ func _make_collision_shape(collision_point: Vector2) -> RectangleShape2D:
     shape.extents = Vector2(
         collision_point.length() / 2.0, (outer_beam_width / 2.0) - 1)
     return shape
+
+func _update_target(collision_point_local: Vector2) -> void:
+    _target.position = collision_point_local
+    _target.rotation = collision_point_local.angle()
 
 func _update_beam_sprite(collision_point_local: Vector2) -> void:
     # Rotate and extend beam sprite to point to collision point.
