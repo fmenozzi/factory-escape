@@ -18,6 +18,7 @@ onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
 onready var _target: Position2D = $Target
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _tween: Tween = $WobbleTween
 
 var _is_shooting := false
 
@@ -28,6 +29,8 @@ var _inner_beam_width := 0.0
 func _ready() -> void:
     # Make sure each instance gets its own shader material.
     _beam_sprite.set_material(_beam_sprite.get_material().duplicate(true))
+
+    _tween.connect('tween_step', self, '_on_wobble_tween_step')
 
 func shoot() -> void:
     if _is_shooting:
@@ -93,19 +96,69 @@ func _start_laser_telegraph() -> void:
     _outer_beam_width = outer_beam_width
     _inner_beam_width = inner_beam_width
 
-    outer_beam_width = 1.0
+    # No inner beam during telegraph.
     inner_beam_width = 0.0
 
-    _update()
+    # Small outer beam during telegraph.
+    outer_beam_width = 1.5
 
-    yield(get_tree().create_timer(TELEGRAPH_DURATION), 'timeout')
+    # "Wobble" the outer beam width.
+    var num_wobbles := 6
+    _start_telegraph_wobble(num_wobbles)
+
+    yield(_tween, 'tween_all_completed')
     emit_signal('telegraph_finished')
 
 func _start_laser_shot() -> void:
+    # Reset beam widths.
     outer_beam_width = _outer_beam_width
     inner_beam_width = _inner_beam_width
 
-    _update()
+    var num_wobbles := 8
+    _start_shooting_wobble(num_wobbles)
 
-    yield(get_tree().create_timer(SHOT_DURATION), 'timeout')
+    yield(_tween, 'tween_all_completed')
     emit_signal('shot_finished')
+
+func _start_telegraph_wobble(num_wobbles: int) -> void:
+    _tween.remove_all()
+    for i in range(num_wobbles):
+        # Wobble outer beam.
+        _tween.interpolate_property(
+            self, 'outer_beam_width', outer_beam_width, outer_beam_width - 1,
+            TELEGRAPH_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, i * (TELEGRAPH_DURATION / float(num_wobbles)))
+        _tween.interpolate_property(
+            self, 'outer_beam_width', outer_beam_width - 1, outer_beam_width,
+            TELEGRAPH_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, (i+1) * (TELEGRAPH_DURATION / float(num_wobbles)))
+    _tween.start()
+
+func _start_shooting_wobble(num_wobbles: int) -> void:
+    _tween.remove_all()
+    for i in range(num_wobbles):
+        # Wobble outer beam.
+        _tween.interpolate_property(
+            self, 'outer_beam_width', outer_beam_width, outer_beam_width - 1,
+            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, i * (SHOT_DURATION / float(num_wobbles)))
+        _tween.interpolate_property(
+            self, 'outer_beam_width', outer_beam_width - 1, outer_beam_width,
+            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, (i+1) * (SHOT_DURATION / float(num_wobbles)))
+
+        # Wobble inner beam.
+        _tween.interpolate_property(
+            self, 'inner_beam_width', inner_beam_width, inner_beam_width - 1,
+            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, i * (SHOT_DURATION / float(num_wobbles)))
+        _tween.interpolate_property(
+            self, 'inner_beam_width', inner_beam_width - 1, inner_beam_width,
+            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
+            Tween.EASE_IN_OUT, (i+1) * (SHOT_DURATION / float(num_wobbles)))
+    _tween.start()
+
+func _on_wobble_tween_step(_obj, _key, _elapsed, _val) -> void:
+    # Ensure that we're updating the collision shape and shader params on each
+    # tween step.
+    _update()
