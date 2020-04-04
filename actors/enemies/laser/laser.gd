@@ -1,7 +1,8 @@
 tool
 extends Node2D
 
-export(float, 0.0, 16.0) var hitbox_width := 8.0 setget set_hitbox_width
+export(float, 0, 16) var outer_beam_width := 8.0 setget set_outer_beam_width
+export(float, 0, 16) var inner_beam_width := 4.0 setget set_inner_beam_width
 
 onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
@@ -24,22 +25,35 @@ func shoot() -> void:
     # and the desired width of the hitbox.
     _update_collision_shape(collision_point_local)
 
-func set_hitbox_width(new_hitbox_width: float) -> void:
+func set_outer_beam_width(new_outer_beam_width: float) -> void:
     # Hack to get around the fact that we need the beam sprite to be loaded in
     # the tree before we can access it below.
     if not is_inside_tree():
         yield(self, 'ready')
 
-    hitbox_width = new_hitbox_width
+    outer_beam_width = new_outer_beam_width
 
-    # Convert hitbox_width from pixels into UV-space for the beam shader.
-    var outer_beam_width_uv := hitbox_width / _beam_sprite.texture.get_height()
+    # Convert outer beam width from pixels into UV-space for the beam shader.
+    var width_uv := outer_beam_width / _beam_sprite.texture.get_height()
     _beam_sprite.get_material().set_shader_param(
-        'outer_beam_half_width_uv', 0.5 * outer_beam_width_uv)
+        'outer_beam_half_width_uv', width_uv / 2.0)
 
-    # Update collision shape to use new width.
-    var collision_point_local := _get_collision_point_local()
-    _update_collision_shape(collision_point_local)
+    # Update collision shape to use new width, since the outer beam is what
+    # determines the laser's hitbox.
+    _update_collision_shape(_get_collision_point_local())
+
+func set_inner_beam_width(new_inner_beam_width: float) -> void:
+    # Hack to get around the fact that we need the beam sprite to be loaded in
+    # the tree before we can access it below.
+    if not is_inside_tree():
+        yield(self, 'ready')
+
+    inner_beam_width = new_inner_beam_width
+
+    # Convert inner beam width from pixels into UV-space for the beam shader.
+    var width_uv := inner_beam_width / _beam_sprite.texture.get_height()
+    _beam_sprite.get_material().set_shader_param(
+        'inner_beam_half_width_uv', width_uv / 2.0)
 
 func _get_collision_point_local() -> Vector2:
     _raycast.cast_to = _target.position
@@ -60,5 +74,6 @@ func _update_collision_shape(collision_point_local: Vector2) -> void:
 
 func _make_collision_shape(collision_point: Vector2) -> RectangleShape2D:
     var shape := RectangleShape2D.new()
-    shape.extents = Vector2(collision_point.length() / 2.0, hitbox_width / 2.0)
+    shape.extents = Vector2(
+        collision_point.length() / 2.0, outer_beam_width / 2.0)
     return shape
