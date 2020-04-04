@@ -25,6 +25,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [node name="Offset" type="Position2D" parent="."]
 
 [node name="RayCast2D" type="RayCast2D" parent="Offset"]
+visible = false
 enabled = true
 cast_to = Vector2( 0, 64 )
 collision_mask = 516
