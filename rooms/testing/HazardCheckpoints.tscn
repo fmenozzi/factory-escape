@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformLarge.tscn" type="PackedScene" id=2]
@@ -7,10 +7,8 @@
 [ext_resource path="res://environment/platforms/collapsable_platform/CollapsablePlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBelt.tscn" type="PackedScene" id=6]
 [ext_resource path="res://environment/lamp/Lamp.tscn" type="PackedScene" id=7]
-
-
-
-
+[ext_resource path="res://rooms/testing/hazard_checkpoints.gd" type="Script" id=8]
+[ext_resource path="res://actors/enemies/laser/Laser.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
@@ -28,6 +26,7 @@ extents = Vector2( 16, 88 )
 extents = Vector2( 16, 88 )
 
 [node name="HazardCheckpoints" instance=ExtResource( 1 )]
+script = ExtResource( 8 )
 
 [node name="BackgroundSmall" parent="TileMaps" index="0"]
 tile_data = PoolIntArray( 13, 65, 0, 14, 65, 0, 15, 1, 0, 27, 65, 0, 28, 65, 0, 65549, 65, 0, 65550, 65, 0, 65551, 1, 0, 65563, 65, 0, 65564, 66, 0, 131085, 65, 0, 131086, 65, 0, 131087, 2, 0, 131099, 65, 0, 196621, 66, 0, 196622, 65, 0, 196635, 66, 0, 262158, 66, 0, 524324, 8, 0 )
@@ -163,6 +162,37 @@ position = Vector2( 24, 180 )
 [node name="Spikes36" parent="Hazards" index="35" instance=ExtResource( 3 )]
 position = Vector2( 8, 180 )
 
+[node name="Lasers" type="Node2D" parent="Enemies" index="0"]
+
+[node name="Laser" parent="Enemies/Lasers" index="0" instance=ExtResource( 9 )]
+position = Vector2( 480, 0 )
+
+[node name="Target" parent="Enemies/Lasers/Laser" index="2"]
+position = Vector2( 0, 192 )
+
+[node name="Laser2" parent="Enemies/Lasers" index="1" instance=ExtResource( 9 )]
+position = Vector2( 296, 0 )
+
+[node name="Target" parent="Enemies/Lasers/Laser2" index="2"]
+position = Vector2( 0, 192 )
+
+[node name="Laser3" parent="Enemies/Lasers" index="2" instance=ExtResource( 9 )]
+position = Vector2( 200, 0 )
+
+[node name="Target" parent="Enemies/Lasers/Laser3" index="2"]
+position = Vector2( 0, 192 )
+
+[node name="Laser4" parent="Enemies/Lasers" index="3" instance=ExtResource( 9 )]
+position = Vector2( 0, 64 )
+
+[node name="Offset" parent="Enemies/Lasers/Laser4" index="1"]
+position = Vector2( 1, 0 )
+
+[node name="Target" parent="Enemies/Lasers/Laser4" index="2"]
+position = Vector2( 624, 0 )
+
+[node name="LaserShotTimer" type="Timer" parent="Enemies" index="1"]
+
 [node name="Entrance" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 568, 144 )
 
@@ -210,6 +240,14 @@ position = Vector2( 32, 112 )
 [editable path="TileMaps"]
 
 [editable path="MovingPlatforms/MovingPlatformLarge"]
+
+[editable path="Enemies/Lasers/Laser"]
+
+[editable path="Enemies/Lasers/Laser2"]
+
+[editable path="Enemies/Lasers/Laser3"]
+
+[editable path="Enemies/Lasers/Laser4"]
 
 [editable path="HazardCheckpoints/Entrance"]
 
