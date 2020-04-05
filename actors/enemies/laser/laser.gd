@@ -62,6 +62,10 @@ func shoot() -> void:
 
     # Once the shot is finished, we're able to shoot again.
     yield(self, 'shot_finished')
+    _beam_sprite.visible = false
+    _impact_sprite.visible = false
+    _impact_sparks.emitting = false
+    _hitbox_collision_shape.set_deferred('disabled', true)
     _is_shooting = false
 
 func _get_collision_point_local() -> Vector2:
@@ -122,6 +126,11 @@ func _start_laser_telegraph() -> void:
     # "Wobble" the outer beam width.
     var num_wobbles := 6
     _start_telegraph_wobble(num_wobbles)
+
+    # Wait until we start wobbling with new beam widths before making beam
+    # sprite visible.
+    yield(_tween, 'tween_started')
+    _beam_sprite.visible = true
 
     yield(_tween, 'tween_all_completed')
     emit_signal('telegraph_finished')
