@@ -24,7 +24,7 @@ onready var _tween: Tween = $WobbleTween
 
 var _is_shooting := false
 
-# Temp variables used to save the
+# Temp variables used to save the designated beam widths.
 var _outer_beam_width := 0.0
 var _inner_beam_width := 0.0
 
