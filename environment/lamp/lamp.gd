@@ -5,6 +5,7 @@ signal rested_at_lamp(lamp)
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
+onready var _ripple_sprite: Sprite = $RippleSprite
 onready var _light_sprite: Sprite = $LightSprite
 onready var _rest_walk_to_points: Node2D = $RestPoints
 onready var _light_walk_to_points: Node2D = $LightPoints
@@ -13,6 +14,10 @@ onready var _player: Player = Util.get_player()
 var _is_lit := false
 
 func _ready() -> void:
+    # Make sure each instance gets its own shader materials.
+    _ripple_sprite.set_material(_ripple_sprite.get_material().duplicate(true))
+    _light_sprite.set_material(_light_sprite.get_material().duplicate(true))
+
     _fade_in_out_label.set_text('Light Lamp')
     _light_sprite.visible = false
     _animation_player.play('unlit')
