@@ -1,13 +1,13 @@
 extends Room
 
-onready var _lasers: Array = $Enemies.get_children()
-
-func _draw() -> void:
-    for laser in _lasers:
-        draw_circle(laser.position + laser._target.position, 2, Color.red)
+onready var _lasers: Array = $Enemies/Lasers.get_children()
+onready var _shoot_timer: Timer = $Enemies/ShootTimer
 
 func _ready() -> void:
+    _shoot_timer.wait_time = 1.0
+    _shoot_timer.connect('timeout', self, '_on_shoot_timeout')
+    _shoot_timer.start()
+
+func _on_shoot_timeout() -> void:
     for laser in _lasers:
         laser.shoot()
-
-    update()

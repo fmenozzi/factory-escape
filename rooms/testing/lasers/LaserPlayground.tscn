@@ -21,32 +21,36 @@ visible = false
 position = Vector2( 160, 90 )
 shape = SubResource( 1 )
 
-[node name="Laser" parent="Enemies" index="0" instance=ExtResource( 2 )]
+[node name="ShootTimer" type="Timer" parent="Enemies" index="0"]
+
+[node name="Lasers" type="Node2D" parent="Enemies" index="1"]
+
+[node name="Laser" parent="Enemies/Lasers" index="0" instance=ExtResource( 2 )]
 position = Vector2( 160, 16 )
 
-[node name="Offset" parent="Enemies/Laser" index="1"]
+[node name="Offset" parent="Enemies/Lasers/Laser" index="1"]
 position = Vector2( 0, 1 )
 
-[node name="Target" parent="Enemies/Laser" index="2"]
+[node name="Target" parent="Enemies/Lasers/Laser" index="2"]
 position = Vector2( 0, 112 )
 
-[node name="Laser2" parent="Enemies" index="1" instance=ExtResource( 2 )]
+[node name="Laser2" parent="Enemies/Lasers" index="1" instance=ExtResource( 2 )]
 position = Vector2( 16, 128 )
 outer_beam_width = 10.0
 
-[node name="Offset" parent="Enemies/Laser2" index="1"]
+[node name="Offset" parent="Enemies/Lasers/Laser2" index="1"]
 position = Vector2( 1, 0 )
 
-[node name="Target" parent="Enemies/Laser2" index="2"]
+[node name="Target" parent="Enemies/Lasers/Laser2" index="2"]
 position = Vector2( 120, 0 )
 
-[node name="Laser3" parent="Enemies" index="2" instance=ExtResource( 2 )]
+[node name="Laser3" parent="Enemies/Lasers" index="2" instance=ExtResource( 2 )]
 position = Vector2( 304, 64 )
 
-[node name="Offset" parent="Enemies/Laser3" index="1"]
+[node name="Offset" parent="Enemies/Lasers/Laser3" index="1"]
 position = Vector2( -1, 0 )
 
-[node name="Target" parent="Enemies/Laser3" index="2"]
+[node name="Target" parent="Enemies/Lasers/Laser3" index="2"]
 position = Vector2( -112, 96 )
 
 [node name="Player" parent="." index="9" instance=ExtResource( 4 )]
@@ -55,8 +59,8 @@ starting_room_path = NodePath("..")
 
 [editable path="TileMaps"]
 
-[editable path="Enemies/Laser"]
+[editable path="Enemies/Lasers/Laser"]
 
-[editable path="Enemies/Laser2"]
+[editable path="Enemies/Lasers/Laser2"]
 
-[editable path="Enemies/Laser3"]
+[editable path="Enemies/Lasers/Laser3"]
