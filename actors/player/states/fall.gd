@@ -46,7 +46,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     if not previous_state in [
         Player.State.JUMP,
         Player.State.DOUBLE_JUMP,
-        Player.State.DASH
+        Player.State.DASH,
+        Player.State.STAGGER,
     ]:
         var jump_manager := player.get_jump_manager()
         jump_manager.reset_jump()
@@ -56,7 +57,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     # Start the fall time stopwatch.
     _fall_time_stopwatch.start()
-
 
     _buffer_jump_enabled = false
     _buffer_dash_enabled = false
