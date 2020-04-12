@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tilesets/scenes/textures/industrial.v2.png" type="Texture" id=1]
 
@@ -8,14 +8,8 @@ extents = Vector2( 8, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 2 )
 
-[sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/industrial.v2.png-623709b22a2fa36ad7a63e2694483d61.stex"
-
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 8 )
-
-[sub_resource type="StreamTexture" id=5]
-load_path = "res://.import/industrial.v2.png-623709b22a2fa36ad7a63e2694483d61.stex"
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 2 )
@@ -197,7 +191,7 @@ shape = SubResource( 2 )
 
 [node name="MossPlatformFullLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 3 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 48, 32, 16, 16 )
 
@@ -208,7 +202,7 @@ shape = SubResource( 4 )
 
 [node name="MossPlatformFullRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 3 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 64, 32, 16, 16 )
 
@@ -219,7 +213,7 @@ shape = SubResource( 4 )
 
 [node name="MossClumpFullLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 3 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 48, 48, 16, 16 )
 
@@ -230,7 +224,7 @@ shape = SubResource( 4 )
 
 [node name="MossClumpFullRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 3 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 64, 48, 16, 16 )
 
@@ -241,7 +235,7 @@ shape = SubResource( 4 )
 
 [node name="MossClumpPartialLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 3 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 48, 64, 16, 16 )
 
@@ -252,7 +246,7 @@ shape = SubResource( 4 )
 
 [node name="MossClumpPartialRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 3 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 64, 64, 16, 16 )
 
@@ -263,7 +257,7 @@ shape = SubResource( 4 )
 
 [node name="BasicPlatform0" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 240, 32, 16, 16 )
 
@@ -275,7 +269,7 @@ shape = SubResource( 6 )
 
 [node name="BasicPlatform1" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 312, 64, 16, 16 )
 
@@ -287,7 +281,7 @@ shape = SubResource( 6 )
 
 [node name="BasicPlatformMiddle" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 288, 0, 16, 16 )
 
@@ -299,7 +293,7 @@ shape = SubResource( 6 )
 
 [node name="BasicPlatformBigChain" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 304, 16, 16, 16 )
 
@@ -311,7 +305,7 @@ shape = SubResource( 6 )
 
 [node name="BasicPlatformSmallPipe" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 336, 32, 16, 16 )
 
@@ -323,7 +317,7 @@ shape = SubResource( 6 )
 
 [node name="BasicPlatformLargePipe" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 320, 16, 16, 16 )
 
@@ -335,7 +329,7 @@ shape = SubResource( 6 )
 
 [node name="SteelCrate" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 80, 0, 16, 16 )
 
@@ -346,7 +340,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderWalkwayLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 192, 0, 16, 16 )
 
@@ -357,7 +351,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderWalkwayMiddle0" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 208, 0, 16, 16 )
 
@@ -368,7 +362,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderWalkwayMiddle1" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 224, 0, 16, 16 )
 
@@ -379,7 +373,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderWalkwayRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 240, 0, 16, 16 )
 
@@ -390,7 +384,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderInterior0" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 304, 0, 16, 16 )
 
@@ -401,7 +395,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderInterior1" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 320, 0, 16, 16 )
 
@@ -412,7 +406,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderInterior2" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 336, 0, 16, 16 )
 
@@ -423,7 +417,7 @@ shape = SubResource( 7 )
 
 [node name="SteelGirderCornerLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 352, 48, 16, 16 )
 
@@ -434,7 +428,7 @@ polygon = PoolVector2Array( 8, -8, -8, -8, -8, -4, 5, 8, 8, 8 )
 
 [node name="SteelGirderCornerRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 368, 48, 16, 16 )
 
@@ -445,7 +439,7 @@ polygon = PoolVector2Array( -8, -8, 8, -8, 8, -4, -5, 8, -8, 8 )
 
 [node name="SmallSteelGirderCornerLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 208, 32, 16, 16 )
 
@@ -456,7 +450,7 @@ polygon = PoolVector2Array( -8, 8, -8, -8, 2, -8, 2, -6, -4, 0, -4, 8 )
 
 [node name="SmallSteelGirderCornerRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 224, 32, 16, 16 )
 
@@ -467,7 +461,7 @@ polygon = PoolVector2Array( 8, -8, -2, -8, -2, -6, 4, 0, 4, 8, 8, 8 )
 
 [node name="SmallCornerLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 224, 48, 16, 16 )
 
@@ -479,7 +473,7 @@ shape = SubResource( 8 )
 
 [node name="SmallCornerRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 208, 48, 16, 16 )
 
@@ -491,7 +485,7 @@ shape = SubResource( 9 )
 
 [node name="SealedDoorUpperLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 128, 96, 16, 16 )
 
@@ -502,7 +496,7 @@ shape = SubResource( 7 )
 
 [node name="SealedDoorUpperRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 144, 96, 16, 16 )
 
@@ -513,7 +507,7 @@ shape = SubResource( 7 )
 
 [node name="SealedDoorLowerLeft" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 128, 112, 16, 16 )
 
@@ -524,7 +518,7 @@ shape = SubResource( 7 )
 
 [node name="SealedDoorLowerRight" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 144, 112, 16, 16 )
 
@@ -535,7 +529,7 @@ shape = SubResource( 7 )
 
 [node name="SealedDoorUpperInterior" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 112, 96, 16, 16 )
 
@@ -546,7 +540,7 @@ shape = SubResource( 7 )
 
 [node name="SealedDoorLowerInterior" type="Sprite" parent="."]
 visible = false
-texture = SubResource( 5 )
+texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 112, 112, 16, 16 )
 
