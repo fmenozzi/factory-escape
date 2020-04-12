@@ -1,6 +1,366 @@
-[gd_resource type="TileSet" load_steps=2 format=2]
+[gd_resource type="TileSet" load_steps=92 format=2]
 
 [ext_resource path="res://tilesets/scenes/textures/industrial.v2.png" type="Texture" id=1]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=18]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=11]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=19]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=20]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=21]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=22]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=23]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=24]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=25]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=26]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=27]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=28]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=29]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=30]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=31]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=32]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=33]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=34]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=35]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=36]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=37]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=38]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=39]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=40]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=41]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=42]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=43]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=44]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=45]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=46]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=47]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=48]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=49]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=50]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=51]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=52]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=53]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=54]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=55]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=56]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=57]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=58]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=59]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=60]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=61]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=62]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=63]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=64]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=65]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=66]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=67]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=68]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=69]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=70]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=71]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=72]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=73]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=74]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=91]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=92]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=75]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=76]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=93]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=77]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=85]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=86]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=87]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=88]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=89]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=90]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=94]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=95]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=96]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=78]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=97]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=98]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=99]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=100]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=101]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=102]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=103]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=104]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=105]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=106]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=107]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=108]
+vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [resource]
 0/name = "BigChainMiddle"
@@ -11,6 +371,11 @@
 0/tile_mode = 0
 0/occluder_offset = Vector2( 8, 8 )
 0/navigation_offset = Vector2( 8, 8 )
+0/navigation = SubResource( 6 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
 1/name = "SmallChain"
@@ -21,6 +386,11 @@
 1/tile_mode = 0
 1/occluder_offset = Vector2( 8, 8 )
 1/navigation_offset = Vector2( 8, 8 )
+1/navigation = SubResource( 18 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
 1/shapes = [  ]
 1/z_index = 0
 2/name = "SmallChainHookLeft"
@@ -31,6 +401,11 @@
 2/tile_mode = 0
 2/occluder_offset = Vector2( 8, 8 )
 2/navigation_offset = Vector2( 8, 8 )
+2/navigation = SubResource( 25 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
 2/shapes = [  ]
 2/z_index = 0
 3/name = "SmallChainHookRight"
@@ -41,6 +416,11 @@
 3/tile_mode = 0
 3/occluder_offset = Vector2( 8, 8 )
 3/navigation_offset = Vector2( 8, 8 )
+3/navigation = SubResource( 36 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
 4/name = "SignDownLeft"
@@ -51,6 +431,11 @@
 4/tile_mode = 0
 4/occluder_offset = Vector2( 8, 8 )
 4/navigation_offset = Vector2( 8, 8 )
+4/navigation = SubResource( 47 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
 5/name = "SignDownRight"
@@ -61,6 +446,11 @@
 5/tile_mode = 0
 5/occluder_offset = Vector2( 8, 8 )
 5/navigation_offset = Vector2( 8, 8 )
+5/navigation = SubResource( 58 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
 5/shapes = [  ]
 5/z_index = 0
 6/name = "SignUpRight"
@@ -71,6 +461,11 @@
 6/tile_mode = 0
 6/occluder_offset = Vector2( 8, 8 )
 6/navigation_offset = Vector2( 8, 8 )
+6/navigation = SubResource( 69 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
 7/name = "SignRight"
@@ -81,6 +476,11 @@
 7/tile_mode = 0
 7/occluder_offset = Vector2( 8, 8 )
 7/navigation_offset = Vector2( 8, 8 )
+7/navigation = SubResource( 77 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
 7/shapes = [  ]
 7/z_index = 0
 8/name = "SignLeft"
@@ -91,6 +491,11 @@
 8/tile_mode = 0
 8/occluder_offset = Vector2( 8, 8 )
 8/navigation_offset = Vector2( 8, 8 )
+8/navigation = SubResource( 78 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
 8/shapes = [  ]
 8/z_index = 0
 9/name = "SignVague"
@@ -101,6 +506,11 @@
 9/tile_mode = 0
 9/occluder_offset = Vector2( 8, 8 )
 9/navigation_offset = Vector2( 8, 8 )
+9/navigation = SubResource( 106 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
 9/shapes = [  ]
 9/z_index = 0
 10/name = "SmallPipeUpperLeft"
@@ -111,6 +521,11 @@
 10/tile_mode = 0
 10/occluder_offset = Vector2( 8, 8 )
 10/navigation_offset = Vector2( 8, 8 )
+10/navigation = SubResource( 8 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
 10/shapes = [  ]
 10/z_index = 0
 11/name = "SmallPipeHorizontal"
@@ -121,6 +536,11 @@
 11/tile_mode = 0
 11/occluder_offset = Vector2( 8, 8 )
 11/navigation_offset = Vector2( 8, 8 )
+11/navigation = SubResource( 9 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
 11/shapes = [  ]
 11/z_index = 0
 12/name = "SmallPipeTeeUp"
@@ -131,6 +551,11 @@
 12/tile_mode = 0
 12/occluder_offset = Vector2( 8, 8 )
 12/navigation_offset = Vector2( 8, 8 )
+12/navigation = SubResource( 10 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape_one_way = false
+12/shape_one_way_margin = 0.0
 12/shapes = [  ]
 12/z_index = 0
 13/name = "SmallPipeUpperRight"
@@ -141,6 +566,11 @@
 13/tile_mode = 0
 13/occluder_offset = Vector2( 8, 8 )
 13/navigation_offset = Vector2( 8, 8 )
+13/navigation = SubResource( 11 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
 13/shapes = [  ]
 13/z_index = 0
 14/name = "SmallPipeTeeLeft"
@@ -151,6 +581,11 @@
 14/tile_mode = 0
 14/occluder_offset = Vector2( 8, 8 )
 14/navigation_offset = Vector2( 8, 8 )
+14/navigation = SubResource( 19 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape_one_way = false
+14/shape_one_way_margin = 0.0
 14/shapes = [  ]
 14/z_index = 0
 15/name = "SmallPipeTeeDown"
@@ -161,6 +596,11 @@
 15/tile_mode = 0
 15/occluder_offset = Vector2( 8, 8 )
 15/navigation_offset = Vector2( 8, 8 )
+15/navigation = SubResource( 20 )
+15/shape_offset = Vector2( 0, 0 )
+15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape_one_way = false
+15/shape_one_way_margin = 0.0
 15/shapes = [  ]
 15/z_index = 0
 16/name = "SmallPipeTeeRight"
@@ -171,6 +611,11 @@
 16/tile_mode = 0
 16/occluder_offset = Vector2( 8, 8 )
 16/navigation_offset = Vector2( 8, 8 )
+16/navigation = SubResource( 21 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape_one_way = false
+16/shape_one_way_margin = 0.0
 16/shapes = [  ]
 16/z_index = 0
 17/name = "SmallPipeVertical"
@@ -181,6 +626,11 @@
 17/tile_mode = 0
 17/occluder_offset = Vector2( 8, 8 )
 17/navigation_offset = Vector2( 8, 8 )
+17/navigation = SubResource( 22 )
+17/shape_offset = Vector2( 0, 0 )
+17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+17/shape_one_way = false
+17/shape_one_way_margin = 0.0
 17/shapes = [  ]
 17/z_index = 0
 18/name = "SmallPipeLowerLeft"
@@ -191,6 +641,11 @@
 18/tile_mode = 0
 18/occluder_offset = Vector2( 8, 8 )
 18/navigation_offset = Vector2( 8, 8 )
+18/navigation = SubResource( 23 )
+18/shape_offset = Vector2( 0, 0 )
+18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+18/shape_one_way = false
+18/shape_one_way_margin = 0.0
 18/shapes = [  ]
 18/z_index = 0
 19/name = "SmallBoiler"
@@ -201,6 +656,11 @@
 19/tile_mode = 0
 19/occluder_offset = Vector2( 8, 8 )
 19/navigation_offset = Vector2( 8, 8 )
+19/navigation = SubResource( 24 )
+19/shape_offset = Vector2( 0, 0 )
+19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+19/shape_one_way = false
+19/shape_one_way_margin = 0.0
 19/shapes = [  ]
 19/z_index = 0
 20/name = "WorkstationLeft"
@@ -211,6 +671,11 @@
 20/tile_mode = 0
 20/occluder_offset = Vector2( 8, 8 )
 20/navigation_offset = Vector2( 8, 8 )
+20/navigation = SubResource( 26 )
+20/shape_offset = Vector2( 0, 0 )
+20/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+20/shape_one_way = false
+20/shape_one_way_margin = 0.0
 20/shapes = [  ]
 20/z_index = 0
 21/name = "WorkstationRight"
@@ -221,6 +686,11 @@
 21/tile_mode = 0
 21/occluder_offset = Vector2( 8, 8 )
 21/navigation_offset = Vector2( 8, 8 )
+21/navigation = SubResource( 27 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
 21/shapes = [  ]
 21/z_index = 0
 22/name = "EmptyDeskLeft"
@@ -231,6 +701,11 @@
 22/tile_mode = 0
 22/occluder_offset = Vector2( 8, 8 )
 22/navigation_offset = Vector2( 8, 8 )
+22/navigation = SubResource( 28 )
+22/shape_offset = Vector2( 0, 0 )
+22/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+22/shape_one_way = false
+22/shape_one_way_margin = 0.0
 22/shapes = [  ]
 22/z_index = 0
 23/name = "EmptyDeskRight"
@@ -241,6 +716,11 @@
 23/tile_mode = 0
 23/occluder_offset = Vector2( 8, 8 )
 23/navigation_offset = Vector2( 8, 8 )
+23/navigation = SubResource( 29 )
+23/shape_offset = Vector2( 0, 0 )
+23/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+23/shape_one_way = false
+23/shape_one_way_margin = 0.0
 23/shapes = [  ]
 23/z_index = 0
 24/name = "DeskLeft"
@@ -251,6 +731,11 @@
 24/tile_mode = 0
 24/occluder_offset = Vector2( 8, 8 )
 24/navigation_offset = Vector2( 8, 8 )
+24/navigation = SubResource( 30 )
+24/shape_offset = Vector2( 0, 0 )
+24/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+24/shape_one_way = false
+24/shape_one_way_margin = 0.0
 24/shapes = [  ]
 24/z_index = 0
 25/name = "DeskRight"
@@ -261,6 +746,11 @@
 25/tile_mode = 0
 25/occluder_offset = Vector2( 8, 8 )
 25/navigation_offset = Vector2( 8, 8 )
+25/navigation = SubResource( 31 )
+25/shape_offset = Vector2( 0, 0 )
+25/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+25/shape_one_way = false
+25/shape_one_way_margin = 0.0
 25/shapes = [  ]
 25/z_index = 0
 26/name = "DeskRightChairLeft"
@@ -271,6 +761,11 @@
 26/tile_mode = 0
 26/occluder_offset = Vector2( 8, 8 )
 26/navigation_offset = Vector2( 8, 8 )
+26/navigation = SubResource( 32 )
+26/shape_offset = Vector2( 0, 0 )
+26/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+26/shape_one_way = false
+26/shape_one_way_margin = 0.0
 26/shapes = [  ]
 26/z_index = 0
 27/name = "DeskRightChairRight"
@@ -281,6 +776,11 @@
 27/tile_mode = 0
 27/occluder_offset = Vector2( 8, 8 )
 27/navigation_offset = Vector2( 8, 8 )
+27/navigation = SubResource( 33 )
+27/shape_offset = Vector2( 0, 0 )
+27/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+27/shape_one_way = false
+27/shape_one_way_margin = 0.0
 27/shapes = [  ]
 27/z_index = 0
 28/name = "BigPipeHorizontal"
@@ -291,6 +791,11 @@
 28/tile_mode = 0
 28/occluder_offset = Vector2( 8, 8 )
 28/navigation_offset = Vector2( 8, 8 )
+28/navigation = SubResource( 34 )
+28/shape_offset = Vector2( 0, 0 )
+28/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+28/shape_one_way = false
+28/shape_one_way_margin = 0.0
 28/shapes = [  ]
 28/z_index = 0
 29/name = "BigPipeUpperRight"
@@ -301,6 +806,11 @@
 29/tile_mode = 0
 29/occluder_offset = Vector2( 8, 8 )
 29/navigation_offset = Vector2( 8, 8 )
+29/navigation = SubResource( 35 )
+29/shape_offset = Vector2( 0, 0 )
+29/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+29/shape_one_way = false
+29/shape_one_way_margin = 0.0
 29/shapes = [  ]
 29/z_index = 0
 30/name = "BigPipeLowerRight"
@@ -311,6 +821,11 @@
 30/tile_mode = 0
 30/occluder_offset = Vector2( 8, 8 )
 30/navigation_offset = Vector2( 8, 8 )
+30/navigation = SubResource( 37 )
+30/shape_offset = Vector2( 0, 0 )
+30/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+30/shape_one_way = false
+30/shape_one_way_margin = 0.0
 30/shapes = [  ]
 30/z_index = 0
 31/name = "BigPipeUpperTee"
@@ -321,6 +836,11 @@
 31/tile_mode = 0
 31/occluder_offset = Vector2( 8, 8 )
 31/navigation_offset = Vector2( 8, 8 )
+31/navigation = SubResource( 38 )
+31/shape_offset = Vector2( 0, 0 )
+31/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+31/shape_one_way = false
+31/shape_one_way_margin = 0.0
 31/shapes = [  ]
 31/z_index = 0
 32/name = "BigPipeUpperLeft"
@@ -331,6 +851,11 @@
 32/tile_mode = 0
 32/occluder_offset = Vector2( 8, 8 )
 32/navigation_offset = Vector2( 8, 8 )
+32/navigation = SubResource( 39 )
+32/shape_offset = Vector2( 0, 0 )
+32/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+32/shape_one_way = false
+32/shape_one_way_margin = 0.0
 32/shapes = [  ]
 32/z_index = 0
 33/name = "BigPipeLowerLeft"
@@ -341,6 +866,11 @@
 33/tile_mode = 0
 33/occluder_offset = Vector2( 8, 8 )
 33/navigation_offset = Vector2( 8, 8 )
+33/navigation = SubResource( 40 )
+33/shape_offset = Vector2( 0, 0 )
+33/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+33/shape_one_way = false
+33/shape_one_way_margin = 0.0
 33/shapes = [  ]
 33/z_index = 0
 34/name = "BigPipeLowerTee"
@@ -351,6 +881,11 @@
 34/tile_mode = 0
 34/occluder_offset = Vector2( 8, 8 )
 34/navigation_offset = Vector2( 8, 8 )
+34/navigation = SubResource( 41 )
+34/shape_offset = Vector2( 0, 0 )
+34/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+34/shape_one_way = false
+34/shape_one_way_margin = 0.0
 34/shapes = [  ]
 34/z_index = 0
 35/name = "BigPipeHorizontalRightCap"
@@ -361,6 +896,11 @@
 35/tile_mode = 0
 35/occluder_offset = Vector2( 8, 8 )
 35/navigation_offset = Vector2( 8, 8 )
+35/navigation = SubResource( 42 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape_one_way = false
+35/shape_one_way_margin = 0.0
 35/shapes = [  ]
 35/z_index = 0
 36/name = "BigPipeCross"
@@ -371,6 +911,11 @@
 36/tile_mode = 0
 36/occluder_offset = Vector2( 8, 8 )
 36/navigation_offset = Vector2( 8, 8 )
+36/navigation = SubResource( 43 )
+36/shape_offset = Vector2( 0, 0 )
+36/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+36/shape_one_way = false
+36/shape_one_way_margin = 0.0
 36/shapes = [  ]
 36/z_index = 0
 37/name = "BigPipeUpperCap"
@@ -381,6 +926,11 @@
 37/tile_mode = 0
 37/occluder_offset = Vector2( 8, 8 )
 37/navigation_offset = Vector2( 8, 8 )
+37/navigation = SubResource( 44 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape_one_way = false
+37/shape_one_way_margin = 0.0
 37/shapes = [  ]
 37/z_index = 0
 38/name = "BigPipeLeftTee"
@@ -391,6 +941,11 @@
 38/tile_mode = 0
 38/occluder_offset = Vector2( 8, 8 )
 38/navigation_offset = Vector2( 8, 8 )
+38/navigation = SubResource( 45 )
+38/shape_offset = Vector2( 0, 0 )
+38/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+38/shape_one_way = false
+38/shape_one_way_margin = 0.0
 38/shapes = [  ]
 38/z_index = 0
 39/name = "BigPipeRightTee"
@@ -401,6 +956,11 @@
 39/tile_mode = 0
 39/occluder_offset = Vector2( 8, 8 )
 39/navigation_offset = Vector2( 8, 8 )
+39/navigation = SubResource( 46 )
+39/shape_offset = Vector2( 0, 0 )
+39/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+39/shape_one_way = false
+39/shape_one_way_margin = 0.0
 39/shapes = [  ]
 39/z_index = 0
 40/name = "BigPipeVertical"
@@ -411,6 +971,11 @@
 40/tile_mode = 0
 40/occluder_offset = Vector2( 8, 8 )
 40/navigation_offset = Vector2( 8, 8 )
+40/navigation = SubResource( 48 )
+40/shape_offset = Vector2( 0, 0 )
+40/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+40/shape_one_way = false
+40/shape_one_way_margin = 0.0
 40/shapes = [  ]
 40/z_index = 0
 41/name = "BigPipeLowerCap"
@@ -421,6 +986,11 @@
 41/tile_mode = 0
 41/occluder_offset = Vector2( 8, 8 )
 41/navigation_offset = Vector2( 8, 8 )
+41/navigation = SubResource( 49 )
+41/shape_offset = Vector2( 0, 0 )
+41/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+41/shape_one_way = false
+41/shape_one_way_margin = 0.0
 41/shapes = [  ]
 41/z_index = 0
 42/name = "BigPipeValveFront"
@@ -431,6 +1001,11 @@
 42/tile_mode = 0
 42/occluder_offset = Vector2( 8, 8 )
 42/navigation_offset = Vector2( 8, 8 )
+42/navigation = SubResource( 50 )
+42/shape_offset = Vector2( 0, 0 )
+42/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+42/shape_one_way = false
+42/shape_one_way_margin = 0.0
 42/shapes = [  ]
 42/z_index = 0
 43/name = "BigPipeValveSide"
@@ -441,6 +1016,11 @@
 43/tile_mode = 0
 43/occluder_offset = Vector2( 8, 8 )
 43/navigation_offset = Vector2( 8, 8 )
+43/navigation = SubResource( 51 )
+43/shape_offset = Vector2( 0, 0 )
+43/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+43/shape_one_way = false
+43/shape_one_way_margin = 0.0
 43/shapes = [  ]
 43/z_index = 0
 44/name = "BigPipeLeftTinyPipe"
@@ -451,6 +1031,11 @@
 44/tile_mode = 0
 44/occluder_offset = Vector2( 8, 8 )
 44/navigation_offset = Vector2( 8, 8 )
+44/navigation = SubResource( 52 )
+44/shape_offset = Vector2( 0, 0 )
+44/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+44/shape_one_way = false
+44/shape_one_way_margin = 0.0
 44/shapes = [  ]
 44/z_index = 0
 45/name = "BigPipeUpperTinyPipe"
@@ -461,6 +1046,11 @@
 45/tile_mode = 0
 45/occluder_offset = Vector2( 8, 8 )
 45/navigation_offset = Vector2( 8, 8 )
+45/navigation = SubResource( 53 )
+45/shape_offset = Vector2( 0, 0 )
+45/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+45/shape_one_way = false
+45/shape_one_way_margin = 0.0
 45/shapes = [  ]
 45/z_index = 0
 46/name = "BigPipeLowerTinyPipe"
@@ -471,6 +1061,11 @@
 46/tile_mode = 0
 46/occluder_offset = Vector2( 8, 8 )
 46/navigation_offset = Vector2( 8, 8 )
+46/navigation = SubResource( 54 )
+46/shape_offset = Vector2( 0, 0 )
+46/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+46/shape_one_way = false
+46/shape_one_way_margin = 0.0
 46/shapes = [  ]
 46/z_index = 0
 47/name = "BigPipeRightTinyPipe"
@@ -481,6 +1076,11 @@
 47/tile_mode = 0
 47/occluder_offset = Vector2( 8, 8 )
 47/navigation_offset = Vector2( 8, 8 )
+47/navigation = SubResource( 55 )
+47/shape_offset = Vector2( 0, 0 )
+47/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+47/shape_one_way = false
+47/shape_one_way_margin = 0.0
 47/shapes = [  ]
 47/z_index = 0
 48/name = "TinyPipeUpperLeft"
@@ -491,6 +1091,11 @@
 48/tile_mode = 0
 48/occluder_offset = Vector2( 8, 8 )
 48/navigation_offset = Vector2( 8, 8 )
+48/navigation = SubResource( 56 )
+48/shape_offset = Vector2( 0, 0 )
+48/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+48/shape_one_way = false
+48/shape_one_way_margin = 0.0
 48/shapes = [  ]
 48/z_index = 0
 49/name = "TinyPipeLowerRight"
@@ -501,6 +1106,11 @@
 49/tile_mode = 0
 49/occluder_offset = Vector2( 8, 8 )
 49/navigation_offset = Vector2( 8, 8 )
+49/navigation = SubResource( 57 )
+49/shape_offset = Vector2( 0, 0 )
+49/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+49/shape_one_way = false
+49/shape_one_way_margin = 0.0
 49/shapes = [  ]
 49/z_index = 0
 50/name = "TinyPipeVertical"
@@ -511,6 +1121,11 @@
 50/tile_mode = 0
 50/occluder_offset = Vector2( 8, 8 )
 50/navigation_offset = Vector2( 8, 8 )
+50/navigation = SubResource( 59 )
+50/shape_offset = Vector2( 0, 0 )
+50/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+50/shape_one_way = false
+50/shape_one_way_margin = 0.0
 50/shapes = [  ]
 50/z_index = 0
 51/name = "TinyPipeHorizontal"
@@ -521,6 +1136,11 @@
 51/tile_mode = 0
 51/occluder_offset = Vector2( 8, 8 )
 51/navigation_offset = Vector2( 8, 8 )
+51/navigation = SubResource( 60 )
+51/shape_offset = Vector2( 0, 0 )
+51/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+51/shape_one_way = false
+51/shape_one_way_margin = 0.0
 51/shapes = [  ]
 51/z_index = 0
 52/name = "TinyPipeLeftTee"
@@ -531,6 +1151,11 @@
 52/tile_mode = 0
 52/occluder_offset = Vector2( 8, 8 )
 52/navigation_offset = Vector2( 8, 8 )
+52/navigation = SubResource( 61 )
+52/shape_offset = Vector2( 0, 0 )
+52/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+52/shape_one_way = false
+52/shape_one_way_margin = 0.0
 52/shapes = [  ]
 52/z_index = 0
 53/name = "TinyPipeRightTee"
@@ -541,6 +1166,11 @@
 53/tile_mode = 0
 53/occluder_offset = Vector2( 8, 8 )
 53/navigation_offset = Vector2( 8, 8 )
+53/navigation = SubResource( 62 )
+53/shape_offset = Vector2( 0, 0 )
+53/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+53/shape_one_way = false
+53/shape_one_way_margin = 0.0
 53/shapes = [  ]
 53/z_index = 0
 54/name = "TinyPipeLowerLeft"
@@ -551,6 +1181,11 @@
 54/tile_mode = 0
 54/occluder_offset = Vector2( 8, 8 )
 54/navigation_offset = Vector2( 8, 8 )
+54/navigation = SubResource( 63 )
+54/shape_offset = Vector2( 0, 0 )
+54/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+54/shape_one_way = false
+54/shape_one_way_margin = 0.0
 54/shapes = [  ]
 54/z_index = 0
 55/name = "SmallPipeDarkUpperLeft"
@@ -561,6 +1196,11 @@
 55/tile_mode = 0
 55/occluder_offset = Vector2( 8, 8 )
 55/navigation_offset = Vector2( 8, 8 )
+55/navigation = SubResource( 64 )
+55/shape_offset = Vector2( 0, 0 )
+55/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+55/shape_one_way = false
+55/shape_one_way_margin = 0.0
 55/shapes = [  ]
 55/z_index = 0
 56/name = "SmallPipeDarkTeeRight"
@@ -571,6 +1211,11 @@
 56/tile_mode = 0
 56/occluder_offset = Vector2( 8, 8 )
 56/navigation_offset = Vector2( 8, 8 )
+56/navigation = SubResource( 65 )
+56/shape_offset = Vector2( 0, 0 )
+56/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+56/shape_one_way = false
+56/shape_one_way_margin = 0.0
 56/shapes = [  ]
 56/z_index = 0
 57/name = "SmallPipeDarkTeeUp"
@@ -581,6 +1226,11 @@
 57/tile_mode = 0
 57/occluder_offset = Vector2( 8, 8 )
 57/navigation_offset = Vector2( 8, 8 )
+57/navigation = SubResource( 66 )
+57/shape_offset = Vector2( 0, 0 )
+57/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+57/shape_one_way = false
+57/shape_one_way_margin = 0.0
 57/shapes = [  ]
 57/z_index = 0
 58/name = "SmallPipeDarkLowerRight"
@@ -591,6 +1241,11 @@
 58/tile_mode = 0
 58/occluder_offset = Vector2( 8, 8 )
 58/navigation_offset = Vector2( 8, 8 )
+58/navigation = SubResource( 67 )
+58/shape_offset = Vector2( 0, 0 )
+58/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+58/shape_one_way = false
+58/shape_one_way_margin = 0.0
 58/shapes = [  ]
 58/z_index = 0
 59/name = "SmallPipeDarkTeeLeft"
@@ -601,6 +1256,11 @@
 59/tile_mode = 0
 59/occluder_offset = Vector2( 8, 8 )
 59/navigation_offset = Vector2( 8, 8 )
+59/navigation = SubResource( 68 )
+59/shape_offset = Vector2( 0, 0 )
+59/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+59/shape_one_way = false
+59/shape_one_way_margin = 0.0
 59/shapes = [  ]
 59/z_index = 0
 60/name = "SmallPipeDarkTeeDown"
@@ -611,6 +1271,11 @@
 60/tile_mode = 0
 60/occluder_offset = Vector2( 8, 8 )
 60/navigation_offset = Vector2( 8, 8 )
+60/navigation = SubResource( 70 )
+60/shape_offset = Vector2( 0, 0 )
+60/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+60/shape_one_way = false
+60/shape_one_way_margin = 0.0
 60/shapes = [  ]
 60/z_index = 0
 61/name = "SmallPipeDarkHorizontal"
@@ -621,6 +1286,11 @@
 61/tile_mode = 0
 61/occluder_offset = Vector2( 8, 8 )
 61/navigation_offset = Vector2( 8, 8 )
+61/navigation = SubResource( 71 )
+61/shape_offset = Vector2( 0, 0 )
+61/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+61/shape_one_way = false
+61/shape_one_way_margin = 0.0
 61/shapes = [  ]
 61/z_index = 0
 62/name = "SmallPipeDarkVertical"
@@ -631,6 +1301,11 @@
 62/tile_mode = 0
 62/occluder_offset = Vector2( 8, 8 )
 62/navigation_offset = Vector2( 8, 8 )
+62/navigation = SubResource( 72 )
+62/shape_offset = Vector2( 0, 0 )
+62/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+62/shape_one_way = false
+62/shape_one_way_margin = 0.0
 62/shapes = [  ]
 62/z_index = 0
 63/name = "SmallPipeDarkUpperRight"
@@ -641,6 +1316,11 @@
 63/tile_mode = 0
 63/occluder_offset = Vector2( 8, 8 )
 63/navigation_offset = Vector2( 8, 8 )
+63/navigation = SubResource( 73 )
+63/shape_offset = Vector2( 0, 0 )
+63/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+63/shape_one_way = false
+63/shape_one_way_margin = 0.0
 63/shapes = [  ]
 63/z_index = 0
 64/name = "SmallPipeDarkApparatus"
@@ -651,6 +1331,11 @@
 64/tile_mode = 0
 64/occluder_offset = Vector2( 8, 8 )
 64/navigation_offset = Vector2( 8, 8 )
+64/navigation = SubResource( 74 )
+64/shape_offset = Vector2( 0, 0 )
+64/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+64/shape_one_way = false
+64/shape_one_way_margin = 0.0
 64/shapes = [  ]
 64/z_index = 0
 65/name = "BigChainBackgroundMiddle"
@@ -661,6 +1346,11 @@
 65/tile_mode = 0
 65/occluder_offset = Vector2( 8, 8 )
 65/navigation_offset = Vector2( 8, 8 )
+65/navigation = SubResource( 91 )
+65/shape_offset = Vector2( 0, 0 )
+65/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+65/shape_one_way = false
+65/shape_one_way_margin = 0.0
 65/shapes = [  ]
 65/z_index = 0
 66/name = "BigChainBackgroundTip"
@@ -671,6 +1361,11 @@
 66/tile_mode = 0
 66/occluder_offset = Vector2( 8, 8 )
 66/navigation_offset = Vector2( 8, 8 )
+66/navigation = SubResource( 92 )
+66/shape_offset = Vector2( 0, 0 )
+66/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+66/shape_one_way = false
+66/shape_one_way_margin = 0.0
 66/shapes = [  ]
 66/z_index = 0
 67/name = "SegmentedPipeMiddle"
@@ -681,6 +1376,11 @@
 67/tile_mode = 0
 67/occluder_offset = Vector2( 8, 8 )
 67/navigation_offset = Vector2( 8, 8 )
+67/navigation = SubResource( 75 )
+67/shape_offset = Vector2( 0, 0 )
+67/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+67/shape_one_way = false
+67/shape_one_way_margin = 0.0
 67/shapes = [  ]
 67/z_index = 0
 68/name = "SegmentedPipeBase"
@@ -691,6 +1391,11 @@
 68/tile_mode = 0
 68/occluder_offset = Vector2( 8, 8 )
 68/navigation_offset = Vector2( 8, 8 )
+68/navigation = SubResource( 76 )
+68/shape_offset = Vector2( 0, 0 )
+68/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+68/shape_one_way = false
+68/shape_one_way_margin = 0.0
 68/shapes = [  ]
 68/z_index = 0
 69/name = "SegmentedPipeLarge"
@@ -701,6 +1406,11 @@
 69/tile_mode = 0
 69/occluder_offset = Vector2( 8, 8 )
 69/navigation_offset = Vector2( 8, 8 )
+69/navigation = SubResource( 93 )
+69/shape_offset = Vector2( 0, 0 )
+69/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+69/shape_one_way = false
+69/shape_one_way_margin = 0.0
 69/shapes = [  ]
 69/z_index = 0
 70/name = "BoilerSmall"
@@ -711,6 +1421,10 @@
 70/tile_mode = 0
 70/occluder_offset = Vector2( 4, 8 )
 70/navigation_offset = Vector2( 4, 8 )
+70/shape_offset = Vector2( 0, 0 )
+70/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+70/shape_one_way = false
+70/shape_one_way_margin = 0.0
 70/shapes = [  ]
 70/z_index = 0
 71/name = "BoilerLargeUpperLeft"
@@ -721,6 +1435,11 @@
 71/tile_mode = 0
 71/occluder_offset = Vector2( 8, 8 )
 71/navigation_offset = Vector2( 8, 8 )
+71/navigation = SubResource( 85 )
+71/shape_offset = Vector2( 0, 0 )
+71/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+71/shape_one_way = false
+71/shape_one_way_margin = 0.0
 71/shapes = [  ]
 71/z_index = 0
 72/name = "BoilerLargeUpperRight"
@@ -731,6 +1450,11 @@
 72/tile_mode = 0
 72/occluder_offset = Vector2( 8, 8 )
 72/navigation_offset = Vector2( 8, 8 )
+72/navigation = SubResource( 86 )
+72/shape_offset = Vector2( 0, 0 )
+72/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+72/shape_one_way = false
+72/shape_one_way_margin = 0.0
 72/shapes = [  ]
 72/z_index = 0
 73/name = "BoilerLargeMiddleLeft"
@@ -741,6 +1465,11 @@
 73/tile_mode = 0
 73/occluder_offset = Vector2( 8, 8 )
 73/navigation_offset = Vector2( 8, 8 )
+73/navigation = SubResource( 87 )
+73/shape_offset = Vector2( 0, 0 )
+73/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+73/shape_one_way = false
+73/shape_one_way_margin = 0.0
 73/shapes = [  ]
 73/z_index = 0
 74/name = "BoilerLargeMiddleRight"
@@ -751,6 +1480,11 @@
 74/tile_mode = 0
 74/occluder_offset = Vector2( 8, 8 )
 74/navigation_offset = Vector2( 8, 8 )
+74/navigation = SubResource( 88 )
+74/shape_offset = Vector2( 0, 0 )
+74/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+74/shape_one_way = false
+74/shape_one_way_margin = 0.0
 74/shapes = [  ]
 74/z_index = 0
 75/name = "BoilerLargeBottemLeft"
@@ -761,6 +1495,11 @@
 75/tile_mode = 0
 75/occluder_offset = Vector2( 8, 8 )
 75/navigation_offset = Vector2( 8, 8 )
+75/navigation = SubResource( 89 )
+75/shape_offset = Vector2( 0, 0 )
+75/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+75/shape_one_way = false
+75/shape_one_way_margin = 0.0
 75/shapes = [  ]
 75/z_index = 0
 76/name = "BoilerLargeBottemRight"
@@ -771,6 +1510,11 @@
 76/tile_mode = 0
 76/occluder_offset = Vector2( 8, 8 )
 76/navigation_offset = Vector2( 8, 8 )
+76/navigation = SubResource( 90 )
+76/shape_offset = Vector2( 0, 0 )
+76/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+76/shape_one_way = false
+76/shape_one_way_margin = 0.0
 76/shapes = [  ]
 76/z_index = 0
 77/name = "RailingLeft"
@@ -781,6 +1525,11 @@
 77/tile_mode = 0
 77/occluder_offset = Vector2( 8, 8 )
 77/navigation_offset = Vector2( 8, 8 )
+77/navigation = SubResource( 94 )
+77/shape_offset = Vector2( 0, 0 )
+77/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+77/shape_one_way = false
+77/shape_one_way_margin = 0.0
 77/shapes = [  ]
 77/z_index = 0
 78/name = "RailingInterior0"
@@ -791,6 +1540,11 @@
 78/tile_mode = 0
 78/occluder_offset = Vector2( 8, 8 )
 78/navigation_offset = Vector2( 8, 8 )
+78/navigation = SubResource( 95 )
+78/shape_offset = Vector2( 0, 0 )
+78/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+78/shape_one_way = false
+78/shape_one_way_margin = 0.0
 78/shapes = [  ]
 78/z_index = 0
 79/name = "RailingInterior1"
@@ -801,6 +1555,11 @@
 79/tile_mode = 0
 79/occluder_offset = Vector2( 8, 8 )
 79/navigation_offset = Vector2( 8, 8 )
+79/navigation = SubResource( 96 )
+79/shape_offset = Vector2( 0, 0 )
+79/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+79/shape_one_way = false
+79/shape_one_way_margin = 0.0
 79/shapes = [  ]
 79/z_index = 0
 80/name = "RailingRight"
@@ -811,6 +1570,11 @@
 80/tile_mode = 0
 80/occluder_offset = Vector2( 8, 8 )
 80/navigation_offset = Vector2( 8, 8 )
+80/navigation = SubResource( 97 )
+80/shape_offset = Vector2( 0, 0 )
+80/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+80/shape_one_way = false
+80/shape_one_way_margin = 0.0
 80/shapes = [  ]
 80/z_index = 0
 81/name = "LoneRailing"
@@ -821,6 +1585,11 @@
 81/tile_mode = 0
 81/occluder_offset = Vector2( 8, 8 )
 81/navigation_offset = Vector2( 8, 8 )
+81/navigation = SubResource( 98 )
+81/shape_offset = Vector2( 0, 0 )
+81/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+81/shape_one_way = false
+81/shape_one_way_margin = 0.0
 81/shapes = [  ]
 81/z_index = 0
 82/name = "SteelGirderMoss0"
@@ -831,6 +1600,11 @@
 82/tile_mode = 0
 82/occluder_offset = Vector2( 8, 8 )
 82/navigation_offset = Vector2( 8, 8 )
+82/navigation = SubResource( 99 )
+82/shape_offset = Vector2( 0, 0 )
+82/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+82/shape_one_way = false
+82/shape_one_way_margin = 0.0
 82/shapes = [  ]
 82/z_index = 0
 83/name = "SteelGirderMoss1"
@@ -841,6 +1615,11 @@
 83/tile_mode = 0
 83/occluder_offset = Vector2( 8, 8 )
 83/navigation_offset = Vector2( 8, 8 )
+83/navigation = SubResource( 100 )
+83/shape_offset = Vector2( 0, 0 )
+83/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+83/shape_one_way = false
+83/shape_one_way_margin = 0.0
 83/shapes = [  ]
 83/z_index = 0
 84/name = "SteelGirderMoss2"
@@ -851,6 +1630,11 @@
 84/tile_mode = 0
 84/occluder_offset = Vector2( 8, 8 )
 84/navigation_offset = Vector2( 8, 8 )
+84/navigation = SubResource( 101 )
+84/shape_offset = Vector2( 0, 0 )
+84/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+84/shape_one_way = false
+84/shape_one_way_margin = 0.0
 84/shapes = [  ]
 84/z_index = 0
 85/name = "SteelGirderMoss3"
@@ -861,6 +1645,11 @@
 85/tile_mode = 0
 85/occluder_offset = Vector2( 8, 8 )
 85/navigation_offset = Vector2( 8, 8 )
+85/navigation = SubResource( 102 )
+85/shape_offset = Vector2( 0, 0 )
+85/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+85/shape_one_way = false
+85/shape_one_way_margin = 0.0
 85/shapes = [  ]
 85/z_index = 0
 86/name = "RailingSingle"
@@ -871,6 +1660,10 @@
 86/tile_mode = 0
 86/occluder_offset = Vector2( 8, 8 )
 86/navigation_offset = Vector2( 8, 8 )
+86/shape_offset = Vector2( 0, 0 )
+86/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+86/shape_one_way = false
+86/shape_one_way_margin = 0.0
 86/shapes = [  ]
 86/z_index = 0
 87/name = "HangingMossLeft"
@@ -881,6 +1674,11 @@
 87/tile_mode = 0
 87/occluder_offset = Vector2( 8, 8 )
 87/navigation_offset = Vector2( 8, 8 )
+87/navigation = SubResource( 103 )
+87/shape_offset = Vector2( 0, 0 )
+87/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+87/shape_one_way = false
+87/shape_one_way_margin = 0.0
 87/shapes = [  ]
 87/z_index = 0
 88/name = "HangingMossRight"
@@ -891,6 +1689,11 @@
 88/tile_mode = 0
 88/occluder_offset = Vector2( 8, 8 )
 88/navigation_offset = Vector2( 8, 8 )
+88/navigation = SubResource( 104 )
+88/shape_offset = Vector2( 0, 0 )
+88/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+88/shape_one_way = false
+88/shape_one_way_margin = 0.0
 88/shapes = [  ]
 88/z_index = 0
 89/name = "HangingMoss0"
@@ -901,6 +1704,11 @@
 89/tile_mode = 0
 89/occluder_offset = Vector2( 8, 8 )
 89/navigation_offset = Vector2( 8, 8 )
+89/navigation = SubResource( 105 )
+89/shape_offset = Vector2( 0, 0 )
+89/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+89/shape_one_way = false
+89/shape_one_way_margin = 0.0
 89/shapes = [  ]
 89/z_index = 0
 90/name = "HangingMoss1"
@@ -911,6 +1719,11 @@
 90/tile_mode = 0
 90/occluder_offset = Vector2( 8, 8 )
 90/navigation_offset = Vector2( 8, 8 )
+90/navigation = SubResource( 107 )
+90/shape_offset = Vector2( 0, 0 )
+90/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+90/shape_one_way = false
+90/shape_one_way_margin = 0.0
 90/shapes = [  ]
 90/z_index = 0
 91/name = "HangingMoss2"
@@ -921,5 +1734,10 @@
 91/tile_mode = 0
 91/occluder_offset = Vector2( 8, 8 )
 91/navigation_offset = Vector2( 8, 8 )
+91/navigation = SubResource( 108 )
+91/shape_offset = Vector2( 0, 0 )
+91/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+91/shape_one_way = false
+91/shape_one_way_margin = 0.0
 91/shapes = [  ]
 91/z_index = 0

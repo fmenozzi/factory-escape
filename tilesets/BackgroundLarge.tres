@@ -1,9 +1,66 @@
-[gd_resource type="TileSet" load_steps=2 format=2]
+[gd_resource type="TileSet" load_steps=17 format=2]
 
 [ext_resource path="res://tilesets/scenes/textures/industrial.v2.png" type="Texture" id=1]
 
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
+[sub_resource type="NavigationPolygon" id=2]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
+[sub_resource type="NavigationPolygon" id=3]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=4]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=5]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=6]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=7]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=8]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=9]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=10]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=11]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=12]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=13]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=14]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=15]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [resource]
 0/name = "PipeCrossSectionDarkTop"
@@ -14,6 +71,11 @@
 0/tile_mode = 0
 0/occluder_offset = Vector2( 16, 8 )
 0/navigation_offset = Vector2( 16, 8 )
+0/navigation = SubResource( 1 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
 0/shapes = [  ]
 0/z_index = 0
 1/name = "PipeCrossSectionDarkBottom"
@@ -24,6 +86,11 @@
 1/tile_mode = 0
 1/occluder_offset = Vector2( 16, 8 )
 1/navigation_offset = Vector2( 16, 8 )
+1/navigation = SubResource( 2 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
 1/shapes = [  ]
 1/z_index = 0
 2/name = "PipeCrossSectionLightTop"
@@ -34,6 +101,11 @@
 2/tile_mode = 0
 2/occluder_offset = Vector2( 16, 8 )
 2/navigation_offset = Vector2( 16, 8 )
+2/navigation = SubResource( 8 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape_one_way = false
+2/shape_one_way_margin = 0.0
 2/shapes = [  ]
 2/z_index = 0
 3/name = "PipeCrossSectionLightBottom"
@@ -44,6 +116,11 @@
 3/tile_mode = 0
 3/occluder_offset = Vector2( 16, 8 )
 3/navigation_offset = Vector2( 16, 8 )
+3/navigation = SubResource( 9 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
 3/shapes = [  ]
 3/z_index = 0
 4/name = "LargeBoilerTop"
@@ -54,6 +131,11 @@
 4/tile_mode = 0
 4/occluder_offset = Vector2( 16, 8 )
 4/navigation_offset = Vector2( 16, 8 )
+4/navigation = SubResource( 10 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 0
 5/name = "LargeBoilerMiddle"
@@ -64,6 +146,11 @@
 5/tile_mode = 0
 5/occluder_offset = Vector2( 16, 8 )
 5/navigation_offset = Vector2( 16, 8 )
+5/navigation = SubResource( 11 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape_one_way = false
+5/shape_one_way_margin = 0.0
 5/shapes = [  ]
 5/z_index = 0
 6/name = "LargeBoilerBottom"
@@ -74,6 +161,11 @@
 6/tile_mode = 0
 6/occluder_offset = Vector2( 16, 8 )
 6/navigation_offset = Vector2( 16, 8 )
+6/navigation = SubResource( 12 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape_one_way = false
+6/shape_one_way_margin = 0.0
 6/shapes = [  ]
 6/z_index = 0
 7/name = "OldSiloTop"
@@ -84,6 +176,11 @@
 7/tile_mode = 0
 7/occluder_offset = Vector2( 16, 8 )
 7/navigation_offset = Vector2( 16, 8 )
+7/navigation = SubResource( 13 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape_one_way = false
+7/shape_one_way_margin = 0.0
 7/shapes = [  ]
 7/z_index = 0
 8/name = "OldSiloMiddle"
@@ -94,6 +191,11 @@
 8/tile_mode = 0
 8/occluder_offset = Vector2( 16, 8 )
 8/navigation_offset = Vector2( 16, 8 )
+8/navigation = SubResource( 14 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape_one_way = false
+8/shape_one_way_margin = 0.0
 8/shapes = [  ]
 8/z_index = 0
 9/name = "OldSiloBottom"
@@ -104,6 +206,11 @@
 9/tile_mode = 0
 9/occluder_offset = Vector2( 16, 8 )
 9/navigation_offset = Vector2( 16, 8 )
+9/navigation = SubResource( 15 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape_one_way = false
+9/shape_one_way_margin = 0.0
 9/shapes = [  ]
 9/z_index = 0
 10/name = "SiloTop"
@@ -114,6 +221,11 @@
 10/tile_mode = 0
 10/occluder_offset = Vector2( 16, 8 )
 10/navigation_offset = Vector2( 16, 8 )
+10/navigation = SubResource( 3 )
+10/shape_offset = Vector2( 0, 0 )
+10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+10/shape_one_way = false
+10/shape_one_way_margin = 0.0
 10/shapes = [  ]
 10/z_index = 0
 11/name = "SiloMiddleTop"
@@ -124,6 +236,11 @@
 11/tile_mode = 0
 11/occluder_offset = Vector2( 16, 8 )
 11/navigation_offset = Vector2( 16, 8 )
+11/navigation = SubResource( 4 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape_one_way = false
+11/shape_one_way_margin = 0.0
 11/shapes = [  ]
 11/z_index = 0
 12/name = "SiloMiddleMiddle"
@@ -134,6 +251,11 @@
 12/tile_mode = 0
 12/occluder_offset = Vector2( 16, 8 )
 12/navigation_offset = Vector2( 16, 8 )
+12/navigation = SubResource( 5 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape_one_way = false
+12/shape_one_way_margin = 0.0
 12/shapes = [  ]
 12/z_index = 0
 13/name = "SiloMiddleBottom"
@@ -144,6 +266,11 @@
 13/tile_mode = 0
 13/occluder_offset = Vector2( 16, 8 )
 13/navigation_offset = Vector2( 16, 8 )
+13/navigation = SubResource( 6 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape_one_way = false
+13/shape_one_way_margin = 0.0
 13/shapes = [  ]
 13/z_index = 0
 14/name = "SiloBottom"
@@ -154,6 +281,10 @@
 14/tile_mode = 0
 14/occluder_offset = Vector2( 16, 8 )
 14/navigation_offset = Vector2( 16, 8 )
+14/navigation = SubResource( 7 )
+14/shape_offset = Vector2( 0, 0 )
+14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+14/shape_one_way = false
+14/shape_one_way_margin = 0.0
 14/shapes = [  ]
 14/z_index = 0
-
