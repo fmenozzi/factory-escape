@@ -3,9 +3,6 @@ extends Sprite
 onready var _tween: Tween = $AlphaTween
 
 func _ready() -> void:
-    # Make sure we draw the player over the dash echo.
-    self.show_behind_parent = true
-
     var prop := 'modulate'
     var old := Color(1, 1, 1, 0.5) # Semi-transparent
     var new := Color(1, 1, 1, 0.0) # Transparent

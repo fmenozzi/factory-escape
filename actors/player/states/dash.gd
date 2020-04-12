@@ -90,7 +90,17 @@ func _on_dash_echo_timeout(player: Player) -> void:
     #       emitting an echo right under the player.
 
     var echo = DashEcho.instance()
-    player.get_parent().add_child(echo)
+
+    # Add echo node above player but below the rest of the world so that it's
+    # drawn under the player but over the rest of the world.
+    #
+    # TODO: Consider creating a dedicated node in World for the dash echos in
+    #       order to make this reasoning a little more clear (and also to avoid
+    #       this fairly brittle solution that uses hard-coded indices).
+    var player_parent := player.get_parent()
+    player_parent.add_child(echo)
+    player_parent.move_child(echo, 1)
+
     echo.flip_h = (player.get_direction() == -1)
     # TODO: Why is there this 8 pixel offset?
     echo.set_global_position(player.get_global_position() + Vector2(0, -8))
