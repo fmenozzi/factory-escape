@@ -210,5 +210,4 @@ player_move_up={
 
 [rendering]
 
-environment/default_clear_color=Color( 0.113725, 0.129412, 0.176471, 1 )
 environment/default_environment="res://default_env.tres"
