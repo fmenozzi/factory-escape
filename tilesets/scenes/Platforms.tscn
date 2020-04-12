@@ -34,6 +34,12 @@ extents = Vector2( 8, 1.5 )
 
 [node name="Platforms" type="Node"]
 
+[node name="Empty" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 64, 16, 16 )
+
 [node name="InvisibleWall" type="Sprite" parent="."]
 visible = false
 texture = ExtResource( 1 )
