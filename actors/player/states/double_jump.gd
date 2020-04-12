@@ -80,6 +80,7 @@ func update(player: Player, delta: float) -> Dictionary:
     # Move due to gravity.
     player.velocity.y += physics_manager.get_gravity() * delta
 
-    player.move(player.velocity)
+    # Don't snap while double-jumping.
+    player.move(player.velocity, Util.NO_SNAP)
 
     return {'new_state': Player.State.NO_CHANGE}
