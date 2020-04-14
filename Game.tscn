@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
-[ext_resource path="res://World.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/ScreenFadeout.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/DialogBox.tscn" type="PackedScene" id=5]
@@ -11,7 +11,12 @@
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 
-[node name="World" parent="." instance=ExtResource( 2 )]
+[node name="World" type="Node2D" parent="."]
+
+[node name="Rooms" type="Node2D" parent="World"]
+
+[node name="Player" parent="World" instance=ExtResource( 2 )]
+position = Vector2( 50, 144 )
 
 [node name="PauseLayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -33,5 +38,3 @@ layer = 0
 [node name="Healthbar" parent="UILayer" instance=ExtResource( 6 )]
 
 [node name="SavingIndicator" parent="UILayer" instance=ExtResource( 7 )]
-
-[editable path="World"]
