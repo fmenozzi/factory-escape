@@ -1,7 +1,7 @@
 extends Room
 
-onready var _lasers: Array = $Enemies/Lasers.get_children()
-onready var _shoot_timer: Timer = $Enemies/ShootTimer
+onready var _lasers: Array = $Hazards/Lasers.get_children()
+onready var _shoot_timer: Timer = $Hazards/ShootTimer
 
 func _ready() -> void:
     _shoot_timer.wait_time = 1.0

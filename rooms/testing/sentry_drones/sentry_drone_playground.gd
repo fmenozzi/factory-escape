@@ -8,9 +8,9 @@ enum RoomState {
 }
 var _current_room_state: int = RoomState.PRE_FIGHT
 
-onready var _enemy_spawn_trigger_area: Area2D = $ClosingDoor/ClosingDoorTrigger
+onready var _enemy_spawn_trigger_area: Area2D = $ClosingDoorManager/ClosingDoorTrigger
 onready var _arena_camera_pos: Position2D = $CameraAnchors/Right
-onready var _closing_door: StaticBody2D = $ClosingDoor/ClosingDoor
+onready var _closing_door: StaticBody2D = $ClosingDoorManager/ClosingDoor
 onready var _enemies_node: Node2D = $Enemies
 onready var _player_camera: Camera2D = null
 

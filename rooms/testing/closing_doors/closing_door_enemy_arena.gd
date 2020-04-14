@@ -1,4 +1,4 @@
-extends Node2D
+extends Room
 
 const Slime := preload('res://actors/enemies/slime/Slime.tscn')
 
@@ -9,12 +9,12 @@ enum RoomState {
 }
 var _current_room_state: int = RoomState.PRE_FIGHT
 
-onready var _closing_door: StaticBody2D = $ClosingDoor
-onready var _closing_door_trigger: Area2D = $ClosingDoorTrigger
+onready var _closing_door: StaticBody2D = $ClosingDoorManager/ClosingDoor
+onready var _closing_door_trigger: Area2D = $ClosingDoorManager/ClosingDoorTrigger
 onready var _room: Room = get_parent()
-onready var _camera: Camera2D = Util.get_player().get_camera()
 
 var _slimes := []
+var _player_camera: Camera2D
 
 func _ready() -> void:
     _closing_door_trigger.connect('body_entered', self, '_on_player_entered')
@@ -23,13 +23,15 @@ func _on_player_entered(player: Player) -> void:
     if not player:
         return
 
+    _player_camera = player.get_camera()
+
     match _current_room_state:
         RoomState.PRE_FIGHT:
             _current_room_state = RoomState.FIGHT
 
             _closing_door.close()
 
-            _camera.detach_and_move_to_global(Vector2(320, 90))
+            _player_camera.detach_and_move_to_global(Vector2(320, 90))
 
             _spawn_slime_at(Vector2(320, 32))
             _spawn_slime_at(Vector2(248, 64))
@@ -70,5 +72,5 @@ func _on_slime_death(slime: Slime) -> void:
     _slimes.erase(slime)
     if _slimes.empty():
         _current_room_state = RoomState.POST_FIGHT
-        _camera.reattach()
+        _player_camera.reattach()
         _closing_door.open()

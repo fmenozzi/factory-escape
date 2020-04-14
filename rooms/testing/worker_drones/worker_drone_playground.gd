@@ -11,7 +11,7 @@ enum RoomState {
 var _current_room_state: int = RoomState.PRE_FIGHT
 
 onready var _enemy_spawn_trigger_area: Area2D = $EnemySpawnTrigger
-onready var _arena_camera_pos: Position2D = $CameraAnchors/BottomAnchor
+onready var _arena_camera_pos: Position2D = $CameraAnchors/Bottom
 onready var _enemies_node: Node2D = $Enemies
 
 func _ready() -> void:

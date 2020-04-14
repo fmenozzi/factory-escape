@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Game.tscn" type="PackedScene" id=1]
+[ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/enemies/laser/Laser.tscn" type="PackedScene" id=3]
+[ext_resource path="res://rooms/testing/lasers/laser_playground.gd" type="Script" id=4]
+[ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 160, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 72 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 72 )
+
+[node name="LaserDemo" instance=ExtResource( 1 )]
+
+[node name="LaserPlayground" parent="World/Rooms" index="0" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Platforms" parent="World/Rooms/LaserPlayground/TileMaps" index="2"]
+tile_data = PoolIntArray( -1, 29, 0, -65536, 29, 0, -65535, 29, 0, -65534, 29, 0, -65533, 29, 0, -65532, 29, 0, -65531, 29, 0, -65530, 29, 0, -65529, 29, 0, -65528, 29, 0, -65527, 29, 0, -65526, 29, 0, -65525, 29, 0, -65524, 29, 0, -65523, 29, 0, -65522, 29, 0, -65521, 29, 0, -65520, 29, 0, -65519, 29, 0, -65518, 29, 0, -65517, 29, 0, -65516, 29, 0, 65535, 29, 0, 0, 29, 0, 1, 29, 0, 2, 29, 0, 3, 29, 0, 4, 29, 0, 5, 29, 0, 6, 29, 0, 7, 29, 0, 8, 29, 0, 9, 29, 0, 10, 29, 0, 11, 29, 0, 12, 29, 0, 13, 29, 0, 14, 29, 0, 15, 29, 0, 16, 29, 0, 17, 29, 0, 18, 29, 0, 19, 29, 0, 20, 29, 0, 131071, 29, 0, 65536, 29, 0, 65537, 48, 0, 65538, 48, 0, 65539, 48, 0, 65540, 48, 0, 65541, 48, 0, 65542, 48, 0, 65543, 48, 0, 65544, 48, 0, 65545, 48, 0, 65546, 48, 0, 65547, 48, 0, 65548, 48, 0, 65549, 48, 0, 65550, 48, 0, 65551, 48, 0, 65552, 48, 0, 65553, 48, 0, 65554, 48, 0, 65555, 29, 0, 65556, 29, 0, 196607, 29, 0, 131072, 29, 0, 131073, 48, 0, 131074, 48, 0, 131075, 48, 0, 131076, 48, 0, 131077, 48, 0, 131078, 48, 0, 131079, 48, 0, 131080, 48, 0, 131081, 48, 0, 131082, 48, 0, 131083, 48, 0, 131084, 48, 0, 131085, 48, 0, 131086, 48, 0, 131087, 48, 0, 131088, 48, 0, 131089, 48, 0, 131090, 48, 0, 131091, 29, 0, 131092, 29, 0, 262143, 29, 0, 196608, 29, 0, 196609, 48, 0, 196610, 48, 0, 196611, 18, 0, 196612, 18, 0, 196613, 18, 0, 196614, 48, 0, 196615, 48, 0, 196616, 48, 0, 196617, 48, 0, 196618, 48, 0, 196619, 48, 0, 196620, 48, 0, 196621, 48, 0, 196622, 18, 0, 196623, 18, 0, 196624, 18, 0, 196625, 48, 0, 196626, 48, 0, 196627, 29, 0, 196628, 29, 0, 327679, 29, 0, 262144, 29, 0, 262145, 48, 0, 262146, 48, 0, 262147, 48, 0, 262148, 48, 0, 262149, 48, 0, 262150, 48, 0, 262151, 48, 0, 262152, 48, 0, 262153, 48, 0, 262154, 48, 0, 262155, 48, 0, 262156, 48, 0, 262157, 48, 0, 262158, 48, 0, 262159, 48, 0, 262160, 48, 0, 262161, 48, 0, 262162, 48, 0, 262163, 29, 0, 262164, 29, 0, 393215, 29, 0, 327680, 29, 0, 327681, 48, 0, 327682, 48, 0, 327683, 48, 0, 327684, 48, 0, 327685, 48, 0, 327686, 48, 0, 327687, 48, 0, 327688, 48, 0, 327689, 48, 0, 327690, 48, 0, 327691, 48, 0, 327692, 48, 0, 327693, 48, 0, 327694, 48, 0, 327695, 48, 0, 327696, 48, 0, 327697, 48, 0, 327698, 48, 0, 327699, 29, 0, 327700, 29, 0, 458751, 29, 0, 393216, 29, 0, 393217, 48, 0, 393218, 48, 0, 393219, 48, 0, 393220, 48, 0, 393221, 48, 0, 393222, 48, 0, 393223, 48, 0, 393224, 29, 0, 393225, 29, 0, 393226, 29, 0, 393227, 29, 0, 393228, 48, 0, 393229, 48, 0, 393230, 48, 0, 393231, 48, 0, 393232, 48, 0, 393233, 48, 0, 393234, 48, 0, 393235, 29, 0, 393236, 29, 0, 524287, 29, 0, 458752, 29, 0, 458753, 48, 0, 458754, 48, 0, 458755, 48, 0, 458756, 48, 0, 458757, 48, 0, 458758, 48, 0, 458759, 48, 0, 458760, 29, 0, 458761, 29, 0, 458762, 29, 0, 458763, 29, 0, 458764, 48, 0, 458765, 48, 0, 458766, 48, 0, 458767, 48, 0, 458768, 48, 0, 458769, 48, 0, 458770, 48, 0, 458771, 29, 0, 458772, 29, 0, 589823, 29, 0, 524288, 29, 0, 524289, 48, 0, 524290, 48, 0, 524291, 48, 0, 524292, 48, 0, 524293, 48, 0, 524294, 48, 0, 524295, 48, 0, 524296, 29, 0, 524297, 29, 0, 524298, 29, 0, 524299, 29, 0, 524300, 48, 0, 524301, 48, 0, 524302, 48, 0, 524303, 48, 0, 524304, 48, 0, 524305, 48, 0, 524306, 48, 0, 524307, 29, 0, 524308, 29, 0, 655359, 29, 0, 589824, 29, 0, 589825, 48, 0, 589826, 48, 0, 589827, 48, 0, 589828, 48, 0, 589829, 48, 0, 589830, 48, 0, 589831, 48, 0, 589832, 29, 0, 589833, 29, 0, 589834, 29, 0, 589835, 29, 0, 589836, 48, 0, 589837, 48, 0, 589838, 48, 0, 589839, 48, 0, 589840, 48, 0, 589841, 48, 0, 589842, 48, 0, 589843, 29, 0, 589844, 29, 0, 720895, 29, 0, 655360, 29, 0, 655361, 29, 0, 655362, 29, 0, 655363, 29, 0, 655364, 29, 0, 655365, 29, 0, 655366, 29, 0, 655367, 29, 0, 655368, 29, 0, 655369, 29, 0, 655370, 29, 0, 655371, 29, 0, 655372, 29, 0, 655373, 29, 0, 655374, 29, 0, 655375, 29, 0, 655376, 29, 0, 655377, 29, 0, 655378, 29, 0, 655379, 29, 0, 655380, 29, 0, 786431, 29, 0, 720896, 29, 0, 720897, 29, 0, 720898, 29, 0, 720899, 29, 0, 720900, 29, 0, 720901, 29, 0, 720902, 29, 0, 720903, 29, 0, 720904, 29, 0, 720905, 29, 0, 720906, 29, 0, 720907, 29, 0, 720908, 29, 0, 720909, 29, 0, 720910, 29, 0, 720911, 29, 0, 720912, 29, 0, 720913, 29, 0, 720914, 29, 0, 720915, 29, 0, 720916, 29, 0 )
+
+[node name="RoomBoundaries" parent="World/Rooms/LaserPlayground" index="1"]
+visible = false
+
+[node name="CollisionShape2D" parent="World/Rooms/LaserPlayground/RoomBoundaries" index="0"]
+position = Vector2( 160, 90 )
+shape = SubResource( 1 )
+
+[node name="ShootTimer" type="Timer" parent="World/Rooms/LaserPlayground/Hazards" index="0"]
+
+[node name="Lasers" type="Node2D" parent="World/Rooms/LaserPlayground/Hazards" index="1"]
+
+[node name="Laser" parent="World/Rooms/LaserPlayground/Hazards/Lasers" index="0" instance=ExtResource( 3 )]
+position = Vector2( 160, 16 )
+
+[node name="Offset" parent="World/Rooms/LaserPlayground/Hazards/Lasers/Laser" index="1"]
+position = Vector2( 0, 1 )
+
+[node name="Target" parent="World/Rooms/LaserPlayground/Hazards/Lasers/Laser" index="2"]
+position = Vector2( 0, 112 )
+
+[node name="Left" parent="World/Rooms/LaserPlayground/HazardCheckpoints" index="0" instance=ExtResource( 5 )]
+position = Vector2( 72, 160 )
+
+[node name="CollisionShape2D" parent="World/Rooms/LaserPlayground/HazardCheckpoints/Left" index="0"]
+position = Vector2( 0, -72 )
+shape = SubResource( 2 )
+
+[node name="Right" parent="World/Rooms/LaserPlayground/HazardCheckpoints" index="1" instance=ExtResource( 5 )]
+position = Vector2( 248, 160 )
+
+[node name="CollisionShape2D" parent="World/Rooms/LaserPlayground/HazardCheckpoints/Right" index="0"]
+position = Vector2( 0, -72 )
+shape = SubResource( 3 )
+
+[node name="Player" parent="World" index="1"]
+starting_room_path = NodePath("../Rooms/LaserPlayground")
+
+[editable path="World/Rooms/LaserPlayground"]
+
+[editable path="World/Rooms/LaserPlayground/TileMaps"]
+
+[editable path="World/Rooms/LaserPlayground/Hazards/Lasers/Laser"]
+
+[editable path="World/Rooms/LaserPlayground/HazardCheckpoints/Left"]
+
+[editable path="World/Rooms/LaserPlayground/HazardCheckpoints/Right"]
