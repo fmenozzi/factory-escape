@@ -1,6 +1,8 @@
 extends Node
 
 onready var _player: Player = Util.get_player()
+onready var _camera: Camera2D = _player.get_camera()
+onready var _rooms: Array = $World/Rooms.get_children()
 onready var _health_bar: Control = $UILayer/Healthbar
 onready var _saving_indicator: Node2D = $UILayer/SavingIndicator
 onready var _screen_fadeout: Control = $ScreenFadeoutLayer/ScreenFadeout
@@ -15,6 +17,27 @@ func _ready() -> void:
     for lamp in get_tree().get_nodes_in_group('lamps'):
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
+
+# TODO: See if we can find a more efficient way of doing this that doesn't
+#       involve iterating over every room in every frame. Maybe some kind of
+#       map or otherwise more advanced data structure?
+#
+#       e.g. maybe you can use thin, one-way collision boxes at each room
+#       entrance to signal room changes.
+func _process(delta: float) -> void:
+    for room in _rooms:
+        # Transition to room once we enter a new one.
+        if room != _player.curr_room and room.contains(_player):
+            _player.prev_room = _player.curr_room
+            _player.curr_room = room
+
+            # Pause processing on the old room, transition to the new one, and
+            # then begin processing on the new room once the transition is
+            # complete.
+            _player.prev_room.pause()
+            _camera.transition(_player.prev_room, _player.curr_room)
+            yield(_camera, 'transition_completed')
+            _player.curr_room.resume()
 
 func _on_player_died() -> void:
     print('YOU DIED')
