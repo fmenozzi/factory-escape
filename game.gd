@@ -18,6 +18,13 @@ func _ready() -> void:
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
 
+    # Find the player's current room.
+    for room in _rooms:
+        if room.contains(_player):
+            _player.curr_room = room
+            _player.prev_room = room
+            _player.get_camera().fit_camera_limits_to_room(room)
+
 # TODO: See if we can find a more efficient way of doing this that doesn't
 #       involve iterating over every room in every frame. Maybe some kind of
 #       map or otherwise more advanced data structure?

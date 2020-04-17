@@ -53,7 +53,6 @@ shape = SubResource( 3 )
 
 [node name="Player" parent="World" index="1"]
 position = Vector2( 80, 80 )
-starting_room_path = NodePath("../Rooms/WorkerDronePlayground")
 
 [editable path="World/Rooms/WorkerDronePlayground"]
 

@@ -5,8 +5,6 @@ signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
 signal player_walked_to_point
 
-export(NodePath) var starting_room_path = ""
-
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
 # not itself constitute a valid player state.
@@ -129,22 +127,11 @@ var _current_hazard_checkpoint: Area2D = null
 var prev_room = null
 var curr_room = null
 
-func _get_configuration_warning() -> String:
-    if starting_room_path == '':
-        return "Please specify the player's starting room."
-    return ''
-
 func _ready() -> void:
     # Begin in fall state
     current_state_enum = State.FALL
     current_state = STATES[current_state_enum]
     change_state({'new_state': State.FALL})
-
-    # Initialize current room
-    assert(starting_room_path != '')
-    curr_room = get_node(starting_room_path)
-    prev_room = curr_room
-    get_camera().fit_camera_limits_to_room(curr_room)
 
     # Save the current positions of all "y-axis mirrored" nodes so that they can
     # all be mirrored at once when the player changes direction.
