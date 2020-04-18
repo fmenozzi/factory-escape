@@ -11,5 +11,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)
+    elif not failure.is_on_floor():
+        return {'new_state': LeapingFailure.State.FALL}
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
