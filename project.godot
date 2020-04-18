@@ -60,9 +60,9 @@ _global_script_classes=[ {
 "path": "res://custom/scripts/shader_manager.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "Slime",
+"class": "SluggishFailure",
 "language": "GDScript",
-"path": "res://actors/enemies/slime/slime.gd"
+"path": "res://actors/enemies/sluggish_failure/sluggish_failure.gd"
 }, {
 "base": "Node",
 "class": "Stopwatch",
@@ -85,7 +85,7 @@ _global_script_class_icons={
 "Room": "",
 "SentryDrone": "",
 "ShaderManager": "",
-"Slime": "",
+"SluggishFailure": "",
 "Stopwatch": "",
 "WorkerDrone": ""
 }

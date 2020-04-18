@@ -1,11 +1,11 @@
 extends Room
 
-const Slime := preload('res://actors/enemies/slime/Slime.tscn')
+const SluggishFailure := preload('res://actors/enemies/sluggish_failure/SluggishFailure.tscn')
 const Drone := preload('res://actors/enemies/worker_drone/WorkerDrone.tscn')
 
 enum RoomState {
     PRE_FIGHT,
-    SLIME_FIGHT,
+    FAILURE_FIGHT,
     DRONE_FIGHT,
 }
 var _current_room_state: int = RoomState.PRE_FIGHT
@@ -43,20 +43,20 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
         return
 
     if _current_room_state == RoomState.PRE_FIGHT:
-        _current_room_state = RoomState.SLIME_FIGHT
+        _current_room_state = RoomState.FAILURE_FIGHT
 
         player.get_camera().detach_and_move_to_global(
             _arena_camera_pos.position)
 
-        # Spawn slimes.
-        _spawn_enemy_at(Slime.instance(), Vector2(88, 272))
-        _spawn_enemy_at(Slime.instance(), Vector2(232, 272))
+        # Spawn failures.
+        _spawn_enemy_at(SluggishFailure.instance(), Vector2(88, 272))
+        _spawn_enemy_at(SluggishFailure.instance(), Vector2(232, 272))
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
     if _enemies_node.get_child_count() > 1:
         return
 
-    if _current_room_state == RoomState.SLIME_FIGHT:
+    if _current_room_state == RoomState.FAILURE_FIGHT:
         _current_room_state = RoomState.DRONE_FIGHT
 
         _spawn_enemy_at(Drone.instance(), Vector2(88, 256))

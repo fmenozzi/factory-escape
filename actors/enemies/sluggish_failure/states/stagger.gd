@@ -3,7 +3,7 @@ extends 'res://actors/enemies/state.gd'
 # The duration of the stagger state in seconds.
 const STAGGER_DURATION: float = 0.1
 
-# The speed at which the slime is knocked back in pixels per second.
+# The speed at which the failure is knocked back in pixels per second.
 const STAGGER_SPEED: float = 2.5 * Util.TILE_SIZE
 
 onready var _stagger_duration_timer: Timer = $StaggerDurationTimer
@@ -14,19 +14,19 @@ func _ready() -> void:
     _stagger_duration_timer.wait_time = STAGGER_DURATION
     _stagger_duration_timer.one_shot = true
 
-func enter(slime: Slime, previous_state_dict: Dictionary) -> void:
+func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
     _stagger_duration_timer.start()
 
     _direction_from_hit = previous_state_dict['direction_from_hit']
     assert(_direction_from_hit != null)
 
-func exit(slime: Slime) -> void:
+func exit(failure: SluggishFailure) -> void:
     pass
 
-func update(slime: Slime, delta: float) -> Dictionary:
+func update(failure: SluggishFailure, delta: float) -> Dictionary:
     if _stagger_duration_timer.is_stopped():
-        return {'new_state': Slime.State.WALK}
+        return {'new_state': SluggishFailure.State.WALK}
 
-    slime.move(Vector2(_direction_from_hit * STAGGER_SPEED, 1))
+    failure.move(Vector2(_direction_from_hit * STAGGER_SPEED, 1))
 
-    return {'new_state': Slime.State.NO_CHANGE}
+    return {'new_state': SluggishFailure.State.NO_CHANGE}

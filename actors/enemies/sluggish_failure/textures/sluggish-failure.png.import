@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime.png-579864841d9872186357c43a34e334da.stex"
+path="res://.import/sluggish-failure.png-80e860edf3d2e8e2fb21e2a260020989.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/enemies/slime/textures/slime.png"
-dest_files=[ "res://.import/slime.png-579864841d9872186357c43a34e334da.stex" ]
+source_file="res://actors/enemies/sluggish_failure/textures/sluggish-failure.png"
+dest_files=[ "res://.import/sluggish-failure.png-80e860edf3d2e8e2fb21e2a260020989.stex" ]
 
 [params]
 

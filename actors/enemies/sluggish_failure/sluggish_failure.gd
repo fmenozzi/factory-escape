@@ -1,7 +1,5 @@
 extends KinematicBody2D
-class_name Slime
-
-signal slime_died
+class_name SluggishFailure
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
@@ -50,8 +48,6 @@ func _ready() -> void:
 
     _hurtbox.connect('area_entered', self, '_on_hazard_hit')
 
-    self.connect('slime_died', self, '_on_died')
-
 func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -97,15 +93,15 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state.enter(self, new_state_dict)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
-    print('SLIME HIT (new health: ', new_health, ')')
+    print('SLUGGISH FAILURE HIT (new health: ', new_health, ')')
 
-# Slimes insta-die when touching hazards.
+# Sluggish failures insta-die when touching hazards.
 func _on_hazard_hit(area: Area2D) -> void:
     if not area or not Collision.in_layer(area, 'hazards'):
         return
-    emit_signal('slime_died')
+    _health.emit_signal('died')
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    print('SLIME DIED')
+    print('SLUGGISH FAILURE DIED')
     queue_free()

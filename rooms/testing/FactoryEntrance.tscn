@@ -4,7 +4,7 @@
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/sign/Sign.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=4]
-[ext_resource path="res://actors/enemies/slime/Slime.tscn" type="PackedScene" id=6]
+[ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=6]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -67,10 +67,10 @@ position = Vector2( 80, 72 )
 [node name="Destination" parent="MovingPlatforms/MovingPlatformSmall2" index="2"]
 position = Vector2( 0, 64 )
 
-[node name="Slime" parent="Enemies" index="0" instance=ExtResource( 6 )]
+[node name="SluggishFailure1" parent="Enemies" index="0" instance=ExtResource( 6 )]
 position = Vector2( 192, 144 )
 
-[node name="Slime2" parent="Enemies" index="1" instance=ExtResource( 6 )]
+[node name="SluggishFailure2" parent="Enemies" index="1" instance=ExtResource( 6 )]
 position = Vector2( 296, 96 )
 direction = -1
 

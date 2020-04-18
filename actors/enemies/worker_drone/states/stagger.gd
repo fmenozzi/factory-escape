@@ -3,7 +3,7 @@ extends 'res://actors/enemies/state.gd'
 # The duration of the stagger state in seconds.
 const STAGGER_DURATION: float = 0.1
 
-# The speed at which the slime is knocked back in pixels per second.
+# The speed at which the drone is knocked back in pixels per second.
 const STAGGER_SPEED: float = 10.0 * Util.TILE_SIZE
 
 onready var _stagger_duration_timer: Timer = $StaggerDurationTimer
