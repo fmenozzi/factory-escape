@@ -8,12 +8,14 @@ const SPEED := 0.5 * Util.TILE_SIZE
 enum State {
     NO_CHANGE,
     WALK,
+    STAGGER,
     FALL,
     RETURN_TO_LEDGE,
 }
 
 onready var STATES := {
     State.WALK:            $States/Walk,
+    State.STAGGER:         $States/Stagger,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
 }
@@ -21,6 +23,8 @@ onready var STATES := {
 var _current_state: Node = null
 var _current_state_enum: int = -1
 
+onready var _health: Health = $Health
+onready var _flash_manager: Node = $FlashManager
 onready var _sprite: Sprite = $Sprite
 onready var _dust_puff: Particles2D = $DustPuff
 
@@ -34,6 +38,9 @@ func _ready() -> void:
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
+    _health.connect('health_changed', self, '_on_health_changed')
+    _health.connect('died', self, '_on_died')
+
 func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -42,6 +49,14 @@ func _physics_process(delta: float) -> void:
 func set_direction(new_direction: int) -> void:
     direction = new_direction
     _sprite.flip_h = (new_direction == Util.Direction.LEFT)
+
+func take_hit(damage: int, player: Player) -> void:
+    _health.take_damage(damage)
+    _flash_manager.start_flashing()
+    _change_state({
+        'new_state': State.STAGGER,
+        'direction_from_hit': Util.direction(player, self),
+    })
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
@@ -69,3 +84,11 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state_enum = new_state_enum
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
+
+func _on_health_changed(old_health: int, new_health: int) -> void:
+    print('LEAPING FAILURE HIT (new health: ', new_health, ')')
+
+# TODO: Make death nicer (animation, effects, etc.).
+func _on_died() -> void:
+    print('LEAPING FAILURE DIED')
+    queue_free()
