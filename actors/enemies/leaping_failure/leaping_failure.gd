@@ -8,14 +8,14 @@ const SPEED := 0.5 * Util.TILE_SIZE
 enum State {
     NO_CHANGE,
     WALK,
-    STAGGER,
+    GROUND_STAGGER,
     FALL,
     RETURN_TO_LEDGE,
 }
 
 onready var STATES := {
     State.WALK:            $States/Walk,
-    State.STAGGER:         $States/Stagger,
+    State.GROUND_STAGGER:  $States/GroundStagger,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
 }
@@ -53,10 +53,11 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _change_state({
-        'new_state': State.STAGGER,
-        'direction_from_hit': Util.direction(player, self),
-    })
+    if is_on_floor():
+        _change_state({
+            'new_state': State.GROUND_STAGGER,
+            'direction_from_hit': Util.direction(player, self),
+        })
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)

@@ -8,7 +8,7 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/fall.gd" type="Script" id=6]
 [ext_resource path="res://effects/DustPuff.tscn" type="PackedScene" id=7]
 [ext_resource path="res://actors/enemies/leaping_failure/states/return_to_ledge.gd" type="Script" id=8]
-[ext_resource path="res://actors/enemies/leaping_failure/states/stagger.gd" type="Script" id=9]
+[ext_resource path="res://actors/enemies/leaping_failure/states/ground_stagger.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
@@ -55,10 +55,10 @@ flash_color = Color( 1, 1, 1, 1 )
 [node name="Walk" type="Node" parent="States"]
 script = ExtResource( 5 )
 
-[node name="Stagger" type="Node" parent="States"]
+[node name="GroundStagger" type="Node" parent="States"]
 script = ExtResource( 9 )
 
-[node name="StaggerDurationTimer" type="Timer" parent="States/Stagger"]
+[node name="StaggerDurationTimer" type="Timer" parent="States/GroundStagger"]
 
 [node name="Fall" type="Node" parent="States"]
 script = ExtResource( 6 )
