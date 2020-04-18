@@ -375,6 +375,19 @@ func _check_for_hits() -> void:
             change_state({'new_state': State.HAZARD_HIT})
             emit_signal('player_hit_hazard')
 
+    # Check for overlapping hazard bodies. Some hazards may be StaticBody2Ds
+    # instead of Area2Ds.
+    for hitbox in _hurtbox.get_overlapping_bodies():
+        if Collision.in_layer(hitbox, 'hazards'):
+            # Take damage and stagger when hit.
+            var damage_taken := player_health.take_damage(1)
+            if damage_taken:
+                player_health.set_status(Health.Status.INVINCIBLE)
+                _invincibility_flash_manager.start_flashing()
+                change_state({'new_state': State.HAZARD_HIT})
+                emit_signal('player_hit_hazard')
+
+    # Check for overlapping enemy hitbox and hazard areas.
     for hitbox in _hurtbox.get_overlapping_areas():
         if Collision.in_layers(hitbox, ['hazards', 'enemy_hitbox']):
             # Take damage and stagger when hit.
