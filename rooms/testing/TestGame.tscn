@@ -33,7 +33,4 @@ position = Vector2( 0, 8 )
 [node name="HazardCheckpoints" parent="World/Rooms" index="5" instance=ExtResource( 7 )]
 position = Vector2( -640, 0 )
 
-[node name="Player" parent="World" index="1"]
-starting_room_path = NodePath("../Rooms/FactoryEntrance")
-
 [editable path="World/Rooms/GrapplePlayground"]

@@ -22,21 +22,20 @@ position = Vector2( 160, 90 )
 shape = SubResource( 1 )
 
 [node name="Left" parent="World/Rooms/ConveyorBeltPlayground/MovingPlatforms" index="0" instance=ExtResource( 3 )]
-position = Vector2( 64, 136 )
+position = Vector2( 64, 112 )
 
 [node name="Right" parent="World/Rooms/ConveyorBeltPlayground/MovingPlatforms" index="1" instance=ExtResource( 3 )]
-position = Vector2( 256, 136 )
+position = Vector2( 256, 112 )
 direction = -1
 
 [node name="MiddleLeft" parent="World/Rooms/ConveyorBeltPlayground/MovingPlatforms" index="2" instance=ExtResource( 3 )]
-position = Vector2( 128, 96 )
+position = Vector2( 128, 80 )
 
 [node name="MiddleRight" parent="World/Rooms/ConveyorBeltPlayground/MovingPlatforms" index="3" instance=ExtResource( 3 )]
-position = Vector2( 192, 96 )
+position = Vector2( 192, 80 )
 
 [node name="Player" parent="World" index="1"]
 position = Vector2( 160, 160 )
-starting_room_path = NodePath("../Rooms/ConveyorBeltPlayground")
 
 [editable path="World/Rooms/ConveyorBeltPlayground"]
 
