@@ -1,9 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://tilesets/BackgroundSmall.tres" type="TileSet" id=1]
-[ext_resource path="res://tilesets/BackgroundLarge.tres" type="TileSet" id=2]
-[ext_resource path="res://tilesets/Platforms.tres" type="TileSet" id=3]
-[ext_resource path="res://tilesets/Hazards.tres" type="TileSet" id=4]
+[ext_resource path="res://shared/tilesets/BackgroundSmall.tres" type="TileSet" id=1]
+[ext_resource path="res://shared/tilesets/BackgroundLarge.tres" type="TileSet" id=2]
+[ext_resource path="res://shared/tilesets/Platforms.tres" type="TileSet" id=3]
+[ext_resource path="res://shared/tilesets/Hazards.tres" type="TileSet" id=4]
+
 
 [node name="TileMaps" type="Navigation2D"]
 

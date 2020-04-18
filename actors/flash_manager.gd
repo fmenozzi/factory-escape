@@ -3,7 +3,7 @@ extends Node
 
 signal flashing_finished
 
-const flash_shader := preload('res://shaders/flash.shader')
+const flash_shader := preload('res://shared/shaders/flash.shader')
 
 export(NodePath) var sprite_path = ""
 export(float) var total_duration := 2.0
