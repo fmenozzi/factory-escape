@@ -8,22 +8,22 @@ extents = Vector2( 8, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 2 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 8 )
+
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 2 )
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 2 )
+extents = Vector2( 2, 3 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 8, 8 )
+extents = Vector2( 2, 3 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 2, 3 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 2, 3 )
-
-[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 8, 1.5 )
 
 [node name="Platforms" type="Node"]
@@ -33,6 +33,12 @@ visible = false
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 96, 64, 16, 16 )
+
+[node name="EmptyNoNavdata" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 96, 80, 16, 16 )
 
 [node name="InvisibleWall" type="Sprite" parent="."]
 visible = false
@@ -198,7 +204,7 @@ region_rect = Rect2( 48, 32, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="MossPlatformFullLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MossPlatformFullLeft/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MossPlatformFullRight" type="Sprite" parent="."]
 visible = false
@@ -209,7 +215,7 @@ region_rect = Rect2( 64, 32, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="MossPlatformFullRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MossPlatformFullRight/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MossClumpFullLeft" type="Sprite" parent="."]
 visible = false
@@ -220,7 +226,7 @@ region_rect = Rect2( 48, 48, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="MossClumpFullLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MossClumpFullLeft/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MossClumpFullRight" type="Sprite" parent="."]
 visible = false
@@ -231,7 +237,7 @@ region_rect = Rect2( 64, 48, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="MossClumpFullRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MossClumpFullRight/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MossClumpPartialLeft" type="Sprite" parent="."]
 visible = false
@@ -242,7 +248,7 @@ region_rect = Rect2( 48, 64, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="MossClumpPartialLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MossClumpPartialLeft/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MossClumpPartialRight" type="Sprite" parent="."]
 visible = false
@@ -253,7 +259,7 @@ region_rect = Rect2( 64, 64, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="MossClumpPartialRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MossClumpPartialRight/StaticBody2D"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="BasicPlatform0" type="Sprite" parent="."]
 visible = false
@@ -265,7 +271,7 @@ region_rect = Rect2( 240, 32, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatform0/StaticBody2D"]
 position = Vector2( 0, -6 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="BasicPlatform1" type="Sprite" parent="."]
 visible = false
@@ -277,7 +283,7 @@ region_rect = Rect2( 312, 64, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatform1/StaticBody2D"]
 position = Vector2( 0, -6 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="BasicPlatformMiddle" type="Sprite" parent="."]
 visible = false
@@ -289,7 +295,7 @@ region_rect = Rect2( 288, 0, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatformMiddle/StaticBody2D"]
 position = Vector2( 0, -6 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="BasicPlatformBigChain" type="Sprite" parent="."]
 visible = false
@@ -301,7 +307,7 @@ region_rect = Rect2( 304, 16, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatformBigChain/StaticBody2D"]
 position = Vector2( 0, -6 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="BasicPlatformSmallPipe" type="Sprite" parent="."]
 visible = false
@@ -313,7 +319,7 @@ region_rect = Rect2( 336, 32, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatformSmallPipe/StaticBody2D"]
 position = Vector2( 0, -6 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="BasicPlatformLargePipe" type="Sprite" parent="."]
 visible = false
@@ -325,7 +331,7 @@ region_rect = Rect2( 320, 16, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasicPlatformLargePipe/StaticBody2D"]
 position = Vector2( 0, -6 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="SteelCrate" type="Sprite" parent="."]
 visible = false
@@ -336,7 +342,7 @@ region_rect = Rect2( 80, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelCrate"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelCrate/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderWalkwayLeft" type="Sprite" parent="."]
 visible = false
@@ -347,7 +353,7 @@ region_rect = Rect2( 192, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderWalkwayLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderWalkwayLeft/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderWalkwayMiddle0" type="Sprite" parent="."]
 visible = false
@@ -358,7 +364,7 @@ region_rect = Rect2( 208, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderWalkwayMiddle0"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderWalkwayMiddle0/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderWalkwayMiddle1" type="Sprite" parent="."]
 visible = false
@@ -369,7 +375,7 @@ region_rect = Rect2( 224, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderWalkwayMiddle1"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderWalkwayMiddle1/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderWalkwayRight" type="Sprite" parent="."]
 visible = false
@@ -380,7 +386,7 @@ region_rect = Rect2( 240, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderWalkwayRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderWalkwayRight/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderInterior0" type="Sprite" parent="."]
 visible = false
@@ -391,7 +397,7 @@ region_rect = Rect2( 304, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderInterior0"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderInterior0/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderInterior1" type="Sprite" parent="."]
 visible = false
@@ -402,7 +408,7 @@ region_rect = Rect2( 320, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderInterior1"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderInterior1/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderInterior2" type="Sprite" parent="."]
 visible = false
@@ -413,7 +419,7 @@ region_rect = Rect2( 336, 0, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SteelGirderInterior2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SteelGirderInterior2/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SteelGirderCornerLeft" type="Sprite" parent="."]
 visible = false
@@ -469,7 +475,7 @@ region_rect = Rect2( 224, 48, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallCornerLeft/StaticBody2D"]
 position = Vector2( 6, -5 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="SmallCornerRight" type="Sprite" parent="."]
 visible = false
@@ -481,7 +487,7 @@ region_rect = Rect2( 208, 48, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallCornerRight/StaticBody2D"]
 position = Vector2( -6, -5 )
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="SealedDoorUpperLeft" type="Sprite" parent="."]
 visible = false
@@ -492,7 +498,7 @@ region_rect = Rect2( 128, 96, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SealedDoorUpperLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SealedDoorUpperLeft/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SealedDoorUpperRight" type="Sprite" parent="."]
 visible = false
@@ -503,7 +509,7 @@ region_rect = Rect2( 144, 96, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SealedDoorUpperRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SealedDoorUpperRight/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SealedDoorLowerLeft" type="Sprite" parent="."]
 visible = false
@@ -514,7 +520,7 @@ region_rect = Rect2( 128, 112, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SealedDoorLowerLeft"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SealedDoorLowerLeft/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SealedDoorLowerRight" type="Sprite" parent="."]
 visible = false
@@ -525,7 +531,7 @@ region_rect = Rect2( 144, 112, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SealedDoorLowerRight"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SealedDoorLowerRight/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SealedDoorUpperInterior" type="Sprite" parent="."]
 visible = false
@@ -536,7 +542,7 @@ region_rect = Rect2( 112, 96, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SealedDoorUpperInterior"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SealedDoorUpperInterior/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="SealedDoorLowerInterior" type="Sprite" parent="."]
 visible = false
@@ -547,7 +553,7 @@ region_rect = Rect2( 112, 112, 16, 16 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SealedDoorLowerInterior"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SealedDoorLowerInterior/StaticBody2D"]
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 
 [node name="ThinBridgeLeft" type="Sprite" parent="."]
 visible = false
@@ -559,7 +565,7 @@ region_rect = Rect2( 256, 48, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThinBridgeLeft/StaticBody2D"]
 position = Vector2( 0, -6.5 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="ThinBridgeInterior" type="Sprite" parent="."]
 visible = false
@@ -571,7 +577,7 @@ region_rect = Rect2( 272, 48, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThinBridgeInterior/StaticBody2D"]
 position = Vector2( 0, -6.5 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="ThinBridgeRight" type="Sprite" parent="."]
 visible = false
@@ -583,4 +589,4 @@ region_rect = Rect2( 288, 48, 16, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ThinBridgeRight/StaticBody2D"]
 position = Vector2( 0, -6.5 )
-shape = SubResource( 10 )
+shape = SubResource( 8 )
