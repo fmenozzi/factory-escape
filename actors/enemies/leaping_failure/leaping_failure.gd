@@ -9,11 +9,13 @@ enum State {
     NO_CHANGE,
     WALK,
     FALL,
+    RETURN_TO_LEDGE,
 }
 
 onready var STATES := {
-    State.WALK: $States/Walk,
-    State.FALL: $States/Fall,
+    State.WALK:            $States/Walk,
+    State.FALL:            $States/Fall,
+    State.RETURN_TO_LEDGE: $States/ReturnToLedge,
 }
 
 var _current_state: Node = null
@@ -21,6 +23,9 @@ var _current_state_enum: int = -1
 
 onready var _sprite: Sprite = $Sprite
 onready var _dust_puff: Particles2D = $DustPuff
+
+onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
+onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
     set_direction(direction)
@@ -40,6 +45,12 @@ func set_direction(new_direction: int) -> void:
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
+
+func is_off_ledge() -> bool:
+    var off_left := not _edge_raycast_left.is_colliding()
+    var off_right := not _edge_raycast_right.is_colliding()
+
+    return (off_left and not off_right) or (off_right and not off_left)
 
 func emit_dust_puff() -> void:
     _dust_puff.restart()

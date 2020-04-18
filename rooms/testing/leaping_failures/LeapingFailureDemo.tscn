@@ -24,6 +24,9 @@ shape = SubResource( 1 )
 [node name="Air" parent="World/Rooms/LeapingFailurePlayground/Enemies" index="0" instance=ExtResource( 3 )]
 position = Vector2( 272, 112 )
 
+[node name="Platform" parent="World/Rooms/LeapingFailurePlayground/Enemies" index="1" instance=ExtResource( 3 )]
+position = Vector2( 160, 112 )
+
 [editable path="World/Rooms/LeapingFailurePlayground"]
 
 [editable path="World/Rooms/LeapingFailurePlayground/TileMaps"]
