@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/player.gd"
 }, {
+"base": "Sprite",
+"class": "ReactSprite",
+"language": "GDScript",
+"path": "res://actors/enemies/react_sprite.gd"
+}, {
 "base": "Node2D",
 "class": "Room",
 "language": "GDScript",
@@ -88,6 +93,7 @@ _global_script_class_icons={
 "Pause": "",
 "PhysicsManager": "",
 "Player": "",
+"ReactSprite": "",
 "Room": "",
 "SentryDrone": "",
 "ShaderManager": "",

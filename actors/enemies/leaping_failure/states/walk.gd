@@ -1,13 +1,20 @@
 extends 'res://actors/enemies/state.gd'
 
+var _player: Player = null
+
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
-    failure.get_node('AnimationPlayer').play('walk')
+    failure.get_animation_player().play('walk')
+
+    _player = Util.get_player()
 
 func exit(failure: LeapingFailure) -> void:
     pass
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     failure.move(Vector2(failure.direction * failure.SPEED, 10))
+
+    if failure.is_in_range(_player, failure.AGGRO_RADIUS):
+        return {'new_state': LeapingFailure.State.ALERTED}
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)

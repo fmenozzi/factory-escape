@@ -5,12 +5,17 @@ export(Util.Direction) var direction := Util.Direction.RIGHT
 
 const SPEED := 0.5 * Util.TILE_SIZE
 
+const AGGRO_RADIUS := 6.0 * Util.TILE_SIZE
+const UNAGGRO_RADIUS := 10.0 * Util.TILE_SIZE
+
 enum State {
     NO_CHANGE,
     WALK,
     GROUND_STAGGER,
     FALL,
     RETURN_TO_LEDGE,
+    ALERTED,
+    UNALERTED,
 }
 
 onready var STATES := {
@@ -18,6 +23,8 @@ onready var STATES := {
     State.GROUND_STAGGER:  $States/GroundStagger,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
+    State.ALERTED:         $States/Alerted,
+    State.UNALERTED:       $States/Unalerted,
 }
 
 var _current_state: Node = null
@@ -26,6 +33,9 @@ var _current_state_enum: int = -1
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _sprite: Sprite = $Sprite
+onready var _react_sprite: ReactSprite = $ReactSprite
+onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 onready var _dust_puff: Particles2D = $DustPuff
 
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
@@ -37,6 +47,8 @@ func _ready() -> void:
     _current_state_enum = State.FALL
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
+
+    _react_sprite.change_state(ReactSprite.State.NONE)
 
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
@@ -70,6 +82,25 @@ func is_off_ledge() -> bool:
 
 func emit_dust_puff() -> void:
     _dust_puff.restart()
+
+func is_in_range(player: Player, radius: float) -> bool:
+    var player_center := player.get_center()
+
+    var distance_to_player := global_position.distance_to(player_center)
+
+    _obstacle_detector.cast_to = _obstacle_detector.to_local(player_center)
+    var player_in_line_of_sight := not _obstacle_detector.is_colliding()
+
+    return distance_to_player <= radius and player_in_line_of_sight
+
+func get_obstacle_detector() -> RayCast2D:
+    return _obstacle_detector
+
+func get_react_sprite() -> ReactSprite:
+    return _react_sprite
+
+func get_animation_player() -> AnimationPlayer:
+    return _animation_player
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
