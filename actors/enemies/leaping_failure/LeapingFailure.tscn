@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -12,9 +12,42 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/alerted.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://actors/enemies/leaping_failure/states/unalerted.gd" type="Script" id=12]
+[ext_resource path="res://actors/enemies/leaping_failure/states/jump.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "fall"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "jump"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "walk"
@@ -63,6 +96,9 @@ script = ExtResource( 9 )
 
 [node name="StaggerDurationTimer" type="Timer" parent="States/GroundStagger"]
 
+[node name="Jump" type="Node" parent="States"]
+script = ExtResource( 13 )
+
 [node name="Fall" type="Node" parent="States"]
 script = ExtResource( 6 )
 
@@ -71,6 +107,8 @@ script = ExtResource( 8 )
 
 [node name="Alerted" type="Node" parent="States"]
 script = ExtResource( 10 )
+
+[node name="AlertedDurationTimer" type="Timer" parent="States/Alerted"]
 
 [node name="Unalerted" type="Node" parent="States"]
 script = ExtResource( 12 )
@@ -82,12 +120,15 @@ position = Vector2( 0, -28 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 hframes = 5
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fall = SubResource( 6 )
+anims/jump = SubResource( 5 )
 anims/walk = SubResource( 2 )
 
 [node name="DustPuff" parent="." instance=ExtResource( 7 )]

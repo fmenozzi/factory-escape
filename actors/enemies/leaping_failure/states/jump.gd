@@ -11,21 +11,24 @@ var _gravity: float
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     _gravity = 2 * MAX_JUMP_HEIGHT / pow(JUMP_DURATION, 2)
     _velocity.x = HORIZONTAL_SPEED * failure.direction
-    _velocity.y = 0.0
+    _velocity.y = -sqrt(2 * _gravity * MAX_JUMP_HEIGHT)
 
-    failure.get_animation_player().play('fall')
+    failure.get_animation_player().play('jump')
+
+    failure.emit_dust_puff()
 
 func exit(failure: LeapingFailure) -> void:
     pass
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
-    if failure.is_on_floor():
-        failure.emit_dust_puff()
-        return {'new_state': LeapingFailure.State.WALK}
+    # Switch to 'fall' state once we reach apex of jump.
+    if _velocity.y >= 0:
+        return {'new_state': LeapingFailure.State.FALL}
 
-    # Fall due to gravity.
-    _velocity.y = min(_velocity.y + _gravity * delta, TERMINAL_VELOCITY)
+    # Move due to gravity.
+    _velocity.y += _gravity * delta
 
-    failure.move(_velocity)
+    # Don't snap while jumping.
+    failure.move(_velocity, Util.NO_SNAP)
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
