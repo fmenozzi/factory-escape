@@ -21,10 +21,10 @@
 [ext_resource path="res://actors/player/states/hazard_hit.gd" type="Script" id=19]
 [ext_resource path="res://actors/player/states/hazard_recover.gd" type="Script" id=20]
 [ext_resource path="res://actors/player/states/rest.gd" type="Script" id=21]
-[ext_resource path="res://sfx/WallSlideTrail.tscn" type="PackedScene" id=22]
+[ext_resource path="res://effects/WallSlideTrail.tscn" type="PackedScene" id=22]
 [ext_resource path="res://actors/player/wall_proximity_detector.gd" type="Script" id=23]
-[ext_resource path="res://sfx/DustPuff.tscn" type="PackedScene" id=24]
-[ext_resource path="res://sfx/DashPuff.tscn" type="PackedScene" id=25]
+[ext_resource path="res://effects/DustPuff.tscn" type="PackedScene" id=24]
+[ext_resource path="res://effects/DashPuff.tscn" type="PackedScene" id=25]
 [ext_resource path="res://actors/player/jump_manager.gd" type="Script" id=26]
 [ext_resource path="res://actors/player/textures/grapple-rope.png" type="Texture" id=27]
 [ext_resource path="res://actors/player/textures/grapple-hook.png" type="Texture" id=28]
@@ -32,6 +32,7 @@
 [ext_resource path="res://actors/player/states/hard_landing.gd" type="Script" id=30]
 [ext_resource path="res://custom/nodes/Stopwatch.tscn" type="PackedScene" id=31]
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"

@@ -8,7 +8,8 @@
 [ext_resource path="res://environment/lamp/textures/lamp-light.png" type="Texture" id=6]
 [ext_resource path="res://environment/lamp/textures/lamp-ripple.png" type="Texture" id=7]
 [ext_resource path="res://environment/lamp/textures/lamp.png" type="Texture" id=8]
-[ext_resource path="res://sfx/LampEmbers.tscn" type="PackedScene" id=9]
+[ext_resource path="res://effects/LampEmbers.tscn" type="PackedScene" id=9]
+
 
 
 
