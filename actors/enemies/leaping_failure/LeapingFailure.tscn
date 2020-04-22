@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -13,11 +13,12 @@
 [ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://actors/enemies/leaping_failure/states/unalerted.gd" type="Script" id=12]
 [ext_resource path="res://actors/enemies/leaping_failure/states/jump.gd" type="Script" id=13]
+[ext_resource path="res://actors/enemies/leaping_failure/states/takeoff.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 resource_name = "fall"
 step = 0.05
 tracks/0/type = "value"
@@ -27,14 +28,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "jump"
+length = 0.2
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -49,8 +51,7 @@ tracks/0/keys = {
 "values": [ 2, 1, 0 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk"
+[sub_resource type="Animation" id=4]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -66,10 +67,10 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 8 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 4, 8 )
 
 [node name="LeapingFailure" type="KinematicBody2D"]
@@ -96,6 +97,9 @@ script = ExtResource( 9 )
 
 [node name="StaggerDurationTimer" type="Timer" parent="States/GroundStagger"]
 
+[node name="Takeoff" type="Node" parent="States"]
+script = ExtResource( 14 )
+
 [node name="Jump" type="Node" parent="States"]
 script = ExtResource( 13 )
 
@@ -120,16 +124,15 @@ position = Vector2( 0, -28 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 hframes = 5
-frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/fall = SubResource( 6 )
-anims/jump = SubResource( 5 )
-anims/walk = SubResource( 2 )
+anims/fall = SubResource( 2 )
+anims/jump = SubResource( 3 )
+anims/walk = SubResource( 4 )
 
 [node name="DustPuff" parent="." instance=ExtResource( 7 )]
 
@@ -139,7 +142,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -8 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -147,7 +150,7 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -8 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="ObstacleDetector" type="RayCast2D" parent="."]
 enabled = true

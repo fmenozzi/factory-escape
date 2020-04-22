@@ -13,8 +13,6 @@ func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     _velocity.x = HORIZONTAL_SPEED * failure.direction
     _velocity.y = -sqrt(2 * _gravity * MAX_JUMP_HEIGHT)
 
-    failure.get_animation_player().play('jump')
-
     failure.emit_dust_puff()
 
 func exit(failure: LeapingFailure) -> void:

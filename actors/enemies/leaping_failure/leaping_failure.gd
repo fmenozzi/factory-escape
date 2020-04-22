@@ -12,6 +12,7 @@ enum State {
     NO_CHANGE,
     WALK,
     GROUND_STAGGER,
+    TAKEOFF,
     JUMP,
     FALL,
     RETURN_TO_LEDGE,
@@ -22,6 +23,7 @@ enum State {
 onready var STATES := {
     State.WALK:            $States/Walk,
     State.GROUND_STAGGER:  $States/GroundStagger,
+    State.TAKEOFF:         $States/Takeoff,
     State.JUMP:            $States/Jump,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,

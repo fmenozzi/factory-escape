@@ -34,7 +34,7 @@ func exit(failure: LeapingFailure) -> void:
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     if _timer.is_stopped():
-        return {'new_state': LeapingFailure.State.JUMP}
+        return {'new_state': LeapingFailure.State.TAKEOFF}
 
     # Transition to unalerted state once outside of aggro radius.
     if not failure.is_in_range(_player, failure.AGGRO_RADIUS):
