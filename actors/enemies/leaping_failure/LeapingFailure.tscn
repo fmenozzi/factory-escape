@@ -117,6 +117,8 @@ script = ExtResource( 10 )
 [node name="Unalerted" type="Node" parent="States"]
 script = ExtResource( 12 )
 
+[node name="UnalertedDurationTimer" type="Timer" parent="States/Unalerted"]
+
 [node name="ReactSprite" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, -28 )
 
@@ -124,6 +126,7 @@ position = Vector2( 0, -28 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 hframes = 5
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
