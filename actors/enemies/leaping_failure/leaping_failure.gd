@@ -11,6 +11,7 @@ const UNAGGRO_RADIUS := 10.0 * Util.TILE_SIZE
 enum State {
     NO_CHANGE,
     WALK,
+    FAST_WALK,
     GROUND_STAGGER,
     TAKEOFF,
     JUMP,
@@ -22,6 +23,7 @@ enum State {
 
 onready var STATES := {
     State.WALK:            $States/Walk,
+    State.FAST_WALK:       $States/FastWalk,
     State.GROUND_STAGGER:  $States/GroundStagger,
     State.TAKEOFF:         $States/Takeoff,
     State.JUMP:            $States/Jump,
@@ -50,7 +52,7 @@ func _ready() -> void:
 
     _current_state_enum = State.FALL
     _current_state = STATES[_current_state_enum]
-    _change_state({'new_state': _current_state_enum})
+    _change_state({'new_state': _current_state_enum, 'aggro': false})
 
     _react_sprite.change_state(ReactSprite.State.NONE)
 

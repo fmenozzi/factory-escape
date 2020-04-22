@@ -21,7 +21,10 @@ func exit(failure: LeapingFailure) -> void:
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     # Switch to 'fall' state once we reach apex of jump.
     if _velocity.y >= 0:
-        return {'new_state': LeapingFailure.State.FALL}
+        return {
+            'new_state': LeapingFailure.State.FALL,
+            'aggro': true,
+        }
 
     # Move due to gravity.
     _velocity.y += _gravity * delta

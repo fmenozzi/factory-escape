@@ -3,6 +3,8 @@ extends 'res://actors/enemies/state.gd'
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     failure.get_animation_player().play('jump')
 
+    failure.set_direction(Util.direction(failure, Util.get_player()))
+
 func exit(failure: LeapingFailure) -> void:
     pass
 
