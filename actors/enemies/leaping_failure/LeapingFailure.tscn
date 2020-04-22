@@ -119,6 +119,8 @@ script = ExtResource( 12 )
 
 [node name="UnalertedDurationTimer" type="Timer" parent="States/Unalerted"]
 
+[node name="TurnAroundDurationTimer" type="Timer" parent="States/Unalerted"]
+
 [node name="ReactSprite" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, -28 )
 
