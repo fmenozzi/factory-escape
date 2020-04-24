@@ -95,6 +95,7 @@ func is_in_range(player: Player, radius: float) -> bool:
     var distance_to_player := global_position.distance_to(player_center)
 
     _obstacle_detector.cast_to = _obstacle_detector.to_local(player_center)
+    _obstacle_detector.force_raycast_update()
     var player_in_line_of_sight := not _obstacle_detector.is_colliding()
 
     return distance_to_player <= radius and player_in_line_of_sight
