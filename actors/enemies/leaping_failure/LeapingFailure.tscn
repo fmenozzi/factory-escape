@@ -96,6 +96,8 @@ script = ExtResource( 5 )
 [node name="FastWalk" type="Node" parent="States"]
 script = ExtResource( 15 )
 
+[node name="FastWalkDurationTimer" type="Timer" parent="States/FastWalk"]
+
 [node name="GroundStagger" type="Node" parent="States"]
 script = ExtResource( 9 )
 

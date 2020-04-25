@@ -2,16 +2,26 @@ extends 'res://actors/enemies/state.gd'
 
 const SPEED_MULTIPLIER: float = 1.5
 
+onready var _timer: Timer = $FastWalkDurationTimer
+
 var _player: Player = null
 
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
+    _player = Util.get_player()
+
     # Play standard walk animation but faster.
     failure.get_animation_player().play('walk', -1, SPEED_MULTIPLIER, false)
 
-    _player = Util.get_player()
+    # Failure will wait up to one second before jumping again.
+    _timer.one_shot = true
+    _timer.wait_time = rand_range(0.0, 1.0)
+    _timer.start()
+
+    # Face the player.
+    failure.set_direction(Util.direction(failure, _player))
 
 func exit(failure: LeapingFailure) -> void:
-    pass
+    _timer.stop()
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     failure.move(
@@ -30,10 +40,11 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
             'direction_to_ledge': _get_direction_to_ledge(failure),
         }
 
-    if not failure.is_in_range(_player, failure.UNAGGRO_RADIUS):
-        return {'new_state': LeapingFailure.State.UNALERTED}
-    else:
-        return {'new_state': LeapingFailure.State.TAKEOFF}
+    if _timer.is_stopped():
+        if not failure.is_in_range(_player, failure.UNAGGRO_RADIUS):
+            return {'new_state': LeapingFailure.State.UNALERTED}
+        else:
+            return {'new_state': LeapingFailure.State.TAKEOFF}
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
 
