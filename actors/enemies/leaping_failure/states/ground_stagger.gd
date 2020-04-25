@@ -17,6 +17,7 @@ func _ready() -> void:
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     _stagger_duration_timer.start()
 
+    assert('direction_from_hit' in previous_state_dict)
     _direction_from_hit = previous_state_dict['direction_from_hit']
     assert(_direction_from_hit != null)
 
@@ -25,7 +26,8 @@ func exit(failure: LeapingFailure) -> void:
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     if _stagger_duration_timer.is_stopped():
-        return {'new_state': LeapingFailure.State.WALK}
+        # Assume we're in combat if the failure has been staggered.
+        return {'new_state': LeapingFailure.State.FAST_WALK}
 
     failure.move(Vector2(_direction_from_hit * STAGGER_SPEED, 1))
 
