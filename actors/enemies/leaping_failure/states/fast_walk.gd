@@ -1,6 +1,6 @@
 extends 'res://actors/enemies/state.gd'
 
-const SPEED_MULTIPLIER: float = 1.5
+const SPEED_MULTIPLIER: float = 2.0
 
 onready var _timer: Timer = $FastWalkDurationTimer
 
