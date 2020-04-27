@@ -1,9 +1,9 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/player/physics_manager.gd" type="Script" id=4]
+[ext_resource path="res://actors/player/player_physics_manager.gd" type="Script" id=4]
 [ext_resource path="res://actors/player/textures/character-spritesheet.png" type="Texture" id=5]
 [ext_resource path="res://actors/player/textures/zzz.png" type="Texture" id=6]
 [ext_resource path="res://actors/player/camera.gd" type="Script" id=7]
@@ -32,7 +32,7 @@
 [ext_resource path="res://actors/player/states/hard_landing.gd" type="Script" id=30]
 [ext_resource path="res://custom/nodes/Stopwatch.tscn" type="PackedScene" id=31]
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
-
+[ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=33]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -463,8 +463,9 @@ total_duration = 2.0
 single_flash_duration = 0.075
 flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
-[node name="PhysicsManager" type="Node" parent="."]
+[node name="PhysicsManager" parent="." instance=ExtResource( 33 )]
 script = ExtResource( 4 )
+movement_speed_tiles_per_second = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 1 )

@@ -42,12 +42,17 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PhysicsManager",
 "language": "GDScript",
-"path": "res://actors/player/physics_manager.gd"
+"path": "res://actors/physics_manager.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://actors/player/player.gd"
+}, {
+"base": "PhysicsManager",
+"class": "PlayerPhysicsManager",
+"language": "GDScript",
+"path": "res://actors/player/player_physics_manager.gd"
 }, {
 "base": "Sprite",
 "class": "ReactSprite",
@@ -93,6 +98,7 @@ _global_script_class_icons={
 "Pause": "",
 "PhysicsManager": "",
 "Player": "",
+"PlayerPhysicsManager": "",
 "ReactSprite": "",
 "Room": "",
 "SentryDrone": "",

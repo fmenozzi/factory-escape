@@ -1,22 +1,23 @@
-extends Node
-class_name PhysicsManager
-
-# The speed at which the player can move the character left and right, measured
-# in pixels per second.
-func get_movement_speed() -> float:
-    return 6.0 * Util.TILE_SIZE
+extends PhysicsManager
+class_name PlayerPhysicsManager
 
 # The min/max jump heights the player can achieve in pixels. Releasing the jump
 # button early will "cut" the jump somewhere between these two values, allowing
 # for variable-height jumps.
-func get_min_jump_height() -> float:
-    return 0.5 * Util.TILE_SIZE
-func get_max_jump_height() -> float:
-    return 3.5 * Util.TILE_SIZE
+export(float) var min_jump_height_tiles := 0.5
+export(float) var max_jump_height_tiles := 3.5
 
 # The duration of the max-height jump in seconds from ground to peak.
+export(float) var jump_duration := 0.4
+
+func get_min_jump_height() -> float:
+    return min_jump_height_tiles * Util.TILE_SIZE
+
+func get_max_jump_height() -> float:
+    return max_jump_height_tiles * Util.TILE_SIZE
+
 func get_jump_duration() -> float:
-    return 0.4
+    return jump_duration
 
 # The downward speed applied to the player when falling, measured in pixels per
 # second. This is calculated using basic kinematics with max jump height and
@@ -32,7 +33,3 @@ func get_min_jump_velocity() -> float:
     return -sqrt(2 * get_gravity() * get_min_jump_height())
 func get_max_jump_velocity() -> float:
     return -sqrt(2 * get_gravity() * get_max_jump_height())
-
-# Max falling speed the player can achieve in pixels per second.
-func get_terminal_velocity() -> float:
-    return 20.0 * Util.TILE_SIZE

@@ -99,7 +99,7 @@ onready var _hurtbox: Area2D = $Hurtbox
 
 onready var _invincibility_flash_manager: Node = $FlashManager
 
-onready var _physics_manager: PhysicsManager = $PhysicsManager
+onready var _physics_manager: PlayerPhysicsManager = $PhysicsManager
 
 onready var _dash_duration_timer: Timer = $States/Dash/DashDurationTimer
 onready var _dash_echo_timer: Timer = $States/Dash/DashEchoTimer
@@ -179,7 +179,7 @@ func change_state(new_state_dict: Dictionary) -> void:
 func current_state() -> int:
     return current_state_enum
 
-func get_physics_manager() -> PhysicsManager:
+func get_physics_manager() -> PlayerPhysicsManager:
     return _physics_manager
 
 # Get the current x-axis input direction. Returns +1 if player is moving right,
