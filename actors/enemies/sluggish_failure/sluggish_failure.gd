@@ -3,8 +3,6 @@ class_name SluggishFailure
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
-const SPEED := 0.25 * Util.TILE_SIZE
-
 enum State {
     NO_CHANGE,
     WALK,
@@ -26,6 +24,8 @@ var _current_state_enum: int = -1
 var _direction_from_hit: int = Util.Direction.NONE
 
 onready var _flash_manager: Node = $FlashManager
+
+onready var _physics_manager: PhysicsManager = $PhysicsManager
 
 onready var _dust_puff: Particles2D = $DustPuff
 
@@ -52,6 +52,9 @@ func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
+
+func get_physics_manager() -> PhysicsManager:
+    return _physics_manager
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)

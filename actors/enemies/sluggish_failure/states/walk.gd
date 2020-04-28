@@ -7,7 +7,10 @@ func exit(failure: SluggishFailure) -> void:
     pass
 
 func update(failure: SluggishFailure, delta: float) -> Dictionary:
-    failure.move(Vector2(failure.direction * failure.SPEED, 10))
+    var physics_manager := failure.get_physics_manager()
+
+    failure.move(
+        Vector2(failure.direction * physics_manager.get_movement_speed(), 10))
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)
