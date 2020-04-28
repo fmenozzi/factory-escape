@@ -1,7 +1,5 @@
 extends 'res://actors/enemies/state.gd'
 
-const FLY_SPEED := 2.0 * Util.TILE_SIZE
-
 const ACCEL_DISTANCE := 1.0 * Util.TILE_SIZE
 const DECEL_DISTANCE := 1.0 * Util.TILE_SIZE
 
@@ -29,8 +27,10 @@ func exit(worker_drone: WorkerDrone) -> void:
     pass
 
 func update(worker_drone: WorkerDrone, delta: float) -> Dictionary:
+    var physics_manager := worker_drone.get_physics_manager()
+    var speed := physics_manager.get_movement_speed()
     var speed_multiplier := _get_speed_multiplier(worker_drone)
-    worker_drone.move(speed_multiplier * FLY_SPEED * _direction_to_point)
+    worker_drone.move(speed_multiplier * speed * _direction_to_point)
 
     # Once we reach the point, return to idle.
     if worker_drone.global_position.distance_to(_global_fly_to_point) < 2.0:
@@ -43,7 +43,7 @@ func update(worker_drone: WorkerDrone, delta: float) -> Dictionary:
     #       bottom of the room for a few idle cycles, since most of the points
     #       in the room are above the platform and thus subject to collision.
     if worker_drone.is_hitting_obstacle():
-        worker_drone.move(-FLY_SPEED * _direction_to_point)
+        worker_drone.move(-speed * _direction_to_point)
         return {'new_state': WorkerDrone.State.IDLE}
 
     return {'new_state': WorkerDrone.State.NO_CHANGE}

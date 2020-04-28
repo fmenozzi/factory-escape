@@ -21,6 +21,7 @@ var _current_state_enum: int = -1
 
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
+onready var _physics_manager: PhysicsManager = $PhysicsManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _obstacle_detector: RayCast2D = $ObstacleDetector
@@ -54,6 +55,9 @@ func take_hit(damage: int, player: Player) -> void:
         'new_state': State.STAGGER,
         'direction_from_hit': direction,
     })
+
+func get_physics_manager() -> PhysicsManager:
+    return _physics_manager
 
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
