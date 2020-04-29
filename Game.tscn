@@ -18,23 +18,30 @@ script = ExtResource( 1 )
 [node name="Player" parent="World" instance=ExtResource( 2 )]
 position = Vector2( 50, 144 )
 
-[node name="PauseLayer" type="CanvasLayer" parent="."]
+[node name="Layers" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseLayer" type="CanvasLayer" parent="Layers"]
 layer = 3
 
-[node name="Pause" parent="PauseLayer" instance=ExtResource( 3 )]
+[node name="Pause" parent="Layers/PauseLayer" instance=ExtResource( 3 )]
 
-[node name="ScreenFadeoutLayer" type="CanvasLayer" parent="."]
+[node name="ScreenFadeoutLayer" type="CanvasLayer" parent="Layers"]
 layer = 2
 
-[node name="ScreenFadeout" parent="ScreenFadeoutLayer" instance=ExtResource( 4 )]
+[node name="ScreenFadeout" parent="Layers/ScreenFadeoutLayer" instance=ExtResource( 4 )]
 
-[node name="DialogBoxLayer" type="CanvasLayer" parent="."]
+[node name="DialogBoxLayer" type="CanvasLayer" parent="Layers"]
 
-[node name="DialogBox" parent="DialogBoxLayer" instance=ExtResource( 5 )]
+[node name="DialogBox" parent="Layers/DialogBoxLayer" instance=ExtResource( 5 )]
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="Layers"]
 layer = 0
 
-[node name="Healthbar" parent="UILayer" instance=ExtResource( 6 )]
+[node name="Healthbar" parent="Layers/UILayer" instance=ExtResource( 6 )]
 
-[node name="SavingIndicator" parent="UILayer" instance=ExtResource( 7 )]
+[node name="SavingIndicator" parent="Layers/UILayer" instance=ExtResource( 7 )]

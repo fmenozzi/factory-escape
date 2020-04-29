@@ -3,9 +3,9 @@ extends Node
 onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
 onready var _rooms: Array = $World/Rooms.get_children()
-onready var _health_bar: Control = $UILayer/Healthbar
-onready var _saving_indicator: Node2D = $UILayer/SavingIndicator
-onready var _screen_fadeout: Control = $ScreenFadeoutLayer/ScreenFadeout
+onready var _health_bar: Control = $Layers/UILayer/Healthbar
+onready var _saving_indicator: Node2D = $Layers/UILayer/SavingIndicator
+onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 
 func _ready() -> void:
     var player_health := _player.get_health()
