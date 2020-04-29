@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=2]
@@ -10,7 +10,8 @@
 [ext_resource path="res://actors/enemies/sentry_drone/states/bash.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/sentry_drone/states/bash_recover.gd" type="Script" id=9]
 [ext_resource path="res://effects/DustPuff.tscn" type="PackedScene" id=10]
-
+[ext_resource path="res://actors/enemies/sentry_drone/sentry_drone_physics_manager.gd" type="Script" id=11]
+[ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -43,6 +44,11 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 2 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
+single_flash_duration = 0.075
+flash_color = Color( 1, 1, 1, 1 )
+
+[node name="PhysicsManager" parent="." instance=ExtResource( 12 )]
+script = ExtResource( 11 )
 
 [node name="States" type="Node" parent="."]
 

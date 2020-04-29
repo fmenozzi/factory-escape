@@ -25,6 +25,7 @@ var _current_state_enum: int = -1
 
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
+onready var _physics_manager: SentryDronePhysicsManager = $PhysicsManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _obstacle_detector: RayCast2D = $ObstacleDetector
@@ -49,6 +50,9 @@ func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
 func set_direction(new_direction: int) -> void:
     direction = new_direction
     _sprite.flip_h = (new_direction == Util.Direction.LEFT)
+
+func get_physics_manager() -> SentryDronePhysicsManager:
+    return _physics_manager
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)

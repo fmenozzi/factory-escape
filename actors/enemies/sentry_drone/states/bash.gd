@@ -1,7 +1,5 @@
 extends 'res://actors/enemies/state.gd'
 
-const BASH_SPEED: float = 16.0 * Util.TILE_SIZE
-
 var _direction_to_player: Vector2 = Vector2.ZERO
 
 func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
@@ -13,14 +11,17 @@ func exit(sentry_drone: SentryDrone) -> void:
     pass
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
-    sentry_drone.move(_direction_to_player * BASH_SPEED)
+    var physics_manager := sentry_drone.get_physics_manager()
+    var bash_speed := physics_manager.get_bash_speed()
+
+    sentry_drone.move(_direction_to_player * physics_manager.get_bash_speed())
 
     if sentry_drone.is_colliding():
         Screenshake.start(
             Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
         # TODO: Maybe try to emit puff at contact point.
         sentry_drone.emit_dust_puff()
-        sentry_drone.move(-_direction_to_player * BASH_SPEED)
+        sentry_drone.move(-_direction_to_player * bash_speed)
         return {'new_state': SentryDrone.State.BASH_RECOVER}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
