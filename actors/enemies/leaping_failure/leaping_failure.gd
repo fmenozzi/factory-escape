@@ -3,8 +3,6 @@ class_name LeapingFailure
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
-const SPEED := 0.5 * Util.TILE_SIZE
-
 const AGGRO_RADIUS := 6.0 * Util.TILE_SIZE
 const UNAGGRO_RADIUS := 10.0 * Util.TILE_SIZE
 
@@ -38,6 +36,7 @@ var _current_state_enum: int = -1
 
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
+onready var _physics_manager: LeapingFailurePhysicsManager = $PhysicsManager
 onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -76,6 +75,9 @@ func take_hit(damage: int, player: Player) -> void:
             'new_state': State.GROUND_STAGGER,
             'direction_from_hit': Util.direction(player, self),
         })
+
+func get_physics_manager() -> LeapingFailurePhysicsManager:
+    return _physics_manager
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)

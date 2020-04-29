@@ -11,7 +11,10 @@ func exit(failure: LeapingFailure) -> void:
     pass
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
-    failure.move(Vector2(failure.direction * failure.SPEED, 10))
+    var physics_manager := failure.get_physics_manager()
+
+    failure.move(
+        Vector2(failure.direction * physics_manager.get_movement_speed(), 10))
 
     if failure.is_in_range(_player, failure.AGGRO_RADIUS):
         return {'new_state': LeapingFailure.State.ALERTED}

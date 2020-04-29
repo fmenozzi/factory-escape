@@ -24,8 +24,10 @@ func exit(failure: LeapingFailure) -> void:
     _timer.stop()
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
-    failure.move(
-        Vector2(failure.direction * failure.SPEED * SPEED_MULTIPLIER, 10))
+    var physics_manager := failure.get_physics_manager()
+    var speed := physics_manager.get_movement_speed()
+
+    failure.move(Vector2(failure.direction * speed * SPEED_MULTIPLIER, 10))
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)

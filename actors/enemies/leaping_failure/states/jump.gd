@@ -1,17 +1,11 @@
 extends 'res://actors/enemies/state.gd'
 
-const TERMINAL_VELOCITY: float = 20.0 * Util.TILE_SIZE
-const MAX_JUMP_HEIGHT: float = 4.0 * Util.TILE_SIZE
-const JUMP_DURATION: float = 0.35
-const HORIZONTAL_SPEED: float = 8.0 * Util.TILE_SIZE
-
 var _velocity := Vector2.ZERO
-var _gravity: float
 
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
-    _gravity = 2 * MAX_JUMP_HEIGHT / pow(JUMP_DURATION, 2)
-    _velocity.x = HORIZONTAL_SPEED * failure.direction
-    _velocity.y = -sqrt(2 * _gravity * MAX_JUMP_HEIGHT)
+    var physics_manager := failure.get_physics_manager()
+
+    _velocity.y = physics_manager.get_max_jump_velocity()
 
     failure.emit_dust_puff()
 
@@ -19,6 +13,8 @@ func exit(failure: LeapingFailure) -> void:
     pass
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
+    var physics_manager := failure.get_physics_manager()
+
     # Switch to 'fall' state once we reach apex of jump.
     if _velocity.y >= 0:
         return {
@@ -26,8 +22,12 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
             'aggro': true,
         }
 
+    var speed := physics_manager.get_horizontal_jump_speed()
+    _velocity.x = speed * failure.direction
+
     # Move due to gravity.
-    _velocity.y += _gravity * delta
+    var gravity := physics_manager.get_gravity()
+    _velocity.y += gravity * delta
 
     # Don't snap while jumping.
     failure.move(_velocity, Util.NO_SNAP)

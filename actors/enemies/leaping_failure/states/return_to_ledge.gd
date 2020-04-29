@@ -12,9 +12,12 @@ func exit(failure: LeapingFailure) -> void:
     pass
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
+    var physics_manager := failure.get_physics_manager()
+
     if not failure.is_off_ledge():
         return {'new_state': LeapingFailure.State.WALK}
 
-    failure.move(Vector2(_direction_to_ledge * failure.SPEED, 10))
+    failure.move(
+        Vector2(_direction_to_ledge * physics_manager.get_movement_speed(), 10))
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
