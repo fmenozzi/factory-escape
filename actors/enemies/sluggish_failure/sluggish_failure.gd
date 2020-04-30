@@ -25,7 +25,7 @@ var _direction_from_hit: int = Util.Direction.NONE
 
 onready var _flash_manager: Node = $FlashManager
 
-onready var _physics_manager: PhysicsManager = $PhysicsManager
+onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 
 onready var _dust_puff: Particles2D = $DustPuff
 
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
 
-func get_physics_manager() -> PhysicsManager:
+func get_physics_manager() -> GroundedPhysicsManager:
     return _physics_manager
 
 func take_hit(damage: int, player: Player) -> void:

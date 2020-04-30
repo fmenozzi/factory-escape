@@ -1,12 +1,10 @@
 extends 'res://actors/enemies/state.gd'
 
 var _velocity := Vector2.ZERO
-var _player: Player
 var _aggro: bool
 
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     _velocity.y = 0.0
-    _player = Util.get_player()
 
     assert('aggro' in previous_state_dict)
     _aggro = previous_state_dict['aggro']
