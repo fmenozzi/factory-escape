@@ -22,9 +22,11 @@ func exit(player: Player) -> void:
     player.get_wall_slide_trail().emitting = false
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    var dash_manager := player.get_dash_manager()
+
     if event.is_action_pressed('player_jump'):
         return {'new_state': Player.State.WALL_JUMP}
-    elif event.is_action_pressed('player_dash'):
+    elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         # Flip the player to face away from the wall before dashing.
         player.set_direction(-1 * player.get_direction())
         player.emit_dust_puff()
