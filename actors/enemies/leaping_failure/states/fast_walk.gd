@@ -25,6 +25,8 @@ func exit(failure: LeapingFailure) -> void:
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     var physics_manager := failure.get_physics_manager()
+    var aggro_manager := failure.get_aggro_manager()
+
     var speed := physics_manager.get_movement_speed()
 
     failure.move(Vector2(failure.direction * speed * SPEED_MULTIPLIER, 10))
@@ -43,7 +45,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
         }
 
     if _timer.is_stopped():
-        if not failure.is_in_range(_player, failure.UNAGGRO_RADIUS):
+        if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
             return {'new_state': LeapingFailure.State.UNALERTED}
         else:
             return {'new_state': LeapingFailure.State.TAKEOFF}

@@ -38,13 +38,15 @@ func exit(failure: LeapingFailure) -> void:
     _turn_around_duration_timer.stop()
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
+    var aggro_manager := failure.get_aggro_manager()
+
     # Transition back to alerted once back in aggro radius.
-    if failure.is_in_range(_player, failure.AGGRO_RADIUS):
+    if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():
         return {'new_state': LeapingFailure.State.ALERTED}
 
     # Transition back to walk once out of "unaggro" radius.
     if _unalerted_duration_timer.is_stopped():
-        if not failure.is_in_range(_player, failure.UNAGGRO_RADIUS):
+        if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
             return {'new_state': LeapingFailure.State.WALK}
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}

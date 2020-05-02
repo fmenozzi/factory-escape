@@ -12,11 +12,12 @@ func exit(failure: LeapingFailure) -> void:
 
 func update(failure: LeapingFailure, delta: float) -> Dictionary:
     var physics_manager := failure.get_physics_manager()
+    var aggro_manager := failure.get_aggro_manager()
 
     failure.move(
         Vector2(failure.direction * physics_manager.get_movement_speed(), 10))
 
-    if failure.is_in_range(_player, failure.AGGRO_RADIUS):
+    if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():
         return {'new_state': LeapingFailure.State.ALERTED}
 
     if failure.is_on_wall():

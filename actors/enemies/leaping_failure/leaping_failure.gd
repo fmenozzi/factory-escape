@@ -3,9 +3,6 @@ class_name LeapingFailure
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
-const AGGRO_RADIUS := 6.0 * Util.TILE_SIZE
-const UNAGGRO_RADIUS := 10.0 * Util.TILE_SIZE
-
 enum State {
     NO_CHANGE,
     WALK,
@@ -37,10 +34,10 @@ var _current_state_enum: int = -1
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: LeapingFailurePhysicsManager = $PhysicsManager
+onready var _aggro_manager: AggroManager = $AggroManager
 onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 onready var _dust_puff: Particles2D = $DustPuff
 
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
@@ -79,6 +76,9 @@ func take_hit(damage: int, player: Player) -> void:
 func get_physics_manager() -> LeapingFailurePhysicsManager:
     return _physics_manager
 
+func get_aggro_manager() -> AggroManager:
+    return _aggro_manager
+
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
@@ -90,20 +90,6 @@ func is_off_ledge() -> bool:
 
 func emit_dust_puff() -> void:
     _dust_puff.restart()
-
-func is_in_range(player: Player, radius: float) -> bool:
-    var player_center := player.get_center()
-
-    var distance_to_player := global_position.distance_to(player_center)
-
-    _obstacle_detector.cast_to = _obstacle_detector.to_local(player_center)
-    _obstacle_detector.force_raycast_update()
-    var player_in_line_of_sight := not _obstacle_detector.is_colliding()
-
-    return distance_to_player <= radius and player_in_line_of_sight
-
-func get_obstacle_detector() -> RayCast2D:
-    return _obstacle_detector
 
 func get_react_sprite() -> ReactSprite:
     return _react_sprite
