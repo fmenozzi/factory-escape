@@ -12,5 +12,5 @@ void fragment() {
 
     vec3 color = mix(sprite_color.rgb, flash_color.rgb, lerp_amount);
 
-    COLOR = vec4(color, sprite_color.a);
+    COLOR = vec4(clamp(color, vec3(0.0), vec3(1.0)), sprite_color.a);
 }
