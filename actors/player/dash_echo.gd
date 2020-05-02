@@ -1,11 +1,13 @@
 extends Sprite
 
+export(float) var glow_multiplier := 1.0
+
 onready var _tween: Tween = $AlphaTween
 
 func _ready() -> void:
     var prop := 'modulate'
-    var old := Color(1, 1, 1, 0.5) # Semi-transparent
-    var new := Color(1, 1, 1, 0.0) # Transparent
+    var old := Color(glow_multiplier, glow_multiplier, glow_multiplier, 1.0)
+    var new := Color(glow_multiplier, glow_multiplier, glow_multiplier, 0.0)
     var duration := 0.5
     var trans := Tween.TRANS_SINE
     var easing := Tween.EASE_OUT
