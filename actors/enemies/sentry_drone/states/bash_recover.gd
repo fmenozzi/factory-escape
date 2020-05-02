@@ -26,7 +26,11 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     sentry_drone.shake_once(_get_damping())
 
     if _recover_timer.is_stopped():
-        return {'new_state': SentryDrone.State.IDLE}
+        var aggro_manager := sentry_drone.get_aggro_manager()
+        if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
+            return {'new_state': SentryDrone.State.UNALERTED}
+        else:
+            return {'new_state': SentryDrone.State.BASH_TELEGRAPH_SHAKE}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
 
