@@ -26,9 +26,9 @@ var _current_state_enum: int = -1
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: SentryDronePhysicsManager = $PhysicsManager
+onready var _aggro_manager: AggroManager = $AggroManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 onready var _dust_puff: Particles2D = $DustPuff
 
 func _ready() -> void:
@@ -54,6 +54,9 @@ func set_direction(new_direction: int) -> void:
 func get_physics_manager() -> SentryDronePhysicsManager:
     return _physics_manager
 
+func get_aggro_manager() -> AggroManager:
+    return _aggro_manager
+
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
@@ -76,9 +79,6 @@ func reset_sprite_position() -> void:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
-
-func get_obstacle_detector() -> RayCast2D:
-    return _obstacle_detector
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
