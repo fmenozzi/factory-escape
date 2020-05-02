@@ -5,11 +5,9 @@
 [ext_resource path="res://actors/enemies/laser/shaders/laser_beam.shader" type="Shader" id=3]
 [ext_resource path="res://actors/enemies/laser/shaders/laser_impact.shader" type="Shader" id=4]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
-shader_param/outer_beam_color = Color( 1, 0.309804, 0.470588, 1 )
+shader_param/outer_beam_color = Color( 1.2, 0.37, 0.56, 1 )
 shader_param/outer_beam_half_width_uv = 0.25
 shader_param/inner_beam_color = Color( 1, 1, 1, 1 )
 shader_param/inner_beam_half_width_uv = 0.15
