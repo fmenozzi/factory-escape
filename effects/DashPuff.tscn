@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 1, 0.309804, 0.470588, 1, 1, 0.309804, 0.470588, 0 )
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 0.309804, 0.470588, 1, 1, 0.309804, 0.470588, 1, 1, 0.309804, 0.470588, 0 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
@@ -29,6 +30,7 @@ hue_variation_random = 1.0
 hue_variation_curve = SubResource( 4 )
 
 [node name="DashPuff" type="Particles2D"]
+modulate = Color( 1.7, 1.7, 1.7, 1 )
 rotation = 3.14159
 emitting = false
 lifetime = 0.6

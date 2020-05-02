@@ -637,6 +637,7 @@ emitting = false
 [node name="DustPuff" parent="." instance=ExtResource( 24 )]
 
 [node name="DashPuff" parent="." instance=ExtResource( 25 )]
+show_behind_parent = true
 position = Vector2( 0, -8 )
 
 [node name="WallProximityDetector" type="Node2D" parent="."]
