@@ -38,5 +38,11 @@ func _on_effects_value_changed(new_value: float) -> void:
 func _on_ui_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()
 
+    # Convert integer slider value [0, 10] to decibel value [-80, 0].
+    var bus_index := AudioServer.get_bus_index('UI')
+    var old_volume_db := AudioServer.get_bus_volume_db(bus_index)
+    var new_volume_db := max(linear2db(new_value / _ui_slider.max_value), -80)
+    AudioServer.set_bus_volume_db(bus_index, new_volume_db)
+
 func _on_back_pressed(pause: Pause) -> void:
     change_menu(pause.Menu.AUDIO_OPTIONS, pause.Menu.OPTIONS)
