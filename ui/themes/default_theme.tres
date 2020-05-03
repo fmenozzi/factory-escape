@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=12 format=2]
 
 [ext_resource path="res://ui/themes/button/focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/themes/button/hover.tres" type="StyleBox" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://ui/themes/textures/checkbutton-on.png" type="Texture" id=5]
 [ext_resource path="res://ui/themes/textures/checkbutton-off.png" type="Texture" id=6]
 [ext_resource path="res://ui/fonts/m5x7.tres" type="DynamicFont" id=7]
+[ext_resource path="res://ui/themes/textures/grabber-unhighlighted.png" type="Texture" id=8]
+[ext_resource path="res://ui/themes/textures/grabber-highlighted.png" type="Texture" id=9]
+[ext_resource path="res://ui/themes/hslider/slider.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/themes/hslider/grabber_area.tres" type="StyleBox" id=11]
 
 [resource]
 default_font = ExtResource( 7 )
@@ -39,3 +43,9 @@ CheckBox/styles/hover = null
 CheckBox/styles/hover_pressed = null
 CheckBox/styles/normal = null
 CheckBox/styles/pressed = null
+HSlider/icons/grabber = ExtResource( 8 )
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource( 9 )
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = ExtResource( 11 )
+HSlider/styles/slider = ExtResource( 10 )
