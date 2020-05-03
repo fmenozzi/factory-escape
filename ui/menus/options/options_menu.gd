@@ -37,6 +37,9 @@ func handle_input(pause: Pause, event: InputEvent) -> void:
     elif event.is_action_pressed('ui_cancel'):
         change_menu(pause.Menu.OPTIONS, pause.Menu.PAUSE)
 
+    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
+        emit_menu_navigation_sound()
+
 func _on_game_pressed(pause: Pause) -> void:
     print('game button not yet implemented')
 

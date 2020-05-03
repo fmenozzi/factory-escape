@@ -21,6 +21,9 @@ func handle_input(pause: Pause, event: InputEvent) -> void:
     elif event.is_action_pressed('ui_cancel'):
         change_menu(pause.Menu.VIDEO_OPTIONS, pause.Menu.OPTIONS)
 
+    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
+        emit_menu_navigation_sound()
+
 func _on_vsync_pressed() -> void:
     # TODO: Save this somewhere persistent as well.
     OS.set_use_vsync(_vsync.is_pressed())

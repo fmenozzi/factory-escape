@@ -26,6 +26,9 @@ func handle_input(pause: Pause, event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause') or event.is_action_pressed('ui_cancel'):
         change_menu(pause.Menu.PAUSE, pause.Menu.UNPAUSED)
 
+    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
+        emit_menu_navigation_sound()
+
 func _on_resume_pressed(pause: Pause) -> void:
     change_menu(pause.Menu.PAUSE, pause.Menu.UNPAUSED)
 

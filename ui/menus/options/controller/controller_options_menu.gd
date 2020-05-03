@@ -102,6 +102,9 @@ func handle_input(pause: Pause, event: InputEvent) -> void:
         elif event.is_action_pressed('ui_cancel'):
             change_menu(pause.Menu.CONTROLLER_OPTIONS, pause.Menu.OPTIONS)
 
+        if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
+            emit_menu_navigation_sound()
+
 func setup_remap(player_action: int) -> void:
     # Change button text.
     var ui_button = PLAYER_ACTION_DATA[player_action]['ui_button']

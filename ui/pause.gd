@@ -33,12 +33,14 @@ onready var MENUS = {
 }
 var _current_menu: VBoxContainer = null
 
+onready var _click_sound: AudioStreamPlayer = $ClickSound
 onready var _black_overlay: ColorRect = $BlackOverlay
 
 func _ready() -> void:
     # Intercept all menu_changed signals from individual submenus.
     for menu in MENUS.values():
         menu.connect('menu_changed', self, '_change_menu')
+        menu.connect('menu_navigated', self, '_emit_click_sound')
 
     # Start in unpaused state.
     _current_menu = MENUS[Menu.UNPAUSED]
@@ -61,6 +63,9 @@ func _change_menu(old_menu: int, new_menu: int) -> void:
     _current_menu.exit(self)
     _current_menu = MENUS[new_menu]
     _current_menu.enter(self, old_menu)
+
+func _emit_click_sound() -> void:
+    _click_sound.play()
 
 func _set_paused(new_pause_state: bool) -> void:
     get_tree().paused = new_pause_state
