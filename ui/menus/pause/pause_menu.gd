@@ -12,9 +12,9 @@ func enter(pause: Pause, previous_menu: int) -> void:
     self.visible = true
 
     match previous_menu:
-        pause.Menu.OPTIONS:
+        Pause.Menu.OPTIONS:
             _options.grab_focus()
-        pause.Menu.QUIT:
+        Pause.Menu.QUIT:
             _quit.grab_focus()
         _:
             _resume.grab_focus()
@@ -24,16 +24,16 @@ func exit(pause: Pause) -> void:
 
 func handle_input(pause: Pause, event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause') or event.is_action_pressed('ui_cancel'):
-        change_menu(pause.Menu.PAUSE, pause.Menu.UNPAUSED)
+        change_menu(Pause.Menu.PAUSE, Pause.Menu.UNPAUSED)
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
 
 func _on_resume_pressed(pause: Pause) -> void:
-    change_menu(pause.Menu.PAUSE, pause.Menu.UNPAUSED)
+    change_menu(Pause.Menu.PAUSE, Pause.Menu.UNPAUSED)
 
 func _on_options_pressed(pause: Pause) -> void:
-    change_menu(pause.Menu.PAUSE, pause.Menu.OPTIONS)
+    change_menu(Pause.Menu.PAUSE, Pause.Menu.OPTIONS)
 
 func _on_quit_pressed(pause: Pause) -> void:
-    change_menu(pause.Menu.PAUSE, pause.Menu.QUIT)
+    change_menu(Pause.Menu.PAUSE, Pause.Menu.QUIT)

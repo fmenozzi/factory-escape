@@ -17,9 +17,9 @@ func exit(pause: Pause) -> void:
 
 func handle_input(pause: Pause, event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
-        change_menu(pause.Menu.VIDEO_OPTIONS, pause.Menu.UNPAUSED)
+        change_menu(Pause.Menu.VIDEO_OPTIONS, Pause.Menu.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
-        change_menu(pause.Menu.VIDEO_OPTIONS, pause.Menu.OPTIONS)
+        change_menu(Pause.Menu.VIDEO_OPTIONS, Pause.Menu.OPTIONS)
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
