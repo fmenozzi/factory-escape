@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/pause.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://ui/menus/quit/QuitMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/menus/options/video/VideoOptionsMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/menus/options/controller/ControllerOptionsMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/menus/options/audio/AudioOptionsMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends 'res://ui/menus/menu.gd'
@@ -29,6 +30,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlackOverlay" type="ColorRect" parent="."]
 visible = false
@@ -47,6 +51,9 @@ margin_right = 80.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 160, 180 )
 color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UnpausedState" type="VBoxContainer" parent="MenuBackground"]
 visible = false
@@ -61,6 +68,9 @@ visible = false
 visible = false
 
 [node name="QuitMenu" parent="MenuBackground" instance=ExtResource( 5 )]
+visible = false
+
+[node name="AudioOptionsMenu" parent="MenuBackground" instance=ExtResource( 8 )]
 visible = false
 
 [node name="VideoOptionsMenu" parent="MenuBackground" instance=ExtResource( 6 )]

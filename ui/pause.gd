@@ -15,6 +15,7 @@ enum Menu {
     OPTIONS,
     QUIT,
 
+    AUDIO_OPTIONS,
     VIDEO_OPTIONS,
     CONTROLLER_OPTIONS,
 }
@@ -26,6 +27,7 @@ onready var MENUS = {
     Menu.OPTIONS: $MenuBackground/OptionsMenu,
     Menu.QUIT:    $MenuBackground/QuitMenu,
 
+    Menu.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
     Menu.CONTROLLER_OPTIONS: $MenuBackground/ControllerOptionsMenu,
 }

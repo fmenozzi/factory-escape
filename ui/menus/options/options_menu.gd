@@ -18,6 +18,8 @@ func enter(pause: Pause, previous_menu: int) -> void:
     self.visible = true
 
     match previous_menu:
+        pause.Menu.AUDIO_OPTIONS:
+            _audio.grab_focus()
         pause.Menu.VIDEO_OPTIONS:
             _video.grab_focus()
         pause.Menu.CONTROLLER_OPTIONS:
@@ -39,7 +41,7 @@ func _on_game_pressed(pause: Pause) -> void:
     print('game button not yet implemented')
 
 func _on_audio_pressed(pause: Pause) -> void:
-    print('audio button not yet implemented')
+    change_menu(pause.Menu.OPTIONS, pause.Menu.AUDIO_OPTIONS)
 
 func _on_video_pressed(pause: Pause) -> void:
     change_menu(pause.Menu.OPTIONS, pause.Menu.VIDEO_OPTIONS)

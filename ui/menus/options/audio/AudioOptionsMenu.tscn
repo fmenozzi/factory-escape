@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/menus/options/audio/audio_options_menu.gd" type="Script" id=2]
+[ext_resource path="res://ui/menus/options/audio/AudioSlider.tscn" type="PackedScene" id=3]
+
+[node name="AudioOptionsMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+alignment = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="Label" parent="."]
+margin_top = 35.0
+margin_right = 320.0
+margin_bottom = 48.0
+text = "Audio"
+align = 1
+
+[node name="BlankSeparatorLabel" type="Label" parent="."]
+margin_top = 52.0
+margin_right = 320.0
+margin_bottom = 65.0
+
+[node name="Music" parent="." instance=ExtResource( 3 )]
+margin_top = 69.0
+margin_bottom = 85.0
+
+[node name="Label" parent="Music" index="0"]
+text = "Music"
+
+[node name="Slider" parent="Music/Container" index="0"]
+focus_neighbour_top = NodePath("../../../Back")
+focus_neighbour_bottom = NodePath("../../../Effects/Container/Slider")
+
+[node name="Effects" parent="." instance=ExtResource( 3 )]
+margin_top = 89.0
+margin_bottom = 105.0
+
+[node name="Label" parent="Effects" index="0"]
+text = "Effects"
+
+[node name="Slider" parent="Effects/Container" index="0"]
+focus_neighbour_top = NodePath("../../../Music/Container/Slider")
+focus_neighbour_bottom = NodePath("../../../UI/Container/Slider")
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+margin_top = 109.0
+margin_bottom = 125.0
+
+[node name="Label" parent="UI" index="0"]
+text = "UI"
+
+[node name="Slider" parent="UI/Container" index="0"]
+focus_neighbour_top = NodePath("../../../Effects/Container/Slider")
+focus_neighbour_bottom = NodePath("../../../Back")
+
+[node name="Back" type="Button" parent="."]
+margin_top = 129.0
+margin_right = 320.0
+margin_bottom = 144.0
+focus_neighbour_top = NodePath("../UI/Container/Slider")
+focus_neighbour_bottom = NodePath("../Music/Container/Slider")
+text = "Back"
+
+[editable path="Music"]
+
+[editable path="Effects"]
+
+[editable path="UI"]
