@@ -46,8 +46,10 @@ func _ready() -> void:
     _current_menu = MENUS[Menu.UNPAUSED]
     _change_menu(Menu.UNPAUSED, Menu.UNPAUSED)
 
+    _current_menu.connect('pause_changed', self, '_set_paused')
+
 func _input(event: InputEvent) -> void:
-    _current_menu.handle_input(self, event)
+    _current_menu.handle_input(event)
 
 func _change_menu(old_menu: int, new_menu: int) -> void:
     # All inputs while paused should not be propagated out of the pause menu to
@@ -60,9 +62,9 @@ func _change_menu(old_menu: int, new_menu: int) -> void:
     if get_tree().paused:
         accept_event()
 
-    _current_menu.exit(self)
+    _current_menu.exit()
     _current_menu = MENUS[new_menu]
-    _current_menu.enter(self, old_menu)
+    _current_menu.enter(old_menu)
 
 func _emit_click_sound() -> void:
     _click_sound.play()

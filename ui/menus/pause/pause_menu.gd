@@ -4,11 +4,12 @@ onready var _resume: Button = $Resume
 onready var _options: Button = $Options
 onready var _quit: Button = $Quit
 
-func enter(pause: Pause, previous_menu: int) -> void:
-    _resume.connect('pressed', self, '_on_resume_pressed', [pause])
-    _options.connect('pressed', self, '_on_options_pressed', [pause])
-    _quit.connect('pressed', self, '_on_quit_pressed', [pause])
+func _ready() -> void:
+    _resume.connect('pressed', self, '_on_resume_pressed')
+    _options.connect('pressed', self, '_on_options_pressed')
+    _quit.connect('pressed', self, '_on_quit_pressed')
 
+func enter(previous_menu: int) -> void:
     self.visible = true
 
     match previous_menu:
@@ -19,21 +20,21 @@ func enter(pause: Pause, previous_menu: int) -> void:
         _:
             _resume.grab_focus()
 
-func exit(pause: Pause) -> void:
+func exit() -> void:
     self.visible = false
 
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause') or event.is_action_pressed('ui_cancel'):
         change_menu(Pause.Menu.PAUSE, Pause.Menu.UNPAUSED)
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
 
-func _on_resume_pressed(pause: Pause) -> void:
+func _on_resume_pressed() -> void:
     change_menu(Pause.Menu.PAUSE, Pause.Menu.UNPAUSED)
 
-func _on_options_pressed(pause: Pause) -> void:
+func _on_options_pressed() -> void:
     change_menu(Pause.Menu.PAUSE, Pause.Menu.OPTIONS)
 
-func _on_quit_pressed(pause: Pause) -> void:
+func _on_quit_pressed() -> void:
     change_menu(Pause.Menu.PAUSE, Pause.Menu.QUIT)

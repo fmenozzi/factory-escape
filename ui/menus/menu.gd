@@ -4,15 +4,15 @@ signal menu_changed(old_menu, new_menu)
 signal menu_navigated
 
 # Called when this menu is entered.
-func enter(pause: Pause, previous_menu: int) -> void:
+func enter(previous_menu: int) -> void:
     pass
 
 # Called when this menu is exited.
-func exit(pause: Pause) -> void:
+func exit() -> void:
     pass
 
 # Called when handling input for this menu.
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func handle_input(event: InputEvent) -> void:
     pass
 
 # Convenience function for emitting the menu_changed signal from within a menu.

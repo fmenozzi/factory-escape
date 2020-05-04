@@ -13,13 +13,15 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends 'res://ui/menus/menu.gd'
 
-func enter(pause: Pause, previous_menu: int) -> void:
-    pause._set_paused(false)
+signal pause_changed(new_pause_value)
 
-func exit(pause: Pause) -> void:
-    pause._set_paused(true)
+func enter(previous_menu: int) -> void:
+    emit_signal('pause_changed', false)
 
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func exit() -> void:
+    emit_signal('pause_changed', true)
+
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
         change_menu(Pause.Menu.UNPAUSED, Pause.Menu.PAUSE)
         accept_event()

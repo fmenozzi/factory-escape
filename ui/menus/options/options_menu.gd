@@ -7,14 +7,15 @@ onready var _controller: Button = $Controller
 onready var _keyboard: Button = $Keyboard
 onready var _back: Button = $Back
 
-func enter(pause: Pause, previous_menu: int) -> void:
-    _game.connect('pressed', self, '_on_game_pressed', [pause])
-    _audio.connect('pressed', self, '_on_audio_pressed', [pause])
-    _video.connect('pressed', self, '_on_video_pressed', [pause])
-    _controller.connect('pressed', self, '_on_controller_pressed', [pause])
-    _keyboard.connect('pressed', self, '_on_keyboard_pressed', [pause])
-    _back.connect('pressed', self, '_on_back_pressed', [pause])
+func _ready() -> void:
+    _game.connect('pressed', self, '_on_game_pressed')
+    _audio.connect('pressed', self, '_on_audio_pressed')
+    _video.connect('pressed', self, '_on_video_pressed')
+    _controller.connect('pressed', self, '_on_controller_pressed')
+    _keyboard.connect('pressed', self, '_on_keyboard_pressed')
+    _back.connect('pressed', self, '_on_back_pressed')
 
+func enter(previous_menu: int) -> void:
     self.visible = true
 
     match previous_menu:
@@ -28,10 +29,10 @@ func enter(pause: Pause, previous_menu: int) -> void:
             # Default to first option.
             _game.grab_focus()
 
-func exit(pause: Pause) -> void:
+func exit() -> void:
     self.visible = false
 
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
         change_menu(Pause.Menu.OPTIONS, Pause.Menu.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
@@ -40,20 +41,20 @@ func handle_input(pause: Pause, event: InputEvent) -> void:
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
 
-func _on_game_pressed(pause: Pause) -> void:
+func _on_game_pressed() -> void:
     print('game button not yet implemented')
 
-func _on_audio_pressed(pause: Pause) -> void:
+func _on_audio_pressed() -> void:
     change_menu(Pause.Menu.OPTIONS, Pause.Menu.AUDIO_OPTIONS)
 
-func _on_video_pressed(pause: Pause) -> void:
+func _on_video_pressed() -> void:
     change_menu(Pause.Menu.OPTIONS, Pause.Menu.VIDEO_OPTIONS)
 
-func _on_controller_pressed(pause: Pause) -> void:
+func _on_controller_pressed() -> void:
     change_menu(Pause.Menu.OPTIONS, Pause.Menu.CONTROLLER_OPTIONS)
 
-func _on_keyboard_pressed(pause: Pause) -> void:
+func _on_keyboard_pressed() -> void:
     print('keyboard button not yet implemented')
 
-func _on_back_pressed(pause: Pause) -> void:
+func _on_back_pressed() -> void:
     change_menu(Pause.Menu.OPTIONS, Pause.Menu.PAUSE)

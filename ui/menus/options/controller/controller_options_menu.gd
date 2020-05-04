@@ -76,7 +76,10 @@ const JOYPAD_BUTTONS_TO_TEXTURES: Dictionary = {
     JOY_DPAD_LEFT:  preload('res://ui/menus/options/controller/textures/xbox-dpad-left.png'),
 }
 
-func enter(pause: Pause, previous_menu: int) -> void:
+func _ready() -> void:
+    _back_button.connect('pressed', self, '_on_back_pressed')
+
+func enter(previous_menu: int) -> void:
     self.visible = true
 
     _jump_button.connect('pressed', self, '_on_jump_pressed')
@@ -85,14 +88,12 @@ func enter(pause: Pause, previous_menu: int) -> void:
     _grapple_button.connect('pressed', self, '_on_grapple_pressed')
     _interact_button.connect('pressed', self, '_on_interact_pressed')
 
-    _back_button.connect('pressed', self, '_on_back_pressed', [pause])
-
     _jump_button.grab_focus()
 
-func exit(pause: Pause) -> void:
+func exit() -> void:
     self.visible = false
 
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func handle_input(event: InputEvent) -> void:
     if _is_remapping and event is InputEventJoypadButton:
         remap(event)
         _is_remapping = false
@@ -168,5 +169,5 @@ func _on_grapple_pressed() -> void:
 func _on_interact_pressed() -> void:
     setup_remap(PlayerAction.INTERACT)
 
-func _on_back_pressed(pause: Pause) -> void:
+func _on_back_pressed() -> void:
     change_menu(Pause.Menu.CONTROLLER_OPTIONS, Pause.Menu.OPTIONS)

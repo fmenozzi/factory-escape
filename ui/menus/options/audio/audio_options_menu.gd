@@ -10,17 +10,17 @@ func _ready() -> void:
     _effects_slider.connect('value_changed', self, '_on_effects_value_changed')
     _ui_slider.connect('value_changed', self, '_on_ui_value_changed')
 
-func enter(pause: Pause, previous_menu: int) -> void:
+    _back_button.connect('pressed', self, '_on_back_pressed')
+
+func enter(previous_menu: int) -> void:
     self.visible = true
 
     _music_slider.grab_focus()
 
-    _back_button.connect('pressed', self, '_on_back_pressed', [pause])
-
-func exit(pause: Pause) -> void:
+func exit() -> void:
     self.visible = false
 
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
         change_menu(Pause.Menu.AUDIO_OPTIONS, Pause.Menu.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
@@ -44,5 +44,5 @@ func _on_ui_value_changed(new_value: float) -> void:
     var new_volume_db := max(linear2db(new_value / _ui_slider.max_value), -80)
     AudioServer.set_bus_volume_db(bus_index, new_volume_db)
 
-func _on_back_pressed(pause: Pause) -> void:
+func _on_back_pressed() -> void:
     change_menu(Pause.Menu.AUDIO_OPTIONS, Pause.Menu.OPTIONS)

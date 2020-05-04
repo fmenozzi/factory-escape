@@ -7,15 +7,15 @@ func _ready() -> void:
     _vsync.connect('pressed', self, '_on_vsync_pressed')
     _fullscreen.connect('pressed', self, '_on_fullscreen_pressed')
 
-func enter(pause: Pause, previous_menu: int) -> void:
+func enter(previous_menu: int) -> void:
     self.visible = true
 
     _vsync.grab_focus()
 
-func exit(pause: Pause) -> void:
+func exit() -> void:
     self.visible = false
 
-func handle_input(pause: Pause, event: InputEvent) -> void:
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
         change_menu(Pause.Menu.VIDEO_OPTIONS, Pause.Menu.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
