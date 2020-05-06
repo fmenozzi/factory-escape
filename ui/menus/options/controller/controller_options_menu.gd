@@ -122,7 +122,7 @@ func setup_remap(player_action: int) -> void:
 func remap(event: InputEventJoypadButton) -> void:
     # Consume input event so that it doesn't get interpreted as e.g. a
     # button click/press immediately afterwards.
-    get_tree().set_input_as_handled()
+    accept_event()
 
     var current_action_data = PLAYER_ACTION_DATA[_player_action_to_remap]
 
