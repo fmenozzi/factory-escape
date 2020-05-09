@@ -29,6 +29,8 @@ shape = SubResource( 1 )
 [node name="ProjectileSpawner" parent="World/Rooms/EnergyProjectilePlayground" index="9" instance=ExtResource( 4 )]
 position = Vector2( 32, 128 )
 
+[node name="ShootTimer" type="Timer" parent="World/Rooms/EnergyProjectilePlayground" index="10"]
+
 [node name="Player" parent="World" index="3"]
 position = Vector2( 40, 160 )
 
