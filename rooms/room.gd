@@ -1,9 +1,17 @@
 extends Node2D
 class_name Room
 
+const EnergyProjectile := preload('res://actors/enemies/energy_projectile/EnergyProjectile.tscn')
+
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
+onready var _enemies: Node2D = $Enemies
+
+func _ready() -> void:
+    for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
+        spawner.connect(
+            'energy_projectile_fired', self, '_on_energy_projectile_fired')
 
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
@@ -57,3 +65,10 @@ func contains(obj: Node2D) -> bool:
     var bounds := Rect2(get_global_position(), get_room_dimensions())
 
     return bounds.has_point(obj.get_global_position())
+
+func _on_energy_projectile_fired(global_pos: Vector2, dir: Vector2) -> void:
+    var energy_projectile := EnergyProjectile.instance()
+    _enemies.add_child(energy_projectile)
+
+    energy_projectile.global_position = global_pos
+    energy_projectile.start(dir)
