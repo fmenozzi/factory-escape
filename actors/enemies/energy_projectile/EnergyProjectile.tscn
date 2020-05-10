@@ -51,6 +51,7 @@ radius = 4.0
 script = ExtResource( 2 )
 
 [node name="BubbleParticles" type="Particles2D" parent="."]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 amount = 16
 lifetime = 0.5
 local_coords = false
@@ -58,13 +59,14 @@ process_material = SubResource( 5 )
 texture = ExtResource( 1 )
 
 [node name="TrailParticles" type="Particles2D" parent="."]
-modulate = Color( 1, 0.309804, 0.470588, 1 )
+modulate = Color( 1.3, 0.4, 0.61, 1 )
 amount = 32
 lifetime = 2.0
 local_coords = false
 process_material = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1.1, 1.1, 1.1, 1 )
 texture = ExtResource( 1 )
 
 [node name="Hitbox" type="Area2D" parent="."]
