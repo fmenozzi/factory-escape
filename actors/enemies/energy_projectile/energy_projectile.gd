@@ -6,6 +6,7 @@ const MAX_LIFETIME := 20.0
 
 var _velocity := Vector2.ZERO
 
+onready var _trail_particles: Particles2D = $TrailParticles
 onready var _hitbox: Area2D = $Hitbox
 onready var _lifetime_timer: Timer = $LifetimeTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -31,8 +32,21 @@ func start(direction: Vector2) -> void:
     _lifetime_timer.start()
     set_physics_process(true)
 
-func _on_impact(body: Node) -> void:
+func _explode() -> void:
+    # Stop moving the projectile.
+    set_physics_process(false)
+
+    # Wait for explode animation to finish.
+    _animation_player.play('explode')
+    yield(_animation_player, 'animation_finished')
+
+    # Wait for the trail particles to disappear, since they last a few seconds.
+    yield(get_tree().create_timer(_trail_particles.lifetime), 'timeout')
+
     queue_free()
 
+func _on_impact(body: Node) -> void:
+    _explode()
+
 func _on_lifetime_timeout() -> void:
-    queue_free()
+    _explode()
