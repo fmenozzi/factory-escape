@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/player.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "RangedSentryDrone",
+"language": "GDScript",
+"path": "res://actors/enemies/ranged_sentry_drone/ranged_sentry_drone.gd"
+}, {
 "base": "Sprite",
 "class": "ReactSprite",
 "language": "GDScript",
@@ -116,6 +121,7 @@ _global_script_class_icons={
 "Pause": "",
 "PhysicsManager": "",
 "Player": "",
+"RangedSentryDrone": "",
 "ReactSprite": "",
 "Room": "",
 "SentryDrone": "",
