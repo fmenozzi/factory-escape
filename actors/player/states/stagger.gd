@@ -19,9 +19,10 @@ func _ready() -> void:
     _stagger_duration_timer.one_shot = true
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    # Set the initial velocity corresponding to the knockback force. For now we
-    # assume the knockback direction is always up and away
-    velocity = STAGGER_SPEED * Vector2(-player.get_direction(), -1).normalized()
+    # Set the initial velocity corresponding to the knockback force.
+    assert('direction_from_hit' in previous_state_dict)
+    var x_direction_from_hit: int = previous_state_dict['direction_from_hit']
+    velocity = STAGGER_SPEED * Vector2(x_direction_from_hit, -1).normalized()
 
     _stagger_duration_timer.start()
 

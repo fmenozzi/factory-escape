@@ -403,7 +403,10 @@ func _check_for_hits() -> void:
                     Rumble.start(Rumble.Type.WEAK, 0.15)
                     Screenshake.start(
                         Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
-                    change_state({'new_state': State.STAGGER})
+                    change_state({
+                        'new_state': State.STAGGER,
+                        'direction_from_hit': Util.direction(hitbox, self)
+                    })
 
 func get_next_grapple_point() -> GrapplePoint:
     return _next_grapple_point
