@@ -4,12 +4,16 @@ class_name RangedSentryDrone
 enum State {
     NO_CHANGE,
     IDLE,
+    ALERTED,
+    UNALERTED,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
 onready var STATES := {
-    State.IDLE: $States/Idle,
+    State.IDLE:      $States/Idle,
+    State.ALERTED:   $States/Alerted,
+    State.UNALERTED: $States/Unalerted,
 }
 
 var _current_state: Node = null
@@ -17,6 +21,9 @@ var _current_state_enum: int = -1
 
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
+onready var _physics_manager: PhysicsManager = $PhysicsManager
+onready var _aggro_manager: AggroManager = $AggroManager
+onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -26,9 +33,16 @@ func _ready() -> void:
 
     set_direction(direction)
 
+    _react_sprite.change_state(ReactSprite.State.NONE)
+
     _current_state_enum = State.IDLE
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
+
+func _physics_process(delta: float) -> void:
+    var new_state_dict = _current_state.update(self, delta)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
@@ -37,6 +51,15 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+
+func get_physics_manager() -> PhysicsManager:
+    return _physics_manager
+
+func get_aggro_manager() -> AggroManager:
+    return _aggro_manager
+
+func get_react_sprite() -> ReactSprite:
+    return _react_sprite
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
