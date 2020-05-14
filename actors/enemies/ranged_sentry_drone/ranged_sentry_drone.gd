@@ -6,6 +6,7 @@ enum State {
     IDLE,
     ALERTED,
     UNALERTED,
+    SHOOT,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
@@ -14,6 +15,7 @@ onready var STATES := {
     State.IDLE:      $States/Idle,
     State.ALERTED:   $States/Alerted,
     State.UNALERTED: $States/Unalerted,
+    State.SHOOT:     $States/Shoot,
 }
 
 var _current_state: Node = null
@@ -26,6 +28,7 @@ onready var _aggro_manager: AggroManager = $AggroManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _projectile_spawner: Position2D = $ProjectileSpawner
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -63,6 +66,9 @@ func get_react_sprite() -> ReactSprite:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_projectile_spawner() -> Position2D:
+    return _projectile_spawner
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
