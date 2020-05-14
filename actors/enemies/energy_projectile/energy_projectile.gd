@@ -8,6 +8,7 @@ var _velocity := Vector2.ZERO
 
 onready var _trail_particles: Particles2D = $TrailParticles
 onready var _hitbox: Area2D = $Hitbox
+onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _lifetime_timer: Timer = $LifetimeTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -35,6 +36,9 @@ func start(direction: Vector2) -> void:
 func _explode() -> void:
     # Stop moving the projectile.
     set_physics_process(false)
+
+    # Disable the projectile's hitbox.
+    _hitbox_collision_shape.set_deferred('disabled', true)
 
     # Wait for explode animation to finish.
     _animation_player.play('explode')
