@@ -15,7 +15,10 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 func _ready() -> void:
     set_physics_process(false)
 
+    # Detect impacts with both the environment (StaticBody2D) and the player's
+    # hurtbox (Area2D).
     _hitbox.connect('body_entered', self, '_on_impact')
+    _hitbox.connect('area_entered', self, '_on_impact')
 
     _lifetime_timer.one_shot = true
     _lifetime_timer.wait_time = MAX_LIFETIME
@@ -49,7 +52,7 @@ func _explode() -> void:
 
     queue_free()
 
-func _on_impact(body: Node) -> void:
+func _on_impact(_player_or_environment: Node) -> void:
     _explode()
 
 func _on_lifetime_timeout() -> void:
