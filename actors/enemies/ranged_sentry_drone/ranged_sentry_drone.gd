@@ -6,16 +6,18 @@ enum State {
     IDLE,
     ALERTED,
     UNALERTED,
+    FOLLOW_PLAYER,
     SHOOT,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
 onready var STATES := {
-    State.IDLE:      $States/Idle,
-    State.ALERTED:   $States/Alerted,
-    State.UNALERTED: $States/Unalerted,
-    State.SHOOT:     $States/Shoot,
+    State.IDLE:          $States/Idle,
+    State.ALERTED:       $States/Alerted,
+    State.UNALERTED:     $States/Unalerted,
+    State.FOLLOW_PLAYER: $States/FollowPlayer,
+    State.SHOOT:         $States/Shoot,
 }
 
 var _current_state: Node = null
@@ -46,6 +48,9 @@ func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
+
+func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
+    .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction

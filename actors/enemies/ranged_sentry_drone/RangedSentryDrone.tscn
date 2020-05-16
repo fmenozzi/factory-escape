@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/ranged_sentry_drone.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=10]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/states/shoot.gd" type="Script" id=11]
 [ext_resource path="res://actors/enemies/energy_projectile/ProjectileSpawner.tscn" type="PackedScene" id=12]
+[ext_resource path="res://actors/enemies/ranged_sentry_drone/states/follow_player.gd" type="Script" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 2 )
@@ -53,7 +54,7 @@ single_flash_duration = 0.075
 flash_color = Color( 1, 1, 1, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 4 )]
-script = null
+movement_speed_tiles_per_second = 4.0
 
 [node name="AggroManager" parent="." instance=ExtResource( 5 )]
 visible = false
@@ -76,6 +77,9 @@ script = ExtResource( 9 )
 [node name="UnalertedDurationTimer" type="Timer" parent="States/Unalerted"]
 
 [node name="TurnAroundDurationTimer" type="Timer" parent="States/Unalerted"]
+
+[node name="FollowPlayer" type="Node" parent="States"]
+script = ExtResource( 13 )
 
 [node name="Shoot" type="Node" parent="States"]
 script = ExtResource( 11 )
