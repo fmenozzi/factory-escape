@@ -81,10 +81,12 @@ script = ExtResource( 9 )
 [node name="FollowPlayer" type="Node" parent="States"]
 script = ExtResource( 13 )
 
+[node name="ShootTimer" type="Timer" parent="States/FollowPlayer"]
+
 [node name="Shoot" type="Node" parent="States"]
 script = ExtResource( 11 )
 
-[node name="ShootTimer" type="Timer" parent="States/Shoot"]
+[node name="ShootDurationTimer" type="Timer" parent="States/Shoot"]
 
 [node name="ReactSprite" parent="." instance=ExtResource( 10 )]
 position = Vector2( 0, -18 )

@@ -1,12 +1,14 @@
 extends 'res://actors/enemies/state.gd'
 
+const SHOOT_DURATION := 1.0
+
 var _player: Player = null
 
-onready var _shoot_timer: Timer = $ShootTimer
+onready var _shoot_duration_timer: Timer = $ShootDurationTimer
 
 func _ready() -> void:
-    _shoot_timer.one_shot = false
-    _shoot_timer.wait_time = 2.0
+    _shoot_duration_timer.one_shot = true
+    _shoot_duration_timer.wait_time = SHOOT_DURATION
 
 func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> void:
     _player = Util.get_player()
@@ -17,13 +19,15 @@ func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> 
     # Turn to face player when shooting.
     sentry_drone.set_direction(Util.direction(sentry_drone, _player))
 
-    # Start shoot timer.
-    _shoot_timer.connect('timeout', self, '_shoot', [sentry_drone])
-    _shoot_timer.start()
-    _shoot(sentry_drone)
+    # Shoot!
+    var dir = sentry_drone.global_position.direction_to(_player.get_center())
+    sentry_drone.get_projectile_spawner().shoot(dir)
+
+    # Start shoot duration timer.
+    _shoot_duration_timer.start()
 
 func exit(sentry_drone: RangedSentryDrone) -> void:
-    _shoot_timer.stop()
+    pass
 
 func update(sentry_drone: RangedSentryDrone, delta: float) -> Dictionary:
     var aggro_manager := sentry_drone.get_aggro_manager()
@@ -33,8 +37,7 @@ func update(sentry_drone: RangedSentryDrone, delta: float) -> Dictionary:
     if not (aggro_manager.in_aggro_range() or aggro_manager.can_see_player()):
         return {'new_state': RangedSentryDrone.State.UNALERTED}
 
-    return {'new_state': RangedSentryDrone.State.NO_CHANGE}
+    if _shoot_duration_timer.is_stopped():
+        return {'new_state': RangedSentryDrone.State.FOLLOW_PLAYER}
 
-func _shoot(sentry_drone: RangedSentryDrone) -> void:
-    var dir = sentry_drone.global_position.direction_to(_player.global_position)
-    sentry_drone.get_projectile_spawner().shoot(dir)
+    return {'new_state': RangedSentryDrone.State.NO_CHANGE}
