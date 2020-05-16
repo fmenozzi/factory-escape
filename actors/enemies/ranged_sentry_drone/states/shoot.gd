@@ -1,6 +1,6 @@
 extends 'res://actors/enemies/state.gd'
 
-const SHOOT_DURATION := 1.0
+const SHOOT_DURATION := 0.6
 
 var _player: Player = null
 
