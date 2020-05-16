@@ -4,6 +4,7 @@ class_name RangedSentryDrone
 enum State {
     NO_CHANGE,
     IDLE,
+    FLY_TO_POINT,
     ALERTED,
     UNALERTED,
     FOLLOW_PLAYER,
@@ -14,6 +15,7 @@ export(Util.Direction) var direction := Util.Direction.RIGHT
 
 onready var STATES := {
     State.IDLE:          $States/Idle,
+    State.FLY_TO_POINT:  $States/FlyToPoint,
     State.ALERTED:       $States/Alerted,
     State.UNALERTED:     $States/Unalerted,
     State.FOLLOW_PLAYER: $States/FollowPlayer,

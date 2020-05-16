@@ -7,6 +7,7 @@ onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
 onready var _enemies: Node2D = $Enemies
+onready var _tilemaps_nav: Navigation2D = $TileMaps
 
 func _ready() -> void:
     for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
@@ -53,6 +54,9 @@ func get_room_dimensions() -> Vector2:
 
 func get_moving_platforms() -> Array:
     return _moving_platforms
+
+func get_tilemaps_nav() -> Navigation2D:
+    return _tilemaps_nav
 
 func pause() -> void:
     for moving_platform in get_moving_platforms():
