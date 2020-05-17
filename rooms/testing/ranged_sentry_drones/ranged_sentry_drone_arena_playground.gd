@@ -62,7 +62,7 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
         _spawn_enemy_at(Drone.instance(), Vector2(400, 96))
         for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
             spawner.connect(
-                'energy_projectile_fired', self, '_on_energy_projectile_fired')
+                'homing_projectile_fired', self, '_on_homing_projectile_fired')
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
     _remaining_drones -= 1

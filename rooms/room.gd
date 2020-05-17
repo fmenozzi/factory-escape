@@ -1,7 +1,7 @@
 extends Node2D
 class_name Room
 
-const EnergyProjectile := preload('res://actors/enemies/energy_projectile/EnergyProjectile.tscn')
+const HomingProjectile := preload('res://actors/enemies/homing_projectile/HomingProjectile.tscn')
 
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
@@ -12,7 +12,7 @@ onready var _tilemaps_nav: Navigation2D = $TileMaps
 func _ready() -> void:
     for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
         spawner.connect(
-            'energy_projectile_fired', self, '_on_energy_projectile_fired')
+            'homing_projectile_fired', self, '_on_homing_projectile_fired')
 
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
@@ -70,9 +70,9 @@ func contains(obj: Node2D) -> bool:
 
     return bounds.has_point(obj.get_global_position())
 
-func _on_energy_projectile_fired(global_pos: Vector2, dir: Vector2) -> void:
-    var energy_projectile := EnergyProjectile.instance()
-    _enemies.add_child(energy_projectile)
+func _on_homing_projectile_fired(global_pos: Vector2, dir: Vector2) -> void:
+    var homing_projectile := HomingProjectile.instance()
+    _enemies.add_child(homing_projectile)
 
-    energy_projectile.global_position = global_pos
-    energy_projectile.start(dir)
+    homing_projectile.global_position = global_pos
+    homing_projectile.start(dir)
