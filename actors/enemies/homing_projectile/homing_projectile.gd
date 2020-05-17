@@ -69,13 +69,13 @@ func _get_homing_weight() -> float:
     var homing_elapsed_time_fraction := \
         (HOMING_DURATION - _homing_duration_timer.time_left) / HOMING_DURATION
 
-    # The initial homing weight is itself a linear interpolation; at the start
-    # of the shot, the weight is 0.25, and decays linearly over the course of
-    # the homing duration to 0, at which point the shot no longer homes in and
-    # instead continues in its current direction.
-    var weight: float = lerp(0.25, 0.0, homing_elapsed_time_fraction)
-
-    return weight
+    # The weight starts at 0.25 and decays exponentially over the course of the
+    # homing duration. Because exp() is asymptotic, the weight will never reach
+    # 0 exactly, which means the projectile will always be bending towards the
+    # player ever so slightly. In practice, this looks much more pleasant than
+    # interpolating linearly to zero, at which point the projectile would just
+    # continue in a straight line.
+    return 0.25 * exp(-3.0 * homing_elapsed_time_fraction)
 
 func _explode() -> void:
     # Stop moving the projectile.
