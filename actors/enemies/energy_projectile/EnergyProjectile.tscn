@@ -217,6 +217,8 @@ shape = SubResource( 12 )
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 
+[node name="HomingDurationTimer" type="Timer" parent="."]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/explode = SubResource( 13 )
 anims/spawn = SubResource( 14 )
