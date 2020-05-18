@@ -15,7 +15,6 @@
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/states/follow_player.gd" type="Script" id=13]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/states/fly_to_point.gd" type="Script" id=14]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 2 )
 
