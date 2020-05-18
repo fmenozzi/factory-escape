@@ -98,3 +98,9 @@ func _on_impact(_player_or_environment: Node) -> void:
 
 func _on_lifetime_timeout() -> void:
     _explode()
+
+func _on_projectile_spawner_destroyed() -> void:
+    # Destroy the projectile if the spawner (i.e. the enemy spawning it) is
+    # destroyed during the projectile's spawn animation.
+    if _animation_player.is_playing() and _animation_player.current_animation == 'spawn':
+        _explode()

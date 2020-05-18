@@ -98,4 +98,5 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
     print('RANGED SENTRY DRONE DIED')
+    _projectile_spawner.emit_signal('projectile_spawner_destroyed')
     queue_free()

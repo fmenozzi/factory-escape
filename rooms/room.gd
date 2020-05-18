@@ -12,7 +12,8 @@ onready var _tilemaps_nav: Navigation2D = $TileMaps
 func _ready() -> void:
     for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
         spawner.connect(
-            'homing_projectile_fired', self, '_on_homing_projectile_fired')
+            'homing_projectile_fired', self, '_on_homing_projectile_fired',
+            [spawner])
 
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
@@ -70,9 +71,15 @@ func contains(obj: Node2D) -> bool:
 
     return bounds.has_point(obj.get_global_position())
 
-func _on_homing_projectile_fired(global_pos: Vector2, dir: Vector2) -> void:
+func _on_homing_projectile_fired(
+    global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner
+) -> void:
     var homing_projectile := HomingProjectile.instance()
     _enemies.add_child(homing_projectile)
+
+    spawner.connect(
+        'projectile_spawner_destroyed', homing_projectile,
+        '_on_projectile_spawner_destroyed')
 
     homing_projectile.global_position = global_pos
     homing_projectile.start(dir)

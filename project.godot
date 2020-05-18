@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/player.gd"
 }, {
+"base": "Position2D",
+"class": "ProjectileSpawner",
+"language": "GDScript",
+"path": "res://actors/enemies/homing_projectile/projectile_spawner.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "RangedSentryDrone",
 "language": "GDScript",
@@ -121,6 +126,7 @@ _global_script_class_icons={
 "Pause": "",
 "PhysicsManager": "",
 "Player": "",
+"ProjectileSpawner": "",
 "RangedSentryDrone": "",
 "ReactSprite": "",
 "Room": "",
