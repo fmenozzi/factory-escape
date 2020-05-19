@@ -40,6 +40,8 @@ func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
+    set_direction(direction)
+
     _react_sprite.change_state(ReactSprite.State.NONE)
 
     _current_state_enum = State.IDLE
