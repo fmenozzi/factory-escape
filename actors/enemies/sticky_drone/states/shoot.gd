@@ -20,7 +20,7 @@ func exit(sticky_drone: StickyDrone) -> void:
 
 func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
     if _shot_finished:
-        return {'new_state': StickyDrone.State.IDLE}
+        return {'new_state': StickyDrone.State.WALK}
 
     return {'new_state': StickyDrone.State.NO_CHANGE}
 
