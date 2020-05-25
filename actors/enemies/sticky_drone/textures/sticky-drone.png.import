@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/spider-drone.png-7ba7950f06883834047c6948a459c8a3.stex"
+path="res://.import/sticky-drone.png-47914100b4da854e75099320fd1080b7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/enemies/spider_drone/textures/spider-drone.png"
-dest_files=[ "res://.import/spider-drone.png-7ba7950f06883834047c6948a459c8a3.stex" ]
+source_file="res://actors/enemies/sticky_drone/textures/sticky-drone.png"
+dest_files=[ "res://.import/sticky-drone.png-47914100b4da854e75099320fd1080b7.stex" ]
 
 [params]
 

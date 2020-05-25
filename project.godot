@@ -110,9 +110,9 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/sluggish_failure/sluggish_failure.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "SpiderDrone",
+"class": "StickyDrone",
 "language": "GDScript",
-"path": "res://actors/enemies/spider_drone/spider_drone.gd"
+"path": "res://actors/enemies/sticky_drone/sticky_drone.gd"
 }, {
 "base": "Node",
 "class": "Stopwatch",
@@ -145,7 +145,7 @@ _global_script_class_icons={
 "SentryDronePhysicsManager": "",
 "ShaderManager": "",
 "SluggishFailure": "",
-"SpiderDrone": "",
+"StickyDrone": "",
 "Stopwatch": "",
 "WorkerDrone": ""
 }

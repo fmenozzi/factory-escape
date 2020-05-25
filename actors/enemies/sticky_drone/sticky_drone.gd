@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name SpiderDrone
+class_name StickyDrone
 
 enum State {
     NO_CHANGE,
@@ -120,9 +120,9 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state.enter(self, new_state_dict)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
-    print('SPIDER DRONE HIT (new health: ', new_health, ')')
+    print('STICKY DRONE HIT (new health: ', new_health, ')')
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    print('SPIDER DRONE DIED')
+    print('STICKY DRONE DIED')
     queue_free()
