@@ -24,8 +24,20 @@ visible = false
 position = Vector2( 160, 90 )
 shape = SubResource( 1 )
 
-[node name="SpiderDrone" parent="World/Rooms/SpiderDronePlayground/Enemies" index="0" instance=ExtResource( 3 )]
+[node name="SpiderDroneFloor" parent="World/Rooms/SpiderDronePlayground/Enemies" index="0" instance=ExtResource( 3 )]
 position = Vector2( 152, 160 )
+
+[node name="SpiderDroneCeiling" parent="World/Rooms/SpiderDronePlayground/Enemies" index="1" instance=ExtResource( 3 )]
+position = Vector2( 152, 16 )
+floor_normal = 1
+
+[node name="SpiderDroneWallLeft" parent="World/Rooms/SpiderDronePlayground/Enemies" index="2" instance=ExtResource( 3 )]
+position = Vector2( 16, 96 )
+floor_normal = 3
+
+[node name="SpiderDroneWallRight" parent="World/Rooms/SpiderDronePlayground/Enemies" index="3" instance=ExtResource( 3 )]
+position = Vector2( 304, 96 )
+floor_normal = 2
 
 [node name="Player" parent="World" index="3"]
 position = Vector2( 48, 160 )

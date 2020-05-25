@@ -9,6 +9,14 @@ enum State {
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
+enum FloorNormal {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+}
+export(FloorNormal) var floor_normal := FloorNormal.UP
+
 onready var STATES := {
     State.IDLE: $States/Idle,
     State.WALK: $States/Walk,
@@ -28,6 +36,18 @@ func _ready() -> void:
     _health.connect('died', self, '_on_died')
 
     set_direction(direction)
+
+    # Set rotation to match the specified floor normal. This floor normal will
+    # also be used as a basis for movement.
+    match floor_normal:
+        FloorNormal.UP:
+            self.rotation_degrees = 0
+        FloorNormal.DOWN:
+            self.rotation_degrees = 180
+        FloorNormal.LEFT:
+            self.rotation_degrees = -90
+        FloorNormal.RIGHT:
+            self.rotation_degrees = 90
 
     _current_state_enum = State.IDLE
     _current_state = STATES[_current_state_enum]

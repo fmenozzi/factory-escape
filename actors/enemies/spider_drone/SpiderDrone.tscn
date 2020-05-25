@@ -29,7 +29,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "walk"
 length = 0.8
 loop = true
@@ -46,10 +46,10 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 6.5, 10 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6.5, 10 )
 
 [node name="SpiderDrone" type="KinematicBody2D"]
@@ -85,7 +85,6 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 5 )
 vframes = 3
 hframes = 4
-frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.5, -10 )
@@ -93,7 +92,7 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )
-anims/walk = SubResource( 5 )
+anims/walk = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
@@ -101,7 +100,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0.5, -10 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -109,4 +108,4 @@ collision_mask = 272
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0.5, -10 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
