@@ -49,7 +49,7 @@ func _ready() -> void:
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
 
-    _current_state_enum = State.IDLE
+    _current_state_enum = State.WALK
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
@@ -58,8 +58,17 @@ func _physics_process(delta: float) -> void:
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
 
-func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
-    .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
+func move(
+    velocity: Vector2,
+    snap: Vector2 = Util.NO_SNAP,
+    floor_normal: Vector2 = Util.FLOOR_NORMAL
+) -> void:
+    # Adjust velocity by factoring in the current sprite direction and current
+    # rotation (which will have been set according the the floor_normal
+    # property).
+    velocity = velocity.rotated(deg2rad(self.direction * self.rotation_degrees))
+
+    .move_and_slide_with_snap(velocity, snap, floor_normal)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
@@ -68,6 +77,20 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+
+func get_floor_normal() -> Vector2:
+    match floor_normal:
+        FloorNormal.UP:
+            return Vector2.UP
+        FloorNormal.DOWN:
+            return Vector2.DOWN
+        FloorNormal.LEFT:
+            return Vector2.LEFT
+        FloorNormal.RIGHT:
+            return Vector2.RIGHT
+
+    # Shouldn't get here.
+    return Vector2.ZERO
 
 func get_physics_manager() -> PhysicsManager:
     return _physics_manager
