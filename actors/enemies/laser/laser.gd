@@ -1,4 +1,5 @@
 extends Node2D
+class_name Laser
 
 signal telegraph_finished
 signal shot_finished
@@ -34,9 +35,13 @@ func _ready() -> void:
 
     _tween.connect('tween_step', self, '_on_wobble_tween_step')
 
-func shoot() -> void:
+func shoot(target_local := Vector2.ZERO) -> void:
     if _is_shooting:
         return
+
+    # Use target_local if provided, else use the position of the target node.
+    if target_local != Vector2.ZERO:
+        _target.position = target_local
 
     _is_shooting = true
 

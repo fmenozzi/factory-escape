@@ -5,6 +5,7 @@ enum State {
     NO_CHANGE,
     IDLE,
     WALK,
+    SHOOT,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
@@ -18,8 +19,9 @@ enum FloorNormal {
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
-    State.IDLE: $States/Idle,
-    State.WALK: $States/Walk,
+    State.IDLE:  $States/Idle,
+    State.WALK:  $States/Walk,
+    State.SHOOT: $States/Shoot,
 }
 
 var _current_state: Node = null
@@ -30,6 +32,7 @@ onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: PhysicsManager = $PhysicsManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _laser: Laser = $Laser
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -49,7 +52,7 @@ func _ready() -> void:
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
 
-    _current_state_enum = State.WALK
+    _current_state_enum = State.SHOOT
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
@@ -97,6 +100,9 @@ func get_physics_manager() -> PhysicsManager:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_laser() -> Laser:
+    return _laser
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
