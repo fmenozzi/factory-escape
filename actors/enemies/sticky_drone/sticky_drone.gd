@@ -5,7 +5,9 @@ enum State {
     NO_CHANGE,
     IDLE,
     WALK,
+    CROUCH,
     SHOOT,
+    UNCROUCH,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
@@ -19,9 +21,11 @@ enum FloorNormal {
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
-    State.IDLE:  $States/Idle,
-    State.WALK:  $States/Walk,
-    State.SHOOT: $States/Shoot,
+    State.IDLE:     $States/Idle,
+    State.WALK:     $States/Walk,
+    State.CROUCH:   $States/Crouch,
+    State.SHOOT:    $States/Shoot,
+    State.UNCROUCH: $States/Uncrouch,
 }
 
 var _current_state: Node = null
@@ -52,7 +56,7 @@ func _ready() -> void:
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
 
-    _current_state_enum = State.SHOOT
+    _current_state_enum = State.CROUCH
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
