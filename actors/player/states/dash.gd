@@ -27,6 +27,7 @@ func _ready() -> void:
 
     # Set up dash echo timer.
     _dash_echo_timer.wait_time = DASH_ECHO_DELAY
+    _dash_echo_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
 
     # Calculate dash speed from the specified dash distance and duration.
     DASH_SPEED = DASH_DISTANCE / DASH_DURATION
