@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://custom/nodes/Stopwatch.tscn" type="PackedScene" id=31]
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
 [ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=33]
+[ext_resource path="res://effects/DashEchoes.tscn" type="PackedScene" id=34]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -587,8 +588,6 @@ script = ExtResource( 13 )
 
 [node name="DashDurationTimer" type="Timer" parent="States/Dash"]
 
-[node name="DashEchoTimer" type="Timer" parent="States/Dash"]
-
 [node name="WallSlide" type="Node" parent="States"]
 script = ExtResource( 14 )
 
@@ -635,6 +634,9 @@ position = Vector2( 5, -10 )
 emitting = false
 
 [node name="DustPuff" parent="." instance=ExtResource( 24 )]
+
+[node name="DashEchoes" parent="." instance=ExtResource( 34 )]
+position = Vector2( 0, -8 )
 
 [node name="DashPuff" parent="." instance=ExtResource( 25 )]
 show_behind_parent = true

@@ -10,24 +10,14 @@ const DASH_DURATION: float = 0.20
 # second and calculated based on dash duration and dash distance.
 var DASH_SPEED: float
 
-# The delay between emissions of the dash echo.
-var DASH_ECHO_DELAY: float = 0.05
-
 var _previous_state_enum: int
 
-const DashEcho = preload('res://actors/player/DashEcho.tscn')
-
 onready var _dash_duration_timer: Timer = $DashDurationTimer
-onready var _dash_echo_timer: Timer = $DashEchoTimer
 
 func _ready() -> void:
     # Set up dash duration timer.
     _dash_duration_timer.wait_time = DASH_DURATION
     _dash_duration_timer.one_shot = true
-
-    # Set up dash echo timer.
-    _dash_echo_timer.wait_time = DASH_ECHO_DELAY
-    _dash_echo_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
 
     # Calculate dash speed from the specified dash distance and duration.
     DASH_SPEED = DASH_DISTANCE / DASH_DURATION
@@ -35,13 +25,12 @@ func _ready() -> void:
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     var dash_manager := player.get_dash_manager()
 
-    # Reset dash duration, dash cooldown, and dash echo timers.
+    # Reset dash duration and dash cooldown timers.
     _dash_duration_timer.start()
-    _dash_echo_timer.connect('timeout', self, '_on_dash_echo_timeout', [player])
-    _dash_echo_timer.start()
     dash_manager.get_dash_cooldown_timer().stop()
 
-    player.emit_dash_puff()
+    # Initiate various particle effects for dash.
+    player.emit_dash_effects()
 
     # Reset player velocity.
     player.velocity = Vector2.ZERO
@@ -56,10 +45,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 func exit(player: Player) -> void:
     # Start the cooldown timer once the dash finishes.
     player.get_dash_manager().get_dash_cooldown_timer().start()
-
-    # Stop the dash echo timer.
-    _dash_echo_timer.disconnect('timeout', self, '_on_dash_echo_timeout')
-    _dash_echo_timer.stop()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
@@ -85,17 +70,3 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(player.velocity)
 
     return {'new_state': Player.State.NO_CHANGE}
-
-func _on_dash_echo_timeout(player: Player) -> void:
-    # TODO: Configure dash in terms of how many echoes to emit and consider not
-    #       emitting an echo right under the player.
-
-    var echo = DashEcho.instance()
-
-    # Add echo node above player but below the rest of the world so that it's
-    # drawn under the player but over the rest of the world.
-    player.get_parent().get_node('TemporaryNodes').add_child(echo)
-
-    echo.flip_h = (player.get_direction() == -1)
-    # TODO: Why is there this 8 pixel offset?
-    echo.set_global_position(player.get_global_position() + Vector2(0, -8))

@@ -5,6 +5,9 @@ signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
 signal player_walked_to_point
 
+const DashEchoLeft := preload('res://actors/player/textures/dash-echo-left.png')
+const DashEchoRight := preload('res://actors/player/textures/dash-echo-right.png')
+
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
 # not itself constitute a valid player state.
@@ -88,6 +91,7 @@ onready var _floor_proximity_detector: RayCast2D = $FloorProximityDetector
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _dust_puff: Particles2D = $DustPuff
 onready var _dash_puff: Particles2D = $DashPuff
+onready var _dash_echoes: Particles2D = $DashEchoes
 
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_hook: Sprite = $GrappleHook
@@ -102,7 +106,6 @@ onready var _invincibility_flash_manager: Node = $FlashManager
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 
 onready var _dash_duration_timer: Timer = $States/Dash/DashDurationTimer
-onready var _dash_echo_timer: Timer = $States/Dash/DashEchoTimer
 
 onready var _stagger_duration_timer: Timer = $States/Stagger/StaggerDurationTimer
 
@@ -234,8 +237,9 @@ func get_wall_normal_back() -> Vector2:
 func emit_dust_puff() -> void:
     _dust_puff.restart()
 
-func emit_dash_puff() -> void:
+func emit_dash_effects() -> void:
     _dash_puff.restart()
+    _dash_echoes.restart()
 
 func start_attack(attack_animation_name: String = 'attack') -> void:
     _enemies_hit.clear()
@@ -285,6 +289,13 @@ func set_direction(direction: int) -> void:
     var dash_puff_speed := abs(_dash_puff.process_material.initial_velocity)
     _dash_puff.process_material.initial_velocity = dash_puff_speed * direction
 
+    # Use appropriate texture for dash echoes.
+    match direction:
+        Util.Direction.LEFT:
+            _dash_echoes.texture = DashEchoLeft
+        Util.Direction.RIGHT:
+            _dash_echoes.texture = DashEchoRight
+
     # Flip all "y-axis mirrored" nodes.
     if direction in [-1, 1]:
         for node in get_tree().get_nodes_in_group('mirror_y_axis'):
@@ -329,8 +340,10 @@ func pause() -> void:
 
     _dash_manager.get_dash_cooldown_timer().paused = true
 
+    _dash_puff.speed_scale = 0
+    _dash_echoes.speed_scale = 0
+
     _dash_duration_timer.paused = true
-    _dash_echo_timer.paused = true
     _stagger_duration_timer.paused = true
 
     _fall_time_stopwatch.pause()
@@ -347,8 +360,10 @@ func unpause() -> void:
 
     _dash_manager.get_dash_cooldown_timer().paused = false
 
+    _dash_puff.speed_scale = 1
+    _dash_echoes.speed_scale = 1
+
     _dash_duration_timer.paused = false
-    _dash_echo_timer.paused = false
     _stagger_duration_timer.paused = false
 
     _fall_time_stopwatch.resume()
