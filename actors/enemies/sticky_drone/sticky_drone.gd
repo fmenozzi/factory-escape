@@ -70,10 +70,9 @@ func move(
     snap: Vector2 = Util.NO_SNAP,
     floor_normal: Vector2 = Util.FLOOR_NORMAL
 ) -> void:
-    # Adjust velocity by factoring in the current sprite direction and current
-    # rotation (which will have been set according the the floor_normal
-    # property).
-    velocity = velocity.rotated(deg2rad(self.direction * self.rotation_degrees))
+    # Adjust velocity by factoring in the current rotation (which will have been
+    # set according the the floor_normal property).
+    velocity = velocity.rotated(deg2rad(self.rotation_degrees))
 
     .move_and_slide_with_snap(velocity, snap, floor_normal)
 
