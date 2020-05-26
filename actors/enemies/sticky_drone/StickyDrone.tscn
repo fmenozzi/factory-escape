@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 6.5 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 resource_name = "crouch"
 length = 1.2
 tracks/0/type = "value"
@@ -32,7 +32,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "crouching"
 length = 1.2
 loop = true
@@ -49,8 +49,7 @@ tracks/0/keys = {
 "values": [ 18, 19, 20, 21, 22, 23 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=4]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -66,7 +65,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "uncrouch"
 length = 1.2
 tracks/0/type = "value"
@@ -82,8 +81,7 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27, 28, 29 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "walk"
+[sub_resource type="Animation" id=6]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -99,10 +97,10 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 6.5, 6.5 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 6.5, 6.5 )
 
 [node name="StickyDrone" type="KinematicBody2D"]
@@ -116,6 +114,8 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 5 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
+single_flash_duration = 0.075
+flash_color = Color( 1, 1, 1, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 1 )]
 movement_speed_tiles_per_second = 1.0
@@ -128,8 +128,12 @@ visible = false
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 2 )
 
+[node name="IdleDurationTimer" type="Timer" parent="States/Idle"]
+
 [node name="Walk" type="Node" parent="States"]
 script = ExtResource( 4 )
+
+[node name="WalkDurationTimer" type="Timer" parent="States/Walk"]
 
 [node name="Crouch" type="Node" parent="States"]
 script = ExtResource( 11 )
@@ -152,11 +156,11 @@ position = Vector2( -0.5, -6.5 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/crouch = SubResource( 6 )
-anims/crouching = SubResource( 7 )
-anims/idle = SubResource( 2 )
-anims/uncrouch = SubResource( 8 )
-anims/walk = SubResource( 3 )
+anims/crouch = SubResource( 2 )
+anims/crouching = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/uncrouch = SubResource( 5 )
+anims/walk = SubResource( 6 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
@@ -164,7 +168,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -172,7 +176,7 @@ collision_mask = 272
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="Laser" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0, -13 )
