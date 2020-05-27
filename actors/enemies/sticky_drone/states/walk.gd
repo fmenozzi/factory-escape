@@ -17,10 +17,14 @@ func exit(sticky_drone: StickyDrone) -> void:
     pass
 
 func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
+    var aggro_manager := sticky_drone.get_aggro_manager()
+    var physics_manager := sticky_drone.get_physics_manager()
+
+    if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():
+        return {'new_state': StickyDrone.State.ALERTED}
+
     if _walk_duration_timer.is_stopped():
         return {'new_state': StickyDrone.State.IDLE}
-
-    var physics_manager := sticky_drone.get_physics_manager()
 
     var velocity := Vector2(
         sticky_drone.direction * physics_manager.get_movement_speed(), 0)

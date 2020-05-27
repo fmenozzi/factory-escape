@@ -5,6 +5,8 @@ enum State {
     NO_CHANGE,
     IDLE,
     WALK,
+    ALERTED,
+    UNALERTED,
     CROUCH,
     SHOOT,
     UNCROUCH,
@@ -21,11 +23,13 @@ enum FloorNormal {
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
-    State.IDLE:     $States/Idle,
-    State.WALK:     $States/Walk,
-    State.CROUCH:   $States/Crouch,
-    State.SHOOT:    $States/Shoot,
-    State.UNCROUCH: $States/Uncrouch,
+    State.IDLE:      $States/Idle,
+    State.WALK:      $States/Walk,
+    State.ALERTED:   $States/Alerted,
+    State.UNALERTED: $States/Unalerted,
+    State.CROUCH:    $States/Crouch,
+    State.SHOOT:     $States/Shoot,
+    State.UNCROUCH:  $States/Uncrouch,
 }
 
 var _current_state: Node = null
@@ -34,6 +38,8 @@ var _current_state_enum: int = -1
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: PhysicsManager = $PhysicsManager
+onready var _aggro_manager: AggroManager = $AggroManager
+onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _laser: Laser = $Laser
@@ -44,19 +50,27 @@ func _ready() -> void:
 
     set_direction(direction)
 
+    _react_sprite.change_state(ReactSprite.State.NONE)
+
     # Set rotation to match the specified floor normal. This floor normal will
-    # also be used as a basis for movement.
+    # also be used as a basis for movement. Also ensure that the react sprite's
+    # orientation is the same regardless of the floor normal by undoing its
+    # rotation.
     match floor_normal:
         FloorNormal.UP:
             self.rotation_degrees = 0
+            _react_sprite.rotation_degrees = 0
         FloorNormal.DOWN:
             self.rotation_degrees = 180
+            _react_sprite.rotation_degrees = -180
         FloorNormal.LEFT:
             self.rotation_degrees = -90
+            _react_sprite.rotation_degrees = 90
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
+            _react_sprite.rotation_degrees = -90
 
-    _current_state_enum = State.CROUCH
+    _current_state_enum = State.IDLE
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
@@ -100,6 +114,12 @@ func get_floor_normal() -> Vector2:
 
 func get_physics_manager() -> PhysicsManager:
     return _physics_manager
+
+func get_aggro_manager() -> AggroManager:
+    return _aggro_manager
+
+func get_react_sprite() -> ReactSprite:
+    return _react_sprite
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
