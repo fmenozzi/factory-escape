@@ -15,6 +15,11 @@ const TELEGRAPH_DURATION: float = 1.0
 # and can harm the player.
 const SHOT_DURATION: float = 1.0
 
+# The maximum length of the laser. Even if the target is closer, the laser will
+# continue to cast to the point this length away in the same direction, since
+# lasers shouldn't stop in midair.
+const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
+
 onready var _beam_sprite: Sprite = $Beam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
 onready var _target: Position2D = $Target
@@ -74,7 +79,7 @@ func shoot(target_local := Vector2.ZERO) -> void:
     _is_shooting = false
 
 func _get_collision_point_local() -> Vector2:
-    _raycast.cast_to = _target.position
+    _raycast.cast_to = _target.position.normalized() * MAX_LENGTH
     _raycast.force_raycast_update()
     if _raycast.is_colliding():
         return self.to_local(_raycast.get_collision_point())
