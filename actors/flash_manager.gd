@@ -3,7 +3,7 @@ extends Node
 
 signal flashing_finished
 
-const flash_shader := preload('res://shared/shaders/flash.shader')
+const FlashShader := preload('res://shared/shaders/flash.shader')
 
 export(NodePath) var sprite_path = ""
 export(float) var total_duration := 2.0
@@ -50,7 +50,7 @@ func resume_timer() -> void:
 
 func _setup_tween() -> void:
     # Attach flash shader to sprite and set flash color shader param.
-    _shader_manager.add_shader(flash_shader, _sprite)
+    _shader_manager.add_shader(FlashShader, _sprite)
     _shader_manager.set_shader_param('flash_color', flash_color)
 
     # Reset flash tween to animate lerp amount in flash shader.

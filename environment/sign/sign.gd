@@ -2,7 +2,7 @@ extends Area2D
 
 export(Array, String) var dialog
 
-const FlashShader := preload('res://shaders/flash.shader')
+const FlashShader := preload('res://shared/shaders/flash.shader')
 const UNHIGHLIGHTED_LERP_AMOUNT := 0.0
 const HIGHLIGHTED_LERP_AMOUNT := 1.0
 
