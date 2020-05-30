@@ -10,9 +10,10 @@ func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
     var aggro_manager := sticky_drone.get_aggro_manager()
 
     if not sticky_drone.get_animation_player().is_playing():
-        # Transition to unalerted state once outside of aggro radius or once the
-        # player is no longer visible.
-        if not aggro_manager.in_aggro_range() or not aggro_manager.can_see_player():
+        # Once aggroed, sticky drone will only unaggro when out of range, and
+        # NOT when player is no longer in line of sight (i.e. the drone will
+        # "track" the player through cover).
+        if not aggro_manager.in_aggro_range():
             return {'new_state': StickyDrone.State.UNALERTED}
 
         return {'new_state': StickyDrone.State.IDLE}
