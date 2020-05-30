@@ -117,16 +117,14 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 5 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
-single_flash_duration = 0.075
-flash_color = Color( 1, 1, 1, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 1 )]
 movement_speed_tiles_per_second = 1.0
 
 [node name="AggroManager" parent="." instance=ExtResource( 9 )]
 position = Vector2( 0, -8 )
-aggro_radius_tiles = 4.0
-unaggro_radius_tiles = 6.0
+aggro_radius_tiles = 8.0
+unaggro_radius_tiles = 14.0
 
 [node name="States" type="Node" parent="."]
 
