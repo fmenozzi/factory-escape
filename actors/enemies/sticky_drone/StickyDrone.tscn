@@ -183,7 +183,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 7 )
 vframes = 5
 hframes = 6
-frame = 12
+frame = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, -6.5 )
@@ -213,6 +213,7 @@ position = Vector2( -0.5, -6.5 )
 shape = SubResource( 8 )
 
 [node name="Laser" parent="." instance=ExtResource( 8 )]
-position = Vector2( 0, -13 )
+show_behind_parent = true
+position = Vector2( 0, -12 )
 outer_beam_width = 4.0
 inner_beam_width = 2.0
