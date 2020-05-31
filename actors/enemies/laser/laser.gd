@@ -21,7 +21,8 @@ const SHOT_DURATION: float = 1.0
 # lasers shouldn't stop in midair.
 const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
 
-onready var _beam_sprite: Sprite = $Beam
+onready var _outer_beam_sprite: Sprite = $OuterBeam
+onready var _inner_beam_sprite: Sprite = $InnerBeam
 onready var _raycast: RayCast2D = $Offset/RayCast2D
 onready var _target: Position2D = $Target
 onready var _impact_sprite: Sprite = $Target/BeamImpact
@@ -37,7 +38,8 @@ var _inner_beam_width := 0.0
 
 func _ready() -> void:
     # Make sure each instance gets its own shader material.
-    _beam_sprite.set_material(_beam_sprite.get_material().duplicate(true))
+    _outer_beam_sprite.set_material(_outer_beam_sprite.get_material().duplicate(true))
+    _inner_beam_sprite.set_material(_inner_beam_sprite.get_material().duplicate(true))
     _impact_sprite.set_material(_impact_sprite.get_material().duplicate(true))
 
     # Convert beam impact radius from pixels to shader's UV space.
@@ -80,7 +82,8 @@ func shoot(target_local := Vector2.ZERO) -> void:
 
     # Once the shot is finished, we're able to shoot again.
     yield(self, 'shot_finished')
-    _beam_sprite.visible = false
+    _outer_beam_sprite.visible = false
+    _inner_beam_sprite.visible = false
     _impact_sprite.visible = false
     _impact_sparks.emitting = false
     _hitbox_collision_shape.set_deferred('disabled', true)
@@ -107,22 +110,24 @@ func _update_target(collision_point_local: Vector2) -> void:
     _target.rotation = collision_point_local.angle()
 
 func _update_beam_sprite(collision_point_local: Vector2) -> void:
-    # Rotate and extend beam sprite to point to collision point.
-    _beam_sprite.rotation = collision_point_local.angle()
-    _beam_sprite.region_rect.end.x = collision_point_local.length()
+    # Rotate and extend beam sprites to point to collision point.
+    _outer_beam_sprite.rotation = collision_point_local.angle()
+    _outer_beam_sprite.region_rect.end.x = collision_point_local.length()
+    _inner_beam_sprite.rotation = collision_point_local.angle()
+    _inner_beam_sprite.region_rect.end.x = collision_point_local.length()
 
 func _update_shader_params() -> void:
     # Update beam rendering by setting shader params.
-    var beam_width_px := _beam_sprite.texture.get_height()
+    var outer_beam_width_px := _outer_beam_sprite.texture.get_height()
+    var inner_beam_width_px := _inner_beam_sprite.texture.get_height()
 
-    var outer_beam_width_uv := outer_beam_width / beam_width_px
-    var inner_beam_width_uv := inner_beam_width / beam_width_px
+    var outer_beam_width_uv := outer_beam_width / outer_beam_width_px
+    var inner_beam_width_uv := inner_beam_width / inner_beam_width_px
 
-    var shader_material: ShaderMaterial = _beam_sprite.get_material()
-    shader_material.set_shader_param(
-        'outer_beam_half_width_uv', outer_beam_width_uv / 2.0)
-    shader_material.set_shader_param(
-        'inner_beam_half_width_uv', inner_beam_width_uv / 2.0)
+    _outer_beam_sprite.get_material().set_shader_param(
+        'beam_half_width_uv', outer_beam_width_uv / 2.0)
+    _inner_beam_sprite.get_material().set_shader_param(
+        'beam_half_width_uv', inner_beam_width_uv / 2.0)
 
 func _update_collision_shape(collision_point_local: Vector2) -> void:
     # Set hitbox collision shape dynamically based on the laser's contact point
@@ -148,7 +153,8 @@ func _start_laser_telegraph() -> void:
     # Wait until we start wobbling with new beam widths before making beam
     # sprite visible.
     yield(_tween, 'tween_started')
-    _beam_sprite.visible = true
+    _outer_beam_sprite.visible = true
+    _inner_beam_sprite.visible = true
 
     yield(_tween, 'tween_all_completed')
     emit_signal('telegraph_finished')
