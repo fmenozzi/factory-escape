@@ -217,3 +217,4 @@ show_behind_parent = true
 position = Vector2( 0, -12 )
 outer_beam_width = 4.0
 inner_beam_width = 2.0
+beam_impact_radius = 2.0
