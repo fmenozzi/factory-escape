@@ -13,8 +13,13 @@ onready var _unaggro_area: Area2D = $UnaggroArea
 onready var _unaggro_collision_shape: CollisionShape2D = $UnaggroArea/CollisionShape2D
 
 func _ready() -> void:
-    _aggro_collision_shape.shape.radius = aggro_radius_tiles * Util.TILE_SIZE
-    _unaggro_collision_shape.shape.radius = unaggro_radius_tiles * Util.TILE_SIZE
+    var aggro_circle_shape = CircleShape2D.new()
+    aggro_circle_shape.radius = aggro_radius_tiles * Util.TILE_SIZE
+    _aggro_collision_shape.shape = aggro_circle_shape
+
+    var unaggro_circle_shape = CircleShape2D.new()
+    unaggro_circle_shape.radius = unaggro_radius_tiles * Util.TILE_SIZE
+    _unaggro_collision_shape.shape = unaggro_circle_shape
 
 func in_aggro_range(player: Player = Util.get_player()) -> bool:
     assert(player != null)
