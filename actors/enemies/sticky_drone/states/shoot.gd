@@ -7,7 +7,7 @@ func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     _player = Util.get_player()
     _shot_finished = false
 
-    sticky_drone.get_animation_player().play('crouching')
+    sticky_drone.get_animation_player().queue('crouching')
 
     var laser := sticky_drone.get_laser()
 

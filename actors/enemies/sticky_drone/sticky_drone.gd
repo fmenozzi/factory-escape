@@ -142,6 +142,17 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
 
+# This function is called during the 'crouch' animation in order to transition
+# to the SHOOT state in the middle of the animation. This effectively means that
+# the drone will start shooting in the middle of this animation, and this
+# animation is allowed to finish before starting the looped 'crouching'
+# animation from within the SHOOT state.
+func _transition_to_shoot_state(pause_before_shooting: bool = false) -> void:
+    _change_state({
+        'new_state': State.SHOOT,
+        'pause_before_shooting': pause_before_shooting,
+    })
+
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('STICKY DRONE HIT (new health: ', new_health, ')')
 

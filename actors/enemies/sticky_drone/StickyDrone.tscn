@@ -34,6 +34,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 12, 13, 14, 15, 16, 17 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_transition_to_shoot_state"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "crouching"
@@ -117,6 +131,8 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 5 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
+single_flash_duration = 0.075
+flash_color = Color( 1, 1, 1, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 1 )]
 movement_speed_tiles_per_second = 1.0
@@ -167,6 +183,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 7 )
 vframes = 5
 hframes = 6
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, -6.5 )
