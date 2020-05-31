@@ -6,6 +6,7 @@ signal shot_finished
 
 export(float, 0, 16) var outer_beam_width := 8.0
 export(float, 0, 16) var inner_beam_width := 4.0
+export(float, 0, 8) var beam_impact_radius := 4.0
 
 # The amount of time the laser spends telegraphing the subsequent shot, during
 # which the player cannot be harmed.
@@ -37,6 +38,13 @@ var _inner_beam_width := 0.0
 func _ready() -> void:
     # Make sure each instance gets its own shader material.
     _beam_sprite.set_material(_beam_sprite.get_material().duplicate(true))
+    _impact_sprite.set_material(_impact_sprite.get_material().duplicate(true))
+
+    # Convert beam impact radius from pixels to shader's UV space.
+    var impact_sprite_radius_px := _impact_sprite.texture.get_width() / 2.0
+    var impact_sprite_radius_uv := beam_impact_radius / impact_sprite_radius_px
+    _impact_sprite.get_material().set_shader_param(
+        'impact_radius_uv', impact_sprite_radius_uv)
 
     _tween.connect('tween_step', self, '_on_wobble_tween_step')
 

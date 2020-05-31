@@ -46,6 +46,15 @@ position = Vector2( 0, 1 )
 [node name="Target" parent="World/Rooms/LaserPlayground/Hazards/Lasers/Laser" index="2"]
 position = Vector2( 0, 112 )
 
+[node name="Laser2" parent="World/Rooms/LaserPlayground/Hazards/Lasers" index="1" instance=ExtResource( 3 )]
+position = Vector2( 72, 16 )
+outer_beam_width = 4.0
+inner_beam_width = 2.0
+beam_impact_radius = 2.0
+
+[node name="Offset" parent="World/Rooms/LaserPlayground/Hazards/Lasers/Laser2" index="1"]
+position = Vector2( 0, 1 )
+
 [node name="Left" parent="World/Rooms/LaserPlayground/HazardCheckpoints" index="0" instance=ExtResource( 5 )]
 position = Vector2( 72, 160 )
 
@@ -65,6 +74,8 @@ shape = SubResource( 3 )
 [editable path="World/Rooms/LaserPlayground/TileMaps"]
 
 [editable path="World/Rooms/LaserPlayground/Hazards/Lasers/Laser"]
+
+[editable path="World/Rooms/LaserPlayground/Hazards/Lasers/Laser2"]
 
 [editable path="World/Rooms/LaserPlayground/HazardCheckpoints/Left"]
 
