@@ -9,13 +9,14 @@
 [ext_resource path="res://actors/enemies/sentry_drone/states/bash_telegraph_pause.gd" type="Script" id=7]
 [ext_resource path="res://actors/enemies/sentry_drone/states/bash.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/sentry_drone/states/bash_recover.gd" type="Script" id=9]
-[ext_resource path="res://effects/DustPuff.tscn" type="PackedScene" id=10]
+[ext_resource path="res://shared/effects/DustPuff.tscn" type="PackedScene" id=10]
 [ext_resource path="res://actors/enemies/sentry_drone/sentry_drone_physics_manager.gd" type="Script" id=11]
 [ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=12]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/sentry_drone/states/unalerted.gd" type="Script" id=14]
 [ext_resource path="res://actors/enemies/sentry_drone/states/alerted.gd" type="Script" id=15]
 [ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=16]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )

@@ -6,7 +6,7 @@
 [ext_resource path="res://actors/enemies/leaping_failure/leaping_failure.gd" type="Script" id=4]
 [ext_resource path="res://actors/enemies/leaping_failure/states/walk.gd" type="Script" id=5]
 [ext_resource path="res://actors/enemies/leaping_failure/states/fall.gd" type="Script" id=6]
-[ext_resource path="res://effects/DustPuff.tscn" type="PackedScene" id=7]
+[ext_resource path="res://shared/effects/DustPuff.tscn" type="PackedScene" id=7]
 [ext_resource path="res://actors/enemies/leaping_failure/states/return_to_ledge.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/leaping_failure/states/ground_stagger.gd" type="Script" id=9]
 [ext_resource path="res://actors/enemies/leaping_failure/states/alerted.gd" type="Script" id=10]
@@ -18,6 +18,7 @@
 [ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/enemies/leaping_failure/leaping_failure_physics_manager.gd" type="Script" id=17]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=18]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
