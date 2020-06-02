@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 # Timer for controlling how long during the wall jump the player does not have
 # directional control.

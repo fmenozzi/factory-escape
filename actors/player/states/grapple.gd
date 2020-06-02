@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 var velocity: Vector2 = Vector2.ZERO
 

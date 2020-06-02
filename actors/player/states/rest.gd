@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 # The time in seconds spent in the standard rest animation before switching to
 # the sleep animation.

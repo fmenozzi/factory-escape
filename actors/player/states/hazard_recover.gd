@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('hazard_recover')

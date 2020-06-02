@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 # If we fall for longer than this duration, transition to hard landing state
 # instead of idle state upon touching the ground.

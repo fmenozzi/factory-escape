@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 # Since we don't want the double jump to be as strong as the initial jump, use
 # this multiplier to adjust the new jump height and recalculate max jump

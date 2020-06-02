@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 # The distance covered by the dash in pixels.
 var DASH_DISTANCE: float = 4 * Util.TILE_SIZE

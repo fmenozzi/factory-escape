@@ -1,4 +1,4 @@
-extends 'res://actors/player/states/state.gd'
+extends 'res://actors/player/states/player_state.gd'
 
 var _stopping_point: Position2D
 var _direction_to_stopping_point: int = Util.Direction.NONE
