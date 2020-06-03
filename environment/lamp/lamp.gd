@@ -2,6 +2,7 @@ extends Area2D
 
 signal lamp_lit(lamp)
 signal rested_at_lamp(lamp)
+signal lit_animation_started
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
@@ -63,6 +64,8 @@ func light() -> void:
     yield(_animation_player, 'animation_started')
     _fade_in_out_label.set_text('Rest')
     fade_in_label()
+
+    emit_signal('lit_animation_started')
 
     _is_lit = true
 

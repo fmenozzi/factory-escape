@@ -91,26 +91,18 @@ func _on_player_lit_lamp(lamp: Area2D) -> void:
     # in.
     lamp.fade_out_label()
 
+    # Start the LIGHT_LAMP state sequence.
     _player.change_state({
-        'new_state': Player.State.WALK_TO_POINT,
+        'new_state': Player.State.LIGHT_LAMP,
         'stopping_point': lamp.get_closest_light_walk_to_point(),
+        'object_to_face': lamp,
     })
-    yield(_player, 'player_walked_to_point')
-    yield(get_tree(), 'physics_frame')
+    yield(_player.current_state, 'sequence_finished')
 
-    # Ensure player is facing lamp.
-    _player.set_direction(Util.direction(_player, lamp))
-
-    # Play light_lamp animation and wait for that to finish before
-    # the lamp actually lights.
-    #
-    # TODO: This might be better served as its own state.
-    var player_animation_player := _player.get_animation_player()
-    player_animation_player.play('light_lamp')
-    yield(player_animation_player, 'animation_finished')
-    player_animation_player.play('idle')
-
+    # Wait until the animation starts before continuing. This helps prevent it
+    # from being played twice if the player spams player_interact.
     lamp.light()
+    yield(lamp, 'lit_animation_started')
 
     _player.set_process_unhandled_input(true)
     lamp.set_process_unhandled_input(true)

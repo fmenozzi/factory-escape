@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -34,10 +34,9 @@
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
 [ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=33]
 [ext_resource path="res://actors/player/effects/DashEchoes.tscn" type="PackedScene" id=34]
-
-
-
-
+[ext_resource path="res://actors/player/states/play_light_lamp_animation.gd" type="Script" id=35]
+[ext_resource path="res://actors/player/states/player_state_sequence.gd" type="Script" id=36]
+[ext_resource path="res://actors/player/states/face_object.gd" type="Script" id=37]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -618,6 +617,18 @@ script = ExtResource( 19 )
 
 [node name="HazardRecover" type="Node" parent="States"]
 script = ExtResource( 20 )
+
+[node name="LightLamp" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="WalkToPoint" type="Node" parent="States/LightLamp"]
+script = ExtResource( 29 )
+
+[node name="FaceObject" type="Node" parent="States/LightLamp"]
+script = ExtResource( 37 )
+
+[node name="PlayLightLampAnimation" type="Node" parent="States/LightLamp"]
+script = ExtResource( 35 )
 
 [node name="Rest" type="Node" parent="States"]
 script = ExtResource( 21 )
