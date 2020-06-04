@@ -630,10 +630,19 @@ script = ExtResource( 37 )
 [node name="PlayLightLampAnimation" type="Node" parent="States/LightLamp"]
 script = ExtResource( 35 )
 
-[node name="Rest" type="Node" parent="States"]
+[node name="RestAtLamp" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="WalkToPoint" type="Node" parent="States/RestAtLamp"]
+script = ExtResource( 29 )
+
+[node name="FaceObject" type="Node" parent="States/RestAtLamp"]
+script = ExtResource( 37 )
+
+[node name="Rest" type="Node" parent="States/RestAtLamp"]
 script = ExtResource( 21 )
 
-[node name="RestingTimer" type="Timer" parent="States/Rest"]
+[node name="RestingTimer" type="Timer" parent="States/RestAtLamp/Rest"]
 
 [node name="WalkToPoint" type="Node" parent="States"]
 script = ExtResource( 29 )

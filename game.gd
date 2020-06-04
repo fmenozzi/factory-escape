@@ -111,15 +111,11 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     lamp.set_process_unhandled_input(false)
     _player.set_process_unhandled_input(false)
 
+    # Start the REST_AT_LAMP sequence.
     _player.change_state({
-        'new_state': Player.State.WALK_TO_POINT,
+        'new_state': Player.State.REST_AT_LAMP,
         'stopping_point': lamp.get_closest_rest_walk_to_point(),
-    })
-    yield(_player, 'player_walked_to_point')
-    yield(get_tree(), 'physics_frame')
-
-    _player.change_state({
-        'new_state': Player.State.REST,
+        'object_to_face': lamp,
         'lamp': lamp,
     })
 

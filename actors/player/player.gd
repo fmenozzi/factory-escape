@@ -27,7 +27,7 @@ enum State {
     HAZARD_HIT,
     HAZARD_RECOVER,
     LIGHT_LAMP,
-    REST,
+    REST_AT_LAMP,
     WALK_TO_POINT,
     HARD_LANDING,
 }
@@ -48,7 +48,7 @@ onready var STATES = {
     State.HAZARD_HIT:     $States/HazardHit,
     State.HAZARD_RECOVER: $States/HazardRecover,
     State.LIGHT_LAMP:     $States/LightLamp,
-    State.REST:           $States/Rest,
+    State.REST_AT_LAMP:   $States/RestAtLamp,
     State.WALK_TO_POINT:  $States/WalkToPoint,
     State.HARD_LANDING:   $States/HardLanding,
 }

@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('player_interact'):
-        if _player.current_state() == Player.State.REST:
+        if _player.current_state() == Player.State.REST_AT_LAMP:
             _player.change_state({'new_state': Player.State.IDLE})
             return
 
