@@ -3,7 +3,6 @@ class_name Player
 
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
-signal player_walked_to_point
 
 const DashEchoLeft := preload('res://actors/player/textures/dash-echo-left.png')
 const DashEchoRight := preload('res://actors/player/textures/dash-echo-right.png')
@@ -28,7 +27,7 @@ enum State {
     HAZARD_RECOVER,
     LIGHT_LAMP,
     REST_AT_LAMP,
-    WALK_TO_POINT,
+    READ_SIGN,
     HARD_LANDING,
 }
 
@@ -49,7 +48,7 @@ onready var STATES = {
     State.HAZARD_RECOVER: $States/HazardRecover,
     State.LIGHT_LAMP:     $States/LightLamp,
     State.REST_AT_LAMP:   $States/RestAtLamp,
-    State.WALK_TO_POINT:  $States/WalkToPoint,
+    State.READ_SIGN:      $States/ReadSign,
     State.HARD_LANDING:   $States/HardLanding,
 }
 
