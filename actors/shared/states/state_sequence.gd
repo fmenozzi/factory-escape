@@ -13,13 +13,12 @@ func _get_configuration_warning() -> String:
 func _ready() -> void:
     assert(get_child_count() > 0)
 
-    # Start with the first child state node and proceed sequentially.
-    _active_state = get_child(0)
-
 func enter(actor, previous_state_dict: Dictionary) -> void:
     _initial_metadata = previous_state_dict.duplicate(true)
     _initial_metadata.erase('previous_state')
 
+    # Start with the first child state node and proceed sequentially.
+    _active_state = get_child(0)
     _active_state.enter(actor, previous_state_dict)
 
 func exit(actor) -> void:
