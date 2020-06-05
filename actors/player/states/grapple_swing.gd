@@ -73,7 +73,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null and next_grapple_point != grapple_point:
             return {
-                'new_state': Player.State.GRAPPLE_START,
+                'new_state': Player.State.GRAPPLE,
                 'grapple_point': next_grapple_point,
             }
     elif event.is_action_pressed('player_jump') and velocity.y > 0:

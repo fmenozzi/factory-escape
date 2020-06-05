@@ -104,7 +104,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         var next_grapple_point := player.get_next_grapple_point()
         if next_grapple_point != null:
             return {
-                'new_state': Player.State.GRAPPLE_START,
+                'new_state': Player.State.GRAPPLE,
                 'grapple_point': next_grapple_point,
             }
 

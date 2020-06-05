@@ -15,8 +15,8 @@
 [ext_resource path="res://actors/player/states/dash.gd" type="Script" id=13]
 [ext_resource path="res://actors/player/states/wall_slide.gd" type="Script" id=14]
 [ext_resource path="res://actors/player/states/wall_jump.gd" type="Script" id=15]
-[ext_resource path="res://actors/player/states/grapple_start.gd" type="Script" id=16]
-[ext_resource path="res://actors/player/states/grapple.gd" type="Script" id=17]
+[ext_resource path="res://actors/player/states/grapple_rope_launch.gd" type="Script" id=16]
+[ext_resource path="res://actors/player/states/grapple_swing.gd" type="Script" id=17]
 [ext_resource path="res://actors/player/states/stagger.gd" type="Script" id=18]
 [ext_resource path="res://actors/player/states/hazard_hit.gd" type="Script" id=19]
 [ext_resource path="res://actors/player/states/hazard_recover.gd" type="Script" id=20]
@@ -151,7 +151,7 @@ tracks/0/keys = {
 "values": [ 56, 57, 58, 59 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("States/GrappleStart")
+tracks/1/path = NodePath("States/Grapple/GrappleRopeLaunch")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -196,7 +196,7 @@ tracks/0/keys = {
 "values": [ 56, 57, 58, 59 ]
 }
 tracks/1/type = "method"
-tracks/1/path = NodePath("States/GrappleStart")
+tracks/1/path = NodePath("States/Grapple/GrappleRopeLaunch")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -601,10 +601,13 @@ script = ExtResource( 15 )
 
 [node name="JumpCutTimer" type="Timer" parent="States/WallJump"]
 
-[node name="GrappleStart" type="Node" parent="States"]
+[node name="Grapple" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="GrappleRopeLaunch" type="Node" parent="States/Grapple"]
 script = ExtResource( 16 )
 
-[node name="Grapple" type="Node" parent="States"]
+[node name="GrappleSwing" type="Node" parent="States/Grapple"]
 script = ExtResource( 17 )
 
 [node name="Stagger" type="Node" parent="States"]
