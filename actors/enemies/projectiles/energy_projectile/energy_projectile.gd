@@ -32,6 +32,7 @@ func start(direction: Vector2) -> void:
     yield(_animation_player, 'animation_finished')
 
     _velocity = direction.normalized() * speed_tiles_per_second * Util.TILE_SIZE
+    self.rotation = direction.angle()
     _lifetime_timer.start()
     set_physics_process(true)
 
