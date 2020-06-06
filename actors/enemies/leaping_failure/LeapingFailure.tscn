@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
@@ -18,7 +18,7 @@
 [ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/enemies/leaping_failure/leaping_failure_physics_manager.gd" type="Script" id=17]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=18]
-
+[ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
@@ -118,15 +118,6 @@ script = ExtResource( 9 )
 
 [node name="StaggerDurationTimer" type="Timer" parent="States/GroundStagger"]
 
-[node name="Takeoff" type="Node" parent="States"]
-script = ExtResource( 14 )
-
-[node name="Jump" type="Node" parent="States"]
-script = ExtResource( 13 )
-
-[node name="Fall" type="Node" parent="States"]
-script = ExtResource( 6 )
-
 [node name="ReturnToLedge" type="Node" parent="States"]
 script = ExtResource( 8 )
 
@@ -141,6 +132,21 @@ script = ExtResource( 12 )
 [node name="UnalertedDurationTimer" type="Timer" parent="States/Unalerted"]
 
 [node name="TurnAroundDurationTimer" type="Timer" parent="States/Unalerted"]
+
+[node name="Fall" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="Leap" type="Node" parent="States"]
+script = ExtResource( 19 )
+
+[node name="Takeoff" type="Node" parent="States/Leap"]
+script = ExtResource( 14 )
+
+[node name="Jump" type="Node" parent="States/Leap"]
+script = ExtResource( 13 )
+
+[node name="Fall" type="Node" parent="States/Leap"]
+script = ExtResource( 6 )
 
 [node name="ReactSprite" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, -28 )

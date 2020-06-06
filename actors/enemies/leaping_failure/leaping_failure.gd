@@ -5,27 +5,26 @@ export(Util.Direction) var direction := Util.Direction.RIGHT
 
 enum State {
     NO_CHANGE,
+    NEXT_STATE_IN_SEQUENCE,
     WALK,
     FAST_WALK,
     GROUND_STAGGER,
-    TAKEOFF,
-    JUMP,
-    FALL,
     RETURN_TO_LEDGE,
     ALERTED,
     UNALERTED,
+    FALL,
+    LEAP,
 }
 
 onready var STATES := {
     State.WALK:            $States/Walk,
     State.FAST_WALK:       $States/FastWalk,
     State.GROUND_STAGGER:  $States/GroundStagger,
-    State.TAKEOFF:         $States/Takeoff,
-    State.JUMP:            $States/Jump,
-    State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
     State.ALERTED:         $States/Alerted,
     State.UNALERTED:       $States/Unalerted,
+    State.FALL:            $States/Fall,
+    State.LEAP:            $States/Leap,
 }
 
 var _current_state: Node = null

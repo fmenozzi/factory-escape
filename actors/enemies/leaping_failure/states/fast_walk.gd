@@ -48,7 +48,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
         if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
             return {'new_state': LeapingFailure.State.UNALERTED}
         else:
-            return {'new_state': LeapingFailure.State.TAKEOFF}
+            return {'new_state': LeapingFailure.State.LEAP}
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
 

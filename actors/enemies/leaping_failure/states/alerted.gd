@@ -36,7 +36,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
     var aggro_manager := failure.get_aggro_manager()
 
     if _timer.is_stopped():
-        return {'new_state': LeapingFailure.State.TAKEOFF}
+        return {'new_state': LeapingFailure.State.LEAP}
 
     # Transition to unalerted state once outside of aggro radius or once the
     # player is no longer visible.
