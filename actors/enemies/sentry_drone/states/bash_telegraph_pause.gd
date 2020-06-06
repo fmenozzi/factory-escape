@@ -22,7 +22,7 @@ func exit(sentry_drone: SentryDrone) -> void:
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     if _pause_timer.is_stopped():
         return {
-            'new_state': SentryDrone.State.BASH,
+            'new_state': SentryDrone.State.NEXT_STATE_IN_SEQUENCE,
             'direction_to_player': _direction_to_player,
         }
 

@@ -22,6 +22,6 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
         # TODO: Maybe try to emit puff at contact point.
         sentry_drone.emit_dust_puff()
         sentry_drone.move(-_direction_to_player * bash_speed)
-        return {'new_state': SentryDrone.State.BASH_RECOVER}
+        return {'new_state': SentryDrone.State.NEXT_STATE_IN_SEQUENCE}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}

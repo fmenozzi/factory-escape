@@ -30,7 +30,7 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
         if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
             return {'new_state': SentryDrone.State.UNALERTED}
         else:
-            return {'new_state': SentryDrone.State.BASH_TELEGRAPH_SHAKE}
+            return {'new_state': SentryDrone.State.ATTACK}
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
 

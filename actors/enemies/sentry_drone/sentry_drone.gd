@@ -3,25 +3,20 @@ class_name SentryDrone
 
 enum State {
     NO_CHANGE,
+    NEXT_STATE_IN_SEQUENCE,
     IDLE,
     ALERTED,
     UNALERTED,
-    BASH_TELEGRAPH_SHAKE,
-    BASH_TELEGRAPH_PAUSE,
-    BASH,
-    BASH_RECOVER,
+    ATTACK,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
 
 onready var STATES := {
-    State.IDLE:                 $States/Idle,
-    State.ALERTED:              $States/Alerted,
-    State.UNALERTED:            $States/Unalerted,
-    State.BASH_TELEGRAPH_SHAKE: $States/BashTelegraphShake,
-    State.BASH_TELEGRAPH_PAUSE: $States/BashTelegraphPause,
-    State.BASH:                 $States/Bash,
-    State.BASH_RECOVER:         $States/BashRecover,
+    State.IDLE:      $States/Idle,
+    State.ALERTED:   $States/Alerted,
+    State.UNALERTED: $States/Unalerted,
+    State.ATTACK:    $States/Attack,
 }
 
 var _current_state: Node = null

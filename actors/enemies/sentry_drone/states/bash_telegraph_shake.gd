@@ -36,7 +36,7 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
         # will not immediately ram into the ground when trying to bash the
         # nearby player who is also flush with the ground.
         return {
-            'new_state': SentryDrone.State.BASH_TELEGRAPH_PAUSE,
+            'new_state': SentryDrone.State.NEXT_STATE_IN_SEQUENCE,
             'direction_to_player': sentry_drone.global_position.direction_to(
                 _player.get_center()),
         }
