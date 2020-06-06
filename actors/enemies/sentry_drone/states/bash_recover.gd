@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 const RECOVER_DURATION: float = 1.0
 const SHAKE_DURATION: float = RECOVER_DURATION / 3.0

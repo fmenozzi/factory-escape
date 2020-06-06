@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 var _player: Player
 var _shot_finished: bool

@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 var _velocity := Vector2.ZERO
 var _aggro: bool

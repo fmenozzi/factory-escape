@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
     failure.get_node('AnimationPlayer').play('walk')

@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 # The duration of the stagger state in seconds.
 const STAGGER_DURATION: float = 0.1

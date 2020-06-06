@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 const NUM_ATTEMPTS_TO_FIND_NEXT_POINT := 10
 

@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 # The time spent telegraphing the bash attack by shaking in place.
 const SHAKE_DURATION: float = 0.5

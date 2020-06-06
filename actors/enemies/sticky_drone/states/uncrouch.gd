@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     sticky_drone.get_animation_player().play('uncrouch')

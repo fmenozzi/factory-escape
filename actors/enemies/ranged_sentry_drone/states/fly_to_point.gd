@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 var _global_fly_to_point := Vector2.ZERO
 var _nav: Navigation2D

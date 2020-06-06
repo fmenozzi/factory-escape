@@ -1,4 +1,4 @@
-extends 'res://actors/enemies/state.gd'
+extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     # The crouch animation itself will include a function call that transitions
