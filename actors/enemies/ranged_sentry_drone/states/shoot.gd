@@ -21,7 +21,7 @@ func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> 
 
     # Shoot!
     var dir = sentry_drone.global_position.direction_to(_player.get_center())
-    sentry_drone.get_projectile_spawner().shoot(dir)
+    sentry_drone.get_projectile_spawner().shoot_homing_projectile(dir)
 
     # Start shoot duration timer.
     _shoot_duration_timer.start()

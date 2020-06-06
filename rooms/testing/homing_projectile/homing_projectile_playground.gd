@@ -11,4 +11,4 @@ func _ready() -> void:
     shoot()
 
 func shoot() -> void:
-    _projectile_spawner.shoot(Vector2.RIGHT)
+    _projectile_spawner.shoot_homing_projectile(Vector2.RIGHT)

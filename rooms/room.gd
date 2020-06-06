@@ -2,6 +2,7 @@ extends Node2D
 class_name Room
 
 const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
+const EnergyProjectile := preload('res://actors/enemies/projectiles/energy_projectile/EnergyProjectile.tscn')
 
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
@@ -13,6 +14,9 @@ func _ready() -> void:
     for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
         spawner.connect(
             'homing_projectile_fired', self, '_on_homing_projectile_fired',
+            [spawner])
+        spawner.connect(
+            'energy_projectile_fired', self, '_on_energy_projectile_fired',
             [spawner])
 
 # Get global positions of all camera anchors in each room. During a transition,
@@ -83,3 +87,12 @@ func _on_homing_projectile_fired(
 
     homing_projectile.global_position = global_pos
     homing_projectile.start(dir)
+
+func _on_energy_projectile_fired(
+    global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner
+) -> void:
+    var energy_projectile := EnergyProjectile.instance()
+    _enemies.add_child(energy_projectile)
+
+    energy_projectile.global_position = global_pos
+    energy_projectile.start(dir)
