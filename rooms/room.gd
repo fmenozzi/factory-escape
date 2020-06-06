@@ -1,7 +1,7 @@
 extends Node2D
 class_name Room
 
-const HomingProjectile := preload('res://actors/enemies/homing_projectile/HomingProjectile.tscn')
+const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
 
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()

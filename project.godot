@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "Position2D",
 "class": "ProjectileSpawner",
 "language": "GDScript",
-"path": "res://actors/enemies/homing_projectile/projectile_spawner.gd"
+"path": "res://actors/enemies/projectiles/projectile_spawner.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "RangedSentryDrone",

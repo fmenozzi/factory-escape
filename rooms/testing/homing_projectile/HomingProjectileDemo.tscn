@@ -3,7 +3,7 @@
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.tscn" type="PackedScene" id=2]
 [ext_resource path="res://rooms/testing/homing_projectile/homing_projectile_playground.gd" type="Script" id=3]
-[ext_resource path="res://actors/enemies/homing_projectile/ProjectileSpawner.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/enemies/projectiles/ProjectileSpawner.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )

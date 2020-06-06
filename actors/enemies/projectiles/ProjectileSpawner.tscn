@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://actors/enemies/homing_projectile/projectile_spawner.gd" type="Script" id=1]
+[ext_resource path="res://actors/enemies/projectiles/projectile_spawner.gd" type="Script" id=1]
 
 [node name="ProjectileSpawner" type="Position2D" groups=[
 "projectile_spawners",
