@@ -31,7 +31,7 @@ func start(direction: Vector2) -> void:
     _animation_player.play('spawn')
     yield(_animation_player, 'animation_finished')
 
-    _velocity = direction * speed_tiles_per_second * Util.TILE_SIZE
+    _velocity = direction.normalized() * speed_tiles_per_second * Util.TILE_SIZE
     _lifetime_timer.start()
     set_physics_process(true)
 
