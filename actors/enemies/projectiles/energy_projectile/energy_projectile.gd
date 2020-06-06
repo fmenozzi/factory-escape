@@ -6,9 +6,9 @@ const MAX_LIFETIME := 20.0
 
 var _velocity := Vector2.ZERO
 
-onready var _trail_particles: Particles2D = $TrailParticles
 onready var _hitbox: Area2D = $Hitbox
 onready var _lifetime_timer: Timer = $LifetimeTimer
+onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
     set_physics_process(false)
@@ -27,8 +27,10 @@ func _physics_process(delta: float) -> void:
     position += _velocity * delta
 
 func start(direction: Vector2) -> void:
+    _animation_player.play('spawn')
+    yield(_animation_player, 'animation_finished')
+
     _velocity = direction * speed_tiles_per_second * Util.TILE_SIZE
-    _trail_particles.emitting = true
     _lifetime_timer.start()
     set_physics_process(true)
 
