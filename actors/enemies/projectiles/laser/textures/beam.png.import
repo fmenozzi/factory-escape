@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/beam.png-82a4fe88b15400f0744ddb513970fb0b.stex"
+path="res://.import/beam.png-2e305754f8a5001ce5ee03cac0ed4bd7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/enemies/laser/textures/beam.png"
-dest_files=[ "res://.import/beam.png-82a4fe88b15400f0744ddb513970fb0b.stex" ]
+source_file="res://actors/enemies/projectiles/laser/textures/beam.png"
+dest_files=[ "res://.import/beam.png-2e305754f8a5001ce5ee03cac0ed4bd7.stex" ]
 
 [params]
 

@@ -1,47 +1,47 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://actors/enemies/laser/laser.gd" type="Script" id=1]
-[ext_resource path="res://actors/enemies/laser/textures/beam.png" type="Texture" id=2]
-[ext_resource path="res://actors/enemies/laser/shaders/laser_beam.shader" type="Shader" id=3]
-[ext_resource path="res://actors/enemies/laser/shaders/laser_impact.shader" type="Shader" id=4]
+[ext_resource path="res://actors/enemies/projectiles/laser/shaders/laser_impact.shader" type="Shader" id=1]
+[ext_resource path="res://actors/enemies/projectiles/laser/shaders/laser_beam.shader" type="Shader" id=2]
+[ext_resource path="res://actors/enemies/projectiles/laser/laser.gd" type="Script" id=3]
+[ext_resource path="res://actors/enemies/projectiles/laser/textures/beam.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 3 )
+shader = ExtResource( 2 )
 shader_param/beam_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/beam_half_width_uv = 0.25
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
 shader_param/beam_color = Color( 1, 1, 1, 1 )
 shader_param/beam_half_width_uv = 0.25
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 4 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
 shader_param/impact_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/impact_radius_uv = 0.5
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 0.309804, 0.470588, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 spread = 40.0
 gravity = Vector3( 100, 0, 0 )
 initial_velocity = -60.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 5 )
 
 [node name="Laser" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="OuterBeam" type="Sprite" parent="."]
 visible = false
 material = SubResource( 1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 4 )
 centered = false
 offset = Vector2( 0, -8 )
 region_enabled = true
@@ -49,8 +49,8 @@ region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="InnerBeam" type="Sprite" parent="."]
 visible = false
-material = SubResource( 6 )
-texture = ExtResource( 2 )
+material = SubResource( 2 )
+texture = ExtResource( 4 )
 centered = false
 offset = Vector2( 0, -8 )
 region_enabled = true
@@ -69,8 +69,8 @@ position = Vector2( 0, 64 )
 
 [node name="BeamImpact" type="Sprite" parent="Target"]
 visible = false
-material = SubResource( 2 )
-texture = ExtResource( 2 )
+material = SubResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="BeamImpactSparks" type="Particles2D" parent="Target"]
 emitting = false
@@ -78,7 +78,7 @@ amount = 10
 lifetime = 0.5
 randomness = 1.0
 draw_order = 1
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 256

@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Laser",
 "language": "GDScript",
-"path": "res://actors/enemies/laser/laser.gd"
+"path": "res://actors/enemies/projectiles/laser/laser.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "LeapingFailure",
