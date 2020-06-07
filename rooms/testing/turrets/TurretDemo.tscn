@@ -26,8 +26,20 @@ visible = false
 position = Vector2( 160, 90 )
 shape = SubResource( 1 )
 
-[node name="Turret" parent="World/Rooms/TurretPlayground/Enemies" index="0" instance=ExtResource( 3 )]
+[node name="Bottom" parent="World/Rooms/TurretPlayground/Enemies" index="0" instance=ExtResource( 3 )]
 position = Vector2( 160, 160 )
+
+[node name="Left" parent="World/Rooms/TurretPlayground/Enemies" index="1" instance=ExtResource( 3 )]
+position = Vector2( 16, 88 )
+floor_normal = 3
+
+[node name="Top" parent="World/Rooms/TurretPlayground/Enemies" index="2" instance=ExtResource( 3 )]
+position = Vector2( 160, 16 )
+floor_normal = 1
+
+[node name="Right" parent="World/Rooms/TurretPlayground/Enemies" index="3" instance=ExtResource( 3 )]
+position = Vector2( 304, 88 )
+floor_normal = 2
 
 [node name="ShootTimer" type="Timer" parent="World/Rooms/TurretPlayground" index="9"]
 
