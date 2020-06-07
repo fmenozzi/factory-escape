@@ -9,11 +9,17 @@ enum FloorNormal {
 }
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
+onready var _health: Health = $Health
+onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
-onready var _head_sprite: Sprite = $Head/Sprite
 onready var _projectile_spawner: ProjectileSpawner = $Head/ProjectileSpawner
+onready var _head_sprite: Sprite = $Head/Sprite
+onready var _head_flash_manager: Node = $Head/FlashManager
 
 func _ready() -> void:
+    _health.connect('health_changed', self, '_on_health_changed')
+    _health.connect('died', self, '_on_died')
+
     # Set rotation to match the specified floor normal. This floor normal will
     # also be used to orient the turret so that the body sprite is against the
     # wall.
@@ -26,6 +32,11 @@ func _ready() -> void:
             self.rotation_degrees = -90
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
+
+func take_hit(damage: int, player: Player) -> void:
+    _health.take_damage(damage)
+    _body_flash_manager.start_flashing()
+    _head_flash_manager.start_flashing()
 
 func rotate_head(angle: float) -> void:
     _head.rotation = fposmod(_head.rotation + angle, 2*PI)
@@ -41,3 +52,11 @@ func shoot() -> void:
     var direction_corrected := direction.rotated(deg2rad(self.rotation_degrees))
 
     _projectile_spawner.shoot_energy_projectile(direction_corrected)
+
+func _on_health_changed(old_health: int, new_health: int) -> void:
+    print('TURRET HIT (new health: ', new_health, ')')
+
+# TODO: Make death nicer (animation, effects, etc.).
+func _on_died() -> void:
+    print('TURRET DIED')
+    queue_free()

@@ -4,7 +4,6 @@ const ROTATION_SPEED := PI/8.0
 
 var _angle := 0.0
 
-onready var _turrets: Array = $Enemies.get_children()
 onready var _shoot_timer: Timer = $ShootTimer
 
 func _ready() -> void:
@@ -16,9 +15,11 @@ func _ready() -> void:
     _shoot()
 
 func _process(delta: float) -> void:
-    for turret in _turrets:
-        turret.rotate_head(ROTATION_SPEED * delta)
+    for enemy in $Enemies.get_children():
+        if enemy is Turret:
+            enemy.rotate_head(ROTATION_SPEED * delta)
 
 func _shoot() -> void:
-    for turret in _turrets:
-        turret.shoot()
+    for enemy in $Enemies.get_children():
+        if enemy is Turret:
+            enemy.shoot()
