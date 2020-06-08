@@ -1,6 +1,8 @@
 extends Node2D
 class_name Turret
 
+export(Util.Direction) var direction := Util.Direction.RIGHT
+
 enum FloorNormal {
     UP,
     DOWN,
@@ -20,6 +22,8 @@ func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
+    set_direction(direction)
+
     # Set rotation to match the specified floor normal. This floor normal will
     # also be used to orient the turret so that the body sprite is against the
     # wall.
@@ -33,6 +37,10 @@ func _ready() -> void:
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
 
+func set_direction(new_direction: int) -> void:
+    direction = new_direction
+    _head.scale.x = new_direction
+
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _body_flash_manager.start_flashing()
@@ -44,14 +52,17 @@ func rotate_head(angle: float) -> void:
 
 func shoot() -> void:
     # The initial direction is simply the turret head's current rotation.
-    var direction := Vector2.RIGHT.rotated(_head.rotation)
+    var shoot_direction := Vector2.RIGHT.rotated(_head.rotation)
 
     # Because the entire turret can itself be rotated according to the floor
     # normal, make sure to correct the direction by factoring in the overall
     # rotation.
-    var direction_corrected := direction.rotated(deg2rad(self.rotation_degrees))
+    shoot_direction = shoot_direction.rotated(deg2rad(self.rotation_degrees))
 
-    _projectile_spawner.shoot_energy_projectile(direction_corrected)
+    # Factor in the direction of the head sprite as well.
+    shoot_direction *= self.direction
+
+    _projectile_spawner.shoot_energy_projectile(shoot_direction)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('TURRET HIT (new health: ', new_health, ')')
