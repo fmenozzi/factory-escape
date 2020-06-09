@@ -11,6 +11,19 @@ enum FloorNormal {
 }
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
+enum State {
+    NO_CHANGE,
+    NEXT_STATE_IN_SEQUENCE,
+    SCAN,
+}
+
+onready var STATES := {
+    State.SCAN: $States/Scan,
+}
+
+var _current_state: Node = null
+var _current_state_enum: int = -1
+
 onready var _health: Health = $Health
 onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
@@ -36,6 +49,15 @@ func _ready() -> void:
             self.rotation_degrees = -90
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
+
+    _current_state_enum = State.SCAN
+    _current_state = STATES[_current_state_enum]
+    _change_state({'new_state': _current_state_enum})
+
+func _physics_process(delta: float) -> void:
+    var new_state_dict = _current_state.update(self, delta)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
@@ -63,6 +85,21 @@ func shoot() -> void:
     shoot_direction *= self.direction
 
     _projectile_spawner.shoot_energy_projectile(shoot_direction)
+
+func _change_state(new_state_dict: Dictionary) -> void:
+    var old_state_enum := _current_state_enum
+    var new_state_enum: int = new_state_dict['new_state']
+
+    # Before passing along the new_state_dict to the new state (since we want
+    # any additional metadata keys passed too), rename the 'new_state' key to
+    # 'previous_state'.
+    new_state_dict.erase('new_state')
+    new_state_dict['previous_state'] = old_state_enum
+
+    _current_state.exit(self)
+    _current_state_enum = new_state_enum
+    _current_state = STATES[new_state_enum]
+    _current_state.enter(self, new_state_dict)
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('TURRET HIT (new health: ', new_health, ')')
