@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://actors/enemies/turret/textures/turret-body.png" type="Texture" id=1]
 [ext_resource path="res://actors/enemies/turret/textures/turret-head.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=9]
 [ext_resource path="res://actors/enemies/turret/states/pause.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/turret/states/pause_again.gd" type="Script" id=11]
+[ext_resource path="res://actors/enemies/turret/Scanner.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
@@ -75,6 +76,10 @@ sprite_path = NodePath("../Sprite")
 total_duration = 0.3
 single_flash_duration = 0.075
 flash_color = Color( 1, 1, 1, 1 )
+
+[node name="Scanner" parent="Head" instance=ExtResource( 12 )]
+show_behind_parent = true
+position = Vector2( 6, 0.5 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
