@@ -79,7 +79,7 @@ flash_color = Color( 1, 1, 1, 1 )
 
 [node name="Scanner" parent="Head" instance=ExtResource( 12 )]
 show_behind_parent = true
-position = Vector2( 6, 0.5 )
+position = Vector2( 6, 0 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
