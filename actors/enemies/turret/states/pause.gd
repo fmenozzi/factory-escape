@@ -9,6 +9,8 @@ func _ready() -> void:
     _pause_duration_timer.wait_time = PAUSE_DURATION
 
 func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
+    turret.change_rotation_direction()
+
     _pause_duration_timer.start()
 
 func exit(turret: Turret) -> void:
@@ -16,6 +18,9 @@ func exit(turret: Turret) -> void:
 
 func update(turret: Turret, delta: float) -> Dictionary:
     if _pause_duration_timer.is_stopped():
-        return {'new_state': Turret.State.NEXT_STATE_IN_SEQUENCE}
+        return {
+            'new_state': Turret.State.ROTATE,
+            'rotation_direction': turret.get_rotation_direction(),
+        }
 
     return {'new_state': Turret.State.NO_CHANGE}

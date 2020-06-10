@@ -13,16 +13,19 @@ export(FloorNormal) var floor_normal := FloorNormal.UP
 
 enum State {
     NO_CHANGE,
-    NEXT_STATE_IN_SEQUENCE,
-    SCAN,
+    ROTATE,
+    PAUSE,
 }
 
 onready var STATES := {
-    State.SCAN: $States/Scan,
+    State.ROTATE: $States/Rotate,
+    State.PAUSE:  $States/Pause,
 }
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
+
+var _rotation_direction := -1
 
 onready var _health: Health = $Health
 onready var _body_flash_manager: Node = $Body/FlashManager
@@ -50,9 +53,12 @@ func _ready() -> void:
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
 
-    _current_state_enum = State.SCAN
+    _current_state_enum = State.ROTATE
     _current_state = STATES[_current_state_enum]
-    _change_state({'new_state': _current_state_enum})
+    _change_state({
+        'new_state': _current_state_enum,
+        'rotation_direction': _rotation_direction
+    })
 
 func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
@@ -85,6 +91,12 @@ func shoot() -> void:
     shoot_direction *= self.direction
 
     _projectile_spawner.shoot_energy_projectile(shoot_direction)
+
+func get_rotation_direction() -> int:
+    return _rotation_direction
+
+func change_rotation_direction() -> void:
+    _rotation_direction *= -1
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
