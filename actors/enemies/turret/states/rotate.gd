@@ -10,6 +10,7 @@ onready var _rotation_duration_timer: Timer = $RotationDurationTimer
 func _ready() -> void:
     _rotation_duration_timer.one_shot = true
     _rotation_duration_timer.wait_time = ROTATION_DURATION
+    _rotation_duration_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
 
     _rotation_speed = PI / ROTATION_DURATION
 
