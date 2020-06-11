@@ -26,6 +26,9 @@ func exit(turret: Turret) -> void:
 func update(turret: Turret, delta: float) -> Dictionary:
     turret.rotate_head(_rotation_direction * _rotation_speed * delta)
 
+    if turret.get_scanner().is_colliding_with_player():
+        return {'new_state': Turret.State.ALERTED}
+
     if _rotation_duration_timer.is_stopped():
         return {'new_state': Turret.State.PAUSE}
 

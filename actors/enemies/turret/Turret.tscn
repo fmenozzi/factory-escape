@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://actors/enemies/turret/textures/turret-body.png" type="Texture" id=1]
 [ext_resource path="res://actors/enemies/turret/textures/turret-head.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://actors/Health.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/enemies/turret/states/rotate.gd" type="Script" id=7]
+[ext_resource path="res://actors/enemies/turret/states/alerted.gd" type="Script" id=8]
+[ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/turret/states/pause.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/turret/Scanner.tscn" type="PackedScene" id=12]
 
@@ -33,6 +35,14 @@ script = ExtResource( 7 )
 script = ExtResource( 10 )
 
 [node name="PauseDurationTimer" type="Timer" parent="States/Pause"]
+
+[node name="Alerted" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="AlertedDurationTimer" type="Timer" parent="States/Alerted"]
+
+[node name="ReactSprite" parent="." instance=ExtResource( 9 )]
+position = Vector2( 0, -26 )
 
 [node name="Body" type="Node2D" parent="."]
 

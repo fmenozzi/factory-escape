@@ -15,11 +15,13 @@ enum State {
     NO_CHANGE,
     ROTATE,
     PAUSE,
+    ALERTED,
 }
 
 onready var STATES := {
-    State.ROTATE: $States/Rotate,
-    State.PAUSE:  $States/Pause,
+    State.ROTATE:  $States/Rotate,
+    State.PAUSE:   $States/Pause,
+    State.ALERTED: $States/Alerted,
 }
 
 var _current_state: Node = null
@@ -28,11 +30,13 @@ var _current_state_enum: int = -1
 var _rotation_direction := -1
 
 onready var _health: Health = $Health
+onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
 onready var _projectile_spawner: ProjectileSpawner = $Head/ProjectileSpawner
 onready var _head_sprite: Sprite = $Head/Sprite
 onready var _head_flash_manager: Node = $Head/FlashManager
+onready var _scanner: Scanner = $Head/Scanner
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -40,18 +44,25 @@ func _ready() -> void:
 
     set_direction(direction)
 
+    _react_sprite.change_state(ReactSprite.State.NONE)
+
     # Set rotation to match the specified floor normal. This floor normal will
     # also be used to orient the turret so that the body sprite is against the
-    # wall.
+    # wall. Also ensure that the react sprite's orientation is the same
+    # regardless of the floor normal by undoing its rotation.
     match floor_normal:
         FloorNormal.UP:
             self.rotation_degrees = 0
+            _react_sprite.rotation_degrees = 0
         FloorNormal.DOWN:
             self.rotation_degrees = 180
+            _react_sprite.rotation_degrees = -180
         FloorNormal.LEFT:
             self.rotation_degrees = -90
+            _react_sprite.rotation_degrees = 90
         FloorNormal.RIGHT:
             self.rotation_degrees = 90
+            _react_sprite.rotation_degrees = -90
 
     _current_state_enum = State.ROTATE
     _current_state = STATES[_current_state_enum]
@@ -91,6 +102,12 @@ func shoot() -> void:
     shoot_direction *= self.direction
 
     _projectile_spawner.shoot_energy_projectile(shoot_direction)
+
+func get_react_sprite() -> ReactSprite:
+    return _react_sprite
+
+func get_scanner() -> Scanner:
+    return _scanner
 
 func get_rotation_direction() -> int:
     return _rotation_direction
