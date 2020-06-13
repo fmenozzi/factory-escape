@@ -27,12 +27,12 @@ _global_script_classes=[ {
 "base": "PhysicsManager",
 "class": "GroundedPhysicsManager",
 "language": "GDScript",
-"path": "res://actors/grounded_physics_manager.gd"
+"path": "res://actors/shared/physics_managers/grounded_physics_manager.gd"
 }, {
 "base": "Node",
 "class": "Health",
 "language": "GDScript",
-"path": "res://actors/health.gd"
+"path": "res://actors/shared/health.gd"
 }, {
 "base": "Node2D",
 "class": "JumpManager",
@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PhysicsManager",
 "language": "GDScript",
-"path": "res://actors/physics_manager.gd"
+"path": "res://actors/shared/physics_managers/physics_manager.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",

@@ -1,9 +1,9 @@
 [gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
-[ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/grounded_physics_manager.gd" type="Script" id=4]
+[ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/shared/physics_managers/grounded_physics_manager.gd" type="Script" id=4]
 [ext_resource path="res://actors/player/textures/character-spritesheet.png" type="Texture" id=5]
 [ext_resource path="res://actors/player/textures/zzz.png" type="Texture" id=6]
 [ext_resource path="res://actors/player/camera.gd" type="Script" id=7]
@@ -32,11 +32,14 @@
 [ext_resource path="res://actors/player/states/hard_landing.gd" type="Script" id=30]
 [ext_resource path="res://custom/nodes/Stopwatch.tscn" type="PackedScene" id=31]
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
-[ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=33]
+[ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=33]
 [ext_resource path="res://actors/player/effects/DashEchoes.tscn" type="PackedScene" id=34]
 [ext_resource path="res://actors/player/states/play_light_lamp_animation.gd" type="Script" id=35]
 [ext_resource path="res://actors/player/states/player_state_sequence.gd" type="Script" id=36]
 [ext_resource path="res://actors/player/states/face_object.gd" type="Script" id=37]
+
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"

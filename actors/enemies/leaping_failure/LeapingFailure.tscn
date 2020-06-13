@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://actors/FlashManager.tscn" type="PackedScene" id=1]
-[ext_resource path="res://actors/Health.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/leaping_failure/textures/leaping-failure.png" type="Texture" id=3]
 [ext_resource path="res://actors/enemies/leaping_failure/leaping_failure.gd" type="Script" id=4]
 [ext_resource path="res://actors/enemies/leaping_failure/states/walk.gd" type="Script" id=5]
@@ -15,10 +15,12 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/jump.gd" type="Script" id=13]
 [ext_resource path="res://actors/enemies/leaping_failure/states/takeoff.gd" type="Script" id=14]
 [ext_resource path="res://actors/enemies/leaping_failure/states/fast_walk.gd" type="Script" id=15]
-[ext_resource path="res://actors/PhysicsManager.tscn" type="PackedScene" id=16]
+[ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/enemies/leaping_failure/leaping_failure_physics_manager.gd" type="Script" id=17]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=18]
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=19]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
