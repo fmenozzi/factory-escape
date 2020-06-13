@@ -1,6 +1,6 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
-const TIME_BETWEEN_SHOTS: float = 0.35
+const TIME_BETWEEN_SHOTS: float = 0.2
 const NUM_SHOTS_IN_VOLLEY: int = 3
 const FOLLOW_ANGULAR_SPEED: float = PI/2
 
