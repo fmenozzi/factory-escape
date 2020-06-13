@@ -29,7 +29,7 @@ MAX_HEALTH = 3
 [node name="Rotate" type="Node" parent="States"]
 script = ExtResource( 7 )
 
-[node name="RotationDurationTimer" type="Timer" parent="States/Rotate"]
+[node name="RotationTween" type="Tween" parent="States/Rotate"]
 
 [node name="Pause" type="Node" parent="States"]
 script = ExtResource( 10 )
@@ -60,7 +60,7 @@ flash_color = Color( 1, 1, 1, 1 )
 position = Vector2( 0, -11 )
 
 [node name="ProjectileSpawner" parent="Head" instance=ExtResource( 3 )]
-position = Vector2( 6, 0 )
+position = Vector2( 0, -6 )
 
 [node name="Sprite" type="Sprite" parent="Head"]
 texture = ExtResource( 2 )
@@ -73,7 +73,8 @@ flash_color = Color( 1, 1, 1, 1 )
 
 [node name="Scanner" parent="Head" instance=ExtResource( 12 )]
 show_behind_parent = true
-position = Vector2( 6, 0 )
+position = Vector2( 0, -6 )
+rotation = -1.5708
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64

@@ -27,7 +27,7 @@ onready var STATES := {
 var _current_state: Node = null
 var _current_state_enum: int = -1
 
-var _rotation_direction := -1
+var _rotation_direction := 0
 
 onready var _health: Health = $Health
 onready var _react_sprite: ReactSprite = $ReactSprite
@@ -43,6 +43,8 @@ func _ready() -> void:
     _health.connect('died', self, '_on_died')
 
     set_direction(direction)
+
+    _rotation_direction = -direction
 
     _react_sprite.change_state(ReactSprite.State.NONE)
 
@@ -78,6 +80,7 @@ func _physics_process(delta: float) -> void:
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
+    _head.rotation = new_direction * PI/2
     _head.scale.x = new_direction
 
 func take_hit(damage: int, player: Player) -> void:
@@ -85,9 +88,9 @@ func take_hit(damage: int, player: Player) -> void:
     _body_flash_manager.start_flashing()
     _head_flash_manager.start_flashing()
 
-func rotate_head(angle: float) -> void:
-    _head.rotation = fposmod(_head.rotation + angle, 2*PI)
-    _head_sprite.flip_v = (PI/2 <= _head.rotation and _head.rotation < 3*PI/2)
+func rotate_head_to(new_rotation: float) -> void:
+    _head.rotation = new_rotation
+    _head_sprite.flip_h = (_head.scale.x * _head.rotation) < 0
 
 func shoot() -> void:
     # The initial direction is simply the turret head's current rotation.
@@ -108,6 +111,9 @@ func get_react_sprite() -> ReactSprite:
 
 func get_scanner() -> Scanner:
     return _scanner
+
+func get_head_rotation() -> float:
+    return _head.rotation
 
 func get_rotation_direction() -> int:
     return _rotation_direction

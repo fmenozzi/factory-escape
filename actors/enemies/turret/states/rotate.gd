@@ -1,35 +1,50 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
-const ROTATION_DURATION: float = 3.0
+# The duration of rotating a full 180 degrees (PI radians). If the turret head
+# is already partway through a full rotation, the rotation tween's duration will
+# be altered accordingly.
+const FULL_ROTATION_DURATION: float = 3.0
 
-var _rotation_speed := 0.0
 var _rotation_direction := 0.0
+var _elapsed_rotation := 0.0
 
-onready var _rotation_duration_timer: Timer = $RotationDurationTimer
-
-func _ready() -> void:
-    _rotation_duration_timer.one_shot = true
-    _rotation_duration_timer.wait_time = ROTATION_DURATION
-    _rotation_duration_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
-
-    _rotation_speed = PI / ROTATION_DURATION
+onready var _rotation_tween: Tween = $RotationTween
 
 func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     assert('rotation_direction' in previous_state_dict)
     _rotation_direction = sign(previous_state_dict['rotation_direction'])
 
-    _rotation_duration_timer.start()
+    var end_rotation := -PI/2 if _rotation_direction < 0 else PI/2
+    _elapsed_rotation = turret.get_head_rotation()
+
+    # Determine the fraction of the 180-degree arc that the turret head has to
+    # travel, and adjust the tween duration such that the angular speed is
+    # constant.
+    var duration := 0.0
+    if _rotation_direction < 0:
+        duration = (PI/2 + _elapsed_rotation) / PI * FULL_ROTATION_DURATION
+    else:
+        duration = (PI/2 - _elapsed_rotation) / PI * FULL_ROTATION_DURATION
+
+    _rotation_tween.remove_all()
+    _rotation_tween.connect('tween_step', self, '_on_tween_step', [turret])
+    _rotation_tween.interpolate_property(
+        self, '_elapsed_rotation', _elapsed_rotation, end_rotation, duration,
+        Tween.TRANS_LINEAR, Tween.EASE_IN)
+    _rotation_tween.start()
+
 
 func exit(turret: Turret) -> void:
-    _rotation_duration_timer.stop()
+    _rotation_tween.remove_all()
 
 func update(turret: Turret, delta: float) -> Dictionary:
-    turret.rotate_head(_rotation_direction * _rotation_speed * delta)
-
     if turret.get_scanner().is_colliding_with_player():
         return {'new_state': Turret.State.ALERTED}
 
-    if _rotation_duration_timer.is_stopped():
+    if not _rotation_tween.is_active():
         return {'new_state': Turret.State.PAUSE}
 
     return {'new_state': Turret.State.NO_CHANGE}
+
+func _on_tween_step(_obj, _key, _elapsed, val: float, turret: Turret) -> void:
+    turret.rotate_head_to(val)
