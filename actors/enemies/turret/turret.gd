@@ -16,12 +16,14 @@ enum State {
     ROTATE,
     PAUSE,
     ALERTED,
+    SHOOT,
 }
 
 onready var STATES := {
     State.ROTATE:  $States/Rotate,
     State.PAUSE:   $States/Pause,
     State.ALERTED: $States/Alerted,
+    State.SHOOT:   $States/Shoot,
 }
 
 var _current_state: Node = null
@@ -94,7 +96,7 @@ func rotate_head_to(new_rotation: float) -> void:
 
 func shoot() -> void:
     # The initial direction is simply the turret head's current rotation.
-    var shoot_direction := Vector2.RIGHT.rotated(_head.rotation)
+    var shoot_direction := Vector2.UP.rotated(_head.rotation)
 
     # Because the entire turret can itself be rotated according to the floor
     # normal, make sure to correct the direction by factoring in the overall

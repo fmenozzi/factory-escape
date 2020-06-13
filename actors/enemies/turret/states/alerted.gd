@@ -22,9 +22,6 @@ func exit(turret: Turret) -> void:
 
 func update(turret: Turret, delta: float) -> Dictionary:
     if _alerted_duration_timer.is_stopped():
-        return {
-            'new_state': Turret.State.ROTATE,
-            'rotation_direction': turret.get_rotation_direction(),
-        }
+        return {'new_state': Turret.State.SHOOT}
 
     return {'new_state': Turret.State.NO_CHANGE}
