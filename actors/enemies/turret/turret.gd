@@ -39,6 +39,7 @@ onready var _projectile_spawner: ProjectileSpawner = $Head/ProjectileSpawner
 onready var _head_sprite: Sprite = $Head/Sprite
 onready var _head_flash_manager: Node = $Head/FlashManager
 onready var _scanner: Scanner = $Head/Scanner
+onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -119,6 +120,9 @@ func get_head_rotation() -> float:
 
 func get_rotation_direction() -> int:
     return _rotation_direction
+
+func get_animation_player() -> AnimationPlayer:
+    return _animation_player
 
 func change_rotation_direction() -> void:
     _rotation_direction *= -1

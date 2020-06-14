@@ -48,7 +48,7 @@ func _get_angular_direction_to_player(turret: Turret) -> float:
     return sign(turret_head_rotation_vec.angle_to(player_position_local))
 
 func _shoot(turret: Turret) -> void:
-    turret.shoot()
+    turret.get_animation_player().play('shoot')
     _num_shots_fired += 1
     if _num_shots_fired == NUM_SHOTS_IN_VOLLEY:
         _shoot_timer.stop()
