@@ -24,8 +24,7 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     _shoot_timer.start()
 
 func exit(turret: Turret) -> void:
-    # Show scan line.
-    turret.get_scanner().visible = true
+    pass
 
 func update(turret: Turret, delta: float) -> Dictionary:
     var aggro_manager := turret.get_aggro_manager()

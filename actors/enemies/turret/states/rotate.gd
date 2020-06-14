@@ -33,6 +33,8 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
         Tween.TRANS_LINEAR, Tween.EASE_IN)
     _rotation_tween.start()
 
+    # Show scan line.
+    turret.get_scanner().visible = true
 
 func exit(turret: Turret) -> void:
     _rotation_tween.remove_all()

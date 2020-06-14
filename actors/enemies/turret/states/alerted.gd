@@ -20,6 +20,9 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
 
     _alerted_duration_timer.start()
 
+    # Hide scan line.
+    turret.get_scanner().visible = false
+
 func exit(turret: Turret) -> void:
     # Hide reaction sprite.
     turret.get_react_sprite().change_state(ReactSprite.State.NONE)

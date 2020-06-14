@@ -13,6 +13,9 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
 
     _pause_duration_timer.start()
 
+    # Show scan line.
+    turret.get_scanner().visible = true
+
 func exit(turret: Turret) -> void:
     _pause_duration_timer.stop()
 
