@@ -32,6 +32,7 @@ var _current_state_enum: int = -1
 var _rotation_direction := 0
 
 onready var _health: Health = $Health
+onready var _aggro_manager: AggroManager = $AggroManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
@@ -108,6 +109,9 @@ func shoot() -> void:
     shoot_direction *= self.direction
 
     _projectile_spawner.shoot_energy_projectile(shoot_direction)
+
+func get_aggro_manager() -> AggroManager:
+    return _aggro_manager
 
 func get_react_sprite() -> ReactSprite:
     return _react_sprite

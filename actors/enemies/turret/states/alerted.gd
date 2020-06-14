@@ -2,6 +2,8 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 const ALERTED_DURATION: float = 1.0
 
+var _already_aggroed := false
+
 onready var _alerted_duration_timer: Timer = $AlertedDurationTimer
 
 func _ready() -> void:
@@ -9,8 +11,12 @@ func _ready() -> void:
     _alerted_duration_timer.wait_time = ALERTED_DURATION
 
 func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
-    # Display alerted reaction.
-    turret.get_react_sprite().change_state(ReactSprite.State.ALERTED)
+    assert('already_aggroed' in previous_state_dict)
+    _already_aggroed = previous_state_dict['already_aggroed']
+
+    # Display alerted reaction if we weren't already aggroed.
+    if not _already_aggroed:
+        turret.get_react_sprite().change_state(ReactSprite.State.ALERTED)
 
     _alerted_duration_timer.start()
 

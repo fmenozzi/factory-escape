@@ -28,12 +28,20 @@ func exit(turret: Turret) -> void:
     turret.get_scanner().visible = true
 
 func update(turret: Turret, delta: float) -> Dictionary:
+    var aggro_manager := turret.get_aggro_manager()
+
     var angular_delta := \
         _get_angular_direction_to_player(turret) * FOLLOW_ANGULAR_SPEED * delta
     turret.rotate_head_to(turret.get_head_rotation() + angular_delta)
 
     if _shoot_timer.is_stopped():
-        return {'new_state': Turret.State.PAUSE}
+        if aggro_manager.can_see_player() and aggro_manager.in_unaggro_range():
+            return {
+                'new_state': Turret.State.ALERTED,
+                'already_aggroed': true
+            }
+        else:
+            return {'new_state': Turret.State.PAUSE}
 
     return {'new_state': Turret.State.NO_CHANGE}
 

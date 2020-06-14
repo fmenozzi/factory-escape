@@ -17,8 +17,14 @@ func exit(turret: Turret) -> void:
     _pause_duration_timer.stop()
 
 func update(turret: Turret, delta: float) -> Dictionary:
-    if turret.get_scanner().is_colliding_with_player():
-        return {'new_state': Turret.State.ALERTED}
+    var scanner := turret.get_scanner()
+    var aggro_manager := turret.get_aggro_manager()
+
+    if scanner.is_colliding_with_player() or aggro_manager.in_aggro_range():
+        return {
+            'new_state': Turret.State.ALERTED,
+            'already_aggroed': false
+        }
 
     if _pause_duration_timer.is_stopped():
         return {
