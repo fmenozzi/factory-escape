@@ -2,10 +2,13 @@ extends 'res://ui/menus/menu.gd'
 
 onready var _vsync: CheckBox = $VSync
 onready var _fullscreen: CheckBox = $Fullscreen
+onready var _back_button: Button = $Back
 
 func _ready() -> void:
     _vsync.connect('pressed', self, '_on_vsync_pressed')
     _fullscreen.connect('pressed', self, '_on_fullscreen_pressed')
+
+    _back_button.connect('pressed', self, '_on_back_pressed')
 
 func enter(previous_menu: int) -> void:
     self.visible = true
@@ -31,3 +34,6 @@ func _on_vsync_pressed() -> void:
 func _on_fullscreen_pressed() -> void:
     # TODO: Save this somewhere persistent as well.
     OS.set_window_fullscreen(_fullscreen.is_pressed())
+
+func _on_back_pressed() -> void:
+    change_menu(Pause.Menu.VIDEO_OPTIONS, Pause.Menu.OPTIONS)
