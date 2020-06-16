@@ -301,9 +301,9 @@ func set_direction(direction: int) -> void:
             var original_position = _mirror_y_axis_node_original_positions[node]
             node.position.x = original_position.x * direction
 
-func set_nearby_readable_object(new_readable_object: Area2D) -> void:
+func set_nearby_readable_object(new_readable_object: Node2D) -> void:
     _nearby_readable_object = new_readable_object
-func get_nearby_readable_object() -> Area2D:
+func get_nearby_readable_object() -> Node2D:
     return _nearby_readable_object
 
 func set_nearby_lamp(new_lamp: Area2D) -> void:

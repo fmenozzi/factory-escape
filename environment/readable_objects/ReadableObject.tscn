@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://environment/readable_objects/readable_object.gd" type="Script" id=1]
+[ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/WalkToPoints.tscn" type="PackedScene" id=3]
+
+[node name="ReadableObject" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="ReadableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReadableArea"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="FadeInOutLabel" parent="." instance=ExtResource( 2 )]
+text = "Read"
+
+[node name="WalkToPoints" parent="." instance=ExtResource( 3 )]

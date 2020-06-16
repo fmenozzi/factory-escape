@@ -85,6 +85,11 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/react_sprite.gd"
 }, {
 "base": "Node2D",
+"class": "ReadableObject",
+"language": "GDScript",
+"path": "res://environment/readable_objects/readable_object.gd"
+}, {
+"base": "Node2D",
 "class": "Room",
 "language": "GDScript",
 "path": "res://rooms/room.gd"
@@ -150,6 +155,7 @@ _global_script_class_icons={
 "ProjectileSpawner": "",
 "RangedSentryDrone": "",
 "ReactSprite": "",
+"ReadableObject": "",
 "Room": "",
 "Scanner": "",
 "SentryDrone": "",
