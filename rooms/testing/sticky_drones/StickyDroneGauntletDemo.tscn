@@ -6,8 +6,9 @@
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/lamp/Lamp.tscn" type="PackedScene" id=6]
-[ext_resource path="res://environment/sign/Sign.tscn" type="PackedScene" id=7]
+[ext_resource path="res://environment/readable_objects/sign/Sign.tscn" type="PackedScene" id=7]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=8]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 90 )
