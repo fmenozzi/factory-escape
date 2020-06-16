@@ -24,7 +24,7 @@ func _on_player_entered(player: Player) -> void:
     if not player:
         return
 
-    player.set_nearby_sign(self)
+    player.set_nearby_readable_object(self)
 
     _modulate_sign_color(UNHIGHLIGHTED_LERP_AMOUNT, HIGHLIGHTED_LERP_AMOUNT)
     label_fade_in()
@@ -33,7 +33,7 @@ func _on_player_exited(player: Player) -> void:
     if not player:
         return
 
-    player.set_nearby_sign(null)
+    player.set_nearby_readable_object(null)
 
     _modulate_sign_color(HIGHLIGHTED_LERP_AMOUNT, UNHIGHLIGHTED_LERP_AMOUNT)
     label_fade_out()

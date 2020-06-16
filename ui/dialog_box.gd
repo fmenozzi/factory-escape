@@ -37,25 +37,25 @@ func _unhandled_input(event: InputEvent) -> void:
                         _advance_dialog_to_next_page()
                     else:
                         # End dialog if there is no more left to display.
-                        var nearby_sign := _player.get_nearby_sign()
-                        nearby_sign.label_fade_in()
+                        var nearby_readable_object := _player.get_nearby_readable_object()
+                        nearby_readable_object.label_fade_in()
                         _stop_dialog()
                         _current_state = State.DISABLED
 
             # ui_cancel to exit the dialog box
             if event.is_action_pressed('ui_cancel'):
-                var nearby_sign := _player.get_nearby_sign()
-                nearby_sign.label_fade_in()
+                var nearby_readable_object := _player.get_nearby_readable_object()
+                nearby_readable_object.label_fade_in()
                 _stop_dialog()
                 _current_state = State.DISABLED
 
         State.DISABLED:
             # Ensure player is idle near a sign.
-            var nearby_sign := _player.get_nearby_sign()
-            if not nearby_sign or _player.current_state() != Player.State.IDLE:
+            var nearby_readable_object := _player.get_nearby_readable_object()
+            if not nearby_readable_object or _player.current_state() != Player.State.IDLE:
                 return
 
-            _dialog = nearby_sign.dialog
+            _dialog = nearby_readable_object.dialog
 
             # player_interact to open up the dialog box when near a sign.
             if event.is_action_pressed('player_interact'):
@@ -64,12 +64,12 @@ func _unhandled_input(event: InputEvent) -> void:
                 # Start READ_SIGN sequence.
                 _player.change_state({
                     'new_state': Player.State.READ_SIGN,
-                    'stopping_point': nearby_sign.get_closest_reading_point(),
-                    'object_to_face': nearby_sign,
+                    'stopping_point': nearby_readable_object.get_closest_reading_point(),
+                    'object_to_face': nearby_readable_object,
                 })
                 yield(_player.current_state, 'sequence_finished')
 
-                nearby_sign.label_fade_out()
+                nearby_readable_object.label_fade_out()
                 _start_dialog()
                 _current_state = State.ENABLED
 

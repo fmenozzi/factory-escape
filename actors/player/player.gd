@@ -119,7 +119,7 @@ onready var _dash_manager: DashManager = $DashManager
 # to null and grappling has no effect.
 var _next_grapple_point: GrapplePoint = null
 
-var _nearby_sign = null
+var _nearby_readable_object = null
 var _nearby_lamp = null
 
 var _current_hazard_checkpoint: Area2D = null
@@ -301,10 +301,10 @@ func set_direction(direction: int) -> void:
             var original_position = _mirror_y_axis_node_original_positions[node]
             node.position.x = original_position.x * direction
 
-func set_nearby_sign(new_sign: Area2D) -> void:
-    _nearby_sign = new_sign
-func get_nearby_sign() -> Area2D:
-    return _nearby_sign
+func set_nearby_readable_object(new_readable_object: Area2D) -> void:
+    _nearby_readable_object = new_readable_object
+func get_nearby_readable_object() -> Area2D:
+    return _nearby_readable_object
 
 func set_nearby_lamp(new_lamp: Area2D) -> void:
     _nearby_lamp = new_lamp
