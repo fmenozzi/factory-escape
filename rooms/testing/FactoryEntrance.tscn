@@ -2,11 +2,10 @@
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
-[ext_resource path="res://environment/readable_objects/sign/Sign.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=6]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=7]
-
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -54,14 +53,6 @@ position = Vector2( 280, 96 )
 position = Vector2( -70, -16 )
 shape = SubResource( 2 )
 
-[node name="TestSign" parent="." index="4" instance=ExtResource( 3 )]
-position = Vector2( 160, 144 )
-dialog = [ "Hello", "This is a test of whether exporting arrays works", "Pls work" ]
-
-[node name="TestSign2" parent="." index="5" instance=ExtResource( 3 )]
-position = Vector2( 304, 96 )
-dialog = [ "Man I hope this works...", "Maybe it did?" ]
-
 [node name="MovingPlatformSmall" parent="MovingPlatforms" index="0" instance=ExtResource( 4 )]
 position = Vector2( 128, 72 )
 
@@ -94,6 +85,10 @@ position = Vector2( 328, 48 )
 rotation = -1.5708
 shape = SubResource( 4 )
 one_way_collision = true
+
+[node name="ComputerTerminalSmall" parent="." index="9" instance=ExtResource( 3 )]
+position = Vector2( 160, 144 )
+dialog = [ "Hello", "This is a test of whether exporting arrays works", "Pls work" ]
 
 [editable path="TileMaps"]
 
