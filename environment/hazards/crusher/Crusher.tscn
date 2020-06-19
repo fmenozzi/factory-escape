@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://environment/hazards/crusher/crusher.gd" type="Script" id=1]
+[ext_resource path="res://environment/hazards/crusher/textures/crusher-background.png" type="Texture" id=2]
+[ext_resource path="res://environment/hazards/crusher/textures/crusher-head.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 14 )
+
+[node name="Crusher" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="BackgroundSprite" type="Sprite" parent="."]
+position = Vector2( 0, -28 )
+texture = ExtResource( 2 )
+
+[node name="CrusherHead" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -14 )
+collision_layer = 4
+collision_mask = 3
+motion/sync_to_physics = true
+
+[node name="Sprite" type="Sprite" parent="CrusherHead"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CrusherHead"]
+shape = SubResource( 1 )
+
+[node name="MoveTween" type="Tween" parent="."]
+repeat = true
+playback_process_mode = 0
+playback/repeat = true
