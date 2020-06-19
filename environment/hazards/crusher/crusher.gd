@@ -1,9 +1,12 @@
 extends Node2D
 
+export(float) var initial_delay := 0.0
+
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _dust_puffs: Array = $CrusherHead/DustPuffs.get_children()
 
 func _ready() -> void:
+    yield(get_tree().create_timer(initial_delay), 'timeout')
     _animation_player.play('crush_loop')
 
 func _impact() -> void:
