@@ -31,9 +31,13 @@ shape = SubResource( 1 )
 [node name="CrusherLeft" parent="World/Rooms/Room/Hazards" index="0" instance=ExtResource( 3 )]
 position = Vector2( 152, 160 )
 
-[node name="CrusherRight" parent="World/Rooms/Room/Hazards" index="1" instance=ExtResource( 3 )]
+[node name="CrusherMiddle" parent="World/Rooms/Room/Hazards" index="1" instance=ExtResource( 3 )]
 position = Vector2( 208, 160 )
 initial_delay = 1.0
+
+[node name="CrusherRightFast" parent="World/Rooms/Room/Hazards" index="2" instance=ExtResource( 3 )]
+position = Vector2( 264, 160 )
+speed = 1
 
 [node name="HazardCheckpoint" parent="World/Rooms/Room/HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 96, 160 )
