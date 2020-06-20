@@ -6,7 +6,7 @@
 [ext_resource path="res://shared/effects/DustPuff.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 14 )
+extents = Vector2( 16, 18 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 14 )
@@ -49,15 +49,15 @@ collision_layer = 4
 collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="Background"]
-position = Vector2( 0, -28 )
+position = Vector2( 0, -46 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background"]
-position = Vector2( 0, -42 )
+position = Vector2( 0, -46 )
 shape = SubResource( 1 )
 
 [node name="CrusherHead" type="KinematicBody2D" parent="."]
-position = Vector2( 0, -23.1946 )
+position = Vector2( 0, -14 )
 collision_layer = 4
 collision_mask = 3
 motion/sync_to_physics = true
