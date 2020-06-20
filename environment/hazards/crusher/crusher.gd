@@ -10,7 +10,16 @@ func _ready() -> void:
     _animation_player.play('crush_loop')
 
 func _impact() -> void:
-    Screenshake.start(Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
+    if _player_is_near():
+        Screenshake.start(Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
 
     for dust_puff in _dust_puffs:
         dust_puff.emitting = true
+
+func _player_is_near() -> bool:
+    var player: Player = Util.get_player()
+    assert(player != null)
+
+    # For now, simply check that the player is in the same room as the crusher.
+    var current_room: Room = get_parent().get_parent()
+    return player.curr_room == current_room
