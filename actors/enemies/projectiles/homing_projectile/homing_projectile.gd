@@ -1,4 +1,5 @@
 extends Node2D
+class_name HomingProjectile
 
 export(float) var speed_tiles_per_second := 8.0
 

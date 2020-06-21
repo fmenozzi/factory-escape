@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://actors/player/dash_manager.gd"
 }, {
 "base": "Node2D",
+"class": "EnergyProjectile",
+"language": "GDScript",
+"path": "res://actors/enemies/projectiles/energy_projectile/energy_projectile.gd"
+}, {
+"base": "Node2D",
 "class": "FireColumn",
 "language": "GDScript",
 "path": "res://environment/hazards/fire_column/fire_column.gd"
@@ -38,6 +43,11 @@ _global_script_classes=[ {
 "class": "Health",
 "language": "GDScript",
 "path": "res://actors/shared/health.gd"
+}, {
+"base": "Node2D",
+"class": "HomingProjectile",
+"language": "GDScript",
+"path": "res://actors/enemies/projectiles/homing_projectile/homing_projectile.gd"
 }, {
 "base": "Node2D",
 "class": "JumpManager",
@@ -147,10 +157,12 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AggroManager": "",
 "DashManager": "",
+"EnergyProjectile": "",
 "FireColumn": "",
 "GrapplePoint": "",
 "GroundedPhysicsManager": "",
 "Health": "",
+"HomingProjectile": "",
 "JumpManager": "",
 "Laser": "",
 "LeapingFailure": "",
@@ -186,6 +198,7 @@ Util="*res://custom/scripts/util.gd"
 Rumble="*res://custom/nodes/Rumble.tscn"
 Screenshake="*res://custom/nodes/Screenshake.tscn"
 Collision="*res://custom/scripts/collision.gd"
+Preloads="*res://custom/scripts/preloads.gd"
 
 [display]
 

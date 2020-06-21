@@ -1,8 +1,5 @@
 extends Room
 
-const SluggishFailure := preload('res://actors/enemies/sluggish_failure/SluggishFailure.tscn')
-const Drone := preload('res://actors/enemies/worker_drone/WorkerDrone.tscn')
-
 enum RoomState {
     PRE_FIGHT,
     FAILURE_FIGHT,
@@ -49,8 +46,8 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
             _arena_camera_pos.position)
 
         # Spawn failures.
-        _spawn_enemy_at(SluggishFailure.instance(), Vector2(88, 272))
-        _spawn_enemy_at(SluggishFailure.instance(), Vector2(232, 272))
+        _spawn_enemy_at(Preloads.SluggishFailure.instance(), Vector2(88, 272))
+        _spawn_enemy_at(Preloads.SluggishFailure.instance(), Vector2(232, 272))
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
     if _enemies_node.get_child_count() > 1:
@@ -59,6 +56,6 @@ func _on_enemy_death(enemy: KinematicBody2D) -> void:
     if _current_room_state == RoomState.FAILURE_FIGHT:
         _current_room_state = RoomState.DRONE_FIGHT
 
-        _spawn_enemy_at(Drone.instance(), Vector2(88, 256))
-        _spawn_enemy_at(Drone.instance(), Vector2(232, 256))
-        _spawn_enemy_at(Drone.instance(), Vector2(160, 320))
+        _spawn_enemy_at(Preloads.WorkerDrone.instance(), Vector2(88, 256))
+        _spawn_enemy_at(Preloads.WorkerDrone.instance(), Vector2(232, 256))
+        _spawn_enemy_at(Preloads.WorkerDrone.instance(), Vector2(160, 320))

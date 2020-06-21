@@ -46,7 +46,7 @@ position = Vector2( 344, 80 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Rooms/ClosingDoorEnemyArena/ClosingDoorManager/ClosingDoorTrigger" index="0"]
 shape = SubResource( 2 )
 
-[node name="Player" parent="World" index="1"]
+[node name="Player" parent="World" index="3"]
 position = Vector2( 50, 160 )
 
 [editable path="World/Rooms/ClosingDoorEnemyArena"]

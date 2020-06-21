@@ -1,7 +1,5 @@
 extends Room
 
-const Drone := preload('res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn')
-
 enum RoomState {
     PRE_FIGHT,
     DRONE_FIGHT,
@@ -58,8 +56,8 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
         # TODO: is there a better way to do this? Maybe some kind of signal or
         #       notification when a child is added to Enemies? Or else some way
         #       of doing this automatically when a ProjectileSpawner is created?
-        _spawn_enemy_at(Drone.instance(), Vector2(240, 96))
-        _spawn_enemy_at(Drone.instance(), Vector2(400, 96))
+        _spawn_enemy_at(Preloads.RangedSentryDrone.instance(), Vector2(240, 96))
+        _spawn_enemy_at(Preloads.RangedSentryDrone.instance(), Vector2(400, 96))
         for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
             spawner.connect(
                 'homing_projectile_fired', self, '_on_homing_projectile_fired',

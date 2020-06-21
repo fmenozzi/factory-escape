@@ -4,9 +4,6 @@ class_name Player
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
 
-const DashEchoLeft := preload('res://actors/player/textures/dash-echo-left.png')
-const DashEchoRight := preload('res://actors/player/textures/dash-echo-right.png')
-
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
 # not itself constitute a valid player state.
@@ -291,9 +288,9 @@ func set_direction(direction: int) -> void:
     # Use appropriate texture for dash echoes.
     match direction:
         Util.Direction.LEFT:
-            _dash_echoes.texture = DashEchoLeft
+            _dash_echoes.texture = Preloads.DashEchoLeft
         Util.Direction.RIGHT:
-            _dash_echoes.texture = DashEchoRight
+            _dash_echoes.texture = Preloads.DashEchoRight
 
     # Flip all "y-axis mirrored" nodes.
     if direction in [-1, 1]:

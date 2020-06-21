@@ -1,7 +1,5 @@
 extends Room
 
-const Drone := preload('res://actors/enemies/sentry_drone/SentryDrone.tscn')
-
 enum RoomState {
     PRE_FIGHT,
     DRONE_FIGHT,
@@ -51,9 +49,9 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
         _player_camera.detach_and_move_to_global(_arena_camera_pos.position)
 
         # Spawn drones.
-        _spawn_enemy_at(Drone.instance(), Vector2(240, 96))
-        _spawn_enemy_at(Drone.instance(), Vector2(320, 64))
-        _spawn_enemy_at(Drone.instance(), Vector2(400, 96))
+        _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(240, 96))
+        _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(320, 64))
+        _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(400, 96))
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
     if _enemies_node.get_child_count() > 1:

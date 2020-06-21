@@ -1,7 +1,5 @@
 extends Room
 
-const SluggishFailure := preload('res://actors/enemies/sluggish_failure/SluggishFailure.tscn')
-
 enum RoomState {
     PRE_FIGHT,
     FIGHT,
@@ -44,7 +42,7 @@ func _on_player_entered(player: Player) -> void:
 
 
 func _spawn_failure_at(position: Vector2) -> void:
-    var failure := SluggishFailure.instance()
+    var failure := Preloads.SluggishFailure.instance()
     failure.set_position(position)
     failure.get_node('Health').connect(
         'died', self, '_on_failure_death', [failure])

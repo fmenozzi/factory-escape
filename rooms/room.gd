@@ -1,9 +1,6 @@
 extends Node2D
 class_name Room
 
-const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
-const EnergyProjectile := preload('res://actors/enemies/projectiles/energy_projectile/EnergyProjectile.tscn')
-
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
@@ -78,7 +75,7 @@ func contains(obj: Node2D) -> bool:
 func _on_homing_projectile_fired(
     global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner
 ) -> void:
-    var homing_projectile := HomingProjectile.instance()
+    var homing_projectile: HomingProjectile = Preloads.HomingProjectile.instance()
     _enemies.add_child(homing_projectile)
 
     spawner.connect(
@@ -91,7 +88,7 @@ func _on_homing_projectile_fired(
 func _on_energy_projectile_fired(
     global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner
 ) -> void:
-    var energy_projectile := EnergyProjectile.instance()
+    var energy_projectile: EnergyProjectile = Preloads.EnergyProjectile.instance()
     _enemies.add_child(energy_projectile)
 
     energy_projectile.global_position = global_pos

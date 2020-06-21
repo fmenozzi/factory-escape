@@ -1,7 +1,5 @@
 extends Room
 
-const Failure := preload('res://actors/enemies/leaping_failure/LeapingFailure.tscn')
-
 enum RoomState {
     PRE_FIGHT,
     FIGHT,
@@ -51,9 +49,9 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
         _player_camera.detach_and_move_to_global(_arena_camera_pos.position)
 
         # Spawn failures.
-        _spawn_enemy_at(Failure.instance(), Vector2(224, 112))
-        _spawn_enemy_at(Failure.instance(), Vector2(256, 160))
-        _spawn_enemy_at(Failure.instance(), Vector2(416, 112))
+        _spawn_enemy_at(Preloads.LeapingFailure.instance(), Vector2(224, 112))
+        _spawn_enemy_at(Preloads.LeapingFailure.instance(), Vector2(256, 160))
+        _spawn_enemy_at(Preloads.LeapingFailure.instance(), Vector2(416, 112))
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
     if _enemies_node.get_child_count() > 1:

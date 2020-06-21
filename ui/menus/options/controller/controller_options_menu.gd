@@ -58,22 +58,22 @@ var _player_action_to_remap: int = -1
 
 const JOYPAD_BUTTONS_TO_TEXTURES: Dictionary = {
     # Main buttons.
-    JOY_XBOX_A: preload('res://ui/menus/options/controller/textures/xbox-a.png'),
-    JOY_XBOX_B: preload('res://ui/menus/options/controller/textures/xbox-b.png'),
-    JOY_XBOX_X: preload('res://ui/menus/options/controller/textures/xbox-x.png'),
-    JOY_XBOX_Y: preload('res://ui/menus/options/controller/textures/xbox-y.png'),
+    JOY_XBOX_A: Preloads.XboxA,
+    JOY_XBOX_B: Preloads.XboxB,
+    JOY_XBOX_X: Preloads.XboxX,
+    JOY_XBOX_Y: Preloads.XboxY,
 
     # Bumbers and triggers.
-    JOY_L:  preload('res://ui/menus/options/controller/textures/xbox-lb.png'),
-    JOY_R:  preload('res://ui/menus/options/controller/textures/xbox-rb.png'),
-    JOY_L2: preload('res://ui/menus/options/controller/textures/xbox-lt.png'),
-    JOY_R2: preload('res://ui/menus/options/controller/textures/xbox-rt.png'),
+    JOY_L:  Preloads.XboxLb,
+    JOY_R:  Preloads.XboxRb,
+    JOY_L2: Preloads.XboxLt,
+    JOY_R2: Preloads.XboxRt,
 
     # D-pad.
-    JOY_DPAD_UP:    preload('res://ui/menus/options/controller/textures/xbox-dpad-up.png'),
-    JOY_DPAD_RIGHT: preload('res://ui/menus/options/controller/textures/xbox-dpad-right.png'),
-    JOY_DPAD_DOWN:  preload('res://ui/menus/options/controller/textures/xbox-dpad-down.png'),
-    JOY_DPAD_LEFT:  preload('res://ui/menus/options/controller/textures/xbox-dpad-left.png'),
+    JOY_DPAD_UP:    Preloads.XboxDpadUp,
+    JOY_DPAD_RIGHT: Preloads.XboxDpadRight,
+    JOY_DPAD_DOWN:  Preloads.XboxDpadDown,
+    JOY_DPAD_LEFT:  Preloads.XboxDpadLeft,
 }
 
 func _ready() -> void:
