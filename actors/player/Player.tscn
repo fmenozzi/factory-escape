@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -39,7 +39,7 @@
 [ext_resource path="res://actors/player/states/face_object.gd" type="Script" id=37]
 
 [sub_resource type="Animation" id=1]
-resource_name = "attack"
+resource_name = "attack_1"
 length = 0.24
 step = 0.01
 tracks/0/type = "value"
@@ -53,6 +53,40 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 42, 43 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Hitboxes/SideAttack/CollisionShape2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.18 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ "disabled", false ],
+"method": "set_deferred"
+}, {
+"args": [ "disabled", true ],
+"method": "set_deferred"
+} ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "attack_2"
+length = 0.24
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 44, 45, 46, 47 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("Hitboxes/SideAttack/CollisionShape2D")
@@ -472,7 +506,8 @@ script = ExtResource( 4 )
 movement_speed_tiles_per_second = 6.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 1 )
+anims/attack_1 = SubResource( 1 )
+anims/attack_2 = SubResource( 24 )
 anims/attack_up = SubResource( 2 )
 anims/dash = SubResource( 3 )
 anims/fall = SubResource( 4 )

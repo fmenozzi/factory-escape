@@ -126,6 +126,8 @@ var _current_hazard_checkpoint: Area2D = null
 var prev_room = null
 var curr_room = null
 
+var use_attack_1 := true
+
 func _ready() -> void:
     # Begin in fall state
     current_state_enum = State.FALL
@@ -237,12 +239,20 @@ func emit_dash_effects() -> void:
     _dash_puff.restart()
     _dash_echoes.restart()
 
-func start_attack(attack_animation_name: String = 'attack') -> void:
+func start_attack(attack_animation_name: String = 'attack_1') -> void:
     _enemies_hit.clear()
-    get_animation_player().play(attack_animation_name)
+    if attack_animation_name == 'attack_1':
+        if use_attack_1:
+            get_animation_player().play('attack_1')
+        else:
+            get_animation_player().play('attack_2')
+        use_attack_1 = not use_attack_1
+    else:
+        get_animation_player().play(attack_animation_name)
 
 func is_attacking() -> bool:
-    return get_animation_player().current_animation in ['attack', 'attack_up']
+    var possible_attacks := ['attack_1', 'attack_2', 'attack_up']
+    return get_animation_player().current_animation in possible_attacks
 
 # Flush animation queue so that we can cancel attack animations cleanly.
 func stop_attack() -> void:

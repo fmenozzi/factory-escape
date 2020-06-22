@@ -50,7 +50,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if Input.is_action_pressed("player_move_up"):
             player.start_attack('attack_up')
         else:
-            player.start_attack('attack')
+            player.start_attack('attack_1')
         player.get_animation_player().queue('jump')
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         return {'new_state': Player.State.DASH}
