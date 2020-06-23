@@ -483,10 +483,10 @@ extents = Vector2( 5, 7 )
 extents = Vector2( 4, 6 )
 
 [sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 14, 7 )
+extents = Vector2( 18, 7 )
 
 [sub_resource type="RectangleShape2D" id=24]
-extents = Vector2( 7, 14 )
+extents = Vector2( 7, 16 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
@@ -533,7 +533,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 44
+frame = 49
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -584,7 +584,7 @@ script = ExtResource( 7 )
 [node name="SideAttack" type="Area2D" parent="Hitboxes" groups=[
 "mirror_y_axis",
 ]]
-position = Vector2( 22, -8 )
+position = Vector2( 18, -8 )
 collision_layer = 16
 collision_mask = 128
 
@@ -597,7 +597,7 @@ collision_layer = 16
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/UpAttack"]
-position = Vector2( 0, -30 )
+position = Vector2( 0, -28 )
 shape = SubResource( 24 )
 disabled = true
 
