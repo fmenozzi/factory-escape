@@ -4,9 +4,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
-    # Stop attack animation, in case we were attacking in previous state.
-    player.stop_attack()
-
     # Play walk animation.
     player.get_animation_player().play('walk')
 
@@ -20,9 +17,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
-        # Play attack animation before returning to walk animation.
-        player.start_attack()
-        player.get_animation_player().queue('walk')
+        return {'new_state': Player.State.ATTACK}
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):

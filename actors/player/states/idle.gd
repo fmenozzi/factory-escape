@@ -16,11 +16,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_jump_manager().reset_jump()
 
 func exit(player: Player) -> void:
-    # In case we exit the idle state before the previously-playing attack
-    # animation finishes, stop the attack, which has the effect of both flushing
-    # the animation queue and hiding the attack sprite.
-    if player.is_attacking():
-        player.stop_attack()
+    pass
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
@@ -29,12 +25,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
-        # Play attack animation before returning to idle animation.
         if Input.is_action_pressed("player_move_up"):
-            player.start_attack('attack_up')
+            return {'new_state': Player.State.ATTACK_UP}
         else:
-            player.start_attack('attack_1')
-        player.get_animation_player().queue('idle')
+            return {'new_state': Player.State.ATTACK}
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):

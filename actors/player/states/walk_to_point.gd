@@ -7,9 +7,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
-    # Stop attack animation, in case we were attacking in previous state.
-    player.stop_attack()
-
     # Play walk animation.
     player.get_animation_player().play('walk')
 

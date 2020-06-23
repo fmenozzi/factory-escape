@@ -17,6 +17,8 @@ enum State {
     DASH,
     WALL_SLIDE,
     WALL_JUMP,
+    ATTACK,
+    ATTACK_UP,
     GRAPPLE,
     STAGGER,
     HAZARD_HIT,
@@ -37,6 +39,8 @@ onready var STATES = {
     State.DASH:           $States/Dash,
     State.WALL_SLIDE:     $States/WallSlide,
     State.WALL_JUMP:      $States/WallJump,
+    State.ATTACK:         $States/Attack,
+    State.ATTACK_UP:      $States/AttackUp,
     State.GRAPPLE:        $States/Grapple,
     State.STAGGER:        $States/Stagger,
     State.HAZARD_HIT:     $States/HazardHit,
@@ -241,14 +245,7 @@ func emit_dash_effects() -> void:
 
 func start_attack(attack_animation_name: String = 'attack_1') -> void:
     _enemies_hit.clear()
-    if attack_animation_name == 'attack_1':
-        if use_attack_1:
-            get_animation_player().play('attack_1')
-        else:
-            get_animation_player().play('attack_2')
-        use_attack_1 = not use_attack_1
-    else:
-        get_animation_player().play(attack_animation_name)
+    get_animation_player().play(attack_animation_name)
 
 func is_attacking() -> bool:
     var possible_attacks := ['attack_1', 'attack_2', 'attack_up']
