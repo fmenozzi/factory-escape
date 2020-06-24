@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -39,6 +39,7 @@
 [ext_resource path="res://actors/player/states/face_object.gd" type="Script" id=37]
 [ext_resource path="res://actors/player/states/attack.gd" type="Script" id=38]
 [ext_resource path="res://actors/player/states/attack_up.gd" type="Script" id=39]
+[ext_resource path="res://actors/player/attack_manager.gd" type="Script" id=40]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -640,8 +641,6 @@ script = ExtResource( 15 )
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource( 38 )
 
-[node name="AttackComboTimer" type="Timer" parent="States/Attack"]
-
 [node name="AttackUp" type="Node" parent="States"]
 script = ExtResource( 39 )
 
@@ -786,3 +785,8 @@ cast_to = Vector2( 0, 8 )
 collision_mask = 260
 
 [node name="DashCooldown" type="Timer" parent="DashManager"]
+
+[node name="Attackmanager" type="Node2D" parent="."]
+script = ExtResource( 40 )
+
+[node name="AttackComboTimer" type="Timer" parent="Attackmanager"]

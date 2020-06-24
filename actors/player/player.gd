@@ -113,6 +113,7 @@ onready var _fall_time_stopwatch: Stopwatch = $States/Fall/FallTimeStopwatch
 
 onready var _jump_manager: JumpManager = $JumpManager
 onready var _dash_manager: DashManager = $DashManager
+onready var _attack_manager: AttackManager = $Attackmanager
 
 # The grapple point to be used the next time the player presses the grapple
 # button. This is updated on every frame based on several candidacy rules. If
@@ -328,6 +329,9 @@ func get_jump_manager() -> JumpManager:
 
 func get_dash_manager() -> DashManager:
     return _dash_manager
+
+func get_attack_manager() -> AttackManager:
+    return _attack_manager
 
 # Pause/resume processing for player node specifically. Used during room
 # transitions.

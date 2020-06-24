@@ -1,20 +1,7 @@
 extends 'res://actors/player/states/player_state.gd'
 
-onready var _attack_combo_timer: Timer = $AttackComboTimer
-
-func _ready() -> void:
-    _attack_combo_timer.one_shot = true
-    _attack_combo_timer.wait_time = 0.5
-
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    # Attack using appropriate animation, depending on how much time has passed
-    # since the last attack.
-    if _attack_combo_timer.is_stopped():
-        _attack_combo_timer.start()
-        player.start_attack('attack_1')
-    else:
-        _attack_combo_timer.stop()
-        player.start_attack('attack_2')
+    player.start_attack(player.get_attack_manager().get_next_attack_animation())
 
 func exit(player: Player) -> void:
     player.stop_attack()

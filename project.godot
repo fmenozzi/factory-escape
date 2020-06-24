@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/aggro_manager.gd"
 }, {
 "base": "Node2D",
+"class": "AttackManager",
+"language": "GDScript",
+"path": "res://actors/player/attack_manager.gd"
+}, {
+"base": "Node2D",
 "class": "DashManager",
 "language": "GDScript",
 "path": "res://actors/player/dash_manager.gd"
@@ -156,6 +161,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AggroManager": "",
+"AttackManager": "",
 "DashManager": "",
 "EnergyProjectile": "",
 "FireColumn": "",
