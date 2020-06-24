@@ -32,12 +32,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
 
-    # Let attack animation play out before switching to fall animation.
-    if player.is_attacking():
-        player.get_animation_player().clear_queue()
-        player.get_animation_player().queue('fall')
-    else:
-        player.get_animation_player().play('fall')
+    player.get_animation_player().play('fall')
 
     # Treat falling off a ledge as consuming a jump (i.e. can only jump again if
     # we have the double jump). Also, start the coyote timer to allow for jumps
@@ -75,11 +70,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var dash_manager := player.get_dash_manager()
 
     if event.is_action_pressed('player_attack'):
-        if Input.is_action_pressed("player_move_up"):
-            player.start_attack('attack_up')
+        if Input.is_action_pressed('player_move_up'):
+            return {'new_state': Player.State.ATTACK_UP}
         else:
-            player.start_attack('attack_1')
-        player.get_animation_player().queue('fall')
+            return {'new_state': Player.State.ATTACK}
     elif event.is_action_pressed('player_dash'):
         if dash_manager.can_dash():
             return {'new_state': Player.State.DASH}

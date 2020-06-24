@@ -21,12 +21,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # will cause the velocity to "cut", allowing for variable-height jumps).
     player.velocity.y = NEW_MAX_JUMP_VELOCITY
 
-    # Let attack animation play out before switching to jump animation.
-    if player.is_attacking():
-        player.get_animation_player().clear_queue()
-        player.get_animation_player().queue('jump')
-    else:
-        player.get_animation_player().play('jump')
+    player.get_animation_player().play('jump')
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.get_jump_manager().consume_jump()
@@ -48,10 +43,9 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             player.velocity.y, physics_manager.get_min_jump_velocity())
     elif event.is_action_pressed('player_attack'):
         if Input.is_action_pressed("player_move_up"):
-            player.start_attack('attack_up')
+            return {'new_state': Player.State.ATTACK_UP}
         else:
-            player.start_attack('attack_1')
-        player.get_animation_player().queue('jump')
+            return {'new_state': Player.State.ATTACK}
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):
