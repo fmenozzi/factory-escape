@@ -72,7 +72,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_attack'):
         if Input.is_action_pressed('player_move_up'):
             return {'new_state': Player.State.ATTACK_UP}
-        else:
+        elif player.get_attack_manager().can_attack():
             return {'new_state': Player.State.ATTACK}
     elif event.is_action_pressed('player_dash'):
         if dash_manager.can_dash():

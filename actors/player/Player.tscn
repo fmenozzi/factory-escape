@@ -790,3 +790,5 @@ collision_mask = 260
 script = ExtResource( 40 )
 
 [node name="AttackComboTimer" type="Timer" parent="Attackmanager"]
+
+[node name="AttackCooldownTimer" type="Timer" parent="Attackmanager"]
