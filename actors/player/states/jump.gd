@@ -14,11 +14,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_jump_manager().consume_jump()
 
 func exit(player: Player) -> void:
-    # In case we exit the jump state before the previously-playing attack
-    # animation finishes, stop the attack, which has the effect of both flushing
-    # the animation queue and hiding the attack sprite.
-    if player.is_attacking():
-        player.stop_attack()
+    pass
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var physics_manager := player.get_physics_manager()

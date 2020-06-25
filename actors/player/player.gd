@@ -248,10 +248,6 @@ func start_attack(attack_animation_name: String = 'attack_1') -> void:
     _enemies_hit.clear()
     get_animation_player().play(attack_animation_name)
 
-func is_attacking() -> bool:
-    var possible_attacks := ['attack_1', 'attack_2', 'attack_up']
-    return get_animation_player().current_animation in possible_attacks
-
 # Flush animation queue so that we can cancel attack animations cleanly.
 func stop_attack() -> void:
     get_animation_player().clear_queue()

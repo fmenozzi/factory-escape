@@ -4,12 +4,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
-    # Let attack animation play out before switching to idle animation.
-    if player.is_attacking():
-        player.get_animation_player().clear_queue()
-        player.get_animation_player().queue('idle')
-    else:
-        player.get_animation_player().play('idle')
+    player.get_animation_player().play('idle')
 
     # Reset the dash and double jump.
     player.get_dash_manager().reset_dash()
