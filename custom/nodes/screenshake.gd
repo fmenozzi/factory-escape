@@ -9,12 +9,14 @@ enum Priority {
 }
 
 enum Duration {
+    VERY_SHORT,
     SHORT,
     MEDIUM,
     LONG,
 }
 
 enum Amplitude {
+    VERY_SMALL,
     SMALL,
     MEDIUM,
     LARGE,
@@ -83,6 +85,9 @@ func _reset_camera_offset() -> void:
 
 func _get_duration(duration: int) -> float:
     match duration:
+        Duration.VERY_SHORT:
+            return 0.05
+
         Duration.SHORT:
             return 0.1
 
@@ -96,6 +101,9 @@ func _get_duration(duration: int) -> float:
 
 func _get_amplitude(amplitude: int) -> float:
     match amplitude:
+        Amplitude.VERY_SMALL:
+            return 1.0
+
         Amplitude.SMALL:
             return 0.25 * Util.TILE_SIZE
 
