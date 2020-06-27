@@ -533,10 +533,6 @@ script = ExtResource( 1 )
 
 [node name="Health" parent="." instance=ExtResource( 2 )]
 
-[node name="FlashManager" parent="." instance=ExtResource( 3 )]
-sprite_path = NodePath("../Sprite")
-flash_color = Color( 1, 0.309804, 0.470588, 1 )
-
 [node name="PhysicsManager" parent="." instance=ExtResource( 33 )]
 script = ExtResource( 4 )
 movement_speed_tiles_per_second = 6.0
@@ -694,6 +690,11 @@ script = ExtResource( 36 )
 [node name="Hit" type="Node" parent="States/Stagger"]
 script = ExtResource( 42 )
 
+[node name="FlashManager" parent="States/Stagger/Hit" instance=ExtResource( 3 )]
+sprite_path = NodePath("../../../../Sprite")
+total_duration = 1.2
+flash_color = Color( 1, 0.309804, 0.470588, 1 )
+
 [node name="Knockback" type="Node" parent="States/Stagger"]
 script = ExtResource( 18 )
 
@@ -701,6 +702,10 @@ script = ExtResource( 18 )
 
 [node name="HazardHit" type="Node" parent="States"]
 script = ExtResource( 19 )
+
+[node name="FlashManager" parent="States/HazardHit" instance=ExtResource( 3 )]
+sprite_path = NodePath("../../../Sprite")
+flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
 [node name="HazardRecover" type="Node" parent="States"]
 script = ExtResource( 20 )

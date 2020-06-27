@@ -102,7 +102,8 @@ onready var _health: Health = $Health
 onready var _hitboxes: Node2D = $Hitboxes
 onready var _hurtbox: Area2D = $Hurtbox
 
-onready var _invincibility_flash_manager: Node = $FlashManager
+onready var _invincibility_flash_manager_hazard_hit: Node = $States/HazardHit/FlashManager
+onready var _invincibility_flash_manager_enemy_hit: Node = $States/Stagger/Hit/FlashManager
 
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 
@@ -144,9 +145,6 @@ func _ready() -> void:
     # all be mirrored at once when the player changes direction.
     for node in get_tree().get_nodes_in_group('mirror_y_axis'):
         _mirror_y_axis_node_original_positions[node] = node.get_position()
-
-    _invincibility_flash_manager.connect(
-        'flashing_finished', self, '_on_invincibility_flashing_finished')
 
     for hitbox in _hitboxes.get_children():
         hitbox.connect('area_entered', self, '_on_attack_connected')
@@ -342,7 +340,8 @@ func pause() -> void:
         _animation_queue.append(animation)
     get_animation_player().stop(false)
 
-    _invincibility_flash_manager.pause_timer()
+    _invincibility_flash_manager_hazard_hit.pause_timer()
+    _invincibility_flash_manager_enemy_hit.pause_timer()
 
     _dash_manager.get_dash_cooldown_timer().paused = true
 
@@ -362,7 +361,8 @@ func unpause() -> void:
         get_animation_player().queue(animation)
     _animation_queue.clear()
 
-    _invincibility_flash_manager.resume_timer()
+    _invincibility_flash_manager_hazard_hit.resume_timer()
+    _invincibility_flash_manager_enemy_hit.resume_timer()
 
     _dash_manager.get_dash_cooldown_timer().paused = false
 
@@ -391,8 +391,6 @@ func _check_for_hits() -> void:
     if _is_being_crushed():
         var damage_taken := player_health.take_damage(1)
         if damage_taken:
-            player_health.set_status(Health.Status.INVINCIBLE)
-            _invincibility_flash_manager.start_flashing()
             change_state({'new_state': State.HAZARD_HIT})
             emit_signal('player_hit_hazard')
 
@@ -403,8 +401,6 @@ func _check_for_hits() -> void:
             # Take damage and stagger when hit.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
-                player_health.set_status(Health.Status.INVINCIBLE)
-                _invincibility_flash_manager.start_flashing()
                 change_state({'new_state': State.HAZARD_HIT})
                 emit_signal('player_hit_hazard')
 
@@ -414,9 +410,6 @@ func _check_for_hits() -> void:
             # Take damage and stagger when hit.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
-                player_health.set_status(Health.Status.INVINCIBLE)
-                _invincibility_flash_manager.start_flashing()
-
                 if Collision.in_layer(hitbox, 'hazards'):
                     change_state({'new_state': State.HAZARD_HIT})
                     emit_signal('player_hit_hazard')
