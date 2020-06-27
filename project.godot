@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://actors/player/dash_manager.gd"
 }, {
 "base": "Node2D",
+"class": "EnemyHitEffect",
+"language": "GDScript",
+"path": "res://actors/enemies/shared/enemy_hit_effect/enemy_hit_effect.gd"
+}, {
+"base": "Node2D",
 "class": "EnergyProjectile",
 "language": "GDScript",
 "path": "res://actors/enemies/projectiles/energy_projectile/energy_projectile.gd"
@@ -48,11 +53,6 @@ _global_script_classes=[ {
 "class": "Health",
 "language": "GDScript",
 "path": "res://actors/shared/health.gd"
-}, {
-"base": "Node2D",
-"class": "HitEffect",
-"language": "GDScript",
-"path": "res://actors/enemies/shared/hit_effect/hit_effect.gd"
 }, {
 "base": "Node2D",
 "class": "HomingProjectile",
@@ -168,12 +168,12 @@ _global_script_class_icons={
 "AggroManager": "",
 "AttackManager": "",
 "DashManager": "",
+"EnemyHitEffect": "",
 "EnergyProjectile": "",
 "FireColumn": "",
 "GrapplePoint": "",
 "GroundedPhysicsManager": "",
 "Health": "",
-"HitEffect": "",
 "HomingProjectile": "",
 "JumpManager": "",
 "Laser": "",

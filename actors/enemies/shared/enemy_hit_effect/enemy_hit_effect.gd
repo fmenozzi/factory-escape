@@ -1,5 +1,5 @@
 extends Node2D
-class_name HitEffect
+class_name EnemyHitEffect
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 

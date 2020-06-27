@@ -12,7 +12,7 @@ const SentryDrone := preload('res://actors/enemies/sentry_drone/SentryDrone.tscn
 const RangedSentryDrone := preload('res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn')
 
 # Hit effect.
-const HitEffect := preload('res://actors/enemies/shared/hit_effect/HitEffect.tscn')
+const EnemyHitEffect := preload('res://actors/enemies/shared/enemy_hit_effect/EnemyHitEffect.tscn')
 
 # Projectiles.
 const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
