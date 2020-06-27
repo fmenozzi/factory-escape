@@ -50,13 +50,6 @@ func _on_player_died() -> void:
     print('YOU DIED')
 
 func _on_player_hit_hazard() -> void:
-    Screenshake.start(
-        Screenshake.Duration.MEDIUM,
-        Screenshake.Amplitude.SMALL,
-        Screenshake.Priority.HIGH)
-
-    Rumble.start(Rumble.Type.STRONG, 0.25, Rumble.Priority.HIGH)
-
     _screen_fadeout.fade_out()
     yield(_screen_fadeout, 'fade_out_completed')
 

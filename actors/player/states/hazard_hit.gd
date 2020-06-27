@@ -5,6 +5,12 @@ onready var _invincibility_flash_manager: Node = $FlashManager
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('hazard_hit')
 
+    Rumble.start(Rumble.Type.STRONG, 0.25, Rumble.Priority.HIGH)
+    Screenshake.start(
+        Screenshake.Duration.MEDIUM,
+        Screenshake.Amplitude.SMALL,
+        Screenshake.Priority.HIGH)
+
     player.get_hit_effect().play_hit_effect()
 
     player.get_health().set_status(Health.Status.INVINCIBLE)
