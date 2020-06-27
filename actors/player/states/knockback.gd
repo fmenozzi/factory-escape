@@ -11,12 +11,12 @@ const STAGGER_SPEED: float = 10.0 * Util.TILE_SIZE
 
 var velocity: Vector2 = Vector2.ZERO
 
-onready var _stagger_duration_timer: Timer = $StaggerDurationTimer
+onready var _knockback_duration_timer: Timer = $KnockbackDurationTimer
 
 func _ready() -> void:
-    # Set up stagger duration timer.
-    _stagger_duration_timer.wait_time = STAGGER_DURATION
-    _stagger_duration_timer.one_shot = true
+    # Set up knockback duration timer.
+    _knockback_duration_timer.wait_time = STAGGER_DURATION
+    _knockback_duration_timer.one_shot = true
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Set the initial velocity corresponding to the knockback force.
@@ -24,12 +24,10 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     var x_direction_from_hit: int = previous_state_dict['direction_from_hit']
     velocity = STAGGER_SPEED * Vector2(x_direction_from_hit, -1).normalized()
 
-    _stagger_duration_timer.start()
-
-    player.get_animation_player().play('stagger')
+    _knockback_duration_timer.start()
 
     # Make the player collidable with enemy barriers for the duration of the
-    # stagger so that the player is not knocked into the adjacent room.
+    # knockback so that the player is not knocked into the adjacent room.
     Collision.set_mask(player, 'enemy_barrier', true)
 
 func exit(player: Player) -> void:
@@ -41,9 +39,9 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
 
-    # Once the stagger finishes, we either fall if we're currently airborne or
+    # Once the knockback finishes, we either fall if we're currently airborne or
     # idle otherwise.
-    if _stagger_duration_timer.is_stopped():
+    if _knockback_duration_timer.is_stopped():
         if player.is_in_air():
             return {'new_state': Player.State.FALL}
         else:

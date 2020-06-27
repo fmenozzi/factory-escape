@@ -92,6 +92,7 @@ onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _dust_puff: Particles2D = $DustPuff
 onready var _dash_puff: Particles2D = $DashPuff
 onready var _dash_echoes: Particles2D = $DashEchoes
+onready var _hit_effect: PlayerHitEffect = $PlayerHitEffect
 
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_hook: Sprite = $GrappleHook
@@ -107,7 +108,7 @@ onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 
 onready var _dash_duration_timer: Timer = $States/Dash/DashDurationTimer
 
-onready var _stagger_duration_timer: Timer = $States/Stagger/StaggerDurationTimer
+onready var _knockback_duration_timer: Timer = $States/Stagger/Knockback/KnockbackDurationTimer
 
 onready var _fall_time_stopwatch: Stopwatch = $States/Fall/FallTimeStopwatch
 
@@ -267,6 +268,9 @@ func get_camera() -> Camera2D:
 func get_wall_slide_trail() -> Particles2D:
     return _wall_slide_trail_effect
 
+func get_hit_effect() -> PlayerHitEffect:
+    return _hit_effect
+
 func get_grapple_rope() -> Line2D:
     return _grapple_rope
 
@@ -346,7 +350,7 @@ func pause() -> void:
     _dash_echoes.speed_scale = 0
 
     _dash_duration_timer.paused = true
-    _stagger_duration_timer.paused = true
+    _knockback_duration_timer.paused = true
 
     _fall_time_stopwatch.pause()
 func unpause() -> void:
@@ -366,7 +370,7 @@ func unpause() -> void:
     _dash_echoes.speed_scale = 1
 
     _dash_duration_timer.paused = false
-    _stagger_duration_timer.paused = false
+    _knockback_duration_timer.paused = false
 
     _fall_time_stopwatch.resume()
 
