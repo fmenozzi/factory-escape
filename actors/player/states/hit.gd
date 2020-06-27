@@ -7,6 +7,12 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     _hit_effect_finished = false
 
+    Rumble.start(Rumble.Type.WEAK, 0.15)
+    Screenshake.start(
+        Screenshake.Duration.LONG,
+        Screenshake.Amplitude.SMALL,
+        Screenshake.Priority.HIGH)
+
     var player_hit_effect := player.get_hit_effect()
     player_hit_effect.connect('hit_effect_finished', self, '_on_hit_effect_finished')
     player_hit_effect.play_hit_effect()

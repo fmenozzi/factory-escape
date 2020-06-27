@@ -421,9 +421,6 @@ func _check_for_hits() -> void:
                     change_state({'new_state': State.HAZARD_HIT})
                     emit_signal('player_hit_hazard')
                 elif Collision.in_layer(hitbox, 'enemy_hitbox'):
-                    Rumble.start(Rumble.Type.WEAK, 0.15)
-                    Screenshake.start(
-                        Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
                     change_state({
                         'new_state': State.STAGGER,
                         'direction_from_hit': Util.direction(hitbox, self)
