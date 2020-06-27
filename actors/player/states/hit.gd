@@ -7,7 +7,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     _hit_effect_finished = false
 
-    Rumble.start(Rumble.Type.WEAK, 0.15)
+    Rumble.start(Rumble.Type.STRONG, 0.15, Rumble.Priority.HIGH)
     Screenshake.start(
         Screenshake.Duration.LONG,
         Screenshake.Amplitude.SMALL,
