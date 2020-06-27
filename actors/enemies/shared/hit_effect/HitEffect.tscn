@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://actors/shared/hit_effect/hit_effect.gd" type="Script" id=1]
-[ext_resource path="res://actors/shared/hit_effect/textures/hit-effect.png" type="Texture" id=2]
+[ext_resource path="res://actors/enemies/shared/hit_effect/hit_effect.gd" type="Script" id=1]
+[ext_resource path="res://actors/enemies/shared/hit_effect/textures/hit-effect.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
@@ -64,7 +64,6 @@ process_material = SubResource( 4 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 5
-frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hit_effect = SubResource( 1 )

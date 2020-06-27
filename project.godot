@@ -52,7 +52,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "HitEffect",
 "language": "GDScript",
-"path": "res://actors/shared/hit_effect/hit_effect.gd"
+"path": "res://actors/enemies/shared/hit_effect/hit_effect.gd"
 }, {
 "base": "Node2D",
 "class": "HomingProjectile",
