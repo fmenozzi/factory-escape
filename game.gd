@@ -6,10 +6,12 @@ onready var _rooms: Array = $World/Rooms.get_children()
 onready var _health_bar: Control = $Layers/UILayer/Healthbar
 onready var _saving_indicator: Node2D = $Layers/UILayer/SavingIndicator
 onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
+onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 
 func _ready() -> void:
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
+    player_health.connect('health_changed', _vignette, '_on_health_changed')
     player_health.connect('died', self, '_on_player_died')
 
     _player.connect('player_hit_hazard', self, '_on_player_hit_hazard')

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://shared/effects/screen_space_effects/vignette/shaders/vignette.shader" type="Shader" id=1]
+[ext_resource path="res://shared/effects/screen_space_effects/vignette/vignette.gd" type="Script" id=2]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -10,6 +11,7 @@ shader_param/vignette_color = Color( 0, 0, 0, 1 )
 [node name="Vignette" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -21,3 +23,5 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VignettePowerTween" type="Tween" parent="."]
