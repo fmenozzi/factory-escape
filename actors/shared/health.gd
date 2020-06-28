@@ -18,6 +18,9 @@ func _ready() -> void:
     _current_health = MAX_HEALTH
     _current_status = Status.NONE
 
+func get_current_health() -> int:
+    return _current_health
+
 # Take damage if not invincible. Returns whether damage was taken.
 func take_damage(damage_amount: int) -> bool:
     if _current_status == Status.INVINCIBLE:

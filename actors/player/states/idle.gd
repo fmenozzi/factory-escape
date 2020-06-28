@@ -4,7 +4,10 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
-    player.get_animation_player().play('idle')
+    if player.get_health().get_current_health() == 1:
+        player.get_animation_player().play('idle_low_health')
+    else:
+        player.get_animation_player().play('idle')
 
     # Reset the dash and double jump.
     player.get_dash_manager().reset_dash()
