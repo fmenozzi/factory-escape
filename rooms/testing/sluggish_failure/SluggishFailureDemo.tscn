@@ -75,7 +75,7 @@ collision_mask = 2
 position = Vector2( 328, 88 )
 shape = SubResource( 3 )
 
-[node name="Player" parent="World" index="1"]
+[node name="Player" parent="World" index="3"]
 position = Vector2( 112, 96 )
 
 [editable path="World/Rooms/SluggishFailurePlayground"]

@@ -10,6 +10,7 @@ enum State {
     CROUCH,
     SHOOT,
     UNCROUCH,
+    DIE,
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
@@ -30,6 +31,7 @@ onready var STATES := {
     State.CROUCH:    $States/Crouch,
     State.SHOOT:     $States/Shoot,
     State.UNCROUCH:  $States/Uncrouch,
+    State.DIE:       $States/Die,
 }
 
 var _current_state: Node = null
@@ -158,5 +160,4 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    print('STICKY DRONE DIED')
-    queue_free()
+    _change_state({'new_state': State.DIE})

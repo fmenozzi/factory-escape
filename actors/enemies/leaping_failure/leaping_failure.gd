@@ -14,6 +14,7 @@ enum State {
     UNALERTED,
     FALL,
     LEAP,
+    DIE,
 }
 
 onready var STATES := {
@@ -25,6 +26,7 @@ onready var STATES := {
     State.UNALERTED:       $States/Unalerted,
     State.FALL:            $States/Fall,
     State.LEAP:            $States/Leap,
+    State.DIE:             $States/Die,
 }
 
 var _current_state: Node = null
@@ -116,5 +118,4 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    print('LEAPING FAILURE DIED')
-    queue_free()
+    _change_state({'new_state': State.DIE})

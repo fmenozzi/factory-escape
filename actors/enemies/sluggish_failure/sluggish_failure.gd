@@ -9,6 +9,7 @@ enum State {
     STAGGER,
     FALL,
     RETURN_TO_LEDGE,
+    DIE,
 }
 
 onready var STATES := {
@@ -16,6 +17,7 @@ onready var STATES := {
     State.STAGGER:         $States/Stagger,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
+    State.DIE:             $States/Die,
 }
 
 var _current_state: Node = null
@@ -106,5 +108,4 @@ func _on_hazard_hit(area: Area2D) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    print('SLUGGISH FAILURE DIED')
-    queue_free()
+    _change_state({'new_state': State.DIE})

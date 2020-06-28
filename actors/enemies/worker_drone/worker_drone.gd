@@ -8,12 +8,14 @@ enum State {
     IDLE,
     STAGGER,
     FLY_TO_POINT,
+    DIE,
 }
 
 onready var STATES := {
     State.IDLE:         $States/Idle,
     State.STAGGER:      $States/Stagger,
     State.FLY_TO_POINT: $States/FlyToPoint,
+    State.DIE:          $States/Die,
 }
 
 var _current_state: Node = null
@@ -88,5 +90,4 @@ func _on_health_changed(old_health: int, new_health: int) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    print('WORKER DRONE DIED')
-    queue_free()
+    _change_state({'new_state': State.DIE})
