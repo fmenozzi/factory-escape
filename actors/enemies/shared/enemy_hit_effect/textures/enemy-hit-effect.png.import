@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hit-effect.png-32c0312bc2a7a8b5baf80c00ba410c6a.stex"
+path="res://.import/enemy-hit-effect.png-15ba8b7c0af436c98db2ca6b616b63cc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/enemies/shared/enemy_hit_effect/textures/hit-effect.png"
-dest_files=[ "res://.import/hit-effect.png-32c0312bc2a7a8b5baf80c00ba410c6a.stex" ]
+source_file="res://actors/enemies/shared/enemy_hit_effect/textures/enemy-hit-effect.png"
+dest_files=[ "res://.import/enemy-hit-effect.png-15ba8b7c0af436c98db2ca6b616b63cc.stex" ]
 
 [params]
 
