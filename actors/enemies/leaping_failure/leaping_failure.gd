@@ -8,7 +8,6 @@ enum State {
     NEXT_STATE_IN_SEQUENCE,
     WALK,
     FAST_WALK,
-    GROUND_STAGGER,
     RETURN_TO_LEDGE,
     ALERTED,
     UNALERTED,
@@ -20,7 +19,6 @@ enum State {
 onready var STATES := {
     State.WALK:            $States/Walk,
     State.FAST_WALK:       $States/FastWalk,
-    State.GROUND_STAGGER:  $States/GroundStagger,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
     State.ALERTED:         $States/Alerted,
     State.UNALERTED:       $States/Unalerted,
@@ -36,6 +34,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: LeapingFailurePhysicsManager = $PhysicsManager
 onready var _aggro_manager: AggroManager = $AggroManager
+onready var _pushback_manager: PushbackManager = $PushbackManager
 onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -57,6 +56,9 @@ func _ready() -> void:
     _health.connect('died', self, '_on_died')
 
 func _physics_process(delta: float) -> void:
+    if _pushback_manager.is_being_pushed_back():
+        move(_pushback_manager.get_pushback_velocity())
+
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
@@ -69,10 +71,8 @@ func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
     if is_on_floor():
-        _change_state({
-            'new_state': State.GROUND_STAGGER,
-            'direction_from_hit': Util.direction(player, self),
-        })
+        _pushback_manager.start_pushback(
+            player.get_center().direction_to(global_position))
 
 func get_physics_manager() -> LeapingFailurePhysicsManager:
     return _physics_manager

@@ -8,7 +8,7 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/fall.gd" type="Script" id=6]
 [ext_resource path="res://shared/effects/DustPuff.tscn" type="PackedScene" id=7]
 [ext_resource path="res://actors/enemies/leaping_failure/states/return_to_ledge.gd" type="Script" id=8]
-[ext_resource path="res://actors/enemies/leaping_failure/states/ground_stagger.gd" type="Script" id=9]
+[ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/leaping_failure/states/alerted.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://actors/enemies/leaping_failure/states/unalerted.gd" type="Script" id=12]
@@ -104,6 +104,10 @@ jump_duration = 0.35
 aggro_radius_tiles = 6.0
 unaggro_radius_tiles = 10.0
 
+[node name="PushbackManager" parent="." instance=ExtResource( 9 )]
+pushback_distance_tiles = 1.0
+pushback_duration = 0.15
+
 [node name="States" type="Node" parent="."]
 
 [node name="Walk" type="Node" parent="States"]
@@ -113,11 +117,6 @@ script = ExtResource( 5 )
 script = ExtResource( 15 )
 
 [node name="FastWalkDurationTimer" type="Timer" parent="States/FastWalk"]
-
-[node name="GroundStagger" type="Node" parent="States"]
-script = ExtResource( 9 )
-
-[node name="StaggerDurationTimer" type="Timer" parent="States/GroundStagger"]
 
 [node name="ReturnToLedge" type="Node" parent="States"]
 script = ExtResource( 8 )
