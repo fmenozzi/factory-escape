@@ -26,8 +26,8 @@ var _current_state_enum: int = -1
 var _direction_from_hit: int = Util.Direction.NONE
 
 onready var _flash_manager: Node = $FlashManager
-
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
+onready var _pushback_manager: PushbackManager = $PushbackManager
 
 onready var _dust_puff: Particles2D = $DustPuff
 
@@ -57,6 +57,9 @@ func _physics_process(delta: float) -> void:
 
 func get_physics_manager() -> GroundedPhysicsManager:
     return _physics_manager
+
+func get_pushback_manager() -> PushbackManager:
+    return _pushback_manager
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
