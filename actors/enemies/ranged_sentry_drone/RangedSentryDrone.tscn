@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/ranged_sentry_drone.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/states/follow_player.gd" type="Script" id=13]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/states/fly_to_point.gd" type="Script" id=14]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/states/die.gd" type="Script" id=15]
+[ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 2 )
@@ -62,6 +63,10 @@ movement_speed_tiles_per_second = 4.0
 visible = false
 aggro_radius_tiles = 4.0
 unaggro_radius_tiles = 6.0
+
+[node name="PushbackManager" parent="." instance=ExtResource( 16 )]
+pushback_distance_tiles = 1.0
+pushback_duration = 0.15
 
 [node name="States" type="Node" parent="."]
 
