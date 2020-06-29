@@ -28,6 +28,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: SentryDronePhysicsManager = $PhysicsManager
 onready var _aggro_manager: AggroManager = $AggroManager
+onready var _pushback_manager: PushbackManager = $PushbackManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -46,6 +47,9 @@ func _ready() -> void:
     _change_state({'new_state': _current_state_enum})
 
 func _physics_process(delta: float) -> void:
+    if _pushback_manager.is_being_pushed_back():
+        move(_pushback_manager.get_pushback_velocity())
+
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
@@ -66,6 +70,9 @@ func get_aggro_manager() -> AggroManager:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+
+    _pushback_manager.start_pushback(
+        player.get_center().direction_to(global_position))
 
 func is_colliding() -> bool:
     return .is_on_ceiling() or .is_on_floor() or .is_on_wall()
