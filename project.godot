@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/projectiles/projectile_spawner.gd"
 }, {
+"base": "Node",
+"class": "PushbackManager",
+"language": "GDScript",
+"path": "res://actors/enemies/pushback_manager.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "RangedSentryDrone",
 "language": "GDScript",
@@ -189,6 +194,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerHitEffect": "",
 "ProjectileSpawner": "",
+"PushbackManager": "",
 "RangedSentryDrone": "",
 "ReactSprite": "",
 "ReadableObject": "",
