@@ -13,7 +13,7 @@ func update(worker_drone: WorkerDrone, delta: float) -> Dictionary:
     var pushback_manager := worker_drone.get_pushback_manager()
 
     if not pushback_manager.is_being_pushed_back():
-        return {'new_state': WorkerDrone.State.IDLE}
+        return {'new_state': WorkerDrone.State.WANDER}
 
     worker_drone.move(pushback_manager.get_pushback_velocity())
 

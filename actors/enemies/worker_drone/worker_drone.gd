@@ -5,17 +5,15 @@ export(Util.Direction) var direction := Util.Direction.RIGHT
 
 enum State {
     NO_CHANGE,
-    IDLE,
+    WANDER,
     STAGGER,
-    FLY_TO_POINT,
     DIE,
 }
 
 onready var STATES := {
-    State.IDLE:         $States/Idle,
-    State.STAGGER:      $States/Stagger,
-    State.FLY_TO_POINT: $States/FlyToPoint,
-    State.DIE:          $States/Die,
+    State.WANDER:  $States/Wander,
+    State.STAGGER: $States/Stagger,
+    State.DIE:     $States/Die,
 }
 
 var _current_state: Node = null
@@ -37,7 +35,7 @@ func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
-    _current_state_enum = State.IDLE
+    _current_state_enum = State.WANDER
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
@@ -67,9 +65,6 @@ func get_pushback_manager() -> PushbackManager:
 
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
-
-func get_obstacle_detector() -> RayCast2D:
-    return _obstacle_detector
 
 func is_hitting_obstacle() -> bool:
     return .is_on_floor() or .is_on_ceiling() or .is_on_wall()
