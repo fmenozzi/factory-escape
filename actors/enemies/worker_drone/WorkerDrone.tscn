@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://actors/enemies/worker_drone/states/fly_to_point.gd" type="Script" id=7]
 [ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/enemies/worker_drone/states/die.gd" type="Script" id=9]
+[ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.5, 3.5 )
@@ -53,6 +54,10 @@ flash_color = Color( 1, 1, 1, 1 )
 [node name="PhysicsManager" parent="." instance=ExtResource( 8 )]
 movement_speed_tiles_per_second = 2.0
 
+[node name="PushbackManager" parent="." instance=ExtResource( 10 )]
+pushback_distance_tiles = 2.0
+pushback_duration = 0.15
+
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
@@ -62,8 +67,6 @@ script = ExtResource( 5 )
 
 [node name="Stagger" type="Node" parent="States"]
 script = ExtResource( 6 )
-
-[node name="StaggerDurationTimer" type="Timer" parent="States/Stagger"]
 
 [node name="FlyToPoint" type="Node" parent="States"]
 script = ExtResource( 7 )
