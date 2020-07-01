@@ -13,9 +13,9 @@ func update(player: Player, delta: float) -> Dictionary:
     if not player.get_animation_player().is_playing():
         return {'new_state': Player.State.IDLE}
 
-    # Apply slight downward movement. This is important mostly for ensuring that
-    # we're snapped to the ground, so that the ground doesn't disappear out from
-    # under us during the attack, such as if we're on a downward-moving platform.
-    player.move(Vector2(0, 10))
+    # Apply slight downward movement if grounded. This is useful for ensuring
+    # that we snap to downward-moving platforms.
+    if player.is_on_floor():
+        player.move(Vector2(0, 10))
 
     return {'new_state': Player.State.NO_CHANGE}

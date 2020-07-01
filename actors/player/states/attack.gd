@@ -26,16 +26,9 @@ func update(player: Player, delta: float) -> Dictionary:
         else:
             return {'new_state': Player.State.IDLE}
 
-    # Turn left or right.
-    var input_direction = player.get_input_direction()
-    if input_direction != Util.Direction.NONE:
-        player.set_direction(input_direction)
-
-    # Apply slight downward movement. This is useful both for if the player is
-    # attacking in midair (so that they fall slowly and have a chance to connect
-    # with midair enemies) and if the player is already grounded (so that they
-    # snap to the ground and the ground doesn't disappear out from under them,
-    # such as from a downward-moving platform).
-    player.move(Vector2(0, 10))
+    # Apply slight downward movement if grounded. This is useful for ensuring
+    # that we snap to downward-moving platforms.
+    if player.is_on_floor():
+        player.move(Vector2(0, 10))
 
     return {'new_state': Player.State.NO_CHANGE}
