@@ -158,7 +158,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 48, 49, 50, 51 ]
+"values": [ 52, 53, 54, 55 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("Hitboxes/UpAttack/CollisionShape2D")
@@ -584,7 +584,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 1
+frame = 48
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -712,6 +712,7 @@ script = ExtResource( 42 )
 [node name="FlashManager" parent="States/Stagger/Hit" instance=ExtResource( 3 )]
 sprite_path = NodePath("../../../../Sprite")
 total_duration = 1.2
+single_flash_duration = 0.075
 flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
 [node name="Knockback" type="Node" parent="States/Stagger"]
@@ -724,6 +725,8 @@ script = ExtResource( 19 )
 
 [node name="FlashManager" parent="States/HazardHit" instance=ExtResource( 3 )]
 sprite_path = NodePath("../../../Sprite")
+total_duration = 2.0
+single_flash_duration = 0.075
 flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
 [node name="HazardRecover" type="Node" parent="States"]
