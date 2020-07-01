@@ -125,7 +125,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 40, 41, 42, 43 ]
+"values": [ 48, 49, 50, 51 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("Hitboxes/SideAttack/CollisionShape2D")
