@@ -23,7 +23,7 @@ func exit() -> void:
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
-        change_menu(Pause.Menu.UNPAUSED, Pause.Menu.PAUSE)
+        change_menu(Menu.Menus.UNPAUSED, Menu.Menus.PAUSE)
         accept_event()
 "
 

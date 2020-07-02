@@ -1,7 +1,24 @@
 extends VBoxContainer
+class_name Menu
 
 signal menu_changed(old_menu, new_menu)
 signal menu_navigated
+
+# The possible menus that the player can navigate to in various contexts, such
+# as from the title screen or after pressing the pause button.
+enum Menus {
+    # Reserved for representing the unpaused state, in order to know when to
+    # toggle visibility of the main pause menu and actually pause the game.
+    UNPAUSED,
+
+    PAUSE,
+    OPTIONS,
+    QUIT,
+
+    AUDIO_OPTIONS,
+    VIDEO_OPTIONS,
+    CONTROLLER_OPTIONS,
+}
 
 # Called when this menu is entered.
 func enter(previous_menu: int) -> void:

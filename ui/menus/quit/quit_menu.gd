@@ -17,9 +17,9 @@ func exit() -> void:
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
-        change_menu(Pause.Menu.QUIT, Pause.Menu.UNPAUSED)
+        change_menu(Menu.Menus.QUIT, Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
-        change_menu(Pause.Menu.QUIT, Pause.Menu.PAUSE)
+        change_menu(Menu.Menus.QUIT, Menu.Menus.PAUSE)
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
@@ -28,4 +28,4 @@ func _on_yes_pressed() -> void:
     get_tree().quit()
 
 func _on_no_pressed() -> void:
-    change_menu(Pause.Menu.QUIT, Pause.Menu.PAUSE)
+    change_menu(Menu.Menus.QUIT, Menu.Menus.PAUSE)

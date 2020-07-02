@@ -1,35 +1,16 @@
 extends Control
 class_name Pause
 
-# The possible menus that the player can navigate to after pressing the pause
-# button. Starts in the UNPAUSED state.
-#
-# TODO: Consider changing this back to "State", rather than "Menu", given that
-#       UNPAUSED isn't a menu.
-enum Menu {
-    # Reserved for representing the unpaused state, in order to know when to
-    # toggle visibility of the main pause menu and actually pause the game.
-    UNPAUSED,
-
-    PAUSE,
-    OPTIONS,
-    QUIT,
-
-    AUDIO_OPTIONS,
-    VIDEO_OPTIONS,
-    CONTROLLER_OPTIONS,
-}
-
 onready var MENUS = {
-    Menu.UNPAUSED: $MenuBackground/UnpausedState,
+    Menu.Menus.UNPAUSED: $MenuBackground/UnpausedState,
 
-    Menu.PAUSE:   $MenuBackground/PauseMenu,
-    Menu.OPTIONS: $MenuBackground/OptionsMenu,
-    Menu.QUIT:    $MenuBackground/QuitMenu,
+    Menu.Menus.PAUSE:   $MenuBackground/PauseMenu,
+    Menu.Menus.OPTIONS: $MenuBackground/OptionsMenu,
+    Menu.Menus.QUIT:    $MenuBackground/QuitMenu,
 
-    Menu.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
-    Menu.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
-    Menu.CONTROLLER_OPTIONS: $MenuBackground/ControllerOptionsMenu,
+    Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
+    Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
+    Menu.Menus.CONTROLLER_OPTIONS: $MenuBackground/ControllerOptionsMenu,
 }
 var _current_menu: VBoxContainer = null
 
@@ -43,8 +24,8 @@ func _ready() -> void:
         menu.connect('menu_navigated', self, '_emit_click_sound')
 
     # Start in unpaused state.
-    _current_menu = MENUS[Menu.UNPAUSED]
-    _change_menu(Menu.UNPAUSED, Menu.UNPAUSED)
+    _current_menu = MENUS[Menu.Menus.UNPAUSED]
+    _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED)
 
     _current_menu.connect('pause_changed', self, '_set_paused')
 

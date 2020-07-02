@@ -22,9 +22,9 @@ func exit() -> void:
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
-        change_menu(Pause.Menu.AUDIO_OPTIONS, Pause.Menu.UNPAUSED)
+        change_menu(Menu.Menus.AUDIO_OPTIONS, Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
-        change_menu(Pause.Menu.AUDIO_OPTIONS, Pause.Menu.OPTIONS)
+        change_menu(Menu.Menus.AUDIO_OPTIONS, Menu.Menus.OPTIONS)
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
@@ -45,4 +45,4 @@ func _on_ui_value_changed(new_value: float) -> void:
     AudioServer.set_bus_volume_db(bus_index, new_volume_db)
 
 func _on_back_pressed() -> void:
-    change_menu(Pause.Menu.AUDIO_OPTIONS, Pause.Menu.OPTIONS)
+    change_menu(Menu.Menus.AUDIO_OPTIONS, Menu.Menus.OPTIONS)

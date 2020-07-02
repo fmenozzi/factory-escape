@@ -19,11 +19,11 @@ func enter(previous_menu: int) -> void:
     self.visible = true
 
     match previous_menu:
-        Pause.Menu.AUDIO_OPTIONS:
+        Menu.Menus.AUDIO_OPTIONS:
             _audio.grab_focus()
-        Pause.Menu.VIDEO_OPTIONS:
+        Menu.Menus.VIDEO_OPTIONS:
             _video.grab_focus()
-        Pause.Menu.CONTROLLER_OPTIONS:
+        Menu.Menus.CONTROLLER_OPTIONS:
             _controller.grab_focus()
         _:
             # Default to first option.
@@ -34,9 +34,9 @@ func exit() -> void:
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
-        change_menu(Pause.Menu.OPTIONS, Pause.Menu.UNPAUSED)
+        change_menu(Menu.Menus.OPTIONS, Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
-        change_menu(Pause.Menu.OPTIONS, Pause.Menu.PAUSE)
+        change_menu(Menu.Menus.OPTIONS, Menu.Menus.PAUSE)
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
@@ -45,16 +45,16 @@ func _on_game_pressed() -> void:
     print('game button not yet implemented')
 
 func _on_audio_pressed() -> void:
-    change_menu(Pause.Menu.OPTIONS, Pause.Menu.AUDIO_OPTIONS)
+    change_menu(Menu.Menus.OPTIONS, Menu.Menus.AUDIO_OPTIONS)
 
 func _on_video_pressed() -> void:
-    change_menu(Pause.Menu.OPTIONS, Pause.Menu.VIDEO_OPTIONS)
+    change_menu(Menu.Menus.OPTIONS, Menu.Menus.VIDEO_OPTIONS)
 
 func _on_controller_pressed() -> void:
-    change_menu(Pause.Menu.OPTIONS, Pause.Menu.CONTROLLER_OPTIONS)
+    change_menu(Menu.Menus.OPTIONS, Menu.Menus.CONTROLLER_OPTIONS)
 
 func _on_keyboard_pressed() -> void:
     print('keyboard button not yet implemented')
 
 func _on_back_pressed() -> void:
-    change_menu(Pause.Menu.OPTIONS, Pause.Menu.PAUSE)
+    change_menu(Menu.Menus.OPTIONS, Menu.Menus.PAUSE)
