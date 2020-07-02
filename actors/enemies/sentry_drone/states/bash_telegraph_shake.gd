@@ -1,7 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 # The time spent telegraphing the bash attack by shaking in place.
-const SHAKE_DURATION: float = 0.5
+const SHAKE_DURATION: float = 0.35
 
 export(float, EASE) var damp_easing := 1.0
 
