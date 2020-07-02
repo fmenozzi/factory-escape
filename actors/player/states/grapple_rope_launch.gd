@@ -32,10 +32,11 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
-    # Once we finish the grapple animation, switch to the actual grapple state.
+    # Once we finish the grapple animation, switch to the actual grapple swing
+    # state.
     if not player.get_animation_player().is_playing():
         return {
-            'new_state': Player.State.GRAPPLE,
+            'new_state': Player.State.NEXT_STATE_IN_SEQUENCE,
             'grapple_point': _grapple_point,
         }
 

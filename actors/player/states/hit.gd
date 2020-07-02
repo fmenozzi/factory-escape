@@ -33,7 +33,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 
 func update(player: Player, delta: float) -> Dictionary:
     if _hit_effect_finished:
-        return {'new_state': Player.State.IDLE}
+        return {'new_state': Player.State.NEXT_STATE_IN_SEQUENCE}
 
     return {'new_state': Player.State.NO_CHANGE}
 

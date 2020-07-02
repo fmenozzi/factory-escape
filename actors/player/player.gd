@@ -9,6 +9,7 @@ signal player_hit_hazard
 # not itself constitute a valid player state.
 enum State {
     NO_CHANGE,
+    NEXT_STATE_IN_SEQUENCE,
     IDLE,
     WALK,
     JUMP,
