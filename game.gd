@@ -52,8 +52,10 @@ func _on_player_died() -> void:
     print('YOU DIED')
 
 func _on_player_hit_hazard() -> void:
-    _screen_fadeout.fade_out()
-    yield(_screen_fadeout, 'fade_out_completed')
+    var fade_duration := 0.4
+
+    _screen_fadeout.fade_to_black(fade_duration)
+    yield(_screen_fadeout, 'fade_to_black_finished')
 
     # Reset player at the last hazard checkpoint. Set the player's direction to
     # be the direction from the checkpoint to the player's impact point with the
@@ -67,9 +69,9 @@ func _on_player_hit_hazard() -> void:
     # be the first frame of the 'hazard_recover' animation.
     _player.get_node('Sprite').frame = 72
 
-    var fade_in_delay := 0.25
-    _screen_fadeout.fade_in(fade_in_delay)
-    yield(_screen_fadeout, 'fade_in_completed')
+    var fade_delay := 0.25
+    _screen_fadeout.fade_from_black(fade_duration, fade_delay)
+    yield(_screen_fadeout, 'fade_from_black_finished')
 
     # Play the 'hazard recover' animation once the screen fades back in. Note
     # that the HAZARD_HIT state itself (which the player would be in at this

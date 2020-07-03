@@ -1,22 +1,29 @@
 extends Control
 
-signal fade_out_completed
-signal fade_in_completed
+signal fade_to_black_finished
+signal fade_from_black_finished
 
-onready var _animation_player: AnimationPlayer = $AnimationPlayer
+const TRANSPARENT_ALPHA := 0.0
+const OPAQUE_ALPHA := 1.0
 
-func fade_out(delay: float = 0.0) -> void:
-    yield(get_tree().create_timer(delay), 'timeout')
+onready var _black_overlay: ColorRect = $BlackOverlay
+onready var _fade_tween: Tween = $FadeTween
 
-    _animation_player.play('fade_out')
-    yield(_animation_player, 'animation_finished')
+func fade_to_black(duration: float, delay: float = 0.0) -> void:
+    _fade(TRANSPARENT_ALPHA, OPAQUE_ALPHA, duration, delay)
+    yield(_fade_tween, 'tween_all_completed')
 
-    emit_signal('fade_out_completed')
+    emit_signal('fade_to_black_finished')
 
-func fade_in(delay: float = 0.0) -> void:
-    yield(get_tree().create_timer(delay), 'timeout')
+func fade_from_black(duration: float, delay: float = 0.0) -> void:
+    _fade(OPAQUE_ALPHA, TRANSPARENT_ALPHA, duration, delay)
+    yield(_fade_tween, 'tween_all_completed')
 
-    _animation_player.play_backwards('fade_out')
-    yield(_animation_player, 'animation_finished')
+    emit_signal('fade_from_black_finished')
 
-    emit_signal('fade_in_completed')
+func _fade(old: float, new: float, duration: float, delay: float) -> void:
+    _fade_tween.remove_all()
+    _fade_tween.interpolate_property(
+        _black_overlay, 'modulate:a', old, new, duration, Tween.TRANS_LINEAR,
+        Tween.EASE_IN, delay)
+    _fade_tween.start()
