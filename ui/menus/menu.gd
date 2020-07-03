@@ -15,6 +15,7 @@ enum Menus {
     # Reserved for indicating that we want to go back to the previous menu.
     PREVIOUS,
 
+    TITLE,
     PAUSE,
     OPTIONS,
     QUIT,
