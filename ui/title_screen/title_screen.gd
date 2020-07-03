@@ -8,7 +8,7 @@ export(PackedScene) var game = null
 onready var MENUS := {
     Menu.Menus.TITLE:   $MenuBackground/TitleMenu,
     Menu.Menus.OPTIONS: $MenuBackground/OptionsMenu,
-    Menu.Menus.QUIT:    $MenuBackground/QuitMenu,
+    Menu.Menus.QUIT:    $MenuBackground/TitleQuitMenu,
 
     Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,

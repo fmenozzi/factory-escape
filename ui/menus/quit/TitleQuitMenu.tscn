@@ -1,14 +1,17 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://ui/menus/quit/quit_menu.gd" type="Script" id=2]
+[ext_resource path="res://ui/menus/quit/title_quit_menu.gd" type="Script" id=2]
 
-[node name="QuitMenu" type="VBoxContainer"]
+[node name="TitleQuitMenu" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 alignment = 1
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AreYouSure" type="Label" parent="."]
 margin_top = 64.0
@@ -21,12 +24,10 @@ align = 1
 margin_top = 81.0
 margin_right = 320.0
 margin_bottom = 96.0
-focus_neighbour_top = NodePath("../No")
 text = "Yes"
 
 [node name="No" type="Button" parent="."]
 margin_top = 100.0
 margin_right = 320.0
 margin_bottom = 115.0
-focus_neighbour_bottom = NodePath("../Yes")
 text = "No"

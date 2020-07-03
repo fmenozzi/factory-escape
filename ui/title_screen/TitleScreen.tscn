@@ -5,7 +5,7 @@
 [ext_resource path="res://ui/menus/options/OptionsMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/menus/title/TitleMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=5]
-[ext_resource path="res://ui/menus/quit/QuitMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/menus/quit/TitleQuitMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/menus/options/audio/AudioOptionsMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/menus/options/video/VideoOptionsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/menus/options/controller/ControllerOptionsMenu.tscn" type="PackedScene" id=9]
@@ -43,7 +43,7 @@ visible = false
 [node name="OptionsMenu" parent="MenuBackground" instance=ExtResource( 3 )]
 visible = false
 
-[node name="QuitMenu" parent="MenuBackground" instance=ExtResource( 6 )]
+[node name="TitleQuitMenu" parent="MenuBackground" instance=ExtResource( 6 )]
 visible = false
 
 [node name="AudioOptionsMenu" parent="MenuBackground" instance=ExtResource( 7 )]

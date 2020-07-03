@@ -16,10 +16,7 @@ func exit() -> void:
     self.visible = false
 
 func handle_input(event: InputEvent) -> void:
-    if event.is_action_pressed('ui_pause'):
-        if get_tree().paused:
-            advance_to_menu(Menu.Menus.UNPAUSED)
-    elif event.is_action_pressed('ui_cancel'):
+    if event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
