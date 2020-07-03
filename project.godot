@@ -229,6 +229,7 @@ Rumble="*res://custom/nodes/Rumble.tscn"
 Screenshake="*res://custom/nodes/Screenshake.tscn"
 Collision="*res://custom/scripts/collision.gd"
 Preloads="*res://custom/scripts/preloads.gd"
+SceneChanger="*res://custom/nodes/SceneChanger.tscn"
 
 [display]
 

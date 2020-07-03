@@ -55,4 +55,5 @@ func _on_previous_menu_requested() -> void:
     _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS)
 
 func _on_start_pressed() -> void:
-    get_tree().change_scene_to(game)
+    var fade_duration := 2.0
+    SceneChanger.change_scene_to(game, fade_duration)
