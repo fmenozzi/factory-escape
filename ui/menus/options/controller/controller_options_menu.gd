@@ -99,7 +99,8 @@ func handle_input(event: InputEvent) -> void:
         _is_remapping = false
     else:
         if event.is_action_pressed('ui_pause'):
-            advance_to_menu(Menu.Menus.UNPAUSED)
+            if get_tree().paused:
+                advance_to_menu(Menu.Menus.UNPAUSED)
         elif event.is_action_pressed('ui_cancel'):
             go_to_previous_menu()
 
