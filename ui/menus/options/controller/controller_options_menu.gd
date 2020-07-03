@@ -99,9 +99,9 @@ func handle_input(event: InputEvent) -> void:
         _is_remapping = false
     else:
         if event.is_action_pressed('ui_pause'):
-            change_menu(Menu.Menus.CONTROLLER_OPTIONS, Menu.Menus.UNPAUSED)
+            advance_to_menu(Menu.Menus.UNPAUSED)
         elif event.is_action_pressed('ui_cancel'):
-            change_menu(Menu.Menus.CONTROLLER_OPTIONS, Menu.Menus.OPTIONS)
+            go_to_previous_menu()
 
         if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
             emit_menu_navigation_sound()
@@ -170,4 +170,4 @@ func _on_interact_pressed() -> void:
     setup_remap(PlayerAction.INTERACT)
 
 func _on_back_pressed() -> void:
-    change_menu(Menu.Menus.CONTROLLER_OPTIONS, Menu.Menus.OPTIONS)
+    go_to_previous_menu()
