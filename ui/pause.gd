@@ -25,6 +25,8 @@ func _ready() -> void:
         menu.connect('menu_navigated', self, '_emit_click_sound')
 
     MENUS[Menu.Menus.UNPAUSED].connect('pause_changed', self, '_set_paused')
+    MENUS[Menu.Menus.QUIT].connect(
+        'quit_to_main_menu_requested', self, '_on_quit_to_main_menu_requested')
 
     # Start in unpaused state.
     _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED)
@@ -65,6 +67,10 @@ func _on_menu_changed(new_menu: int) -> void:
 func _on_previous_menu_requested() -> void:
     assert(_menu_stack.size() >= 2)
     _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS)
+
+func _on_quit_to_main_menu_requested() -> void:
+    var fade_duration := 2.0
+    SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
 
 func _emit_click_sound() -> void:
     _click_sound.play()

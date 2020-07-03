@@ -4,6 +4,8 @@
 [ext_resource path="res://custom/nodes/scene_changer.gd" type="Script" id=2]
 
 [node name="SceneChanger" type="CanvasLayer"]
+pause_mode = 2
+layer = 128
 script = ExtResource( 2 )
 
 [node name="ScreenFadeout" parent="." instance=ExtResource( 1 )]

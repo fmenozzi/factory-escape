@@ -1,5 +1,7 @@
 extends 'res://ui/menus/menu.gd'
 
+signal quit_to_main_menu_requested
+
 onready var _quit_to_main_menu: Button = $QuitToMainMenu
 onready var _quit_to_desktop: Button = $QuitToDesktop
 onready var _no: Button = $No
@@ -27,7 +29,7 @@ func handle_input(event: InputEvent) -> void:
         emit_menu_navigation_sound()
 
 func _on_quit_to_main_menu_pressed() -> void:
-    print('quit to main menu not yet implemented')
+    emit_signal('quit_to_main_menu_requested')
 
 func _on_quit_to_desktop_pressed() -> void:
     get_tree().quit()

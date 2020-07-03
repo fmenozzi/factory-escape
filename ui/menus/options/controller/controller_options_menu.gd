@@ -56,7 +56,7 @@ var _is_remapping: bool = false
 # UI button corresponding to the control that we want to remap.
 var _player_action_to_remap: int = -1
 
-const JOYPAD_BUTTONS_TO_TEXTURES: Dictionary = {
+var JOYPAD_BUTTONS_TO_TEXTURES: Dictionary = {
     # Main buttons.
     JOY_XBOX_A: Preloads.XboxA,
     JOY_XBOX_B: Preloads.XboxB,
