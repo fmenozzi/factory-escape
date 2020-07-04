@@ -16,16 +16,19 @@ onready var MENUS := {
 }
 var _menu_stack := []
 
+onready var _click_sound: AudioStreamPlayer = $ClickSound
+
 func _get_configuration_warning() -> String:
     if game == null:
         return 'No instance of Game.tscn set in title screen!'
     return ''
 
 func _ready() -> void:
-    # Intercept all menu-changing-related signals from individual submenus.
+    # Intercept all menu-related signals from individual submenus.
     for menu in MENUS.values():
         menu.connect('menu_changed', self, '_on_menu_changed')
         menu.connect('previous_menu_requested', self, '_on_previous_menu_requested')
+        menu.connect('menu_navigated', self, '_emit_click_sound')
 
     MENUS[Menu.Menus.MAIN].connect('start_pressed', self, '_on_start_pressed')
 
@@ -57,3 +60,6 @@ func _on_previous_menu_requested() -> void:
 func _on_start_pressed() -> void:
     var fade_duration := 2.0
     SceneChanger.change_scene_to(game, fade_duration)
+
+func _emit_click_sound() -> void:
+    _click_sound.play()
