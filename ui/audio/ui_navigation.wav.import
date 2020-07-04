@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ui_navigation.wav-88aff2ae96aff65a637e6711895215b5.sample"
+
+[deps]
+
+source_file="res://ui/audio/ui_navigation.wav"
+dest_files=[ "res://.import/ui_navigation.wav-88aff2ae96aff65a637e6711895215b5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

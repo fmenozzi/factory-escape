@@ -9,7 +9,7 @@
 [ext_resource path="res://ui/menus/options/audio/AudioOptionsMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/menus/options/video/VideoOptionsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/menus/options/controller/ControllerOptionsMenu.tscn" type="PackedScene" id=9]
-[ext_resource path="res://ui/audio/click.wav" type="AudioStream" id=10]
+[ext_resource path="res://ui/audio/ui_navigation.wav" type="AudioStream" id=10]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
