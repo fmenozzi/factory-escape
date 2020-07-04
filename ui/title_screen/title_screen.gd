@@ -6,9 +6,9 @@ extends Control
 export(PackedScene) var game = null
 
 onready var MENUS := {
-    Menu.Menus.TITLE:   $MenuBackground/TitleMenu,
+    Menu.Menus.MAIN:    $MenuBackground/MainMenu,
     Menu.Menus.OPTIONS: $MenuBackground/OptionsMenu,
-    Menu.Menus.QUIT:    $MenuBackground/TitleQuitMenu,
+    Menu.Menus.QUIT:    $MenuBackground/MainQuitMenu,
 
     Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
@@ -27,10 +27,10 @@ func _ready() -> void:
         menu.connect('menu_changed', self, '_on_menu_changed')
         menu.connect('previous_menu_requested', self, '_on_previous_menu_requested')
 
-    MENUS[Menu.Menus.TITLE].connect('start_pressed', self, '_on_start_pressed')
+    MENUS[Menu.Menus.MAIN].connect('start_pressed', self, '_on_start_pressed')
 
-    # Start at title menu.
-    _change_menu(Menu.Menus.TITLE, Menu.Menus.TITLE)
+    # Start at main menu.
+    _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN)
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
