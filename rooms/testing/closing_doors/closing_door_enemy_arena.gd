@@ -9,7 +9,7 @@ var _current_room_state: int = RoomState.PRE_FIGHT
 
 onready var _closing_door: StaticBody2D = $ClosingDoorManager/ClosingDoor
 onready var _closing_door_trigger: Area2D = $ClosingDoorManager/ClosingDoorTrigger
-onready var _room: Room = get_parent()
+onready var _enemies_node: Node2D = $Enemies
 
 var _sluggish_failures := []
 var _player_camera: Camera2D
@@ -60,7 +60,7 @@ func _spawn_failure_at(position: Vector2) -> void:
         failure, prop, old, new, duration, trans, easing)
     failure.add_child(alpha_tween)
 
-    _room.add_child(failure)
+    _enemies_node.add_child(failure)
     alpha_tween.start()
     _sluggish_failures.append(failure)
 
