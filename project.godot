@@ -218,7 +218,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Industrial"
+config/name="Factory Escape"
 run/main_scene="res://rooms/testing/TestGame.tscn"
 config/icon="res://icon.png"
 
