@@ -27,7 +27,7 @@ shape = SubResource( 1 )
 [node name="Lever" parent="World/Rooms/LeverPlayground" index="9" instance=ExtResource( 3 )]
 position = Vector2( 160, 160 )
 
-[node name="Player" parent="World" index="1"]
+[node name="Player" parent="World" index="3"]
 position = Vector2( 130, 160 )
 
 [editable path="World/Rooms/LeverPlayground"]
