@@ -1,6 +1,6 @@
 extends Control
 
-onready var _health_nodes: VBoxContainer = $HealthNodes
+onready var _health_nodes: HBoxContainer = $HealthNodes
 
 var _current_health: int = 5
 

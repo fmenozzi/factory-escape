@@ -4,7 +4,7 @@ extends Control
 # the dialog box.
 const SCROLL_SPEED: float = 0.05
 
-onready var _black_overlay: TextureRect = $BlackOverlay
+onready var _black_overlay: ColorRect = $BlackOverlay
 onready var _label: RichTextLabel = $RichTextLabel
 onready var _timer: Timer = $TextScrollTimer
 
