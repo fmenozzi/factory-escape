@@ -37,6 +37,12 @@ func exit() -> void:
 func handle_input(event: InputEvent) -> void:
     pass
 
+# Toggle whether inputs for this menu should be enabled. This function is meant
+# to be overridden by individual menus so that they can e.g. enable/disable
+# individual button callbacks.
+func set_input_enabled(enabled: bool) -> void:
+    pass
+
 # Convenience function for emitting the menu_changed signal from within a menu.
 func advance_to_menu(new_menu: int) -> void:
     emit_signal('menu_changed', new_menu)

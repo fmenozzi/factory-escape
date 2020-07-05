@@ -18,6 +18,8 @@ onready var _click_sound: AudioStreamPlayer = $ClickSound
 onready var _black_overlay: ColorRect = $BlackOverlay
 
 func _ready() -> void:
+    _set_quit_menu_input_enabled(true)
+
     # Intercept all menu_changed signals from individual submenus.
     for menu in MENUS.values():
         menu.connect('menu_changed', self, '_on_menu_changed')
@@ -61,6 +63,10 @@ func _change_menu(old_menu: int, new_menu: int) -> void:
             _menu_stack.push_back(new_menu)
     MENUS[_menu_stack.back()].enter(old_menu)
 
+func _set_quit_menu_input_enabled(enabled: bool) -> void:
+    set_process_input(enabled)
+    MENUS[Menu.Menus.QUIT].set_input_enabled(enabled)
+
 func _on_menu_changed(new_menu: int) -> void:
     _change_menu(_menu_stack.back(), new_menu)
 
@@ -69,6 +75,8 @@ func _on_previous_menu_requested() -> void:
     _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS)
 
 func _on_quit_to_main_menu_requested() -> void:
+    _set_quit_menu_input_enabled(false)
+
     var fade_duration := 2.0
     SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
 

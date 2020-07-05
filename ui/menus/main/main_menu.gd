@@ -7,9 +7,7 @@ onready var _options: Button = $Options
 onready var _quit: Button = $Quit
 
 func _ready() -> void:
-    _start.connect('pressed', self, '_on_start_pressed')
-    _options.connect('pressed', self, '_on_options_pressed')
-    _quit.connect('pressed', self, '_on_quit_pressed')
+    set_input_enabled(true)
 
 func enter(previous_menu: int) -> void:
     self.visible = true
@@ -28,6 +26,28 @@ func exit() -> void:
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
+
+func set_input_enabled(enabled: bool) -> void:
+    _set_focus_enabled(enabled)
+
+    if enabled:
+        _start.connect('pressed', self, '_on_start_pressed')
+        _options.connect('pressed', self, '_on_options_pressed')
+        _quit.connect('pressed', self, '_on_quit_pressed')
+    else:
+        _start.disconnect('pressed', self, '_on_start_pressed')
+        _options.disconnect('pressed', self, '_on_options_pressed')
+        _quit.disconnect('pressed', self, '_on_quit_pressed')
+
+func _set_focus_enabled(enabled: bool) -> void:
+    if enabled:
+        _start.focus_mode = Control.FOCUS_ALL
+        _options.focus_mode = Control.FOCUS_ALL
+        _quit.focus_mode = Control.FOCUS_ALL
+    else:
+        _start.focus_mode = Control.FOCUS_NONE
+        _options.focus_mode = Control.FOCUS_NONE
+        _quit.focus_mode = Control.FOCUS_NONE
 
 func _on_start_pressed() -> void:
     emit_signal('start_pressed')

@@ -28,6 +28,28 @@ func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
 
+func set_input_enabled(enabled: bool) -> void:
+    _set_focus_enabled(enabled)
+
+    if enabled:
+        _quit_to_main_menu.connect('pressed', self, '_on_quit_to_main_menu_pressed')
+        _quit_to_desktop.connect('pressed', self, '_on_quit_to_desktop_pressed')
+        _no.connect('pressed', self, '_on_no_pressed')
+    else:
+        _quit_to_main_menu.disconnect('pressed', self, '_on_quit_to_main_menu_pressed')
+        _quit_to_desktop.disconnect('pressed', self, '_on_quit_to_desktop_pressed')
+        _no.disconnect('pressed', self, '_on_no_pressed')
+
+func _set_focus_enabled(enabled: bool) -> void:
+    if enabled:
+        _quit_to_main_menu.focus_mode = Control.FOCUS_ALL
+        _quit_to_desktop.focus_mode = Control.FOCUS_ALL
+        _no.focus_mode = Control.FOCUS_ALL
+    else:
+        _quit_to_main_menu.focus_mode = Control.FOCUS_NONE
+        _quit_to_desktop.focus_mode = Control.FOCUS_NONE
+        _no.focus_mode = Control.FOCUS_NONE
+
 func _on_quit_to_main_menu_pressed() -> void:
     emit_signal('quit_to_main_menu_requested')
 
