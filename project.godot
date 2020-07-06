@@ -335,3 +335,7 @@ player_move_up={
 2d_physics/layer_8="enemy_hurtbox"
 2d_physics/layer_9="hazards"
 2d_physics/layer_10="enemy_barrier"
+
+[world]
+
+2d/cell_size=8

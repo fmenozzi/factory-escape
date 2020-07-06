@@ -10,6 +10,7 @@ export(Speed) var speed := Speed.SLOW
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _dust_puffs: Array = $CrusherHead/DustPuffs.get_children()
+onready var _visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
 
 func _ready() -> void:
     yield(get_tree().create_timer(initial_delay), 'timeout')
@@ -28,9 +29,4 @@ func _impact() -> void:
         dust_puff.emitting = true
 
 func _player_is_near() -> bool:
-    var player: Player = Util.get_player()
-    assert(player != null)
-
-    # For now, simply check that the player is in the same room as the crusher.
-    var current_room: Room = get_parent().get_parent()
-    return player.curr_room == current_room
+    return _visibility_notifier.is_on_screen()
