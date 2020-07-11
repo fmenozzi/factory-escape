@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://ui/themes/button/focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/themes/button/hover.tres" type="StyleBox" id=2]
@@ -12,16 +12,17 @@
 [ext_resource path="res://ui/themes/hslider/slider.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/themes/hslider/grabber_area.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/themes/hslider/grabber_area_highlight.tres" type="StyleBox" id=12]
+[ext_resource path="res://ui/themes/button/disabled.tres" type="StyleBox" id=13]
 
 [resource]
 default_font = ExtResource( 7 )
-Button/colors/font_color = Color( 0.878431, 0.878431, 0.878431, 1 )
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
 Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_hover = Color( 0.941176, 0.941176, 0.941176, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = null
+Button/styles/disabled = ExtResource( 13 )
 Button/styles/focus = ExtResource( 1 )
 Button/styles/hover = ExtResource( 2 )
 Button/styles/normal = ExtResource( 3 )
