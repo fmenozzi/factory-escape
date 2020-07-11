@@ -4,4 +4,3 @@
 color = Color( 0.152941, 0.168627, 0.239216, 1 )
 grow_begin = -6.0
 grow_end = -6.0
-thickness = 2
