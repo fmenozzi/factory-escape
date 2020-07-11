@@ -23,6 +23,7 @@ enum Menus {
     AUDIO_OPTIONS,
     VIDEO_OPTIONS,
     CONTROLLER_OPTIONS,
+    KEYBOARD_OPTIONS,
 }
 
 # Called when this menu is entered.

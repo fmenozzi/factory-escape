@@ -13,6 +13,7 @@ onready var MENUS := {
     Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
     Menu.Menus.CONTROLLER_OPTIONS: $MenuBackground/ControllerOptionsMenu,
+    Menu.Menus.KEYBOARD_OPTIONS:   $MenuBackground/KeyboardOptionsMenu,
 }
 var _menu_stack := []
 

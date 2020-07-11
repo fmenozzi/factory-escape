@@ -1,0 +1,135 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/menus/options/keyboard/keyboard_options_menu.gd" type="Script" id=1]
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/menus/options/keyboard/KeyboardRemapContainer.tscn" type="PackedScene" id=3]
+
+[node name="KeyboardOptionsMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+alignment = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Keyboard" type="Label" parent="."]
+margin_top = 18.0
+margin_right = 320.0
+margin_bottom = 31.0
+text = "Keyboard"
+align = 1
+
+[node name="JumpRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 35.0
+margin_right = 320.0
+margin_bottom = 50.0
+label = "Jump"
+
+[node name="Label" parent="JumpRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="JumpRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../Back")
+focus_neighbour_bottom = NodePath("../../AttackRemapContainer/KeyboardRemapButton")
+action = "player_jump"
+
+[node name="AttackRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_right = 320.0
+margin_bottom = 69.0
+label = "Attack"
+
+[node name="Label" parent="AttackRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="AttackRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../JumpRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../DashRemapContainer/KeyboardRemapButton")
+action = "player_attack"
+
+[node name="DashRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 73.0
+margin_right = 320.0
+margin_bottom = 88.0
+label = "Dash"
+
+[node name="Label" parent="DashRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="DashRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../AttackRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../GrappleRemapContainer/KeyboardRemapButton")
+action = "player_dash"
+
+[node name="GrappleRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 92.0
+margin_right = 320.0
+margin_bottom = 107.0
+label = "Grapple"
+
+[node name="Label" parent="GrappleRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="GrappleRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../DashRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../InteractRemapContainer/KeyboardRemapButton")
+action = "player_grapple"
+
+[node name="InteractRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 111.0
+margin_right = 320.0
+margin_bottom = 126.0
+label = "Interact"
+
+[node name="Label" parent="InteractRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="InteractRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../GrappleRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../Back")
+action = "player_interact"
+
+[node name="BlankSeparatorLabel" type="Label" parent="."]
+margin_top = 130.0
+margin_right = 320.0
+margin_bottom = 143.0
+
+[node name="Back" type="Button" parent="."]
+margin_top = 147.0
+margin_right = 320.0
+margin_bottom = 162.0
+focus_neighbour_top = NodePath("../InteractRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../JumpRemapContainer/KeyboardRemapButton")
+text = "Back"
+
+[editable path="JumpRemapContainer"]
+
+[editable path="AttackRemapContainer"]
+
+[editable path="DashRemapContainer"]
+
+[editable path="GrappleRemapContainer"]
+
+[editable path="InteractRemapContainer"]

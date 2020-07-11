@@ -25,6 +25,8 @@ func enter(previous_menu: int) -> void:
             _video.grab_focus()
         Menu.Menus.CONTROLLER_OPTIONS:
             _controller.grab_focus()
+        Menu.Menus.KEYBOARD_OPTIONS:
+            _keyboard.grab_focus()
         _:
             # Default to first option.
             _game.grab_focus()
@@ -55,7 +57,7 @@ func _on_controller_pressed() -> void:
     advance_to_menu(Menu.Menus.CONTROLLER_OPTIONS)
 
 func _on_keyboard_pressed() -> void:
-    print('keyboard button not yet implemented')
+    advance_to_menu(Menu.Menus.KEYBOARD_OPTIONS)
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()
