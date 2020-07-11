@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=13 format=2]
 
 [ext_resource path="res://ui/themes/button/focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/themes/button/hover.tres" type="StyleBox" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://ui/themes/textures/grabber-highlighted.png" type="Texture" id=9]
 [ext_resource path="res://ui/themes/hslider/slider.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/themes/hslider/grabber_area.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/themes/hslider/grabber_area_highlight.tres" type="StyleBox" id=12]
 
 [resource]
 default_font = ExtResource( 7 )
@@ -48,4 +49,5 @@ HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = ExtResource( 9 )
 HSlider/icons/tick = null
 HSlider/styles/grabber_area = ExtResource( 11 )
+HSlider/styles/grabber_area_highlight = ExtResource( 12 )
 HSlider/styles/slider = ExtResource( 10 )
