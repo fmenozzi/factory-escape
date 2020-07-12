@@ -5,6 +5,11 @@ signal remap_finished
 
 export(String) var action := ''
 
+const BLOCKLIST := [
+    KEY_ESCAPE,
+    KEY_ENTER,
+]
+
 func _ready() -> void:
     assert(InputMap.has_action(action))
 
@@ -26,11 +31,15 @@ func _toggled(button_pressed: bool) -> void:
         _display_current_key()
 
 func _unhandled_key_input(event: InputEventKey) -> void:
-    _remap_action_to(event)
-    self.pressed = false
-    emit_signal('remap_finished')
+    if _remap_action_to(event):
+        self.pressed = false
+        emit_signal('remap_finished')
 
-func _remap_action_to(event: InputEventKey) -> void:
+func _remap_action_to(event: InputEventKey) -> bool:
+    # Make sure the desired remapping is allowed.
+    if event.scancode in BLOCKLIST:
+        return false
+
     # Remove all keyboard events corresponding to action before adding the new
     # mapping.
     for existing_event in InputMap.get_action_list(action):
@@ -39,6 +48,8 @@ func _remap_action_to(event: InputEventKey) -> void:
     InputMap.action_add_event(action, event)
 
     _display_current_key()
+
+    return true
 
 func _display_current_key() -> void:
     for event in InputMap.get_action_list(action):
