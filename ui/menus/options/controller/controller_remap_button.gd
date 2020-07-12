@@ -58,8 +58,13 @@ func _remap_action_to(event: InputEventJoypadButton) -> bool:
     if not _joypad_buttons_to_textures.has(event.button_index):
         return false
 
-    InputMap.action_erase_events(action)
+    # Remove all joypad events corresponding to action before adding the new
+    # mapping.
+    for existing_event in InputMap.get_action_list(action):
+        if existing_event is InputEventJoypadButton:
+            InputMap.action_erase_event(action, existing_event)
     InputMap.action_add_event(action, event)
+
     _display_current_texture()
 
     return true

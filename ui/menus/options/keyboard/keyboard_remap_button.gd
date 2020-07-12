@@ -31,8 +31,13 @@ func _unhandled_key_input(event: InputEventKey) -> void:
     emit_signal('remap_finished')
 
 func _remap_action_to(event: InputEventKey) -> void:
-    InputMap.action_erase_events(action)
+    # Remove all keyboard events corresponding to action before adding the new
+    # mapping.
+    for existing_event in InputMap.get_action_list(action):
+        if existing_event is InputEventKey:
+            InputMap.action_erase_event(action, existing_event)
     InputMap.action_add_event(action, event)
+
     _display_current_key()
 
 func _display_current_key() -> void:
