@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/options/controller/controller_options_menu.gd" type="Script" id=2]
-[ext_resource path="res://ui/menus/options/controller/textures/xbox-a.png" type="Texture" id=3]
-[ext_resource path="res://ui/menus/options/controller/textures/xbox-x.png" type="Texture" id=4]
-[ext_resource path="res://ui/menus/options/controller/textures/xbox-rt.png" type="Texture" id=5]
-[ext_resource path="res://ui/menus/options/controller/textures/xbox-lt.png" type="Texture" id=6]
-[ext_resource path="res://ui/menus/options/controller/textures/xbox-dpad-up.png" type="Texture" id=7]
+[ext_resource path="res://ui/menus/options/controller/ControllerRemapContainer.tscn" type="PackedScene" id=3]
 
 [node name="ControllerOptionsMenu" type="VBoxContainer"]
 anchor_right = 1.0
@@ -19,121 +15,121 @@ __meta__ = {
 }
 
 [node name="Controller" type="Label" parent="."]
-margin_top = 15.0
+margin_top = 18.0
 margin_right = 320.0
-margin_bottom = 28.0
+margin_bottom = 31.0
 text = "Controller"
 align = 1
 
-[node name="Jump" type="HBoxContainer" parent="."]
-margin_top = 32.0
+[node name="JumpRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 35.0
 margin_right = 320.0
-margin_bottom = 48.0
-alignment = 1
+margin_bottom = 50.0
+label = "Jump"
 
-[node name="Jump" type="Button" parent="Jump"]
-margin_right = 158.0
-margin_bottom = 16.0
+[node name="Label" parent="JumpRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+
+[node name="ControllerRemapButton" parent="JumpRemapContainer" index="1"]
+margin_bottom = 15.0
 focus_neighbour_top = NodePath("../../Back")
-size_flags_horizontal = 3
-text = "Jump"
-align = 2
+focus_neighbour_bottom = NodePath("../../AttackRemapContainer/ControllerRemapButton")
+action = "player_jump"
 
-[node name="JumpButtonTexture" type="TextureRect" parent="Jump"]
-margin_left = 162.0
+[node name="AttackRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
 margin_right = 320.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-texture = ExtResource( 3 )
+margin_bottom = 69.0
+label = "Attack"
 
-[node name="Attack" type="HBoxContainer" parent="."]
-margin_top = 52.0
-margin_right = 320.0
-margin_bottom = 68.0
-alignment = 1
+[node name="Label" parent="AttackRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
 
-[node name="Attack" type="Button" parent="Attack"]
-margin_right = 158.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-text = "Attack"
-align = 2
+[node name="ControllerRemapButton" parent="AttackRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../JumpRemapContainer/ControllerRemapButton")
+focus_neighbour_bottom = NodePath("../../DashRemapContainer/ControllerRemapButton")
+action = "player_attack"
 
-[node name="AttackButtonTexture" type="TextureRect" parent="Attack"]
-margin_left = 162.0
-margin_right = 320.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-texture = ExtResource( 4 )
-
-[node name="Dash" type="HBoxContainer" parent="."]
-margin_top = 72.0
+[node name="DashRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 73.0
 margin_right = 320.0
 margin_bottom = 88.0
-alignment = 1
+label = "Dash"
 
-[node name="Dash" type="Button" parent="Dash"]
-margin_right = 158.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-text = "Dash"
-align = 2
+[node name="Label" parent="DashRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
 
-[node name="DashButtonTexture" type="TextureRect" parent="Dash"]
-margin_left = 162.0
-margin_right = 320.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-texture = ExtResource( 5 )
+[node name="ControllerRemapButton" parent="DashRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../AttackRemapContainer/ControllerRemapButton")
+focus_neighbour_bottom = NodePath("../../GrappleRemapContainer/ControllerRemapButton")
+action = "player_dash"
 
-[node name="Grapple" type="HBoxContainer" parent="."]
+[node name="GrappleRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 92.0
 margin_right = 320.0
-margin_bottom = 108.0
-alignment = 1
+margin_bottom = 107.0
+label = "Grapple"
 
-[node name="Grapple" type="Button" parent="Grapple"]
-margin_right = 158.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-text = "Grapple"
-align = 2
+[node name="Label" parent="GrappleRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
 
-[node name="GrappleButtonTexture" type="TextureRect" parent="Grapple"]
-margin_left = 162.0
+[node name="ControllerRemapButton" parent="GrappleRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../DashRemapContainer/ControllerRemapButton")
+focus_neighbour_bottom = NodePath("../../InteractRemapContainer/ControllerRemapButton")
+action = "player_grapple"
+
+[node name="InteractRemapContainer" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 111.0
 margin_right = 320.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-texture = ExtResource( 6 )
+margin_bottom = 126.0
+label = "Interact"
 
-[node name="Interact" type="HBoxContainer" parent="."]
-margin_top = 112.0
-margin_right = 320.0
-margin_bottom = 128.0
-alignment = 1
+[node name="Label" parent="InteractRemapContainer" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
 
-[node name="Interact" type="Button" parent="Interact"]
-margin_right = 158.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-text = "Interact"
-align = 2
-
-[node name="InteractButtonTexture" type="TextureRect" parent="Interact"]
-margin_left = 162.0
-margin_right = 320.0
-margin_bottom = 16.0
-size_flags_horizontal = 3
-texture = ExtResource( 7 )
+[node name="ControllerRemapButton" parent="InteractRemapContainer" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../GrappleRemapContainer/ControllerRemapButton")
+focus_neighbour_bottom = NodePath("../../Back")
+action = "player_interact"
 
 [node name="BlankSeparatorLabel" type="Label" parent="."]
-margin_top = 132.0
+margin_top = 130.0
 margin_right = 320.0
-margin_bottom = 145.0
+margin_bottom = 143.0
 
 [node name="Back" type="Button" parent="."]
-margin_top = 149.0
+margin_top = 147.0
 margin_right = 320.0
-margin_bottom = 164.0
-focus_neighbour_bottom = NodePath("../Jump/Jump")
+margin_bottom = 162.0
+focus_neighbour_top = NodePath("../InteractRemapContainer/ControllerRemapButton")
+focus_neighbour_bottom = NodePath("../JumpRemapContainer/ControllerRemapButton")
 text = "Back"
+
+[editable path="JumpRemapContainer"]
+
+[editable path="AttackRemapContainer"]
+
+[editable path="DashRemapContainer"]
+
+[editable path="GrappleRemapContainer"]
+
+[editable path="InteractRemapContainer"]
