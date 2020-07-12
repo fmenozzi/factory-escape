@@ -20,6 +20,7 @@ func _toggled(button_pressed: bool) -> void:
     self.disabled = button_pressed
 
     if button_pressed:
+        release_focus()
         emit_signal('remap_started')
     else:
         _display_current_key()
