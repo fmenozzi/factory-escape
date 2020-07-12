@@ -3,7 +3,9 @@
 [ext_resource path="res://ui/menus/options/controller/controller_remap_button.gd" type="Script" id=1]
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=2]
 
-[node name="ControllerRemapButton" type="Button"]
+[node name="ControllerRemapButton" type="Button" groups=[
+"controller_remap_button",
+]]
 margin_right = 40.0
 margin_bottom = 40.0
 theme = ExtResource( 2 )
