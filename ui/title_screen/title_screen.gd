@@ -38,6 +38,8 @@ func _ready() -> void:
     # Start at main menu.
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN)
 
+    Options.load_options()
+
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
 

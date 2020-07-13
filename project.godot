@@ -230,6 +230,7 @@ Screenshake="*res://custom/nodes/Screenshake.tscn"
 Collision="*res://custom/scripts/collision.gd"
 Preloads="*res://custom/scripts/preloads.gd"
 SceneChanger="*res://custom/nodes/SceneChanger.tscn"
+Options="*res://custom/nodes/Options.tscn"
 
 [display]
 

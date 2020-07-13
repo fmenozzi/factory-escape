@@ -34,6 +34,8 @@ func _ready() -> void:
     # Start in unpaused state.
     _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED)
 
+    Options.load_options()
+
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
 
