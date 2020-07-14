@@ -4,7 +4,9 @@
 [ext_resource path="res://ui/menus/options/audio/audio_options_menu.gd" type="Script" id=2]
 [ext_resource path="res://ui/menus/options/audio/AudioSlider.tscn" type="PackedScene" id=3]
 
-[node name="AudioOptionsMenu" type="VBoxContainer"]
+[node name="AudioOptionsMenu" type="VBoxContainer" groups=[
+"options",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
