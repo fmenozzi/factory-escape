@@ -5,6 +5,8 @@ signal remap_finished
 
 export(String) var action := ''
 
+var _button_index := -1
+
 var _joypad_buttons_to_textures: Dictionary = {
     # Main buttons.
     JOY_XBOX_A: Preloads.XboxA,
@@ -49,11 +51,14 @@ func _unhandled_input(event: InputEvent) -> void:
     if not event is InputEventJoypadButton:
         return
 
-    if _remap_action_to(event as InputEventJoypadButton):
+    if remap_action_to(event as InputEventJoypadButton):
         self.pressed = false
         emit_signal('remap_finished')
 
-func _remap_action_to(event: InputEventJoypadButton) -> bool:
+func get_button_index() -> int:
+    return _button_index
+
+func remap_action_to(event: InputEventJoypadButton) -> bool:
     # Make sure the desired remapping is allowed.
     if not _joypad_buttons_to_textures.has(event.button_index):
         return false
@@ -74,4 +79,5 @@ func _display_current_texture() -> void:
         if event is InputEventJoypadButton:
             # Make sure the desired remapping is allowed.
             if _joypad_buttons_to_textures.has(event.button_index):
-                self.icon = _joypad_buttons_to_textures[event.button_index]
+                _button_index = event.button_index
+                self.icon = _joypad_buttons_to_textures[_button_index]
