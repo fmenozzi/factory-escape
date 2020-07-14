@@ -10,6 +10,7 @@ var _scancode := -1
 const BLOCKLIST := [
     KEY_ESCAPE,
     KEY_ENTER,
+    KEY_KP_ENTER,
 ]
 
 func _ready() -> void:
