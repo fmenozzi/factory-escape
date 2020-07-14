@@ -5,6 +5,8 @@ signal remap_finished
 
 export(String) var action := ''
 
+var _scancode := -1
+
 const BLOCKLIST := [
     KEY_ESCAPE,
     KEY_ENTER,
@@ -31,11 +33,14 @@ func _toggled(button_pressed: bool) -> void:
         _display_current_key()
 
 func _unhandled_key_input(event: InputEventKey) -> void:
-    if _remap_action_to(event):
+    if remap_action_to(event):
         self.pressed = false
         emit_signal('remap_finished')
 
-func _remap_action_to(event: InputEventKey) -> bool:
+func get_scancode() -> int:
+    return _scancode
+
+func remap_action_to(event: InputEventKey) -> bool:
     # Make sure the desired remapping is allowed.
     if event.scancode in BLOCKLIST:
         return false
@@ -54,4 +59,5 @@ func _remap_action_to(event: InputEventKey) -> bool:
 func _display_current_key() -> void:
     for event in InputMap.get_action_list(action):
         if event is InputEventKey:
+            _scancode = event.scancode
             self.text = OS.get_scancode_string(event.scancode)
