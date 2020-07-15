@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://ui/themes/button/focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/themes/button/hover.tres" type="StyleBox" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ui/themes/hslider/grabber_area.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/themes/hslider/grabber_area_highlight.tres" type="StyleBox" id=12]
 [ext_resource path="res://ui/themes/button/disabled.tres" type="StyleBox" id=13]
+[ext_resource path="res://ui/themes/hseparator/separator.tres" type="StyleBox" id=14]
 
 [resource]
 default_font = ExtResource( 7 )
@@ -45,6 +46,8 @@ CheckBox/styles/hover = null
 CheckBox/styles/hover_pressed = null
 CheckBox/styles/normal = null
 CheckBox/styles/pressed = null
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = ExtResource( 14 )
 HSlider/icons/grabber = ExtResource( 8 )
 HSlider/icons/grabber_disabled = null
 HSlider/icons/grabber_highlight = ExtResource( 9 )

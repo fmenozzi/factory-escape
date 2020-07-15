@@ -16,36 +16,36 @@ __meta__ = {
 }
 
 [node name="Video" type="Label" parent="."]
-margin_top = 43.0
+margin_top = 42.0
 margin_right = 320.0
-margin_bottom = 56.0
+margin_bottom = 55.0
 text = "Video"
 align = 1
 
 [node name="VSync" type="CheckBox" parent="."]
-margin_top = 60.0
+margin_top = 59.0
 margin_right = 320.0
-margin_bottom = 78.0
+margin_bottom = 77.0
 focus_neighbour_top = NodePath("../Back")
 text = "VSync"
 align = 1
 
 [node name="Fullscreen" type="CheckBox" parent="."]
-margin_top = 82.0
+margin_top = 81.0
 margin_right = 320.0
-margin_bottom = 100.0
+margin_bottom = 99.0
 focus_neighbour_bottom = NodePath("../Back")
 text = "Fullscreen"
 align = 1
 
-[node name="BlankSeparatorLabel" type="Label" parent="."]
-margin_top = 104.0
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 103.0
 margin_right = 320.0
-margin_bottom = 117.0
+margin_bottom = 119.0
 
 [node name="Back" type="Button" parent="."]
-margin_top = 121.0
+margin_top = 123.0
 margin_right = 320.0
-margin_bottom = 136.0
+margin_bottom = 138.0
 focus_neighbour_bottom = NodePath("../VSync")
 text = "Back"
