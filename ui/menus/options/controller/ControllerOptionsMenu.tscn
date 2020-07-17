@@ -17,18 +17,18 @@ __meta__ = {
 }
 
 [node name="Controller" type="Label" parent="."]
-margin_top = 22.0
+margin_top = 13.0
 margin_right = 320.0
-margin_bottom = 35.0
+margin_bottom = 26.0
 text = "Controller"
 align = 1
 
 [node name="JumpRemapContainer" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 39.0
+margin_top = 30.0
 margin_right = 320.0
-margin_bottom = 54.0
+margin_bottom = 45.0
 label = "Jump"
 
 [node name="Label" parent="JumpRemapContainer" index="0"]
@@ -44,9 +44,9 @@ action = "player_jump"
 [node name="AttackRemapContainer" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 58.0
+margin_top = 49.0
 margin_right = 320.0
-margin_bottom = 73.0
+margin_bottom = 64.0
 label = "Attack"
 
 [node name="Label" parent="AttackRemapContainer" index="0"]
@@ -62,9 +62,9 @@ action = "player_attack"
 [node name="DashRemapContainer" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 77.0
+margin_top = 68.0
 margin_right = 320.0
-margin_bottom = 92.0
+margin_bottom = 83.0
 label = "Dash"
 
 [node name="Label" parent="DashRemapContainer" index="0"]
@@ -80,9 +80,9 @@ action = "player_dash"
 [node name="GrappleRemapContainer" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 96.0
+margin_top = 87.0
 margin_right = 320.0
-margin_bottom = 111.0
+margin_bottom = 102.0
 label = "Grapple"
 
 [node name="Label" parent="GrappleRemapContainer" index="0"]
@@ -98,9 +98,9 @@ action = "player_grapple"
 [node name="InteractRemapContainer" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 115.0
+margin_top = 106.0
 margin_right = 320.0
-margin_bottom = 130.0
+margin_bottom = 121.0
 label = "Interact"
 
 [node name="Label" parent="InteractRemapContainer" index="0"]
@@ -110,19 +110,27 @@ margin_bottom = 14.0
 [node name="ControllerRemapButton" parent="InteractRemapContainer" index="1"]
 margin_bottom = 15.0
 focus_neighbour_top = NodePath("../../GrappleRemapContainer/ControllerRemapButton")
-focus_neighbour_bottom = NodePath("../../Back")
+focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 action = "player_interact"
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 134.0
+margin_top = 125.0
 margin_right = 320.0
-margin_bottom = 138.0
+margin_bottom = 129.0
+
+[node name="ResetToDefaults" type="Button" parent="."]
+margin_top = 133.0
+margin_right = 320.0
+margin_bottom = 148.0
+focus_neighbour_top = NodePath("../InteractRemapContainer/ControllerRemapButton")
+focus_neighbour_bottom = NodePath("../Back")
+text = "Reset To Defaults"
 
 [node name="Back" type="Button" parent="."]
-margin_top = 142.0
+margin_top = 152.0
 margin_right = 320.0
-margin_bottom = 157.0
-focus_neighbour_top = NodePath("../InteractRemapContainer/ControllerRemapButton")
+margin_bottom = 167.0
+focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../JumpRemapContainer/ControllerRemapButton")
 text = "Back"
 
