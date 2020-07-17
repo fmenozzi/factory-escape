@@ -8,6 +8,7 @@ onready var _dash_remap_button: Button = $DashRemapContainer/KeyboardRemapButton
 onready var _grapple_remap_button: Button = $GrappleRemapContainer/KeyboardRemapButton
 onready var _interact_remap_button: Button = $InteractRemapContainer/KeyboardRemapButton
 
+onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
 var _input_enabled := true
@@ -17,6 +18,7 @@ func _ready() -> void:
         remap_button.connect('remap_started', self, '_on_remap_started')
         remap_button.connect('remap_finished', self, '_on_remap_started')
 
+    _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
 func enter(previous_menu: int) -> void:
@@ -84,6 +86,48 @@ func _on_remap_started() -> void:
 
 func _on_remap_finished() -> void:
     _set_input_enabled(true)
+    Options.save_options()
+
+func _on_reset_to_defaults_pressed() -> void:
+    # Clear existing mappings and reload from project settings. The keyboard
+    # bindings will be reloaded from the project settings, while the controller
+    # bindings will be reloaded from the current config (so as not to be
+    # overwritten once we save the keyboard defaults).
+    InputMap.load_from_globals()
+
+    var keyboard_remap_buttons := [
+        _jump_remap_button,
+        _attack_remap_button,
+        _dash_remap_button,
+        _grapple_remap_button,
+        _interact_remap_button,
+    ]
+
+    # Save existing controller option data to restore later.
+    var controller_option_data := {}
+    var config: ConfigFile = Options.get_config()
+    if config.has_section('controller'):
+        for keyboard_remap_button in keyboard_remap_buttons:
+            var action: String = keyboard_remap_button.action
+            controller_option_data[action] = config.get_value('controller', action)
+
+    # Restore keyboard option data to defaults from project settings.
+    for keyboard_remap_button in keyboard_remap_buttons:
+        var action: String = keyboard_remap_button.action
+        for event in InputMap.get_action_list(action):
+            if event is InputEventKey:
+                keyboard_remap_button.remap_action_to(event)
+
+    # Restore existing keyboard option data.
+    for action in controller_option_data:
+        for existing_event in InputMap.get_action_list(action):
+            if existing_event is InputEventJoypadButton:
+                InputMap.action_erase_event(action, existing_event)
+
+                var new_event := InputEventJoypadButton.new()
+                new_event.button_index = controller_option_data[action]
+                InputMap.action_add_event(action, new_event)
+
     Options.save_options()
 
 func _on_back_pressed() -> void:
