@@ -17,20 +17,20 @@ __meta__ = {
 }
 
 [node name="Audio" type="Label" parent="."]
-margin_top = 36.0
+margin_top = 26.0
 margin_right = 320.0
-margin_bottom = 49.0
+margin_bottom = 39.0
 text = "Audio"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 53.0
+margin_top = 43.0
 margin_right = 320.0
-margin_bottom = 57.0
+margin_bottom = 47.0
 
 [node name="Music" parent="." instance=ExtResource( 3 )]
-margin_top = 61.0
-margin_bottom = 77.0
+margin_top = 51.0
+margin_bottom = 67.0
 
 [node name="Label" parent="Music" index="0"]
 text = "Music"
@@ -40,8 +40,8 @@ focus_neighbour_top = NodePath("../../../Back")
 focus_neighbour_bottom = NodePath("../../../Effects/Container/Slider")
 
 [node name="Effects" parent="." instance=ExtResource( 3 )]
-margin_top = 81.0
-margin_bottom = 97.0
+margin_top = 71.0
+margin_bottom = 87.0
 
 [node name="Label" parent="Effects" index="0"]
 text = "Effects"
@@ -51,26 +51,34 @@ focus_neighbour_top = NodePath("../../../Music/Container/Slider")
 focus_neighbour_bottom = NodePath("../../../UI/Container/Slider")
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-margin_top = 101.0
-margin_bottom = 117.0
+margin_top = 91.0
+margin_bottom = 107.0
 
 [node name="Label" parent="UI" index="0"]
 text = "UI"
 
 [node name="Slider" parent="UI/Container" index="0"]
 focus_neighbour_top = NodePath("../../../Effects/Container/Slider")
-focus_neighbour_bottom = NodePath("../../../Back")
+focus_neighbour_bottom = NodePath("../../../ResetToDefaults")
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 121.0
+margin_top = 111.0
 margin_right = 320.0
-margin_bottom = 125.0
+margin_bottom = 115.0
+
+[node name="ResetToDefaults" type="Button" parent="."]
+margin_top = 119.0
+margin_right = 320.0
+margin_bottom = 134.0
+focus_neighbour_top = NodePath("../UI/Container/Slider")
+focus_neighbour_bottom = NodePath("../Back")
+text = "Reset To Defaults"
 
 [node name="Back" type="Button" parent="."]
-margin_top = 129.0
+margin_top = 138.0
 margin_right = 320.0
-margin_bottom = 144.0
-focus_neighbour_top = NodePath("../UI/Container/Slider")
+margin_bottom = 153.0
+focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../Music/Container/Slider")
 text = "Back"
 

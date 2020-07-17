@@ -5,11 +5,14 @@ const SECTION := 'audio'
 onready var _music_slider: HSlider = $Music/Container/Slider
 onready var _effects_slider: HSlider = $Effects/Container/Slider
 onready var _ui_slider: HSlider = $UI/Container/Slider
+
+onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
 func _ready() -> void:
     _set_slider_signals_connected(true)
 
+    _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
 func enter(previous_menu: int) -> void:
@@ -105,6 +108,11 @@ func _on_ui_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()
     _set_bus_volume('UI', new_value)
     Options.save_options()
+
+func _on_reset_to_defaults_pressed() -> void:
+    _music_slider.set_value(_music_slider.max_value)
+    _effects_slider.set_value(_effects_slider.max_value)
+    _ui_slider.set_value(_ui_slider.max_value)
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()
