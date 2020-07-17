@@ -4,17 +4,19 @@ const SECTION := 'video'
 
 onready var _vsync: CheckBox = $VSync
 onready var _fullscreen: CheckBox = $Fullscreen
+
+onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
 func _ready() -> void:
     _vsync.connect('pressed', self, '_on_vsync_pressed')
     _fullscreen.connect('pressed', self, '_on_fullscreen_pressed')
 
+    _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
-    var default_options_data := get_options_data()
-    _vsync.pressed = default_options_data[1]['vsync']
-    _fullscreen.pressed = default_options_data[1]['fullscreen']
+    _vsync.pressed = OS.vsync_enabled
+    _fullscreen.pressed = OS.window_fullscreen
 
 func enter(previous_menu: int) -> void:
     self.visible = true
@@ -57,6 +59,15 @@ func _on_vsync_pressed() -> void:
 
 func _on_fullscreen_pressed() -> void:
     OS.set_window_fullscreen(_fullscreen.is_pressed())
+    Options.save_options()
+
+func _on_reset_to_defaults_pressed() -> void:
+    OS.set_use_vsync(true)
+    _vsync.pressed = true
+
+    OS.set_window_fullscreen(false)
+    _fullscreen.pressed = false
+
     Options.save_options()
 
 func _on_back_pressed() -> void:
