@@ -41,5 +41,8 @@ func load_options() -> void:
 
     emit_signal('options_loaded')
 
+func get_config() -> ConfigFile:
+    return _config
+
 func _get_file_path() -> String:
     return SAVE_DIRECTORY + 'options.cfg'
