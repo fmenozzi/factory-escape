@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/options/video/video_options_menu.gd" type="Script" id=2]
+[ext_resource path="res://ui/menus/options/video/VideoOptionContainer.tscn" type="PackedScene" id=3]
 
 [node name="VideoOptionsMenu" type="VBoxContainer" groups=[
 "options",
@@ -16,43 +17,71 @@ __meta__ = {
 }
 
 [node name="Video" type="Label" parent="."]
-margin_top = 38.0
+margin_top = 41.0
 margin_right = 320.0
-margin_bottom = 51.0
+margin_bottom = 54.0
 text = "Video"
 align = 1
 
-[node name="VSync" type="CheckBox" parent="."]
-margin_top = 55.0
+[node name="VSync" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 58.0
 margin_right = 320.0
 margin_bottom = 73.0
-focus_neighbour_top = NodePath("../Back")
-text = "VSync"
-align = 1
+options = [ "Enabled", "Disabled" ]
+default_option = "Enabled"
 
-[node name="Fullscreen" type="CheckBox" parent="."]
+[node name="Label" parent="VSync" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+text = "Vsync"
+
+[node name="OptionButton" parent="VSync" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../Back")
+focus_neighbour_bottom = NodePath("../../WindowMode/OptionButton")
+
+[node name="WindowMode" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 77.0
 margin_right = 320.0
-margin_bottom = 95.0
-focus_neighbour_bottom = NodePath("../ResetToDefaults")
-text = "Fullscreen"
-align = 1
+margin_bottom = 92.0
+options = [ "Windowed", "Fullscreen" ]
+default_option = "Windowed"
+
+[node name="Label" parent="WindowMode" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+text = "Window Mode"
+
+[node name="OptionButton" parent="WindowMode" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../VSync/OptionButton")
+focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 99.0
+margin_top = 96.0
 margin_right = 320.0
-margin_bottom = 103.0
+margin_bottom = 100.0
 
 [node name="ResetToDefaults" type="Button" parent="."]
-margin_top = 107.0
+margin_top = 104.0
 margin_right = 320.0
-margin_bottom = 122.0
+margin_bottom = 119.0
+focus_neighbour_top = NodePath("../WindowMode/OptionButton")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Reset To Defaults"
 
 [node name="Back" type="Button" parent="."]
-margin_top = 126.0
+margin_top = 123.0
 margin_right = 320.0
-margin_bottom = 141.0
-focus_neighbour_bottom = NodePath("../VSync")
+margin_bottom = 138.0
+focus_neighbour_top = NodePath("../ResetToDefaults")
+focus_neighbour_bottom = NodePath("../VSync/OptionButton")
 text = "Back"
+
+[editable path="VSync"]
+
+[editable path="WindowMode"]
