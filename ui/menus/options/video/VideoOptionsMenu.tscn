@@ -17,18 +17,18 @@ __meta__ = {
 }
 
 [node name="Video" type="Label" parent="."]
-margin_top = 41.0
+margin_top = 32.0
 margin_right = 320.0
-margin_bottom = 54.0
+margin_bottom = 45.0
 text = "Video"
 align = 1
 
 [node name="VSync" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 58.0
+margin_top = 49.0
 margin_right = 320.0
-margin_bottom = 73.0
+margin_bottom = 64.0
 options = [ "Enabled", "Disabled" ]
 default_option = "Enabled"
 
@@ -45,9 +45,9 @@ focus_neighbour_bottom = NodePath("../../WindowMode/OptionButton")
 [node name="WindowMode" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 77.0
+margin_top = 68.0
 margin_right = 320.0
-margin_bottom = 92.0
+margin_bottom = 83.0
 options = [ "Windowed", "Fullscreen" ]
 default_option = "Windowed"
 
@@ -59,25 +59,44 @@ text = "Window Mode"
 [node name="OptionButton" parent="WindowMode" index="1"]
 margin_bottom = 15.0
 focus_neighbour_top = NodePath("../../VSync/OptionButton")
+focus_neighbour_bottom = NodePath("../../FpsCap/OptionButton")
+
+[node name="FpsCap" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 87.0
+margin_right = 320.0
+margin_bottom = 102.0
+options = [ "None", "30", "60" ]
+default_option = "60"
+
+[node name="Label" parent="FpsCap" index="0"]
+margin_top = 1.0
+margin_bottom = 14.0
+text = "FPS Cap"
+
+[node name="OptionButton" parent="FpsCap" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../WindowMode/OptionButton")
 focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 96.0
+margin_top = 106.0
 margin_right = 320.0
-margin_bottom = 100.0
+margin_bottom = 110.0
 
 [node name="ResetToDefaults" type="Button" parent="."]
-margin_top = 104.0
+margin_top = 114.0
 margin_right = 320.0
-margin_bottom = 119.0
-focus_neighbour_top = NodePath("../WindowMode/OptionButton")
+margin_bottom = 129.0
+focus_neighbour_top = NodePath("../FpsCap/OptionButton")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Reset To Defaults"
 
 [node name="Back" type="Button" parent="."]
-margin_top = 123.0
+margin_top = 133.0
 margin_right = 320.0
-margin_bottom = 138.0
+margin_bottom = 148.0
 focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../VSync/OptionButton")
 text = "Back"
@@ -85,3 +104,5 @@ text = "Back"
 [editable path="VSync"]
 
 [editable path="WindowMode"]
+
+[editable path="FpsCap"]

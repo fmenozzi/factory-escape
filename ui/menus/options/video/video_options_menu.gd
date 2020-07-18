@@ -4,6 +4,7 @@ const SECTION := 'video'
 
 onready var _vsync: HBoxContainer = $VSync
 onready var _window_mode: HBoxContainer = $WindowMode
+onready var _fps_cap: HBoxContainer = $FpsCap
 
 onready var _vsync_option_button: OptionButton = $VSync/OptionButton
 
@@ -13,6 +14,7 @@ onready var _back_button: Button = $Back
 func _ready() -> void:
     _vsync.connect('option_changed', self, '_on_vsync_changed')
     _window_mode.connect('option_changed', self, '_on_window_mode_changed')
+    _fps_cap.connect('option_changed', self, '_on_fps_cap_changed')
 
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
@@ -30,7 +32,9 @@ func handle_input(event: InputEvent) -> void:
         if get_tree().paused:
             advance_to_menu(Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
-        if not _vsync.is_being_set() and not _window_mode.is_being_set():
+        if not _vsync.is_being_set() and        \
+           not _window_mode.is_being_set() and  \
+           not _fps_cap.is_being_set():
             go_to_previous_menu()
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
@@ -40,6 +44,7 @@ func get_options_data() -> Array:
     return [SECTION, {
         'vsync': _vsync.get_selected_option_name(),
         'window_mode': _window_mode.get_selected_option_name(),
+        'fps_cap': _fps_cap.get_selected_option_name(),
     }]
 
 func load_options_data(config: ConfigFile) -> void:
@@ -50,6 +55,10 @@ func load_options_data(config: ConfigFile) -> void:
     if config.has_section_key(SECTION, 'window_mode'):
         _window_mode.select_option(config.get_value(SECTION, 'window_mode'))
         _set_window_mode()
+
+    if config.has_section_key(SECTION, 'fps_cap'):
+        _fps_cap.select_option(config.get_value(SECTION, 'fps_cap'))
+        _set_fps_cap()
 
 # Sets OS-level vsync using the currently-selected option in the option button.
 func _set_vsync() -> void:
@@ -68,6 +77,20 @@ func _set_window_mode() -> void:
         'Windowed':
             OS.window_fullscreen = false
 
+func _set_fps_cap() -> void:
+    var fps_cap: String = _fps_cap.get_selected_option_name()
+    assert(fps_cap in ['None', '30', '60'])
+
+    match fps_cap:
+        'None':
+            Engine.target_fps = 0
+
+        '30':
+            Engine.target_fps = 30
+
+        '60':
+            Engine.target_fps = 60
+
 func _on_vsync_changed() -> void:
     _set_vsync()
 
@@ -78,12 +101,20 @@ func _on_window_mode_changed() -> void:
 
     Options.save_options()
 
+func _on_fps_cap_changed() -> void:
+    _set_fps_cap()
+
+    Options.save_options()
+
 func _on_reset_to_defaults_pressed() -> void:
     _vsync.reset_to_default()
     _set_vsync()
 
     _window_mode.reset_to_default()
     _set_window_mode()
+
+    _fps_cap.reset_to_default()
+    _set_fps_cap()
 
     Options.save_options()
 

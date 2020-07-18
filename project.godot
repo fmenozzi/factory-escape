@@ -232,6 +232,10 @@ Preloads="*res://custom/scripts/preloads.gd"
 SceneChanger="*res://custom/nodes/SceneChanger.tscn"
 Options="*res://custom/nodes/Options.tscn"
 
+[debug]
+
+settings/fps/force_fps=60
+
 [display]
 
 window/size/width=320
