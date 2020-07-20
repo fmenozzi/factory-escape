@@ -337,6 +337,10 @@ player_move_up={
 2d_physics/layer_9="hazards"
 2d_physics/layer_10="enemy_barrier"
 
+[rendering]
+
+quality/2d/use_pixel_snap=true
+
 [world]
 
 2d/cell_size=8
