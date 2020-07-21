@@ -231,6 +231,7 @@ Collision="*res://custom/scripts/collision.gd"
 Preloads="*res://custom/scripts/preloads.gd"
 SceneChanger="*res://custom/nodes/SceneChanger.tscn"
 Options="*res://custom/nodes/Options.tscn"
+SaveAndLoad="*res://custom/nodes/SaveAndLoad.tscn"
 
 [debug]
 
