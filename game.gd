@@ -1,14 +1,20 @@
 extends Node
 
+var save_slot: int = SaveAndLoad.SaveSlot.UNSET
+
 onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
 onready var _rooms: Array = $World/Rooms.get_children()
+onready var _pause: Control = $Layers/PauseLayer/Pause
 onready var _health_bar: Control = $Layers/UILayer/Healthbar
 onready var _saving_indicator: Control = $Layers/UILayer/SavingIndicator
 onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 
 func _ready() -> void:
+    save_slot = SaveAndLoad.SaveSlot.SLOT_1
+    SaveAndLoad.load_game(save_slot)
+
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
     player_health.connect('health_changed', _vignette, '_on_health_changed')
@@ -19,6 +25,9 @@ func _ready() -> void:
     for lamp in get_tree().get_nodes_in_group('lamps'):
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
+
+    _pause.connect('quit_to_main_menu_requested', self, '_on_quit_to_main_menu')
+    _pause.connect('quit_to_desktop_requested', self, '_on_quit_to_desktop')
 
     # Find the player's current room.
     for room in _rooms:
@@ -47,6 +56,11 @@ func _process(delta: float) -> void:
             _camera.transition(_player.prev_room, _player.curr_room)
             yield(_camera, 'transition_completed')
             _player.curr_room.resume()
+
+func _save_game() -> void:
+    _saving_indicator.show()
+    SaveAndLoad.save_game(save_slot)
+    _saving_indicator.hide()
 
 func _on_player_died() -> void:
     print('YOU DIED')
@@ -108,15 +122,19 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     lamp.set_process_unhandled_input(false)
     _player.set_process_unhandled_input(false)
 
+    var closest_rest_point: Position2D = lamp.get_closest_rest_walk_to_point()
+
     # Start the REST_AT_LAMP sequence.
     _player.change_state({
         'new_state': Player.State.REST_AT_LAMP,
-        'stopping_point': lamp.get_closest_rest_walk_to_point(),
+        'stopping_point': closest_rest_point,
         'object_to_face': lamp,
         'lamp': lamp,
     })
 
     _player.get_health().heal_to_full()
+    _player.last_saved_global_position = closest_rest_point.global_position
+    _player.last_saved_direction_to_lamp = Util.direction(_player, lamp)
 
     # For now, simulate time spent saving game to disk by yielding for two
     # seconds as we start up the saving indicator. Once we actually have a save
@@ -127,7 +145,18 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     yield(get_tree().create_timer(2.0), 'timeout')
     _saving_indicator.hide()
 
+    _save_game()
+
     lamp.set_process_unhandled_input(true)
     _player.set_process_unhandled_input(true)
 
-    print('Game Saved')
+func _on_quit_to_main_menu() -> void:
+    _save_game()
+
+    var fade_duration := 2.0
+    SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
+
+func _on_quit_to_desktop() -> void:
+    _save_game()
+
+    get_tree().quit()

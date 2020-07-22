@@ -1,6 +1,7 @@
 extends 'res://ui/menus/menu.gd'
 
 signal quit_to_main_menu_requested
+signal quit_to_desktop_requested
 
 onready var _quit_to_main_menu: Button = $QuitToMainMenu
 onready var _quit_to_desktop: Button = $QuitToDesktop
@@ -54,7 +55,7 @@ func _on_quit_to_main_menu_pressed() -> void:
     emit_signal('quit_to_main_menu_requested')
 
 func _on_quit_to_desktop_pressed() -> void:
-    get_tree().quit()
+    emit_signal('quit_to_desktop_requested')
 
 func _on_no_pressed() -> void:
     go_to_previous_menu()

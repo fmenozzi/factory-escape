@@ -545,6 +545,7 @@ extents = Vector2( 7, 16 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
+"save",
 ]]
 collision_mask = 4
 script = ExtResource( 1 )

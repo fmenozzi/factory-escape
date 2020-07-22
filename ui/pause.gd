@@ -1,6 +1,9 @@
 extends Control
 class_name Pause
 
+signal quit_to_main_menu_requested
+signal quit_to_desktop_requested
+
 onready var MENUS = {
     Menu.Menus.UNPAUSED: $MenuBackground/UnpausedState,
 
@@ -30,6 +33,8 @@ func _ready() -> void:
     MENUS[Menu.Menus.UNPAUSED].connect('pause_changed', self, '_set_paused')
     MENUS[Menu.Menus.QUIT].connect(
         'quit_to_main_menu_requested', self, '_on_quit_to_main_menu_requested')
+    MENUS[Menu.Menus.QUIT].connect(
+        'quit_to_desktop_requested', self, '_on_quit_to_desktop_requested')
 
     # Start in unpaused state.
     _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED)
@@ -80,8 +85,10 @@ func _on_previous_menu_requested() -> void:
 func _on_quit_to_main_menu_requested() -> void:
     _set_quit_menu_input_enabled(false)
 
-    var fade_duration := 2.0
-    SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
+    emit_signal('quit_to_main_menu_requested')
+
+func _on_quit_to_desktop_requested() -> void:
+    emit_signal('quit_to_desktop_requested')
 
 func _emit_click_sound() -> void:
     _click_sound.play()

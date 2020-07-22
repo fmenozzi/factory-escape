@@ -129,6 +129,9 @@ var _nearby_lamp = null
 
 var _current_hazard_checkpoint: Area2D = null
 
+var last_saved_global_position: Vector2 = Vector2(50, 144)
+var last_saved_direction_to_lamp: int = Util.Direction.RIGHT
+
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
@@ -163,6 +166,30 @@ func _physics_process(delta: float) -> void:
     var new_state_dict = current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         change_state(new_state_dict)
+
+func get_save_data() -> Array:
+    return ['player', {
+        'global_position_x': last_saved_global_position.x,
+        'global_position_y': last_saved_global_position.y,
+        'direction_to_lamp': last_saved_direction_to_lamp,
+    }]
+
+func load_save_data(all_save_data: Dictionary) -> void:
+    if not 'player' in all_save_data:
+        return
+
+    var player_save_data: Dictionary = all_save_data['player']
+    assert('global_position_x' in player_save_data)
+    assert('global_position_y' in player_save_data)
+    assert('direction_to_lamp' in player_save_data)
+
+    last_saved_global_position.x = player_save_data['global_position_x']
+    last_saved_global_position.y = player_save_data['global_position_y']
+    last_saved_direction_to_lamp = player_save_data['direction_to_lamp']
+
+    global_position = last_saved_global_position
+
+    set_direction(last_saved_direction_to_lamp)
 
 # Change from one state in the state machine to another.
 func change_state(new_state_dict: Dictionary) -> void:
