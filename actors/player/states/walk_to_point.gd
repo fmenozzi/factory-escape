@@ -36,6 +36,9 @@ func update(player: Player, delta: float) -> Dictionary:
             if player.global_position.x >= _stopping_point.global_position.x:
                 return {'new_state': Player.State.IDLE}
 
+        Util.Direction.NONE:
+            return {'new_state': Player.State.IDLE}
+
     # If we've somehow walked off a platform, start falling.
     if player.is_in_air():
         return {'new_state': Player.State.FALL}
