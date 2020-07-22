@@ -132,6 +132,7 @@ tracks/5/keys = {
 
 [node name="Lamp" type="Area2D" groups=[
 "lamps",
+"save",
 ]]
 collision_layer = 0
 script = ExtResource( 4 )
