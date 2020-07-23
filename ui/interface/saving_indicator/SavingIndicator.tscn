@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ui/interface/saving_indicator.gd" type="Script" id=1]
+[ext_resource path="res://ui/interface/saving_indicator/saving_indicator.gd" type="Script" id=1]
 
 [node name="SavingIndicator" type="Control"]
 anchor_left = 1.0
@@ -10,6 +10,9 @@ anchor_bottom = 1.0
 margin_left = -32.0
 margin_top = -28.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="UpperLeft" type="Polygon2D" parent="."]
 color = Color( 1, 0.309804, 0.470588, 1 )

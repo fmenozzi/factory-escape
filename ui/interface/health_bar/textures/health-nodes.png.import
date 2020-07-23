@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/health-node-empty.png-fc57f059db22f227294292a0cc5e43dc.stex"
+path="res://.import/health-nodes.png-b91db10c91771240514f137a0054e892.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/interface/textures/health-node-empty.png"
-dest_files=[ "res://.import/health-node-empty.png-fc57f059db22f227294292a0cc5e43dc.stex" ]
+source_file="res://ui/interface/health_bar/textures/health-nodes.png"
+dest_files=[ "res://.import/health-nodes.png-b91db10c91771240514f137a0054e892.stex" ]
 
 [params]
 
