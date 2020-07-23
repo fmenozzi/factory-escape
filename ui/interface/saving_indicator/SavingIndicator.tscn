@@ -1,6 +1,63 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/interface/saving_indicator/saving_indicator.gd" type="Script" id=1]
+[ext_resource path="res://ui/interface/saving_indicator/textures/saving-indicator-lower-right.png" type="Texture" id=2]
+[ext_resource path="res://ui/interface/saving_indicator/textures/saving-indicator-upper-right.png" type="Texture" id=3]
+[ext_resource path="res://ui/interface/saving_indicator/textures/saving-indicator-lower-left.png" type="Texture" id=4]
+[ext_resource path="res://ui/interface/saving_indicator/textures/saving-indicator-upper-left.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "spin"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("UpperLeft:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("UpperRight:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.723465 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LowerRight:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("LowerLeft:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.170394 ) ]
+}
 
 [node name="SavingIndicator" type="Control"]
 anchor_left = 1.0
@@ -14,24 +71,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpperLeft" type="Polygon2D" parent="."]
-color = Color( 1, 0.309804, 0.470588, 1 )
-antialiased = true
-polygon = PoolVector2Array( 8, 6, 8, 10, 4, 10 )
+[node name="UpperLeft" type="Sprite" parent="."]
+position = Vector2( 4, 4 )
+texture = ExtResource( 5 )
 
-[node name="UpperRight" type="Polygon2D" parent="."]
-color = Color( 1, 0.309804, 0.470588, 1 )
-antialiased = true
-polygon = PoolVector2Array( 9, 6, 13, 10, 9, 10 )
+[node name="UpperRight" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.861732 )
+position = Vector2( 12, 4 )
+texture = ExtResource( 3 )
 
-[node name="LowerRight" type="Polygon2D" parent="."]
-color = Color( 1, 0.309804, 0.470588, 1 )
-antialiased = true
-polygon = PoolVector2Array( 13, 11, 9, 15, 9, 11 )
+[node name="LowerRight" type="Sprite" parent="."]
+position = Vector2( 12, 12 )
+texture = ExtResource( 2 )
 
-[node name="LowerLeft" type="Polygon2D" parent="."]
-color = Color( 1, 0.309804, 0.470588, 1 )
-antialiased = true
-polygon = PoolVector2Array( 8, 11, 8, 15, 4, 11 )
+[node name="LowerLeft" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 4, 12 )
+texture = ExtResource( 4 )
 
-[node name="AlphaTween" type="Tween" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/spin = SubResource( 1 )
