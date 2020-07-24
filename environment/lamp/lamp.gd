@@ -30,15 +30,17 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('player_interact'):
+        if _player.get_nearby_lamp() != self:
+            return
+
         if _player.current_state() == Player.State.REST_AT_LAMP:
             _player.change_state({'new_state': Player.State.IDLE})
             return
 
-        if _player.get_nearby_lamp() == self:
-            if not _is_lit:
-                emit_signal('lamp_lit', self)
-            else:
-                emit_signal('rested_at_lamp', self)
+        if not _is_lit:
+            emit_signal('lamp_lit', self)
+        else:
+            emit_signal('rested_at_lamp', self)
 
 func _on_player_entered(player: Player) -> void:
     if not player:
