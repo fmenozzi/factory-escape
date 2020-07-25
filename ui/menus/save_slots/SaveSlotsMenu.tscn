@@ -15,36 +15,74 @@ __meta__ = {
 }
 
 [node name="SelectSaveSlot" type="Label" parent="."]
-margin_top = 51.0
+margin_top = 37.0
 margin_right = 320.0
-margin_bottom = 64.0
+margin_bottom = 50.0
 text = "Select Save Slot"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 68.0
+margin_top = 54.0
 margin_right = 320.0
-margin_bottom = 72.0
+margin_bottom = 58.0
 
 [node name="SaveSlotContainer1" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 76.0
+margin_top = 62.0
 margin_right = 320.0
-margin_bottom = 91.0
+margin_bottom = 77.0
+
+[node name="Slot" parent="SaveSlotContainer1" index="0"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../Back")
+
+[node name="Delete" parent="SaveSlotContainer1" index="1"]
+margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../Back")
 
 [node name="SaveSlotContainer2" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 95.0
+margin_top = 81.0
 margin_right = 320.0
-margin_bottom = 110.0
+margin_bottom = 96.0
 save_slot = 2
+
+[node name="Slot" parent="SaveSlotContainer2" index="0"]
+margin_bottom = 15.0
+
+[node name="Delete" parent="SaveSlotContainer2" index="1"]
+margin_bottom = 15.0
 
 [node name="SaveSlotContainer3" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 114.0
+margin_top = 100.0
 margin_right = 320.0
-margin_bottom = 129.0
+margin_bottom = 115.0
 save_slot = 3
+
+[node name="Slot" parent="SaveSlotContainer3" index="0"]
+margin_bottom = 15.0
+
+[node name="Delete" parent="SaveSlotContainer3" index="1"]
+margin_bottom = 15.0
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+margin_top = 119.0
+margin_right = 320.0
+margin_bottom = 123.0
+
+[node name="Back" type="Button" parent="."]
+margin_top = 127.0
+margin_right = 320.0
+margin_bottom = 142.0
+focus_neighbour_bottom = NodePath("../SaveSlotContainer1/Slot")
+text = "Back"
+
+[editable path="SaveSlotContainer1"]
+
+[editable path="SaveSlotContainer2"]
+
+[editable path="SaveSlotContainer3"]
