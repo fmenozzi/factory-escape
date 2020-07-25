@@ -34,7 +34,7 @@ func save_game() -> void:
         dir.make_dir_recursive(SAVE_DIRECTORY)
 
     var file := File.new()
-    file.open(_get_save_file_path(), File.WRITE)
+    file.open(_get_save_file_path(save_slot), File.WRITE)
     file.store_string(to_json(save_data))
     file.close()
 
@@ -50,10 +50,13 @@ func load_game() -> void:
 
     emit_signal('game_loaded')
 
-func _get_save_file_path() -> String:
-    assert(save_slot != SaveSlot.UNSET)
+func has_save_data(save_slot_to_check: int) -> bool:
+    return File.new().file_exists(_get_save_file_path(save_slot_to_check))
 
-    match save_slot:
+func _get_save_file_path(save_slot_to_use: int) -> String:
+    assert(save_slot_to_use != SaveSlot.UNSET)
+
+    match save_slot_to_use:
         SaveSlot.SLOT_1:
             return SAVE_DIRECTORY + '1.json'
         SaveSlot.SLOT_2:
@@ -66,7 +69,7 @@ func _get_save_file_path() -> String:
 func _load_all_data() -> Dictionary:
     var file := File.new()
 
-    var path := _get_save_file_path()
+    var path := _get_save_file_path(save_slot)
 
     # If the save file doesn't exist, assume that it's because the game is
     # being played for the very first time.
