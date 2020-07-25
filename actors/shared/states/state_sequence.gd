@@ -39,8 +39,7 @@ func update(actor, delta: float) -> Dictionary:
         if new_state_index >= get_child_count():
             # Once we finish with the last state in the sequence, transition to
             # that state's next state.
-            emit_signal('sequence_finished')
-            _sequence_completed = true
+            _mark_sequence_as_finished()
             return new_state_dict
 
         _merge_initial_metadata(new_state_dict)
@@ -61,3 +60,7 @@ func update(actor, delta: float) -> Dictionary:
 func _merge_initial_metadata(existing_metadata: Dictionary) -> void:
     for key in _initial_metadata:
         existing_metadata[key] = _initial_metadata[key]
+
+func _mark_sequence_as_finished() -> void:
+    _sequence_completed = true
+    emit_signal('sequence_finished')
