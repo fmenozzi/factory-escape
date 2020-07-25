@@ -4,6 +4,7 @@ signal sequence_finished
 
 var _active_state: Node = null
 var _initial_metadata: Dictionary = {}
+var _sequence_completed := false
 
 func _get_configuration_warning() -> String:
     if get_child_count() == 0:
@@ -21,8 +22,13 @@ func enter(actor, previous_state_dict: Dictionary) -> void:
     _active_state = get_child(0)
     _active_state.enter(actor, previous_state_dict)
 
+    _sequence_completed = false
+
 func exit(actor) -> void:
-    pass
+    # If the state sequence was interrupted, make sure the current active state
+    # gets a chance to call its exit function.
+    if not _sequence_completed:
+        _active_state.exit(actor)
 
 func update(actor, delta: float) -> Dictionary:
     var new_state_dict: Dictionary = _active_state.update(actor, delta)
@@ -34,6 +40,7 @@ func update(actor, delta: float) -> Dictionary:
             # Once we finish with the last state in the sequence, transition to
             # that state's next state.
             emit_signal('sequence_finished')
+            _sequence_completed = true
             return new_state_dict
 
         _merge_initial_metadata(new_state_dict)
