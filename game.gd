@@ -1,7 +1,5 @@
 extends Node
 
-var save_slot: int = SaveAndLoad.SaveSlot.UNSET
-
 onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
 onready var _rooms: Array = $World/Rooms.get_children()
@@ -12,8 +10,11 @@ onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 
 func _ready() -> void:
-    save_slot = SaveAndLoad.SaveSlot.SLOT_1
-    SaveAndLoad.load_game(save_slot)
+    # Use slot 1 by default if we don't go through the title screen.
+    if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
+        SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1
+
+    SaveAndLoad.load_game()
 
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
@@ -59,7 +60,7 @@ func _process(delta: float) -> void:
 
 func _save_game() -> void:
     _saving_indicator.show()
-    SaveAndLoad.save_game(save_slot)
+    SaveAndLoad.save_game()
     _saving_indicator.hide()
 
 func _on_player_died() -> void:

@@ -13,7 +13,11 @@ enum SaveSlot {
     SLOT_3,
 }
 
-func save_game(save_slot: int) -> void:
+# Save slot to use. This will be set by the title screen when a save slot is
+# selected, and used throughout afterwards.
+var save_slot: int = SaveSlot.UNSET
+
+func save_game() -> void:
     assert(save_slot != SaveSlot.UNSET)
 
     var save_data := {}
@@ -30,23 +34,23 @@ func save_game(save_slot: int) -> void:
         dir.make_dir_recursive(SAVE_DIRECTORY)
 
     var file := File.new()
-    file.open(_get_save_file_path(save_slot), File.WRITE)
+    file.open(_get_save_file_path(), File.WRITE)
     file.store_string(to_json(save_data))
     file.close()
 
     emit_signal('game_saved')
 
-func load_game(save_slot: int ) -> void:
+func load_game() -> void:
     assert(save_slot != SaveSlot.UNSET)
 
-    var all_save_data := _load_all_data(save_slot)
+    var all_save_data := _load_all_data()
 
     for node in get_tree().get_nodes_in_group(GROUP):
         node.load_save_data(all_save_data)
 
     emit_signal('game_loaded')
 
-func _get_save_file_path(save_slot: int) -> String:
+func _get_save_file_path() -> String:
     assert(save_slot != SaveSlot.UNSET)
 
     match save_slot:
@@ -59,10 +63,10 @@ func _get_save_file_path(save_slot: int) -> String:
         _:
             return SAVE_DIRECTORY + 'error.json'
 
-func _load_all_data(save_slot: int) -> Dictionary:
+func _load_all_data() -> Dictionary:
     var file := File.new()
 
-    var path := _get_save_file_path(save_slot)
+    var path := _get_save_file_path()
 
     # If the save file doesn't exist, assume that it's because the game is
     # being played for the very first time.
