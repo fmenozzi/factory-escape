@@ -6,9 +6,10 @@ extends Control
 export(PackedScene) var game = null
 
 onready var MENUS := {
-    Menu.Menus.MAIN:    $MenuBackground/MainMenu,
-    Menu.Menus.OPTIONS: $MenuBackground/OptionsMenu,
-    Menu.Menus.QUIT:    $MenuBackground/MainQuitMenu,
+    Menu.Menus.MAIN:       $MenuBackground/MainMenu,
+    Menu.Menus.SAVE_SLOTS: $MenuBackground/SaveSlotsMenu,
+    Menu.Menus.OPTIONS:    $MenuBackground/OptionsMenu,
+    Menu.Menus.QUIT:       $MenuBackground/MainQuitMenu,
 
     Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
@@ -33,7 +34,7 @@ func _ready() -> void:
         menu.connect('previous_menu_requested', self, '_on_previous_menu_requested')
         menu.connect('menu_navigated', self, '_emit_click_sound')
 
-    MENUS[Menu.Menus.MAIN].connect('start_pressed', self, '_on_start_pressed')
+    MENUS[Menu.Menus.SAVE_SLOTS].connect('save_slot_selected', self, '_start_game')
 
     # Start at main menu.
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN)
@@ -66,8 +67,11 @@ func _on_previous_menu_requested() -> void:
     assert(_menu_stack.size() >= 2)
     _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS)
 
-func _on_start_pressed() -> void:
+func _start_game(save_slot: int) -> void:
     _set_main_menu_input_enabled(false)
+
+    # Set the save slot to use for this session.
+    SaveAndLoad.save_slot = save_slot
 
     var fade_duration := 2.0
     SceneChanger.change_scene_to(game, fade_duration)

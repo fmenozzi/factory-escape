@@ -16,6 +16,7 @@ enum Menus {
     PREVIOUS,
 
     MAIN,
+    SAVE_SLOTS,
     PAUSE,
     OPTIONS,
     QUIT,

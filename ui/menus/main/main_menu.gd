@@ -1,7 +1,5 @@
 extends 'res://ui/menus/menu.gd'
 
-signal start_pressed
-
 onready var _start: Button = $Start
 onready var _options: Button = $Options
 onready var _quit: Button = $Quit
@@ -13,6 +11,8 @@ func enter(previous_menu: int) -> void:
     self.visible = true
 
     match previous_menu:
+        Menu.Menus.SAVE_SLOTS:
+            _start.grab_focus()
         Menu.Menus.OPTIONS:
             _options.grab_focus()
         Menu.Menus.QUIT:
@@ -50,7 +50,7 @@ func _set_focus_enabled(enabled: bool) -> void:
         _quit.focus_mode = Control.FOCUS_NONE
 
 func _on_start_pressed() -> void:
-    emit_signal('start_pressed')
+    advance_to_menu(Menu.Menus.SAVE_SLOTS)
 
 func _on_options_pressed() -> void:
     advance_to_menu(Menu.Menus.OPTIONS)
