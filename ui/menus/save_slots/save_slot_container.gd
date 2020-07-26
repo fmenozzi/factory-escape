@@ -23,8 +23,10 @@ func _ready() -> void:
 func set_save_slot_label() -> void:
     if SaveAndLoad.has_save_data(save_slot):
         _slot.text = 'Slot %d' % save_slot
+        _delete.disabled = false
     else:
         _slot.text = 'EMPTY'
+        _delete.disabled = true
 
 func _on_slot_button_pressed() -> void:
     emit_signal('slot_requested')
