@@ -53,6 +53,15 @@ func load_game() -> void:
 func has_save_data(save_slot_to_check: int) -> bool:
     return File.new().file_exists(_get_save_file_path(save_slot_to_check))
 
+func delete_save_data(save_slot_to_delete: int) -> void:
+    var dir := Directory.new()
+
+    var path := _get_save_file_path(save_slot_to_delete)
+    if not dir.file_exists(path):
+        return
+
+    assert(dir.remove(path) == OK)
+
 func _get_save_file_path(save_slot_to_use: int) -> String:
     assert(save_slot_to_use != SaveSlot.UNSET)
 

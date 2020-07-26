@@ -2,12 +2,6 @@ extends 'res://ui/menus/menu.gd'
 
 signal save_slot_selected(save_slot)
 
-enum State {
-    NORMAL,
-    DELETE_CONFIRMATION,
-}
-var _state: int = State.NORMAL
-
 onready var _slot_container_1: HBoxContainer = $SaveSlotContainer1
 onready var _slot_container_2: HBoxContainer = $SaveSlotContainer2
 onready var _slot_container_3: HBoxContainer = $SaveSlotContainer3
@@ -30,7 +24,9 @@ func _ready() -> void:
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
-    _state = State.NORMAL
+    _slot_container_1.set_save_slot_label()
+    _slot_container_2.set_save_slot_label()
+    _slot_container_3.set_save_slot_label()
 
     _slot_container_1_button.grab_focus()
 
@@ -48,7 +44,9 @@ func _on_slot_pressed(save_slot: int) -> void:
     emit_signal('save_slot_selected', save_slot)
 
 func _on_delete_pressed(save_slot: int) -> void:
-    advance_to_menu(Menu.Menus.DELETE_CONFIRMATION)
+    advance_to_menu_with_metadata(Menu.Menus.DELETE_CONFIRMATION, {
+        'save_slot': save_slot,
+    })
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()

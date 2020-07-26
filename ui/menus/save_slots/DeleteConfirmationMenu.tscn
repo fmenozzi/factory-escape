@@ -13,11 +13,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AreYouSure" type="Label" parent="."]
+[node name="DeleteThisSaveSlot" type="Label" parent="."]
 margin_top = 60.0
 margin_right = 320.0
 margin_bottom = 73.0
-text = "Delete this save slot?"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
