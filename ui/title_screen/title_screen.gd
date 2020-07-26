@@ -38,14 +38,14 @@ func _ready() -> void:
     MENUS[Menu.Menus.SAVE_SLOTS].connect('save_slot_selected', self, '_start_game')
 
     # Start at main menu.
-    _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN)
+    _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
 
     Options.load_options()
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
 
-func _change_menu(old_menu: int, new_menu: int) -> void:
+func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
     # Use a basic pushdown automaton to control menu transitions. The logic here
     # can be simplified because, in the case of menus, we always either push the
     # new menu on the stack to go forwards, or pop the current menu from the
@@ -55,18 +55,18 @@ func _change_menu(old_menu: int, new_menu: int) -> void:
         _menu_stack.pop_back()
     else:
         _menu_stack.push_back(new_menu)
-    MENUS[_menu_stack.back()].enter(old_menu)
+    MENUS[_menu_stack.back()].enter(old_menu, metadata)
 
 func _set_main_menu_input_enabled(enabled: bool) -> void:
     set_process_input(enabled)
     MENUS[Menu.Menus.MAIN].set_input_enabled(enabled)
 
-func _on_menu_changed(new_menu: int) -> void:
-    _change_menu(_menu_stack.back(), new_menu)
+func _on_menu_changed(new_menu: int, metadata: Dictionary) -> void:
+    _change_menu(_menu_stack.back(), new_menu, metadata)
 
 func _on_previous_menu_requested() -> void:
     assert(_menu_stack.size() >= 2)
-    _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS)
+    _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS, {})
 
 func _start_game(save_slot: int) -> void:
     _set_main_menu_input_enabled(false)

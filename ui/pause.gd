@@ -37,14 +37,14 @@ func _ready() -> void:
         'quit_to_desktop_requested', self, '_on_quit_to_desktop_requested')
 
     # Start in unpaused state.
-    _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED)
+    _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED, {})
 
     Options.load_options()
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
 
-func _change_menu(old_menu: int, new_menu: int) -> void:
+func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
     # All inputs while paused should not be propagated out of the pause menu to
     # things like the player controller, dialog boxes, etc.
     #
@@ -69,18 +69,18 @@ func _change_menu(old_menu: int, new_menu: int) -> void:
             _menu_stack.pop_back()
         _:
             _menu_stack.push_back(new_menu)
-    MENUS[_menu_stack.back()].enter(old_menu)
+    MENUS[_menu_stack.back()].enter(old_menu, metadata)
 
 func _set_quit_menu_input_enabled(enabled: bool) -> void:
     set_process_input(enabled)
     MENUS[Menu.Menus.QUIT].set_input_enabled(enabled)
 
-func _on_menu_changed(new_menu: int) -> void:
-    _change_menu(_menu_stack.back(), new_menu)
+func _on_menu_changed(new_menu: int, metadata: Dictionary) -> void:
+    _change_menu(_menu_stack.back(), new_menu, metadata)
 
 func _on_previous_menu_requested() -> void:
     assert(_menu_stack.size() >= 2)
-    _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS)
+    _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS, {})
 
 func _on_quit_to_main_menu_requested() -> void:
     _set_quit_menu_input_enabled(false)

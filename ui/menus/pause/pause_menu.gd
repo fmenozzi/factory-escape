@@ -9,7 +9,7 @@ func _ready() -> void:
     _options.connect('pressed', self, '_on_options_pressed')
     _quit.connect('pressed', self, '_on_quit_pressed')
 
-func enter(previous_menu: int) -> void:
+func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
     match previous_menu:

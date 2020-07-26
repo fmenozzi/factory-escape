@@ -7,7 +7,7 @@ onready var _quit: Button = $Quit
 func _ready() -> void:
     set_input_enabled(true)
 
-func enter(previous_menu: int) -> void:
+func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
     match previous_menu:

@@ -15,7 +15,7 @@ func _ready() -> void:
     _keyboard.connect('pressed', self, '_on_keyboard_pressed')
     _back.connect('pressed', self, '_on_back_pressed')
 
-func enter(previous_menu: int) -> void:
+func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
     match previous_menu:

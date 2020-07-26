@@ -16,7 +16,7 @@ script/source = "extends 'res://ui/menus/menu.gd'
 
 signal pause_changed(new_pause_value)
 
-func enter(previous_menu: int) -> void:
+func enter(previous_menu: int, metadata: Dictionary) -> void:
     emit_signal('pause_changed', false)
 
 func exit() -> void:

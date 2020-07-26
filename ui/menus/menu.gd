@@ -1,7 +1,7 @@
 extends VBoxContainer
 class_name Menu
 
-signal menu_changed( new_menu)
+signal menu_changed(new_menu, metadata)
 signal previous_menu_requested
 signal menu_navigated
 
@@ -29,7 +29,7 @@ enum Menus {
 }
 
 # Called when this menu is entered.
-func enter(previous_menu: int) -> void:
+func enter(previous_menu: int, metadata: Dictionary) -> void:
     pass
 
 # Called when this menu is exited.
@@ -48,7 +48,13 @@ func set_input_enabled(enabled: bool) -> void:
 
 # Convenience function for emitting the menu_changed signal from within a menu.
 func advance_to_menu(new_menu: int) -> void:
-    emit_signal('menu_changed', new_menu)
+    advance_to_menu_with_metadata(new_menu, {})
+
+# Convenience function for emitting the menu_changed signal from within a menu.
+# This version allows for specifying additional metadata to be passed to the
+# new menu.
+func advance_to_menu_with_metadata(new_menu: int, metadata: Dictionary) -> void:
+    emit_signal('menu_changed', new_menu, metadata)
 
 # Convenience function for emitting the previous_menu_requested signal from
 # within a menu.

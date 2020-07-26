@@ -19,7 +19,7 @@ func _ready() -> void:
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
-func enter(previous_menu: int) -> void:
+func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
     _vsync_option_button.grab_focus()
