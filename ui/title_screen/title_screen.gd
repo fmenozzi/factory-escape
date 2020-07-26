@@ -6,10 +6,11 @@ extends Control
 export(PackedScene) var game = null
 
 onready var MENUS := {
-    Menu.Menus.MAIN:       $MenuBackground/MainMenu,
-    Menu.Menus.SAVE_SLOTS: $MenuBackground/SaveSlotsMenu,
-    Menu.Menus.OPTIONS:    $MenuBackground/OptionsMenu,
-    Menu.Menus.QUIT:       $MenuBackground/MainQuitMenu,
+    Menu.Menus.MAIN:                $MenuBackground/MainMenu,
+    Menu.Menus.SAVE_SLOTS:          $MenuBackground/SaveSlotsMenu,
+    Menu.Menus.DELETE_CONFIRMATION: $MenuBackground/DeleteConfirmationMenu,
+    Menu.Menus.OPTIONS:             $MenuBackground/OptionsMenu,
+    Menu.Menus.QUIT:                $MenuBackground/MainQuitMenu,
 
     Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,

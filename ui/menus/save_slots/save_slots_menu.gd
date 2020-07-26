@@ -48,7 +48,7 @@ func _on_slot_pressed(save_slot: int) -> void:
     emit_signal('save_slot_selected', save_slot)
 
 func _on_delete_pressed(save_slot: int) -> void:
-    pass
+    advance_to_menu(Menu.Menus.DELETE_CONFIRMATION)
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()

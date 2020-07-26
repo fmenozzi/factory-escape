@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://rooms/testing/TestGame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/title_screen/title_screen.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ui/title_screen/textures/background.png" type="Texture" id=11]
 [ext_resource path="res://ui/menus/options/keyboard/KeyboardOptionsMenu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/menus/save_slots/SaveSlotsMenu.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/menus/save_slots/DeleteConfirmationMenu.tscn" type="PackedScene" id=14]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -46,6 +47,9 @@ __meta__ = {
 visible = false
 
 [node name="SaveSlotsMenu" parent="MenuBackground" instance=ExtResource( 13 )]
+visible = false
+
+[node name="DeleteConfirmationMenu" parent="MenuBackground" instance=ExtResource( 14 )]
 visible = false
 
 [node name="OptionsMenu" parent="MenuBackground" instance=ExtResource( 3 )]
