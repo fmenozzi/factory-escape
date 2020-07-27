@@ -91,3 +91,5 @@ texture = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/spin = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]

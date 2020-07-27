@@ -58,11 +58,6 @@ func _process(delta: float) -> void:
             yield(_camera, 'transition_completed')
             _player.curr_room.resume()
 
-func _save_game() -> void:
-    _saving_indicator.show()
-    SaveAndLoad.save_game()
-    _saving_indicator.hide()
-
 func _on_player_died() -> void:
     print('YOU DIED')
 
@@ -137,27 +132,24 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     _player.last_saved_global_position = closest_rest_point.global_position
     _player.last_saved_direction_to_lamp = Util.direction(_player, lamp)
 
-    # For now, simulate time spent saving game to disk by yielding for two
-    # seconds as we start up the saving indicator. Once we actually have a save
-    # system in place, it's likely that there will still be a "minimum time"
-    # spent spinning, even if the actual save takes less time. This allows the
-    # player to notice the saving indicator.
-    _saving_indicator.show()
-    yield(get_tree().create_timer(2.0), 'timeout')
-    _saving_indicator.hide()
-
-    _save_game()
+    # Spin saving indicator for two seconds to let player notice it.
+    _saving_indicator.start_spinning_for(2.0)
+    SaveAndLoad.save_game()
+    if _saving_indicator.is_spinning():
+        yield(_saving_indicator, 'spinning_finished')
 
     lamp.set_process_unhandled_input(true)
     _player.set_process_unhandled_input(true)
 
 func _on_quit_to_main_menu() -> void:
-    _save_game()
-
     var fade_duration := 2.0
+    _saving_indicator.start_spinning_for(fade_duration)
+    SaveAndLoad.save_game()
+
     SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
 
 func _on_quit_to_desktop() -> void:
-    _save_game()
+    _saving_indicator.start_spinning_for(0.0)
+    SaveAndLoad.save_game()
 
     get_tree().quit()
