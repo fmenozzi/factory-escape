@@ -16,7 +16,7 @@ var _input_enabled := true
 func _ready() -> void:
     for remap_button in get_tree().get_nodes_in_group('keyboard_remap_button'):
         remap_button.connect('remap_started', self, '_on_remap_started')
-        remap_button.connect('remap_finished', self, '_on_remap_started')
+        remap_button.connect('remap_finished', self, '_on_remap_finished')
 
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
