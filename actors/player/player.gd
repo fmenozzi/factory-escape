@@ -137,8 +137,6 @@ var last_saved_direction_to_lamp: int = Util.Direction.RIGHT
 var prev_room = null
 var curr_room = null
 
-var use_attack_1 := true
-
 func _ready() -> void:
     # Begin in fall state
     current_state_enum = State.FALL
@@ -275,7 +273,6 @@ func start_attack(attack_animation_name: String = 'attack_1') -> void:
     _enemies_hit.clear()
     get_animation_player().play(attack_animation_name)
 
-# Flush animation queue so that we can cancel attack animations cleanly.
 func stop_attack() -> void:
     for hitbox in _hitboxes.get_children():
         assert(hitbox.get_child_count() == 1)
