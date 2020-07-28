@@ -10,7 +10,9 @@ onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
 func _ready() -> void:
-    _set_slider_signals_connected(true)
+    _music_slider.connect('value_changed', self, '_on_music_value_changed')
+    _effects_slider.connect('value_changed', self, '_on_effects_value_changed')
+    _ui_slider.connect('value_changed', self, '_on_ui_value_changed')
 
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
@@ -33,6 +35,12 @@ func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
 
+# Save options before returning to previous menu.
+func go_to_previous_menu() -> void:
+    Options.save_options()
+
+    .go_to_previous_menu()
+
 func get_options_data() -> Array:
     return [SECTION, {
         'music': _music_slider.value,
@@ -43,11 +51,6 @@ func get_options_data() -> Array:
 func load_options_data(config: ConfigFile) -> void:
     if not config.has_section(SECTION):
         return
-
-    # Disconnect slider signals before modifying them from config, as otherwise
-    # we'll save all options from within the slider callbacks below before we
-    # have a chance to load them all.
-    _set_slider_signals_connected(false)
 
     if config.has_section_key(SECTION, 'music'):
         var music: float = config.get_value(SECTION, 'music')
@@ -63,8 +66,6 @@ func load_options_data(config: ConfigFile) -> void:
         var ui: float = config.get_value(SECTION, 'ui')
         _set_bus_volume('UI', ui)
         _ui_slider.set_value(ui)
-
-    _set_slider_signals_connected(true)
 
 func _set_bus_volume(bus: String, slider_value: float) -> void:
     assert(bus in ['Music', 'Effects', 'UI'])
@@ -84,35 +85,24 @@ func _set_bus_volume(bus: String, slider_value: float) -> void:
     var new_volume_db := max(linear2db(slider_value / slider.max_value), -80)
     AudioServer.set_bus_volume_db(bus_index, new_volume_db)
 
-func _set_slider_signals_connected(connected: bool) -> void:
-    if connected:
-        _music_slider.connect('value_changed', self, '_on_music_value_changed')
-        _effects_slider.connect('value_changed', self, '_on_effects_value_changed')
-        _ui_slider.connect('value_changed', self, '_on_ui_value_changed')
-    else:
-        _music_slider.disconnect('value_changed', self, '_on_music_value_changed')
-        _effects_slider.disconnect('value_changed', self, '_on_effects_value_changed')
-        _ui_slider.disconnect('value_changed', self, '_on_ui_value_changed')
-
 func _on_music_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()
     _set_bus_volume('Music', new_value)
-    Options.save_options()
 
 func _on_effects_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()
     _set_bus_volume('Effects', new_value)
-    Options.save_options()
 
 func _on_ui_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()
     _set_bus_volume('UI', new_value)
-    Options.save_options()
 
 func _on_reset_to_defaults_pressed() -> void:
     _music_slider.set_value(_music_slider.max_value)
     _effects_slider.set_value(_effects_slider.max_value)
     _ui_slider.set_value(_ui_slider.max_value)
+
+    Options.save_options()
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()

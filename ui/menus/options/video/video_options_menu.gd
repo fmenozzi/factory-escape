@@ -40,6 +40,12 @@ func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
 
+# Save options before returning to previous menu.
+func go_to_previous_menu() -> void:
+    Options.save_options()
+
+    .go_to_previous_menu()
+
 func get_options_data() -> Array:
     return [SECTION, {
         'vsync': _vsync.get_selected_option_name(),
@@ -94,17 +100,11 @@ func _set_fps_cap() -> void:
 func _on_vsync_changed() -> void:
     _set_vsync()
 
-    Options.save_options()
-
 func _on_window_mode_changed() -> void:
     _set_window_mode()
 
-    Options.save_options()
-
 func _on_fps_cap_changed() -> void:
     _set_fps_cap()
-
-    Options.save_options()
 
 func _on_reset_to_defaults_pressed() -> void:
     _vsync.reset_to_default()
