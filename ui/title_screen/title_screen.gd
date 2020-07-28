@@ -20,6 +20,7 @@ onready var MENUS := {
 var _menu_stack := []
 
 onready var _click_sound: AudioStreamPlayer = $ClickSound
+onready var _saving_indicator: Control = $SavingIndicator
 
 func _get_configuration_warning() -> String:
     if game == null:
@@ -36,6 +37,8 @@ func _ready() -> void:
         menu.connect('menu_navigated', self, '_emit_click_sound')
 
     MENUS[Menu.Menus.SAVE_SLOTS].connect('save_slot_selected', self, '_start_game')
+
+    Options.connect('options_saved', self, '_on_options_saved')
 
     # Start at main menu.
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
@@ -60,6 +63,12 @@ func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
 func _set_main_menu_input_enabled(enabled: bool) -> void:
     set_process_input(enabled)
     MENUS[Menu.Menus.MAIN].set_input_enabled(enabled)
+
+func _on_options_saved() -> void:
+    if _saving_indicator.is_spinning():
+        return
+
+    _saving_indicator.start_spinning_for(1.0)
 
 func _on_menu_changed(new_menu: int, metadata: Dictionary) -> void:
     _change_menu(_menu_stack.back(), new_menu, metadata)

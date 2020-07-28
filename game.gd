@@ -27,6 +27,8 @@ func _ready() -> void:
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
 
+    Options.connect('options_saved', self, '_on_options_saved')
+
     _pause.connect('quit_to_main_menu_requested', self, '_on_quit_to_main_menu')
     _pause.connect('quit_to_desktop_requested', self, '_on_quit_to_desktop')
 
@@ -140,6 +142,12 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
 
     lamp.set_process_unhandled_input(true)
     _player.set_process_unhandled_input(true)
+
+func _on_options_saved() -> void:
+    if _saving_indicator.is_spinning():
+        return
+
+    _saving_indicator.start_spinning_for(1.0)
 
 func _on_quit_to_main_menu() -> void:
     var fade_duration := 2.0
