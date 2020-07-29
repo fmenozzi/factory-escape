@@ -9,6 +9,7 @@
 [ext_resource path="res://rooms/testing/HazardCheckpoints.tscn" type="PackedScene" id=7]
 
 [node name="TestGame" instance=ExtResource( 1 )]
+run_standalone = false
 
 [node name="FactoryEntrance" parent="World/Rooms" index="0" instance=ExtResource( 2 )]
 

@@ -1,5 +1,10 @@
 extends Node
 
+# If true, run this game instance "standalone", which means that it doesn't save
+# or load any non-options data. This is needed for demo rooms, as otherwise the
+# player will be loaded to the wrong location.
+export(bool) var run_standalone := true
+
 onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
 onready var _rooms: Array = $World/Rooms.get_children()
@@ -10,11 +15,11 @@ onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 
 func _ready() -> void:
-    # Use slot 1 by default if we don't go through the title screen.
-    if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
-        SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1
-
-    SaveAndLoad.load_game()
+    if not run_standalone:
+        # Use slot 1 by default if we don't go through the title screen.
+        if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
+            SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1
+        SaveAndLoad.load_game()
 
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
@@ -59,6 +64,10 @@ func _process(delta: float) -> void:
             _camera.transition(_player.prev_room, _player.curr_room)
             yield(_camera, 'transition_completed')
             _player.curr_room.resume()
+
+func _maybe_save_game() -> void:
+    if not run_standalone:
+        SaveAndLoad.save_game()
 
 func _on_player_died() -> void:
     print('YOU DIED')
@@ -136,7 +145,7 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
 
     # Spin saving indicator for two seconds to let player notice it.
     _saving_indicator.start_spinning_for(2.0)
-    SaveAndLoad.save_game()
+    _maybe_save_game()
     if _saving_indicator.is_spinning():
         yield(_saving_indicator, 'spinning_finished')
 
@@ -152,12 +161,12 @@ func _on_options_saved() -> void:
 func _on_quit_to_main_menu() -> void:
     var fade_duration := 2.0
     _saving_indicator.start_spinning_for(fade_duration)
-    SaveAndLoad.save_game()
+    _maybe_save_game()
 
     SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
 
 func _on_quit_to_desktop() -> void:
     _saving_indicator.start_spinning_for(0.0)
-    SaveAndLoad.save_game()
+    _maybe_save_game()
 
     get_tree().quit()

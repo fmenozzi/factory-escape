@@ -25,9 +25,14 @@ onready var _saving_indicator: Control = $SavingIndicator
 func _get_configuration_warning() -> String:
     if game == null:
         return 'No instance of Game.tscn set in title screen!'
+    if game.instance().run_standalone:
+        return 'Instance of Game.tscn must not be in run_standalone mode!'
     return ''
 
 func _ready() -> void:
+    assert(game != null)
+    assert(not game.instance().run_standalone)
+
     _set_main_menu_input_enabled(true)
 
     # Intercept all menu-related signals from individual submenus.
