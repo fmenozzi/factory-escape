@@ -11,7 +11,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 
 func update(player: Player, delta: float) -> Dictionary:
     if not player.get_animation_player().is_playing():
-        return {'new_state': Player.State.IDLE}
+        if player.is_on_floor():
+            return {'new_state': Player.State.IDLE}
+        else:
+            return {'new_state': Player.State.FALL}
 
     # Apply slight downward movement if grounded. This is useful for ensuring
     # that we snap to downward-moving platforms.
