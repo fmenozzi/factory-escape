@@ -20,10 +20,15 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
     var dash_manager := player.get_dash_manager()
 
+    if event.is_action_pressed('player_look_down'):
+        return {'new_state': Player.State.LOOK_DOWN}
+    if event.is_action_pressed('player_look_up'):
+        return {'new_state': Player.State.LOOK_UP}
+
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
-        if Input.is_action_pressed("player_move_up"):
+        if Input.is_action_pressed('player_move_up'):
             return {'new_state': Player.State.ATTACK_UP}
         elif player.get_attack_manager().can_attack():
             return {'new_state': Player.State.ATTACK}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -42,6 +42,8 @@
 [ext_resource path="res://actors/player/attack_manager.gd" type="Script" id=40]
 [ext_resource path="res://actors/player/effects/player_hit_effect/PlayerHitEffect.tscn" type="PackedScene" id=41]
 [ext_resource path="res://actors/player/states/hit.gd" type="Script" id=42]
+[ext_resource path="res://actors/player/states/look_down.gd" type="Script" id=43]
+[ext_resource path="res://actors/player/states/look_up.gd" type="Script" id=44]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -427,6 +429,38 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=17]
+resource_name = "look_down"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 30 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "look_up"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 31 ]
+}
+
+[sub_resource type="Animation" id=19]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -441,7 +475,7 @@ tracks/0/keys = {
 "values": [ 73, 72 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=20]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -457,7 +491,7 @@ tracks/0/keys = {
 "values": [ 80, 81, 82, 81 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=21]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -485,7 +519,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=22]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -501,7 +535,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=23]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -517,7 +551,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=24]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -531,16 +565,16 @@ tracks/0/keys = {
 "values": [ 36 ]
 }
 
-[sub_resource type="RectangleShape2D" id=23]
+[sub_resource type="RectangleShape2D" id=25]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=24]
+[sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 18, 7 )
 
-[sub_resource type="RectangleShape2D" id=26]
+[sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 7, 16 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -573,19 +607,21 @@ anims/idle = SubResource( 13 )
 anims/idle_low_health = SubResource( 14 )
 anims/jump = SubResource( 15 )
 anims/light_lamp = SubResource( 16 )
-anims/pre_rest = SubResource( 17 )
-anims/rest = SubResource( 18 )
-anims/sleep = SubResource( 19 )
-anims/stagger = SubResource( 20 )
-anims/walk = SubResource( 21 )
-anims/wall_slide = SubResource( 22 )
+anims/look_down = SubResource( 17 )
+anims/look_up = SubResource( 18 )
+anims/pre_rest = SubResource( 19 )
+anims/rest = SubResource( 20 )
+anims/sleep = SubResource( 21 )
+anims/stagger = SubResource( 22 )
+anims/walk = SubResource( 23 )
+anims/wall_slide = SubResource( 24 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 48
+frame = 40
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -605,7 +641,7 @@ region_rect = Rect2( 0, 0, 48, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 23 )
+shape = SubResource( 25 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -613,7 +649,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 24 )
+shape = SubResource( 26 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -641,7 +677,7 @@ collision_layer = 16
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/SideAttack"]
-shape = SubResource( 25 )
+shape = SubResource( 27 )
 disabled = true
 
 [node name="UpAttack" type="Area2D" parent="Hitboxes"]
@@ -650,7 +686,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/UpAttack"]
 position = Vector2( 0, -28 )
-shape = SubResource( 26 )
+shape = SubResource( 28 )
 disabled = true
 
 [node name="States" type="Node" parent="."]
@@ -678,6 +714,12 @@ script = ExtResource( 12 )
 script = ExtResource( 13 )
 
 [node name="DashDurationTimer" type="Timer" parent="States/Dash"]
+
+[node name="LookDown" type="Node" parent="States"]
+script = ExtResource( 43 )
+
+[node name="LookUp" type="Node" parent="States"]
+script = ExtResource( 44 )
 
 [node name="WallSlide" type="Node" parent="States"]
 script = ExtResource( 14 )

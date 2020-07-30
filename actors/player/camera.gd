@@ -2,6 +2,8 @@ extends Camera2D
 
 signal transition_completed
 
+const CAMERA_PAN_DISTANCE := 4.0 * Util.TILE_SIZE
+
 onready var _player: Player = get_parent().get_parent()
 onready var _tween: Tween = $PositionTween
 
@@ -31,6 +33,15 @@ func reattach() -> void:
     _tween.remove_all()
     _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
     _tween.start()
+
+func pan_up() -> void:
+    _pan_to_position(Vector2(0, -CAMERA_PAN_DISTANCE))
+
+func pan_down() -> void:
+    _pan_to_position(Vector2(0, CAMERA_PAN_DISTANCE))
+
+func return_from_pan() -> void:
+    _pan_to_position(Vector2.ZERO)
 
 func transition(old_room, new_room) -> void:
     _transition_setup()
@@ -104,3 +115,15 @@ func _remove_camera_limits() -> void:
     self.limit_right = 10000000
     self.limit_top = -10000000
     self.limit_bottom = 10000000
+
+func _pan_to_position(new_position: Vector2) -> void:
+    var prop := 'position'
+    var duration := 0.25
+    var trans := Tween.TRANS_QUAD
+    var easing := Tween.EASE_IN_OUT
+    var old := self.position
+    var new := new_position
+
+    _tween.remove_all()
+    _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
+    _tween.start()
