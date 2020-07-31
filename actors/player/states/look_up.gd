@@ -14,6 +14,9 @@ func exit(player: Player) -> void:
     player.get_camera().return_from_pan()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
+    if event.is_action_pressed('player_attack'):
+        return {'new_state': Player.State.ATTACK_UP}
+
     if event.is_action_released('player_look_up_controller'):
         if _entered_from_controller:
             return {'new_state': Player.State.IDLE}
