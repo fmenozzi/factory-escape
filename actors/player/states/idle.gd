@@ -1,5 +1,13 @@
 extends 'res://actors/player/states/player_state.gd'
 
+onready var _look_up_down_keyboard_delay_timer: Timer = $LookUpDownKeyboardDelayTimer
+
+var _started_timer := false
+
+func _ready() -> void:
+    _look_up_down_keyboard_delay_timer.one_shot = true
+    _look_up_down_keyboard_delay_timer.wait_time = 0.5
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
@@ -9,21 +17,46 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     else:
         player.get_animation_player().play('idle')
 
+    _started_timer = false
+
     # Reset the dash and double jump.
     player.get_dash_manager().reset_dash()
     player.get_jump_manager().reset_jump()
 
 func exit(player: Player) -> void:
-    pass
+    _look_up_down_keyboard_delay_timer.stop()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
     var dash_manager := player.get_dash_manager()
 
-    if event.is_action_pressed('player_look_down'):
-        return {'new_state': Player.State.LOOK_DOWN}
-    if event.is_action_pressed('player_look_up'):
-        return {'new_state': Player.State.LOOK_UP}
+    # Looking up/down on controller happens immediately.
+    if event.is_action_pressed('player_look_down_controller'):
+        return {
+            'new_state': Player.State.LOOK_DOWN,
+            'entered_from_controller': true,
+        }
+    if event.is_action_pressed('player_look_up_controller'):
+        return {
+            'new_state': Player.State.LOOK_UP,
+            'entered_from_controller': true,
+        }
+
+    # Looking up/down on keyboard incurs a small delay so that the player can
+    # have time to up-attack instead of looking up.
+    if event.is_action_pressed('player_look_down_keyboard'):
+        if _look_up_down_keyboard_delay_timer.is_stopped():
+            _look_up_down_keyboard_delay_timer.start()
+            _started_timer = true
+    if event.is_action_pressed('player_look_up_keyboard'):
+        print('is_action_pressed for player_look_up_keyboard')
+        if _look_up_down_keyboard_delay_timer.is_stopped():
+            _look_up_down_keyboard_delay_timer.start()
+            _started_timer = true
+    if event.is_action_released('player_look_down_keyboard'):
+        _look_up_down_keyboard_delay_timer.stop()
+    if event.is_action_released('player_look_up_keyboard'):
+        _look_up_down_keyboard_delay_timer.stop()
 
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
@@ -47,6 +80,18 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     if player.get_input_direction() != Util.Direction.NONE:
         return {'new_state': Player.State.WALK}
+
+    if _look_up_down_keyboard_delay_timer.is_stopped() and _started_timer:
+        if Input.is_action_pressed('player_look_down_keyboard'):
+            return {
+                'new_state': Player.State.LOOK_DOWN,
+                'entered_from_controller': false,
+            }
+        if Input.is_action_pressed('player_look_up_keyboard'):
+            return {
+                'new_state': Player.State.LOOK_UP,
+                'entered_from_controller': false,
+            }
 
     # It's possible to inch off a ledge and no longer be on the ground directly
     # from the idle state (i.e. without having to first transition to the walk

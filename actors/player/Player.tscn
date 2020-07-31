@@ -694,6 +694,8 @@ disabled = true
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 8 )
 
+[node name="LookUpDownKeyboardDelayTimer" type="Timer" parent="States/Idle"]
+
 [node name="Walk" type="Node" parent="States"]
 script = ExtResource( 9 )
 
