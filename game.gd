@@ -156,9 +156,11 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     _player.set_process_unhandled_input(true)
 
 func _on_health_pack_taken(health_pack: Node2D) -> void:
+    _player.change_state({
+        'new_state': Player.State.TAKE_HEALTH_PACK,
+        'object_to_face': health_pack,
+    })
     _player.get_health().heal_to_full()
-
-    print('Health pack taken')
 
 func _on_options_saved() -> void:
     if _saving_indicator.is_spinning():

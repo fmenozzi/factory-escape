@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://actors/player/states/hit.gd" type="Script" id=42]
 [ext_resource path="res://actors/player/states/look_down.gd" type="Script" id=43]
 [ext_resource path="res://actors/player/states/look_up.gd" type="Script" id=44]
+[ext_resource path="res://actors/player/states/play_take_health_pack_animation.gd" type="Script" id=45]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -535,6 +536,22 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
+[sub_resource type="Animation" id=29]
+resource_name = "take_health_pack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 86, 87 ]
+}
+
 [sub_resource type="Animation" id=23]
 length = 0.8
 loop = true
@@ -613,6 +630,7 @@ anims/pre_rest = SubResource( 19 )
 anims/rest = SubResource( 20 )
 anims/sleep = SubResource( 21 )
 anims/stagger = SubResource( 22 )
+anims/take_health_pack = SubResource( 29 )
 anims/walk = SubResource( 23 )
 anims/wall_slide = SubResource( 24 )
 
@@ -621,7 +639,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 40
+frame = 86
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -811,6 +829,15 @@ script = ExtResource( 29 )
 
 [node name="FaceObject" type="Node" parent="States/ReadSign"]
 script = ExtResource( 37 )
+
+[node name="TakeHealthPack" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="FaceObject" type="Node" parent="States/TakeHealthPack"]
+script = ExtResource( 37 )
+
+[node name="PlayTakeHealthPackAnimation" type="Node" parent="States/TakeHealthPack"]
+script = ExtResource( 45 )
 
 [node name="HardLanding" type="Node" parent="States"]
 script = ExtResource( 30 )
