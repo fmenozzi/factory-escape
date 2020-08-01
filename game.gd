@@ -27,6 +27,7 @@ func _ready() -> void:
     player_health.connect('died', self, '_on_player_died')
 
     _player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
+    _player.connect('player_healed', self, '_on_player_healed')
 
     for lamp in get_tree().get_nodes_in_group('lamps'):
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
@@ -160,6 +161,9 @@ func _on_health_pack_taken(health_pack: Node2D) -> void:
         'new_state': Player.State.TAKE_HEALTH_PACK,
         'object_to_face': health_pack,
     })
+    _player.get_health().heal_to_full()
+
+func _on_player_healed() -> void:
     _player.get_health().heal_to_full()
 
 func _on_options_saved() -> void:

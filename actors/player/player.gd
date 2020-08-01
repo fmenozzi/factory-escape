@@ -3,6 +3,7 @@ class_name Player
 
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
+signal player_healed
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
@@ -31,6 +32,7 @@ enum State {
     READ_SIGN,
     TAKE_HEALTH_PACK,
     HARD_LANDING,
+    HEAL,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -56,6 +58,7 @@ onready var STATES = {
     State.READ_SIGN:        $States/ReadSign,
     State.TAKE_HEALTH_PACK: $States/TakeHealthPack,
     State.HARD_LANDING:     $States/HardLanding,
+    State.HEAL:             $States/Heal,
 }
 
 var current_state: Node = null

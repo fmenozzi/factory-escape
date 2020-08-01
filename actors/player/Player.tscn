@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -34,6 +34,7 @@
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
 [ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=33]
 [ext_resource path="res://actors/player/effects/DashEchoes.tscn" type="PackedScene" id=34]
+[ext_resource path="res://actors/player/states/heal.gd" type="Script" id=35]
 [ext_resource path="res://actors/player/states/player_state_sequence.gd" type="Script" id=36]
 [ext_resource path="res://actors/player/states/face_object.gd" type="Script" id=37]
 [ext_resource path="res://actors/player/states/attack.gd" type="Script" id=38]
@@ -362,6 +363,40 @@ tracks/0/keys = {
 "values": [ 72, 73, 74, 75, 76, 77, 78, 79, 76, 77, 78, 79 ]
 }
 
+[sub_resource type="Animation" id=30]
+resource_name = "heal"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 68, 69, 70 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("States/Heal/FlashManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_flashing"
+}, {
+"args": [  ],
+"method": "stop_flashing"
+} ]
+}
+
 [sub_resource type="Animation" id=13]
 length = 1.4
 loop = true
@@ -619,6 +654,7 @@ anims/grapple_pull = SubResource( 9 )
 anims/hard_landing = SubResource( 10 )
 anims/hazard_hit = SubResource( 11 )
 anims/hazard_recover = SubResource( 12 )
+anims/heal = SubResource( 30 )
 anims/idle = SubResource( 13 )
 anims/idle_low_health = SubResource( 14 )
 anims/jump = SubResource( 15 )
@@ -638,7 +674,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 86
+frame = 68
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -842,6 +878,15 @@ animation_name = "take_health_pack"
 
 [node name="HardLanding" type="Node" parent="States"]
 script = ExtResource( 30 )
+
+[node name="Heal" type="Node" parent="States"]
+script = ExtResource( 35 )
+
+[node name="FlashManager" parent="States/Heal" instance=ExtResource( 3 )]
+sprite_path = NodePath("../../../Sprite")
+total_duration = 0.7
+single_flash_duration = 0.075
+flash_color = Color( 1, 1, 1, 1 )
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
