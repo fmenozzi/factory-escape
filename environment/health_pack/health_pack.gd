@@ -3,6 +3,7 @@ extends Node2D
 signal health_pack_taken(health_pack)
 
 onready var _pickup_area: Area2D = $PickupArea
+onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 
 var _player: Player
@@ -12,6 +13,8 @@ func _ready() -> void:
     _pickup_area.connect('body_entered', self, '_on_player_entered')
     _pickup_area.connect('body_exited', self, '_on_player_exited')
 
+    _animation_player.play('spawn')
+
     set_process_unhandled_input(false)
 
 func _unhandled_input(event: InputEvent):
@@ -19,7 +22,8 @@ func _unhandled_input(event: InputEvent):
         if _player.current_state() == Player.State.IDLE:
             if not _taken:
                 _taken = true
-                self.visible = false
+                _animation_player.play('taken')
+                _fade_in_out_label.fade_out()
                 set_process_unhandled_input(false)
                 emit_signal('health_pack_taken', self)
 
