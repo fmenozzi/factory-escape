@@ -32,6 +32,9 @@ func _ready() -> void:
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
 
+    for health_pack in get_tree().get_nodes_in_group('health_packs'):
+        health_pack.connect('health_pack_taken', self, '_on_health_pack_taken')
+
     Options.connect('options_saved', self, '_on_options_saved')
 
     _pause.connect('quit_to_main_menu_requested', self, '_on_quit_to_main_menu')
@@ -151,6 +154,11 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
 
     lamp.set_process_unhandled_input(true)
     _player.set_process_unhandled_input(true)
+
+func _on_health_pack_taken(health_pack: Node2D) -> void:
+    _player.get_health().heal_to_full()
+
+    print('Health pack taken')
 
 func _on_options_saved() -> void:
     if _saving_indicator.is_spinning():
