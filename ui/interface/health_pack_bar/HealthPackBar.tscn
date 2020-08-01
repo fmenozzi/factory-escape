@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/interface/health_pack_bar/health_pack_bar.gd" type="Script" id=1]
+[ext_resource path="res://ui/interface/health_pack_bar/textures/health-pack-icon.png" type="Texture" id=2]
+
+[node name="HealthPackBar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 19.0
+margin_bottom = 24.0
+color = Color( 0, 0, 0, 0.25098 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 16.0
+margin_right = 19.0
+margin_bottom = 24.0
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthPackIcon" type="TextureRect" parent="HBoxContainer"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 2 )
+
+[node name="HealthPackNodes" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 9.0
+margin_right = 9.0
+margin_bottom = 8.0
+grow_vertical = 2
+custom_constants/separation = 1
+
+[node name="0" type="TextureRect" parent="HBoxContainer/HealthPackNodes"]
+
+[node name="1" type="TextureRect" parent="HBoxContainer/HealthPackNodes"]
+margin_top = 1.0
+margin_bottom = 1.0
+
+[node name="2" type="TextureRect" parent="HBoxContainer/HealthPackNodes"]
+margin_top = 2.0
+margin_bottom = 2.0

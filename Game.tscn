@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/interface/saving_indicator/SavingIndicator.tscn" type="PackedScene" id=7]
 [ext_resource path="res://shared/environments/glow_env.tres" type="Environment" id=8]
 [ext_resource path="res://shared/effects/screen_space_effects/vignette/Vignette.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/interface/health_pack_bar/HealthPackBar.tscn" type="PackedScene" id=10]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -50,6 +51,8 @@ layer = 2
 [node name="UILayer" type="CanvasLayer" parent="Layers"]
 
 [node name="Healthbar" parent="Layers/UILayer" instance=ExtResource( 6 )]
+
+[node name="HealthPackBar" parent="Layers/UILayer" instance=ExtResource( 10 )]
 
 [node name="SavingIndicator" parent="Layers/UILayer" instance=ExtResource( 7 )]
 pause_mode = 2

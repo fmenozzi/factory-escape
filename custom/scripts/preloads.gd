@@ -39,5 +39,9 @@ const XboxDpadLeft := preload('res://ui/menus/options/controller/textures/xbox-d
 const EmptyHealthTexture := preload('res://ui/interface/health_bar/textures/health-node-empty.png')
 const FullHealthTexture := preload('res://ui/interface/health_bar/textures/health-node-full.png')
 
+# Health pack sprites.
+const EmptyHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-empty.png')
+const FullHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-full.png')
+
 # Title screen.
 const TitleScreen := preload('res://ui/title_screen/TitleScreen.tscn')
