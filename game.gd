@@ -10,6 +10,7 @@ onready var _camera: Camera2D = _player.get_camera()
 onready var _rooms: Array = $World/Rooms.get_children()
 onready var _pause: Control = $Layers/PauseLayer/Pause
 onready var _health_bar: Control = $Layers/UILayer/Healthbar
+onready var _health_pack_bar: Control = $Layers/UILayer/HealthPackBar
 onready var _saving_indicator: Control = $Layers/UILayer/SavingIndicator
 onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
@@ -28,6 +29,9 @@ func _ready() -> void:
 
     _player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
     _player.connect('player_healed', self, '_on_player_healed')
+
+    _player.get_health_pack_manager().connect(
+        'health_pack_consumed', self, '_on_health_pack_consumed')
 
     for lamp in get_tree().get_nodes_in_group('lamps'):
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
@@ -162,6 +166,14 @@ func _on_health_pack_taken(health_pack: Node2D) -> void:
         'object_to_face': health_pack,
     })
     _player.get_health().heal_to_full()
+
+    var health_pack_manager := _player.get_health_pack_manager()
+    health_pack_manager.add_health_pack()
+    _health_pack_bar.set_health_packs(health_pack_manager.num_health_packs())
+
+func _on_health_pack_consumed() -> void:
+    _health_pack_bar.set_health_packs(
+        _player.get_health_pack_manager().num_health_packs())
 
 func _on_player_healed() -> void:
     _player.get_health().heal_to_full()

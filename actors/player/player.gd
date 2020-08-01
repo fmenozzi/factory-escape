@@ -116,6 +116,7 @@ onready var _invincibility_flash_manager_hazard_hit: Node = $States/HazardHit/Fl
 onready var _invincibility_flash_manager_enemy_hit: Node = $States/Stagger/Hit/FlashManager
 
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
+onready var _health_pack_manager: HealthPackManager = $HealthPackManager
 
 onready var _dash_duration_timer: Timer = $States/Dash/DashDurationTimer
 
@@ -221,6 +222,9 @@ func current_state() -> int:
 
 func get_physics_manager() -> GroundedPhysicsManager:
     return _physics_manager
+
+func get_health_pack_manager() -> HealthPackManager:
+    return _health_pack_manager
 
 # Get the current x-axis input direction. Returns +1 if player is moving right,
 # -1 if player is moving left, and 0 if player is not moving. These conveniently

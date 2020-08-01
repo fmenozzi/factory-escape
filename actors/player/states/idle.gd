@@ -75,7 +75,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
                 'grapple_point': next_grapple_point,
             }
     elif event.is_action_pressed('player_heal'):
-        return {'new_state': Player.State.HEAL}
+        if player.get_health_pack_manager().can_heal():
+            return {'new_state': Player.State.HEAL}
 
     return {'new_state': Player.State.NO_CHANGE}
 

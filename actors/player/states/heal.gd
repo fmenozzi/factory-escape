@@ -5,6 +5,8 @@ onready var _flash_manager: Node = $FlashManager
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('heal')
 
+    player.get_health_pack_manager().consume_health_pack()
+
 func exit(player: Player) -> void:
     _flash_manager.stop_flashing()
 
@@ -15,7 +17,7 @@ func update(player: Player, delta: float) -> Dictionary:
     if not player.get_animation_player().is_playing():
         # Emit the player_healed signal here, instead of in exit(). This means
         # that the heal will not take effect if the player is hit by an enemy
-        # during the animation.
+        # during the animation, and the health pack will be consumed anyway.
         player.emit_signal('player_healed')
 
         if player.is_in_air():
