@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -34,7 +34,6 @@
 [ext_resource path="res://actors/player/dash_manager.gd" type="Script" id=32]
 [ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=33]
 [ext_resource path="res://actors/player/effects/DashEchoes.tscn" type="PackedScene" id=34]
-[ext_resource path="res://actors/player/states/play_light_lamp_animation.gd" type="Script" id=35]
 [ext_resource path="res://actors/player/states/player_state_sequence.gd" type="Script" id=36]
 [ext_resource path="res://actors/player/states/face_object.gd" type="Script" id=37]
 [ext_resource path="res://actors/player/states/attack.gd" type="Script" id=38]
@@ -44,7 +43,7 @@
 [ext_resource path="res://actors/player/states/hit.gd" type="Script" id=42]
 [ext_resource path="res://actors/player/states/look_down.gd" type="Script" id=43]
 [ext_resource path="res://actors/player/states/look_up.gd" type="Script" id=44]
-[ext_resource path="res://actors/player/states/play_take_health_pack_animation.gd" type="Script" id=45]
+[ext_resource path="res://actors/player/states/play_animation.gd" type="Script" id=45]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -804,8 +803,9 @@ script = ExtResource( 29 )
 [node name="FaceObject" type="Node" parent="States/LightLamp"]
 script = ExtResource( 37 )
 
-[node name="PlayLightLampAnimation" type="Node" parent="States/LightLamp"]
-script = ExtResource( 35 )
+[node name="PlayAnimation" type="Node" parent="States/LightLamp"]
+script = ExtResource( 45 )
+animation_name = "light_lamp"
 
 [node name="RestAtLamp" type="Node" parent="States"]
 script = ExtResource( 36 )
@@ -836,8 +836,9 @@ script = ExtResource( 36 )
 [node name="FaceObject" type="Node" parent="States/TakeHealthPack"]
 script = ExtResource( 37 )
 
-[node name="PlayTakeHealthPackAnimation" type="Node" parent="States/TakeHealthPack"]
+[node name="PlayAnimation" type="Node" parent="States/TakeHealthPack"]
 script = ExtResource( 45 )
+animation_name = "take_health_pack"
 
 [node name="HardLanding" type="Node" parent="States"]
 script = ExtResource( 30 )
