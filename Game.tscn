@@ -5,7 +5,7 @@
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/ScreenFadeout.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/DialogBox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/interface/health_bar/Healthbar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/interface/health_bar/HealthBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/interface/saving_indicator/SavingIndicator.tscn" type="PackedScene" id=7]
 [ext_resource path="res://shared/environments/glow_env.tres" type="Environment" id=8]
 [ext_resource path="res://shared/effects/screen_space_effects/vignette/Vignette.tscn" type="PackedScene" id=9]
@@ -50,7 +50,7 @@ layer = 2
 
 [node name="UILayer" type="CanvasLayer" parent="Layers"]
 
-[node name="Healthbar" parent="Layers/UILayer" instance=ExtResource( 6 )]
+[node name="HealthBar" parent="Layers/UILayer" instance=ExtResource( 6 )]
 
 [node name="HealthPackBar" parent="Layers/UILayer" instance=ExtResource( 10 )]
 
