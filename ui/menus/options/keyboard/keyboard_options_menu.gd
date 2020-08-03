@@ -2,11 +2,12 @@ extends 'res://ui/menus/menu.gd'
 
 const SECTION := 'keyboard'
 
-onready var _jump_remap_button: Button = $JumpRemapContainer/KeyboardRemapButton
-onready var _attack_remap_button: Button = $AttackRemapContainer/KeyboardRemapButton
-onready var _dash_remap_button: Button = $DashRemapContainer/KeyboardRemapButton
-onready var _grapple_remap_button: Button = $GrappleRemapContainer/KeyboardRemapButton
-onready var _interact_remap_button: Button = $InteractRemapContainer/KeyboardRemapButton
+onready var _jump_remap_button: Button = $ContainerRow1/JumpRemapContainer/KeyboardRemapButton
+onready var _attack_remap_button: Button = $ContainerRow1/AttackRemapContainer/KeyboardRemapButton
+onready var _dash_remap_button: Button = $ContainerRow2/DashRemapContainer/KeyboardRemapButton
+onready var _grapple_remap_button: Button = $ContainerRow2/GrappleRemapContainer/KeyboardRemapButton
+onready var _interact_remap_button: Button = $ContainerRow3/InteractRemapContainer/KeyboardRemapButton
+onready var _heal_remap_button: Button = $ContainerRow3/HealRemapContainer/KeyboardRemapButton
 
 onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
@@ -56,6 +57,7 @@ func get_options_data() -> Array:
         'player_dash': _dash_remap_button.get_scancode(),
         'player_grapple': _grapple_remap_button.get_scancode(),
         'player_interact': _interact_remap_button.get_scancode(),
+        'player_heal': _heal_remap_button.get_scancode(),
     }]
 
 func load_options_data(config: ConfigFile) -> void:
@@ -84,6 +86,11 @@ func load_options_data(config: ConfigFile) -> void:
         event.scancode = config.get_value(SECTION, 'player_interact')
         assert(_interact_remap_button.remap_action_to(event))
 
+    if config.has_section_key(SECTION, 'player_heal'):
+        var event := InputEventKey.new()
+        event.scancode = config.get_value(SECTION, 'player_heal')
+        assert(_heal_remap_button.remap_action_to(event))
+
 func _set_input_enabled(enabled: bool) -> void:
     _input_enabled = enabled
 
@@ -106,6 +113,7 @@ func _on_reset_to_defaults_pressed() -> void:
         _dash_remap_button,
         _grapple_remap_button,
         _interact_remap_button,
+        _heal_remap_button,
     ]
 
     # Save existing controller option data to restore later.

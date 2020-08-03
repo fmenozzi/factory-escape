@@ -36,8 +36,8 @@ anchor_bottom = 1.0
 texture = ExtResource( 11 )
 
 [node name="MenuBackground" type="ColorRect" parent="."]
-margin_left = 80.0
-margin_right = 240.0
+margin_left = 64.0
+margin_right = 256.0
 margin_bottom = 180.0
 color = Color( 1, 1, 1, 0 )
 __meta__ = {
