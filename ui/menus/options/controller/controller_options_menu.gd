@@ -94,6 +94,14 @@ func load_options_data(config: ConfigFile) -> void:
 func _set_input_enabled(enabled: bool) -> void:
     _input_enabled = enabled
 
+    # Disable back and reset-to-defaults buttons while remapping input.
+    if _input_enabled:
+        _reset_to_defaults.disabled = false
+        _back_button.disabled = false
+    else:
+        _reset_to_defaults.disabled = true
+        _back_button.disabled = true
+
 func _on_remap_started() -> void:
     _set_input_enabled(false)
 
