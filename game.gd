@@ -30,8 +30,12 @@ func _ready() -> void:
     _player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
     _player.connect('player_healed', self, '_on_player_healed')
 
-    _player.get_health_pack_manager().connect(
+    var player_health_pack_manager := _player.get_health_pack_manager()
+    player_health_pack_manager.connect(
         'health_pack_consumed', self, '_on_health_pack_consumed')
+
+    _health_pack_bar.set_health_packs(
+        player_health_pack_manager.num_health_packs())
 
     for lamp in get_tree().get_nodes_in_group('lamps'):
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')

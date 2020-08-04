@@ -364,7 +364,7 @@ tracks/0/keys = {
 "values": [ 72, 73, 74, 75, 76, 77, 78, 79, 76, 77, 78, 79 ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=13]
 resource_name = "heal"
 length = 0.8
 step = 0.05
@@ -398,7 +398,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 1.4
 loop = true
 step = 0.2
@@ -415,8 +415,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "idle_low_health"
+[sub_resource type="Animation" id=15]
 length = 1.4
 loop = true
 step = 0.2
@@ -433,7 +432,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 7, 6, 5 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
@@ -449,7 +448,7 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -464,8 +463,7 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
-[sub_resource type="Animation" id=17]
-resource_name = "look_down"
+[sub_resource type="Animation" id=18]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -480,8 +478,7 @@ tracks/0/keys = {
 "values": [ 30 ]
 }
 
-[sub_resource type="Animation" id=18]
-resource_name = "look_up"
+[sub_resource type="Animation" id=19]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -496,7 +493,7 @@ tracks/0/keys = {
 "values": [ 31 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -511,7 +508,7 @@ tracks/0/keys = {
 "values": [ 73, 72 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -527,7 +524,7 @@ tracks/0/keys = {
 "values": [ 80, 81, 82, 81 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -555,7 +552,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=23]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -571,7 +568,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=24]
 resource_name = "take_health_pack"
 length = 0.4
 tracks/0/type = "value"
@@ -587,7 +584,7 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=25]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -603,7 +600,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=26]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -617,16 +614,16 @@ tracks/0/keys = {
 "values": [ 36 ]
 }
 
-[sub_resource type="RectangleShape2D" id=25]
+[sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=26]
+[sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="RectangleShape2D" id=27]
+[sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 18, 7 )
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 7, 16 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -642,7 +639,9 @@ script = ExtResource( 1 )
 script = ExtResource( 4 )
 movement_speed_tiles_per_second = 6.0
 
-[node name="HealthPackManager" type="Node" parent="."]
+[node name="HealthPackManager" type="Node" parent="." groups=[
+"save",
+]]
 script = ExtResource( 46 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -658,20 +657,20 @@ anims/grapple_pull = SubResource( 9 )
 anims/hard_landing = SubResource( 10 )
 anims/hazard_hit = SubResource( 11 )
 anims/hazard_recover = SubResource( 12 )
-anims/heal = SubResource( 30 )
-anims/idle = SubResource( 13 )
-anims/idle_low_health = SubResource( 14 )
-anims/jump = SubResource( 15 )
-anims/light_lamp = SubResource( 16 )
-anims/look_down = SubResource( 17 )
-anims/look_up = SubResource( 18 )
-anims/pre_rest = SubResource( 19 )
-anims/rest = SubResource( 20 )
-anims/sleep = SubResource( 21 )
-anims/stagger = SubResource( 22 )
-anims/take_health_pack = SubResource( 29 )
-anims/walk = SubResource( 23 )
-anims/wall_slide = SubResource( 24 )
+anims/heal = SubResource( 13 )
+anims/idle = SubResource( 14 )
+anims/idle_low_health = SubResource( 15 )
+anims/jump = SubResource( 16 )
+anims/light_lamp = SubResource( 17 )
+anims/look_down = SubResource( 18 )
+anims/look_up = SubResource( 19 )
+anims/pre_rest = SubResource( 20 )
+anims/rest = SubResource( 21 )
+anims/sleep = SubResource( 22 )
+anims/stagger = SubResource( 23 )
+anims/take_health_pack = SubResource( 24 )
+anims/walk = SubResource( 25 )
+anims/wall_slide = SubResource( 26 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -698,7 +697,7 @@ region_rect = Rect2( 0, 0, 48, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 25 )
+shape = SubResource( 27 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -706,7 +705,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 26 )
+shape = SubResource( 28 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -734,7 +733,7 @@ collision_layer = 16
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/SideAttack"]
-shape = SubResource( 27 )
+shape = SubResource( 29 )
 disabled = true
 
 [node name="UpAttack" type="Area2D" parent="Hitboxes"]
@@ -743,7 +742,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/UpAttack"]
 position = Vector2( 0, -28 )
-shape = SubResource( 28 )
+shape = SubResource( 30 )
 disabled = true
 
 [node name="States" type="Node" parent="."]
