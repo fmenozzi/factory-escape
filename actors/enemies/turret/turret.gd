@@ -42,6 +42,8 @@ onready var _projectile_spawner: ProjectileSpawner = $Head/ProjectileSpawner
 onready var _head_sprite: Sprite = $Head/Sprite
 onready var _head_flash_manager: Node = $Head/FlashManager
 onready var _scanner: Scanner = $Head/Scanner
+onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
@@ -129,6 +131,10 @@ func get_rotation_direction() -> int:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
+    _hitbox_collision_shape.set_deferred('disabled', disabled)
+    _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
 func change_rotation_direction() -> void:
     _rotation_direction *= -1

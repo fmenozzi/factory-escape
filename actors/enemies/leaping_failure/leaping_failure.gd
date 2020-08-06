@@ -39,7 +39,8 @@ onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _dust_puff: Particles2D = $DustPuff
-
+onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
@@ -97,6 +98,10 @@ func get_react_sprite() -> ReactSprite:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
+    _hitbox_collision_shape.set_deferred('disabled', disabled)
+    _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum

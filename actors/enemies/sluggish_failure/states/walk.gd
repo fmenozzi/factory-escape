@@ -1,7 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
-    failure.get_node('AnimationPlayer').play('walk')
+    failure.get_animation_player().play('walk')
 
 func exit(failure: SluggishFailure) -> void:
     pass

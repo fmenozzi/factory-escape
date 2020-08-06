@@ -25,6 +25,8 @@ onready var _physics_manager: PhysicsManager = $PhysicsManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 
 func _ready() -> void:
@@ -33,7 +35,6 @@ func _ready() -> void:
     set_direction(direction)
 
     _health.connect('health_changed', self, '_on_health_changed')
-    _health.connect('died', self, '_on_died')
 
     _current_state_enum = State.WANDER
     _current_state = STATES[_current_state_enum]
@@ -51,11 +52,15 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    var direction := player.global_position.direction_to(global_position)
-    _change_state({
-        'new_state': State.STAGGER,
-        'direction_from_hit': direction,
-    })
+    if _health.get_current_health() == 0:
+        # TODO: Make death nicer (animation, effects, etc.).
+        _change_state({'new_state': State.DIE})
+    else:
+        var direction := player.global_position.direction_to(global_position)
+        _change_state({
+            'new_state': State.STAGGER,
+            'direction_from_hit': direction,
+        })
 
 func get_physics_manager() -> PhysicsManager:
     return _physics_manager
@@ -68,6 +73,10 @@ func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
 
 func is_hitting_obstacle() -> bool:
     return .is_on_floor() or .is_on_ceiling() or .is_on_wall()
+
+func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
+    _hitbox_collision_shape.set_deferred('disabled', disabled)
+    _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
@@ -86,7 +95,3 @@ func _change_state(new_state_dict: Dictionary) -> void:
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     print('WORKER DRONE HIT (new health: ', new_health, ')')
-
-# TODO: Make death nicer (animation, effects, etc.).
-func _on_died() -> void:
-    _change_state({'new_state': State.DIE})

@@ -32,6 +32,8 @@ onready var _pushback_manager: PushbackManager = $PushbackManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _dust_puff: Particles2D = $DustPuff
 
 func _ready() -> void:
@@ -95,6 +97,10 @@ func get_animation_player() -> AnimationPlayer:
 
 func get_react_sprite() -> ReactSprite:
     return _react_sprite
+
+func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
+    _hitbox_collision_shape.set_deferred('disabled', disabled)
+    _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
