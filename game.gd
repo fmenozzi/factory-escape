@@ -161,6 +161,9 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     if _saving_indicator.is_spinning():
         yield(_saving_indicator, 'spinning_finished')
 
+    for node in get_tree().get_nodes_in_group('lamp_reset'):
+        node.reset()
+
     lamp.set_process_unhandled_input(true)
     _player.set_process_unhandled_input(true)
 

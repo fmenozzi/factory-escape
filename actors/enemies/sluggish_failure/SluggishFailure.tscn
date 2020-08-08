@@ -34,7 +34,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
 
-[node name="SluggishFailure" type="KinematicBody2D"]
+[node name="SluggishFailure" type="KinematicBody2D" groups=[
+"lamp_reset",
+]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 4 )

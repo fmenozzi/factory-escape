@@ -142,6 +142,11 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
 func change_rotation_direction() -> void:
     _rotation_direction *= -1
 
+func reset() -> void:
+    set_direction(initial_direction)
+    _health.heal_to_full()
+    _change_state({'new_state': initial_state})
+
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
     var new_state_enum: int = new_state_dict['new_state']

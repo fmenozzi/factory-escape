@@ -52,7 +52,9 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="Turret" type="Node2D"]
+[node name="Turret" type="Node2D" groups=[
+"lamp_reset",
+]]
 script = ExtResource( 4 )
 
 [node name="Health" parent="." instance=ExtResource( 5 )]

@@ -99,6 +99,12 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)
     _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
+func reset() -> void:
+    global_position = _initial_global_position
+    set_direction(initial_direction)
+    _health.heal_to_full()
+    _change_state({'new_state': initial_state})
+
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
     var new_state_enum: int = new_state_dict['new_state']

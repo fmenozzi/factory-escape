@@ -42,7 +42,9 @@ extents = Vector2( 6, 6 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 6, 6 )
 
-[node name="RangedSentryDrone" type="KinematicBody2D"]
+[node name="RangedSentryDrone" type="KinematicBody2D" groups=[
+"lamp_reset",
+]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 1 )
