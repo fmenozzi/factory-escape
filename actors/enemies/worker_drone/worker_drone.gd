@@ -19,6 +19,8 @@ onready var STATES := {
 
 var direction: int
 
+var _initial_global_position: Vector2
+
 var _current_state: Node = null
 var _current_state_enum: int = -1
 
@@ -36,6 +38,8 @@ func _ready() -> void:
     _animation_player.play('idle')
 
     set_direction(initial_direction)
+
+    _initial_global_position = global_position
 
     _health.connect('health_changed', self, '_on_health_changed')
 

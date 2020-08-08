@@ -27,6 +27,8 @@ onready var STATES := {
 
 var direction: int
 
+var _initial_global_position: Vector2
+
 var _current_state: Node = null
 var _current_state_enum: int = -1
 
@@ -47,6 +49,8 @@ func _ready() -> void:
     _health.connect('died', self, '_on_died')
 
     set_direction(initial_direction)
+
+    _initial_global_position = global_position
 
     _react_sprite.change_state(ReactSprite.State.NONE)
 

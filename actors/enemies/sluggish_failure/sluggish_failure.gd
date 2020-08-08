@@ -23,6 +23,8 @@ onready var STATES := {
 
 var direction: int
 
+var _initial_global_position: Vector2
+
 var _current_state: Node = null
 var _current_state_enum: int = -1
 
@@ -46,6 +48,8 @@ onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
     set_direction(initial_direction)
+
+    _initial_global_position = global_position
 
     _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
