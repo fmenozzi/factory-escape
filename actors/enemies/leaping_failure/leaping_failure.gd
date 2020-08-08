@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name LeapingFailure
 
-export(Util.Direction) var direction := Util.Direction.RIGHT
-
 enum State {
     NO_CHANGE,
     NEXT_STATE_IN_SEQUENCE,
@@ -15,6 +13,8 @@ enum State {
     LEAP,
     DIE,
 }
+
+export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.FALL
 
 onready var STATES := {
@@ -27,6 +27,8 @@ onready var STATES := {
     State.LEAP:            $States/Leap,
     State.DIE:             $States/Die,
 }
+
+var direction: int
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
@@ -46,7 +48,7 @@ onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
-    set_direction(direction)
+    set_direction(initial_direction)
 
     _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]

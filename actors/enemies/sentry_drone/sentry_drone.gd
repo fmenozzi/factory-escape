@@ -11,7 +11,7 @@ enum State {
     DIE,
 }
 
-export(Util.Direction) var direction := Util.Direction.RIGHT
+export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.IDLE
 
 onready var STATES := {
@@ -21,6 +21,8 @@ onready var STATES := {
     State.ATTACK:    $States/Attack,
     State.DIE:       $States/Die,
 }
+
+var direction: int
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
@@ -41,7 +43,7 @@ func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
-    set_direction(direction)
+    set_direction(initial_direction)
 
     _react_sprite.change_state(ReactSprite.State.NONE)
 

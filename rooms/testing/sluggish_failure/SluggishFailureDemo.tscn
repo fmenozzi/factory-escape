@@ -37,7 +37,7 @@ position = Vector2( 112, 56 )
 [node name="GroundLeft" parent="World/Rooms/SluggishFailurePlayground/Enemies" index="0" instance=ExtResource( 3 )]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 24, 160 )
-direction = -1
+initial_direction = -1
 
 [node name="GroundRight" parent="World/Rooms/SluggishFailurePlayground/Enemies" index="1" instance=ExtResource( 3 )]
 modulate = Color( 1, 0, 0, 1 )

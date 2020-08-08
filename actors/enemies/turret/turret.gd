@@ -1,15 +1,12 @@
 extends Node2D
 class_name Turret
 
-export(Util.Direction) var direction := Util.Direction.RIGHT
-
 enum FloorNormal {
     UP,
     DOWN,
     LEFT,
     RIGHT,
 }
-export(FloorNormal) var floor_normal := FloorNormal.UP
 
 enum State {
     NO_CHANGE,
@@ -20,7 +17,9 @@ enum State {
     DIE,
 }
 
+export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.ROTATE
+export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
     State.ROTATE:  $States/Rotate,
@@ -29,6 +28,8 @@ onready var STATES := {
     State.SHOOT:   $States/Shoot,
     State.DIE:     $States/Die,
 }
+
+var direction: int
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
@@ -52,9 +53,9 @@ func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
-    set_direction(direction)
+    set_direction(initial_direction)
 
-    _rotation_direction = -direction
+    _rotation_direction = -initial_direction
 
     _react_sprite.change_state(ReactSprite.State.NONE)
 

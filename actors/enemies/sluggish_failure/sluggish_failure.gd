@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name SluggishFailure
 
-export(Util.Direction) var direction := Util.Direction.RIGHT
-
 enum State {
     NO_CHANGE,
     WALK,
@@ -12,6 +10,7 @@ enum State {
     DIE,
 }
 
+export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.WALK
 
 onready var STATES := {
@@ -21,6 +20,8 @@ onready var STATES := {
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
     State.DIE:             $States/Die,
 }
+
+var direction: int
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
@@ -44,7 +45,7 @@ onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
-    set_direction(direction)
+    set_direction(initial_direction)
 
     _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]

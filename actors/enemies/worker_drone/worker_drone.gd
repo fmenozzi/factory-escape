@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name WorkerDrone
 
-export(Util.Direction) var direction := Util.Direction.RIGHT
-
 enum State {
     NO_CHANGE,
     WANDER,
@@ -10,6 +8,7 @@ enum State {
     DIE,
 }
 
+export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.WANDER
 
 onready var STATES := {
@@ -17,6 +16,8 @@ onready var STATES := {
     State.STAGGER: $States/Stagger,
     State.DIE:     $States/Die,
 }
+
+var direction: int
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
@@ -34,7 +35,7 @@ onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 func _ready() -> void:
     _animation_player.play('idle')
 
-    set_direction(direction)
+    set_direction(initial_direction)
 
     _health.connect('health_changed', self, '_on_health_changed')
 
