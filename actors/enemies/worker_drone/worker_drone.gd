@@ -10,6 +10,8 @@ enum State {
     DIE,
 }
 
+export(State) var initial_state := State.WANDER
+
 onready var STATES := {
     State.WANDER:  $States/Wander,
     State.STAGGER: $States/Stagger,
@@ -36,7 +38,7 @@ func _ready() -> void:
 
     _health.connect('health_changed', self, '_on_health_changed')
 
-    _current_state_enum = State.WANDER
+    _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 

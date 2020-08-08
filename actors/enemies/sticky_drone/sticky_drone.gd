@@ -14,6 +14,7 @@ enum State {
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
+export(State) var initial_state := State.IDLE
 
 enum FloorNormal {
     UP,
@@ -74,7 +75,7 @@ func _ready() -> void:
             self.rotation_degrees = 90
             _react_sprite.rotation_degrees = -90
 
-    _current_state_enum = State.IDLE
+    _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 

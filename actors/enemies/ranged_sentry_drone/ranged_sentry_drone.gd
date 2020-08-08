@@ -13,6 +13,7 @@ enum State {
 }
 
 export(Util.Direction) var direction := Util.Direction.RIGHT
+export(State) var initial_state := State.IDLE
 
 onready var STATES := {
     State.IDLE:          $States/Idle,
@@ -47,7 +48,7 @@ func _ready() -> void:
 
     _react_sprite.change_state(ReactSprite.State.NONE)
 
-    _current_state_enum = State.IDLE
+    _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 

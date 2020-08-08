@@ -12,6 +12,8 @@ enum State {
     DIE,
 }
 
+export(State) var initial_state := State.WALK
+
 onready var STATES := {
     State.WALK:            $States/Walk,
     State.STAGGER:         $States/Stagger,
@@ -44,7 +46,7 @@ onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 func _ready() -> void:
     set_direction(direction)
 
-    _current_state_enum = State.WALK
+    _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 

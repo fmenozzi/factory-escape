@@ -20,6 +20,8 @@ enum State {
     DIE,
 }
 
+export(State) var initial_state := State.ROTATE
+
 onready var STATES := {
     State.ROTATE:  $States/Rotate,
     State.PAUSE:   $States/Pause,
@@ -74,7 +76,7 @@ func _ready() -> void:
             self.rotation_degrees = 90
             _react_sprite.rotation_degrees = -90
 
-    _current_state_enum = State.ROTATE
+    _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({
         'new_state': _current_state_enum,
