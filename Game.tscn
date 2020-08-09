@@ -56,6 +56,10 @@ layer = 2
 
 [node name="SavingIndicator" parent="Layers/UILayer" instance=ExtResource( 7 )]
 pause_mode = 2
+margin_left = -40.0
+margin_top = -28.0
+margin_right = -24.0
+margin_bottom = -12.0
 
 [node name="ScreenSpaceEffectsLayer" type="CanvasLayer" parent="Layers"]
 layer = 0

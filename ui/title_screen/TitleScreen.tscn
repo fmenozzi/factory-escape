@@ -72,3 +72,7 @@ visible = false
 visible = false
 
 [node name="SavingIndicator" parent="." instance=ExtResource( 15 )]
+margin_left = -40.0
+margin_top = -28.0
+margin_right = -24.0
+margin_bottom = -12.0
