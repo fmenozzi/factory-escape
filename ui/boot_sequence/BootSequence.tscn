@@ -1,0 +1,127 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ui/boot_sequence/boot_sequence.gd" type="Script" id=1]
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://ui/ScreenFadeout.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/boot_sequence/textures/godot-icon.png" type="Texture" id=4]
+[ext_resource path="res://ui/boot_sequence/textures/controller.png" type="Texture" id=5]
+[ext_resource path="res://ui/interface/saving_indicator/SavingIndicator.tscn" type="PackedScene" id=6]
+
+[node name="BootSequence" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.113725, 0.129412, 0.176471, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sequence" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MadeWithGodot" type="Control" parent="Sequence"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Sequence/MadeWithGodot"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -34.0
+margin_right = 32.0
+margin_bottom = 30.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BestWithController" type="Control" parent="Sequence"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sequence/BestWithController"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Sequence/BestWithController/VBoxContainer"]
+margin_top = 65.0
+margin_right = 320.0
+margin_bottom = 97.0
+texture = ExtResource( 5 )
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Sequence/BestWithController/VBoxContainer"]
+margin_top = 101.0
+margin_right = 320.0
+margin_bottom = 114.0
+text = "This game plays best with a controller"
+align = 1
+
+[node name="AutosaveFeature" type="Control" parent="Sequence"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThisGameUsesAnAutosaveFeature" type="Label" parent="Sequence/AutosaveFeature"]
+margin_top = 56.0
+margin_right = 320.0
+margin_bottom = 69.0
+text = "This game uses an autosave feature"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SavingIndicator" parent="Sequence/AutosaveFeature" instance=ExtResource( 6 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 152.0
+margin_top = 80.0
+margin_right = 168.0
+margin_bottom = 94.0
+
+[node name="UpperRight" parent="Sequence/AutosaveFeature/SavingIndicator" index="1"]
+modulate = Color( 1, 1, 1, 0.861732 )
+
+[node name="DoNotShutDown" type="Label" parent="Sequence/AutosaveFeature"]
+margin_top = 104.0
+margin_right = 320.0
+margin_bottom = 117.0
+text = "Do not shut down the game when this symbol appears"
+align = 1
+
+[node name="ScreenFadeout" parent="." instance=ExtResource( 3 )]
+
+[node name="Timer" type="Timer" parent="."]
+
+[editable path="Sequence/AutosaveFeature/SavingIndicator"]
