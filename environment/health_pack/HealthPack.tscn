@@ -41,6 +41,7 @@ tracks/0/keys = {
 
 [node name="HealthPack" type="Node2D" groups=[
 "health_packs",
+"lamp_reset",
 ]]
 script = ExtResource( 2 )
 

@@ -27,6 +27,10 @@ func _unhandled_input(event: InputEvent):
                 set_process_unhandled_input(false)
                 emit_signal('health_pack_taken', self)
 
+func reset() -> void:
+    _animation_player.play('spawn')
+    _taken = false
+
 func _on_player_entered(player: Player) -> void:
     if not player:
         return
