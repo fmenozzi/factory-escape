@@ -27,6 +27,14 @@ func _ready() -> void:
     _timer.connect('timeout', self, '_on_timeout')
     _timer.start()
 
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed('ui_accept'):
+        # Disable input until re-enabled elsewhere. This prevents the player
+        # from spamming ui_accept, which might mess things up with all the
+        # yields around fading to/from black during transitions.
+        set_process_unhandled_input(false)
+        _advance()
+
 func _go_to_next_screen_in_sequence() -> void:
     var fade_duration := 1.0
 
@@ -40,6 +48,8 @@ func _go_to_next_screen_in_sequence() -> void:
     _screen_fadeout.fade_from_black(fade_duration)
     yield(_screen_fadeout, 'fade_from_black_finished')
 
+    set_process_unhandled_input(true)
+
     _timer.start()
 
 func _go_to_title_screen() -> void:
@@ -47,8 +57,13 @@ func _go_to_title_screen() -> void:
 
     SceneChanger.change_scene_to(Preloads.TitleScreen, fade_duration)
 
-func _on_timeout() -> void:
+func _advance() -> void:
+    _timer.stop()
+
     if _idx < _sequence.get_child_count() - 1:
         _go_to_next_screen_in_sequence()
     else:
         _go_to_title_screen()
+
+func _on_timeout() -> void:
+    _advance()
