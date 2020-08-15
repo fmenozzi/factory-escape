@@ -1,6 +1,8 @@
 extends Control
 
 onready var _sequence: Control = $Sequence
+onready var _eyes: TextureRect = $Sequence/MadeWithGodot/Eyes
+onready var _eye_glow_tween: Tween = $Sequence/MadeWithGodot/EyeGlowTween
 onready var _saving_indicator: Control = $Sequence/AutosaveFeature/SavingIndicator
 onready var _screen_fadeout: Control = $ScreenFadeout
 onready var _timer: Timer = $Timer
@@ -18,6 +20,9 @@ func _ready() -> void:
 
         'Windowed':
             OS.window_fullscreen = false
+
+    # Set up eye glow tween to gently pulse.
+    _setup_and_start_eye_glow_tween()
 
     # Start spinning the saving indicator.
     _saving_indicator.start_spinning_for(0.0)
@@ -64,6 +69,18 @@ func _advance() -> void:
         _go_to_next_screen_in_sequence()
     else:
         _go_to_title_screen()
+
+func _setup_and_start_eye_glow_tween() -> void:
+    var duration := 0.5
+
+    _eye_glow_tween.repeat = true
+    _eye_glow_tween.interpolate_property(
+        _eyes, 'modulate', Color(1, 1, 1), Color(1.3, 1.3, 1.3), duration,
+        Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+    _eye_glow_tween.interpolate_property(
+        _eyes, 'modulate', Color(1.3, 1.3, 1.3), Color(1, 1, 1), duration,
+        Tween.TRANS_QUAD, Tween.EASE_IN_OUT, duration)
+    _eye_glow_tween.start()
 
 func _on_timeout() -> void:
     _advance()
