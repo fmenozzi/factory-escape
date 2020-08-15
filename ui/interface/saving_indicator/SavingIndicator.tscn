@@ -60,6 +60,7 @@ tracks/3/keys = {
 }
 
 [node name="SavingIndicator" type="Control"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
