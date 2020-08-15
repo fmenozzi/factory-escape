@@ -17,6 +17,12 @@ onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 
 func _ready() -> void:
     if not run_standalone:
+        # Before loading the game, set the last saved global position to the
+        # player's current global position (i.e. as set in the editor for this
+        # Game instance). This will be overwritten during load if the player has
+        # rested at a lamp in the current save slot.
+        _player.last_saved_global_position = _player.global_position
+
         # Use slot 1 by default if we don't go through the title screen.
         if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
             SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1

@@ -139,7 +139,7 @@ var _nearby_lamp = null
 
 var _current_hazard_checkpoint: Area2D = null
 
-var last_saved_global_position: Vector2 = Vector2(50, 144)
+var last_saved_global_position: Vector2
 var last_saved_direction_to_lamp: int = Util.Direction.RIGHT
 
 # Keep track of the current room the player is in, as well as the previous room
