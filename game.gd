@@ -14,6 +14,7 @@ onready var _health_pack_bar: Control = $Layers/UILayer/HealthPackBar
 onready var _saving_indicator: Control = $Layers/UILayer/SavingIndicator
 onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
+onready var _player_death_transition: Control = $Layers/ScreenSpaceEffectsLayer/PlayerDeathTransition
 
 func _ready() -> void:
     if not run_standalone:
@@ -89,6 +90,69 @@ func _maybe_save_game() -> void:
 
 func _on_player_died() -> void:
     print('YOU DIED')
+
+    _player.set_process_unhandled_input(false)
+
+    # Make player invincible for duration of death transition so that they don't
+    # trigger an infinite loop by continuously taking contact damage while
+    # standing still during death animation.
+    _player.get_health().set_status(Health.Status.INVINCIBLE)
+
+    Screenshake.start(
+        Screenshake.Duration.LONG,
+        Screenshake.Amplitude.MEDIUM,
+        Screenshake.Priority.HIGH)
+    Rumble.start(Rumble.Type.STRONG, 1.0, Rumble.Priority.HIGH)
+
+    # Hide all health-related UI elements.
+    _health_bar.hide()
+    _health_pack_bar.hide()
+
+    # Start player death sequence.
+    _player.change_state({'new_state': Player.State.DIE})
+    yield(_player.current_state, 'sequence_finished')
+
+    # Start the player death transition effect.
+    _player_death_transition.start_player_death_transition(_player)
+    yield(_player_death_transition, 'player_death_transition_finished')
+
+    # Reload the game and fade to black with the screen fadeout node. The screen
+    # is already black as a result of the death transition effect, but the
+    # screen fadeout node is in a higher layer than the death transition effect,
+    # so we fade to black here to make all the transitions look smoother. This
+    # has the added benefit of allowing us to use the time to fade to black to
+    # act as a timer for how long the screen should remain black before fading
+    # back in.
+    SaveAndLoad.load_game()
+    _screen_fadeout.fade_to_black(2.0)
+    yield(_screen_fadeout, 'fade_to_black_finished')
+
+    # Now that the screen is black, we can reset the death transition effect
+    # without having to worry about weird graphical artifacts.
+    _player_death_transition.reset()
+
+    # Here we cheat a bit and simply run the same code as when resting at a lamp
+    # in order to achieve the desired outcome: the player and world reset, and
+    # the screen fades from black with the player character already resting at
+    # the last lamp. Because we've reloaded the game, the player starts out next
+    # to the last lamp rested at, so the nearby lamp will conveniently be set to
+    # that one.
+    assert(_player.get_nearby_lamp() != null)
+    _on_player_rested_at_lamp(_player.get_nearby_lamp())
+
+    # Show all health-related UI elements
+    _health_bar.show()
+    _health_pack_bar.show()
+
+    Screenshake.stop()
+    Rumble.stop()
+
+    _player.get_health().set_status(Health.Status.NONE)
+
+    _screen_fadeout.fade_from_black(2.0)
+    yield(_screen_fadeout, 'fade_from_black_finished')
+
+    _player.set_process_unhandled_input(true)
 
 func _on_player_hit_hazard() -> void:
     var fade_duration := 0.4

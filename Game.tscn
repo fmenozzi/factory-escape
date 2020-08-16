@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://shared/environments/glow_env.tres" type="Environment" id=8]
 [ext_resource path="res://shared/effects/screen_space_effects/vignette/Vignette.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/interface/health_pack_bar/HealthPackBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://shared/effects/screen_space_effects/player_death_transition/PlayerDeathTransition.tscn" type="PackedScene" id=11]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -65,3 +66,5 @@ margin_bottom = -12.0
 layer = 0
 
 [node name="Vignette" parent="Layers/ScreenSpaceEffectsLayer" instance=ExtResource( 9 )]
+
+[node name="PlayerDeathTransition" parent="Layers/ScreenSpaceEffectsLayer" instance=ExtResource( 11 )]

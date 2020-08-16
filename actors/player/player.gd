@@ -33,6 +33,7 @@ enum State {
     TAKE_HEALTH_PACK,
     HARD_LANDING,
     HEAL,
+    DIE,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -59,6 +60,7 @@ onready var STATES = {
     State.TAKE_HEALTH_PACK: $States/TakeHealthPack,
     State.HARD_LANDING:     $States/HardLanding,
     State.HEAL:             $States/Heal,
+    State.DIE:              $States/Die,
 }
 
 var current_state: Node = null
@@ -429,33 +431,40 @@ func _check_for_hits() -> void:
     if _is_being_crushed():
         var damage_taken := player_health.take_damage(1)
         if damage_taken:
-            change_state({'new_state': State.HAZARD_HIT})
-            emit_signal('player_hit_hazard')
+            # Only initiate hazard hit if the player hasn't died as a result of
+            # being crushed (otherwise, let the death transition play out).
+            if player_health.get_current_health() != 0:
+                change_state({'new_state': State.HAZARD_HIT})
+                emit_signal('player_hit_hazard')
 
     # Check for overlapping hazard bodies. Some hazards may be StaticBody2Ds
     # instead of Area2Ds.
     for hitbox in _hurtbox.get_overlapping_bodies():
         if Collision.in_layer(hitbox, 'hazards'):
-            # Take damage and stagger when hit.
+            # Take damage and stagger when hit, unless the hit resulted in the
+            # player's death, in which case let the death transition play out.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
-                change_state({'new_state': State.HAZARD_HIT})
-                emit_signal('player_hit_hazard')
+                if player_health.get_current_health() != 0:
+                    change_state({'new_state': State.HAZARD_HIT})
+                    emit_signal('player_hit_hazard')
 
     # Check for overlapping enemy hitbox and hazard areas.
     for hitbox in _hurtbox.get_overlapping_areas():
         if Collision.in_layers(hitbox, ['hazards', 'enemy_hitbox']):
-            # Take damage and stagger when hit.
+            # Take damage and stagger when hit, unless the hit resulted in the
+            # player's death, in which case let the death transition play out.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
-                if Collision.in_layer(hitbox, 'hazards'):
-                    change_state({'new_state': State.HAZARD_HIT})
-                    emit_signal('player_hit_hazard')
-                elif Collision.in_layer(hitbox, 'enemy_hitbox'):
-                    change_state({
-                        'new_state': State.STAGGER,
-                        'direction_from_hit': Util.direction(hitbox, self)
-                    })
+                if player_health.get_current_health() != 0:
+                    if Collision.in_layer(hitbox, 'hazards'):
+                        change_state({'new_state': State.HAZARD_HIT})
+                        emit_signal('player_hit_hazard')
+                    elif Collision.in_layer(hitbox, 'enemy_hitbox'):
+                        change_state({
+                            'new_state': State.STAGGER,
+                            'direction_from_hit': Util.direction(hitbox, self)
+                        })
 
 func get_next_grapple_point() -> GrapplePoint:
     return _next_grapple_point
