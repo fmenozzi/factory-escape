@@ -91,13 +91,6 @@ func _maybe_save_game() -> void:
         SaveAndLoad.save_game()
 
 func _reset_world() -> void:
-    _player.change_state({'new_state': Player.State.IDLE})
-
-    _player.get_health().heal_to_full()
-
-    _player.global_position = _player.last_saved_global_position
-    _player.set_direction(_player.last_saved_direction_to_lamp)
-
     for node in get_tree().get_nodes_in_group('lamp_reset'):
         node.reset()
 
@@ -143,6 +136,8 @@ func _on_player_died() -> void:
     # Now that the screen is black, we can reset the death transition effect
     # without having to worry about weird graphical artifacts.
     _player_death_transition.reset()
+
+    _player.change_state({'new_state': Player.State.IDLE})
 
     _reset_world()
 

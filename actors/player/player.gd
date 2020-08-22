@@ -201,6 +201,12 @@ func load_save_data(all_save_data: Dictionary) -> void:
 
     set_direction(last_saved_direction_to_lamp)
 
+func reset() -> void:
+    get_health().heal_to_full()
+
+    global_position = last_saved_global_position
+    set_direction(last_saved_direction_to_lamp)
+
 # Change from one state in the state machine to another.
 func change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := current_state_enum

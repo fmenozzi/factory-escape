@@ -641,6 +641,7 @@ extents = Vector2( 18, 7 )
 extents = Vector2( 7, 16 )
 
 [node name="Player" type="KinematicBody2D" groups=[
+"lamp_reset",
 "player",
 "save",
 ]]
