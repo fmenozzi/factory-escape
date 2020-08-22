@@ -233,19 +233,18 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
         'object_to_face': lamp,
         'lamp': lamp,
     })
+    yield(_player, 'player_reached_walk_to_point')
 
-    _player.get_health().heal_to_full()
     _player.last_saved_global_position = closest_rest_point.global_position
     _player.last_saved_direction_to_lamp = Util.direction(_player, lamp)
+
+    _reset_world()
 
     # Spin saving indicator for two seconds to let player notice it.
     _saving_indicator.start_spinning_for(2.0)
     _maybe_save_game()
     if _saving_indicator.is_spinning():
         yield(_saving_indicator, 'spinning_finished')
-
-    for node in get_tree().get_nodes_in_group('lamp_reset'):
-        node.reset()
 
     lamp.set_process_unhandled_input(true)
     _player.set_process_unhandled_input(true)

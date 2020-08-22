@@ -4,6 +4,7 @@ class_name Player
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_hazard
 signal player_healed
+signal player_reached_walk_to_point
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
