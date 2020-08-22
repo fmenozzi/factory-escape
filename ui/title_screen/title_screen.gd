@@ -42,6 +42,8 @@ func _ready() -> void:
         menu.connect('menu_navigated', self, '_emit_click_sound')
 
     MENUS[Menu.Menus.SAVE_SLOTS].connect('save_slot_selected', self, '_start_game')
+    MENUS[Menu.Menus.QUIT].connect(
+        'quit_to_desktop_requested', self, '_on_quit_to_desktop_requested')
 
     Options.connect('options_saved', self, '_on_options_saved')
 
@@ -81,6 +83,13 @@ func _on_menu_changed(new_menu: int, metadata: Dictionary) -> void:
 func _on_previous_menu_requested() -> void:
     assert(_menu_stack.size() >= 2)
     _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS, {})
+
+func _on_quit_to_desktop_requested() -> void:
+    _saving_indicator.start_spinning_for(0.0)
+
+    Options.save_options()
+
+    get_tree().quit()
 
 func _start_game(save_slot: int) -> void:
     _set_main_menu_input_enabled(false)

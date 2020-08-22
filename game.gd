@@ -93,6 +93,9 @@ func _maybe_save_game() -> void:
     if not run_standalone:
         SaveAndLoad.save_game()
 
+    # Options are saved regardless of whether we're running in standalone mode.
+    Options.save_options()
+
 func _reset_world() -> void:
     for node in get_tree().get_nodes_in_group('lamp_reset'):
         node.reset()
