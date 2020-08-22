@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -46,6 +46,7 @@
 [ext_resource path="res://actors/player/states/look_up.gd" type="Script" id=44]
 [ext_resource path="res://actors/player/states/play_animation.gd" type="Script" id=45]
 [ext_resource path="res://actors/player/health_pack_manager.gd" type="Script" id=46]
+[ext_resource path="res://actors/player/states/sleep.gd" type="Script" id=47]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -875,6 +876,9 @@ script = ExtResource( 37 )
 script = ExtResource( 21 )
 
 [node name="RestingTimer" type="Timer" parent="States/RestAtLamp/Rest"]
+
+[node name="Sleep" type="Node" parent="States"]
+script = ExtResource( 47 )
 
 [node name="ReadSign" type="Node" parent="States"]
 script = ExtResource( 36 )
