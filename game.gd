@@ -31,6 +31,9 @@ func _ready() -> void:
             SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1
         SaveAndLoad.load_game()
 
+        # Start off in the SLEEP state.
+        _player.change_state({'new_state': Player.State.SLEEP})
+
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
     player_health.connect('health_changed', _vignette, '_on_health_changed')

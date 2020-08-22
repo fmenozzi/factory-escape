@@ -48,7 +48,10 @@ func _on_player_entered(player: Player) -> void:
 
     player.set_nearby_lamp(self)
 
-    fade_in_label()
+    # Don't fade the label in if the player is already in the SLEEP state (i.e.
+    # if the player has spawned in at the lamp directly).
+    if player.current_state() != Player.State.SLEEP:
+        fade_in_label()
 
 func _on_player_exited(player: Player) -> void:
     if not player:
