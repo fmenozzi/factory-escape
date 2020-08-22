@@ -137,9 +137,12 @@ func _on_player_died() -> void:
     # without having to worry about weird graphical artifacts.
     _player_death_transition.reset()
 
-    _player.change_state({'new_state': Player.State.IDLE})
-
     _reset_world()
+
+    var lamp := _player.get_nearby_lamp()
+    if lamp != null:
+        lamp.fade_out_label()
+    _player.change_state({'new_state': Player.State.SLEEP})
 
     # Spin saving indicator for two seconds to let player notice it.
     _saving_indicator.start_spinning_for(2.0)
