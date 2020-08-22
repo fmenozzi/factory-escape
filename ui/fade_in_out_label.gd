@@ -20,7 +20,7 @@ func set_text(new_text: String) -> void:
     self.text = new_text
 
 func fade_in() -> void:
-    _modulate_label_visibility(LABEL_NOT_VISIBLE, LABEL_VISIBLE)
+    _modulate_label_visibility(self.modulate, LABEL_VISIBLE)
 
 func fade_out() -> void:
-    _modulate_label_visibility(LABEL_VISIBLE, LABEL_NOT_VISIBLE)
+    _modulate_label_visibility(self.modulate, LABEL_NOT_VISIBLE)
