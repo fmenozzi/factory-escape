@@ -31,6 +31,8 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 func exit() -> void:
     self.visible = false
 
+    Options.save_options()
+
 func handle_input(event: InputEvent) -> void:
     if not _input_enabled:
         return
@@ -43,12 +45,6 @@ func handle_input(event: InputEvent) -> void:
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
-
-# Save options before returning to previous menu.
-func go_to_previous_menu() -> void:
-    Options.save_options()
-
-    .go_to_previous_menu()
 
 func get_options_data() -> Array:
     return [SECTION, {
@@ -154,8 +150,6 @@ func _on_reset_to_defaults_pressed() -> void:
                 var new_event := InputEventKey.new()
                 new_event.scancode = keyboard_option_data[action]
                 InputMap.action_add_event(action, new_event)
-
-    Options.save_options()
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()
