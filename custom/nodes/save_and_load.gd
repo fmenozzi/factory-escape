@@ -60,7 +60,8 @@ func delete_save_data(save_slot_to_delete: int) -> void:
     if not dir.file_exists(path):
         return
 
-    assert(dir.remove(path) == OK)
+    var status := dir.remove(path)
+    assert(status == OK)
 
 func _get_save_file_path(save_slot_to_use: int) -> String:
     assert(save_slot_to_use != SaveSlot.UNSET)

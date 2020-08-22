@@ -64,32 +64,38 @@ func load_options_data(config: ConfigFile) -> void:
     if config.has_section_key(SECTION, 'player_jump'):
         var event := InputEventKey.new()
         event.scancode = config.get_value(SECTION, 'player_jump')
-        assert(_jump_remap_button.remap_action_to(event))
+        var remap_succeeded: bool = _jump_remap_button.remap_action_to(event)
+        assert(remap_succeeded)
 
     if config.has_section_key(SECTION, 'player_attack'):
         var event := InputEventKey.new()
         event.scancode = config.get_value(SECTION, 'player_attack')
-        assert(_attack_remap_button.remap_action_to(event))
+        var remap_succeeded: bool = _attack_remap_button.remap_action_to(event)
+        assert(remap_succeeded)
 
     if config.has_section_key(SECTION, 'player_dash'):
         var event := InputEventKey.new()
         event.scancode = config.get_value(SECTION, 'player_dash')
-        assert(_dash_remap_button.remap_action_to(event))
+        var remap_succeeded: bool = _dash_remap_button.remap_action_to(event)
+        assert(remap_succeeded)
 
     if config.has_section_key(SECTION, 'player_grapple'):
         var event := InputEventKey.new()
         event.scancode = config.get_value(SECTION, 'player_grapple')
-        assert(_grapple_remap_button.remap_action_to(event))
+        var remap_succeeded: bool = _grapple_remap_button.remap_action_to(event)
+        assert(remap_succeeded)
 
     if config.has_section_key(SECTION, 'player_interact'):
         var event := InputEventKey.new()
         event.scancode = config.get_value(SECTION, 'player_interact')
-        assert(_interact_remap_button.remap_action_to(event))
+        var remap_succeeded: bool = _interact_remap_button.remap_action_to(event)
+        assert(remap_succeeded)
 
     if config.has_section_key(SECTION, 'player_heal'):
         var event := InputEventKey.new()
         event.scancode = config.get_value(SECTION, 'player_heal')
-        assert(_heal_remap_button.remap_action_to(event))
+        var remap_succeeded: bool = _heal_remap_button.remap_action_to(event)
+        assert(remap_succeeded)
 
 func _set_input_enabled(enabled: bool) -> void:
     _input_enabled = enabled

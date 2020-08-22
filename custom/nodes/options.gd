@@ -24,7 +24,8 @@ func save_options() -> void:
     if not dir.dir_exists(SAVE_DIRECTORY):
         dir.make_dir_recursive(SAVE_DIRECTORY)
 
-    assert(_config.save(_get_file_path()) == OK)
+    var status := _config.save(_get_file_path())
+    assert(status == OK)
 
     emit_signal('options_saved')
 

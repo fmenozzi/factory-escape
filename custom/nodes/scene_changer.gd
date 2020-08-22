@@ -8,7 +8,8 @@ func change_scene_to(scene: PackedScene, fade_duration: float) -> void:
     _screen_fadeout.fade_to_black(fade_duration)
     yield(_screen_fadeout, 'fade_to_black_finished')
 
-    assert(get_tree().change_scene_to(scene) == OK)
+    var status := get_tree().change_scene_to(scene)
+    assert(status == OK)
 
     # If we're going from the pause menu back to the title screen, unpause the
     # tree.
