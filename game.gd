@@ -18,11 +18,13 @@ onready var _player_death_transition: Control = $Layers/ScreenSpaceEffectsLayer/
 
 func _ready() -> void:
     if not run_standalone:
-        # Before loading the game, set the last saved global position to the
-        # player's current global position (i.e. as set in the editor for this
-        # Game instance). This will be overwritten during load if the player has
-        # rested at a lamp in the current save slot.
+        # Before loading the game, set the last saved global position and
+        # direction to the player's current global position and direction (i.e.
+        # as set in the editor for this Game instance). This will be overwritten
+        # during load if the player has rested at a lamp in the current save
+        # slot.
         _player.last_saved_global_position = _player.global_position
+        _player.last_saved_direction_to_lamp = _player.get_direction()
 
         # Use slot 1 by default if we don't go through the title screen.
         if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
@@ -88,6 +90,17 @@ func _maybe_save_game() -> void:
     if not run_standalone:
         SaveAndLoad.save_game()
 
+func _reset_world() -> void:
+    _player.change_state({'new_state': Player.State.IDLE})
+
+    _player.get_health().heal_to_full()
+
+    _player.global_position = _player.last_saved_global_position
+    _player.set_direction(_player.last_saved_direction_to_lamp)
+
+    for node in get_tree().get_nodes_in_group('lamp_reset'):
+        node.reset()
+
 func _on_player_died() -> void:
     print('YOU DIED')
 
@@ -131,14 +144,13 @@ func _on_player_died() -> void:
     # without having to worry about weird graphical artifacts.
     _player_death_transition.reset()
 
-    # Here we cheat a bit and simply run the same code as when resting at a lamp
-    # in order to achieve the desired outcome: the player and world reset, and
-    # the screen fades from black with the player character already resting at
-    # the last lamp. Because we've reloaded the game, the player starts out next
-    # to the last lamp rested at, so the nearby lamp will conveniently be set to
-    # that one.
-    assert(_player.get_nearby_lamp() != null)
-    _on_player_rested_at_lamp(_player.get_nearby_lamp())
+    _reset_world()
+
+    # Spin saving indicator for two seconds to let player notice it.
+    _saving_indicator.start_spinning_for(2.0)
+    _maybe_save_game()
+    if _saving_indicator.is_spinning():
+        yield(_saving_indicator, 'spinning_finished')
 
     # Show all health-related UI elements
     _health_bar.show()
