@@ -4,7 +4,7 @@ signal game_saved
 signal game_loaded
 
 const GROUP := 'save'
-const SAVE_DIRECTORY := 'res://debug_save_data/'
+const SAVE_DIRECTORY := 'user://save_data/'
 
 enum SaveSlot {
     UNSET,

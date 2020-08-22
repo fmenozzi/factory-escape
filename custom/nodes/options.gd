@@ -4,7 +4,7 @@ signal options_saved
 signal options_loaded
 
 const GROUP := 'options'
-const SAVE_DIRECTORY := 'res://debug_save_data/'
+const SAVE_DIRECTORY := 'user://save_data/'
 
 var _config := ConfigFile.new()
 
