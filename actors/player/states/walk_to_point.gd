@@ -30,10 +30,12 @@ func update(player: Player, delta: float) -> Dictionary:
     match _direction_to_stopping_point:
         Util.Direction.LEFT:
             if player.global_position.x <= _stopping_point.global_position.x:
+                player.global_position.x = _stopping_point.global_position.x
                 return {'new_state': Player.State.IDLE}
 
         Util.Direction.RIGHT:
             if player.global_position.x >= _stopping_point.global_position.x:
+                player.global_position.x = _stopping_point.global_position.x
                 return {'new_state': Player.State.IDLE}
 
         Util.Direction.NONE:
