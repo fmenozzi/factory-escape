@@ -95,4 +95,10 @@ func _emit_click_sound() -> void:
 
 func _set_paused(new_pause_state: bool) -> void:
     get_tree().paused = new_pause_state
+
     _black_overlay.visible = new_pause_state
+
+    if new_pause_state:
+        Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+    else:
+        Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
