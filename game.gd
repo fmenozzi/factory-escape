@@ -22,7 +22,7 @@ func _ready() -> void:
         # direction to the player's current global position and direction (i.e.
         # as set in the editor for this Game instance). This will be overwritten
         # during load if the player has rested at a lamp in the current save
-        # slot.
+        # slot, or has at least completed the intro fall sequence.
         _player.last_saved_global_position = _player.global_position
         _player.last_saved_direction_to_lamp = _player.get_direction()
 
@@ -31,8 +31,16 @@ func _ready() -> void:
             SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1
         SaveAndLoad.load_game()
 
-        # Start off in the SLEEP state.
-        _player.change_state({'new_state': Player.State.SLEEP})
+        # Determine player's starting state.
+        if not _player.has_completed_intro_fall_sequence:
+            _player.change_state({'new_state': Player.State.INTRO_FALL})
+        elif _player.has_rested_at_any_lamp:
+            _player.change_state({'new_state': Player.State.SLEEP})
+        else:
+            # In case the player quits and reloads the game before reaching the
+            # first lamp.
+            _player.change_state({'new_state': Player.State.IDLE})
+
 
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
@@ -240,6 +248,7 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
 
     _player.last_saved_global_position = closest_rest_point.global_position
     _player.last_saved_direction_to_lamp = Util.direction(_player, lamp)
+    _player.has_rested_at_any_lamp = true
 
     _reset_world()
 

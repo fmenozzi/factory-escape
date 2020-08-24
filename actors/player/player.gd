@@ -36,6 +36,7 @@ enum State {
     HARD_LANDING,
     HEAL,
     DIE,
+    INTRO_FALL,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -64,6 +65,7 @@ onready var STATES = {
     State.HARD_LANDING:     $States/HardLanding,
     State.HEAL:             $States/Heal,
     State.DIE:              $States/Die,
+    State.INTRO_FALL:       $States/IntroFall,
 }
 
 var current_state: Node = null
@@ -146,6 +148,8 @@ var _current_hazard_checkpoint: Area2D = null
 
 var last_saved_global_position: Vector2
 var last_saved_direction_to_lamp: int = Util.Direction.RIGHT
+var has_rested_at_any_lamp: bool = false
+var has_completed_intro_fall_sequence: bool = false
 
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
@@ -185,6 +189,8 @@ func get_save_data() -> Array:
         'global_position_x': last_saved_global_position.x,
         'global_position_y': last_saved_global_position.y,
         'direction_to_lamp': last_saved_direction_to_lamp,
+        'has_rested_at_any_lamp': has_rested_at_any_lamp,
+        'has_completed_intro_fall_sequence': has_completed_intro_fall_sequence,
     }]
 
 func load_save_data(all_save_data: Dictionary) -> void:
@@ -195,10 +201,14 @@ func load_save_data(all_save_data: Dictionary) -> void:
     assert('global_position_x' in player_save_data)
     assert('global_position_y' in player_save_data)
     assert('direction_to_lamp' in player_save_data)
+    assert('has_rested_at_any_lamp' in player_save_data)
+    assert('has_completed_intro_fall_sequence' in player_save_data)
 
     last_saved_global_position.x = player_save_data['global_position_x']
     last_saved_global_position.y = player_save_data['global_position_y']
     last_saved_direction_to_lamp = player_save_data['direction_to_lamp']
+    has_rested_at_any_lamp = player_save_data['has_rested_at_any_lamp']
+    has_completed_intro_fall_sequence = player_save_data['has_completed_intro_fall_sequence']
 
     global_position = last_saved_global_position
 
