@@ -295,11 +295,18 @@ func _on_health_pack_taken(health_pack: Node2D) -> void:
         'new_state': Player.State.TAKE_HEALTH_PACK,
         'object_to_face': health_pack,
     })
-    _player.get_health().heal_to_full()
 
     var health_pack_manager := _player.get_health_pack_manager()
+
+    # Add health pack to health pack manager. If player is already carrying the
+    # max number of health packs, treat this health pack as a heal and heal the
+    # player to full health.
+    var old_health_packs := health_pack_manager.num_health_packs()
     health_pack_manager.add_health_pack()
-    _health_pack_bar.set_health_packs(health_pack_manager.num_health_packs())
+    var new_health_packs := health_pack_manager.num_health_packs()
+    if old_health_packs == new_health_packs:
+        _player.get_health().heal_to_full()
+    _health_pack_bar.set_health_packs(new_health_packs)
 
 func _on_health_pack_consumed() -> void:
     _health_pack_bar.set_health_packs(
