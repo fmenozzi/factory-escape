@@ -69,12 +69,7 @@ func _ready() -> void:
     _pause.connect('quit_to_main_menu_requested', self, '_on_quit_to_main_menu')
     _pause.connect('quit_to_desktop_requested', self, '_on_quit_to_desktop')
 
-    # Find the player's current room.
-    for room in _rooms:
-        if room.contains(_player):
-            _player.curr_room = room
-            _player.prev_room = room
-            _player.get_camera().fit_camera_limits_to_room(room)
+    _set_player_starting_room()
 
 # TODO: See if we can find a more efficient way of doing this that doesn't
 #       involve iterating over every room in every frame. Maybe some kind of
@@ -96,6 +91,30 @@ func _process(delta: float) -> void:
             _camera.transition(_player.prev_room, _player.curr_room)
             yield(_camera, 'transition_completed')
             _player.curr_room.resume()
+
+func _set_player_starting_room() -> void:
+    var starting_room: Room
+
+    if not run_standalone and not _player.has_completed_intro_fall_sequence:
+        # If we're running a "real" game (i.e. not a standalone demo) and we
+        # haven't completed the intro fall sequence (i.e. we're starting up the
+        # game for the first time), assume that the current room is the first
+        # room in the Rooms node. This is important because the player starts
+        # out outside the room boundaries in the intro fall sequence, which
+        # would result in null values for player.curr_room and player.prev_room
+        # if we simply loop over the existing rooms and check which one contains
+        # the player.
+        assert(not _rooms.empty())
+        starting_room = _rooms[0]
+    else:
+        # Simply determine which room actually contains the player.
+        for room in _rooms:
+            if room.contains(_player):
+                starting_room = room
+
+    _player.curr_room = starting_room
+    _player.prev_room = starting_room
+    _player.get_camera().fit_camera_limits_to_room(starting_room)
 
 func _maybe_save_game() -> void:
     if not run_standalone:
