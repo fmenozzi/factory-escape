@@ -71,6 +71,8 @@ func _ready() -> void:
 
     _set_player_starting_room()
 
+    _set_player_starting_health_and_health_packs()
+
 # TODO: See if we can find a more efficient way of doing this that doesn't
 #       involve iterating over every room in every frame. Maybe some kind of
 #       map or otherwise more advanced data structure?
@@ -115,6 +117,14 @@ func _set_player_starting_room() -> void:
     _player.curr_room = starting_room
     _player.prev_room = starting_room
     _player.get_camera().fit_camera_limits_to_room(starting_room)
+
+func _set_player_starting_health_and_health_packs() -> void:
+    if run_standalone:
+        return
+
+    if not _player.has_completed_intro_fall_sequence or not _player.has_rested_at_any_lamp:
+        _player.get_health().set_starting_health()
+        _player.get_health_pack_manager().set_starting_health_packs()
 
 func _maybe_save_game() -> void:
     if not run_standalone:

@@ -21,6 +21,14 @@ func _ready() -> void:
 func get_current_health() -> int:
     return _current_health
 
+# Set initial health when first starting the game.
+func set_starting_health() -> void:
+    var old_health := _current_health
+    _current_health = 3
+
+    emit_signal('health_changed', old_health, _current_health)
+
+
 # Take damage if not invincible. Returns whether damage was taken.
 func take_damage(damage_amount: int) -> bool:
     if _current_status == Status.INVINCIBLE:

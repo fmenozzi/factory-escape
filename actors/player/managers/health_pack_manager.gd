@@ -16,6 +16,11 @@ func can_heal() -> bool:
 func num_health_packs() -> int:
     return _num_health_packs
 
+func set_starting_health_packs() -> void:
+    _num_health_packs = 1
+
+    emit_signal('health_pack_consumed')
+
 func consume_health_pack() -> void:
     _num_health_packs = max(_num_health_packs - 1, 0)
 
