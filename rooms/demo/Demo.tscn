@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/demo/rooms/FactoryEntrance.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://rooms/demo/rooms/PrimaryMaintenanceShaft.tscn" type="PackedScene" id=11]
 [ext_resource path="res://rooms/demo/rooms/MaintenanceStorage.tscn" type="PackedScene" id=12]
 [ext_resource path="res://rooms/demo/rooms/ShaftConnectorLeft.tscn" type="PackedScene" id=13]
+[ext_resource path="res://rooms/demo/rooms/ShaftConnectorRight.tscn" type="PackedScene" id=14]
 
 [node name="Demo" instance=ExtResource( 1 )]
 run_standalone = false
@@ -51,6 +52,9 @@ position = Vector2( 960, 540 )
 
 [node name="ShaftConnectorLeft" parent="World/Rooms" index="11" instance=ExtResource( 13 )]
 position = Vector2( 1600, 900 )
+
+[node name="ShaftConnectorRight" parent="World/Rooms" index="12" instance=ExtResource( 14 )]
+position = Vector2( 1920, 900 )
 
 [node name="Player" parent="World" index="3"]
 position = Vector2( 160, -384 )
