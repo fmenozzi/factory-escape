@@ -114,7 +114,7 @@ func reset() -> void:
     global_position = _initial_global_position
     set_direction(initial_direction)
     _health.heal_to_full()
-    _change_state({'new_state': initial_state})
+    _change_state({'new_state': initial_state, 'aggro': false})
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
