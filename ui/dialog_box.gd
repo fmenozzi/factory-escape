@@ -50,9 +50,11 @@ func _unhandled_input(event: InputEvent) -> void:
                 _current_state = State.DISABLED
 
         State.DISABLED:
-            # Ensure player is idle near a sign.
+            # Ensure player is idle or walking near a sign.
             var nearby_readable_object := _player.get_nearby_readable_object()
-            if not nearby_readable_object or _player.current_state() != Player.State.IDLE:
+            if not nearby_readable_object:
+                return
+            if not _player.current_state() in [Player.State.IDLE, Player.State.WALK]:
                 return
 
             _dialog = nearby_readable_object.dialog
