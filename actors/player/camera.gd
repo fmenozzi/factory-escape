@@ -21,10 +21,14 @@ func detach_and_move_to_global(new_global_pos: Vector2) -> void:
 func reattach() -> void:
     self.set_as_toplevel(false)
 
+    # Now that we're no longer top-level, determine our position relative to the
+    # player for the starting value of the reattachment interpolation.
+    self.position = _player.to_local(self.global_position)
+
     # Smoothly reattach the camera to the player by tweening to the original
     # local anchor position.
     var prop := 'position'
-    var duration := 1.0
+    var duration := 0.50
     var trans := Tween.TRANS_QUAD
     var easing := Tween.EASE_IN_OUT
     var old := self.position
