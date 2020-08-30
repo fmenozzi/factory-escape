@@ -33,8 +33,14 @@ func _unhandled_input(event: InputEvent) -> void:
         if _player.get_nearby_lamp() != self:
             return
 
-        if _player.current_state() == Player.State.REST_AT_LAMP:
+        var player_state := _player.current_state()
+
+        if player_state == Player.State.REST_AT_LAMP:
             _player.change_state({'new_state': Player.State.IDLE})
+            return
+
+        # Only allow interacting with lamps while idle or walking near them.
+        if not player_state in [Player.State.IDLE, Player.State.WALK]:
             return
 
         if not _is_lit:
