@@ -12,10 +12,14 @@ onready var _yes: Button = $ConfirmationWidget/HBoxContainer/Yes
 onready var _no: Button = $ConfirmationWidget/HBoxContainer/No
 
 func _ready() -> void:
-    set_process_unhandled_input(false)
+    hide_dialog()
 
     _yes.connect('pressed', self, '_on_yes_pressed')
     _no.connect('pressed', self, '_on_no_pressed')
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed('ui_cancel'):
+        _on_no_pressed()
 
 func show_dialog(msg: String) -> void:
     _message_label.text = msg
@@ -33,6 +37,8 @@ func hide_dialog() -> void:
 
     _message.hide()
     _confirmation_widget.hide()
+
+    set_process_unhandled_input(false)
 
 func _on_yes_pressed() -> void:
     hide_dialog()
