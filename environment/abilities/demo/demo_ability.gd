@@ -15,7 +15,7 @@ enum Ability {
 export(Texture) var ability_icon: Texture = null
 export(Ability) var ability := Ability.DASH
 
-onready var _sprite: Sprite = $Sprite
+onready var _icon: Sprite = $Icon
 onready var _selectable_area: Area2D = $SelectableArea
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _reading_points: Node2D = $WalkToPoints
@@ -29,7 +29,7 @@ func _get_configuration_warning() -> String:
 func _ready() -> void:
     assert(ability_icon != null)
 
-    _sprite.texture = ability_icon
+    _icon.texture = ability_icon
 
     _selectable_area.connect('body_entered', self, '_on_player_entered')
     _selectable_area.connect('body_exited', self, '_on_player_exited')
