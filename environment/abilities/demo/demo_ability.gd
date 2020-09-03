@@ -25,6 +25,7 @@ onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _reading_points: Node2D = $WalkToPoints
 onready var _glow_tween: Tween = $GlowTween
 onready var _float_tween: Tween = $FloatTween
+onready var _fade_out_tween: Tween = $FadeOutTween
 
 func _get_configuration_warning() -> String:
     if ability_icon == null:
@@ -128,7 +129,17 @@ func _on_ability_chosen(ability_object: DemoAbility) -> void:
     _selectable_area.disconnect('body_exited', self, '_on_player_exited')
     set_process_unhandled_input(false)
 
-    if ability_object != self:
-        hide()
-    else:
-        pass
+    var prop := 'modulate:a'
+    var old := 1.0
+    var new := 0.0
+    var duration := 1.0
+    var trans := Tween.TRANS_LINEAR
+    var easing := Tween.EASE_IN
+    var delay := 0.0 if ability_object != self else 2.0
+
+    # Fade out the ability object. The selected abillity object will fade out on
+    # a delay, while the others will fade out immediately.
+    _fade_out_tween.remove_all()
+    _fade_out_tween.interpolate_property(
+        self, prop, old, new, duration, trans, easing, delay)
+    _fade_out_tween.start()

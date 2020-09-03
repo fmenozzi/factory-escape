@@ -36,3 +36,5 @@ position = Vector2( 0, 16 )
 [node name="GlowTween" type="Tween" parent="."]
 
 [node name="FloatTween" type="Tween" parent="."]
+
+[node name="FadeOutTween" type="Tween" parent="."]
