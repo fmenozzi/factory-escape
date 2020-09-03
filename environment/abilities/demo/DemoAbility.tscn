@@ -13,12 +13,14 @@ extents = Vector2( 8, 8 )
 ]]
 script = ExtResource( 2 )
 
-[node name="BackgroundGlow" type="Sprite" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="BackgroundGlow" type="Sprite" parent="Sprites"]
 texture = ExtResource( 4 )
 
-[node name="Icon" type="Sprite" parent="."]
+[node name="Icon" type="Sprite" parent="Sprites"]
 
-[node name="ForegroundGlow" type="Sprite" parent="."]
+[node name="ForegroundGlow" type="Sprite" parent="Sprites"]
 
 [node name="SelectableArea" type="Area2D" parent="."]
 
@@ -32,3 +34,5 @@ text = "Select"
 position = Vector2( 0, 16 )
 
 [node name="GlowTween" type="Tween" parent="."]
+
+[node name="FloatTween" type="Tween" parent="."]

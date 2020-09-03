@@ -16,13 +16,15 @@ export(Texture) var ability_icon: Texture = null
 export(Texture) var ability_foreground_glow_texture: Texture = null
 export(Ability) var ability := Ability.DASH
 
-onready var _icon: Sprite = $Icon
-onready var _background_glow_sprite: Sprite = $BackgroundGlow
-onready var _foreground_glow_sprite: Sprite = $ForegroundGlow
+onready var _sprites: Node2D = $Sprites
+onready var _icon: Sprite = $Sprites/Icon
+onready var _background_glow_sprite: Sprite = $Sprites/BackgroundGlow
+onready var _foreground_glow_sprite: Sprite = $Sprites/ForegroundGlow
 onready var _selectable_area: Area2D = $SelectableArea
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _reading_points: Node2D = $WalkToPoints
 onready var _glow_tween: Tween = $GlowTween
+onready var _float_tween: Tween = $FloatTween
 
 func _get_configuration_warning() -> String:
     if ability_icon == null:
@@ -46,6 +48,7 @@ func _ready() -> void:
     set_process_unhandled_input(false)
 
     _start_glow_tween()
+    _start_float_tween()
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('player_interact'):
@@ -77,6 +80,26 @@ func _start_glow_tween() -> void:
         _foreground_glow_sprite, prop, new, old, duration, trans, easing, delay)
 
     _glow_tween.start()
+
+func _start_float_tween() -> void:
+    _float_tween.repeat = true
+
+    var prop := 'position:y'
+    var old := 0
+    var new := -2
+    var duration := 1.0
+    var trans := Tween.TRANS_QUAD
+    var easing := Tween.EASE_IN_OUT
+    var delay := duration
+
+    _float_tween.remove_all()
+
+    _float_tween.interpolate_property(
+        _sprites, prop, old, new, duration, trans, easing)
+    _float_tween.interpolate_property(
+        _sprites, prop, new, old, duration, trans, easing, delay)
+
+    _float_tween.start()
 
 func get_closest_reading_point() -> Position2D:
     return _reading_points.get_closest_point()
