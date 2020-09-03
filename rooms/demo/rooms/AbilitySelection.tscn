@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/abilities/demo/textures/dash-foreground-glow.png" type="Texture" id=3]
 [ext_resource path="res://environment/abilities/demo/DemoAbility.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/abilities/demo/textures/dash-ability-icon.png" type="Texture" id=5]
 [ext_resource path="res://environment/abilities/demo/textures/double-jump-ability-icon.png" type="Texture" id=6]
 [ext_resource path="res://environment/abilities/demo/textures/grapple-ability-icon.png" type="Texture" id=7]
 [ext_resource path="res://environment/abilities/demo/textures/wall-jump-ability-icon.png" type="Texture" id=8]
+[ext_resource path="res://environment/abilities/demo/textures/grapple-foreground-glow.png" type="Texture" id=10]
+[ext_resource path="res://environment/abilities/demo/textures/wall-jump-foreground-glow.png" type="Texture" id=11]
+[ext_resource path="res://environment/abilities/demo/textures/double-jump-foreground-glow.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -44,20 +48,24 @@ position = Vector2( 312, 152 )
 [node name="DashAbility" parent="." index="11" instance=ExtResource( 4 )]
 position = Vector2( 88, 152 )
 ability_icon = ExtResource( 5 )
+ability_foreground_glow_texture = ExtResource( 3 )
 
 [node name="DoubleJumpAbility" parent="." index="12" instance=ExtResource( 4 )]
 position = Vector2( 136, 152 )
 ability_icon = ExtResource( 6 )
+ability_foreground_glow_texture = ExtResource( 12 )
 ability = 1
 
 [node name="GrappleAbility" parent="." index="13" instance=ExtResource( 4 )]
 position = Vector2( 184, 152 )
 ability_icon = ExtResource( 7 )
+ability_foreground_glow_texture = ExtResource( 10 )
 ability = 2
 
 [node name="WallJumpAbility" parent="." index="14" instance=ExtResource( 4 )]
 position = Vector2( 232, 152 )
 ability_icon = ExtResource( 8 )
+ability_foreground_glow_texture = ExtResource( 11 )
 ability = 3
 
 [editable path="TileMaps"]

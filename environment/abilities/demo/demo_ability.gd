@@ -13,10 +13,12 @@ enum Ability {
 }
 
 export(Texture) var ability_icon: Texture = null
+export(Texture) var ability_foreground_glow_texture: Texture = null
 export(Ability) var ability := Ability.DASH
 
 onready var _icon: Sprite = $Icon
 onready var _background_glow_sprite: Sprite = $BackgroundGlow
+onready var _foreground_glow_sprite: Sprite = $ForegroundGlow
 onready var _selectable_area: Area2D = $SelectableArea
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _reading_points: Node2D = $WalkToPoints
@@ -26,12 +28,17 @@ func _get_configuration_warning() -> String:
     if ability_icon == null:
         return 'Demo ability must have icon texture!'
 
+    if ability_foreground_glow_texture == null:
+        return 'Demo ability must have foreground glow texture!'
+
     return ''
 
 func _ready() -> void:
     assert(ability_icon != null)
+    assert(ability_foreground_glow_texture != null)
 
     _icon.texture = ability_icon
+    _foreground_glow_sprite.texture = ability_foreground_glow_texture
 
     _selectable_area.connect('body_entered', self, '_on_player_entered')
     _selectable_area.connect('body_exited', self, '_on_player_exited')
@@ -56,10 +63,19 @@ func _start_glow_tween() -> void:
     var delay := duration
 
     _glow_tween.remove_all()
+
+    # Background glow sprite.
     _glow_tween.interpolate_property(
         _background_glow_sprite, prop, old, new, duration, trans, easing)
     _glow_tween.interpolate_property(
         _background_glow_sprite, prop, new, old, duration, trans, easing, delay)
+
+    # Foreground glow sprite.
+    _glow_tween.interpolate_property(
+        _foreground_glow_sprite, prop, old, new, duration, trans, easing)
+    _glow_tween.interpolate_property(
+        _foreground_glow_sprite, prop, new, old, duration, trans, easing, delay)
+
     _glow_tween.start()
 
 func get_closest_reading_point() -> Position2D:

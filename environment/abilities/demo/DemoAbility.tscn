@@ -18,6 +18,8 @@ texture = ExtResource( 4 )
 
 [node name="Icon" type="Sprite" parent="."]
 
+[node name="ForegroundGlow" type="Sprite" parent="."]
+
 [node name="SelectableArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectableArea"]
