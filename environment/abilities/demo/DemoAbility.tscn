@@ -28,3 +28,5 @@ text = "Select"
 
 [node name="WalkToPoints" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 16 )
+
+[node name="GlowTween" type="Tween" parent="."]
