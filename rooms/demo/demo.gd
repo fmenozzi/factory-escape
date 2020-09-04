@@ -3,6 +3,7 @@ extends "res://game.gd"
 signal ability_chosen(ability_object)
 
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
+onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
 
 func _ready() -> void:
     ._ready()
@@ -19,6 +20,9 @@ func _ready() -> void:
         'ability_chosen', _player.get_grapple_manager(), '_on_ability_chosen')
     self.connect(
         'ability_chosen', _player.get_wall_jump_manager(), '_on_ability_chosen')
+
+    self.connect(
+        'ability_chosen', _ability_selection_room, '_on_ability_chosen')
 
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
