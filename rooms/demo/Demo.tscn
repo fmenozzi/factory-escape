@@ -20,7 +20,9 @@
 [ext_resource path="res://rooms/demo/demo.gd" type="Script" id=18]
 [ext_resource path="res://rooms/demo/rooms/AbilitiesLamp.tscn" type="PackedScene" id=19]
 
-[node name="Demo" instance=ExtResource( 1 )]
+[node name="Demo" groups=[
+"save",
+] instance=ExtResource( 1 )]
 script = ExtResource( 18 )
 run_standalone = false
 

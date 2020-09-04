@@ -2,6 +2,10 @@ extends "res://game.gd"
 
 signal ability_chosen(ability_object)
 
+const SAVE_KEY := 'demo'
+
+var _chosen_ability := -1
+
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
 onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
 
@@ -23,6 +27,20 @@ func _ready() -> void:
 
     self.connect(
         'ability_chosen', _ability_selection_room, '_on_ability_chosen')
+
+func get_save_data() -> Array:
+    return [SAVE_KEY, {
+        'chosen_ability': _chosen_ability,
+    }]
+
+func load_save_data(all_save_data: Dictionary) -> void:
+    if not SAVE_KEY in all_save_data:
+        return
+
+    var demo_save_data: Dictionary = all_save_data[SAVE_KEY]
+    assert('chosen_ability' in demo_save_data)
+
+    _chosen_ability = demo_save_data['chosen_ability']
 
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
@@ -55,6 +73,8 @@ func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     var ability_chosen: bool = yield(_confirmation_dialog, 'selection_made')
 
     if ability_chosen:
+        _chosen_ability = ability
+
         emit_signal('ability_chosen', ability)
 
     _player.set_process_unhandled_input(true)
