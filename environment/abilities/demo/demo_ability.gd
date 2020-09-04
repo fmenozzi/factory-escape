@@ -105,6 +105,11 @@ func _start_float_tween() -> void:
 func get_closest_reading_point() -> Position2D:
     return _reading_points.get_closest_point()
 
+func make_non_interactable() -> void:
+    _selectable_area.disconnect('body_entered', self, '_on_player_entered')
+    _selectable_area.disconnect('body_exited', self, '_on_player_exited')
+    set_process_unhandled_input(false)
+
 func _on_player_entered(player: KinematicBody2D) -> void:
     if not player or not player == Util.get_player():
         return
@@ -130,9 +135,7 @@ func _on_ability_chosen(chosen_ability: int) -> void:
     ])
 
     # Regardless of whether this ability was chosen, make it non-interactable.
-    _selectable_area.disconnect('body_entered', self, '_on_player_entered')
-    _selectable_area.disconnect('body_exited', self, '_on_player_exited')
-    set_process_unhandled_input(false)
+    make_non_interactable()
 
     var prop := 'modulate:a'
     var old := 1.0

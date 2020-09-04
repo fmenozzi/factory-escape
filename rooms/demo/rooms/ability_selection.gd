@@ -7,6 +7,12 @@ onready var _door_trigger: Area2D = $ClosingDoorTrigger
 func _ready() -> void:
     _door_trigger.connect('body_entered', self, '_on_player_entered_room')
 
+func open_doors_and_keep_them_open() -> void:
+    _closing_door_left.open()
+    _closing_door_right.open()
+
+    _door_trigger.disconnect('body_entered', self, '_on_player_entered_room')
+
 func _on_player_entered_room(player: Player) -> void:
     if not player:
         return

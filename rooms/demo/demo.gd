@@ -3,8 +3,9 @@ extends "res://game.gd"
 signal ability_chosen(ability_object)
 
 const SAVE_KEY := 'demo'
+const UNCHOSEN_ABILITY := -1
 
-var _chosen_ability := -1
+var _chosen_ability := UNCHOSEN_ABILITY
 
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
 onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
@@ -41,6 +42,23 @@ func load_save_data(all_save_data: Dictionary) -> void:
     assert('chosen_ability' in demo_save_data)
 
     _chosen_ability = demo_save_data['chosen_ability']
+
+    if _chosen_ability != UNCHOSEN_ABILITY:
+        # "Remove" demo abilities once one has been chosen in order to prevent
+        # the player from choosing again if they quit out before reaching the
+        # abilities lamp.
+        for demo_ability in get_tree().get_nodes_in_group('demo_ability'):
+            demo_ability.make_non_interactable()
+            demo_ability.hide()
+
+        # In case the player quit out before reaching the abilities lamp, open
+        # the doors to the ability selection room and ensure they don't close
+        # again when the player enters.
+        #
+        # TODO: why is this null when cached via onready? load_save_data() is
+        #       called in the parent _ready() function, but it should still
+        #       be non-null before then...
+        $World/Rooms/AbilitySelection.open_doors_and_keep_them_open()
 
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
