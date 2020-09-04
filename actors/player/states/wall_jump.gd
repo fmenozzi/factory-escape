@@ -25,8 +25,9 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.velocity.y = player.get_physics_manager().get_max_jump_velocity()
 
     # Flip the player to face away from the wall if necessary.
-    if player.is_near_wall_front():
-        player.set_direction(player.get_wall_normal_front().x)
+    var wall_jump_manager := player.get_wall_jump_manager()
+    if wall_jump_manager.is_near_wall_front():
+        player.set_direction(wall_jump_manager.get_wall_normal_front().x)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.get_jump_manager().consume_jump()
@@ -45,6 +46,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
     var dash_manager := player.get_dash_manager()
     var grapple_manager := player.get_grapple_manager()
+    var wall_jump_manager := player.get_wall_jump_manager()
 
     if event.is_action_released('player_jump') and _jump_cut_timer.is_stopped():
         _jump_cut(player)
@@ -52,7 +54,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if _fixed_velocity_timer.is_stopped():
             # Once we regain control, either wall jump or double jump, depending
             # on whether we're near a wall.
-            if player.is_near_wall_front() or player.is_near_wall_back():
+            if wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back():
                 return {'new_state': Player.State.WALL_JUMP}
             elif jump_manager.can_jump():
                 return {'new_state': Player.State.DOUBLE_JUMP}

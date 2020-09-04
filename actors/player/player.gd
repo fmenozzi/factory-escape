@@ -101,8 +101,6 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 onready var _camera: Camera2D = $CameraAnchor/Camera2D
 
-onready var _wall_proximity_detector: Node2D = $WallProximityDetector
-
 onready var _floor_proximity_detector: RayCast2D = $FloorProximityDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
@@ -130,6 +128,7 @@ onready var _fall_time_stopwatch: Stopwatch = $States/Fall/FallTimeStopwatch
 onready var _jump_manager: JumpManager = $JumpManager
 onready var _dash_manager: DashManager = $DashManager
 onready var _grapple_manager: GrappleManager = $GrappleManager
+onready var _wall_jump_manager: WallJumpManager = $WallJumpManager
 onready var _attack_manager: AttackManager = $Attackmanager
 
 var _nearby_readable_object = null
@@ -270,23 +269,6 @@ func is_in_air() -> bool:
 func is_on_wall() -> bool:
     return .is_on_wall()
 
-# Detects whether the player is close to a wall without necessarily directly
-# colliding with it. This is useful for making quick consecutive wall jumps feel
-# more comfortable by not requiring the player to connect with the wall for a
-# frame before continuing the wall jump chain.
-func is_near_wall_front() -> bool:
-    return _wall_proximity_detector.is_near_wall_front()
-func is_near_wall_back() -> bool:
-    return _wall_proximity_detector.is_near_wall_back()
-
-# Gets the wall normal if either set of raycasts is colliding with the wall, or
-# Vector2.ZERO otherwise. Useful for ensuring proper player direction when
-# performing wall jumps.
-func get_wall_normal_front() -> Vector2:
-    return _wall_proximity_detector.get_wall_normal_front()
-func get_wall_normal_back() -> Vector2:
-    return _wall_proximity_detector.get_wall_normal_back()
-
 func emit_dust_puff() -> void:
     _dust_puff.restart()
 
@@ -328,7 +310,7 @@ func set_direction(direction: int) -> void:
 
     # Flip wall detector raycasts.
     if direction in [-1, 1]:
-        _wall_proximity_detector.set_direction(direction)
+        _wall_jump_manager.get_wall_proximity_detector().set_direction(direction)
 
     # Flip emission direction of dash puff.
     var dash_puff_speed := abs(_dash_puff.process_material.initial_velocity)
@@ -373,6 +355,9 @@ func get_dash_manager() -> DashManager:
 
 func get_grapple_manager() -> GrappleManager:
     return _grapple_manager
+
+func get_wall_jump_manager() -> WallJumpManager:
+    return _wall_jump_manager
 
 func get_attack_manager() -> AttackManager:
     return _attack_manager

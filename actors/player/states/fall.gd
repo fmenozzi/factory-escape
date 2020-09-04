@@ -63,6 +63,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
     var dash_manager := player.get_dash_manager()
     var grapple_manager := player.get_grapple_manager()
+    var wall_jump_manager := player.get_wall_jump_manager()
 
     if event.is_action_pressed('player_attack'):
         if Input.is_action_pressed('player_move_up'):
@@ -75,7 +76,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         elif dash_manager.get_dash_buffer_raycast().is_colliding():
             _buffer_dash_enabled = true
     elif event.is_action_pressed('player_jump'):
-        if player.is_near_wall_front() or player.is_near_wall_back():
+        if wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back():
             # Wall jump.
             return {'new_state': Player.State.WALL_JUMP}
         elif not _coyote_timer.is_stopped():

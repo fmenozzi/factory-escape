@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -50,6 +50,7 @@
 [ext_resource path="res://actors/player/states/fall_no_input.gd" type="Script" id=48]
 [ext_resource path="res://actors/player/states/mark_intro_fall_as_completed.gd" type="Script" id=49]
 [ext_resource path="res://actors/player/grapple_manager.gd" type="Script" id=50]
+[ext_resource path="res://actors/player/wall_jump_manager.gd" type="Script" id=51]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -951,33 +952,6 @@ position = Vector2( 0, -8 )
 
 [node name="PlayerHitEffect" parent="." instance=ExtResource( 41 )]
 
-[node name="WallProximityDetector" type="Node2D" parent="."]
-script = ExtResource( 23 )
-
-[node name="TopFront" type="RayCast2D" parent="WallProximityDetector"]
-position = Vector2( 0, -12 )
-enabled = true
-cast_to = Vector2( 1, 0 )
-collision_mask = 4
-
-[node name="BottomFront" type="RayCast2D" parent="WallProximityDetector"]
-position = Vector2( 0, -2 )
-enabled = true
-cast_to = Vector2( 1, 0 )
-collision_mask = 4
-
-[node name="TopBack" type="RayCast2D" parent="WallProximityDetector"]
-position = Vector2( 0, -12 )
-enabled = true
-cast_to = Vector2( -1, 0 )
-collision_mask = 4
-
-[node name="BottomBack" type="RayCast2D" parent="WallProximityDetector"]
-position = Vector2( 0, -2 )
-enabled = true
-cast_to = Vector2( -1, 0 )
-collision_mask = 4
-
 [node name="FloorProximityDetector" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 0.5 )
@@ -1020,6 +994,36 @@ texture = ExtResource( 28 )
 position = Vector2( 0, -8 )
 enabled = true
 cast_to = Vector2( 0, 0 )
+collision_mask = 4
+
+[node name="WallJumpManager" type="Node2D" parent="."]
+script = ExtResource( 51 )
+
+[node name="WallProximityDetector" type="Node2D" parent="WallJumpManager"]
+script = ExtResource( 23 )
+
+[node name="TopFront" type="RayCast2D" parent="WallJumpManager/WallProximityDetector"]
+position = Vector2( 0, -12 )
+enabled = true
+cast_to = Vector2( 1, 0 )
+collision_mask = 4
+
+[node name="BottomFront" type="RayCast2D" parent="WallJumpManager/WallProximityDetector"]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( 1, 0 )
+collision_mask = 4
+
+[node name="TopBack" type="RayCast2D" parent="WallJumpManager/WallProximityDetector"]
+position = Vector2( 0, -12 )
+enabled = true
+cast_to = Vector2( -1, 0 )
+collision_mask = 4
+
+[node name="BottomBack" type="RayCast2D" parent="WallJumpManager/WallProximityDetector"]
+position = Vector2( 0, -2 )
+enabled = true
+cast_to = Vector2( -1, 0 )
 collision_mask = 4
 
 [node name="Attackmanager" type="Node2D" parent="."]
