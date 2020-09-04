@@ -17,12 +17,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "AttackManager",
 "language": "GDScript",
-"path": "res://actors/player/attack_manager.gd"
+"path": "res://actors/player/managers/attack_manager.gd"
 }, {
 "base": "Node2D",
 "class": "DashManager",
 "language": "GDScript",
-"path": "res://actors/player/dash_manager.gd"
+"path": "res://actors/player/managers/dash_manager.gd"
 }, {
 "base": "Node2D",
 "class": "EnemyHitEffect",
@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "GrappleManager",
 "language": "GDScript",
-"path": "res://actors/player/grapple_manager.gd"
+"path": "res://actors/player/managers/grapple_manager.gd"
 }, {
 "base": "Node2D",
 "class": "GrapplePoint",
@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "HealthPackManager",
 "language": "GDScript",
-"path": "res://actors/player/health_pack_manager.gd"
+"path": "res://actors/player/managers/health_pack_manager.gd"
 }, {
 "base": "Node2D",
 "class": "HomingProjectile",
@@ -72,7 +72,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "JumpManager",
 "language": "GDScript",
-"path": "res://actors/player/jump_manager.gd"
+"path": "res://actors/player/managers/jump_manager.gd"
 }, {
 "base": "Node2D",
 "class": "Laser",
@@ -187,7 +187,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "WallJumpManager",
 "language": "GDScript",
-"path": "res://actors/player/wall_jump_manager.gd"
+"path": "res://actors/player/managers/wall_jump_manager.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "WorkerDrone",

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://actors/player/managers/grapple_manager.gd" type="Script" id=1]
+[ext_resource path="res://actors/player/textures/grapple-hook.png" type="Texture" id=2]
+[ext_resource path="res://actors/player/textures/grapple-rope.png" type="Texture" id=3]
+
+
+[node name="GrappleManager" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="GrappleRope" type="Line2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -1, -8 )
+width = 16.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 3 )
+texture_mode = 1
+
+[node name="GrappleHook" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+
+[node name="GrappleLineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+collision_mask = 4
