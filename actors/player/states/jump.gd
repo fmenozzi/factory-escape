@@ -28,7 +28,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         player.velocity.y = max(
             player.velocity.y, physics_manager.get_min_jump_velocity())
     elif event.is_action_pressed('player_jump'):
-        if wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back():
+        if (wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back()) and wall_jump_manager.can_wall_jump():
             # Wall jump.
             return {'new_state': Player.State.WALL_JUMP}
         elif jump_manager.can_jump():

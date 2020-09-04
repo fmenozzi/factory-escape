@@ -3,7 +3,9 @@
 [ext_resource path="res://actors/player/managers/WallProximityDetector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/player/managers/wall_jump_manager.gd" type="Script" id=2]
 
-[node name="WallJumpManager" type="Node2D"]
+[node name="WallJumpManager" type="Node2D" groups=[
+"save",
+]]
 script = ExtResource( 2 )
 
 [node name="WallProximityDetector" parent="." instance=ExtResource( 1 )]

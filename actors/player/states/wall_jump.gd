@@ -55,7 +55,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             # Once we regain control, either wall jump or double jump, depending
             # on whether we're near a wall.
             if wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back():
-                return {'new_state': Player.State.WALL_JUMP}
+                if wall_jump_manager.can_wall_jump():
+                    return {'new_state': Player.State.WALL_JUMP}
             elif jump_manager.can_jump():
                 return {'new_state': Player.State.DOUBLE_JUMP}
     elif event.is_action_pressed('player_attack'):

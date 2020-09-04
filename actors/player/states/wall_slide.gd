@@ -24,8 +24,9 @@ func exit(player: Player) -> void:
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var dash_manager := player.get_dash_manager()
     var grapple_manager := player.get_grapple_manager()
+    var wall_jump_manager := player.get_wall_jump_manager()
 
-    if event.is_action_pressed('player_jump'):
+    if event.is_action_pressed('player_jump') and wall_jump_manager.can_wall_jump():
         return {'new_state': Player.State.WALL_JUMP}
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         # Flip the player to face away from the wall before dashing.

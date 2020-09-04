@@ -106,7 +106,10 @@ func update(player: Player, delta: float) -> Dictionary:
 
     if player.is_on_wall():
         player.emit_dust_puff()
-        return {'new_state': Player.State.WALL_SLIDE}
+        if player.get_wall_jump_manager().can_wall_jump():
+            return {'new_state': Player.State.WALL_SLIDE}
+        else:
+            return {'new_state': Player.State.FALL}
 
     if velocity.y > 0:
         player.get_animation_player().play('fall')

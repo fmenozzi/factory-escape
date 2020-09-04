@@ -76,7 +76,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         elif dash_manager.get_dash_buffer_raycast().is_colliding():
             _buffer_dash_enabled = true
     elif event.is_action_pressed('player_jump'):
-        if wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back():
+        if (wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back()) and wall_jump_manager.can_wall_jump():
             # Wall jump.
             return {'new_state': Player.State.WALL_JUMP}
         elif not _coyote_timer.is_stopped():
@@ -105,6 +105,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
+    var wall_jump_manager := player.get_wall_jump_manager()
 
     # Once we hit the ground, emit the landing puff and either switch to idle,
     # "hard land", or perform a buffer action.
@@ -121,7 +122,7 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
-    if player.is_on_wall():
+    if player.is_on_wall() and wall_jump_manager.can_wall_jump():
         return {'new_state': Player.State.WALL_SLIDE}
 
     # Move left or right.
