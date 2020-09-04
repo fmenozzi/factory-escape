@@ -11,6 +11,15 @@ func _ready() -> void:
         demo_ability.connect('ability_inspected', self, '_on_ability_inspected')
         self.connect('ability_chosen', demo_ability, '_on_ability_chosen')
 
+    self.connect(
+        'ability_chosen', _player.get_jump_manager(), '_on_ability_chosen')
+    self.connect(
+        'ability_chosen', _player.get_dash_manager(), '_on_ability_chosen')
+    self.connect(
+        'ability_chosen', _player.get_grapple_manager(), '_on_ability_chosen')
+    self.connect(
+        'ability_chosen', _player.get_wall_jump_manager(), '_on_ability_chosen')
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 
@@ -42,6 +51,6 @@ func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     var ability_chosen: bool = yield(_confirmation_dialog, 'selection_made')
 
     if ability_chosen:
-        emit_signal('ability_chosen', demo_ability)
+        emit_signal('ability_chosen', ability)
 
     _player.set_process_unhandled_input(true)

@@ -43,3 +43,14 @@ func get_wall_normal_back() -> Vector2:
 
 func get_wall_proximity_detector() -> Node2D:
     return _wall_proximity_detector
+
+func _on_ability_chosen(chosen_ability: int) -> void:
+    assert(chosen_ability in [
+        DemoAbility.Ability.DASH,
+        DemoAbility.Ability.DOUBLE_JUMP,
+        DemoAbility.Ability.GRAPPLE,
+        DemoAbility.Ability.WALL_JUMP
+    ])
+
+    if chosen_ability == DemoAbility.Ability.WALL_JUMP:
+        _has_wall_jump = true

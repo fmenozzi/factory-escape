@@ -105,24 +105,29 @@ func _start_float_tween() -> void:
 func get_closest_reading_point() -> Position2D:
     return _reading_points.get_closest_point()
 
-func _on_player_entered(player: Player) -> void:
-    if not player:
+func _on_player_entered(player: KinematicBody2D) -> void:
+    if not player or not player == Util.get_player():
         return
 
     _fade_in_out_label.fade_in()
 
     set_process_unhandled_input(true)
 
-func _on_player_exited(player: Player) -> void:
-    if not player:
+func _on_player_exited(player: KinematicBody2D) -> void:
+    if not player or not player == Util.get_player():
         return
 
     _fade_in_out_label.fade_out()
 
     set_process_unhandled_input(false)
 
-func _on_ability_chosen(ability_object: DemoAbility) -> void:
-    assert(ability_object != null)
+func _on_ability_chosen(chosen_ability: int) -> void:
+    assert(chosen_ability in [
+        Ability.DASH,
+        Ability.DOUBLE_JUMP,
+        Ability.GRAPPLE,
+        Ability.WALL_JUMP
+    ])
 
     # Regardless of whether this ability was chosen, make it non-interactable.
     _selectable_area.disconnect('body_entered', self, '_on_player_entered')
@@ -135,7 +140,7 @@ func _on_ability_chosen(ability_object: DemoAbility) -> void:
     var duration := 1.0
     var trans := Tween.TRANS_LINEAR
     var easing := Tween.EASE_IN
-    var delay := 0.0 if ability_object != self else 2.0
+    var delay := 0.0 if chosen_ability != ability else 2.0
 
     # Fade out the ability object. The selected abillity object will fade out on
     # a delay, while the others will fade out immediately.

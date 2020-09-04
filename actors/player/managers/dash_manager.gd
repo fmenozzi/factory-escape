@@ -47,3 +47,14 @@ func get_dash_buffer_raycast() -> RayCast2D:
 
 func get_dash_cooldown_timer() -> Timer:
     return _dash_cooldown_timer
+
+func _on_ability_chosen(chosen_ability: int) -> void:
+    assert(chosen_ability in [
+        DemoAbility.Ability.DASH,
+        DemoAbility.Ability.DOUBLE_JUMP,
+        DemoAbility.Ability.GRAPPLE,
+        DemoAbility.Ability.WALL_JUMP
+    ])
+
+    if chosen_ability == DemoAbility.Ability.DASH:
+        _has_dash = true

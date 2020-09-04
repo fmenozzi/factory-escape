@@ -62,3 +62,14 @@ func reset_jump() -> void:
 
 func get_jump_buffer_raycast() -> RayCast2D:
     return _jump_buffer_raycast
+
+func _on_ability_chosen(chosen_ability: int) -> void:
+    assert(chosen_ability in [
+        DemoAbility.Ability.DASH,
+        DemoAbility.Ability.DOUBLE_JUMP,
+        DemoAbility.Ability.GRAPPLE,
+        DemoAbility.Ability.WALL_JUMP
+    ])
+
+    if chosen_ability == DemoAbility.Ability.DOUBLE_JUMP:
+        _has_double_jump = true
