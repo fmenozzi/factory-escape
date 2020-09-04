@@ -70,7 +70,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             return {'new_state': Player.State.ATTACK_UP}
         elif player.get_attack_manager().can_attack():
             return {'new_state': Player.State.ATTACK}
-    elif event.is_action_pressed('player_dash'):
+    elif event.is_action_pressed('player_dash') and dash_manager.has_dash():
         if dash_manager.can_dash():
             return {'new_state': Player.State.DASH}
         elif dash_manager.get_dash_buffer_raycast().is_colliding():

@@ -1,9 +1,12 @@
 extends Node2D
 class_name DashManager
 
+const SAVE_KEY := 'dash_manager'
+
 # The amount of time to wait after completing a dash before dashing again.
 const DASH_COOLDOWN: float = 0.30
 
+var _has_dash := false
 var _can_dash := true
 
 onready var _dash_buffer_raycast: RayCast2D = $DashBufferRaycast
@@ -13,8 +16,25 @@ func _ready() -> void:
     _dash_cooldown_timer.wait_time = DASH_COOLDOWN
     _dash_cooldown_timer.one_shot = true
 
+func get_save_data() -> Array:
+    return [SAVE_KEY, {
+        'has_dash': _has_dash,
+    }]
+
+func load_save_data(all_save_data: Dictionary) -> void:
+    if not SAVE_KEY in all_save_data:
+        return
+
+    var dash_manager_save_data: Dictionary = all_save_data[SAVE_KEY]
+    assert('has_dash' in dash_manager_save_data)
+
+    _has_dash = dash_manager_save_data['has_dash']
+
+func has_dash() -> bool:
+    return _has_dash
+
 func can_dash() -> bool:
-    return _can_dash and get_dash_cooldown_timer().is_stopped()
+    return _has_dash and _can_dash and get_dash_cooldown_timer().is_stopped()
 
 func consume_dash() -> void:
     _can_dash = false
