@@ -1,6 +1,10 @@
 extends Node2D
 class_name GrappleManager
 
+const SAVE_KEY := 'grapple_manager'
+
+var _has_grapple := false
+
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_hook: Sprite = $GrappleHook
 onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
@@ -10,6 +14,20 @@ onready var _grapple_line_of_sight: RayCast2D = $GrappleLineOfSight
 # several candidacy rules. If there are no valid grapple points for the player
 # on a given frame, this is set to null and grappling has no effect.
 var _next_grapple_point: GrapplePoint = null
+
+func get_save_data() -> Array:
+    return [SAVE_KEY, {
+        'has_grapple': _has_grapple,
+    }]
+
+func load_save_data(all_save_data: Dictionary) -> void:
+    if not SAVE_KEY in all_save_data:
+        return
+
+    var grapple_manager_save_data: Dictionary = all_save_data[SAVE_KEY]
+    assert('has_grapple' in grapple_manager_save_data)
+
+    _has_grapple = grapple_manager_save_data['has_grapple']
 
 func update_next_grapple_point(player, curr_room) -> void:
     _next_grapple_point = null
@@ -64,6 +82,9 @@ func _grapple_point_on_screen(grapple_point: GrapplePoint) -> bool:
     return grapple_point.is_on_screen()
 
 func _can_grapple_to(grapple_point: GrapplePoint, player) -> bool:
+    if not _has_grapple:
+        return false
+
     if not grapple_point.is_available():
         return false
 
