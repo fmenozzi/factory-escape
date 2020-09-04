@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent):
     if event.is_action_pressed('player_interact'):
-        if _player.current_state() == Player.State.IDLE:
+        if _player.current_state() in [Player.State.IDLE, Player.State.WALK]:
             if not _taken:
                 _taken = true
                 _animation_player.play('taken')
