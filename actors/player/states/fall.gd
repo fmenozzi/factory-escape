@@ -62,6 +62,7 @@ func exit(player: Player) -> void:
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
     var dash_manager := player.get_dash_manager()
+    var grapple_manager := player.get_grapple_manager()
 
     if event.is_action_pressed('player_attack'):
         if Input.is_action_pressed('player_move_up'):
@@ -89,7 +90,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             # presses the jump button (and is unable to otherwise jump).
             _buffer_jump_enabled = true
     elif event.is_action_pressed('player_grapple'):
-        var next_grapple_point := player.get_next_grapple_point()
+        var next_grapple_point := grapple_manager.get_next_grapple_point()
         if next_grapple_point != null:
             return {
                 'new_state': Player.State.GRAPPLE,

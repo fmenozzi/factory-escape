@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://environment/hazards/fire_column/fire_column.gd"
 }, {
 "base": "Node2D",
+"class": "GrappleManager",
+"language": "GDScript",
+"path": "res://actors/player/grapple_manager.gd"
+}, {
+"base": "Node2D",
 "class": "GrapplePoint",
 "language": "GDScript",
 "path": "res://environment/grapple_point/grapple_point.gd"
@@ -191,6 +196,7 @@ _global_script_class_icons={
 "EnemyHitEffect": "",
 "EnergyProjectile": "",
 "FireColumn": "",
+"GrappleManager": "",
 "GrapplePoint": "",
 "GroundedPhysicsManager": "",
 "Health": "",

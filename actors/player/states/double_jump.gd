@@ -32,6 +32,7 @@ func exit(player: Player) -> void:
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var physics_manager := player.get_physics_manager()
     var dash_manager := player.get_dash_manager()
+    var grapple_manager := player.get_grapple_manager()
 
     if event.is_action_released('player_jump'):
         # "Jump cut" if the jump button is released.
@@ -45,7 +46,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):
-        var next_grapple_point := player.get_next_grapple_point()
+        var next_grapple_point := grapple_manager.get_next_grapple_point()
         if next_grapple_point != null:
             return {
                 'new_state': Player.State.GRAPPLE,

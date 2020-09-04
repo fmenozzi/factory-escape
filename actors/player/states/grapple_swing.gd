@@ -70,7 +70,7 @@ func exit(player: Player) -> void:
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_grapple'):
-        var next_grapple_point := player.get_next_grapple_point()
+        var next_grapple_point := player.get_grapple_manager().get_next_grapple_point()
         if next_grapple_point != null and next_grapple_point != grapple_point:
             return {
                 'new_state': Player.State.GRAPPLE,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -49,6 +49,7 @@
 [ext_resource path="res://actors/player/states/sleep.gd" type="Script" id=47]
 [ext_resource path="res://actors/player/states/fall_no_input.gd" type="Script" id=48]
 [ext_resource path="res://actors/player/states/mark_intro_fall_as_completed.gd" type="Script" id=49]
+[ext_resource path="res://actors/player/grapple_manager.gd" type="Script" id=50]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -263,7 +264,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("GrappleRope:modulate")
+tracks/2/path = NodePath("GrappleManager/GrappleRope:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -308,7 +309,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("GrappleRope:modulate")
+tracks/2/path = NodePath("GrappleManager/GrappleRope:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -977,24 +978,6 @@ enabled = true
 cast_to = Vector2( -1, 0 )
 collision_mask = 4
 
-[node name="GrappleRope" type="Line2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -1, -8 )
-width = 16.0
-default_color = Color( 1, 1, 1, 1 )
-texture = ExtResource( 27 )
-texture_mode = 1
-
-[node name="GrappleHook" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 28 )
-
-[node name="GrappleLineOfSight" type="RayCast2D" parent="."]
-position = Vector2( 0, -8 )
-enabled = true
-cast_to = Vector2( 0, 0 )
-collision_mask = 4
-
 [node name="FloorProximityDetector" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 0.5 )
@@ -1017,6 +1000,27 @@ cast_to = Vector2( 0, 8 )
 collision_mask = 260
 
 [node name="DashCooldown" type="Timer" parent="DashManager"]
+
+[node name="GrappleManager" type="Node2D" parent="."]
+script = ExtResource( 50 )
+
+[node name="GrappleRope" type="Line2D" parent="GrappleManager"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -1, -8 )
+width = 16.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 27 )
+texture_mode = 1
+
+[node name="GrappleHook" type="Sprite" parent="GrappleManager"]
+visible = false
+texture = ExtResource( 28 )
+
+[node name="GrappleLineOfSight" type="RayCast2D" parent="GrappleManager"]
+position = Vector2( 0, -8 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+collision_mask = 4
 
 [node name="Attackmanager" type="Node2D" parent="."]
 script = ExtResource( 40 )
