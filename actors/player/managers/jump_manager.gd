@@ -1,6 +1,8 @@
 extends Node2D
 class_name JumpManager
 
+const SAVE_KEY := 'jump_manager'
+
 enum State {
     NOT_JUMPED,
     JUMPED,
@@ -8,12 +10,23 @@ enum State {
 }
 var _state: int = State.NOT_JUMPED
 
-var _has_double_jump: bool
+var _has_double_jump := false
 
 onready var _jump_buffer_raycast: RayCast2D = $JumpBufferRaycast
 
-func _ready() -> void:
-    _has_double_jump = true
+func get_save_data() -> Array:
+    return [SAVE_KEY, {
+        'has_double_jump': _has_double_jump,
+    }]
+
+func load_save_data(all_save_data: Dictionary) -> void:
+    if not SAVE_KEY in all_save_data:
+        return
+
+    var jump_manager_save_data: Dictionary = all_save_data[SAVE_KEY]
+    assert('has_double_jump' in jump_manager_save_data)
+
+    _has_double_jump = jump_manager_save_data['has_double_jump']
 
 func can_jump() -> bool:
     assert(_state in [State.NOT_JUMPED, State.JUMPED, State.DOUBLE_JUMPED])
@@ -31,9 +44,6 @@ func can_jump() -> bool:
         _:
             # If we've already double-jumped, we can't jump anymore.
             return false
-
-func has_double_jump() -> bool:
-    return _has_double_jump
 
 func consume_jump() -> void:
     assert(_state in [State.NOT_JUMPED, State.JUMPED, State.DOUBLE_JUMPED])
