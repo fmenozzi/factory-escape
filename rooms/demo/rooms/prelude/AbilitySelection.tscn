@@ -8,10 +8,11 @@
 [ext_resource path="res://environment/abilities/demo/textures/double-jump-ability-icon.png" type="Texture" id=6]
 [ext_resource path="res://environment/abilities/demo/textures/grapple-ability-icon.png" type="Texture" id=7]
 [ext_resource path="res://environment/abilities/demo/textures/wall-jump-ability-icon.png" type="Texture" id=8]
-[ext_resource path="res://rooms/demo/rooms/ability_selection.gd" type="Script" id=9]
+[ext_resource path="res://rooms/demo/rooms/prelude/ability_selection.gd" type="Script" id=9]
 [ext_resource path="res://environment/abilities/demo/textures/grapple-foreground-glow.png" type="Texture" id=10]
 [ext_resource path="res://environment/abilities/demo/textures/wall-jump-foreground-glow.png" type="Texture" id=11]
 [ext_resource path="res://environment/abilities/demo/textures/double-jump-foreground-glow.png" type="Texture" id=12]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
