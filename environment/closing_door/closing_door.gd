@@ -9,6 +9,9 @@ onready var _dust_puff: Particles2D = $DustPuff
 
 var _is_closed = false
 
+func _ready() -> void:
+    open()
+
 func open() -> void:
     _collision_shape.set_deferred('disabled', true)
     _animation_player.play_backwards('close')
