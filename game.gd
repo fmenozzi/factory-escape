@@ -80,7 +80,7 @@ func _ready() -> void:
 #       e.g. maybe you can use thin, one-way collision boxes at each room
 #       entrance to signal room changes.
 func _process(delta: float) -> void:
-    for room in _rooms:
+    for room in $World/Rooms.get_children():
         # Transition to room once we enter a new one.
         if room != _player.curr_room and room.contains(_player):
             _player.prev_room = _player.curr_room

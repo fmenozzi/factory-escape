@@ -7,7 +7,26 @@ const UNCHOSEN_ABILITY := -1
 
 var _chosen_ability := UNCHOSEN_ABILITY
 
+const ABILITY_ROOMS := {
+    DemoAbility.Ability.DASH: [
+        [preload('res://rooms/demo/rooms/dash/DashTutorial.tscn'), Vector2(3840, 1080)],
+    ],
+
+    DemoAbility.Ability.DOUBLE_JUMP: [
+        [preload('res://rooms/demo/rooms/double_jump/DoubleJumpTutorial.tscn'), Vector2(3840, 1080)],
+    ],
+
+    DemoAbility.Ability.GRAPPLE: [
+        [preload('res://rooms/demo/rooms/grapple/GrappleTutorial.tscn'), Vector2(3840, 1080)],
+    ],
+
+    DemoAbility.Ability.WALL_JUMP: [
+        [preload('res://rooms/demo/rooms/wall_jump/WallJumpTutorial.tscn'), Vector2(3840, 1080)],
+    ],
+}
+
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
+onready var _rooms_node: Node2D = $World/Rooms
 onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
 
 func _ready() -> void:
@@ -58,6 +77,30 @@ func load_save_data(all_save_data: Dictionary) -> void:
         #       be non-null before then...
         $World/Rooms/AbilitySelection.open_doors_and_keep_them_open()
 
+        _generate_ability_specific_demo_rooms()
+
+func _generate_ability_specific_demo_rooms() -> void:
+    assert(_chosen_ability in [
+        DemoAbility.Ability.DASH,
+        DemoAbility.Ability.DOUBLE_JUMP,
+        DemoAbility.Ability.GRAPPLE,
+        DemoAbility.Ability.WALL_JUMP,
+    ])
+
+    var room_position_pairs: Array = ABILITY_ROOMS[_chosen_ability]
+
+    for room_position_pair in room_position_pairs:
+        var room_packed_scene: PackedScene = room_position_pair[0]
+        var position: Vector2 = room_position_pair[1]
+
+        var room: Room = room_packed_scene.instance()
+        room.position = position
+
+        # Add the room to the tree.
+        #
+        # TODO: why is this null when cached via onready?
+        $World/Rooms.add_child(room)
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 
@@ -90,6 +133,8 @@ func _on_ability_inspected(demo_ability: DemoAbility) -> void:
 
     if ability_chosen:
         _chosen_ability = ability
+
+        _generate_ability_specific_demo_rooms()
 
         emit_signal('ability_chosen', ability)
 
