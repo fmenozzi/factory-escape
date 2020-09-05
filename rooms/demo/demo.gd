@@ -11,8 +11,6 @@ onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationD
 onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
 
 func _ready() -> void:
-    ._ready()
-
     for demo_ability in get_tree().get_nodes_in_group('demo_ability'):
         demo_ability.connect('ability_inspected', self, '_on_ability_inspected')
         self.connect('ability_chosen', demo_ability, '_on_ability_chosen')
