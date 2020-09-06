@@ -87,6 +87,10 @@ func reset() -> void:
 
     _current_wave_enemy_count = 0
 
+    # Despawn all enemies in case the player dies during the arena fight.
+    for enemy in _enemies_node.get_children():
+        enemy.queue_free()
+
     # Unless the player has already completed the arena, reset to PRE_FIGHT
     # state on lamp rest (e.g. if the player dies in the middle of the fight).
     if _current_room_state != RoomState.POST_FIGHT:
