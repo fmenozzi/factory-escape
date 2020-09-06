@@ -79,6 +79,24 @@ func _process(delta: float) -> void:
         RoomState.POST_FIGHT:
             set_process(false)
 
+func reset() -> void:
+    set_process(false)
+
+    _closing_door_left.open()
+    _closing_door_right.open()
+
+    _current_wave_enemy_count = 0
+
+    # Unless the player has already completed the arena, reset to PRE_FIGHT
+    # state on lamp rest (e.g. if the player dies in the middle of the fight).
+    if _current_room_state != RoomState.POST_FIGHT:
+        _current_room_state = RoomState.PRE_FIGHT
+
+        # In case the player died while the camera was detached in the middle
+        # of the arena fight, reattach the camera without tweening it (i.e. set
+        # the camera's position to (0, 0) immediately).
+        _player_camera.reattach(false)
+
 func get_save_data() -> Array:
     return [SAVE_KEY, {
         'current_room_state': _current_room_state,

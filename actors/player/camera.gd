@@ -18,8 +18,13 @@ func detach_and_move_to_global(new_global_pos: Vector2) -> void:
 
     self.global_position = new_global_pos
 
-func reattach() -> void:
+func reattach(tween_on_reattach: bool = true) -> void:
     self.set_as_toplevel(false)
+
+    if not tween_on_reattach:
+        _original_local_anchor_pos = Vector2.ZERO
+        self.position = _original_local_anchor_pos
+        return
 
     # Now that we're no longer top-level, determine our position relative to the
     # player for the starting value of the reattachment interpolation.

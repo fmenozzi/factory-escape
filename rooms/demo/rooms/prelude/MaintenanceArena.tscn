@@ -5,7 +5,6 @@
 [ext_resource path="res://rooms/demo/rooms/prelude/maintenance_arena.gd" type="Script" id=3]
 [ext_resource path="res://environment/health_pack/HealthPack.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
 
@@ -13,6 +12,7 @@ extents = Vector2( 320, 90 )
 extents = Vector2( 8, 72 )
 
 [node name="MaintenanceArena" groups=[
+"lamp_reset",
 "save",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 3 )
