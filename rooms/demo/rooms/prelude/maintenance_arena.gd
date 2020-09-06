@@ -98,8 +98,10 @@ func reset() -> void:
 
         # In case the player died while the camera was detached in the middle
         # of the arena fight, reattach the camera without tweening it (i.e. set
-        # the camera's position to (0, 0) immediately).
-        _player_camera.reattach(false)
+        # the camera's position to (0, 0) immediately). If the player dies
+        # before reaching the arena, the player camera will be null.
+        if _player_camera != null:
+            _player_camera.reattach(false)
 
 func get_save_data() -> Array:
     return [SAVE_KEY, {
@@ -113,8 +115,11 @@ func load_save_data(all_save_data: Dictionary) -> void:
     var arena_save_data: Dictionary = all_save_data[SAVE_KEY]
     assert('current_room_state' in arena_save_data)
 
+    # If we haven't already completed the arena, make sure room state gets set
+    # to PRE_FIGHT (i.e. in case the player quits out during one of the waves).
     _current_room_state = arena_save_data['current_room_state']
-    assert(_current_room_state in [RoomState.PRE_FIGHT, RoomState.POST_FIGHT])
+    if _current_room_state != RoomState.POST_FIGHT:
+        _current_room_state = RoomState.PRE_FIGHT
 
     # If we've already completed the arena, disconnect the door trigger signal.
     if _current_room_state == RoomState.POST_FIGHT:
