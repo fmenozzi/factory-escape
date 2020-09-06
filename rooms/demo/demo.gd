@@ -7,6 +7,8 @@ const UNCHOSEN_ABILITY := -1
 
 var _chosen_ability := UNCHOSEN_ABILITY
 
+var _generated_rooms := false
+
 const ABILITY_ROOMS := {
     DemoAbility.Ability.DASH: [
         [preload('res://rooms/demo/rooms/dash/DashTutorial.tscn'), Vector2(3840, 1080)],
@@ -88,6 +90,14 @@ func _generate_ability_specific_demo_rooms() -> void:
         DemoAbility.Ability.GRAPPLE,
         DemoAbility.Ability.WALL_JUMP,
     ])
+
+    # If we've already added the dynamic rooms to the scene tree, exit early.
+    # This is mainly to prevent adding multiple copies of the same room to the
+    # scene tree when the demo is reloaded upon player death.
+    if _generated_rooms:
+        return
+
+    _generated_rooms = true
 
     var room_position_pairs: Array = ABILITY_ROOMS[_chosen_ability]
 
