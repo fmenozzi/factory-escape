@@ -10,6 +10,7 @@ var _chosen_ability := UNCHOSEN_ABILITY
 const ABILITY_ROOMS := {
     DemoAbility.Ability.DASH: [
         [preload('res://rooms/demo/rooms/dash/DashTutorial.tscn'), Vector2(3840, 1080)],
+        [preload('res://rooms/demo/rooms/dash/DashPractice.tscn'), Vector2(4160, 900)],
     ],
 
     DemoAbility.Ability.DOUBLE_JUMP: [
