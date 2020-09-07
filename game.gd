@@ -165,14 +165,12 @@ func _on_player_died() -> void:
     _player_death_transition.start_player_death_transition(_player)
     yield(_player_death_transition, 'player_death_transition_finished')
 
-    # Reload the game and fade to black with the screen fadeout node. The screen
-    # is already black as a result of the death transition effect, but the
-    # screen fadeout node is in a higher layer than the death transition effect,
-    # so we fade to black here to make all the transitions look smoother. This
-    # has the added benefit of allowing us to use the time to fade to black to
-    # act as a timer for how long the screen should remain black before fading
-    # back in.
-    SaveAndLoad.load_game()
+    # Fade to black with the screen fadeout node. The screen is already black as
+    # a result of the death transition effect, but the screen fadeout node is in
+    # a higher layer than the death transition effect, so we fade to black here
+    # to make all the transitions look smoother. This has the added benefit of
+    # allowing us to use the time to fade to black to act as a timer for how
+    # long the screen should remain black before fading back in.
     _screen_fadeout.fade_to_black(2.0)
     yield(_screen_fadeout, 'fade_to_black_finished')
 

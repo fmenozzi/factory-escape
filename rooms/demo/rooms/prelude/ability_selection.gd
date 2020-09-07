@@ -25,5 +25,5 @@ func _on_player_entered_room(player: Player) -> void:
         'disconnect', 'body_entered', self, '_on_player_entered_room')
 
 func _on_ability_chosen(chosen_ability: int) -> void:
-    # Only open the door on the right.
+    _closing_door_left.open()
     _closing_door_right.open()
