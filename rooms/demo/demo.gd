@@ -16,6 +16,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/dash/SentryDroneCalibration.tscn'), Vector2(4480, 900)],
         [preload('res://rooms/demo/rooms/dash/CalibrationBridge.tscn'), Vector2(5120, 900)],
         [preload('res://rooms/demo/rooms/dash/SecurityCheckpoint.tscn'), Vector2(5440, 900)],
+        [preload('res://rooms/demo/rooms/dash/CheckpointCorridor.tscn'), Vector2(5760, 1080)],
     ],
 
     DemoAbility.Ability.DOUBLE_JUMP: [
