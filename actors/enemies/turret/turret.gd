@@ -145,7 +145,10 @@ func change_rotation_direction() -> void:
 func reset() -> void:
     set_direction(initial_direction)
     _health.heal_to_full()
-    _change_state({'new_state': initial_state})
+    _change_state({
+        'new_state': initial_state,
+        'rotation_direction': _rotation_direction,
+    })
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
