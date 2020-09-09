@@ -7,7 +7,6 @@ export(bool) var run_standalone := true
 
 onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
-onready var _rooms: Array = $World/Rooms.get_children()
 onready var _pause: Control = $Layers/PauseLayer/Pause
 onready var _health_bar: Control = $Layers/UILayer/HealthBar
 onready var _health_pack_bar: Control = $Layers/UILayer/HealthPackBar
@@ -95,7 +94,9 @@ func _process(delta: float) -> void:
             _player.curr_room.resume()
 
 func _set_player_starting_room() -> void:
-    var starting_room: Room
+    var starting_room: Room = null
+
+    var rooms := $World/Rooms.get_children()
 
     if not run_standalone and not _player.has_completed_intro_fall_sequence:
         # If we're running a "real" game (i.e. not a standalone demo) and we
@@ -106,13 +107,15 @@ func _set_player_starting_room() -> void:
         # would result in null values for player.curr_room and player.prev_room
         # if we simply loop over the existing rooms and check which one contains
         # the player.
-        assert(not _rooms.empty())
-        starting_room = _rooms[0]
+        assert(not rooms.empty())
+        starting_room = rooms[0]
     else:
         # Simply determine which room actually contains the player.
-        for room in _rooms:
+        for room in rooms:
             if room.contains(_player):
                 starting_room = room
+
+    assert(starting_room != null)
 
     _player.curr_room = starting_room
     _player.prev_room = starting_room
