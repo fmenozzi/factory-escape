@@ -117,6 +117,10 @@ func _generate_ability_specific_demo_rooms() -> void:
         # TODO: why is this null when cached via onready?
         $World/Rooms.add_child(room)
 
+    # Now that we've added all the new rooms, load the game again to give each
+    # room (and all the objects inside it) a chance to be loaded in properly.
+    SaveAndLoad.load_game()
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 
