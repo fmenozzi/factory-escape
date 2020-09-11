@@ -110,6 +110,7 @@ position = Vector2( -12, 0 )
 position = Vector2( 12, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/crush_loop_fast = SubResource( 3 )
 anims/crush_loop_slow = SubResource( 4 )
 
