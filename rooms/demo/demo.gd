@@ -21,6 +21,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/dash/CentralProcessing.tscn'), Vector2(6720, 900)],
         [preload('res://rooms/demo/rooms/dash/SecondaryProcessing.tscn'), Vector2(7360, 1080)],
         [preload('res://rooms/demo/rooms/dash/ProcessingArena.tscn'), Vector2(7360, 1440)],
+        [preload('res://rooms/demo/rooms/dash/DashEnd.tscn'), Vector2(8000, 1440)],
     ],
 
     DemoAbility.Ability.DOUBLE_JUMP: [
