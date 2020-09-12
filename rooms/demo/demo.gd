@@ -19,6 +19,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/dash/CheckpointCorridor.tscn'), Vector2(5760, 1080)],
         [preload('res://rooms/demo/rooms/dash/CheckpointLamp.tscn'), Vector2(6400, 1080)],
         [preload('res://rooms/demo/rooms/dash/CentralProcessing.tscn'), Vector2(6720, 900)],
+        [preload('res://rooms/demo/rooms/dash/SecondaryProcessing.tscn'), Vector2(7360, 1080)],
     ],
 
     DemoAbility.Ability.DOUBLE_JUMP: [
