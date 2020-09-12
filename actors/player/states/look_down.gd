@@ -32,4 +32,9 @@ func update(player: Player, delta: float) -> Dictionary:
     # for not triggering wall slide when jumping up from idling next to a wall.
     player.move(Vector2(0, 10))
 
+    # Transition to fall if we're no longer on the ground (e.g. conveyor belt or
+    # collapsable platform).
+    if player.is_in_air():
+        return {'new_state': Player.State.FALL}
+
     return {'new_state': Player.State.NO_CHANGE}
