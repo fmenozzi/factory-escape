@@ -33,9 +33,10 @@ func save_game() -> void:
     if not dir.dir_exists(SAVE_DIRECTORY):
         dir.make_dir_recursive(SAVE_DIRECTORY)
 
+    # Save data as formatted JSON using a two-space indent with sorted keys.
     var file := File.new()
     file.open(_get_save_file_path(save_slot), File.WRITE)
-    file.store_string(to_json(save_data))
+    file.store_string(JSON.print(save_data, '  ', true))
     file.close()
 
     emit_signal('game_saved')
@@ -87,7 +88,9 @@ func _load_all_data() -> Dictionary:
         return {}
 
     file.open(path, File.READ)
-    var save_data: Dictionary = parse_json(file.get_as_text())
+    var json_parse_result := JSON.parse(file.get_as_text())
+    assert(json_parse_result.error == OK)
+    assert(typeof(json_parse_result.result) == TYPE_DICTIONARY)
     file.close()
 
-    return save_data
+    return json_parse_result.result
