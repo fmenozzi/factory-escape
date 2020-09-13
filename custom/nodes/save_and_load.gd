@@ -64,6 +64,9 @@ func delete_save_data(save_slot_to_delete: int) -> void:
     var status := dir.remove(path)
     assert(status == OK)
 
+func get_all_save_data() -> Dictionary:
+    return _load_all_data()
+
 func _get_save_file_path(save_slot_to_use: int) -> String:
     assert(save_slot_to_use != SaveSlot.UNSET)
 

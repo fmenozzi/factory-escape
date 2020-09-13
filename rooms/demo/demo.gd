@@ -109,6 +109,8 @@ func _generate_ability_specific_demo_rooms() -> void:
 
     var room_position_pairs: Array = ABILITY_ROOMS[_chosen_ability]
 
+    var all_generated_rooms := []
+
     for room_position_pair in room_position_pairs:
         var room_packed_scene: PackedScene = room_position_pair[0]
         var position: Vector2 = room_position_pair[1]
@@ -116,14 +118,32 @@ func _generate_ability_specific_demo_rooms() -> void:
         var room: Room = room_packed_scene.instance()
         room.position = position
 
+        all_generated_rooms.append(room)
+
         # Add the room to the tree.
         #
         # TODO: why is this null when cached via onready?
         $World/Rooms.add_child(room)
 
-    # Now that we've added all the new rooms, load the game again to give each
-    # room (and all the objects inside it) a chance to be loaded in properly.
-    SaveAndLoad.load_game()
+    # Since SaveAndLoad.load_game() was called before these rooms (and any of
+    # their nodes) were generated, ensure that each such node has a chance to
+    # get loaded in.
+    var generated_nodes_to_load := []
+    for node in get_tree().get_nodes_in_group('save'):
+        for generated_room in all_generated_rooms:
+            # Check if the room itself needs to be loaded.
+            if generated_room == node:
+                generated_nodes_to_load.append(node)
+
+            # Check if the node is a descendant of a generated room and thus
+            # also in need of being loaded.
+            if node.find_parent(generated_room.name):
+                generated_nodes_to_load.append(node)
+
+    # Load in the generated save-and-load nodes.
+    var all_save_data := SaveAndLoad.get_all_save_data()
+    for node in generated_nodes_to_load:
+        node.load_save_data(all_save_data)
 
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
