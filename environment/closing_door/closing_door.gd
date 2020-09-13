@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func open() -> void:
     _collision_shape.set_deferred('disabled', true)
-    _animation_player.play_backwards('close')
+    _animation_player.play('open')
     yield(_animation_player, 'animation_finished')
     _is_closed = false
     emit_signal('door_opened')
