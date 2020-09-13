@@ -99,6 +99,6 @@ func _set_paused(new_pause_state: bool) -> void:
     _black_overlay.visible = new_pause_state
 
     if new_pause_state:
-        Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     else:
         Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
