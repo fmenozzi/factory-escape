@@ -31,6 +31,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/double_jump/PrimaryContainment.tscn'), Vector2(4800, 900)],
         [preload('res://rooms/demo/rooms/double_jump/SecondaryContainment.tscn'), Vector2(5440, 900)],
         [preload('res://rooms/demo/rooms/double_jump/ContainmentJunction.tscn'), Vector2(5760, 1080)],
+        [preload('res://rooms/demo/rooms/double_jump/ContainmentCorridor.tscn'), Vector2(6080, 1080)],
     ],
 
     DemoAbility.Ability.GRAPPLE: [
