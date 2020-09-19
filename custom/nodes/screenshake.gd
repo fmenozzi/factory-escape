@@ -40,6 +40,8 @@ func start(duration: int, amplitude: int, priority: int = Priority.LOW) -> void:
     if priority < _priority:
         return
 
+    _priority = priority
+
     _camera = Util.get_player().get_camera()
 
     _amplitude = _get_amplitude(amplitude)
