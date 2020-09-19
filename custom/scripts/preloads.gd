@@ -10,6 +10,7 @@ const LeapingFailure := preload('res://actors/enemies/leaping_failure/LeapingFai
 const WorkerDrone := preload('res://actors/enemies/worker_drone/WorkerDrone.tscn')
 const SentryDrone := preload('res://actors/enemies/sentry_drone/SentryDrone.tscn')
 const RangedSentryDrone := preload('res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn')
+const StickyDrone := preload('res://actors/enemies/sticky_drone/StickyDrone.tscn')
 const Turret := preload('res://actors/enemies/turret/Turret.tscn')
 
 # Hit effect.
