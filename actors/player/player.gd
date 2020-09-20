@@ -203,7 +203,7 @@ func load_save_data(all_save_data: Dictionary) -> void:
 
     set_direction(last_saved_direction_to_lamp)
 
-func reset() -> void:
+func lamp_reset() -> void:
     get_health().heal_to_full()
 
     global_position = last_saved_global_position

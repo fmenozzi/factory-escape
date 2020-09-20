@@ -26,7 +26,7 @@ func _on_player_entered_room(player: Player) -> void:
 func _on_rested_at_lamp(lamp: Area2D) -> void:
     _rested_at_lamp = true
 
-func reset() -> void:
+func lamp_reset() -> void:
     if not _rested_at_lamp:
         _closing_door.open()
         _door_trigger.connect('body_entered', self, '_on_player_entered_room')

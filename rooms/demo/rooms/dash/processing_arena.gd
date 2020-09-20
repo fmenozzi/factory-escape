@@ -102,7 +102,7 @@ func _process(delta: float) -> void:
         RoomState.POST_FIGHT:
             set_process(false)
 
-func reset() -> void:
+func lamp_reset() -> void:
     set_process(false)
 
     _closing_door_left.open()

@@ -9,10 +9,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 72 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 72 )
 
 [node name="ContainmentArena" groups=[
@@ -45,7 +45,7 @@ position = Vector2( 480, 160 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/HazardCheckpoint" index="0"]
 position = Vector2( -128, -72 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="HealthPack" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 128, 160 )
@@ -60,7 +60,7 @@ position = Vector2( 632, 144 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClosingDoorTrigger" index="0"]
 position = Vector2( 496, 88 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [editable path="TileMaps"]
 

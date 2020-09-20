@@ -138,7 +138,7 @@ func _maybe_save_game() -> void:
 
 func _reset_world() -> void:
     for node in get_tree().get_nodes_in_group('lamp_reset'):
-        node.reset()
+        node.lamp_reset()
 
 func _on_player_died() -> void:
     print('YOU DIED')
