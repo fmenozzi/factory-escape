@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://environment/hazards/crusher/crusher.gd" type="Script" id=1]
 [ext_resource path="res://environment/hazards/crusher/textures/crusher-background.png" type="Texture" id=2]
 [ext_resource path="res://environment/hazards/crusher/textures/crusher-head.png" type="Texture" id=3]
-[ext_resource path="res://shared/effects/DustPuff.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 18 )
@@ -98,15 +97,15 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrusherHead"]
 shape = SubResource( 2 )
 
-[node name="DustPuffs" type="Node2D" parent="CrusherHead"]
+[node name="DustPuffSpawnPositions" type="Node2D" parent="CrusherHead"]
 position = Vector2( 0, 14 )
 
-[node name="DustPuffLeft" parent="CrusherHead/DustPuffs" instance=ExtResource( 4 )]
+[node name="DustPuffSpawnPositionLeft" type="Position2D" parent="CrusherHead/DustPuffSpawnPositions"]
 position = Vector2( -12, 0 )
 
-[node name="DustPuffCenter" parent="CrusherHead/DustPuffs" instance=ExtResource( 4 )]
+[node name="DustPuffSpawnPositionCenter" type="Position2D" parent="CrusherHead/DustPuffSpawnPositions"]
 
-[node name="DustPuffRight" parent="CrusherHead/DustPuffs" instance=ExtResource( 4 )]
+[node name="DustPuffSpawnPositionRight" type="Position2D" parent="CrusherHead/DustPuffSpawnPositions"]
 position = Vector2( 12, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

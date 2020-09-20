@@ -34,7 +34,6 @@ onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-onready var _dust_puff: Particles2D = $DustPuff
 
 onready var _health: Health = $Health
 onready var _hurtbox: Area2D = $Hurtbox
@@ -99,7 +98,7 @@ func is_off_ledge() -> bool:
     return (off_left and not off_right) or (off_right and not off_left)
 
 func emit_dust_puff() -> void:
-    _dust_puff.restart()
+    Effects.spawn_dust_puff_at(global_position)
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)

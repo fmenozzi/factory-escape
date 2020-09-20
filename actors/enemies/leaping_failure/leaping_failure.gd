@@ -43,7 +43,6 @@ onready var _pushback_manager: PushbackManager = $PushbackManager
 onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-onready var _dust_puff: Particles2D = $DustPuff
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
@@ -98,7 +97,7 @@ func is_off_ledge() -> bool:
     return (off_left and not off_right) or (off_right and not off_left)
 
 func emit_dust_puff() -> void:
-    _dust_puff.restart()
+    Effects.spawn_dust_puff_at(global_position)
 
 func get_react_sprite() -> ReactSprite:
     return _react_sprite

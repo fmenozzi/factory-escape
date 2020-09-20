@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -23,7 +23,6 @@
 [ext_resource path="res://actors/player/states/rest.gd" type="Script" id=21]
 [ext_resource path="res://actors/player/effects/WallSlideTrail.tscn" type="PackedScene" id=22]
 [ext_resource path="res://actors/player/managers/WallJumpManager.tscn" type="PackedScene" id=23]
-[ext_resource path="res://shared/effects/DustPuff.tscn" type="PackedScene" id=24]
 [ext_resource path="res://actors/player/effects/DashPuff.tscn" type="PackedScene" id=25]
 [ext_resource path="res://actors/player/managers/JumpManager.tscn" type="PackedScene" id=26]
 [ext_resource path="res://actors/player/managers/GrappleManager.tscn" type="PackedScene" id=27]
@@ -934,8 +933,6 @@ script = ExtResource( 49 )
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
-
-[node name="DustPuff" parent="." instance=ExtResource( 24 )]
 
 [node name="DashEchoes" parent="." instance=ExtResource( 34 )]
 position = Vector2( 0, -8 )

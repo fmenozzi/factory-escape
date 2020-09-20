@@ -39,7 +39,6 @@ onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
-onready var _dust_puff: Particles2D = $DustPuff
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -94,7 +93,7 @@ func shake_once(damping: float = 1.0) -> void:
         damping * rand_range(-1.0, 1.0))
 
 func emit_dust_puff() -> void:
-    _dust_puff.emitting = true
+    Effects.spawn_dust_puff_at(global_position)
 
 func reset_sprite_position() -> void:
     _sprite.position = Vector2.ZERO

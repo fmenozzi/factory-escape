@@ -16,6 +16,9 @@ const Turret := preload('res://actors/enemies/turret/Turret.tscn')
 # Hit effect.
 const EnemyHitEffect := preload('res://actors/enemies/shared/enemy_hit_effect/EnemyHitEffect.tscn')
 
+# Dust puff.
+const DustPuff := preload('res://shared/effects/dust_puff/DustPuff.tscn')
+
 # Projectiles.
 const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
 const EnergyProjectile := preload('res://actors/enemies/projectiles/energy_projectile/EnergyProjectile.tscn')

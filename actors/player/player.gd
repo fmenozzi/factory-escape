@@ -104,7 +104,6 @@ onready var _camera: Camera2D = $CameraAnchor/Camera2D
 onready var _floor_proximity_detector: RayCast2D = $FloorProximityDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
-onready var _dust_puff: Particles2D = $DustPuff
 onready var _dash_puff: Particles2D = $DashPuff
 onready var _dash_echoes: Particles2D = $DashEchoes
 onready var _hit_effect: PlayerHitEffect = $PlayerHitEffect
@@ -270,7 +269,7 @@ func is_on_wall() -> bool:
     return .is_on_wall()
 
 func emit_dust_puff() -> void:
-    _dust_puff.restart()
+    Effects.spawn_dust_puff_at(self.global_position)
 
 func emit_dash_effects() -> void:
     _dash_puff.restart()

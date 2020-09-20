@@ -256,6 +256,7 @@ Preloads="*res://custom/scripts/preloads.gd"
 SceneChanger="*res://custom/nodes/SceneChanger.tscn"
 Options="*res://custom/nodes/Options.tscn"
 SaveAndLoad="*res://custom/nodes/SaveAndLoad.tscn"
+Effects="*res://custom/scripts/effects.gd"
 
 [debug]
 
