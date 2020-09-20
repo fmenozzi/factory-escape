@@ -104,6 +104,12 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)
     _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
+func pause() -> void:
+    set_physics_process(false)
+
+func resume() -> void:
+    set_physics_process(true)
+
 func lamp_reset() -> void:
     global_position = _initial_global_position
     set_direction(initial_direction)

@@ -16,6 +16,8 @@ func _ready() -> void:
             'energy_projectile_fired', self, '_on_energy_projectile_fired',
             [spawner])
 
+    pause()
+
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
 # the old room to the closest anchor in the new room.
@@ -63,9 +65,16 @@ func get_tilemaps_nav() -> Navigation2D:
 func pause() -> void:
     for moving_platform in get_moving_platforms():
         moving_platform.pause()
+
+    for enemy in $Enemies.get_children():
+        enemy.pause()
+
 func resume() -> void:
     for moving_platform in get_moving_platforms():
         moving_platform.resume()
+
+    for enemy in $Enemies.get_children():
+        enemy.resume()
 
 func contains(obj: Node2D) -> bool:
     var bounds := Rect2(get_global_position(), get_room_dimensions())

@@ -142,6 +142,12 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
 func change_rotation_direction() -> void:
     _rotation_direction *= -1
 
+func pause() -> void:
+    set_physics_process(false)
+
+func resume() -> void:
+    set_physics_process(true)
+
 func lamp_reset() -> void:
     set_direction(initial_direction)
     _health.heal_to_full()
