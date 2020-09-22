@@ -52,10 +52,8 @@ func _process(delta: float) -> void:
                 _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(448, 80))
                 _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(576, 80))
                 _spawn_enemy_at(Preloads.RangedSentryDrone.instance(), Vector2(516, 96))
-                for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
-                    spawner.connect(
-                        'homing_projectile_fired', self, '_on_homing_projectile_fired',
-                        [spawner])
+
+                _connect_projectile_spawner_signals()
 
                 _current_room_state = RoomState.WAVE_3
 

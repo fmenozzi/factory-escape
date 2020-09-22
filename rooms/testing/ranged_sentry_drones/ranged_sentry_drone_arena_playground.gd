@@ -58,10 +58,8 @@ func _on_player_triggered_enemy_spawns(player: Player) -> void:
         #       of doing this automatically when a ProjectileSpawner is created?
         _spawn_enemy_at(Preloads.RangedSentryDrone.instance(), Vector2(240, 96))
         _spawn_enemy_at(Preloads.RangedSentryDrone.instance(), Vector2(400, 96))
-        for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
-            spawner.connect(
-                'homing_projectile_fired', self, '_on_homing_projectile_fired',
-                [spawner])
+
+        _connect_projectile_spawner_signals()
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
     _remaining_drones -= 1

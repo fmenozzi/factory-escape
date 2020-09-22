@@ -8,13 +8,7 @@ onready var _enemies: Node2D = $Enemies
 onready var _tilemaps_nav: Navigation2D = $TileMaps
 
 func _ready() -> void:
-    for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
-        spawner.connect(
-            'homing_projectile_fired', self, '_on_homing_projectile_fired',
-            [spawner])
-        spawner.connect(
-            'energy_projectile_fired', self, '_on_energy_projectile_fired',
-            [spawner])
+    _connect_projectile_spawner_signals()
 
     pause()
 
@@ -80,6 +74,24 @@ func contains(obj: Node2D) -> bool:
     var bounds := Rect2(get_global_position(), get_room_dimensions())
 
     return bounds.has_point(obj.get_global_position())
+
+# TODO: This general idea could probably be improved by having projectile
+#       spawners figure out which room they're in (by walking up the tree) and
+#       connecting their signals to that room. This could happen in each
+#       spawner's _ready() function, eliminating the need to call this function
+#       manually.
+func _connect_projectile_spawner_signals() -> void:
+    for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
+        # Only connect the spawners in this room to this room's callbacks.
+        if spawner.find_parent(self.name) == null:
+            continue
+
+        spawner.connect(
+            'homing_projectile_fired', self, '_on_homing_projectile_fired',
+            [spawner])
+        spawner.connect(
+            'energy_projectile_fired', self, '_on_energy_projectile_fired',
+            [spawner])
 
 func _on_homing_projectile_fired(
     global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner

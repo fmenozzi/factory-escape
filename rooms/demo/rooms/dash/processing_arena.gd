@@ -60,10 +60,7 @@ func _process(delta: float) -> void:
                 _spawn_enemy_at(ranged_sentry_drone_right, Vector2(552, 112))
                 _spawn_enemy_at(sluggish_failure, Vector2(480, 104))
 
-                for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
-                    spawner.connect(
-                        'homing_projectile_fired', self, '_on_homing_projectile_fired',
-                        [spawner])
+                _connect_projectile_spawner_signals()
 
                 _current_room_state = RoomState.WAVE_2
 
@@ -81,10 +78,7 @@ func _process(delta: float) -> void:
                 _spawn_enemy_at(turret_center, Vector2(480, 116))
                 _spawn_enemy_at(turret_right, Vector2(624, 120))
 
-                for spawner in get_tree().get_nodes_in_group('projectile_spawners'):
-                    spawner.connect(
-                        'energy_projectile_fired', self, '_on_energy_projectile_fired',
-                        [spawner])
+                _connect_projectile_spawner_signals()
 
                 _current_room_state = RoomState.WAVE_3
 
