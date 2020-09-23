@@ -32,7 +32,6 @@ onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
-onready var _obstacle_detector: RayCast2D = $ObstacleDetector
 
 func _ready() -> void:
     _animation_player.play('idle')
