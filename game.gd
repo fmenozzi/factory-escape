@@ -93,6 +93,9 @@ func _process(delta: float) -> void:
             yield(_camera, 'transition_completed')
             _player.curr_room.resume()
 
+            # Reset enemies in the previous room once the transition completes.
+            _player.prev_room.reset_enemies()
+
 func _set_player_starting_room() -> void:
     var starting_room: Room = null
 

@@ -148,6 +148,10 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
 
+func room_reset() -> void:
+    if _current_state_enum != State.DIE:
+        lamp_reset()
+
 func lamp_reset() -> void:
     set_direction(initial_direction)
     _health.heal_to_full()

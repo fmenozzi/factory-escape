@@ -70,6 +70,10 @@ func resume() -> void:
     for enemy in $Enemies.get_children():
         enemy.resume()
 
+func reset_enemies() -> void:
+    for enemy in $Enemies.get_children():
+        enemy.room_reset()
+
 func contains(obj: Node2D) -> bool:
     var bounds := Rect2(get_global_position(), get_room_dimensions())
 

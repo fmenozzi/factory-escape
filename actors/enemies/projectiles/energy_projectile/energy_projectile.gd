@@ -44,6 +44,9 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
 
+func room_reset() -> void:
+    queue_free()
+
 func _impact() -> void:
     # Stop moving the projectile.
     set_physics_process(false)

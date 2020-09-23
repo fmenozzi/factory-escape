@@ -54,6 +54,9 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
 
+func room_reset() -> void:
+    queue_free()
+
 func _update_velocity() -> void:
     # The homing weight is used to determine how much the projectile will home
     # in towards the player. This is a normalized value, where 0 means the
