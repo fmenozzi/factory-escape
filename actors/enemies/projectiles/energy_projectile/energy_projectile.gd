@@ -13,7 +13,7 @@ onready var _lifetime_timer: Timer = $LifetimeTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-    set_physics_process(false)
+    pause()
 
     # Detect impacts with both the environment (StaticBody2D) and the player's
     # hurtbox (Area2D).
@@ -35,6 +35,13 @@ func start(direction: Vector2) -> void:
     _velocity = direction.normalized() * speed_tiles_per_second * Util.TILE_SIZE
     self.rotation = direction.angle()
     _lifetime_timer.start()
+
+    resume()
+
+func pause() -> void:
+    set_physics_process(false)
+
+func resume() -> void:
     set_physics_process(true)
 
 func _impact() -> void:

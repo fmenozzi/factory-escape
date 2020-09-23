@@ -17,7 +17,7 @@ onready var _homing_duration_timer: Timer = $HomingDurationTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
-    set_physics_process(false)
+    pause()
 
     # Detect impacts with both the environment (StaticBody2D) and the player's
     # hurtbox (Area2D).
@@ -45,6 +45,13 @@ func start(direction: Vector2) -> void:
     _lifetime_timer.start()
     _homing_duration_timer.start()
     _player = Util.get_player()
+
+    resume()
+
+func pause() -> void:
+    set_physics_process(false)
+
+func resume() -> void:
     set_physics_process(true)
 
 func _update_velocity() -> void:
