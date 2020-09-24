@@ -60,12 +60,18 @@ func pause() -> void:
     for moving_platform in get_moving_platforms():
         moving_platform.pause()
 
+    for hazard in $Hazards.get_children():
+        hazard.pause()
+
     for enemy in $Enemies.get_children():
         enemy.pause()
 
 func resume() -> void:
     for moving_platform in get_moving_platforms():
         moving_platform.resume()
+
+    for hazard in $Hazards.get_children():
+        hazard.resume()
 
     for enemy in $Enemies.get_children():
         enemy.resume()
