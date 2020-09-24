@@ -47,6 +47,76 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 270 )
 
+[node name="ConveyorBelts" type="Node2D" parent="." index="5"]
+
+[node name="TopConveyorBelts" type="Node2D" parent="ConveyorBelts" index="0"]
+position = Vector2( 0, 16 )
+
+[node name="Right" parent="ConveyorBelts/TopConveyorBelts" index="0" instance=ExtResource( 3 )]
+position = Vector2( 272, 136 )
+direction = -1
+
+[node name="MiddleRight" parent="ConveyorBelts/TopConveyorBelts" index="1" instance=ExtResource( 3 )]
+position = Vector2( 208, 136 )
+direction = -1
+
+[node name="MiddleLeft" parent="ConveyorBelts/TopConveyorBelts" index="2" instance=ExtResource( 3 )]
+position = Vector2( 144, 136 )
+direction = -1
+
+[node name="Left" parent="ConveyorBelts/TopConveyorBelts" index="3" instance=ExtResource( 3 )]
+position = Vector2( 80, 136 )
+direction = -1
+
+[node name="MiddleConveyorBelts" type="Node2D" parent="ConveyorBelts" index="1"]
+position = Vector2( 0, 2 )
+
+[node name="Left" parent="ConveyorBelts/MiddleConveyorBelts" index="0" instance=ExtResource( 3 )]
+position = Vector2( 48, 224 )
+
+[node name="MiddleLeft" parent="ConveyorBelts/MiddleConveyorBelts" index="1" instance=ExtResource( 3 )]
+position = Vector2( 112, 224 )
+
+[node name="MiddleRight" parent="ConveyorBelts/MiddleConveyorBelts" index="2" instance=ExtResource( 3 )]
+position = Vector2( 176, 224 )
+
+[node name="Right" parent="ConveyorBelts/MiddleConveyorBelts" index="3" instance=ExtResource( 3 )]
+position = Vector2( 240, 224 )
+
+[node name="BottomConveyorBelts" type="Node2D" parent="ConveyorBelts" index="2"]
+position = Vector2( -16, -4 )
+
+[node name="Right" parent="ConveyorBelts/BottomConveyorBelts" index="0" instance=ExtResource( 3 )]
+position = Vector2( 272, 304 )
+direction = -1
+
+[node name="Middle" parent="ConveyorBelts/BottomConveyorBelts" index="1" instance=ExtResource( 3 )]
+position = Vector2( 192, 304 )
+
+[node name="Left" parent="ConveyorBelts/BottomConveyorBelts" index="2" instance=ExtResource( 3 )]
+position = Vector2( 112, 304 )
+
+[node name="CrusherTop" parent="Hazards" index="0" instance=ExtResource( 2 )]
+position = Vector2( 84, 88 )
+speed = 1
+
+[node name="CrusherMiddleLeft" parent="Hazards" index="1" instance=ExtResource( 2 )]
+position = Vector2( 136, 226 )
+speed = 1
+
+[node name="CrusherMiddleRight" parent="Hazards" index="2" instance=ExtResource( 2 )]
+position = Vector2( 216, 226 )
+speed = 1
+
+[node name="CrusherBottomLeft" parent="Hazards" index="3" instance=ExtResource( 2 )]
+position = Vector2( 136, 300 )
+initial_delay = 1.5
+speed = 1
+
+[node name="CrusherBottomRight" parent="Hazards" index="4" instance=ExtResource( 2 )]
+position = Vector2( 216, 300 )
+speed = 1
+
 [node name="TopLeft" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 32, 88 )
 
@@ -72,74 +142,6 @@ position = Vector2( 296, 264 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/PlatformRight" index="0"]
 shape = SubResource( 3 )
-
-[node name="TopConveyorBelts" type="Node2D" parent="." index="9"]
-position = Vector2( 0, 16 )
-
-[node name="Right" parent="TopConveyorBelts" index="0" instance=ExtResource( 3 )]
-position = Vector2( 272, 136 )
-direction = -1
-
-[node name="MiddleRight" parent="TopConveyorBelts" index="1" instance=ExtResource( 3 )]
-position = Vector2( 208, 136 )
-direction = -1
-
-[node name="MiddleLeft" parent="TopConveyorBelts" index="2" instance=ExtResource( 3 )]
-position = Vector2( 144, 136 )
-direction = -1
-
-[node name="Left" parent="TopConveyorBelts" index="3" instance=ExtResource( 3 )]
-position = Vector2( 80, 136 )
-direction = -1
-
-[node name="MiddleConveyorBelts" type="Node2D" parent="." index="10"]
-position = Vector2( 0, 2 )
-
-[node name="Left" parent="MiddleConveyorBelts" index="0" instance=ExtResource( 3 )]
-position = Vector2( 48, 224 )
-
-[node name="MiddleLeft" parent="MiddleConveyorBelts" index="1" instance=ExtResource( 3 )]
-position = Vector2( 112, 224 )
-
-[node name="MiddleRight" parent="MiddleConveyorBelts" index="2" instance=ExtResource( 3 )]
-position = Vector2( 176, 224 )
-
-[node name="Right" parent="MiddleConveyorBelts" index="3" instance=ExtResource( 3 )]
-position = Vector2( 240, 224 )
-
-[node name="BottomConveyorBelts" type="Node2D" parent="." index="11"]
-position = Vector2( -16, -4 )
-
-[node name="Right" parent="BottomConveyorBelts" index="0" instance=ExtResource( 3 )]
-position = Vector2( 272, 304 )
-direction = -1
-
-[node name="Middle" parent="BottomConveyorBelts" index="1" instance=ExtResource( 3 )]
-position = Vector2( 192, 304 )
-
-[node name="Left" parent="BottomConveyorBelts" index="2" instance=ExtResource( 3 )]
-position = Vector2( 112, 304 )
-
-[node name="CrusherTop" parent="." index="12" instance=ExtResource( 2 )]
-position = Vector2( 84, 88 )
-speed = 1
-
-[node name="CrusherMiddleLeft" parent="." index="13" instance=ExtResource( 2 )]
-position = Vector2( 136, 226 )
-speed = 1
-
-[node name="CrusherMiddleRight" parent="." index="14" instance=ExtResource( 2 )]
-position = Vector2( 216, 226 )
-speed = 1
-
-[node name="CrusherBottomLeft" parent="." index="15" instance=ExtResource( 2 )]
-position = Vector2( 136, 300 )
-initial_delay = 1.5
-speed = 1
-
-[node name="CrusherBottomRight" parent="." index="16" instance=ExtResource( 2 )]
-position = Vector2( 216, 300 )
-speed = 1
 
 [editable path="TileMaps"]
 

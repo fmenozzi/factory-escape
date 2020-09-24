@@ -62,6 +62,19 @@ position = Vector2( 160, 270 )
 [node name="BottomRight" type="Position2D" parent="CameraAnchors" index="3"]
 position = Vector2( 480, 270 )
 
+[node name="CrusherTop" parent="Hazards" index="0" instance=ExtResource( 3 )]
+position = Vector2( 496, 76 )
+
+[node name="CrusherMiddle" parent="Hazards" index="1" instance=ExtResource( 3 )]
+position = Vector2( 496, 172 )
+
+[node name="CrusherBottomLeft" parent="Hazards" index="2" instance=ExtResource( 3 )]
+position = Vector2( 496, 268 )
+
+[node name="CrusherBottomRight" parent="Hazards" index="3" instance=ExtResource( 3 )]
+position = Vector2( 576, 268 )
+initial_delay = 1.0
+
 [node name="RangedSentryDrone" parent="Enemies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 32, 120 )
 
@@ -162,19 +175,6 @@ position = Vector2( 344, 220 )
 [node name="CollisionShape2D" parent="HazardCheckpoints/RightPlatform" index="0"]
 position = Vector2( 0, -4.00002 )
 shape = SubResource( 4 )
-
-[node name="CrusherTop" parent="." index="9" instance=ExtResource( 3 )]
-position = Vector2( 496, 76 )
-
-[node name="CrusherMiddle" parent="." index="10" instance=ExtResource( 3 )]
-position = Vector2( 496, 172 )
-
-[node name="CrusherBottomLeft" parent="." index="11" instance=ExtResource( 3 )]
-position = Vector2( 496, 268 )
-
-[node name="CrusherBottomRight" parent="." index="12" instance=ExtResource( 3 )]
-position = Vector2( 576, 268 )
-initial_delay = 1.0
 
 [editable path="TileMaps"]
 
