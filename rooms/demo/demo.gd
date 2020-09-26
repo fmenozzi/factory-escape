@@ -42,6 +42,7 @@ const ABILITY_ROOMS := {
 
     DemoAbility.Ability.GRAPPLE: [
         [preload('res://rooms/demo/rooms/grapple/GrappleTutorial.tscn'), Vector2(3840, 1080)],
+        [preload('res://rooms/demo/rooms/grapple/GrapplePractice.tscn'), Vector2(4160, 900)],
     ],
 
     DemoAbility.Ability.WALL_JUMP: [
