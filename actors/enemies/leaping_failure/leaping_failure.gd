@@ -15,7 +15,7 @@ enum State {
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
-export(State) var initial_state := State.FALL
+export(State) var initial_state := State.WALK
 
 onready var STATES := {
     State.WALK:            $States/Walk,
@@ -123,7 +123,7 @@ func lamp_reset() -> void:
     global_position = _initial_global_position
     set_direction(initial_direction)
     _health.heal_to_full()
-    _change_state({'new_state': initial_state, 'aggro': false})
+    _change_state({'new_state': initial_state})
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
