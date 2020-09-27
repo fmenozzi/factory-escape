@@ -5,6 +5,7 @@ enum State {
     NO_CHANGE,
     IDLE,
     WALK,
+    RETURN_TO_LEDGE,a
     ALERTED,
     UNALERTED,
     CROUCH,
@@ -25,14 +26,15 @@ enum FloorNormal {
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
-    State.IDLE:      $States/Idle,
-    State.WALK:      $States/Walk,
-    State.ALERTED:   $States/Alerted,
-    State.UNALERTED: $States/Unalerted,
-    State.CROUCH:    $States/Crouch,
-    State.SHOOT:     $States/Shoot,
-    State.UNCROUCH:  $States/Uncrouch,
-    State.DIE:       $States/Die,
+    State.IDLE:            $States/Idle,
+    State.WALK:            $States/Walk,
+    State.RETURN_TO_LEDGE: $States/ReturnToLedge,
+    State.ALERTED:         $States/Alerted,
+    State.UNALERTED:       $States/Unalerted,
+    State.CROUCH:          $States/Crouch,
+    State.SHOOT:           $States/Shoot,
+    State.UNCROUCH:        $States/Uncrouch,
+    State.DIE:             $States/Die,
 }
 
 var direction: int
@@ -52,6 +54,8 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _laser: Laser = $Laser
+onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
+onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
     _health.connect('health_changed', self, '_on_health_changed')
@@ -100,6 +104,12 @@ func move(
     velocity = velocity.rotated(deg2rad(self.rotation_degrees))
 
     .move_and_slide_with_snap(velocity, snap, floor_normal)
+
+func is_off_ledge() -> bool:
+    var off_left := not _edge_raycast_left.is_colliding()
+    var off_right := not _edge_raycast_right.is_colliding()
+
+    return (off_left and not off_right) or (off_right and not off_left)
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
