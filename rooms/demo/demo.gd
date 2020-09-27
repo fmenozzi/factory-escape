@@ -45,6 +45,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/grapple/GrapplePractice.tscn'), Vector2(4160, 900)],
         [preload('res://rooms/demo/rooms/grapple/SpikeTrap.tscn'), Vector2(4480, 900)],
         [preload('res://rooms/demo/rooms/grapple/MaintenanceTunnel.tscn'), Vector2(4800, 900)],
+        [preload('res://rooms/demo/rooms/grapple/UShaft.tscn'), Vector2(5440, 900)],
     ],
 
     DemoAbility.Ability.WALL_JUMP: [
