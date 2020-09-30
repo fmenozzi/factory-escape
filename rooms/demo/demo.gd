@@ -58,6 +58,7 @@ const ABILITY_ROOMS := {
 
     DemoAbility.Ability.WALL_JUMP: [
         [preload('res://rooms/demo/rooms/wall_jump/WallJumpTutorial.tscn'), Vector2(3840, 1080)],
+        [preload('res://rooms/demo/rooms/wall_jump/WallJumpPracticeAntechamber.tscn'), Vector2(4160, 1080)],
     ],
 }
 
