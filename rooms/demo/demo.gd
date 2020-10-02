@@ -61,6 +61,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/wall_jump/WallJumpPracticeAntechamber.tscn'), Vector2(4160, 1080)],
         [preload('res://rooms/demo/rooms/wall_jump/WallJumpPractice.tscn'), Vector2(4480, 900)],
         [preload('res://rooms/demo/rooms/wall_jump/SiloAntechamber.tscn'), Vector2(4800, 1080)],
+        [preload('res://rooms/demo/rooms/wall_jump/SecondarySiloStorage.tscn'), Vector2(5120, 1080)],
     ],
 }
 
