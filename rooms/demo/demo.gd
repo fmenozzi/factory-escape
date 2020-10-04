@@ -70,6 +70,7 @@ const ABILITY_ROOMS := {
         [preload('res://rooms/demo/rooms/wall_jump/SiloConnector.tscn'), Vector2(7680, 1260)],
         [preload('res://rooms/demo/rooms/wall_jump/PrimarySiloStorage.tscn'), Vector2(8000, 720)],
         [preload('res://rooms/demo/rooms/wall_jump/SiloArena.tscn'), Vector2(8320, 720)],
+        [preload('res://rooms/demo/rooms/wall_jump/WallJumpEnd.tscn'), Vector2(8960, 720)],
     ],
 }
 
