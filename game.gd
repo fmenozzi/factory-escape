@@ -85,6 +85,9 @@ func _process(delta: float) -> void:
             _player.prev_room = _player.curr_room
             _player.curr_room = room
 
+            # Show the new room.
+            _player.curr_room.show()
+
             # Pause processing on the old room, transition to the new one, and
             # then begin processing on the new room once the transition is
             # complete.
@@ -93,8 +96,10 @@ func _process(delta: float) -> void:
             yield(_camera, 'transition_completed')
             _player.curr_room.resume()
 
-            # Reset enemies in the previous room once the transition completes.
+            # Reset enemies in the previous room and hide it once the transition
+            # completes.
             _player.prev_room.reset_enemies()
+            _player.prev_room.hide()
 
 func _set_player_starting_room() -> void:
     var starting_room: Room = null
@@ -119,6 +124,8 @@ func _set_player_starting_room() -> void:
                 starting_room = room
 
     assert(starting_room != null)
+
+    starting_room.show()
 
     _player.curr_room = starting_room
     _player.prev_room = starting_room

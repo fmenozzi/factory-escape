@@ -12,6 +12,8 @@ func _ready() -> void:
 
     pause()
 
+    hide()
+
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
 # the old room to the closest anchor in the new room.
