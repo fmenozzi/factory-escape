@@ -72,35 +72,6 @@ func _ready() -> void:
 
     _set_player_starting_health_and_health_packs()
 
-# TODO: See if we can find a more efficient way of doing this that doesn't
-#       involve iterating over every room in every frame. Maybe some kind of
-#       map or otherwise more advanced data structure?
-#
-#       e.g. maybe you can use thin, one-way collision boxes at each room
-#       entrance to signal room changes.
-func _process(delta: float) -> void:
-    for room in $World/Rooms.get_children():
-        # Transition to room once we enter a new one.
-        if room != _player.curr_room and room.contains(_player):
-            _player.prev_room = _player.curr_room
-            _player.curr_room = room
-
-            # Show the new room.
-            _player.curr_room.show()
-
-            # Pause processing on the old room, transition to the new one, and
-            # then begin processing on the new room once the transition is
-            # complete.
-            _player.prev_room.pause()
-            _camera.transition(_player.prev_room, _player.curr_room)
-            yield(_camera, 'transition_completed')
-            _player.curr_room.resume()
-
-            # Reset enemies in the previous room and hide it once the transition
-            # completes.
-            _player.prev_room.reset_enemies()
-            _player.prev_room.hide()
-
 func _set_player_starting_room() -> void:
     var starting_room: Room = null
 

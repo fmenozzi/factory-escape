@@ -1,6 +1,7 @@
 extends Node2D
 class_name Room
 
+onready var _room_boundaries: Area2D = $RoomBoundaries
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
@@ -8,6 +9,8 @@ onready var _enemies: Node2D = $Enemies
 onready var _tilemaps_nav: Navigation2D = $TileMaps
 
 func _ready() -> void:
+    _room_boundaries.connect('area_entered', self, '_on_player_entered')
+
     _connect_projectile_spawner_signals()
 
     pause()
@@ -126,3 +129,30 @@ func _on_energy_projectile_fired(
 
     energy_projectile.global_position = global_pos
     energy_projectile.start(dir)
+
+func _on_player_entered(area: Area2D) -> void:
+    var player: Player = area.get_parent()
+    assert(player != null)
+
+    var camera := player.get_camera()
+
+    # Transition to room once we enter a new one.
+    if player.curr_room != self:
+        player.prev_room = player.curr_room
+        player.curr_room = self
+
+        # Show the new room.
+        player.curr_room.show()
+
+        # Pause processing on the old room, transition to the new one, and
+        # then begin processing on the new room once the transition is
+        # complete.
+        player.prev_room.pause()
+        camera.transition(player.prev_room, player.curr_room)
+        yield(camera, 'transition_completed')
+        player.curr_room.resume()
+
+        # Reset enemies in the previous room and hide it once the transition
+        # completes.
+        player.prev_room.reset_enemies()
+        player.prev_room.hide()

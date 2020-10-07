@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -641,6 +641,9 @@ extents = Vector2( 18, 7 )
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 7, 16 )
 
+[sub_resource type="RectangleShape2D" id=32]
+extents = Vector2( 0.5, 0.5 )
+
 [node name="Player" type="KinematicBody2D" groups=[
 "lamp_reset",
 "player",
@@ -691,7 +694,6 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 65
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -957,3 +959,11 @@ collision_mask = 4
 [node name="WallJumpManager" parent="." instance=ExtResource( 23 )]
 
 [node name="Attackmanager" parent="." instance=ExtResource( 28 )]
+
+[node name="RoomDetector" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector"]
+position = Vector2( 0.5, -0.5 )
+shape = SubResource( 32 )

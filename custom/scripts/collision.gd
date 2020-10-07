@@ -14,6 +14,7 @@ const _LAYER_NAMES := {
     'enemy_hurtbox': 7,
     'hazards': 8,
     'enemy_barrier': 9,
+    'player_room_detector': 10,
 }
 
 func _ready() -> void:

@@ -417,6 +417,7 @@ player_heal={
 2d_physics/layer_8="enemy_hurtbox"
 2d_physics/layer_9="hazards"
 2d_physics/layer_10="enemy_barrier"
+2d_physics/layer_11="player_room_detector"
 
 [rendering]
 
