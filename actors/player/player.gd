@@ -159,6 +159,9 @@ func _ready() -> void:
     for hitbox in _hitboxes.get_children():
         hitbox.connect('area_entered', self, '_on_attack_connected')
 
+    _hurtbox.connect('area_entered', self, '_on_hazard_area_hit')
+    _hurtbox.connect('body_entered', self, '_on_hazard_body_hit')
+
 func _unhandled_input(event: InputEvent) -> void:
     var new_state_dict = current_state.handle_input(self, event)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -428,21 +431,9 @@ func _check_for_hits() -> void:
                 change_state({'new_state': State.HAZARD_HIT})
                 emit_signal('player_hit_hazard')
 
-    # Check for overlapping hazard bodies. Some hazards may be StaticBody2Ds
-    # instead of Area2Ds.
-    for hitbox in _hurtbox.get_overlapping_bodies():
-        if Collision.in_layer(hitbox, 'hazards'):
-            # Take damage and stagger when hit, unless the hit resulted in the
-            # player's death, in which case let the death transition play out.
-            var damage_taken := player_health.take_damage(1)
-            if damage_taken:
-                if player_health.get_current_health() != 0:
-                    change_state({'new_state': State.HAZARD_HIT})
-                    emit_signal('player_hit_hazard')
-
     # Check for overlapping enemy hitbox and hazard areas.
     for hitbox in _hurtbox.get_overlapping_areas():
-        if Collision.in_layers(hitbox, ['hazards', 'enemy_hitbox']):
+        if Collision.in_layer(hitbox, 'enemy_hitbox'):
             # Take damage and stagger when hit, unless the hit resulted in the
             # player's death, in which case let the death transition play out.
             var damage_taken := player_health.take_damage(1)
@@ -456,6 +447,20 @@ func _check_for_hits() -> void:
                             'new_state': State.STAGGER,
                             'direction_from_hit': Util.direction(hitbox, self)
                         })
+
+func _check_for_hazard_hit(hitbox_area_or_body) -> void:
+    if not Collision.in_layer(hitbox_area_or_body, 'hazards'):
+        return
+
+    var player_health := get_health()
+
+    # Take damage and stagger when hit, unless the hit resulted in the player's
+    # death, in which case let the death transition play out.
+    var damage_taken := player_health.take_damage(1)
+    if damage_taken:
+        if player_health.get_current_health() != 0:
+            change_state({'new_state': State.HAZARD_HIT})
+            emit_signal('player_hit_hazard')
 
 func _on_invincibility_flashing_finished() -> void:
     get_health().set_status(Health.Status.NONE)
@@ -483,3 +488,9 @@ func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
 
     # TODO: This is kind of hacky, find a way around this.
     enemy.take_hit(1, self)
+
+func _on_hazard_area_hit(hitbox: Area2D) -> void:
+    _check_for_hazard_hit(hitbox)
+
+func _on_hazard_body_hit(hitbox: Node) -> void:
+    _check_for_hazard_hit(hitbox)
