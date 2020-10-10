@@ -144,9 +144,11 @@ func change_rotation_direction() -> void:
 
 func pause() -> void:
     set_physics_process(false)
+    _animation_player.stop(false)
 
 func resume() -> void:
     set_physics_process(true)
+    _animation_player.play()
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
