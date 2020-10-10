@@ -9,7 +9,7 @@
 [ext_resource path="res://ui/menus/options/audio/AudioOptionsMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/menus/options/video/VideoOptionsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/menus/options/controller/ControllerOptionsMenu.tscn" type="PackedScene" id=9]
-[ext_resource path="res://ui/audio/ui_navigation.wav" type="AudioStream" id=10]
+[ext_resource path="res://ui/UiSoundPlayer.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/title_screen/textures/background.png" type="Texture" id=11]
 [ext_resource path="res://ui/menus/options/keyboard/KeyboardOptionsMenu.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/menus/save_slots/SaveSlotsMenu.tscn" type="PackedScene" id=13]
@@ -26,9 +26,7 @@ __meta__ = {
 }
 game = ExtResource( 1 )
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
-bus = "UI"
+[node name="UiSoundPlayer" parent="." instance=ExtResource( 10 )]
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0

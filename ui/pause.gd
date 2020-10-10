@@ -18,7 +18,7 @@ onready var MENUS = {
 }
 var _menu_stack := []
 
-onready var _click_sound: AudioStreamPlayer = $ClickSound
+onready var _ui_sound_player: Node = $UiSoundPlayer
 onready var _black_overlay: ColorRect = $BlackOverlay
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
     for menu in MENUS.values():
         menu.connect('menu_changed', self, '_on_menu_changed')
         menu.connect('previous_menu_requested', self, '_on_previous_menu_requested')
-        menu.connect('menu_navigated', self, '_emit_click_sound')
+        menu.connect('menu_navigated', _ui_sound_player, 'play_ui_navigation_sound')
 
     MENUS[Menu.Menus.UNPAUSED].connect('pause_changed', self, '_set_paused')
     MENUS[Menu.Menus.QUIT].connect(
@@ -89,9 +89,6 @@ func _on_quit_to_main_menu_requested() -> void:
 
 func _on_quit_to_desktop_requested() -> void:
     emit_signal('quit_to_desktop_requested')
-
-func _emit_click_sound() -> void:
-    _click_sound.play()
 
 func _set_paused(new_pause_state: bool) -> void:
     get_tree().paused = new_pause_state

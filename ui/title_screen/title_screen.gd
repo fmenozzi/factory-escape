@@ -19,7 +19,7 @@ onready var MENUS := {
 }
 var _menu_stack := []
 
-onready var _click_sound: AudioStreamPlayer = $ClickSound
+onready var _ui_sound_player: Node = $UiSoundPlayer
 onready var _saving_indicator: Control = $SavingIndicator
 
 func _get_configuration_warning() -> String:
@@ -39,7 +39,7 @@ func _ready() -> void:
     for menu in MENUS.values():
         menu.connect('menu_changed', self, '_on_menu_changed')
         menu.connect('previous_menu_requested', self, '_on_previous_menu_requested')
-        menu.connect('menu_navigated', self, '_emit_click_sound')
+        menu.connect('menu_navigated', _ui_sound_player, 'play_ui_navigation_sound')
 
     MENUS[Menu.Menus.SAVE_SLOTS].connect('save_slot_selected', self, '_start_game')
     MENUS[Menu.Menus.QUIT].connect(
@@ -99,6 +99,3 @@ func _start_game(save_slot: int) -> void:
 
     var fade_duration := 2.0
     SceneChanger.change_scene_to(game, fade_duration)
-
-func _emit_click_sound() -> void:
-    _click_sound.play()

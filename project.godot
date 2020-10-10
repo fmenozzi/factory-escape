@@ -189,6 +189,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/turret/turret.gd"
 }, {
+"base": "Node",
+"class": "UiSoundPlayer",
+"language": "GDScript",
+"path": "res://ui/ui_sound_player.gd"
+}, {
 "base": "Node2D",
 "class": "WallJumpManager",
 "language": "GDScript",
@@ -236,6 +241,7 @@ _global_script_class_icons={
 "StickyDrone": "",
 "Stopwatch": "",
 "Turret": "",
+"UiSoundPlayer": "",
 "WallJumpManager": "",
 "WorkerDrone": ""
 }
