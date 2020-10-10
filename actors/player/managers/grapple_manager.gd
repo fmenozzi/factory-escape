@@ -32,25 +32,31 @@ func load_save_data(all_save_data: Dictionary) -> void:
 func update_next_grapple_point(player, curr_room) -> void:
     _next_grapple_point = null
 
+    var current_room_grapple_points: Array = curr_room.get_grapple_points()
+    if current_room_grapple_points.empty():
+        return
+
     # Determine candidate set of grapple points and reset grapple point colors.
     var candidate_grapple_points := []
-    for grapple_point in curr_room.get_grapple_points():
+    for grapple_point in current_room_grapple_points:
         grapple_point.get_node('Sprite').modulate = Color.white
         if _can_grapple_to(grapple_point, player):
             candidate_grapple_points.append(grapple_point)
+
+    if candidate_grapple_points.empty():
+        return
 
     # Sort candidate grapple points by distance to player.
     candidate_grapple_points.sort_custom(self, '_grapple_distance_comparator')
 
     # Pick the first grapple point that the player is facing. If the player is
     # facing away from all available grapple points, pick the closest one.
-    if not candidate_grapple_points.empty():
-        _next_grapple_point = candidate_grapple_points[0]
-        for grapple_point in candidate_grapple_points:
-            var grapple_point_direction := Util.direction(self, grapple_point)
-            if player.get_direction() == grapple_point_direction:
-                _next_grapple_point = grapple_point
-                break
+    _next_grapple_point = candidate_grapple_points[0]
+    for grapple_point in candidate_grapple_points:
+        var grapple_point_direction := Util.direction(self, grapple_point)
+        if player.get_direction() == grapple_point_direction:
+            _next_grapple_point = grapple_point
+            break
 
     # Color the next grapple point green.
     if _next_grapple_point:
