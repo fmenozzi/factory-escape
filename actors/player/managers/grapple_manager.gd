@@ -4,6 +4,7 @@ class_name GrappleManager
 const SAVE_KEY := 'grapple_manager'
 
 var _has_grapple := false
+var _current_room_grapple_points := []
 
 onready var _grapple_rope: Line2D = $GrappleRope
 onready var _grapple_hook: Sprite = $GrappleHook
@@ -29,16 +30,15 @@ func load_save_data(all_save_data: Dictionary) -> void:
 
     _has_grapple = grapple_manager_save_data['has_grapple']
 
-func update_next_grapple_point(player, curr_room) -> void:
+func update_next_grapple_point(player) -> void:
     _next_grapple_point = null
 
-    var current_room_grapple_points: Array = curr_room.get_grapple_points()
-    if current_room_grapple_points.empty():
+    if _current_room_grapple_points.empty():
         return
 
     # Determine candidate set of grapple points and reset grapple point colors.
     var candidate_grapple_points := []
-    for grapple_point in current_room_grapple_points:
+    for grapple_point in _current_room_grapple_points:
         grapple_point.get_node('Sprite').modulate = Color.white
         if _can_grapple_to(grapple_point, player):
             candidate_grapple_points.append(grapple_point)
@@ -70,6 +70,9 @@ func get_grapple_rope() -> Line2D:
 
 func get_grapple_hook() -> Sprite:
     return _grapple_hook
+
+func set_current_room_grapple_points(grapple_points: Array) -> void:
+    _current_room_grapple_points = grapple_points
 
 func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
