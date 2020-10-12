@@ -960,10 +960,12 @@ collision_mask = 4
 
 [node name="Attackmanager" parent="." instance=ExtResource( 28 )]
 
-[node name="RoomDetector" type="Area2D" parent="."]
+[node name="RoomDetector" type="Area2D" parent="." groups=[
+"mirror_y_axis",
+]]
+position = Vector2( 0.5, -0.5 )
 collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector"]
-position = Vector2( 0.5, -0.5 )
 shape = SubResource( 32 )

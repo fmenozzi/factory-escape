@@ -59,6 +59,12 @@ func transition(old_room, new_room) -> void:
     # their positions as interpolation points for camera position.
     var old_global_pos = old_room.get_closest_camera_anchor(_player)
     var new_global_pos = new_room.get_closest_camera_anchor(_player)
+
+    # Move the player one pixel into the direction of the new room. This is to
+    # help ensure that the room detection area does not exist in more than one
+    # room at a time.
+    _player.global_position += old_global_pos.direction_to(new_global_pos).normalized()
+
     _interpolate_camera_pos(old_global_pos, new_global_pos)
 
     # Remove camera limits so that camera can smoothly transition between rooms.
