@@ -7,12 +7,6 @@ export(String) var action := ''
 
 var _scancode := -1
 
-const BLOCKLIST := [
-    KEY_ESCAPE,
-    KEY_ENTER,
-    KEY_KP_ENTER,
-]
-
 func _ready() -> void:
     assert(InputMap.has_action(action))
 
@@ -41,17 +35,10 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 func get_scancode() -> int:
     return _scancode
 
-func remap_action_to(event: InputEventKey) -> bool:
-    # Make sure the desired remapping is allowed.
-    if event.scancode in BLOCKLIST:
+func remap_action_to(new_event: InputEventKey) -> bool:
+    var remap_succeeded: bool = Controls.remap_keyboard_action(action, new_event)
+    if not remap_succeeded:
         return false
-
-    # Remove all keyboard events corresponding to action before adding the new
-    # mapping.
-    for existing_event in InputMap.get_action_list(action):
-        if existing_event is InputEventKey:
-            InputMap.action_erase_event(action, existing_event)
-    InputMap.action_add_event(action, event)
 
     _display_current_key()
 

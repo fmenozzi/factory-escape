@@ -7,25 +7,7 @@ export(String) var action := ''
 
 var _button_index := -1
 
-var _joypad_buttons_to_textures: Dictionary = {
-    # Main buttons.
-    JOY_XBOX_A: Preloads.XboxA,
-    JOY_XBOX_B: Preloads.XboxB,
-    JOY_XBOX_X: Preloads.XboxX,
-    JOY_XBOX_Y: Preloads.XboxY,
-
-    # Bumbers and triggers.
-    JOY_L:  Preloads.XboxLb,
-    JOY_R:  Preloads.XboxRb,
-    JOY_L2: Preloads.XboxLt,
-    JOY_R2: Preloads.XboxRt,
-
-    # D-pad.
-    JOY_DPAD_UP:    Preloads.XboxDpadUp,
-    JOY_DPAD_RIGHT: Preloads.XboxDpadRight,
-    JOY_DPAD_DOWN:  Preloads.XboxDpadDown,
-    JOY_DPAD_LEFT:  Preloads.XboxDpadLeft,
-}
+onready var _joypad_buttons_to_textures: Dictionary = Controls.get_joypad_buttons_to_textures()
 
 func _ready() -> void:
     assert(InputMap.has_action(action))
@@ -58,17 +40,10 @@ func _unhandled_input(event: InputEvent) -> void:
 func get_button_index() -> int:
     return _button_index
 
-func remap_action_to(event: InputEventJoypadButton) -> bool:
-    # Make sure the desired remapping is allowed.
-    if not _joypad_buttons_to_textures.has(event.button_index):
+func remap_action_to(new_event: InputEventJoypadButton) -> bool:
+    var remap_succeeded: bool = Controls.remap_controller_action(action, new_event)
+    if not remap_succeeded:
         return false
-
-    # Remove all joypad events corresponding to action before adding the new
-    # mapping.
-    for existing_event in InputMap.get_action_list(action):
-        if existing_event is InputEventJoypadButton:
-            InputMap.action_erase_event(action, existing_event)
-    InputMap.action_add_event(action, event)
 
     _display_current_texture()
 
