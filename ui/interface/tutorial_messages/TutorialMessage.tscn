@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/menus/options/controller/textures/xbox-a.png" type="Texture" id=2]
+[ext_resource path="res://ui/interface/tutorial_messages/tutorial_message.gd" type="Script" id=3]
+
+[node name="TutorialMessage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 144.0
+margin_bottom = -4.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlMessage" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ControllerButtonTexture" type="TextureRect" parent="ControlMessage"]
+margin_left = 136.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 24.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyboardButtonLabel" type="Label" parent="ControlMessage"]
+visible = false
+anchor_bottom = 1.0
+margin_right = 152.0
+text = "Space"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ControlMessage"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -160.0
+text = "to jump"
+valign = 1
+
+[node name="NonControlMessage" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="NonControlMessage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Non-control message"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
