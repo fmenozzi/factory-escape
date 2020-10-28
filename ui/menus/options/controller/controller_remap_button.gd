@@ -50,9 +50,9 @@ func remap_action_to(new_event: InputEventJoypadButton) -> bool:
     return true
 
 func _display_current_texture() -> void:
-    for event in InputMap.get_action_list(action):
-        if event is InputEventJoypadButton:
-            # Make sure the desired remapping is allowed.
-            if _joypad_buttons_to_textures.has(event.button_index):
-                _button_index = event.button_index
-                self.icon = _joypad_buttons_to_textures[_button_index]
+    var current_button_index: int = Controls.get_button_index_for_action(action)
+    if current_button_index == -1:
+        return
+
+    _button_index = current_button_index
+    self.icon = _joypad_buttons_to_textures[_button_index]

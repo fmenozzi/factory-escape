@@ -90,5 +90,23 @@ func remap_keyboard_action(
 
     return true
 
+func get_scancode_for_action(player_action: String) -> int:
+    for event in InputMap.get_action_list(player_action):
+        if event is InputEventKey:
+            # Make sure the desired remapping is allowed.
+            if not event.scancode in _KEYBOARD_BLOCKLIST:
+                return event.scancode
+
+    return -1
+
+func get_button_index_for_action(player_action: String) -> int:
+    for event in InputMap.get_action_list(player_action):
+        if event is InputEventJoypadButton:
+            # Make sure the desired remapping is allowed.
+            if _joypad_buttons_to_textures.has(event.button_index):
+                return event.button_index
+
+    return -1
+
 func get_joypad_buttons_to_textures() -> Dictionary:
     return _joypad_buttons_to_textures

@@ -45,7 +45,9 @@ func remap_action_to(new_event: InputEventKey) -> bool:
     return true
 
 func _display_current_key() -> void:
-    for event in InputMap.get_action_list(action):
-        if event is InputEventKey:
-            _scancode = event.scancode
-            self.text = OS.get_scancode_string(event.scancode)
+    var current_key_scancode: int = Controls.get_scancode_for_action(action)
+    if current_key_scancode == -1:
+        return
+
+    _scancode = current_key_scancode
+    self.text = OS.get_scancode_string(_scancode)
