@@ -39,6 +39,8 @@ const XboxDpadUp := preload('res://ui/menus/options/controller/textures/xbox-dpa
 const XboxDpadRight := preload('res://ui/menus/options/controller/textures/xbox-dpad-right.png')
 const XboxDpadDown := preload('res://ui/menus/options/controller/textures/xbox-dpad-down.png')
 const XboxDpadLeft := preload('res://ui/menus/options/controller/textures/xbox-dpad-left.png')
+const XboxLs := preload('res://ui/menus/options/controller/textures/xbox-ls.png')
+const XboxRs := preload('res://ui/menus/options/controller/textures/xbox-rs.png')
 
 # Health bar sprites.
 const EmptyHealthTexture := preload('res://ui/interface/health_bar/textures/health-node-empty.png')
