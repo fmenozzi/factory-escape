@@ -1,6 +1,9 @@
 extends Control
 class_name TutorialMessage
 
+const VISIBLE := Color(1, 1, 1, 1)
+const NOT_VISIBLE := Color(1, 1, 1, 0)
+
 enum MessageMode {
     CONTROL,
     NON_CONTROL,
@@ -16,8 +19,10 @@ onready var _control_label: Label = $ControlMessage/Label
 onready var _non_control_message: Control = $NonControlMessage
 onready var _non_control_message_label: Label = $NonControlMessage/Label
 
+onready var _tween: Tween = $FadeTween
+
 func _ready() -> void:
-    hide()
+    self.modulate = NOT_VISIBLE
 
     for trigger in get_tree().get_nodes_in_group('tutorial_message_triggers'):
         trigger.connect(
@@ -56,6 +61,16 @@ func _get_keyboard_button_label(player_action: String) -> String:
     assert(scancode != -1)
 
     return OS.get_scancode_string(scancode)
+
+func _modulate_visibility(old: Color, new: Color) -> void:
+    var prop := 'modulate'
+    var duration := 0.25
+    var trans := Tween.TRANS_QUAD
+    var easing := Tween.EASE_IN
+
+    _tween.stop_all()
+    _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
+    _tween.start()
 
 # Automatically switch between the controller button texture and the keyboard
 # button label when the control mode changes.
@@ -103,11 +118,11 @@ func _on_player_entered_tutorial_message_area(
 
             _non_control_message_label.text = message
 
-    show()
+    _modulate_visibility(self.modulate, VISIBLE)
 
 func _on_player_exited_tutorial_message_area(
     message_mode: int,
     message: String,
     player_action: String
 ) -> void:
-    hide()
+    _modulate_visibility(self.modulate, NOT_VISIBLE)
