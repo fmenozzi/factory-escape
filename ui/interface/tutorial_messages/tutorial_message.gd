@@ -48,10 +48,7 @@ func _set_message_mode(new_message_mode: int) -> void:
             _non_control_message.show()
 
 func _get_controller_button_texture(player_action: String) -> Texture:
-    var button_index: int = Controls.get_button_index_for_action(player_action)
-    assert(button_index != -1)
-    
-    return Controls.get_texture_for_joypad_button(button_index)
+    return Controls.get_joypad_texture_for_action(player_action)
 
 func _get_keyboard_button_label(player_action: String) -> String:
     var scancode: int = Controls.get_scancode_for_action(player_action)

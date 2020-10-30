@@ -30,6 +30,16 @@ var _joypad_buttons_to_textures: Dictionary = {
     JOY_DPAD_LEFT:  Preloads.XboxDpadLeft,
 }
 
+var _joypad_motions_to_textures: Dictionary = {
+    # Left stick.
+    JOY_ANALOG_LX: Preloads.XboxLs,
+    JOY_ANALOG_LY: Preloads.XboxLs,
+
+    # Right stick.
+    JOY_ANALOG_RX: Preloads.XboxRs,
+    JOY_ANALOG_RY: Preloads.XboxRs,
+}
+
 # Controller buttons that can be used to remap actions. Controller motions (i.e.
 # sticks), and the start/options buttons cannot be remapped.
 const _CONTROLLER_REMAP_ALLOWLIST := [
@@ -135,3 +145,22 @@ func get_texture_for_joypad_button(button_index: int) -> Texture:
     assert(button_index in _joypad_buttons_to_textures)
 
     return _joypad_buttons_to_textures[button_index]
+
+func get_texture_for_joypad_motion(axis: int) -> Texture:
+    assert(axis in _joypad_motions_to_textures)
+
+    return _joypad_motions_to_textures[axis]
+
+func get_joypad_texture_for_action(player_action: String) -> Texture:
+    var texture: Texture = null
+
+    for event in InputMap.get_action_list(player_action):
+        if event is InputEventJoypadButton:
+            return get_texture_for_joypad_button(event.button_index)
+
+        if event is InputEventJoypadMotion:
+            return get_texture_for_joypad_motion(event.axis)
+
+    assert(false, 'Could not find a joypad texture for action %s' % player_action)
+
+    return null
