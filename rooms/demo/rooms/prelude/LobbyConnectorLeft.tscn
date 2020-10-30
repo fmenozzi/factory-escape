@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/health_pack/HealthPack.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/tutorial_message_trigger/TutorialMessageTrigger.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 56, 48 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 56, 48 )
 
 [node name="LobbyConnectorLeft" instance=ExtResource( 1 )]
 
@@ -38,4 +45,26 @@ position = Vector2( 144, 128 )
 position = Vector2( 512, 128 )
 dialog = [ "Visitors should proceed to the lobby for check-in." ]
 
+[node name="TutorialMessageTriggerInteracting" parent="." index="11" instance=ExtResource( 4 )]
+message_mode = 0
+message = "to interact"
+player_action = "player_interact"
+
+[node name="CollisionShape2D" parent="TutorialMessageTriggerInteracting" index="0"]
+position = Vector2( 72, 80 )
+shape = SubResource( 2 )
+
+[node name="TutorialMessageTriggerHealing" parent="." index="12" instance=ExtResource( 4 )]
+message_mode = 0
+message = "to heal"
+player_action = "player_heal"
+
+[node name="CollisionShape2D" parent="TutorialMessageTriggerHealing" index="0"]
+position = Vector2( 232, 80 )
+shape = SubResource( 3 )
+
 [editable path="TileMaps"]
+
+[editable path="TutorialMessageTriggerInteracting"]
+
+[editable path="TutorialMessageTriggerHealing"]
