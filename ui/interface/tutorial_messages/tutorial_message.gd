@@ -51,6 +51,37 @@ func _get_controller_button_texture(player_action: String) -> Texture:
     return Controls.get_joypad_texture_for_action(player_action)
 
 func _get_keyboard_button_label(player_action: String) -> String:
+    if player_action in ['player_move_left', 'player_move_right']:
+        # Since moving left/right is one controller stick but two keyboard
+        # buttons, handle this special case by specifically concatenating the
+        # left/right keys together to form a single string.
+        var scancode_left: int = Controls.get_scancode_for_action('player_move_left')
+        var scancode_right: int = Controls.get_scancode_for_action('player_move_right')
+        assert(scancode_left != -1 and scancode_right != -1)
+
+        return '%s/%s' % [
+            OS.get_scancode_string(scancode_left),
+            OS.get_scancode_string(scancode_right),
+        ]
+
+    if player_action in [
+        'player_look_up_controller',
+        'player_look_down_controller',
+        'player_look_up_keyboard',
+        'player_look_down_keyboard',
+    ]:
+        # Since looking up/down is one controller stick but two keyboard
+        # buttons, handle this special case by specifically concatenating the
+        # up/down keys together to form a single string.
+        var scancode_up: int = Controls.get_scancode_for_action('player_look_up_keyboard')
+        var scancode_down: int = Controls.get_scancode_for_action('player_look_down_keyboard')
+        assert(scancode_up != -1 and scancode_down != -1)
+
+        return '%s/%s' % [
+            OS.get_scancode_string(scancode_up),
+            OS.get_scancode_string(scancode_down),
+        ]
+
     var scancode: int = Controls.get_scancode_for_action(player_action)
     assert(scancode != -1)
 
