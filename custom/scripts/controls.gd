@@ -30,7 +30,30 @@ var _joypad_buttons_to_textures: Dictionary = {
     JOY_DPAD_LEFT:  Preloads.XboxDpadLeft,
 }
 
-const _KEYBOARD_BLOCKLIST := [
+# Controller buttons that can be used to remap actions. Controller motions (i.e.
+# sticks), and the start/options buttons cannot be remapped.
+const _CONTROLLER_REMAP_ALLOWLIST := [
+    # Main buttons.
+    JOY_XBOX_A,
+    JOY_XBOX_B,
+    JOY_XBOX_X,
+    JOY_XBOX_Y,
+
+    # Bumbers and triggers.
+    JOY_L,
+    JOY_R,
+    JOY_L2,
+    JOY_R2,
+
+    # D-pad.
+    JOY_DPAD_UP,
+    JOY_DPAD_RIGHT,
+    JOY_DPAD_DOWN,
+    JOY_DPAD_LEFT,
+]
+
+# Keyboard scancodes that cannot be used to remap actions.
+const _KEYBOARD_REMAP_BLOCKLIST := [
     KEY_ESCAPE,
     KEY_ENTER,
     KEY_KP_ENTER,
@@ -57,7 +80,7 @@ func remap_controller_action(
     new_event: InputEventJoypadButton
 ) -> bool:
     # Make sure the desired remapping is allowed.
-    if not _joypad_buttons_to_textures.has(new_event.button_index):
+    if not new_event.button_index in _CONTROLLER_REMAP_ALLOWLIST:
         return false
 
     # Remove all joypad events corresponding to the player action before adding
@@ -76,7 +99,7 @@ func remap_keyboard_action(
     new_event: InputEventKey
 ) -> bool:
     # Make sure the desired remapping is allowed.
-    if new_event.scancode in _KEYBOARD_BLOCKLIST:
+    if new_event.scancode in _KEYBOARD_REMAP_BLOCKLIST:
         return false
 
     # Remove all keyboard events corresponding to the player action before
@@ -94,7 +117,7 @@ func get_scancode_for_action(player_action: String) -> int:
     for event in InputMap.get_action_list(player_action):
         if event is InputEventKey:
             # Make sure the desired remapping is allowed.
-            if not event.scancode in _KEYBOARD_BLOCKLIST:
+            if not event.scancode in _KEYBOARD_REMAP_BLOCKLIST:
                 return event.scancode
 
     return -1
@@ -103,7 +126,7 @@ func get_button_index_for_action(player_action: String) -> int:
     for event in InputMap.get_action_list(player_action):
         if event is InputEventJoypadButton:
             # Make sure the desired remapping is allowed.
-            if _joypad_buttons_to_textures.has(event.button_index):
+            if event.button_index in _CONTROLLER_REMAP_ALLOWLIST:
                 return event.button_index
 
     return -1
