@@ -7,8 +7,6 @@ export(String) var action := ''
 
 var _button_index := -1
 
-onready var _joypad_buttons_to_textures: Dictionary = Controls.get_joypad_buttons_to_textures()
-
 func _ready() -> void:
     assert(InputMap.has_action(action))
 
@@ -55,4 +53,4 @@ func _display_current_texture() -> void:
         return
 
     _button_index = current_button_index
-    self.icon = _joypad_buttons_to_textures[_button_index]
+    self.icon = Controls.get_texture_for_joypad_button(_button_index)

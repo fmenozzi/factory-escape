@@ -131,5 +131,7 @@ func get_button_index_for_action(player_action: String) -> int:
 
     return -1
 
-func get_joypad_buttons_to_textures() -> Dictionary:
-    return _joypad_buttons_to_textures
+func get_texture_for_joypad_button(button_index: int) -> Texture:
+    assert(button_index in _joypad_buttons_to_textures)
+
+    return _joypad_buttons_to_textures[button_index]

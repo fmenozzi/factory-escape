@@ -50,11 +50,8 @@ func _set_message_mode(new_message_mode: int) -> void:
 func _get_controller_button_texture(player_action: String) -> Texture:
     var button_index: int = Controls.get_button_index_for_action(player_action)
     assert(button_index != -1)
-
-    var joypad_buttons_to_textures: Dictionary = Controls.get_joypad_buttons_to_textures()
-    assert(button_index in joypad_buttons_to_textures)
-
-    return joypad_buttons_to_textures.get(button_index)
+    
+    return Controls.get_texture_for_joypad_button(button_index)
 
 func _get_keyboard_button_label(player_action: String) -> String:
     var scancode: int = Controls.get_scancode_for_action(player_action)
