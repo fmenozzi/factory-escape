@@ -29,9 +29,9 @@ func _ready() -> void:
             'player_entered_area', self, '_on_player_entered_tutorial_message_area')
         trigger.connect(
             'player_exited_area', self, '_on_player_exited_tutorial_message_area')
+        trigger.connect('control_remapped', self, '_on_control_remapped')
 
     Controls.connect('mode_changed', self, '_on_control_mode_changed')
-    Controls.connect('control_remapped', self, '_on_control_remapped')
 
 func _set_message_mode(new_message_mode: int) -> void:
     assert(new_message_mode in [MessageMode.CONTROL, MessageMode.NON_CONTROL])
@@ -81,8 +81,9 @@ func _on_control_mode_changed(new_control_mode: int) -> void:
             _keyboard_button_label.show()
 
 # Automatically change the controller button texture and keyboard button label
-# when a control is remapped.
-func _on_control_remapped(player_action: String, new_event: InputEvent) -> void:
+# when a control is remapped for the action of the current tutorial message
+# trigger area.
+func _on_control_remapped(player_action: String) -> void:
     _controller_button_texture.texture = _get_controller_button_texture(player_action)
     _keyboard_button_label.text = _get_keyboard_button_label(player_action)
 
