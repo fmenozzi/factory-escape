@@ -52,6 +52,7 @@ one_way_collision = true
 message_mode = 0
 message = "to move"
 player_action = "player_move_left"
+delay = 2.5
 
 [node name="CollisionShape2D" parent="TutorialMessageTriggerMovement" index="0"]
 position = Vector2( 160, 96 )
