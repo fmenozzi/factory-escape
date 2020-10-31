@@ -11,10 +11,10 @@ enum MessageMode {
 
 var _message_mode: int
 
-onready var _control_message: Control = $ControlMessage
-onready var _controller_button_texture: TextureRect = $ControlMessage/ControllerButtonTexture
-onready var _keyboard_button_label: Label = $ControlMessage/KeyboardButtonLabel
-onready var _control_label: Label = $ControlMessage/Label
+onready var _control_message: CenterContainer = $ControlMessage
+onready var _controller_button_texture: TextureRect = $ControlMessage/HBoxContainer/ControllerButtonTexture
+onready var _keyboard_button_label: Label = $ControlMessage/HBoxContainer/KeyboardButtonLabel
+onready var _control_label: Label = $ControlMessage/HBoxContainer/Label
 
 onready var _non_control_message: Control = $NonControlMessage
 onready var _non_control_message_label: Label = $NonControlMessage/Label
