@@ -182,6 +182,10 @@ func _generate_ability_specific_demo_rooms() -> void:
     for node in generated_nodes_to_load:
         node.load_save_data(all_save_data)
 
+    # Connect all tutorial message trigger signals now that we're generating new
+    # rooms with new triggers.
+    $Layers/UILayer/TutorialMessage.connect_trigger_signals()
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 

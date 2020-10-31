@@ -24,14 +24,17 @@ onready var _tween: Tween = $FadeTween
 func _ready() -> void:
     self.modulate = NOT_VISIBLE
 
+    connect_trigger_signals()
+
+    Controls.connect('mode_changed', self, '_on_control_mode_changed')
+
+func connect_trigger_signals() -> void:
     for trigger in get_tree().get_nodes_in_group('tutorial_message_triggers'):
         trigger.connect(
             'player_entered_area', self, '_on_player_entered_tutorial_message_area')
         trigger.connect(
             'player_exited_area', self, '_on_player_exited_tutorial_message_area')
         trigger.connect('control_remapped', self, '_on_control_remapped')
-
-    Controls.connect('mode_changed', self, '_on_control_mode_changed')
 
 func _set_message_mode(new_message_mode: int) -> void:
     assert(new_message_mode in [MessageMode.CONTROL, MessageMode.NON_CONTROL])
