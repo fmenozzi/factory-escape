@@ -40,6 +40,7 @@ shape = SubResource( 1 )
 message_mode = 0
 message = "to jump"
 player_action = "player_jump"
+delay = 1.0
 
 [node name="CollisionShape2D" parent="World/Rooms/TutorialMessagesPlayground/ControlMessageTrigger" index="0"]
 position = Vector2( 152, 88 )

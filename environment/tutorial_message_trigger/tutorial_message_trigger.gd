@@ -13,6 +13,10 @@ export(String) var message := ''
 # which the keyboard button label and controller button texture will be derived).
 export(String) var player_action := ''
 
+# The amount of time in seconds to wait after the player enters the trigger area
+# before emitting the player_entered_area signal.
+export(float) var delay := 0.0
+
 var _is_active := false
 
 func _ready() -> void:
@@ -32,7 +36,11 @@ func _on_player_entered(player: Player) -> void:
 
     _is_active = true
 
-    emit_signal('player_entered_area', message_mode, message, player_action)
+    if delay > 0:
+        yield(get_tree().create_timer(delay), 'timeout')
+
+    if _is_active:
+        emit_signal('player_entered_area', message_mode, message, player_action)
 
 func _on_player_exited(player: Player) -> void:
     if not player:
