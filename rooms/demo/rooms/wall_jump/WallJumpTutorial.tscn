@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/tutorial_message_trigger/TutorialMessageTrigger.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 80, 72 )
 
 [node name="WallJumpTutorial" instance=ExtResource( 1 )]
 
@@ -29,4 +33,15 @@ shape = SubResource( 1 )
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
 
+[node name="TutorialMessageTriggerWallJump" parent="." index="9" instance=ExtResource( 2 )]
+message_mode = 0
+message = "when sliding on wall to jump"
+player_action = "player_jump"
+
+[node name="CollisionShape2D" parent="TutorialMessageTriggerWallJump" index="0"]
+position = Vector2( 104, 96 )
+shape = SubResource( 2 )
+
 [editable path="TileMaps"]
+
+[editable path="TutorialMessageTriggerWallJump"]
