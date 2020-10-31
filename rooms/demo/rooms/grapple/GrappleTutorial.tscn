@@ -45,7 +45,7 @@ shape = SubResource( 2 )
 
 [node name="TutorialMessageTriggerGrapple" parent="." index="9" instance=ExtResource( 3 )]
 message_mode = 0
-message = "to grapple"
+message = "when in range to grapple"
 player_action = "player_grapple"
 
 [node name="CollisionShape2D" parent="TutorialMessageTriggerGrapple" index="0"]

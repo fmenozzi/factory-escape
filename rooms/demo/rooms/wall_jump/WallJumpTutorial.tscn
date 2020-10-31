@@ -35,7 +35,7 @@ position = Vector2( 160, 90 )
 
 [node name="TutorialMessageTriggerWallJump" parent="." index="9" instance=ExtResource( 2 )]
 message_mode = 0
-message = "when sliding on wall to jump"
+message = "when sliding on wall to jump again"
 player_action = "player_jump"
 
 [node name="CollisionShape2D" parent="TutorialMessageTriggerWallJump" index="0"]

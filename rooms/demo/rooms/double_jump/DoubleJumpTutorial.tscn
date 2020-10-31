@@ -35,7 +35,7 @@ position = Vector2( 160, 90 )
 
 [node name="TutorialMessageTriggerDoubleJump" parent="." index="9" instance=ExtResource( 2 )]
 message_mode = 0
-message = "in midair to jump"
+message = "in midair to jump again"
 player_action = "player_jump"
 
 [node name="CollisionShape2D" parent="TutorialMessageTriggerDoubleJump" index="0"]
