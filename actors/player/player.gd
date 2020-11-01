@@ -168,7 +168,7 @@ func _unhandled_input(event: InputEvent) -> void:
         change_state(new_state_dict)
 
 func _physics_process(delta: float) -> void:
-    _grapple_manager.update_next_grapple_point(self)
+    _grapple_manager.update_next_grapple_point(self, curr_room)
 
     _check_for_hits()
 

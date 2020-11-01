@@ -40,6 +40,13 @@ func get_closest_camera_anchor(player: Player) -> Vector2:
 
     return min_dist_anchor
 
+# Get all the GrapplePoint nodes in the current room.
+func get_grapple_points() -> Array:
+    var grapple_points = []
+    for grapple_point in _grapple_points:
+        grapple_points.push_back(grapple_point)
+    return grapple_points
+
 # TODO: Investigate why the collision shape is sometimes null when cached using
 #       onready (seems to always only occur in standalone playground rooms).
 #       Maybe it has something to do with the fact that Room is a base scene?
@@ -136,10 +143,6 @@ func _on_player_entered(area: Area2D) -> void:
 
         # Show the new room.
         player.curr_room.show()
-
-        # Update the grapple manager's grapple points.
-        player.get_grapple_manager().set_current_room_grapple_points(
-            _grapple_points)
 
         # Pause processing on the old room, transition to the new one, and
         # then begin processing on the new room once the transition is
