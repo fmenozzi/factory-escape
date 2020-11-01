@@ -74,6 +74,8 @@ const ABILITY_ROOMS := {
     ],
 }
 
+const EndOfDemoMessage := preload('res://rooms/demo/end_of_demo_message/EndOfDemoMessage.tscn')
+
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
 onready var _rooms_node: Node2D = $World/Rooms
 onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
@@ -186,6 +188,10 @@ func _generate_ability_specific_demo_rooms() -> void:
     # rooms with new triggers.
     $Layers/UILayer/TutorialMessage.connect_trigger_signals()
 
+    # Connect end-of-demo message trigger signals.
+    for trigger in get_tree().get_nodes_in_group('end_of_demo_message_trigger'):
+        trigger.connect('end_of_demo_reached', self, '_on_end_of_demo_reached')
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 
@@ -224,3 +230,13 @@ func _on_ability_inspected(demo_ability: DemoAbility) -> void:
         emit_signal('ability_chosen', ability)
 
     _player.set_process_unhandled_input(true)
+
+func _on_end_of_demo_reached() -> void:
+    var player: Player = Util.get_player()
+    assert(player != null)
+
+    # Disable player control once they fall through the trigger.
+    player.set_process_unhandled_input(false)
+
+    var fade_in_delay := 2.0
+    SceneChanger.change_scene_to(EndOfDemoMessage, fade_in_delay)

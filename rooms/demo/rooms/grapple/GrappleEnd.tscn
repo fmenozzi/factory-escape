@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rooms/demo/end_of_demo_message/EndOfDemoMessageTrigger.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 48 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 8 )
 
 [node name="GrappleEnd" instance=ExtResource( 1 )]
 
@@ -40,6 +44,14 @@ position = Vector2( 136, 100 )
 position = Vector2( -56, 16 )
 shape = SubResource( 2 )
 
+[node name="EndOfDemoMessageTrigger" parent="." index="9" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="EndOfDemoMessageTrigger" index="0"]
+position = Vector2( 240, 184 )
+shape = SubResource( 3 )
+
 [editable path="TileMaps"]
 
 [editable path="GrapplePoints/GrapplePoint"]
+
+[editable path="EndOfDemoMessageTrigger"]
