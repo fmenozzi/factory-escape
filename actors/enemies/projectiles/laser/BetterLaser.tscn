@@ -13,4 +13,4 @@ collision_mask = 516
 width = 4.0
 default_color = Color( 1, 0.309804, 0.470588, 1 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="WidthTween" type="Tween" parent="."]
