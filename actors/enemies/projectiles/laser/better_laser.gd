@@ -6,6 +6,9 @@ const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
 # The maximum width of the laser beam.
 const MAX_WIDTH: float = 4.0
 
+# The maximum radius of the impact sprite in UV coordinates.
+const MAX_IMPACT_SPRITE_RADIUS_UV: float = 0.35
+
 # The color of the laser beam during the telegraph phase.
 const TELEGRAPH_COLOR: Color = Color('ff4f78')
 
@@ -41,6 +44,9 @@ onready var _raycast: RayCast2D = $RayCast2D
 onready var _line: Line2D = $Line2D
 onready var _tween: Tween = $WidthTween
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _beam_end: Position2D = $BeamEnd
+onready var _impact_sprite: Sprite = $BeamEnd/BeamImpact
+onready var _impact_sprite_mat: ShaderMaterial = _impact_sprite.get_material()
 
 func _ready() -> void:
     _raycast.cast_to = Vector2(MAX_LENGTH, 0)
@@ -51,6 +57,9 @@ func _ready() -> void:
 
     _hitbox_collision_shape.shape = RectangleShape2D.new()
     _hitbox_collision_shape.shape.extents = Vector2.ZERO
+
+    _beam_end.position.x = MAX_LENGTH
+    _beam_end.hide()
 
     set_physics_process(false)
     hide()
@@ -75,8 +84,7 @@ func shoot() -> void:
     yield(_tween, 'tween_all_completed')
 
     # Wind down animation. Hitbox is disabled during wind down.
-    _hitbox_collision_shape.set_deferred('disabled', true)
-    _animate_beam_width(_line.width, 0, WIND_DOWN_DURATION)
+    _start_wind_down()
     yield(_tween, 'tween_all_completed')
 
     # Deactivate laser.
@@ -91,7 +99,8 @@ func _cast_laser_beam() -> void:
     var collision_point_local = _get_collision_point_local()
 
     # Update the end of the line representing the beam.
-    _line.points[1] = collision_point_local
+    _beam_end.position = collision_point_local
+    _line.points[1] = _beam_end.position
 
     if _current_state == State.SHOOT:
         # Update collision shape.
@@ -108,10 +117,25 @@ func _get_collision_point_local() -> Vector2:
     else:
         return _raycast.cast_to
 
-func _animate_beam_width(old: float, new: float, duration: float) -> void:
-    _tween.remove_all()
-    _tween.interpolate_property(_line, 'width', old, new, duration)
-    _tween.start()
+func _interpolate_beam_width(
+    old: float,
+    new: float,
+    duration: float,
+    delay: float = 0.0
+) -> void:
+    _tween.interpolate_property(
+        _line, 'width', old, new, duration, Tween.TRANS_QUAD, Tween.EASE_IN_OUT,
+        delay)
+
+func _interpolate_impact_sprite_radius(
+    old: float,
+    new: float,
+    duration: float,
+    delay: float = 0.0
+) -> void:
+    _tween.interpolate_property(
+        _impact_sprite_mat, 'shader_param/impact_radius_uv', old, new, duration,
+        Tween.TRANS_QUAD, Tween.EASE_IN_OUT, delay)
 
 func _start_telegraph() -> void:
     var telegraph_width := 1.5
@@ -120,30 +144,59 @@ func _start_telegraph() -> void:
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
     _line.modulate = TELEGRAPH_COLOR
+    _beam_end.hide()
 
-    _wobble(telegraph_width, num_wobbles)
+    _tween.remove_all()
+    _setup_beam_wobble(telegraph_width, num_wobbles)
+    _tween.start()
 
 func _start_laser_shot() -> void:
     var shot_width := MAX_WIDTH
+    var impact_sprite_radius_uv := MAX_IMPACT_SPRITE_RADIUS_UV
     var num_wobbles := 8
 
     _current_state = State.SHOOT
     _hitbox_collision_shape.set_deferred('disabled', false)
     _line.modulate = SHOT_COLOR
+    _beam_end.show()
 
-    _wobble(shot_width, num_wobbles)
-
-func _wobble(shot_width: float, num_wobbles: int) -> void:
     _tween.remove_all()
+    _setup_beam_wobble(shot_width, num_wobbles)
+    _setup_impact_sprite_wobble(impact_sprite_radius_uv, num_wobbles)
+    _tween.start()
+
+func _start_wind_down() -> void:
+    _hitbox_collision_shape.set_deferred('disabled', true)
+
+    var current_radius_uv: float = _impact_sprite_mat.get_shader_param(
+        'impact_radius_uv')
+
+    _tween.remove_all()
+    _interpolate_beam_width(_line.width, 0, WIND_DOWN_DURATION)
+    _interpolate_impact_sprite_radius(current_radius_uv, 0, WIND_DOWN_DURATION)
+    _tween.start()
+
+func _setup_beam_wobble(shot_width: float, num_wobbles: int) -> void:
+    var wobble_duration := SHOT_DURATION / float(num_wobbles)
 
     for i in range(num_wobbles):
-        _tween.interpolate_property(
-            _line, 'width', shot_width, shot_width - 1,
-            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
-            Tween.EASE_IN_OUT, i * (SHOT_DURATION / float(num_wobbles)))
-        _tween.interpolate_property(
-            _line, 'width', shot_width - 1, shot_width,
-            SHOT_DURATION / float(num_wobbles), Tween.TRANS_QUAD,
-            Tween.EASE_IN_OUT, (i+1) * (SHOT_DURATION / float(num_wobbles)))
+        _interpolate_beam_width(
+            shot_width, shot_width - 1, wobble_duration,
+            i * (SHOT_DURATION / float(num_wobbles)))
+        _interpolate_beam_width(
+            shot_width - 1, shot_width, wobble_duration,
+            (i+1) * (SHOT_DURATION / float(num_wobbles)))
 
-    _tween.start()
+func _setup_impact_sprite_wobble(
+    impact_sprite_radius_uv: float,
+    num_wobbles: int
+) -> void:
+    var wobble_duration := SHOT_DURATION / float(num_wobbles)
+
+    for i in range(num_wobbles):
+        _interpolate_impact_sprite_radius(
+            impact_sprite_radius_uv, impact_sprite_radius_uv - 0.05,
+            wobble_duration, i * (SHOT_DURATION / float(num_wobbles)))
+        _interpolate_impact_sprite_radius(
+            impact_sprite_radius_uv - 0.05, impact_sprite_radius_uv,
+            wobble_duration, (i+1) * (SHOT_DURATION / float(num_wobbles)))
