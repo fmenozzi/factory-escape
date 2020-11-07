@@ -1,8 +1,6 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> void:
-    print('RANGED SENTRY DRONE DIED')
-
     sentry_drone.get_projectile_spawner().emit_signal('projectile_spawner_destroyed')
 
     sentry_drone.get_animation_player().stop()

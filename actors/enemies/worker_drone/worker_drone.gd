@@ -40,8 +40,6 @@ func _ready() -> void:
 
     _initial_global_position = global_position
 
-    _health.connect('health_changed', self, '_on_health_changed')
-
     _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
@@ -116,6 +114,3 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state_enum = new_state_enum
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
-
-func _on_health_changed(old_health: int, new_health: int) -> void:
-    print('WORKER DRONE HIT (new health: ', new_health, ')')

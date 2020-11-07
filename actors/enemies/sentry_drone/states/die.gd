@@ -1,8 +1,6 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
-    print('SENTRY DRONE DIED')
-
     sentry_drone.get_animation_player().stop()
 
     sentry_drone.set_hit_and_hurt_boxes_disabled(true)

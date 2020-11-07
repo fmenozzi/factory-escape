@@ -41,7 +41,6 @@ onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 
 func _ready() -> void:
-    _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
     set_direction(initial_direction)
@@ -140,9 +139,6 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state_enum = new_state_enum
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
-
-func _on_health_changed(old_health: int, new_health: int) -> void:
-    print('SENTRY DRONE HIT (new health: ', new_health, ')')
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:

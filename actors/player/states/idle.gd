@@ -50,7 +50,6 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             _look_up_down_keyboard_delay_timer.start()
             _started_timer = true
     if event.is_action_pressed('player_look_up_keyboard'):
-        print('is_action_pressed for player_look_up_keyboard')
         if _look_up_down_keyboard_delay_timer.is_stopped():
             _look_up_down_keyboard_delay_timer.start()
             _started_timer = true

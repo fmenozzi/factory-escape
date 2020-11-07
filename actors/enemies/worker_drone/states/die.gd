@@ -1,8 +1,6 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
-    print('WORKER DRONE DIED')
-
     worker_drone.set_hit_and_hurt_boxes_disabled(true)
     worker_drone.visible = false
 

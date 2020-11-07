@@ -30,9 +30,7 @@ func _on_test_rumble_pressed() -> void:
 func _on_rumble_started() -> void:
     _is_rumbling = true
     _test_rumble.text = 'Stop'
-    print('rumble started')
 
 func _on_rumble_stopped() -> void:
     _is_rumbling = false
     _test_rumble.text = 'Test Rumble'
-    print('rumble stopped')

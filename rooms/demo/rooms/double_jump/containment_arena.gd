@@ -177,5 +177,4 @@ func _spawn_enemy_at(enemy: Node2D, spawn_point_local: Vector2) -> void:
     alpha_tween.start()
 
 func _on_enemy_death(enemy: KinematicBody2D) -> void:
-    print(enemy.name, ' died')
     _current_wave_enemy_count -= 1

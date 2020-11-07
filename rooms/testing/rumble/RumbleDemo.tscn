@@ -51,13 +51,13 @@ margin_bottom = 46.0
 alignment = 1
 
 [node name="Type" type="OptionButton" parent="World/Rooms/RumblePlayground/RumbleControls/Container/Settings" index="0"]
-margin_left = 91.0
-margin_right = 107.0
+margin_left = 93.0
+margin_right = 104.0
 margin_bottom = 23.0
 
 [node name="Duration" type="SpinBox" parent="World/Rooms/RumblePlayground/RumbleControls/Container/Settings" index="1"]
-margin_left = 111.0
-margin_right = 197.0
+margin_left = 108.0
+margin_right = 194.0
 margin_bottom = 23.0
 max_value = 2.0
 step = 0.1

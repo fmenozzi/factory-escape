@@ -137,9 +137,6 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
 
-func _on_health_changed(old_health: int, new_health: int) -> void:
-    print('SLUGGISH FAILURE HIT (new health: ', new_health, ')')
-
 # Sluggish failures insta-die when touching hazards.
 func _on_hazard_hit(area: Area2D) -> void:
     if not area or not Collision.in_layer(area, 'hazards'):

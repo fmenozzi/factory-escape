@@ -122,8 +122,6 @@ func _reset_world() -> void:
         node.lamp_reset()
 
 func _on_player_died() -> void:
-    print('YOU DIED')
-
     _player.set_process_unhandled_input(false)
 
     # Make player invincible for duration of death transition so that they don't

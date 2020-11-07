@@ -58,7 +58,6 @@ onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
 func _ready() -> void:
-    _health.connect('health_changed', self, '_on_health_changed')
     _health.connect('died', self, '_on_died')
 
     set_direction(initial_direction)
@@ -195,9 +194,6 @@ func _transition_to_shoot_state(pause_before_shooting: bool = false) -> void:
         'new_state': State.SHOOT,
         'pause_before_shooting': pause_before_shooting,
     })
-
-func _on_health_changed(old_health: int, new_health: int) -> void:
-    print('STICKY DRONE HIT (new health: ', new_health, ')')
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:

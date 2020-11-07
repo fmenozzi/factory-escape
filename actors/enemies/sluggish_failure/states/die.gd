@@ -1,8 +1,6 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
-    print('SLUGGISH FAILURE DIED')
-
     failure.get_animation_player().stop()
 
     failure.set_hit_and_hurt_boxes_disabled(true)
