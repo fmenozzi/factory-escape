@@ -6,17 +6,28 @@ const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
 # The maximum width of the laser beam.
 const MAX_WIDTH: float = 4.0
 
-# The amount of time the laser spends winding up to its full width or down to
-# zero width during startup/wind down.
-const WIND_DOWN_DURATION: float = 0.25
+# The color of the laser beam during the telegraph phase.
+const TELEGRAPH_COLOR: Color = Color('ff4f78')
 
 # The amount of time the laser spends telegraphing the subsequent shot, during
 # which the player cannot be harmed.
 const TELEGRAPH_DURATION: float = 1.0
 
+# The color of the laser beam during the shoot phase.
+const SHOT_COLOR: Color = Color(
+    TELEGRAPH_COLOR.r * 1.3,
+    TELEGRAPH_COLOR.g * 1.3,
+    TELEGRAPH_COLOR.b * 1.3,
+    TELEGRAPH_COLOR.a
+)
+
 # The amount of time the laser spends shooting, during which it remains active
 # and can harm the player.
 const SHOT_DURATION: float = 1.0
+
+# The amount of time the laser spends winding up to its full width or down to
+# zero width during startup/wind down.
+const WIND_DOWN_DURATION: float = 0.25
 
 enum State {
     INACTIVE,
@@ -108,6 +119,7 @@ func _start_telegraph() -> void:
 
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
+    _line.modulate = TELEGRAPH_COLOR
 
     _wobble(telegraph_width, num_wobbles)
 
@@ -117,6 +129,7 @@ func _start_laser_shot() -> void:
 
     _current_state = State.SHOOT
     _hitbox_collision_shape.set_deferred('disabled', false)
+    _line.modulate = SHOT_COLOR
 
     _wobble(shot_width, num_wobbles)
 
