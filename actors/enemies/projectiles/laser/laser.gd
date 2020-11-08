@@ -1,4 +1,5 @@
 extends Node2D
+class_name Laser
 
 signal shot_finished
 signal shot_cancelled

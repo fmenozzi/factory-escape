@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://rooms/Room.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/enemies/projectiles/laser/BetterLaser.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/projectiles/laser/Laser.tscn" type="PackedScene" id=3]
 [ext_resource path="res://rooms/testing/lasers/laser_playground.gd" type="Script" id=4]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=5]
 
@@ -47,7 +47,7 @@ position = Vector2( 248, 160 )
 position = Vector2( 0, -72 )
 shape = SubResource( 3 )
 
-[node name="BetterLaser" parent="World/Rooms/LaserPlayground" index="9" instance=ExtResource( 3 )]
+[node name="Laser" parent="World/Rooms/LaserPlayground" index="9" instance=ExtResource( 3 )]
 position = Vector2( 160, 64 )
 
 [node name="ShootTimer" type="Timer" parent="World/Rooms/LaserPlayground" index="10"]

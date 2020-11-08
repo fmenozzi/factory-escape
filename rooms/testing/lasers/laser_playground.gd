@@ -2,7 +2,7 @@ extends Room
 
 const ROTATION_SPEED_DEG := 45.0
 
-onready var _laser = $BetterLaser
+onready var _laser = $Laser
 onready var _shoot_timer: Timer = $ShootTimer
 
 func _ready() -> void:
@@ -12,16 +12,14 @@ func _ready() -> void:
     _shoot_timer.connect('timeout', self, '_on_timeout')
     _shoot_timer.start()
 
-    $BetterLaser.shoot()
+    _laser.shoot()
 
 func _unhandled_input(event):
     if event.is_action_pressed('ui_accept'):
-        print('cancelling')
-        $BetterLaser.cancel()
+        _laser.cancel()
 
 func _physics_process(delta: float) -> void:
-    #return
-    $BetterLaser.rotate(deg2rad(ROTATION_SPEED_DEG) * delta)
+    _laser.rotate(deg2rad(ROTATION_SPEED_DEG) * delta)
 
 func _on_timeout() -> void:
-    $BetterLaser.shoot()
+    _laser.shoot()
