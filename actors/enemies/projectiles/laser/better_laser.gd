@@ -1,5 +1,8 @@
 extends Node2D
 
+signal shot_finished
+signal shot_cancelled
+
 # The maximum length of the laser beam.
 const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
 
@@ -100,6 +103,11 @@ func shoot() -> void:
     # Deactivate laser.
     set_physics_process(false)
     hide()
+
+    if _current_state == State.CANCELLED:
+        emit_signal('shot_cancelled')
+    else:
+        emit_signal('shot_finished')
 
     _current_state = State.INACTIVE
 
