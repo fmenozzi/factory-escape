@@ -39,6 +39,7 @@ enum State {
     INACTIVE,
     TELEGRAPH,
     SHOOT,
+    CANCELLED,
 }
 
 var _current_state: int = State.INACTIVE
@@ -102,6 +103,9 @@ func shoot() -> void:
 
     _current_state = State.INACTIVE
 
+func cancel() -> void:
+    _current_state = State.CANCELLED
+
 func _cast_laser_beam() -> void:
     # Get the local coordinates of the point where the laser actually makes
     # contact
@@ -112,12 +116,18 @@ func _cast_laser_beam() -> void:
     _outer_beam.points[1] = _beam_end.position
     _inner_beam.points[1] = _beam_end.position
 
-    if _current_state == State.SHOOT:
-        # Update collision shape.
-        _hitbox_collision_shape.shape.extents = Vector2(
-            collision_point_local.length() / 2.0, (MAX_WIDTH_OUTER / 2.0) - 1)
-        _hitbox_collision_shape.rotation = collision_point_local.angle()
-        _hitbox_collision_shape.position = collision_point_local / 2.0
+    match _current_state:
+        State.SHOOT:
+            # Update collision shape.
+            _hitbox_collision_shape.shape.extents = Vector2(
+                collision_point_local.length() / 2.0, (MAX_WIDTH_OUTER / 2.0) - 1)
+            _hitbox_collision_shape.rotation = collision_point_local.angle()
+            _hitbox_collision_shape.position = collision_point_local / 2.0
+
+        State.CANCELLED:
+            _hitbox_collision_shape.set_deferred('disabled', true)
+            hide()
+            set_physics_process(false)
 
 func _get_collision_point_local() -> Vector2:
     _raycast.force_raycast_update()
@@ -166,11 +176,12 @@ func _start_laser_shot() -> void:
     var impact_sprite_radius_uv := MAX_IMPACT_SPRITE_RADIUS_UV
     var num_wobbles := 8
 
-    _current_state = State.SHOOT
-    _hitbox_collision_shape.set_deferred('disabled', false)
-    _impact_sparks.emitting = true
-    _outer_beam.modulate = SHOT_COLOR
-    _beam_end.show()
+    if _current_state != State.CANCELLED:
+        _current_state = State.SHOOT
+        _hitbox_collision_shape.set_deferred('disabled', false)
+        _impact_sparks.emitting = true
+        _outer_beam.modulate = SHOT_COLOR
+        _beam_end.show()
 
     _tween.remove_all()
     _setup_beam_wobble(MAX_WIDTH_OUTER, MAX_WIDTH_INNER, num_wobbles)
