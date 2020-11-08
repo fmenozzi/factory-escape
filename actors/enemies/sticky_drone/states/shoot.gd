@@ -19,7 +19,8 @@ func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
 
     # Shoot laser at player's current location.
     laser.connect('shot_finished', self, '_on_shot_finished')
-    laser.shoot(laser.to_local(_player.get_center()))
+    laser.look_at(_player.get_center())
+    laser.shoot()
 
 func exit(sticky_drone: StickyDrone) -> void:
     pass

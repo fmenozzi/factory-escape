@@ -53,7 +53,7 @@ onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
-onready var _laser: Laser = $Laser
+onready var _laser = $Laser
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
@@ -197,4 +197,7 @@ func _transition_to_shoot_state(pause_before_shooting: bool = false) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
+    # Make sure to cancel laser shot so that an invisible-but-active laser
+    # doesn't hit the player.
+    _laser.cancel()
     _change_state({'new_state': State.DIE})

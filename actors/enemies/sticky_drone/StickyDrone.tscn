@@ -7,7 +7,7 @@
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/enemies/sticky_drone/textures/sticky-drone.png" type="Texture" id=7]
-[ext_resource path="res://actors/enemies/projectiles/laser/Laser.tscn" type="PackedScene" id=8]
+[ext_resource path="res://actors/enemies/projectiles/laser/BetterLaser.tscn" type="PackedScene" id=8]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/sticky_drone/states/shoot.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/sticky_drone/states/crouch.gd" type="Script" id=11]
@@ -222,13 +222,6 @@ collision_mask = 272
 position = Vector2( -0.5, -6.5 )
 shape = SubResource( 8 )
 
-[node name="Laser" parent="." instance=ExtResource( 8 )]
-show_behind_parent = true
-position = Vector2( 0, -12 )
-outer_beam_width = 4.0
-inner_beam_width = 2.0
-beam_impact_radius = 2.0
-
 [node name="LedgeDetectorRaycasts" type="Node2D" parent="."]
 
 [node name="Left" type="RayCast2D" parent="LedgeDetectorRaycasts"]
@@ -242,3 +235,7 @@ position = Vector2( 4, 0 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 4
+
+[node name="Laser" parent="." instance=ExtResource( 8 )]
+show_behind_parent = true
+position = Vector2( 0, -12 )
