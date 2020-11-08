@@ -3,20 +3,23 @@ extends Node2D
 # The maximum length of the laser beam.
 const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
 
-# The maximum width of the laser beam.
-const MAX_WIDTH: float = 4.0
+# The maximum width of the outer beam.
+const MAX_WIDTH_OUTER: float = 4.0
+
+# The maximum width of the inner beam.
+const MAX_WIDTH_INNER: float = 2.0
 
 # The maximum radius of the impact sprite in UV coordinates.
 const MAX_IMPACT_SPRITE_RADIUS_UV: float = 0.35
 
-# The color of the laser beam during the telegraph phase.
+# The color of the outer beam during the telegraph phase.
 const TELEGRAPH_COLOR: Color = Color('ff4f78')
 
 # The amount of time the laser spends telegraphing the subsequent shot, during
 # which the player cannot be harmed.
 const TELEGRAPH_DURATION: float = 1.0
 
-# The color of the laser beam during the shoot phase.
+# The color of the outer beam during the shoot phase.
 const SHOT_COLOR: Color = Color(
     TELEGRAPH_COLOR.r * 1.3,
     TELEGRAPH_COLOR.g * 1.3,
@@ -41,7 +44,8 @@ enum State {
 var _current_state: int = State.INACTIVE
 
 onready var _raycast: RayCast2D = $RayCast2D
-onready var _line: Line2D = $Line2D
+onready var _outer_beam: Line2D = $OuterBeam
+onready var _inner_beam: Line2D = $InnerBeam
 onready var _tween: Tween = $WidthTween
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _beam_end: Position2D = $BeamEnd
@@ -51,9 +55,13 @@ onready var _impact_sprite_mat: ShaderMaterial = _impact_sprite.get_material()
 func _ready() -> void:
     _raycast.cast_to = Vector2(MAX_LENGTH, 0)
 
-    _line.width = MAX_WIDTH
-    _line.add_point(Vector2.ZERO)
-    _line.add_point(_raycast.cast_to)
+    _outer_beam.width = MAX_WIDTH_OUTER
+    _outer_beam.add_point(Vector2.ZERO)
+    _outer_beam.add_point(_raycast.cast_to)
+
+    _inner_beam.width = MAX_WIDTH_INNER
+    _inner_beam.add_point(Vector2.ZERO)
+    _inner_beam.add_point(_raycast.cast_to)
 
     _hitbox_collision_shape.shape = RectangleShape2D.new()
     _hitbox_collision_shape.shape.extents = Vector2.ZERO
@@ -100,12 +108,13 @@ func _cast_laser_beam() -> void:
 
     # Update the end of the line representing the beam.
     _beam_end.position = collision_point_local
-    _line.points[1] = _beam_end.position
+    _outer_beam.points[1] = _beam_end.position
+    _inner_beam.points[1] = _beam_end.position
 
     if _current_state == State.SHOOT:
         # Update collision shape.
         _hitbox_collision_shape.shape.extents = Vector2(
-            collision_point_local.length() / 2.0, (MAX_WIDTH / 2.0) - 1)
+            collision_point_local.length() / 2.0, (MAX_WIDTH_OUTER / 2.0) - 1)
         _hitbox_collision_shape.rotation = collision_point_local.angle()
         _hitbox_collision_shape.position = collision_point_local / 2.0
 
@@ -118,13 +127,14 @@ func _get_collision_point_local() -> Vector2:
         return _raycast.cast_to
 
 func _interpolate_beam_width(
+    beam: Line2D,
     old: float,
     new: float,
     duration: float,
     delay: float = 0.0
 ) -> void:
     _tween.interpolate_property(
-        _line, 'width', old, new, duration, Tween.TRANS_QUAD, Tween.EASE_IN_OUT,
+        beam, 'width', old, new, duration, Tween.TRANS_QUAD, Tween.EASE_IN_OUT,
         delay)
 
 func _interpolate_impact_sprite_radius(
@@ -138,30 +148,30 @@ func _interpolate_impact_sprite_radius(
         Tween.TRANS_QUAD, Tween.EASE_IN_OUT, delay)
 
 func _start_telegraph() -> void:
-    var telegraph_width := 1.5
+    var telegraph_width_outer := 1.5
+    var telegraph_width_inner := 0.0
     var num_wobbles := 6
 
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
-    _line.modulate = TELEGRAPH_COLOR
+    _outer_beam.modulate = TELEGRAPH_COLOR
     _beam_end.hide()
 
     _tween.remove_all()
-    _setup_beam_wobble(telegraph_width, num_wobbles)
+    _setup_beam_wobble(telegraph_width_outer, telegraph_width_inner, num_wobbles)
     _tween.start()
 
 func _start_laser_shot() -> void:
-    var shot_width := MAX_WIDTH
     var impact_sprite_radius_uv := MAX_IMPACT_SPRITE_RADIUS_UV
     var num_wobbles := 8
 
     _current_state = State.SHOOT
     _hitbox_collision_shape.set_deferred('disabled', false)
-    _line.modulate = SHOT_COLOR
+    _outer_beam.modulate = SHOT_COLOR
     _beam_end.show()
 
     _tween.remove_all()
-    _setup_beam_wobble(shot_width, num_wobbles)
+    _setup_beam_wobble(MAX_WIDTH_OUTER, MAX_WIDTH_INNER, num_wobbles)
     _setup_impact_sprite_wobble(impact_sprite_radius_uv, num_wobbles)
     _tween.start()
 
@@ -172,19 +182,33 @@ func _start_wind_down() -> void:
         'impact_radius_uv')
 
     _tween.remove_all()
-    _interpolate_beam_width(_line.width, 0, WIND_DOWN_DURATION)
+    _interpolate_beam_width(_outer_beam, _outer_beam.width, 0, WIND_DOWN_DURATION)
+    _interpolate_beam_width(_inner_beam, _inner_beam.width, 0, WIND_DOWN_DURATION)
     _interpolate_impact_sprite_radius(current_radius_uv, 0, WIND_DOWN_DURATION)
     _tween.start()
 
-func _setup_beam_wobble(shot_width: float, num_wobbles: int) -> void:
+func _setup_beam_wobble(
+    outer_width: float,
+    inner_width: float,
+    num_wobbles: int
+) -> void:
     var wobble_duration := SHOT_DURATION / float(num_wobbles)
 
     for i in range(num_wobbles):
+        # Wobble outer beam.
         _interpolate_beam_width(
-            shot_width, shot_width - 1, wobble_duration,
+            _outer_beam, outer_width, outer_width - 1, wobble_duration,
             i * (SHOT_DURATION / float(num_wobbles)))
         _interpolate_beam_width(
-            shot_width - 1, shot_width, wobble_duration,
+            _outer_beam, outer_width - 1, outer_width, wobble_duration,
+            (i+1) * (SHOT_DURATION / float(num_wobbles)))
+
+        # Wobble inner beam.
+        _interpolate_beam_width(
+            _inner_beam, inner_width, inner_width - 1, wobble_duration,
+            i * (SHOT_DURATION / float(num_wobbles)))
+        _interpolate_beam_width(
+            _inner_beam, inner_width - 1, inner_width, wobble_duration,
             (i+1) * (SHOT_DURATION / float(num_wobbles)))
 
 func _setup_impact_sprite_wobble(
