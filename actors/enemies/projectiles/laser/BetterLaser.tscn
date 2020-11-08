@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/enemies/projectiles/laser/better_laser.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/projectiles/laser/textures/beam.png" type="Texture" id=2]
@@ -8,6 +8,21 @@
 shader = ExtResource( 3 )
 shader_param/impact_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/impact_radius_uv = 0.5
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 0.309804, 0.470588, 1, 1, 0.309804, 0.470588, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 40.0
+gravity = Vector3( 1, 0, 0 )
+initial_velocity = -50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 4 )
 
 [node name="BetterLaser" type="Node2D"]
 script = ExtResource( 1 )
@@ -45,3 +60,11 @@ position = Vector2( 10, 0 )
 [node name="BeamImpact" type="Sprite" parent="BeamEnd"]
 material = SubResource( 1 )
 texture = ExtResource( 2 )
+
+[node name="ImpactSparks" type="Particles2D" parent="BeamEnd"]
+emitting = false
+amount = 10
+lifetime = 0.5
+randomness = 1.0
+draw_order = 1
+process_material = SubResource( 2 )

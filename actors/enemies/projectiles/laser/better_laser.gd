@@ -51,6 +51,7 @@ onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _beam_end: Position2D = $BeamEnd
 onready var _impact_sprite: Sprite = $BeamEnd/BeamImpact
 onready var _impact_sprite_mat: ShaderMaterial = _impact_sprite.get_material()
+onready var _impact_sparks: Particles2D = $BeamEnd/ImpactSparks
 
 func _ready() -> void:
     _raycast.cast_to = Vector2(MAX_LENGTH, 0)
@@ -167,6 +168,7 @@ func _start_laser_shot() -> void:
 
     _current_state = State.SHOOT
     _hitbox_collision_shape.set_deferred('disabled', false)
+    _impact_sparks.emitting = true
     _outer_beam.modulate = SHOT_COLOR
     _beam_end.show()
 
@@ -180,6 +182,8 @@ func _start_wind_down() -> void:
 
     var current_radius_uv: float = _impact_sprite_mat.get_shader_param(
         'impact_radius_uv')
+
+    _impact_sparks.emitting = false
 
     _tween.remove_all()
     _interpolate_beam_width(_outer_beam, _outer_beam.width, 0, WIND_DOWN_DURATION)
