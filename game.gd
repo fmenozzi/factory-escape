@@ -96,8 +96,6 @@ func _set_player_starting_room() -> void:
 
     assert(starting_room != null)
 
-    starting_room.show()
-
     _player.curr_room = starting_room
     _player.prev_room = starting_room
     _player.get_camera().fit_camera_limits_to_room(starting_room)

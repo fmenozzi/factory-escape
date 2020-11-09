@@ -15,8 +15,6 @@ func _ready() -> void:
 
     pause()
 
-    hide()
-
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
 # the old room to the closest anchor in the new room.
@@ -141,9 +139,6 @@ func _on_player_entered(area: Area2D) -> void:
         player.prev_room = player.curr_room
         player.curr_room = self
 
-        # Show the new room.
-        player.curr_room.show()
-
         # Pause processing on the old room, transition to the new one, and
         # then begin processing on the new room once the transition is
         # complete.
@@ -152,7 +147,5 @@ func _on_player_entered(area: Area2D) -> void:
         yield(camera, 'transition_completed')
         player.curr_room.resume()
 
-        # Reset enemies in the previous room and hide it once the transition
-        # completes.
+        # Reset enemies in the previous room once the transition completes.
         player.prev_room.reset_enemies()
-        player.prev_room.hide()
