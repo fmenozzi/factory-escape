@@ -2,6 +2,8 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 export(String, 'expand', 'contract') var animation := 'contract'
 
+const PAUSE_TIME: float = 0.2
+
 func _ready() -> void:
     assert(not animation.empty())
 
@@ -22,10 +24,18 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
     if not failure.get_animation_player().is_playing():
         match animation:
             'expand':
-                return {'new_state': SluggishFailure.State.CONTRACT}
+                return {
+                    'new_state': SluggishFailure.State.PAUSE,
+                    'next_move_state': SluggishFailure.State.CONTRACT,
+                    'pause_time': PAUSE_TIME,
+                }
 
             'contract':
-                return {'new_state': SluggishFailure.State.EXPAND}
+                return {
+                    'new_state': SluggishFailure.State.PAUSE,
+                    'next_move_state': SluggishFailure.State.EXPAND,
+                    'pause_time': PAUSE_TIME,
+                }
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)
