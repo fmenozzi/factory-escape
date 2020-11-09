@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/sluggish_failure/sluggish_failure.gd" type="Script" id=4]
-[ext_resource path="res://actors/enemies/sluggish_failure/states/walk.gd" type="Script" id=5]
+[ext_resource path="res://actors/enemies/sluggish_failure/states/move.gd" type="Script" id=5]
 [ext_resource path="res://actors/enemies/sluggish_failure/textures/sluggish-failure.png" type="Texture" id=6]
 [ext_resource path="res://actors/enemies/sluggish_failure/states/return_to_ledge.gd" type="Script" id=7]
 [ext_resource path="res://actors/enemies/sluggish_failure/states/stagger.gd" type="Script" id=8]
@@ -16,10 +16,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "walk"
-length = 2.1
-loop = true
+[sub_resource type="Animation" id=3]
+resource_name = "contract"
+length = 0.8
+step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -27,10 +27,27 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "expand"
+length = 0.6
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6 ]
 }
 
 [node name="SluggishFailure" type="KinematicBody2D" groups=[
@@ -59,9 +76,6 @@ pushback_duration = 0.15
 
 [node name="States" type="Node" parent="."]
 
-[node name="Walk" type="Node" parent="States"]
-script = ExtResource( 5 )
-
 [node name="Stagger" type="Node" parent="States"]
 script = ExtResource( 8 )
 
@@ -73,6 +87,13 @@ script = ExtResource( 7 )
 
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 12 )
+
+[node name="Expand" type="Node" parent="States"]
+script = ExtResource( 5 )
+animation = "expand"
+
+[node name="Contract" type="Node" parent="States"]
+script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -86,7 +107,8 @@ position = Vector2( 0, -6 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/walk = SubResource( 2 )
+anims/contract = SubResource( 3 )
+anims/expand = SubResource( 4 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64

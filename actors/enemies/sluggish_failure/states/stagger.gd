@@ -13,7 +13,7 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
     var pushback_manager := failure.get_pushback_manager()
 
     if not pushback_manager.is_being_pushed_back():
-        return {'new_state': SluggishFailure.State.WALK}
+        return {'new_state': SluggishFailure.State.CONTRACT}
 
     failure.move(pushback_manager.get_pushback_velocity())
 

@@ -13,7 +13,7 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
 
     if failure.is_on_floor():
         failure.emit_dust_puff()
-        return {'new_state': SluggishFailure.State.WALK}
+        return {'new_state': SluggishFailure.State.CONTRACT}
 
     var gravity := physics_manager.get_gravity()
     _velocity.y = min(

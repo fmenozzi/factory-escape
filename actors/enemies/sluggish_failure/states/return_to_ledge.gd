@@ -15,7 +15,7 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
     var physics_manager := failure.get_physics_manager()
 
     if not failure.is_off_ledge():
-        return {'new_state': SluggishFailure.State.WALK}
+        return {'new_state': SluggishFailure.State.CONTRACT}
 
     failure.move(
         Vector2(_direction_to_ledge * physics_manager.get_movement_speed(), 10))

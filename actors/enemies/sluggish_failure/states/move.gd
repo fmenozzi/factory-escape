@@ -1,7 +1,12 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
+export(String, 'expand', 'contract') var animation := 'contract'
+
+func _ready() -> void:
+    assert(not animation.empty())
+
 func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
-    failure.get_animation_player().play('walk')
+    failure.get_animation_player().play(animation)
 
 func exit(failure: SluggishFailure) -> void:
     pass
@@ -11,6 +16,16 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
 
     failure.move(
         Vector2(failure.direction * physics_manager.get_movement_speed(), 10))
+
+    # Switch to next phase in two-phase 'move' cycle once the current animation
+    # finishes.
+    if not failure.get_animation_player().is_playing():
+        match animation:
+            'expand':
+                return {'new_state': SluggishFailure.State.CONTRACT}
+
+            'contract':
+                return {'new_state': SluggishFailure.State.EXPAND}
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)

@@ -3,7 +3,8 @@ class_name SluggishFailure
 
 enum State {
     NO_CHANGE,
-    WALK,
+    EXPAND,
+    CONTRACT,
     STAGGER,
     FALL,
     RETURN_TO_LEDGE,
@@ -11,10 +12,11 @@ enum State {
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
-export(State) var initial_state := State.WALK
+export(State) var initial_state := State.CONTRACT
 
 onready var STATES := {
-    State.WALK:            $States/Walk,
+    State.EXPAND:          $States/Expand,
+    State.CONTRACT:        $States/Contract,
     State.STAGGER:         $States/Stagger,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
