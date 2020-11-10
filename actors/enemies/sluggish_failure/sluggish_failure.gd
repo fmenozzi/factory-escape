@@ -88,7 +88,10 @@ func take_hit(damage: int, player: Player) -> void:
         # TODO: Make death nicer (animation, effects, etc.).
         _change_state({'new_state': State.DIE})
     else:
+        # Once hit, the failure will attempt to flee the player by quickly
+        # moving away from them.
         speed_multiplier = FRIGHTENED_SPEED_MULTIPLIER
+        set_direction(Util.direction(player, self))
         _change_state({
             'new_state': State.STAGGER,
             'direction_from_hit': Util.direction(player, self),

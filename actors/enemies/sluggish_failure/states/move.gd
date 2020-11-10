@@ -17,6 +17,8 @@ func exit(failure: SluggishFailure) -> void:
 func update(failure: SluggishFailure, delta: float) -> Dictionary:
     var physics_manager := failure.get_physics_manager()
 
+    var is_frightened := failure.speed_multiplier > 1.0
+
     failure.move(
         Vector2(
             failure.direction * failure.speed_multiplier * physics_manager.get_movement_speed(),
@@ -41,14 +43,16 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
                 }
 
     if failure.is_on_wall():
-        failure.set_direction(-1 * failure.direction)
+        if not is_frightened:
+            failure.set_direction(-1 * failure.direction)
     elif not failure.is_on_floor():
         return {'new_state': SluggishFailure.State.FALL}
     elif failure.is_off_ledge():
-        return {
-            'new_state': SluggishFailure.State.RETURN_TO_LEDGE,
-            'direction_to_ledge': _get_direction_to_ledge(failure),
-        }
+        if not is_frightened:
+            return {
+                'new_state': SluggishFailure.State.RETURN_TO_LEDGE,
+                'direction_to_ledge': _get_direction_to_ledge(failure),
+            }
 
     return {'new_state': SluggishFailure.State.NO_CHANGE}
 
