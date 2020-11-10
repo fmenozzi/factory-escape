@@ -2,7 +2,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 export(String, 'expand', 'contract') var animation := 'contract'
 
-const SPEED_MULTIPLIER: float = 2.0
+const SPEED_MULTIPLIER: float = 3.0
 const PAUSE_TIME: float = 0.2
 
 onready var _timer: Timer = $FastWalkDurationTimer
