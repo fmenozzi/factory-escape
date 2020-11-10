@@ -20,7 +20,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
     if failure.is_on_floor():
         failure.emit_dust_puff()
         if _aggro:
-            return {'new_state': LeapingFailure.State.FAST_WALK}
+            return {'new_state': LeapingFailure.State.CONTRACT_FAST}
         else:
             return {'new_state': LeapingFailure.State.CONTRACT}
 

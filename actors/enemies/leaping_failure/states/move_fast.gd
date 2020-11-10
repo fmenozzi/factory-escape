@@ -1,16 +1,17 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
+export(String, 'expand', 'contract') var animation := 'contract'
+
 const SPEED_MULTIPLIER: float = 2.0
 
 onready var _timer: Timer = $FastWalkDurationTimer
 
-var _player: Player = null
+func _ready() -> void:
+    assert(not animation.empty())
 
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
-    _player = Util.get_player()
-
-    # Play standard walk animation but faster.
-    failure.get_animation_player().play('walk', -1, SPEED_MULTIPLIER, false)
+    # Play standard animation but faster.
+    failure.get_animation_player().play(animation, -1, SPEED_MULTIPLIER, false)
 
     # Failure will wait up to one second before jumping again.
     _timer.one_shot = true
@@ -18,7 +19,7 @@ func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     _timer.start()
 
     # Face the player.
-    failure.set_direction(Util.direction(failure, _player))
+    failure.set_direction(Util.direction(failure, Util.get_player()))
 
 func exit(failure: LeapingFailure) -> void:
     _timer.stop()
@@ -30,6 +31,17 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
     var speed := physics_manager.get_movement_speed()
 
     failure.move(Vector2(failure.direction * speed * SPEED_MULTIPLIER, 10))
+
+    # Switch to next phase in two-phase 'move' cycle once the current animation
+    # finishes.
+    if not failure.get_animation_player().is_playing():
+        match animation:
+            'expand':
+                return {'new_state': LeapingFailure.State.CONTRACT_FAST}
+
+            'contract':
+                return {'new_state': LeapingFailure.State.EXPAND_FAST}
+
 
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)
