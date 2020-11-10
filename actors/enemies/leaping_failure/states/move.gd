@@ -2,6 +2,8 @@ extends Node
 
 export(String, 'expand', 'contract') var animation := 'contract'
 
+const PAUSE_TIME: float = 0.2
+
 func _ready() -> void:
     assert(not animation.empty())
 
@@ -23,10 +25,18 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
     if not failure.get_animation_player().is_playing():
         match animation:
             'expand':
-                return {'new_state': LeapingFailure.State.CONTRACT}
+                return {
+                    'new_state': LeapingFailure.State.PAUSE,
+                    'next_move_state': LeapingFailure.State.CONTRACT,
+                    'pause_time': PAUSE_TIME,
+                }
 
             'contract':
-                return {'new_state': LeapingFailure.State.EXPAND}
+                return {
+                    'new_state': LeapingFailure.State.PAUSE,
+                    'next_move_state': LeapingFailure.State.EXPAND,
+                    'pause_time': PAUSE_TIME,
+                }
 
     if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():
         return {'new_state': LeapingFailure.State.ALERTED}
