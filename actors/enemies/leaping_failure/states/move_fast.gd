@@ -31,6 +31,9 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
 
     var speed := physics_manager.get_movement_speed()
 
+    # Always face the player when aggroed.
+    failure.set_direction(Util.direction(failure, Util.get_player()))
+
     failure.move(Vector2(failure.direction * speed * SPEED_MULTIPLIER, 10))
 
     # Switch to next phase in two-phase 'move' cycle once the current animation
