@@ -4,7 +4,8 @@ class_name LeapingFailure
 enum State {
     NO_CHANGE,
     NEXT_STATE_IN_SEQUENCE,
-    WALK,
+    EXPAND,
+    CONTRACT,
     FAST_WALK,
     RETURN_TO_LEDGE,
     ALERTED,
@@ -15,10 +16,11 @@ enum State {
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
-export(State) var initial_state := State.WALK
+export(State) var initial_state := State.CONTRACT
 
 onready var STATES := {
-    State.WALK:            $States/Walk,
+    State.EXPAND:          $States/Expand,
+    State.CONTRACT:        $States/Contract,
     State.FAST_WALK:       $States/FastWalk,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
     State.ALERTED:         $States/Alerted,

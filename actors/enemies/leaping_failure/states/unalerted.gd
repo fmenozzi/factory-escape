@@ -47,7 +47,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
     # Transition back to walk once out of "unaggro" radius.
     if _unalerted_duration_timer.is_stopped():
         if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
-            return {'new_state': LeapingFailure.State.WALK}
+            return {'new_state': LeapingFailure.State.CONTRACT}
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
 

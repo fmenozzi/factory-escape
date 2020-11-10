@@ -1,11 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/leaping_failure/textures/leaping-failure.png" type="Texture" id=3]
 [ext_resource path="res://actors/enemies/leaping_failure/leaping_failure.gd" type="Script" id=4]
-[ext_resource path="res://actors/enemies/leaping_failure/states/walk.gd" type="Script" id=5]
 [ext_resource path="res://actors/enemies/leaping_failure/states/fall.gd" type="Script" id=6]
+[ext_resource path="res://actors/enemies/leaping_failure/states/move.gd" type="Script" id=7]
 [ext_resource path="res://actors/enemies/leaping_failure/states/return_to_ledge.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/leaping_failure/states/alerted.gd" type="Script" id=10]
@@ -22,6 +22,38 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "contract"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "expand"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 4 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "fall"
@@ -54,22 +86,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 2, 1, 0 ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 1.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4 ]
 }
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -111,8 +127,12 @@ pushback_duration = 0.15
 
 [node name="States" type="Node" parent="."]
 
-[node name="Walk" type="Node" parent="States"]
-script = ExtResource( 5 )
+[node name="Expand" type="Node" parent="States"]
+script = ExtResource( 7 )
+animation = "expand"
+
+[node name="Contract" type="Node" parent="States"]
+script = ExtResource( 7 )
 
 [node name="FastWalk" type="Node" parent="States"]
 script = ExtResource( 15 )
@@ -159,16 +179,16 @@ position = Vector2( 0, -28 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 3 )
 hframes = 5
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/contract = SubResource( 7 )
+anims/expand = SubResource( 8 )
 anims/fall = SubResource( 2 )
 anims/jump = SubResource( 3 )
-anims/walk = SubResource( 4 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64

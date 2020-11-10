@@ -1,11 +1,12 @@
-extends 'res://actors/enemies/enemy_state.gd'
+extends Node
 
-var _player: Player = null
+export(String, 'expand', 'contract') var animation := 'contract'
+
+func _ready() -> void:
+    assert(not animation.empty())
 
 func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
-    failure.get_animation_player().play('walk')
-
-    _player = Util.get_player()
+    failure.get_animation_player().play(animation)
 
 func exit(failure: LeapingFailure) -> void:
     pass
@@ -16,6 +17,16 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
 
     failure.move(
         Vector2(failure.direction * physics_manager.get_movement_speed(), 10))
+
+    # Switch to next phase in two-phase 'move' cycle once the current animation
+    # finishes.
+    if not failure.get_animation_player().is_playing():
+        match animation:
+            'expand':
+                return {'new_state': LeapingFailure.State.CONTRACT}
+
+            'contract':
+                return {'new_state': LeapingFailure.State.EXPAND}
 
     if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():
         return {'new_state': LeapingFailure.State.ALERTED}

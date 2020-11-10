@@ -22,7 +22,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
         if _aggro:
             return {'new_state': LeapingFailure.State.FAST_WALK}
         else:
-            return {'new_state': LeapingFailure.State.WALK}
+            return {'new_state': LeapingFailure.State.CONTRACT}
 
     var speed := physics_manager.get_horizontal_jump_speed()
     _velocity.x = speed * failure.direction
