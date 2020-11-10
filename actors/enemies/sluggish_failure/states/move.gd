@@ -8,7 +8,8 @@ func _ready() -> void:
     assert(not animation.empty())
 
 func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
-    failure.get_animation_player().play(animation)
+    failure.get_animation_player().play(
+        animation, -1, failure.speed_multiplier, false)
 
 func exit(failure: SluggishFailure) -> void:
     pass
@@ -17,7 +18,9 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
     var physics_manager := failure.get_physics_manager()
 
     failure.move(
-        Vector2(failure.direction * physics_manager.get_movement_speed(), 10))
+        Vector2(
+            failure.direction * failure.speed_multiplier * physics_manager.get_movement_speed(),
+            10))
 
     # Switch to next phase in two-phase 'move' cycle once the current animation
     # finishes.
@@ -27,14 +30,14 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
                 return {
                     'new_state': SluggishFailure.State.PAUSE,
                     'next_move_state': SluggishFailure.State.CONTRACT,
-                    'pause_time': PAUSE_TIME,
+                    'pause_time': PAUSE_TIME / failure.speed_multiplier,
                 }
 
             'contract':
                 return {
                     'new_state': SluggishFailure.State.PAUSE,
                     'next_move_state': SluggishFailure.State.EXPAND,
-                    'pause_time': PAUSE_TIME,
+                    'pause_time': PAUSE_TIME / failure.speed_multiplier,
                 }
 
     if failure.is_on_wall():

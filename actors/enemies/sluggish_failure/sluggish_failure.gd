@@ -25,7 +25,12 @@ onready var STATES := {
     State.DIE:             $States/Die,
 }
 
+# The speed multiplier to apply once the failure becomes frightened (i.e. after
+# being hit).
+const FRIGHTENED_SPEED_MULTIPLIER: float = 3.0
+
 var direction: int
+var speed_multiplier := 1.0
 
 var _initial_global_position: Vector2
 
@@ -83,6 +88,7 @@ func take_hit(damage: int, player: Player) -> void:
         # TODO: Make death nicer (animation, effects, etc.).
         _change_state({'new_state': State.DIE})
     else:
+        speed_multiplier = FRIGHTENED_SPEED_MULTIPLIER
         _change_state({
             'new_state': State.STAGGER,
             'direction_from_hit': Util.direction(player, self),
@@ -124,6 +130,7 @@ func lamp_reset() -> void:
     global_position = _initial_global_position
     set_direction(initial_direction)
     _health.heal_to_full()
+    speed_multiplier = 1.0
     _change_state({'new_state': initial_state})
 
 func _change_state(new_state_dict: Dictionary) -> void:

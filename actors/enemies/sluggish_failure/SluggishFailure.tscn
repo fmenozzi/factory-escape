@@ -17,7 +17,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "contract"
 length = 0.8
 step = 0.2
@@ -34,7 +34,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "expand"
 length = 0.6
 step = 0.2
@@ -113,8 +113,8 @@ position = Vector2( 0, -6 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/contract = SubResource( 3 )
-anims/expand = SubResource( 4 )
+anims/contract = SubResource( 2 )
+anims/expand = SubResource( 3 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
