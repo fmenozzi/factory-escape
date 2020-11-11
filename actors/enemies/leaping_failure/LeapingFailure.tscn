@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -12,7 +12,7 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/alerted.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://actors/enemies/leaping_failure/states/unalerted.gd" type="Script" id=12]
-[ext_resource path="res://actors/enemies/leaping_failure/states/jump.gd" type="Script" id=13]
+[ext_resource path="res://actors/enemies/leaping_failure/states/leap_up.gd" type="Script" id=13]
 [ext_resource path="res://actors/enemies/leaping_failure/states/takeoff.gd" type="Script" id=14]
 [ext_resource path="res://actors/enemies/leaping_failure/states/pause.gd" type="Script" id=15]
 [ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=16]
@@ -20,6 +20,7 @@
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=18]
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=19]
 [ext_resource path="res://actors/enemies/leaping_failure/states/die.gd" type="Script" id=20]
+[ext_resource path="res://actors/enemies/leaping_failure/states/leap_down.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
@@ -173,11 +174,11 @@ script = ExtResource( 19 )
 [node name="Takeoff" type="Node" parent="States/Leap"]
 script = ExtResource( 14 )
 
-[node name="Jump" type="Node" parent="States/Leap"]
+[node name="LeapUp" type="Node" parent="States/Leap"]
 script = ExtResource( 13 )
 
-[node name="Fall" type="Node" parent="States/Leap"]
-script = ExtResource( 6 )
+[node name="LeapDown" type="Node" parent="States/Leap"]
+script = ExtResource( 21 )
 
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 20 )

@@ -59,7 +59,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
     elif not failure.is_on_floor():
         return {
             'new_state': LeapingFailure.State.FALL,
-            'aggro': false,
+            'aggro': true,
         }
 
     if _timer.is_stopped():
