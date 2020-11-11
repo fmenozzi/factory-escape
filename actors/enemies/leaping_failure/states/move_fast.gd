@@ -54,18 +54,12 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
                     'pause_time': PAUSE_TIME / SPEED_MULTIPLIER,
                 }
 
-
     if failure.is_on_wall():
         failure.set_direction(-1 * failure.direction)
     elif not failure.is_on_floor():
         return {
             'new_state': LeapingFailure.State.FALL,
             'aggro': false,
-        }
-    elif failure.is_off_ledge():
-        return {
-            'new_state': LeapingFailure.State.RETURN_TO_LEDGE,
-            'direction_to_ledge': _get_direction_to_ledge(failure),
         }
 
     if _timer.is_stopped():
