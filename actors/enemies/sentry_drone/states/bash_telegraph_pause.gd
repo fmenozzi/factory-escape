@@ -1,7 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 # The time spent pausing before initiating the bash attack.
-const PAUSE_DURATION: float = 0.35
+const PAUSE_DURATION: float = 0.3
 
 var _direction_to_player: Vector2 = Vector2.ZERO
 
