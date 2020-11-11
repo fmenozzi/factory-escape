@@ -71,6 +71,8 @@ pushback_duration = 0.1
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 5 )
 
+[node name="TurnAroundDurationTimer" type="Timer" parent="States/Idle"]
+
 [node name="Alerted" type="Node" parent="States"]
 script = ExtResource( 15 )
 
