@@ -36,7 +36,7 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var aggro_manager := sentry_drone.get_aggro_manager()
 
     if _timer.is_stopped():
-        return {'new_state': SentryDrone.State.ATTACK}
+        return {'new_state': SentryDrone.State.FOLLOW_PLAYER}
 
     # Transition to unalerted state once outside of aggro radius or once the
     # player is no longer visible.

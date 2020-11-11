@@ -7,6 +7,7 @@ enum State {
     IDLE,
     ALERTED,
     UNALERTED,
+    FOLLOW_PLAYER,
     ATTACK,
     DIE,
 }
@@ -15,11 +16,12 @@ export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.IDLE
 
 onready var STATES := {
-    State.IDLE:      $States/Idle,
-    State.ALERTED:   $States/Alerted,
-    State.UNALERTED: $States/Unalerted,
-    State.ATTACK:    $States/Attack,
-    State.DIE:       $States/Die,
+    State.IDLE:          $States/Idle,
+    State.ALERTED:       $States/Alerted,
+    State.UNALERTED:     $States/Unalerted,
+    State.FOLLOW_PLAYER: $States/FollowPlayer,
+    State.ATTACK:        $States/Attack,
+    State.DIE:           $States/Die,
 }
 
 var direction: int
