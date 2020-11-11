@@ -60,7 +60,7 @@ script = ExtResource( 11 )
 
 [node name="AggroManager" parent="." instance=ExtResource( 13 )]
 aggro_radius_tiles = 4.0
-unaggro_radius_tiles = 6.0
+unaggro_radius_tiles = 16.0
 
 [node name="PushbackManager" parent="." instance=ExtResource( 19 )]
 pushback_distance_tiles = 0.5
