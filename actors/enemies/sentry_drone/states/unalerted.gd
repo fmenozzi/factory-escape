@@ -44,10 +44,13 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():
         return {'new_state': SentryDrone.State.ALERTED}
 
-    # Transition back to walk once out of "unaggro" radius.
+    # Fly back to starting point once out of unaggro radius.
     if _unalerted_duration_timer.is_stopped():
         if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
-            return {'new_state': SentryDrone.State.IDLE}
+            return {
+                'new_state': SentryDrone.State.FLY_TO_POINT,
+                'fly_to_point': sentry_drone.get_initial_global_position(),
+            }
 
     return {'new_state': SentryDrone.State.NO_CHANGE}
 

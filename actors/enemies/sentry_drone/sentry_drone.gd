@@ -8,6 +8,7 @@ enum State {
     ALERTED,
     UNALERTED,
     FOLLOW_PLAYER,
+    FLY_TO_POINT,
     ATTACK,
     DIE,
 }
@@ -20,6 +21,7 @@ onready var STATES := {
     State.ALERTED:       $States/Alerted,
     State.UNALERTED:     $States/Unalerted,
     State.FOLLOW_PLAYER: $States/FollowPlayer,
+    State.FLY_TO_POINT:  $States/FlyToPoint,
     State.ATTACK:        $States/Attack,
     State.DIE:           $States/Die,
 }
@@ -104,6 +106,9 @@ func get_animation_player() -> AnimationPlayer:
 
 func get_react_sprite() -> ReactSprite:
     return _react_sprite
+
+func get_initial_global_position() -> Vector2:
+    return _initial_global_position
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)
