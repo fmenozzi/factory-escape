@@ -33,8 +33,10 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     if sentry_drone.is_colliding():
         Screenshake.start(
             Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
-        # TODO: Maybe try to emit puff at contact point.
-        sentry_drone.emit_dust_puff()
+        for i in sentry_drone.get_slide_count():
+            # Emit dust puff at all collision positions.
+            var collision := sentry_drone.get_slide_collision(i)
+            Effects.spawn_dust_puff_at(collision.position)
         sentry_drone.move(-_direction_to_player * bash_speed)
         return {'new_state': SentryDrone.State.NEXT_STATE_IN_SEQUENCE}
 
