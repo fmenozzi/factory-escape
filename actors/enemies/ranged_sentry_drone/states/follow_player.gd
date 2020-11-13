@@ -34,7 +34,7 @@ func update(sentry_drone: RangedSentryDrone, delta: float) -> Dictionary:
 
     # Transition to unalerted state once outside of aggro radius or once the
     # player is no longer visible.
-    if not (aggro_manager.in_aggro_range() or aggro_manager.can_see_player()):
+    if not (aggro_manager.in_unaggro_range() and aggro_manager.can_see_player()):
         return {'new_state': RangedSentryDrone.State.UNALERTED}
 
     if _shoot_timer.is_stopped():
