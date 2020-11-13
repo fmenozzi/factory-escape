@@ -64,7 +64,7 @@ movement_speed_tiles_per_second = 4.0
 [node name="AggroManager" parent="." instance=ExtResource( 5 )]
 visible = false
 aggro_radius_tiles = 4.0
-unaggro_radius_tiles = 6.0
+unaggro_radius_tiles = 16.0
 
 [node name="PushbackManager" parent="." instance=ExtResource( 16 )]
 pushback_distance_tiles = 1.0
