@@ -26,6 +26,9 @@ func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
     if _walk_duration_timer.is_stopped():
         return {'new_state': StickyDrone.State.IDLE}
 
+    if sticky_drone.is_on_wall():
+        sticky_drone.set_direction(-1 * sticky_drone.direction)
+
     if sticky_drone.is_off_ledge():
         return {
             'new_state': StickyDrone.State.RETURN_TO_LEDGE,
