@@ -1,12 +1,15 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
-const WALK_DURATION: float = 2.0
+# The minimum number of seconds the drone walks for before returning to idle.
+# A small random value will be added to this to create the final timer
+# duration in order to avoid having all the drones walk around at the same time.
+const MIN_WALK_DURATION: float = 2.0
 
 onready var _walk_duration_timer: Timer = $WalkDurationTimer
 
 func _ready() -> void:
     _walk_duration_timer.one_shot = true
-    _walk_duration_timer.wait_time = WALK_DURATION
+    _walk_duration_timer.wait_time = MIN_WALK_DURATION + rand_range(0.0, 1.0)
 
 func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     sticky_drone.get_animation_player().play('walk')
