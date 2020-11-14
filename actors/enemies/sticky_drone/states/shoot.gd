@@ -29,10 +29,7 @@ func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
     var aggro_manager := sticky_drone.get_aggro_manager()
 
     if _shot_finished:
-        # Once aggroed, sticky drone will only unaggro when out of range, and
-        # NOT when player is no longer in line of sight (i.e. the drone will
-        # "track" the player through cover).
-        if aggro_manager.in_aggro_range():
+        if aggro_manager.in_unaggro_range() and aggro_manager.can_see_player():
             return {
                 'new_state': StickyDrone.State.SHOOT,
                 'pause_before_shooting': true

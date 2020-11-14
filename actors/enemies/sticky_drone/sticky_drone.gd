@@ -5,7 +5,7 @@ enum State {
     NO_CHANGE,
     IDLE,
     WALK,
-    RETURN_TO_LEDGE,a
+    RETURN_TO_LEDGE,
     ALERTED,
     UNALERTED,
     CROUCH,
