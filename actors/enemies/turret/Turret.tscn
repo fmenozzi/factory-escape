@@ -8,12 +8,13 @@
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=6]
 [ext_resource path="res://actors/enemies/turret/states/rotate.gd" type="Script" id=7]
 [ext_resource path="res://actors/enemies/turret/states/alerted.gd" type="Script" id=8]
-[ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=9]
+[ext_resource path="res://actors/enemies/shared/react_sprite/ReactSprite.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/turret/states/pause.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/turret/states/shoot.gd" type="Script" id=11]
 [ext_resource path="res://actors/enemies/turret/Scanner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/turret/states/die.gd" type="Script" id=14]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )

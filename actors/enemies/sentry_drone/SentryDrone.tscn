@@ -15,11 +15,12 @@
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/sentry_drone/states/unalerted.gd" type="Script" id=14]
 [ext_resource path="res://actors/enemies/sentry_drone/states/alerted.gd" type="Script" id=15]
-[ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=16]
+[ext_resource path="res://actors/enemies/shared/react_sprite/ReactSprite.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=17]
 [ext_resource path="res://actors/enemies/sentry_drone/states/die.gd" type="Script" id=18]
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=19]
 [ext_resource path="res://actors/enemies/sentry_drone/states/fly_to_point.gd" type="Script" id=20]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )

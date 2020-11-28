@@ -10,7 +10,7 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/return_to_ledge.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/leaping_failure/states/alerted.gd" type="Script" id=10]
-[ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=11]
+[ext_resource path="res://actors/enemies/shared/react_sprite/ReactSprite.tscn" type="PackedScene" id=11]
 [ext_resource path="res://actors/enemies/leaping_failure/states/unalerted.gd" type="Script" id=12]
 [ext_resource path="res://actors/enemies/leaping_failure/states/leap_up.gd" type="Script" id=13]
 [ext_resource path="res://actors/enemies/leaping_failure/states/takeoff.gd" type="Script" id=14]
@@ -21,6 +21,7 @@
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=19]
 [ext_resource path="res://actors/enemies/leaping_failure/states/die.gd" type="Script" id=20]
 [ext_resource path="res://actors/enemies/leaping_failure/states/leap_down.gd" type="Script" id=21]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )

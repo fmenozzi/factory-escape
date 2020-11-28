@@ -12,11 +12,12 @@
 [ext_resource path="res://actors/enemies/sticky_drone/states/shoot.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/sticky_drone/states/crouch.gd" type="Script" id=11]
 [ext_resource path="res://actors/enemies/sticky_drone/states/uncrouch.gd" type="Script" id=12]
-[ext_resource path="res://actors/enemies/ReactSprite.tscn" type="PackedScene" id=13]
+[ext_resource path="res://actors/enemies/shared/react_sprite/ReactSprite.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/sticky_drone/states/alerted.gd" type="Script" id=14]
 [ext_resource path="res://actors/enemies/sticky_drone/states/unalerted.gd" type="Script" id=15]
 [ext_resource path="res://actors/enemies/sticky_drone/states/die.gd" type="Script" id=16]
 [ext_resource path="res://actors/enemies/sticky_drone/states/return_to_ledge.gd" type="Script" id=17]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 6.5 )

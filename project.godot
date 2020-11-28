@@ -137,7 +137,7 @@ _global_script_classes=[ {
 "base": "Sprite",
 "class": "ReactSprite",
 "language": "GDScript",
-"path": "res://actors/enemies/react_sprite.gd"
+"path": "res://actors/enemies/shared/react_sprite/react_sprite.gd"
 }, {
 "base": "Node2D",
 "class": "ReadableObject",
