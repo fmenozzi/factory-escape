@@ -25,9 +25,9 @@ const TELEGRAPH_DURATION: float = 1.0
 
 # The color of the outer beam during the shoot phase.
 const SHOT_COLOR: Color = Color(
-    TELEGRAPH_COLOR.r * 1.5,
-    TELEGRAPH_COLOR.g * 1.5,
-    TELEGRAPH_COLOR.b * 1.5,
+    TELEGRAPH_COLOR.r * 1.3,
+    TELEGRAPH_COLOR.g * 1.3,
+    TELEGRAPH_COLOR.b * 1.3,
     TELEGRAPH_COLOR.a
 )
 
