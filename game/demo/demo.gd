@@ -1,4 +1,4 @@
-extends "res://game/game.gd"
+extends 'res://game/game_interface.gd'
 
 signal ability_chosen(ability_object)
 

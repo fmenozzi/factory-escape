@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://game/game.gd" type="Script" id=1]
+[ext_resource path="res://game/game_interface.gd" type="Script" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/ScreenFadeout.tscn" type="PackedScene" id=4]
@@ -14,7 +14,7 @@
 [ext_resource path="res://ui/ConfirmationDialog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/interface/tutorial_messages/TutorialMessage.tscn" type="PackedScene" id=13]
 
-[node name="Game" type="Node"]
+[node name="GameInterface" type="Node"]
 script = ExtResource( 1 )
 
 [node name="World" type="Node2D" parent="."]
