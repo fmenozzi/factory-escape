@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://game/demo/end_of_demo_message/end_of_demo_message.gd" type="Script" id=2]
+
+
+[node name="EndOfDemoMessage" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_top = 24.0
+margin_right = 320.0
+margin_bottom = 160.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ThankYouMessage" type="Label" parent="VBoxContainer"]
+margin_right = 320.0
+margin_bottom = 13.0
+text = "Thank you for playing the Factory Escape demo!"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 17.0
+margin_right = 320.0
+margin_bottom = 21.0
+
+[node name="OtherAbilitiesReminder" type="Label" parent="VBoxContainer"]
+margin_top = 25.0
+margin_right = 320.0
+margin_bottom = 38.0
+text = "Be sure to try out the other abilities!"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 320.0
+margin_bottom = 46.0
+
+[node name="TwitterPlug" type="Label" parent="VBoxContainer"]
+margin_top = 50.0
+margin_right = 320.0
+margin_bottom = 63.0
+text = "Follow the game's progress at twitter.com/fedmenozzi"
+align = 1
