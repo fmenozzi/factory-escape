@@ -28,6 +28,10 @@ func _update_raycast() -> void:
     # Draw the scanning line.
     _line.set_point_position(1, end_point_local)
 
+func set_enabled(enabled: bool) -> void:
+    set_physics_process(enabled)
+    self.visible = enabled
+
 func is_colliding_with_player() -> bool:
     _raycast.force_raycast_update()
     return _raycast.get_collider() is Player

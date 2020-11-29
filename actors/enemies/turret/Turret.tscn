@@ -15,7 +15,6 @@
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/turret/states/die.gd" type="Script" id=14]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
 

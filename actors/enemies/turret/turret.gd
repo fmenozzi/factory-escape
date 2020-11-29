@@ -143,12 +143,12 @@ func change_rotation_direction() -> void:
 
 func pause() -> void:
     set_physics_process(false)
-    _scanner.set_physics_process(false)
+    _scanner.set_enabled(false)
     _animation_player.stop(false)
 
 func resume() -> void:
     set_physics_process(true)
-    _scanner.set_physics_process(true)
+    _scanner.set_enabled(true)
     _animation_player.play()
 
 func room_reset() -> void:
