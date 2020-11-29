@@ -1,10 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Game.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/Room.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/pressure_plate/PressurePlate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/testing/pressure_plates/pressure_plate_playground.gd" type="Script" id=4]
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=5]
+
 
 
 [sub_resource type="RectangleShape2D" id=1]
