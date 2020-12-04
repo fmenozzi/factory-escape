@@ -12,7 +12,7 @@ func _ready() -> void:
     _remap_button.connect('remap_finished', self, '_on_remap_finished')
 
 func _on_remap_started() -> void:
-    _label.text = 'Press new...'
+    _label.text = '...'
 
 func _on_remap_finished() -> void:
     _label.text = label

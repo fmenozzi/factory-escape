@@ -2,6 +2,7 @@ extends 'res://ui/menus/menu.gd'
 
 const SECTION := 'keyboard'
 
+onready var _menu_label: Label = $Keyboard
 onready var _jump_remap_button: Button = $ContainerRow1/JumpRemapContainer/KeyboardRemapButton
 onready var _attack_remap_button: Button = $ContainerRow1/AttackRemapContainer/KeyboardRemapButton
 onready var _dash_remap_button: Button = $ContainerRow2/DashRemapContainer/KeyboardRemapButton
@@ -107,8 +108,12 @@ func _set_input_enabled(enabled: bool) -> void:
 func _on_remap_started() -> void:
     _set_input_enabled(false)
 
+    _menu_label.text = 'Press new...'
+
 func _on_remap_finished() -> void:
     _set_input_enabled(true)
+
+    _menu_label.text = 'Keyboard'
 
 func _on_reset_to_defaults_pressed() -> void:
     # Clear existing mappings and reload from project settings. The keyboard
