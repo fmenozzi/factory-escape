@@ -14,6 +14,7 @@ func _ready() -> void:
     _connect_projectile_spawner_signals()
 
     pause()
+    set_enemies_visible(false)
 
 # Get global positions of all camera anchors in each room. During a transition,
 # the player camera will interpolate its position from the closest anchor in
@@ -83,6 +84,10 @@ func reset_enemies() -> void:
     for enemy in $Enemies.get_children():
         enemy.room_reset()
 
+func set_enemies_visible(enemies_visible: bool) -> void:
+    for enemy in $Enemies.get_children():
+        enemy.visible = enemies_visible
+
 func contains(obj: Node2D) -> bool:
     var bounds := Rect2(get_global_position(), get_room_dimensions())
 
@@ -139,6 +144,8 @@ func _on_player_entered(area: Area2D) -> void:
         player.prev_room = player.curr_room
         player.curr_room = self
 
+        player.curr_room.set_enemies_visible(true)
+
         # Pause processing on the old room, transition to the new one, and
         # then begin processing on the new room once the transition is
         # complete.
@@ -147,5 +154,7 @@ func _on_player_entered(area: Area2D) -> void:
         yield(camera, 'transition_completed')
         player.curr_room.resume()
 
-        # Reset enemies in the previous room once the transition completes.
+        # Reset and hide enemies in the previous room once the transition
+        # completes.
         player.prev_room.reset_enemies()
+        player.prev_room.set_enemies_visible(false)
