@@ -1,5 +1,7 @@
 extends 'res://ui/menus/menu.gd'
 
+const SECTION := 'game'
+
 onready var _rumble: HBoxContainer = $Rumble
 onready var _screenshake: HBoxContainer = $Screenshake
 
@@ -23,6 +25,8 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 func exit() -> void:
     self.visible = false
 
+    Options.save_options()
+
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
         if get_tree().paused:
@@ -33,6 +37,21 @@ func handle_input(event: InputEvent) -> void:
 
     if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
         emit_menu_navigation_sound()
+
+func get_options_data() -> Array:
+    return [SECTION, {
+        'rumble': _rumble.get_selected_option_name(),
+        'screenshake': _screenshake.get_selected_option_name(),
+    }]
+
+func load_options_data(config: ConfigFile) -> void:
+    if config.has_section_key(SECTION, 'rumble'):
+        _rumble.select_option(config.get_value(SECTION, 'rumble'))
+        _set_rumble()
+
+    if config.has_section_key(SECTION, 'screenshake'):
+        _screenshake.select_option(config.get_value(SECTION, 'screenshake'))
+        _set_screenshake()
 
 func _set_rumble() -> void:
     pass
