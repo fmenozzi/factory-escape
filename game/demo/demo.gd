@@ -192,6 +192,12 @@ func _generate_ability_specific_demo_rooms() -> void:
     for trigger in get_tree().get_nodes_in_group('end_of_demo_message_trigger'):
         trigger.connect('end_of_demo_reached', self, '_on_end_of_demo_reached')
 
+    # Re-connect lamp-related signals. This prevents bugs where demo lamps don't
+    # work if the player skips the post-prelude-arena lamp.
+    for lamp in get_tree().get_nodes_in_group('lamps'):
+        lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
+        lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 
