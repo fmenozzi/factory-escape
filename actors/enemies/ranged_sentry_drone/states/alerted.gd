@@ -1,6 +1,6 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
-const ALERTED_DURATION: float = 1.0
+const ALERTED_DURATION: float = 0.25
 
 var _player: Player = null
 

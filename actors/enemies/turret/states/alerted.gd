@@ -1,6 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
-const ALERTED_DURATION: float = 1.0
+const ALERTED_DURATION_FIRST_AGGRO: float = 0.25
+const ALERTED_DURATION_SUBSEQUENT_AGGROS: float = 0.5
 
 var _already_aggroed := false
 
@@ -8,7 +9,6 @@ onready var _alerted_duration_timer: Timer = $AlertedDurationTimer
 
 func _ready() -> void:
     _alerted_duration_timer.one_shot = true
-    _alerted_duration_timer.wait_time = ALERTED_DURATION
 
 func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     assert('already_aggroed' in previous_state_dict)
@@ -18,6 +18,11 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     if not _already_aggroed:
         turret.get_react_sprite().change_state(ReactSprite.State.ALERTED)
 
+    # Longer pause between shots than the initial aggro alerted duration.
+    if _already_aggroed:
+        _alerted_duration_timer.wait_time = ALERTED_DURATION_SUBSEQUENT_AGGROS
+    else:
+        _alerted_duration_timer.wait_time = ALERTED_DURATION_FIRST_AGGRO
     _alerted_duration_timer.start()
 
     # Hide scan line.
