@@ -18,18 +18,23 @@ __meta__ = {
 }
 
 [node name="Keyboard" type="Label" parent="."]
-margin_top = 32.0
+margin_top = 28.0
 margin_right = 320.0
-margin_bottom = 45.0
+margin_bottom = 41.0
 text = "Keyboard"
 align = 1
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 45.0
+margin_right = 320.0
+margin_bottom = 49.0
 
 [node name="ContainerRow1" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 49.0
+margin_top = 53.0
 margin_right = 320.0
-margin_bottom = 64.0
+margin_bottom = 68.0
 
 [node name="JumpRemapContainer" parent="ContainerRow1" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -81,9 +86,9 @@ action = "player_attack"
 [node name="ContainerRow2" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 68.0
+margin_top = 72.0
 margin_right = 320.0
-margin_bottom = 83.0
+margin_bottom = 87.0
 
 [node name="DashRemapContainer" parent="ContainerRow2" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -135,9 +140,9 @@ action = "player_grapple"
 [node name="ContainerRow3" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 87.0
+margin_top = 91.0
 margin_right = 320.0
-margin_bottom = 102.0
+margin_bottom = 106.0
 
 [node name="InteractRemapContainer" parent="ContainerRow3" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -186,23 +191,23 @@ focus_neighbour_right = NodePath("../../InteractRemapContainer/KeyboardRemapButt
 focus_neighbour_bottom = NodePath("../../../ResetToDefaults")
 action = "player_heal"
 
-[node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 106.0
+[node name="HSeparator2" type="HSeparator" parent="."]
+margin_top = 110.0
 margin_right = 320.0
-margin_bottom = 110.0
+margin_bottom = 114.0
 
 [node name="ResetToDefaults" type="Button" parent="."]
-margin_top = 114.0
+margin_top = 118.0
 margin_right = 320.0
-margin_bottom = 129.0
+margin_bottom = 133.0
 focus_neighbour_top = NodePath("../ContainerRow3/InteractRemapContainer/KeyboardRemapButton")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Reset To Defaults"
 
 [node name="Back" type="Button" parent="."]
-margin_top = 133.0
+margin_top = 137.0
 margin_right = 320.0
-margin_bottom = 148.0
+margin_bottom = 152.0
 focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../ContainerRow1/JumpRemapContainer/KeyboardRemapButton")
 text = "Back"
