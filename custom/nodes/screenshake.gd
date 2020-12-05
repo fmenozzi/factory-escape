@@ -26,6 +26,7 @@ export(float, EASE) var damp_easing := 1.0
 
 var _amplitude: float
 var _priority: int = Priority.LOW
+var _strength_multiplier := 1.0
 
 onready var _offset_tween: Tween = $OffsetTween
 onready var _shake_frequency_timer: Timer = $FrequencyTimer
@@ -44,7 +45,7 @@ func start(duration: int, amplitude: int, priority: int = Priority.LOW) -> void:
 
     _camera = Util.get_player().get_camera()
 
-    _amplitude = _get_amplitude(amplitude)
+    _amplitude = _strength_multiplier * _get_amplitude(amplitude)
 
     _shake_duration_timer.wait_time = _get_duration(duration)
     _shake_frequency_timer.wait_time = 1.0 / 20.0  # 20 Hz frequency
@@ -63,6 +64,11 @@ func stop() -> void:
     _priority = Priority.LOW
 
     emit_signal('stopped_shaking')
+
+func set_strength_multiplier(strength_multiplier: float) -> void:
+    assert(strength_multiplier >= 0)
+
+    _strength_multiplier = strength_multiplier
 
 func _shake_once() -> void:
     var damping := ease(

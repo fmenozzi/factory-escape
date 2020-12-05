@@ -15,6 +15,7 @@ enum Priority {
 var _priority: int = Priority.LOW
 
 var _is_rumbling := false
+var _strength_multiplier := 1.0
 
 onready var _timer: Timer = $Timer
 
@@ -31,10 +32,10 @@ func start(type: int, duration: float, priority: int = Priority.LOW) -> void:
 
     match type:
         Type.WEAK:
-            Input.start_joy_vibration(0, 0.25, 0, duration)
+            Input.start_joy_vibration(0, 0.25 * _strength_multiplier, 0, duration)
 
         Type.STRONG:
-            Input.start_joy_vibration(0, 0.50, 0, duration)
+            Input.start_joy_vibration(0, 0.50 * _strength_multiplier, 0, duration)
 
     _timer.wait_time = duration
     _timer.start()
@@ -53,6 +54,11 @@ func stop() -> void:
     _priority = Priority.LOW
 
     emit_signal('rumble_stopped')
+
+func set_strength_multiplier(strength_multiplier: float) -> void:
+    assert(strength_multiplier >= 0)
+
+    _strength_multiplier = strength_multiplier
 
 func _on_rumble_timeout() -> void:
     stop()

@@ -54,16 +54,38 @@ func load_options_data(config: ConfigFile) -> void:
         _set_screenshake()
 
 func _set_rumble() -> void:
-    pass
+    var rumble: String = _rumble.get_selected_option_name()
+    assert(rumble in ['Normal', 'Less', 'None'])
+
+    match rumble:
+        'Normal':
+            Rumble.set_strength_multiplier(1.0)
+
+        'Less':
+            Rumble.set_strength_multiplier(0.5)
+
+        'None':
+            Rumble.set_strength_multiplier(0.0)
 
 func _set_screenshake() -> void:
-    pass
+    var screenshake: String = _screenshake.get_selected_option_name()
+    assert(screenshake in ['Normal', 'Less', 'None'])
+
+    match screenshake:
+        'Normal':
+            Screenshake.set_strength_multiplier(1.0)
+
+        'Less':
+            Screenshake.set_strength_multiplier(0.5)
+
+        'None':
+            Screenshake.set_strength_multiplier(0.0)
 
 func _on_rumble_changed() -> void:
-    pass
+    _set_rumble()
 
 func _on_screenshake_changed() -> void:
-    pass
+    _set_screenshake()
 
 func _on_reset_to_defaults_pressed() -> void:
     _rumble.reset_to_default()
