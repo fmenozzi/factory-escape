@@ -45,7 +45,7 @@ func handle_input(event: InputEvent) -> void:
         emit_menu_navigation_sound()
 
 func _on_game_pressed() -> void:
-    print('game button not yet implemented')
+    advance_to_menu(Menu.Menus.GAME_OPTIONS)
 
 func _on_audio_pressed() -> void:
     advance_to_menu(Menu.Menus.AUDIO_OPTIONS)

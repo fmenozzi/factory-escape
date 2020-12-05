@@ -22,6 +22,7 @@ enum Menus {
     OPTIONS,
     QUIT,
 
+    GAME_OPTIONS,
     AUDIO_OPTIONS,
     VIDEO_OPTIONS,
     CONTROLLER_OPTIONS,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/pause.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ui/menus/options/audio/AudioOptionsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/UiSoundPlayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/menus/options/keyboard/KeyboardOptionsMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/menus/options/game/GameOptionsMenu.tscn" type="PackedScene" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends 'res://ui/menus/menu.gd'
@@ -74,6 +75,9 @@ visible = false
 visible = false
 
 [node name="QuitMenu" parent="MenuBackground" instance=ExtResource( 5 )]
+visible = false
+
+[node name="GameOptionsMenu" parent="MenuBackground" instance=ExtResource( 11 )]
 visible = false
 
 [node name="AudioOptionsMenu" parent="MenuBackground" instance=ExtResource( 8 )]

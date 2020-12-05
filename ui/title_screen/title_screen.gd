@@ -12,6 +12,7 @@ onready var MENUS := {
     Menu.Menus.OPTIONS:             $MenuBackground/OptionsMenu,
     Menu.Menus.QUIT:                $MenuBackground/MainQuitMenu,
 
+    Menu.Menus.GAME_OPTIONS:       $MenuBackground/GameOptionsMenu,
     Menu.Menus.AUDIO_OPTIONS:      $MenuBackground/AudioOptionsMenu,
     Menu.Menus.VIDEO_OPTIONS:      $MenuBackground/VideoOptionsMenu,
     Menu.Menus.CONTROLLER_OPTIONS: $MenuBackground/ControllerOptionsMenu,

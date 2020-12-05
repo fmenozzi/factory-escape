@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://game/testing/TestGame.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/title_screen/title_screen.gd" type="Script" id=2]
@@ -15,7 +15,7 @@
 [ext_resource path="res://ui/menus/save_slots/SaveSlotsMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ui/menus/save_slots/DeleteConfirmationMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ui/interface/saving_indicator/SavingIndicator.tscn" type="PackedScene" id=15]
-
+[ext_resource path="res://ui/menus/options/game/GameOptionsMenu.tscn" type="PackedScene" id=16]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -56,6 +56,9 @@ visible = false
 visible = false
 
 [node name="MainQuitMenu" parent="MenuBackground" instance=ExtResource( 6 )]
+visible = false
+
+[node name="GameOptionsMenu" parent="MenuBackground" instance=ExtResource( 16 )]
 visible = false
 
 [node name="AudioOptionsMenu" parent="MenuBackground" instance=ExtResource( 7 )]
