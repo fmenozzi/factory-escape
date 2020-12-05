@@ -100,6 +100,9 @@ func lamp_reset() -> void:
     _health.heal_to_full()
     _change_state({'new_state': initial_state})
 
+func is_dead() -> bool:
+    return _current_state_enum == State.DIE
+
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
     var new_state_enum: int = new_state_dict['new_state']
