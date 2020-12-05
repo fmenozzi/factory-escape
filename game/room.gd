@@ -86,6 +86,9 @@ func reset_enemies() -> void:
 
 func set_enemies_visible(enemies_visible: bool) -> void:
     for enemy in $Enemies.get_children():
+        if enemy is EnergyProjectile or enemy is HomingProjectile:
+            continue
+
         if not enemy.is_dead():
             enemy.visible = enemies_visible
 
