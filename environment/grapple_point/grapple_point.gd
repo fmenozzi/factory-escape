@@ -42,8 +42,6 @@ func get_launch_grapple_points() -> Array:
     return [_launch_point_left, _launch_point_right]
 
 func is_on_screen() -> bool:
-    # TODO: This doesn't work sometimes, likely because the granularity of the
-    #       grid used for doing these calculations is too small.
     return _visibility_notifier.is_on_screen()
 
 # Grapple points can be marked as unavailable to be excluded from consideration
