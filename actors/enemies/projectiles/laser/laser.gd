@@ -85,9 +85,13 @@ func shoot() -> void:
     if _current_state != State.INACTIVE:
         return
 
-    # Activate laser.
-    show()
+    # Activate laser. Wait one frame before showing it so that we get a chance
+    # to force the raycast update before actually showing the laser. This
+    # prevents the laser from going through the environment for the first frame
+    # of the telegraph.
     set_physics_process(true)
+    yield(get_tree(), 'physics_frame')
+    show()
 
     # Telegraph.
     _start_telegraph()
@@ -102,8 +106,8 @@ func shoot() -> void:
     yield(_tween, 'tween_all_completed')
 
     # Deactivate laser.
-    set_physics_process(false)
     hide()
+    set_physics_process(false)
 
     if _current_state == State.CANCELLED:
         emit_signal('shot_cancelled')
