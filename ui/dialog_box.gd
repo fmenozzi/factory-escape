@@ -37,17 +37,11 @@ func _unhandled_input(event: InputEvent) -> void:
                         _advance_dialog_to_next_page()
                     else:
                         # End dialog if there is no more left to display.
-                        var nearby_readable_object := _player.get_nearby_readable_object()
-                        nearby_readable_object.label_fade_in()
-                        _stop_dialog()
-                        _current_state = State.DISABLED
+                        _exit_dialog_box()
 
             # ui_cancel to exit the dialog box
             if event.is_action_pressed('ui_cancel'):
-                var nearby_readable_object := _player.get_nearby_readable_object()
-                nearby_readable_object.label_fade_in()
-                _stop_dialog()
-                _current_state = State.DISABLED
+                _exit_dialog_box()
 
         State.DISABLED:
             # Ensure player is idle or walking near a sign.
@@ -90,6 +84,13 @@ func _start_dialog() -> void:
 
     _timer.start()
 
+func _exit_dialog_box(fade_in_label: bool = true) -> void:
+    if fade_in_label:
+        var nearby_readable_object := _player.get_nearby_readable_object()
+        nearby_readable_object.label_fade_in()
+    _stop_dialog()
+    _current_state = State.DISABLED
+
 func _stop_dialog() -> void:
     _set_dialog_box_visible(false)
     _set_player_controllable(true)
@@ -112,4 +113,8 @@ func _set_dialog_box_visible(visible: bool) -> void:
 
 func _set_player_controllable(controllable: bool) -> void:
     _player.set_process_unhandled_input(controllable)
-    _player.set_physics_process(controllable)
+
+func _on_player_hit(player_health: int) -> void:
+    if _current_state == State.ENABLED:
+        var fade_in_label_on_exit = (player_health != 0)
+        _exit_dialog_box(fade_in_label_on_exit)

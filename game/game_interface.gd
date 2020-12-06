@@ -8,6 +8,7 @@ export(bool) var run_standalone := true
 onready var _player: Player = Util.get_player()
 onready var _camera: Camera2D = _player.get_camera()
 onready var _pause: Control = $Layers/PauseLayer/Pause
+onready var _dialog_box: Control = $Layers/DialogBoxLayer/DialogBox
 onready var _health_bar: Control = $Layers/UILayer/HealthBar
 onready var _health_pack_bar: Control = $Layers/UILayer/HealthPackBar
 onready var _saving_indicator: Control = $Layers/UILayer/SavingIndicator
@@ -47,6 +48,7 @@ func _ready() -> void:
     player_health.connect('died', self, '_on_player_died')
 
     _player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
+    _player.connect('player_hit_by_enemy', _dialog_box, '_on_player_hit')
     _player.connect('player_healed', self, '_on_player_healed')
 
     var player_health_pack_manager := _player.get_health_pack_manager()

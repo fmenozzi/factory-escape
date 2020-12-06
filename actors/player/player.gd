@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 signal player_state_changed(old_state_enum, new_state_enum)
+signal player_hit_by_enemy
 signal player_hit_hazard
 signal player_healed
 signal player_reached_walk_to_point
@@ -438,7 +439,9 @@ func _check_for_hits() -> void:
             # player's death, in which case let the death transition play out.
             var damage_taken := player_health.take_damage(1)
             if damage_taken:
-                if player_health.get_current_health() != 0:
+                var health_after_hit := player_health.get_current_health()
+                emit_signal('player_hit_by_enemy', health_after_hit)
+                if health_after_hit != 0:
                     if Collision.in_layer(hitbox, 'hazards'):
                         change_state({'new_state': State.HAZARD_HIT})
                         emit_signal('player_hit_hazard')
