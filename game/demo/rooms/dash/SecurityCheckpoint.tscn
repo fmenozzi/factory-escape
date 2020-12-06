@@ -6,7 +6,6 @@
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/health_pack/HealthPack.tscn" type="PackedScene" id=5]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
 
@@ -71,6 +70,7 @@ position = Vector2( 248, 288 )
 
 [node name="Middle" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 136, 188 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Middle" index="0"]
 position = Vector2( 0, -32 )
@@ -78,6 +78,7 @@ shape = SubResource( 2 )
 
 [node name="Bottom" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
 position = Vector2( 208, 332 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Bottom" index="0"]
 position = Vector2( 0, -48 )

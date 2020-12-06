@@ -1,12 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/collapsable_platform/CollapsablePlatform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=3]
-
+[ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 16, 72 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 32 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 8 )
 
 [node name="ContainmentShaft" instance=ExtResource( 1 )]
 
@@ -48,6 +60,58 @@ floor_normal = 3
 position = Vector2( 304, 136 )
 floor_normal = 2
 
+[node name="BottomLeft" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
+position = Vector2( 24, 528 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/BottomLeft" index="0"]
+position = Vector2( -8, -72 )
+shape = SubResource( 2 )
+
+[node name="LowerLeft" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
+position = Vector2( 24, 368 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerLeft" index="0"]
+shape = SubResource( 3 )
+
+[node name="MiddleLeft" parent="HazardCheckpoints" index="2" instance=ExtResource( 4 )]
+position = Vector2( 24, 224 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/MiddleLeft" index="0"]
+shape = SubResource( 3 )
+
+[node name="UpperLeft" parent="HazardCheckpoints" index="3" instance=ExtResource( 4 )]
+position = Vector2( 24, 80 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/UpperLeft" index="0"]
+shape = SubResource( 3 )
+
+[node name="LowerRight" parent="HazardCheckpoints" index="4" instance=ExtResource( 4 )]
+position = Vector2( 296, 368 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerRight" index="0"]
+shape = SubResource( 3 )
+
+[node name="MiddleRight" parent="HazardCheckpoints" index="5" instance=ExtResource( 4 )]
+position = Vector2( 296, 224 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/MiddleRight" index="0"]
+shape = SubResource( 3 )
+
+[node name="TopRight" parent="HazardCheckpoints" index="6" instance=ExtResource( 4 )]
+position = Vector2( 304, 80 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/TopRight" index="0"]
+position = Vector2( 0, -32 )
+shape = SubResource( 4 )
+
+[node name="Middle" parent="HazardCheckpoints" index="7" instance=ExtResource( 4 )]
+position = Vector2( 160, 272 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/Middle" index="0"]
+shape = SubResource( 5 )
+
 [node name="CollapsablePlatform" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 88, 448 )
 
@@ -79,3 +143,19 @@ position = Vector2( 160, 192 )
 position = Vector2( 160, 104 )
 
 [editable path="TileMaps"]
+
+[editable path="HazardCheckpoints/BottomLeft"]
+
+[editable path="HazardCheckpoints/LowerLeft"]
+
+[editable path="HazardCheckpoints/MiddleLeft"]
+
+[editable path="HazardCheckpoints/UpperLeft"]
+
+[editable path="HazardCheckpoints/LowerRight"]
+
+[editable path="HazardCheckpoints/MiddleRight"]
+
+[editable path="HazardCheckpoints/TopRight"]
+
+[editable path="HazardCheckpoints/Middle"]

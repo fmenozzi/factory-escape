@@ -5,7 +5,6 @@
 [ext_resource path="res://environment/hazards/crusher/Crusher.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 180 )
 
@@ -87,6 +86,7 @@ position = Vector2( 32, 120 )
 
 [node name="LeftBottom" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 72, 332 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/LeftBottom" index="0"]
 position = Vector2( -24, -72 )
@@ -129,6 +129,7 @@ shape = SubResource( 5 )
 
 [node name="LeftTop" parent="HazardCheckpoints" index="6" instance=ExtResource( 4 )]
 position = Vector2( 320, 76 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/LeftTop" index="0"]
 position = Vector2( 0, -32 )
@@ -171,6 +172,7 @@ shape = SubResource( 7 )
 
 [node name="RightBottomRight" parent="HazardCheckpoints" index="12" instance=ExtResource( 4 )]
 position = Vector2( 616, 268 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/RightBottomRight" index="0"]
 position = Vector2( 0, -32 )

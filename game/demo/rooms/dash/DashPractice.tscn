@@ -3,7 +3,6 @@
 [ext_resource path="res://game/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
 
@@ -57,6 +56,7 @@ position = Vector2( 160, 270 )
 
 [node name="Bottom" parent="HazardCheckpoints" index="0" instance=ExtResource( 2 )]
 position = Vector2( 24, 284 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Bottom" index="0"]
 position = Vector2( 0, -40 )
@@ -89,6 +89,7 @@ shape = SubResource( 6 )
 
 [node name="Top" parent="HazardCheckpoints" index="5" instance=ExtResource( 2 )]
 position = Vector2( 264, 76 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Top" index="0"]
 position = Vector2( 0, -32 )

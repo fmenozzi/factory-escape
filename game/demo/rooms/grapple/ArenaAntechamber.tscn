@@ -4,7 +4,6 @@
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -61,6 +60,7 @@ position = Vector2( -80, -76 )
 
 [node name="HazardCheckpoint" parent="HazardCheckpoints" index="0" instance=ExtResource( 3 )]
 position = Vector2( 160, 76 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/HazardCheckpoint" index="0"]
 position = Vector2( 0, -32 )

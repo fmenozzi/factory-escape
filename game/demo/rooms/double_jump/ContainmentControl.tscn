@@ -6,7 +6,6 @@
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=5]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 180 )
 
@@ -85,6 +84,7 @@ floor_normal = 1
 
 [node name="Left" parent="HazardCheckpoints" index="0" instance=ExtResource( 5 )]
 position = Vector2( 176, 108 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Left" index="0"]
 position = Vector2( 0, -48 )
@@ -92,6 +92,7 @@ shape = SubResource( 2 )
 
 [node name="Right" parent="HazardCheckpoints" index="1" instance=ExtResource( 5 )]
 position = Vector2( 464, 108 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Right" index="0"]
 position = Vector2( 0, -48 )

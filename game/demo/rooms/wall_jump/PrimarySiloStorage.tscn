@@ -4,7 +4,6 @@
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 360 )
 
@@ -21,7 +20,7 @@ extents = Vector2( 48, 16 )
 extents = Vector2( 80, 8 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 56, 8 )
+extents = Vector2( 56, 32 )
 
 [node name="PrimarySiloStorage" instance=ExtResource( 1 )]
 
@@ -71,6 +70,7 @@ floor_normal = 1
 
 [node name="Bottom" parent="HazardCheckpoints" index="0" instance=ExtResource( 3 )]
 position = Vector2( 136, 656 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Bottom" index="0"]
 position = Vector2( 0, -24 )
@@ -78,6 +78,7 @@ shape = SubResource( 2 )
 
 [node name="LowerMiddleLeft" parent="HazardCheckpoints" index="1" instance=ExtResource( 3 )]
 position = Vector2( 112, 544 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/LowerMiddleLeft" index="0"]
 position = Vector2( 0, -32 )
@@ -85,6 +86,7 @@ shape = SubResource( 3 )
 
 [node name="LowerMiddleRight" parent="HazardCheckpoints" index="2" instance=ExtResource( 3 )]
 position = Vector2( 208, 544 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/LowerMiddleRight" index="0"]
 position = Vector2( 0, -32 )
@@ -113,9 +115,10 @@ shape = SubResource( 5 )
 
 [node name="UpperRight" parent="HazardCheckpoints" index="6" instance=ExtResource( 3 )]
 position = Vector2( 232, 80 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/UpperRight" index="0"]
-position = Vector2( 32, -8 )
+position = Vector2( 32, -32 )
 shape = SubResource( 6 )
 
 [editable path="TileMaps"]

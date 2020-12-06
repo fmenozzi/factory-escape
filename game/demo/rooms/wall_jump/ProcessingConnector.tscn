@@ -5,23 +5,22 @@
 [ext_resource path="res://actors/enemies/leaping_failure/LeapingFailure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 32 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 24, 4 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 64, 48 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 64, 8 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 72, 8 )
 
 [node name="ProcessingConnector" instance=ExtResource( 1 )]
@@ -59,23 +58,25 @@ initial_direction = -1
 
 [node name="Left" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 80, 164 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Left" index="0"]
 position = Vector2( 0, -32 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="Middle" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
 position = Vector2( 168, 68 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Middle" index="0"]
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="Right" parent="HazardCheckpoints" index="2" instance=ExtResource( 4 )]
 position = Vector2( 256, 164 )
+requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Right" index="0"]
 position = Vector2( 0, -44 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="Left" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 collision_layer = 512
@@ -84,7 +85,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/Left" index="0"]
 position = Vector2( -8, 100 )
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="Right" type="StaticBody2D" parent="EnemyBarriers" index="1"]
@@ -94,7 +95,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/Right" index="0"]
 position = Vector2( 328, 92 )
 rotation = -1.5708
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 one_way_collision = true
 
 [editable path="TileMaps"]

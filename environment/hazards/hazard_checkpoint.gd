@@ -1,5 +1,9 @@
 extends Area2D
 
+# If true, player must be grounded within the hazard checkpoint area to set the
+# player's current hazard checkpoint.
+export(bool) var requires_grounded := true
+
 onready var _player: Player = Util.get_player()
 
 func _ready() -> void:
@@ -9,9 +13,11 @@ func _ready() -> void:
     set_process(false)
 
 func _process(delta: float) -> void:
-    if _player.is_on_ground():
-        _player.set_hazard_checkpoint(self)
-        set_process(false)
+    if requires_grounded and not _player.is_on_ground():
+        return
+
+    _player.set_hazard_checkpoint(self)
+    set_process(false)
 
 func _on_player_entered(player: Player) -> void:
     if not player:
