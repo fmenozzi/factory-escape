@@ -198,6 +198,11 @@ func _generate_ability_specific_demo_rooms() -> void:
         lamp.connect('lamp_lit', self, '_on_player_lit_lamp')
         lamp.connect('rested_at_lamp', self, '_on_player_rested_at_lamp')
 
+    # Re-connect health pack-related signals. This prevents bugs where demo
+    # health packs don't work if the player skips the post-prelude-arena lamp.
+    for health_pack in get_tree().get_nodes_in_group('health_packs'):
+        health_pack.connect('health_pack_taken', self, '_on_health_pack_taken')
+
 func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     _player.set_process_unhandled_input(false)
 
