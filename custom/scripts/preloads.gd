@@ -52,3 +52,6 @@ const FullHealthPackTexture := preload('res://ui/interface/health_pack_bar/textu
 
 # Title screen.
 const TitleScreen := preload('res://ui/title_screen/TitleScreen.tscn')
+
+# Credits screen.
+const CreditsScreen := preload('res://ui/credits_screen/CreditsScreen.tscn')

@@ -2,6 +2,7 @@ extends 'res://ui/menus/menu.gd'
 
 onready var _start: Button = $Start
 onready var _options: Button = $Options
+onready var _credits: Button = $Credits
 onready var _quit: Button = $Quit
 
 func _ready() -> void:
@@ -33,10 +34,12 @@ func set_input_enabled(enabled: bool) -> void:
     if enabled:
         _start.connect('pressed', self, '_on_start_pressed')
         _options.connect('pressed', self, '_on_options_pressed')
+        _credits.connect('pressed', self, '_on_credits_pressed')
         _quit.connect('pressed', self, '_on_quit_pressed')
     else:
         _start.disconnect('pressed', self, '_on_start_pressed')
         _options.disconnect('pressed', self, '_on_options_pressed')
+        _credits.disconnect('pressed', self, '_on_credits_pressed')
         _quit.disconnect('pressed', self, '_on_quit_pressed')
 
 func _set_focus_enabled(enabled: bool) -> void:
@@ -54,6 +57,10 @@ func _on_start_pressed() -> void:
 
 func _on_options_pressed() -> void:
     advance_to_menu(Menu.Menus.OPTIONS)
+
+func _on_credits_pressed() -> void:
+    var fade_duration := 2.0
+    SceneChanger.change_scene_to(Preloads.CreditsScreen, fade_duration)
 
 func _on_quit_pressed() -> void:
     advance_to_menu(Menu.Menus.QUIT)
