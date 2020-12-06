@@ -7,7 +7,7 @@ func _ready() -> void:
     _rng.randomize()
 
     # Initial direction is random.
-    _velocity = Vector2.RIGHT.rotated(_rng.randf())
+    _velocity = Vector2.RIGHT.rotated(_rng.randf_range(0.0, 2*PI))
 
 func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
     var speed := worker_drone.get_physics_manager().get_movement_speed()
