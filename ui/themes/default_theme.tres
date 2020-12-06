@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=2]
+[gd_resource type="Theme" load_steps=22 format=2]
 
 [ext_resource path="res://ui/themes/button/focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/themes/button/hover.tres" type="StyleBox" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://ui/themes/option_button/focus.tres" type="StyleBox" id=18]
 [ext_resource path="res://ui/themes/popup_menu/hover.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/themes/popup_menu/panel.tres" type="StyleBox" id=20]
+[ext_resource path="res://ui/themes/vscrollbar/empty.tres" type="StyleBox" id=21]
 
 [resource]
 default_font = ExtResource( 7 )
@@ -118,3 +119,12 @@ RichTextLabel/fonts/mono_font = null
 RichTextLabel/fonts/normal_font = null
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = ExtResource( 21 )
+VScrollBar/styles/grabber_highlight = ExtResource( 21 )
+VScrollBar/styles/grabber_pressed = ExtResource( 21 )
+VScrollBar/styles/scroll = ExtResource( 21 )
+VScrollBar/styles/scroll_focus = ExtResource( 21 )
