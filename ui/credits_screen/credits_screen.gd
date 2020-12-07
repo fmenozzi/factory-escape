@@ -44,6 +44,7 @@ func _get_line_labels() -> Array:
     while not file.eof_reached():
         var label := Label.new()
         label.align = Label.ALIGN_CENTER
+        label.autowrap = true
         label.text = file.get_line()
 
         line_labels.append(label)
