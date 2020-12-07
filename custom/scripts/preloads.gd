@@ -50,6 +50,9 @@ const FullHealthTexture := preload('res://ui/interface/health_bar/textures/healt
 const EmptyHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-empty.png')
 const FullHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-full.png')
 
+# Title image.
+const TitleImage := preload('res://ui/menus/main/textures/title.png')
+
 # Title screen.
 const TitleScreen := preload('res://ui/title_screen/TitleScreen.tscn')
 

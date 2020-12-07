@@ -21,6 +21,9 @@ func _ready() -> void:
     # marker).
     for hseparator in _generate_hseparators(10):
         _vbox_container.add_child(hseparator)
+    _vbox_container.add_child(_generate_title_image())
+    for hseparator in _generate_hseparators(2):
+        _vbox_container.add_child(hseparator)
     for label in _get_line_labels():
         _vbox_container.add_child(label)
     _vbox_container.add_child(_generate_end_marker())
@@ -43,6 +46,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func _go_to_title_screen() -> void:
     var fade_in_delay := 2.0
     SceneChanger.change_scene_to(Preloads.TitleScreen, fade_in_delay)
+
+func _generate_title_image() -> CenterContainer:
+    var texture_rect := TextureRect.new()
+    texture_rect.texture = Preloads.TitleImage
+
+    var center_container := CenterContainer.new()
+    center_container.add_child(texture_rect)
+
+    return center_container
 
 func _generate_hseparators(num_hseparators: int) -> Array:
     var hseparators := []
