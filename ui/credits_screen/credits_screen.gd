@@ -37,7 +37,7 @@ func _go_to_title_screen() -> void:
 
 func _get_line_labels() -> Array:
     var file := File.new()
-    assert(file.open('res://ui/credits_screen/data/credits.tres', File.READ) == OK)
+    assert(file.open('res://ui/credits_screen/data/credits.txt', File.READ) == OK)
 
     var line_labels := []
 
