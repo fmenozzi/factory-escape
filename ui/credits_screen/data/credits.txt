@@ -1,19 +1,18 @@
-Start of credits
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
+Factory Escape
+
+PROGRAMMER
+Federico Menozzi (fmenozzi.itch.io)
+
+ART
+Robert Norenberg (0x72.itch.io)
+NYKNCK (kvsr.itch.io)
+
+FONT
+Daniel Linssen (managore.itch.io)
+
+SOUND
+Emmanuel Shiferaw
+Kenney (www.kenney.nl)
 
 Copyright (c) 2007-2020 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2020 Godot Engine contributors.
 
@@ -24,5 +23,3 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Portions of this software are copyright (c) 2020 The FreeType Project (www.freetype.org). All rights reserved.
-
-End of credits
