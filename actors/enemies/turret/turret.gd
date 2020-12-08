@@ -134,6 +134,9 @@ func get_rotation_direction() -> int:
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
 
+func get_projectile_spawner() -> Position2D:
+    return _projectile_spawner
+
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)
     _hurtbox_collision_shape.set_deferred('disabled', disabled)

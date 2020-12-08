@@ -134,6 +134,10 @@ func _on_energy_projectile_fired(
     var energy_projectile: EnergyProjectile = Preloads.EnergyProjectile.instance()
     _enemies.add_child(energy_projectile)
 
+    spawner.connect(
+        'projectile_spawner_destroyed', energy_projectile,
+        '_on_projectile_spawner_destroyed')
+
     energy_projectile.global_position = global_pos
     energy_projectile.start(dir)
 

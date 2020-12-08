@@ -24,7 +24,7 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     _shoot_timer.start()
 
 func exit(turret: Turret) -> void:
-    pass
+    _shoot_timer.stop()
 
 func update(turret: Turret, delta: float) -> Dictionary:
     var aggro_manager := turret.get_aggro_manager()
