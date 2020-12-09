@@ -23,7 +23,7 @@ func update(turret: Turret, delta: float) -> Dictionary:
     var scanner := turret.get_scanner()
     var aggro_manager := turret.get_aggro_manager()
 
-    if scanner.is_colliding_with_player() or aggro_manager.in_aggro_range():
+    if scanner.is_colliding_with_player():
         return {
             'new_state': Turret.State.ALERTED,
             'already_aggroed': false
