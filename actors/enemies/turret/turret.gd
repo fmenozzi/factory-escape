@@ -152,7 +152,6 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
     _scanner.set_enabled(true)
-    _animation_player.play()
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
