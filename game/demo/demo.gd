@@ -2,11 +2,6 @@ extends 'res://game/game_interface.gd'
 
 signal ability_chosen(ability_object)
 
-const SAVE_KEY := 'demo'
-const UNCHOSEN_ABILITY := -1
-
-var _chosen_ability := UNCHOSEN_ABILITY
-
 var _generated_rooms := false
 
 const ABILITY_ROOMS := {
@@ -79,6 +74,7 @@ const EndOfDemoMessage := preload('res://game/demo/end_of_demo_message/EndOfDemo
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
 onready var _rooms_node: Node2D = $World/Rooms
 onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
+onready var _save_manager: DemoSaveManager = $SaveManager
 
 func _ready() -> void:
     for demo_ability in get_tree().get_nodes_in_group('demo_ability'):
@@ -97,41 +93,12 @@ func _ready() -> void:
     self.connect(
         'ability_chosen', _ability_selection_room, '_on_ability_chosen')
 
-func get_save_data() -> Array:
-    return [SAVE_KEY, {
-        'chosen_ability': _chosen_ability,
-    }]
-
-func load_save_data(all_save_data: Dictionary) -> void:
-    if not SAVE_KEY in all_save_data:
-        return
-
-    var demo_save_data: Dictionary = all_save_data[SAVE_KEY]
-    assert('chosen_ability' in demo_save_data)
-
-    _chosen_ability = demo_save_data['chosen_ability']
-
-    if _chosen_ability != UNCHOSEN_ABILITY:
-        # "Remove" demo abilities once one has been chosen in order to prevent
-        # the player from choosing again if they quit out before reaching the
-        # abilities lamp.
-        for demo_ability in get_tree().get_nodes_in_group('demo_ability'):
-            demo_ability.make_non_interactable()
-            demo_ability.hide()
-
-        # In case the player quit out before reaching the abilities lamp, open
-        # the doors to the ability selection room and ensure they don't close
-        # again when the player enters.
-        #
-        # TODO: why is this null when cached via onready? load_save_data() is
-        #       called in the parent _ready() function, but it should still
-        #       be non-null before then...
-        $World/Rooms/AbilitySelection.open_doors_and_keep_them_open()
-
-        _generate_ability_specific_demo_rooms()
-
 func _generate_ability_specific_demo_rooms() -> void:
-    assert(_chosen_ability in [
+    # Need to get this node here because the existing onready var will be null
+    # when this is called from the save manager's load function.
+    var save_manager: DemoSaveManager = $SaveManager
+
+    assert(save_manager.chosen_ability in [
         DemoAbility.Ability.DASH,
         DemoAbility.Ability.DOUBLE_JUMP,
         DemoAbility.Ability.GRAPPLE,
@@ -146,7 +113,7 @@ func _generate_ability_specific_demo_rooms() -> void:
 
     _generated_rooms = true
 
-    var room_position_pairs: Array = ABILITY_ROOMS[_chosen_ability]
+    var room_position_pairs: Array = ABILITY_ROOMS[save_manager.chosen_ability]
 
     var all_generated_rooms := []
 
@@ -234,7 +201,7 @@ func _on_ability_inspected(demo_ability: DemoAbility) -> void:
     var ability_chosen: bool = yield(_confirmation_dialog, 'selection_made')
 
     if ability_chosen:
-        _chosen_ability = ability
+        _save_manager.chosen_ability = ability
 
         _generate_ability_specific_demo_rooms()
 

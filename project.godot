@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/abilities/demo/demo_ability.gd"
 }, {
+"base": "Node",
+"class": "DemoSaveManager",
+"language": "GDScript",
+"path": "res://game/demo/save_manager.gd"
+}, {
 "base": "Node2D",
 "class": "EnemyHitEffect",
 "language": "GDScript",
@@ -234,6 +239,7 @@ _global_script_class_icons={
 "AttackManager": "",
 "DashManager": "",
 "DemoAbility": "",
+"DemoSaveManager": "",
 "EnemyHitEffect": "",
 "EnergyProjectile": "",
 "FireColumn": "",
