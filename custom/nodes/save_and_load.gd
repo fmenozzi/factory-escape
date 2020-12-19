@@ -26,6 +26,14 @@ func save_game() -> void:
 
     var save_data := {}
 
+    # Add section for game version.
+    save_data['version'] = {
+        'major': Version.major(),
+        'minor': Version.minor(),
+        'patch': Version.patch(),
+    }
+
+    # Add remaining sections.
     for node in get_tree().get_nodes_in_group(GROUP):
         var node_save_data: Array = node.get_save_data()
 
