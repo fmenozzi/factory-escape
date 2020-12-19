@@ -17,10 +17,9 @@ export(String) var player_action := ''
 # before emitting the player_entered_area signal.
 export(float) var delay := 0.0
 
-var _is_active := false
-var _player_entered := false
+onready var _save_manager: TutorialMessageTriggerSaveManager = $SaveManager
 
-onready var _save_key: String = get_path()
+var _is_active := false
 
 func _ready() -> void:
     self.connect('body_entered', self, '_on_player_entered')
@@ -33,30 +32,12 @@ func _ready() -> void:
 
         Controls.connect('control_remapped', self, '_on_control_remapped')
 
-func get_save_data() -> Array:
-    return [_save_key, {
-        'player_entered': _player_entered,
-    }]
-
-func load_save_data(all_save_data: Dictionary) -> void:
-    if not _save_key in all_save_data:
-        return
-
-    var trigger_save_data: Dictionary = all_save_data[_save_key]
-    assert('player_entered' in trigger_save_data)
-
-    _player_entered = trigger_save_data['player_entered']
-
-    if _player_entered:
-        self.disconnect('body_entered', self, '_on_player_entered')
-        self.disconnect('body_exited', self, '_on_player_exited')
-
 func _on_player_entered(player: Player) -> void:
     if not player:
         return
 
     _is_active = true
-    _player_entered = true
+    _save_manager.player_entered = true
 
     if delay > 0:
         yield(get_tree().create_timer(delay), 'timeout')

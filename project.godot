@@ -205,6 +205,11 @@ _global_script_classes=[ {
 "path": "res://ui/interface/tutorial_messages/tutorial_message.gd"
 }, {
 "base": "Node",
+"class": "TutorialMessageTriggerSaveManager",
+"language": "GDScript",
+"path": "res://environment/tutorial_message_trigger/save_manager.gd"
+}, {
+"base": "Node",
 "class": "UiSoundPlayer",
 "language": "GDScript",
 "path": "res://ui/ui_sound_player.gd"
@@ -264,6 +269,7 @@ _global_script_class_icons={
 "Stopwatch": "",
 "Turret": "",
 "TutorialMessage": "",
+"TutorialMessageTriggerSaveManager": "",
 "UiSoundPlayer": "",
 "Version": "",
 "WallJumpManager": "",
