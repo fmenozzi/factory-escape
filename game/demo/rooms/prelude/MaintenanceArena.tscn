@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/demo/rooms/prelude/maintenance_arena.gd" type="Script" id=3]
 [ext_resource path="res://environment/health_pack/HealthPack.tscn" type="PackedScene" id=4]
-
+[ext_resource path="res://game/demo/rooms/prelude/maintenance_arena_save_manager.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
@@ -14,7 +14,6 @@ extents = Vector2( 8, 72 )
 
 [node name="MaintenanceArena" groups=[
 "lamp_reset",
-"save",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
@@ -61,5 +60,10 @@ shape = SubResource( 2 )
 
 [node name="HealthPack" parent="." index="13" instance=ExtResource( 4 )]
 position = Vector2( 552, 168 )
+
+[node name="SaveManager" type="Node" parent="." index="14" groups=[
+"save",
+]]
+script = ExtResource( 5 )
 
 [editable path="TileMaps"]

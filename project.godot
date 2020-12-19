@@ -104,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/leaping_failure/leaping_failure_physics_manager.gd"
 }, {
+"base": "Node",
+"class": "MaintenanceArenaSaveManager",
+"language": "GDScript",
+"path": "res://game/demo/rooms/prelude/maintenance_arena_save_manager.gd"
+}, {
 "base": "VBoxContainer",
 "class": "Menu",
 "language": "GDScript",
@@ -254,6 +259,7 @@ _global_script_class_icons={
 "Laser": "",
 "LeapingFailure": "",
 "LeapingFailurePhysicsManager": "",
+"MaintenanceArenaSaveManager": "",
 "Menu": "",
 "Pause": "",
 "PhysicsManager": "",

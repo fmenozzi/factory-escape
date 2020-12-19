@@ -1,7 +1,5 @@
 extends Room
 
-const SAVE_KEY := 'maintenance_arena'
-
 enum RoomState {
     PRE_FIGHT,
     WAVE_1,
@@ -10,7 +8,6 @@ enum RoomState {
     POST_FIGHT,
 }
 
-var _current_room_state: int = RoomState.PRE_FIGHT
 var _current_wave_enemy_count := 0
 var _player_camera: Camera2D = null
 
@@ -19,14 +16,17 @@ onready var _closing_door_left: StaticBody2D = $ClosingDoorLeft
 onready var _closing_door_right: StaticBody2D = $ClosingDoorRight
 onready var _arena_camera_anchor: Position2D = $ArenaCameraAnchor
 onready var _door_trigger: Area2D = $ClosingDoorTrigger
+onready var _save_manager: MaintenanceArenaSaveManager = $SaveManager
 
 func _ready() -> void:
+    _save_manager.current_room_state = RoomState.PRE_FIGHT
+
     _door_trigger.connect('body_entered', self, '_start_arena')
 
     set_process(false)
 
 func _process(delta: float) -> void:
-    match _current_room_state:
+    match _save_manager.current_room_state:
         RoomState.PRE_FIGHT:
             # Pin the camera to the center of the room.
             _player_camera.detach_and_move_to_global(
@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
             _spawn_enemy_at(sluggish_failure_left, Vector2(256, 168))
             _spawn_enemy_at(sluggish_failure_right, Vector2(384, 168))
 
-            _current_room_state = RoomState.WAVE_1
+            _save_manager.current_room_state = RoomState.WAVE_1
 
         RoomState.WAVE_1:
             if _current_wave_enemy_count == 0:
@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
                 _spawn_enemy_at(leaping_failure_left, Vector2(208, 168))
                 _spawn_enemy_at(leaping_failure_right, Vector2(432, 168))
 
-                _current_room_state = RoomState.WAVE_2
+                _save_manager.current_room_state = RoomState.WAVE_2
 
         RoomState.WAVE_2:
             if _current_wave_enemy_count == 0:
@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
                 _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(232, 152))
                 _spawn_enemy_at(Preloads.SentryDrone.instance(), Vector2(408, 72))
 
-                _current_room_state = RoomState.WAVE_3
+                _save_manager.current_room_state = RoomState.WAVE_3
 
         RoomState.WAVE_3:
             if _current_wave_enemy_count == 0:
@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
                 _closing_door_left.open()
                 _closing_door_right.open()
 
-                _current_room_state = RoomState.POST_FIGHT
+                _save_manager.current_room_state = RoomState.POST_FIGHT
 
         RoomState.POST_FIGHT:
             set_process(false)
@@ -93,8 +93,8 @@ func lamp_reset() -> void:
 
     # Unless the player has already completed the arena, reset to PRE_FIGHT
     # state on lamp rest (e.g. if the player dies in the middle of the fight).
-    if _current_room_state != RoomState.POST_FIGHT:
-        _current_room_state = RoomState.PRE_FIGHT
+    if _save_manager.current_room_state != RoomState.POST_FIGHT:
+        _save_manager.current_room_state = RoomState.PRE_FIGHT
 
         # In case the player died while the camera was detached in the middle
         # of the arena fight, reattach the camera without tweening it (i.e. set
@@ -103,33 +103,11 @@ func lamp_reset() -> void:
         if _player_camera != null:
             _player_camera.reattach(false)
 
-func get_save_data() -> Array:
-    return [SAVE_KEY, {
-        'current_room_state': _current_room_state,
-    }]
-
-func load_save_data(all_save_data: Dictionary) -> void:
-    if not SAVE_KEY in all_save_data:
-        return
-
-    var arena_save_data: Dictionary = all_save_data[SAVE_KEY]
-    assert('current_room_state' in arena_save_data)
-
-    # If we haven't already completed the arena, make sure room state gets set
-    # to PRE_FIGHT (i.e. in case the player quits out during one of the waves).
-    _current_room_state = arena_save_data['current_room_state']
-    if _current_room_state != RoomState.POST_FIGHT:
-        _current_room_state = RoomState.PRE_FIGHT
-
-    # If we've already completed the arena, disconnect the door trigger signal.
-    if _current_room_state == RoomState.POST_FIGHT:
-        _door_trigger.disconnect('body_entered', self, '_start_arena')
-
 func _start_arena(player: Player) -> void:
     if not player:
         return
 
-    if _current_room_state != RoomState.PRE_FIGHT:
+    if _save_manager.current_room_state != RoomState.PRE_FIGHT:
         return
 
     _player_camera = player.get_camera()
