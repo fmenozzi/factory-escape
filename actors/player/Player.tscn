@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://actors/player/states/rest.gd" type="Script" id=21]
 [ext_resource path="res://actors/player/effects/WallSlideTrail.tscn" type="PackedScene" id=22]
 [ext_resource path="res://actors/player/managers/WallJumpManager.tscn" type="PackedScene" id=23]
+[ext_resource path="res://actors/player/managers/save_manager.gd" type="Script" id=24]
 [ext_resource path="res://actors/player/effects/DashPuff.tscn" type="PackedScene" id=25]
 [ext_resource path="res://actors/player/managers/JumpManager.tscn" type="PackedScene" id=26]
 [ext_resource path="res://actors/player/managers/GrappleManager.tscn" type="PackedScene" id=27]
@@ -647,7 +648,6 @@ extents = Vector2( 0.5, 0.5 )
 [node name="Player" type="KinematicBody2D" groups=[
 "lamp_reset",
 "player",
-"save",
 ]]
 collision_mask = 4
 script = ExtResource( 1 )
@@ -659,6 +659,11 @@ script = ExtResource( 4 )
 movement_speed_tiles_per_second = 6.0
 
 [node name="HealthPackManager" parent="." instance=ExtResource( 40 )]
+
+[node name="SaveManager" type="Node" parent="." groups=[
+"save",
+]]
+script = ExtResource( 24 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_1 = SubResource( 1 )

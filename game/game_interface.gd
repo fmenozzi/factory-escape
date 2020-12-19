@@ -23,8 +23,8 @@ func _ready() -> void:
         # as set in the editor for this Game instance). This will be overwritten
         # during load if the player has rested at a lamp in the current save
         # slot, or has at least completed the intro fall sequence.
-        _player.last_saved_global_position = _player.global_position
-        _player.last_saved_direction_to_lamp = _player.get_direction()
+        _player.save_manager.last_saved_global_position = _player.global_position
+        _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
 
         # Use slot 1 by default if we don't go through the title screen.
         if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
@@ -32,9 +32,9 @@ func _ready() -> void:
         SaveAndLoad.load_game()
 
         # Determine player's starting state.
-        if not _player.has_completed_intro_fall_sequence:
+        if not _player.save_manager.has_completed_intro_fall_sequence:
             _player.change_state({'new_state': Player.State.INTRO_FALL})
-        elif _player.has_rested_at_any_lamp:
+        elif _player.save_manager.has_rested_at_any_lamp:
             _player.change_state({'new_state': Player.State.SLEEP})
         else:
             # In case the player quits and reloads the game before reaching the
@@ -79,7 +79,7 @@ func _set_player_starting_room() -> void:
 
     var rooms := $World/Rooms.get_children()
 
-    if not run_standalone and not _player.has_completed_intro_fall_sequence:
+    if not run_standalone and not _player.save_manager.has_completed_intro_fall_sequence:
         # If we're running a "real" game (i.e. not a standalone demo) and we
         # haven't completed the intro fall sequence (i.e. we're starting up the
         # game for the first time), assume that the current room is the first
@@ -106,7 +106,7 @@ func _set_player_starting_health_and_health_packs() -> void:
     if run_standalone:
         return
 
-    if not _player.has_completed_intro_fall_sequence or not _player.has_rested_at_any_lamp:
+    if not _player.save_manager.has_completed_intro_fall_sequence or not _player.save_manager.has_rested_at_any_lamp:
         _player.get_health().set_starting_health()
         _player.get_health_pack_manager().set_starting_health_packs()
 
@@ -255,9 +255,9 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     })
     yield(_player, 'player_reached_walk_to_point')
 
-    _player.last_saved_global_position = closest_rest_point.global_position
-    _player.last_saved_direction_to_lamp = Util.direction(_player, lamp)
-    _player.has_rested_at_any_lamp = true
+    _player.save_manager.last_saved_global_position = closest_rest_point.global_position
+    _player.save_manager.last_saved_direction_to_lamp = Util.direction(_player, lamp)
+    _player.save_manager.has_rested_at_any_lamp = true
 
     _reset_world()
 

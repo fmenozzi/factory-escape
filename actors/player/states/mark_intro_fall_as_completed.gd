@@ -1,9 +1,9 @@
 extends 'res://actors/player/states/player_state.gd'
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    player.has_completed_intro_fall_sequence = true
-    player.last_saved_global_position = player.global_position
-    player.last_saved_direction_to_lamp = player.get_direction()
+    player.save_manager.has_completed_intro_fall_sequence = true
+    player.save_manager.last_saved_global_position = player.global_position
+    player.save_manager.last_saved_direction_to_lamp = player.get_direction()
 
 func exit(player: Player) -> void:
     pass

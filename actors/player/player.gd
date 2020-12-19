@@ -136,15 +136,12 @@ var _nearby_lamp = null
 
 var _current_hazard_checkpoint: Area2D = null
 
-var last_saved_global_position: Vector2
-var last_saved_direction_to_lamp: int = Util.Direction.RIGHT
-var has_rested_at_any_lamp: bool = false
-var has_completed_intro_fall_sequence: bool = false
-
 # Keep track of the current room the player is in, as well as the previous room
 # the player was in, to assist in room transitions.
 var prev_room = null
 var curr_room = null
+
+onready var save_manager: PlayerSaveManager = $SaveManager
 
 func _ready() -> void:
     # Begin in fall state
@@ -177,41 +174,11 @@ func _physics_process(delta: float) -> void:
     if new_state_dict['new_state'] != State.NO_CHANGE:
         change_state(new_state_dict)
 
-func get_save_data() -> Array:
-    return ['player', {
-        'global_position_x': last_saved_global_position.x,
-        'global_position_y': last_saved_global_position.y,
-        'direction_to_lamp': last_saved_direction_to_lamp,
-        'has_rested_at_any_lamp': has_rested_at_any_lamp,
-        'has_completed_intro_fall_sequence': has_completed_intro_fall_sequence,
-    }]
-
-func load_save_data(all_save_data: Dictionary) -> void:
-    if not 'player' in all_save_data:
-        return
-
-    var player_save_data: Dictionary = all_save_data['player']
-    assert('global_position_x' in player_save_data)
-    assert('global_position_y' in player_save_data)
-    assert('direction_to_lamp' in player_save_data)
-    assert('has_rested_at_any_lamp' in player_save_data)
-    assert('has_completed_intro_fall_sequence' in player_save_data)
-
-    last_saved_global_position.x = player_save_data['global_position_x']
-    last_saved_global_position.y = player_save_data['global_position_y']
-    last_saved_direction_to_lamp = player_save_data['direction_to_lamp']
-    has_rested_at_any_lamp = player_save_data['has_rested_at_any_lamp']
-    has_completed_intro_fall_sequence = player_save_data['has_completed_intro_fall_sequence']
-
-    global_position = last_saved_global_position
-
-    set_direction(last_saved_direction_to_lamp)
-
 func lamp_reset() -> void:
     get_health().heal_to_full()
 
-    global_position = last_saved_global_position
-    set_direction(last_saved_direction_to_lamp)
+    global_position = save_manager.last_saved_global_position
+    set_direction(save_manager.last_saved_direction_to_lamp)
 
 # Change from one state in the state machine to another.
 func change_state(new_state_dict: Dictionary) -> void:
