@@ -4,7 +4,6 @@ signal game_saved
 signal game_loaded
 
 const GROUP := 'save'
-const SAVE_DIRECTORY := 'user://save_data/'
 
 enum SaveSlot {
     UNSET,
@@ -16,6 +15,11 @@ enum SaveSlot {
 # Save slot to use. This will be set by the title screen when a save slot is
 # selected, and used throughout afterwards.
 var save_slot: int = SaveSlot.UNSET
+
+onready var _save_directory: String = ProjectSettings.get_setting('application/save_directory')
+
+func _ready() -> void:
+    assert(_save_directory.ends_with('/'))
 
 func save_game() -> void:
     assert(save_slot != SaveSlot.UNSET)
@@ -30,8 +34,8 @@ func save_game() -> void:
         save_data[node_save_data[0]] = node_save_data[1]
 
     var dir := Directory.new()
-    if not dir.dir_exists(SAVE_DIRECTORY):
-        dir.make_dir_recursive(SAVE_DIRECTORY)
+    if not dir.dir_exists(_save_directory):
+        dir.make_dir_recursive(_save_directory)
 
     # Save data as formatted JSON using a two-space indent with sorted keys.
     var file := File.new()
@@ -72,13 +76,13 @@ func _get_save_file_path(save_slot_to_use: int) -> String:
 
     match save_slot_to_use:
         SaveSlot.SLOT_1:
-            return SAVE_DIRECTORY + '1.json'
+            return _save_directory + '1.json'
         SaveSlot.SLOT_2:
-            return SAVE_DIRECTORY + '2.json'
+            return _save_directory + '2.json'
         SaveSlot.SLOT_3:
-            return SAVE_DIRECTORY + '3.json'
+            return _save_directory + '3.json'
         _:
-            return SAVE_DIRECTORY + 'error.json'
+            return _save_directory + 'error.json'
 
 func _load_all_data() -> Dictionary:
     var file := File.new()

@@ -260,6 +260,7 @@ config/icon="res://icon.png"
 version/major=0
 version/minor=1
 version/patch=0
+save_directory="user://save_data/demo/"
 
 [autoload]
 

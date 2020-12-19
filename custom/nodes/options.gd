@@ -4,9 +4,13 @@ signal options_saved
 signal options_loaded
 
 const GROUP := 'options'
-const SAVE_DIRECTORY := 'user://save_data/'
 
 var _config := ConfigFile.new()
+
+onready var _save_directory: String = ProjectSettings.get_setting('application/save_directory')
+
+func _ready() -> void:
+    assert(_save_directory.ends_with('/'))
 
 func save_options() -> void:
     for node in get_tree().get_nodes_in_group(GROUP):
@@ -21,8 +25,8 @@ func save_options() -> void:
             _config.set_value(section, key, data[key])
 
     var dir := Directory.new()
-    if not dir.dir_exists(SAVE_DIRECTORY):
-        dir.make_dir_recursive(SAVE_DIRECTORY)
+    if not dir.dir_exists(_save_directory):
+        dir.make_dir_recursive(_save_directory)
 
     var status := _config.save(_get_file_path())
     assert(status == OK)
@@ -46,4 +50,4 @@ func get_config() -> ConfigFile:
     return _config
 
 func _get_file_path() -> String:
-    return SAVE_DIRECTORY + 'options.cfg'
+    return _save_directory + 'options.cfg'
