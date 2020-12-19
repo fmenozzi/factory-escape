@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AbilitiesLampSaveManager",
+"language": "GDScript",
+"path": "res://game/demo/rooms/prelude/abilities_lamp_save_manager.gd"
+}, {
 "base": "Node2D",
 "class": "AggroManager",
 "language": "GDScript",
@@ -240,6 +245,7 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/worker_drone/worker_drone.gd"
 } ]
 _global_script_class_icons={
+"AbilitiesLampSaveManager": "",
 "AggroManager": "",
 "AttackManager": "",
 "DashManager": "",
