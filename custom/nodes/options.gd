@@ -13,6 +13,12 @@ func _ready() -> void:
     assert(_save_directory.ends_with('/'))
 
 func save_options() -> void:
+    # Add section for game version.
+    _config.set_value('version', 'major', Version.major())
+    _config.set_value('version', 'minor', Version.minor())
+    _config.set_value('version', 'patch', Version.patch())
+
+    # Add remaining sections.
     for node in get_tree().get_nodes_in_group(GROUP):
         var options_data: Array = node.get_options_data()
 
