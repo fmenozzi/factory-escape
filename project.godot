@@ -144,6 +144,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/managers/save_manager.gd"
 }, {
+"base": "Node",
+"class": "ProcessingArenaSaveManager",
+"language": "GDScript",
+"path": "res://game/demo/rooms/dash/processing_arena_save_manager.gd"
+}, {
 "base": "Position2D",
 "class": "ProjectileSpawner",
 "language": "GDScript",
@@ -272,6 +277,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerHitEffect": "",
 "PlayerSaveManager": "",
+"ProcessingArenaSaveManager": "",
 "ProjectileSpawner": "",
 "PushbackManager": "",
 "RangedSentryDrone": "",
