@@ -56,7 +56,7 @@ func save_game() -> void:
 func load_game() -> void:
     assert(save_slot != SaveSlot.UNSET)
 
-    var all_save_data := _load_all_data()
+    var all_save_data := _load_all_data(save_slot)
 
     for node in get_tree().get_nodes_in_group(GROUP):
         node.load_save_data(all_save_data)
@@ -77,7 +77,7 @@ func delete_save_data(save_slot_to_delete: int) -> void:
     assert(status == OK)
 
 func get_all_save_data() -> Dictionary:
-    return _load_all_data()
+    return _load_all_data(save_slot)
 
 func _get_save_file_path(save_slot_to_use: int) -> String:
     assert(save_slot_to_use != SaveSlot.UNSET)
@@ -92,10 +92,10 @@ func _get_save_file_path(save_slot_to_use: int) -> String:
         _:
             return _save_directory + 'error.json'
 
-func _load_all_data() -> Dictionary:
+func _load_all_data(save_slot_to_use: int) -> Dictionary:
     var file := File.new()
 
-    var path := _get_save_file_path(save_slot)
+    var path := _get_save_file_path(save_slot_to_use)
 
     # If the save file doesn't exist, assume that it's because the game is
     # being played for the very first time.
