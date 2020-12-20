@@ -34,7 +34,7 @@ func _ready() -> void:
     assert(game != null)
     assert(not game.instance().run_standalone)
 
-    _set_main_menu_input_enabled(true)
+    set_process_input(false)
 
     # Intercept all menu-related signals from individual submenus.
     for menu in MENUS.values():
@@ -48,10 +48,13 @@ func _ready() -> void:
 
     Options.connect('options_saved', self, '_on_options_saved')
 
-    # Start at main menu.
-    _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
-
     Options.load_options()
+
+    # Start at main menu once we finish transitioning to title screen.
+    if SceneChanger.is_changing_scene():
+        yield(SceneChanger, 'scene_changed')
+    _set_main_menu_input_enabled(true)
+    _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)

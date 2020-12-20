@@ -45,7 +45,6 @@ __meta__ = {
 }
 
 [node name="MainMenu" parent="MenuBackground" instance=ExtResource( 4 )]
-visible = false
 
 [node name="SaveSlotsMenu" parent="MenuBackground" instance=ExtResource( 13 )]
 visible = false
