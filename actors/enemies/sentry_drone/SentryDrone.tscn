@@ -21,7 +21,6 @@
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=19]
 [ext_resource path="res://actors/enemies/sentry_drone/states/fly_to_point.gd" type="Script" id=20]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
 
@@ -50,13 +49,11 @@ collision_mask = 516
 script = ExtResource( 4 )
 
 [node name="Health" parent="." instance=ExtResource( 1 )]
-MAX_HEALTH = 3
+MAX_HEALTH = 4
 
 [node name="FlashManager" parent="." instance=ExtResource( 2 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
-single_flash_duration = 0.075
-flash_color = Color( 1, 1, 1, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 12 )]
 script = ExtResource( 11 )
