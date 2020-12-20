@@ -2,7 +2,7 @@ extends 'res://actors/player/states/player_state.gd'
 
 # The time in seconds spent in the standard rest animation before switching to
 # the sleep state.
-const RESTING_DURATION := 4.0
+const RESTING_DURATION := 6.0
 
 const MOVE_ACTIONS := [
     'player_jump',
