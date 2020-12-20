@@ -36,7 +36,7 @@ func get_save_data() -> Array:
         'num_health_packs': _num_health_packs,
     }]
 
-func load_save_data(all_save_data: Dictionary) -> void:
+func load_version_0_1_0(all_save_data: Dictionary) -> void:
     if not SAVE_KEY in all_save_data:
         return
 

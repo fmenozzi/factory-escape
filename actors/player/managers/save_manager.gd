@@ -15,7 +15,7 @@ func get_save_data() -> Array:
         'has_completed_intro_fall_sequence': has_completed_intro_fall_sequence,
     }]
 
-func load_save_data(all_save_data: Dictionary) -> void:
+func load_version_0_1_0(all_save_data: Dictionary) -> void:
     if not 'player' in all_save_data:
         return
 

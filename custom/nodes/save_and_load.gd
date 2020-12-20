@@ -59,7 +59,11 @@ func load_game() -> void:
     var all_save_data := _load_all_data(save_slot)
 
     for node in get_tree().get_nodes_in_group(GROUP):
-        node.load_save_data(all_save_data)
+        match Version.full():
+            '0.1.0':
+                node.load_version_0_1_0(all_save_data)
+            _:
+                assert(false, 'Invalid save version: ' + Version.full())
 
     emit_signal('game_loaded')
 

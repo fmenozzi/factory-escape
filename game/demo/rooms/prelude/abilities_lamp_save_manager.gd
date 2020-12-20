@@ -12,7 +12,7 @@ func get_save_data() -> Array:
         'rested_at_lamp': rested_at_lamp,
     }]
 
-func load_save_data(all_save_data: Dictionary) -> void:
+func load_version_0_1_0(all_save_data: Dictionary) -> void:
     if not SAVE_KEY in all_save_data:
         return
 

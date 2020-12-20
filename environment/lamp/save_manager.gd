@@ -11,7 +11,7 @@ func get_save_data() -> Array:
         'is_lit': is_lit
     }]
 
-func load_save_data(all_save_data: Dictionary) -> void:
+func load_version_0_1_0(all_save_data: Dictionary) -> void:
     if not _save_key in all_save_data:
         return
 

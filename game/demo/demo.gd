@@ -149,7 +149,11 @@ func _generate_ability_specific_demo_rooms() -> void:
     # Load in the generated save-and-load nodes.
     var all_save_data := SaveAndLoad.get_all_save_data()
     for node in generated_nodes_to_load:
-        node.load_save_data(all_save_data)
+        match Version.full():
+            '0.1.0':
+                node.load_version_0_1_0(all_save_data)
+            _:
+                assert(false, 'Invalid save version: ' + Version.full())
 
     # Connect all tutorial message trigger signals now that we're generating new
     # rooms with new triggers.
