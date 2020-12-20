@@ -21,12 +21,16 @@ func _ready() -> void:
     _delete.connect('pressed', self, '_on_delete_button_pressed')
 
 func set_save_slot_label() -> void:
-    if SaveAndLoad.has_save_data(save_slot):
-        _slot.text = 'Slot %d' % save_slot
-        _delete.disabled = false
-    else:
+    if not SaveAndLoad.has_save_data(save_slot):
         _slot.text = 'EMPTY'
         _delete.disabled = true
+    elif not SaveAndLoad.has_valid_version(save_slot):
+        _slot.text = 'INVALID SAVE VERSION'
+        _slot.disabled = true
+        _delete.disabled = false
+    else:
+        _slot.text = 'Slot %d' % save_slot
+        _delete.disabled = false
 
 func _on_slot_button_pressed() -> void:
     emit_signal('slot_requested')

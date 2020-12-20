@@ -66,6 +66,35 @@ func load_game() -> void:
 func has_save_data(save_slot_to_check: int) -> bool:
     return File.new().file_exists(_get_save_file_path(save_slot_to_check))
 
+func has_valid_version(save_slot_to_check: int) -> bool:
+    # Save data must have 'version' section.
+    var all_save_data := _load_all_data(save_slot_to_check)
+    if not 'version' in all_save_data:
+        return false
+
+    # 'version' section must have 'major', 'minor', and 'patch' sections.
+    var version: Dictionary = all_save_data['version']
+    if not ('major' in version and 'minor' in version and 'patch' in version):
+        return false
+
+    var major_from_save: int = version['major']
+    var minor_from_save: int = version['minor']
+    var patch_from_save: int = version['patch']
+
+    # Major versions must match.
+    if major_from_save != Version.major():
+        return false
+
+    # Save minor version cannot be newer than game minor version
+    if minor_from_save > Version.minor():
+        return false
+
+    # Save patch version cannot be newer than game patch version
+    if patch_from_save > Version.patch():
+        return false
+
+    return true
+
 func delete_save_data(save_slot_to_delete: int) -> void:
     var dir := Directory.new()
 
