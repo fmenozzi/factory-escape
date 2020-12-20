@@ -54,11 +54,14 @@ func save_game() -> void:
     emit_signal('game_saved')
 
 func load_game() -> void:
+    load_specific_nodes(get_tree().get_nodes_in_group(GROUP))
+
+func load_specific_nodes(nodes_to_load: Array) -> void:
     assert(save_slot != SaveSlot.UNSET)
 
     var all_save_data := _load_all_data(save_slot)
 
-    for node in get_tree().get_nodes_in_group(GROUP):
+    for node in nodes_to_load:
         match Version.full():
             '0.1.0':
                 node.load_version_0_1_0(all_save_data)
