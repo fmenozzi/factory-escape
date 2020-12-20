@@ -37,8 +37,8 @@ func _process(delta: float) -> void:
             _closing_door_right.close()
 
             # Spawn wave 1 enemies.
-            var sluggish_failure_left := Preloads.SluggishFailure.instance()
-            var sluggish_failure_right := Preloads.SluggishFailure.instance()
+            var sluggish_failure_left: SluggishFailure = Preloads.SluggishFailure.instance()
+            var sluggish_failure_right: SluggishFailure = Preloads.SluggishFailure.instance()
             sluggish_failure_right.initial_direction = Util.Direction.LEFT
             _spawn_enemy_at(sluggish_failure_left, Vector2(256, 168))
             _spawn_enemy_at(sluggish_failure_right, Vector2(384, 168))
@@ -48,8 +48,8 @@ func _process(delta: float) -> void:
         RoomState.WAVE_1:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 2 enemies.
-                var leaping_failure_left := Preloads.LeapingFailure.instance()
-                var leaping_failure_right := Preloads.LeapingFailure.instance()
+                var leaping_failure_left: LeapingFailure = Preloads.LeapingFailure.instance()
+                var leaping_failure_right: LeapingFailure = Preloads.LeapingFailure.instance()
                 leaping_failure_right.initial_direction = Util.Direction.LEFT
                 _spawn_enemy_at(leaping_failure_left, Vector2(208, 168))
                 _spawn_enemy_at(leaping_failure_right, Vector2(432, 168))

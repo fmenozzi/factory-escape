@@ -35,10 +35,10 @@ func _process(delta: float) -> void:
             _closing_door_right.close()
 
             # Spawn wave 1 enemies.
-            var leaping_failure_left := Preloads.LeapingFailure.instance()
-            var leaping_failure_right := Preloads.LeapingFailure.instance()
+            var leaping_failure_left: LeapingFailure = Preloads.LeapingFailure.instance()
+            var leaping_failure_right: LeapingFailure = Preloads.LeapingFailure.instance()
             leaping_failure_right.initial_direction = Util.Direction.LEFT
-            var sentry_drone := Preloads.SentryDrone.instance()
+            var sentry_drone: SentryDrone = Preloads.SentryDrone.instance()
 
             _spawn_enemy_at(leaping_failure_left, Vector2(384, 160))
             _spawn_enemy_at(sentry_drone, Vector2(480, 48))
@@ -49,13 +49,13 @@ func _process(delta: float) -> void:
         RoomState.WAVE_1:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 2 enemies.
-                var turret_left := Preloads.Turret.instance()
+                var turret_left: Turret = Preloads.Turret.instance()
                 turret_left.floor_normal = Turret.FloorNormal.LEFT
-                var turret_right := Preloads.Turret.instance()
+                var turret_right: Turret = Preloads.Turret.instance()
                 turret_right.floor_normal = Turret.FloorNormal.RIGHT
-                var sentry_drone := Preloads.SentryDrone.instance()
+                var sentry_drone: SentryDrone = Preloads.SentryDrone.instance()
                 sentry_drone.initial_direction = Util.Direction.LEFT
-                var leaping_failure := Preloads.LeapingFailure.instance()
+                var leaping_failure: LeapingFailure = Preloads.LeapingFailure.instance()
 
                 _spawn_enemy_at(turret_left, Vector2(464, 112))
                 _spawn_enemy_at(turret_right, Vector2(496, 112))
@@ -69,11 +69,11 @@ func _process(delta: float) -> void:
         RoomState.WAVE_2:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 3 enemies.
-                var sticky_drone_left := Preloads.StickyDrone.instance()
+                var sticky_drone_left: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone_left.floor_normal = StickyDrone.FloorNormal.RIGHT
-                var sticky_drone_right := Preloads.StickyDrone.instance()
+                var sticky_drone_right: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone_right.floor_normal = StickyDrone.FloorNormal.LEFT
-                var ranged_sentry_drone := Preloads.RangedSentryDrone.instance()
+                var ranged_sentry_drone: RangedSentryDrone = Preloads.RangedSentryDrone.instance()
 
                 _spawn_enemy_at(sticky_drone_left, Vector2(336, 112))
                 _spawn_enemy_at(ranged_sentry_drone, Vector2(480, 144))

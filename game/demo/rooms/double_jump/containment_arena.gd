@@ -35,9 +35,9 @@ func _process(delta: float) -> void:
             _closing_door_right.close()
 
             # Spawn wave 1 enemies.
-            var leaping_failure_left := Preloads.LeapingFailure.instance()
-            var leaping_failure_far_left := Preloads.LeapingFailure.instance()
-            var leaping_failure_right := Preloads.LeapingFailure.instance()
+            var leaping_failure_left: LeapingFailure = Preloads.LeapingFailure.instance()
+            var leaping_failure_far_left: LeapingFailure = Preloads.LeapingFailure.instance()
+            var leaping_failure_right: LeapingFailure = Preloads.LeapingFailure.instance()
             leaping_failure_right.initial_direction = Util.Direction.LEFT
 
             _spawn_enemy_at(leaping_failure_left, Vector2(408, 160))
@@ -49,10 +49,10 @@ func _process(delta: float) -> void:
         RoomState.WAVE_1:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 2 enemies.
-                var sentry_drone_left := Preloads.SentryDrone.instance()
-                var sentry_drone_right := Preloads.SentryDrone.instance()
+                var sentry_drone_left: SentryDrone = Preloads.SentryDrone.instance()
+                var sentry_drone_right: SentryDrone = Preloads.SentryDrone.instance()
                 sentry_drone_right.initial_direction = Util.Direction.LEFT
-                var sticky_drone := Preloads.StickyDrone.instance()
+                var sticky_drone: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone.floor_normal = StickyDrone.FloorNormal.DOWN
 
                 _spawn_enemy_at(sentry_drone_left, Vector2(408, 112))
@@ -64,13 +64,13 @@ func _process(delta: float) -> void:
         RoomState.WAVE_2:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 3 enemies.
-                var sticky_drone_left := Preloads.StickyDrone.instance()
+                var sticky_drone_left: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone_left.floor_normal = StickyDrone.FloorNormal.RIGHT
-                var sticky_drone_right := Preloads.StickyDrone.instance()
+                var sticky_drone_right: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone_right.floor_normal = StickyDrone.FloorNormal.LEFT
-                var sticky_drone_floor_left := Preloads.StickyDrone.instance()
+                var sticky_drone_floor_left: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone_floor_left.floor_normal = StickyDrone.FloorNormal.UP
-                var sticky_drone_floor_right := Preloads.StickyDrone.instance()
+                var sticky_drone_floor_right: StickyDrone = Preloads.StickyDrone.instance()
                 sticky_drone_floor_right.floor_normal = StickyDrone.FloorNormal.UP
 
                 _spawn_enemy_at(sticky_drone_left, Vector2(336, 96))

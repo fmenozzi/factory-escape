@@ -35,9 +35,9 @@ func _process(delta: float) -> void:
             _closing_door_right.close()
 
             # Spawn wave 1 enemies.
-            var sentry_drone_left := Preloads.SentryDrone.instance()
-            var leaping_failure := Preloads.LeapingFailure.instance()
-            var sentry_drone_right := Preloads.SentryDrone.instance()
+            var sentry_drone_left: SentryDrone = Preloads.SentryDrone.instance()
+            var leaping_failure: LeapingFailure = Preloads.LeapingFailure.instance()
+            var sentry_drone_right: SentryDrone = Preloads.SentryDrone.instance()
             sentry_drone_right.initial_direction = Util.Direction.LEFT
 
             _spawn_enemy_at(sentry_drone_left, Vector2(408, 144))
@@ -49,10 +49,10 @@ func _process(delta: float) -> void:
         RoomState.WAVE_1:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 2 enemies.
-                var ranged_sentry_drone_left := Preloads.RangedSentryDrone.instance()
-                var ranged_sentry_drone_right := Preloads.RangedSentryDrone.instance()
+                var ranged_sentry_drone_left: RangedSentryDrone= Preloads.RangedSentryDrone.instance()
+                var ranged_sentry_drone_right: RangedSentryDrone= Preloads.RangedSentryDrone.instance()
                 ranged_sentry_drone_right.initial_direction = Util.Direction.LEFT
-                var sluggish_failure := Preloads.SluggishFailure.instance()
+                var sluggish_failure: SluggishFailure = Preloads.SluggishFailure.instance()
 
                 _spawn_enemy_at(ranged_sentry_drone_left, Vector2(408, 112))
                 _spawn_enemy_at(ranged_sentry_drone_right, Vector2(552, 112))
@@ -65,11 +65,11 @@ func _process(delta: float) -> void:
         RoomState.WAVE_2:
             if _current_wave_enemy_count == 0:
                 # Spawn wave 3 enemies.
-                var turret_left := Preloads.Turret.instance()
+                var turret_left: Turret = Preloads.Turret.instance()
                 turret_left.floor_normal = Turret.FloorNormal.RIGHT
-                var turret_center := Preloads.Turret.instance()
+                var turret_center: Turret = Preloads.Turret.instance()
                 turret_center.floor_normal = Turret.FloorNormal.DOWN
-                var turret_right := Preloads.Turret.instance()
+                var turret_right: Turret = Preloads.Turret.instance()
                 turret_right.floor_normal = Turret.FloorNormal.LEFT
 
                 _spawn_enemy_at(turret_left, Vector2(336, 120))
