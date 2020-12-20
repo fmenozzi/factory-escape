@@ -1,23 +1,22 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/demo/rooms/grapple/grapple_arena.gd" type="Script" id=2]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
-
+[ext_resource path="res://game/demo/rooms/grapple/grapple_arena_save_manager.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7.99999, 72 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 72 )
 
 [node name="GrappleArena" groups=[
 "lamp_reset",
-"save",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
@@ -48,7 +47,7 @@ position = Vector2( 160, 164 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/HazardCheckpoint" index="0"]
 position = Vector2( -40, -72 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="ClosingDoor" parent="." index="9" instance=ExtResource( 3 )]
 position = Vector2( 312, 148 )
@@ -57,7 +56,12 @@ position = Vector2( 312, 148 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClosingDoorTrigger" index="0"]
 position = Vector2( 168, 92 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
+
+[node name="SaveManager" type="Node" parent="." index="11" groups=[
+"save",
+]]
+script = ExtResource( 5 )
 
 [editable path="TileMaps"]
 
