@@ -46,6 +46,8 @@ func load_options() -> void:
         var file := File.new()
         file.open(_get_file_path(), File.WRITE)
         file.close()
+    else:
+        assert(has_valid_version(_config))
 
     for node in get_tree().get_nodes_in_group(GROUP):
         match Version.full():
@@ -56,6 +58,27 @@ func load_options() -> void:
 
 
     emit_signal('options_loaded')
+
+func has_valid_version(config_file: ConfigFile) -> bool:
+    # Config file must have 'version' section.
+    if not config_file.has_section('version'):
+        return false
+
+    # 'version' section must have 'major', 'minor', and 'patch' keys.
+    if not config_file.has_section_key('version', 'major') or \
+       not config_file.has_section_key('version', 'minor') or \
+       not config_file.has_section_key('version', 'patch'):
+        return false
+
+    # Config file version must match one of the supported versions.
+    var full_version_from_config := '%d.%d.%d' % [
+        config_file.get_value('version', 'major'),
+        config_file.get_value('version', 'minor'),
+        config_file.get_value('version', 'patch'),
+    ]
+    return full_version_from_config in [
+        '0.1.0',
+    ]
 
 func get_config() -> ConfigFile:
     return _config
