@@ -327,6 +327,7 @@ version/major=0
 version/minor=1
 version/patch=0
 save_directory="user://save_data/demo/"
+version/valid_versions=[ "0.1.0" ]
 
 [autoload]
 

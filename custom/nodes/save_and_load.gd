@@ -91,9 +91,7 @@ func has_valid_version(save_slot_to_check: int) -> bool:
         version['minor'],
         version['patch'],
     ]
-    return full_version_from_save in [
-        '0.1.0',
-    ]
+    return full_version_from_save in Version.valid_versions()
 
 func delete_save_data(save_slot_to_delete: int) -> void:
     var dir := Directory.new()

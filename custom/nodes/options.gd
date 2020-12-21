@@ -75,9 +75,7 @@ func has_valid_version(config_file: ConfigFile) -> bool:
         config_file.get_value('version', 'minor'),
         config_file.get_value('version', 'patch'),
     ]
-    return full_version_from_config in [
-        '0.1.0',
-    ]
+    return full_version_from_config in Version.valid_versions()
 
 func get_config() -> ConfigFile:
     return _config

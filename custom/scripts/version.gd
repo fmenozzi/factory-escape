@@ -18,3 +18,6 @@ static func full() -> String:
     assert(major >= 0 and minor >= 0 and patch >= 0, 'Invalid game version.')
 
     return '%d.%d.%d' % [major, minor, patch]
+
+static func valid_versions() -> Array:
+    return ProjectSettings.get_setting('application/version/valid_versions')
