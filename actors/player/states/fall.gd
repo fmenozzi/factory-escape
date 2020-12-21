@@ -48,6 +48,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         Player.State.DASH,
         Player.State.STAGGER,
         Player.State.ATTACK,
+        Player.State.ATTACK_UP,
     ]:
         var jump_manager := player.get_jump_manager()
         jump_manager.reset_jump()
