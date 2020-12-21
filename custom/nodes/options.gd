@@ -40,14 +40,9 @@ func save_options() -> void:
     emit_signal('options_saved')
 
 func load_options() -> void:
-    var status := _config.load(_get_file_path())
-    if status != OK:
-        assert(status == ERR_FILE_NOT_FOUND)
-        var file := File.new()
-        file.open(_get_file_path(), File.WRITE)
-        file.close()
-    else:
-        assert(has_valid_version(_config))
+    _load_config(_config)
+
+    assert(has_valid_version(_config))
 
     for node in get_tree().get_nodes_in_group(GROUP):
         match Version.full():
@@ -85,3 +80,21 @@ func get_config() -> ConfigFile:
 
 func _get_file_path() -> String:
     return _save_directory + 'options.cfg'
+
+func _load_config(config_file: ConfigFile) -> void:
+    var path := _get_file_path()
+
+    var status := config_file.load(path)
+    if status != OK:
+        assert(status == ERR_FILE_NOT_FOUND)
+
+        # Create new config file if it doesn't already exist.
+        var file := File.new()
+        file.open(path, File.WRITE)
+        file.close()
+
+        # Add current game version to config.
+        assert(config_file.load(path) == OK)
+        config_file.set_value('version', 'major', Version.major())
+        config_file.set_value('version', 'minor', Version.minor())
+        config_file.set_value('version', 'patch', Version.patch())
