@@ -1,8 +1,5 @@
 extends Node
 
-signal game_saved
-signal game_loaded
-
 const GROUP := 'save'
 
 enum SaveSlot {
@@ -51,8 +48,6 @@ func save_game() -> void:
     file.store_string(JSON.print(save_data, '  ', true))
     file.close()
 
-    emit_signal('game_saved')
-
 func load_game() -> void:
     load_specific_nodes(get_tree().get_nodes_in_group(GROUP))
 
@@ -67,8 +62,6 @@ func load_specific_nodes(nodes_to_load: Array) -> void:
                 node.load_version_0_1_0(all_save_data)
             _:
                 assert(false, 'Invalid save version: ' + Version.full())
-
-    emit_signal('game_loaded')
 
 func has_save_data(save_slot_to_check: int) -> bool:
     return File.new().file_exists(_get_save_file_path(save_slot_to_check))
