@@ -44,7 +44,7 @@ func get_options_data() -> Array:
         'screenshake': _screenshake.get_selected_option_name(),
     }]
 
-func load_options_data(config: ConfigFile) -> void:
+func load_options_version_0_1_0(config: ConfigFile) -> void:
     if config.has_section_key(SECTION, 'rumble'):
         _rumble.select_option(config.get_value(SECTION, 'rumble'))
         _set_rumble()

@@ -44,7 +44,7 @@ func get_options_data() -> Array:
         'ui': _ui_slider.value,
     }]
 
-func load_options_data(config: ConfigFile) -> void:
+func load_options_version_0_1_0(config: ConfigFile) -> void:
     if not config.has_section(SECTION):
         return
 

@@ -49,7 +49,7 @@ func get_options_data() -> Array:
         'fps_cap': _fps_cap.get_selected_option_name(),
     }]
 
-func load_options_data(config: ConfigFile) -> void:
+func load_options_version_0_1_0(config: ConfigFile) -> void:
     if config.has_section_key(SECTION, 'vsync'):
         _vsync.select_option(config.get_value(SECTION, 'vsync'))
         _set_vsync()

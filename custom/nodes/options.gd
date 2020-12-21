@@ -48,7 +48,12 @@ func load_options() -> void:
         file.close()
 
     for node in get_tree().get_nodes_in_group(GROUP):
-        node.load_options_data(_config)
+        match Version.full():
+            '0.1.0':
+                node.load_options_version_0_1_0(_config)
+            _:
+                assert(false, 'Invalid options version: ' + Version.full())
+
 
     emit_signal('options_loaded')
 

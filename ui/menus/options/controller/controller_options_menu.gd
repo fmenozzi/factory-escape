@@ -57,7 +57,7 @@ func get_options_data() -> Array:
         'player_heal': _heal_remap_button.get_button_index(),
     }]
 
-func load_options_data(config: ConfigFile) -> void:
+func load_options_version_0_1_0(config: ConfigFile) -> void:
     if config.has_section_key(SECTION, 'player_jump'):
         var event := InputEventJoypadButton.new()
         event.button_index = config.get_value(SECTION, 'player_jump')
