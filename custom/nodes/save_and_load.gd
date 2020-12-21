@@ -56,6 +56,14 @@ func load_specific_nodes(nodes_to_load: Array) -> void:
 
     var all_save_data := _load_all_data(save_slot)
 
+    # In case we run in standalone mode (i.e. we don't go through the title
+    # screen to check for valid save versions), check here that any non-empty
+    # save data has a valid version (_load_all_data() will return an empty dict
+    # if the file doesn't exist, as would happen the first time the player plays
+    # the game).
+    if not all_save_data.empty():
+        assert(has_valid_version(save_slot))
+
     for node in nodes_to_load:
         match Version.full():
             '0.1.0':
@@ -77,23 +85,15 @@ func has_valid_version(save_slot_to_check: int) -> bool:
     if not ('major' in version and 'minor' in version and 'patch' in version):
         return false
 
-    var major_from_save: int = version['major']
-    var minor_from_save: int = version['minor']
-    var patch_from_save: int = version['patch']
-
-    # Major versions must match.
-    if major_from_save != Version.major():
-        return false
-
-    # Save minor version cannot be newer than game minor version
-    if minor_from_save > Version.minor():
-        return false
-
-    # Save patch version cannot be newer than game patch version
-    if patch_from_save > Version.patch():
-        return false
-
-    return true
+    # Save file version must match one of the supported versions.
+    var full_version_from_save := '%d.%d.%d' % [
+        version['major'],
+        version['minor'],
+        version['patch'],
+    ]
+    return full_version_from_save in [
+        '0.1.0',
+    ]
 
 func delete_save_data(save_slot_to_delete: int) -> void:
     var dir := Directory.new()
