@@ -38,7 +38,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if Input.is_action_pressed('player_move_up'):
             return {'new_state': Player.State.ATTACK_UP}
         elif player.get_attack_manager().can_attack():
-            return {'new_state': Player.State.ATTACK}
+            return {
+                'new_state': Player.State.ATTACK,
+                'velocity': player.velocity,
+            }
     elif event.is_action_pressed('player_dash') and dash_manager.can_dash():
         return {'new_state': Player.State.DASH}
     elif event.is_action_pressed('player_grapple'):

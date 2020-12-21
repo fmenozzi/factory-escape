@@ -32,6 +32,10 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
 
+    # If present, incorporate existing player velocity.
+    if 'velocity' in previous_state_dict:
+        player.velocity = previous_state_dict['velocity']
+
     player.get_animation_player().play('fall')
 
     # Treat falling off a ledge as consuming a jump (i.e. can only jump again if
@@ -43,6 +47,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         Player.State.DOUBLE_JUMP,
         Player.State.DASH,
         Player.State.STAGGER,
+        Player.State.ATTACK,
     ]:
         var jump_manager := player.get_jump_manager()
         jump_manager.reset_jump()
