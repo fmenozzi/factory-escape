@@ -42,15 +42,19 @@ func save_options() -> void:
 func load_options() -> void:
     _load_config(_config)
 
-    assert(has_valid_version(_config))
-
-    for node in get_tree().get_nodes_in_group(GROUP):
-        match Version.full():
-            '0.1.0':
-                node.load_options_version_0_1_0(_config)
-            _:
-                assert(false, 'Invalid options version: ' + Version.full())
-
+    # If we don't have a valid config version, simply reset to the defaults for
+    # the current game version. Otherwise, call the appropriate load function
+    # for the current game version.
+    if not has_valid_version(_config):
+        for node in get_tree().get_nodes_in_group(GROUP):
+            node.reset_to_defaults()
+    else:
+        for node in get_tree().get_nodes_in_group(GROUP):
+            match Version.full():
+                '0.1.0':
+                    node.load_options_version_0_1_0(_config)
+                _:
+                    assert(false, 'Invalid options version: ' + Version.full())
 
     emit_signal('options_loaded')
 

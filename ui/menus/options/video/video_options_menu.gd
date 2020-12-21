@@ -62,6 +62,16 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
         _fps_cap.select_option(config.get_value(SECTION, 'fps_cap'))
         _set_fps_cap()
 
+func reset_to_defaults() -> void:
+    _vsync.reset_to_default()
+    _set_vsync()
+
+    _window_mode.reset_to_default()
+    _set_window_mode()
+
+    _fps_cap.reset_to_default()
+    _set_fps_cap()
+
 # Sets OS-level vsync using the currently-selected option in the option button.
 func _set_vsync() -> void:
     OS.set_use_vsync(_vsync.get_selected_option_name() == 'Enabled')
@@ -103,14 +113,7 @@ func _on_fps_cap_changed() -> void:
     _set_fps_cap()
 
 func _on_reset_to_defaults_pressed() -> void:
-    _vsync.reset_to_default()
-    _set_vsync()
-
-    _window_mode.reset_to_default()
-    _set_window_mode()
-
-    _fps_cap.reset_to_default()
-    _set_fps_cap()
+    reset_to_defaults()
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()

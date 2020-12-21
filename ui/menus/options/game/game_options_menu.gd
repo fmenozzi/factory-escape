@@ -53,6 +53,13 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
         _screenshake.select_option(config.get_value(SECTION, 'screenshake'))
         _set_screenshake()
 
+func reset_to_defaults() -> void:
+    _rumble.reset_to_default()
+    _set_rumble()
+
+    _screenshake.reset_to_default()
+    _set_screenshake()
+
 func _set_rumble() -> void:
     var rumble: String = _rumble.get_selected_option_name()
     assert(rumble in ['Normal', 'Less', 'None'])
@@ -88,11 +95,7 @@ func _on_screenshake_changed() -> void:
     _set_screenshake()
 
 func _on_reset_to_defaults_pressed() -> void:
-    _rumble.reset_to_default()
-    _set_rumble()
-
-    _screenshake.reset_to_default()
-    _set_screenshake()
+    reset_to_defaults()
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()

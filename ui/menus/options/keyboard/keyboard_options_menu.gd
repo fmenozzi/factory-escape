@@ -94,28 +94,7 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
         var remap_succeeded: bool = _heal_remap_button.remap_action_to(event)
         assert(remap_succeeded)
 
-func _set_input_enabled(enabled: bool) -> void:
-    _input_enabled = enabled
-
-    # Disable back and reset-to-defaults buttons while remapping input.
-    if _input_enabled:
-        _reset_to_defaults.disabled = false
-        _back_button.disabled = false
-    else:
-        _reset_to_defaults.disabled = true
-        _back_button.disabled = true
-
-func _on_remap_started() -> void:
-    _set_input_enabled(false)
-
-    _menu_label.text = 'Press new...'
-
-func _on_remap_finished() -> void:
-    _set_input_enabled(true)
-
-    _menu_label.text = 'Keyboard'
-
-func _on_reset_to_defaults_pressed() -> void:
+func reset_to_defaults() -> void:
     # Clear existing mappings and reload from project settings. The keyboard
     # bindings will be reloaded from the project settings, while the controller
     # bindings will be reloaded from the current config (so as not to be
@@ -155,6 +134,30 @@ func _on_reset_to_defaults_pressed() -> void:
                 var new_event := InputEventJoypadButton.new()
                 new_event.button_index = controller_option_data[action]
                 InputMap.action_add_event(action, new_event)
+
+func _set_input_enabled(enabled: bool) -> void:
+    _input_enabled = enabled
+
+    # Disable back and reset-to-defaults buttons while remapping input.
+    if _input_enabled:
+        _reset_to_defaults.disabled = false
+        _back_button.disabled = false
+    else:
+        _reset_to_defaults.disabled = true
+        _back_button.disabled = true
+
+func _on_remap_started() -> void:
+    _set_input_enabled(false)
+
+    _menu_label.text = 'Press new...'
+
+func _on_remap_finished() -> void:
+    _set_input_enabled(true)
+
+    _menu_label.text = 'Keyboard'
+
+func _on_reset_to_defaults_pressed() -> void:
+    reset_to_defaults()
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()

@@ -63,6 +63,11 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
         _set_bus_volume('UI', ui)
         _ui_slider.set_value(ui)
 
+func reset_to_defaults() -> void:
+    _music_slider.set_value(_music_slider.max_value)
+    _effects_slider.set_value(_effects_slider.max_value)
+    _ui_slider.set_value(_ui_slider.max_value)
+
 func _set_bus_volume(bus: String, slider_value: float) -> void:
     assert(bus in ['Music', 'Effects', 'UI'])
 
@@ -94,9 +99,7 @@ func _on_ui_value_changed(new_value: float) -> void:
     _set_bus_volume('UI', new_value)
 
 func _on_reset_to_defaults_pressed() -> void:
-    _music_slider.set_value(_music_slider.max_value)
-    _effects_slider.set_value(_effects_slider.max_value)
-    _ui_slider.set_value(_ui_slider.max_value)
+    reset_to_defaults()
 
 func _on_back_pressed() -> void:
     go_to_previous_menu()
