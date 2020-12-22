@@ -2,7 +2,13 @@ extends 'res://actors/player/states/player_state.gd'
 
 var _attack_again := false
 var _attack_is_connecting := false
-var _transition_to_jump := false
+
+enum TransitionTo {
+    NONE,
+    JUMP,
+    DASH,
+}
+var _transition_to: int = TransitionTo.NONE
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -18,7 +24,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.start_attack(player.get_attack_manager().get_next_attack_animation())
 
     _attack_again = false
-    _transition_to_jump = false
+    _transition_to = TransitionTo.NONE
 
 func exit(player: Player) -> void:
     player.stop_attack()
@@ -37,7 +43,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
             player.velocity.y, physics_manager.get_min_jump_velocity())
     elif event.is_action_pressed('player_jump'):
         if player.get_jump_manager().can_jump():
-            _transition_to_jump = true
+            _transition_to = TransitionTo.JUMP
+    elif event.is_action_pressed('player_dash'):
+        if player.get_dash_manager().can_dash():
+            _transition_to = TransitionTo.DASH
 
     return {'new_state': Player.State.NO_CHANGE}
 
@@ -50,11 +59,17 @@ func update(player: Player, delta: float) -> Dictionary:
         player.velocity.y = 0
 
     if not player.get_animation_player().is_playing():
-        if _transition_to_jump and Input.is_action_pressed('player_jump'):
-            # Insist that the jump button is being held so that the player can
-            # jump cut later by releasing.
-            return {'new_state': Player.State.JUMP}
-        elif _attack_again:
+        match _transition_to:
+            TransitionTo.JUMP:
+                if Input.is_action_pressed('player_jump'):
+                    # Insist that the jump button is being held so that the
+                    # player can jump cut later by releasing.
+                    return {'new_state': Player.State.JUMP}
+
+            TransitionTo.DASH:
+                return {'new_state': Player.State.DASH}
+
+        if _attack_again:
             return {
                 'new_state': Player.State.ATTACK,
                 'velocity': player.velocity,
