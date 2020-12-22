@@ -39,6 +39,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
 
+    player.velocity.x = 0
+
     if not player.get_animation_player().is_playing():
         if _attack_again:
             return {
