@@ -4,9 +4,12 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
 
-    # If present, incorporate existing player velocity.
+    # If present, incorporate existing player velocity. Zero out the x-component
+    # so that we ensure we only move horizontally when airborne (as detected in
+    # update() below).
     if 'velocity' in previous_state_dict:
         player.velocity = previous_state_dict['velocity']
+        player.velocity.x = 0
 
     player.start_attack('attack_up')
 
