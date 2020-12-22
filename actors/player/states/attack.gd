@@ -7,8 +7,10 @@ enum TransitionTo {
     NONE,
     JUMP,
     DASH,
+    GRAPPLE,
 }
 var _transition_to: int = TransitionTo.NONE
+var _next_grapple_point: GrapplePoint = null
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -47,6 +49,11 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_dash'):
         if player.get_dash_manager().can_dash():
             _transition_to = TransitionTo.DASH
+    elif event.is_action_pressed('player_grapple'):
+        var next_grapple_point := player.get_grapple_manager().get_next_grapple_point()
+        if next_grapple_point != null:
+            _next_grapple_point = next_grapple_point
+            _transition_to = TransitionTo.GRAPPLE
 
     return {'new_state': Player.State.NO_CHANGE}
 
@@ -68,6 +75,12 @@ func update(player: Player, delta: float) -> Dictionary:
 
             TransitionTo.DASH:
                 return {'new_state': Player.State.DASH}
+
+            TransitionTo.GRAPPLE:
+                return {
+                    'new_state': Player.State.GRAPPLE,
+                    'grapple_point': _next_grapple_point,
+                }
 
         if _attack_again:
             return {
