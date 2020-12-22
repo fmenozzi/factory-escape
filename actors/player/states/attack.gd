@@ -41,6 +41,9 @@ func update(player: Player, delta: float) -> Dictionary:
 
     player.velocity.x = 0
 
+    if _attack_is_connecting:
+        player.velocity.y = 0
+
     if not player.get_animation_player().is_playing():
         if _attack_again:
             return {
