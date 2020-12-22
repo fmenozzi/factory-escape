@@ -111,6 +111,8 @@ onready var _hit_effect: PlayerHitEffect = $PlayerHitEffect
 
 onready var _health: Health = $Health
 onready var _hitboxes: Node2D = $Hitboxes
+onready var _side_attack_hitbox: Area2D = $Hitboxes/SideAttack
+onready var _up_attack_hitbox: Area2D = $Hitboxes/UpAttack
 onready var _hurtbox: Area2D = $Hurtbox
 
 onready var _attack_state: Node = $States/Attack
@@ -160,8 +162,8 @@ func _ready() -> void:
     for hitbox in _hitboxes.get_children():
         hitbox.connect('area_entered', self, '_on_attack_connected')
 
-        hitbox.connect('area_entered', _attack_state, '_on_attack_connected')
-        hitbox.connect('area_entered', _attack_up_state, '_on_attack_connected')
+    _side_attack_hitbox.connect('area_entered', _attack_state, '_on_attack_connected')
+    _up_attack_hitbox.connect('area_entered', _attack_up_state, '_on_attack_connected')
 
     _hurtbox.connect('area_entered', self, '_on_hazard_area_hit')
     _hurtbox.connect('body_entered', self, '_on_hazard_body_hit')
