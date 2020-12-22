@@ -1,6 +1,7 @@
 extends 'res://actors/player/states/player_state.gd'
 
 var _attack_again := false
+var _attack_is_connecting := false
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -19,6 +20,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
 func exit(player: Player) -> void:
     player.stop_attack()
+
+    _attack_is_connecting = false
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var physics_manager := player.get_physics_manager()
@@ -58,10 +61,15 @@ func update(player: Player, delta: float) -> Dictionary:
         player.velocity.x = input_direction * physics_manager.get_movement_speed()
 
     # Fall.
-    player.velocity.y = min(
-        player.velocity.y + physics_manager.get_gravity() * delta,
-        physics_manager.get_terminal_velocity())
+    if not _attack_is_connecting:
+        player.velocity.y = min(
+            player.velocity.y + physics_manager.get_gravity() * delta,
+            physics_manager.get_terminal_velocity())
 
-    player.move(player.velocity)
+    if not _attack_is_connecting:
+        player.move(player.velocity)
 
     return {'new_state': Player.State.NO_CHANGE}
+
+func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
+    _attack_is_connecting = true

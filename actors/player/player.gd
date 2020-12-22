@@ -113,6 +113,9 @@ onready var _health: Health = $Health
 onready var _hitboxes: Node2D = $Hitboxes
 onready var _hurtbox: Area2D = $Hurtbox
 
+onready var _attack_state: Node = $States/Attack
+onready var _attack_up_state: Node = $States/AttackUp
+
 onready var _invincibility_flash_manager_hazard_hit: Node = $States/HazardHit/FlashManager
 onready var _invincibility_flash_manager_enemy_hit: Node = $States/Stagger/Hit/FlashManager
 
@@ -156,6 +159,9 @@ func _ready() -> void:
 
     for hitbox in _hitboxes.get_children():
         hitbox.connect('area_entered', self, '_on_attack_connected')
+
+        hitbox.connect('area_entered', _attack_state, '_on_attack_connected')
+        hitbox.connect('area_entered', _attack_up_state, '_on_attack_connected')
 
     _hurtbox.connect('area_entered', self, '_on_hazard_area_hit')
     _hurtbox.connect('body_entered', self, '_on_hazard_body_hit')
