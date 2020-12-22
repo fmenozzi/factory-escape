@@ -1,6 +1,7 @@
 extends 'res://actors/player/states/player_state.gd'
 
 var _attack_is_connecting := false
+var _transition_to_jump := false
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
@@ -15,6 +16,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     player.start_attack('attack_up')
 
+    _transition_to_jump = false
+
 func exit(player: Player) -> void:
     player.stop_attack()
 
@@ -27,6 +30,9 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         # "Jump cut" if the jump button is released.
         player.velocity.y = max(
             player.velocity.y, physics_manager.get_min_jump_velocity())
+    elif event.is_action_pressed('player_jump'):
+        if player.get_jump_manager().can_jump():
+            _transition_to_jump = true
 
     return {'new_state': Player.State.NO_CHANGE}
 
@@ -39,7 +45,11 @@ func update(player: Player, delta: float) -> Dictionary:
         player.velocity.y = 0
 
     if not player.get_animation_player().is_playing():
-        if player.is_on_floor():
+        if _transition_to_jump and Input.is_action_pressed('player_jump'):
+            # Insist that the jump button is being held so that the player can
+            # jump cut later by releasing.
+            return {'new_state': Player.State.JUMP}
+        elif player.is_on_floor():
             return {'new_state': Player.State.IDLE}
         else:
             return {
