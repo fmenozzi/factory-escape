@@ -96,7 +96,8 @@ func _load_config(config_file: ConfigFile) -> void:
         file.close()
 
         # Add current game version to config.
-        assert(config_file.load(path) == OK)
+        status = config_file.load(path)
+        assert(status == OK)
         config_file.set_value('version', 'major', Version.major())
         config_file.set_value('version', 'minor', Version.minor())
         config_file.set_value('version', 'patch', Version.patch())
