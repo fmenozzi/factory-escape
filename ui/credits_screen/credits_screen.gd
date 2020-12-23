@@ -64,7 +64,8 @@ func _generate_hseparators(num_hseparators: int) -> Array:
 
 func _get_line_labels() -> Array:
     var file := File.new()
-    assert(file.open('res://ui/credits_screen/data/credits.txt', File.READ) == OK)
+    var status := file.open('res://ui/credits_screen/data/credits.txt', File.READ)
+    assert(status == OK)
 
     var line_labels := []
 
