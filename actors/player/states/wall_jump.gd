@@ -24,10 +24,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # will cause the velocity to "cut", allowing for variable-height jumps).
     player.velocity.y = player.get_physics_manager().get_max_jump_velocity()
 
-    # Flip the player to face away from the wall if necessary.
-    var wall_jump_manager := player.get_wall_jump_manager()
-    if wall_jump_manager.is_near_wall_front():
-        player.set_direction(wall_jump_manager.get_wall_normal_front().x)
+    # Flip the player to face away from the wall.
+    player.set_direction(player.get_wall_jump_manager().get_wall_normal_front().x)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.get_jump_manager().consume_jump()
