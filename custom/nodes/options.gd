@@ -12,7 +12,7 @@ onready var _save_directory: String = ProjectSettings.get_setting('application/s
 func _ready() -> void:
     assert(_save_directory.ends_with('/'))
 
-func save_options() -> void:
+func save_options() -> ErrorPlusMessage:
     # Add section for game version.
     _config.set_value('version', 'major', Version.major())
     _config.set_value('version', 'minor', Version.minor())
@@ -23,7 +23,9 @@ func save_options() -> void:
         var options_data: Array = node.get_options_data()
 
         if options_data.size() != 2:
-            _handle_error('Expected 2 fields in options_data, got %d' % options_data.size())
+            return ErrorPlusMessage.new(
+                ERR_INVALID_DATA,
+                'Expected 2 fields in options_data, got %d' % options_data.size())
 
         var section: String = options_data[0]
         var data: Dictionary = options_data[1]
@@ -35,18 +37,21 @@ func save_options() -> void:
     if not dir.dir_exists(_save_directory):
         var error := dir.make_dir_recursive(_save_directory)
         if error != OK:
-            _handle_error('Could not create save directory %s' % _save_directory)
+            return ErrorPlusMessage.new(
+                error, 'Could not create save directory %s' % _save_directory)
 
     var error := _config.save(_get_file_path())
     if error != OK:
-        _handle_error('Could not save options, error code %d' % error)
+        return ErrorPlusMessage.new(error, 'Could not save option')
 
     emit_signal('options_saved')
 
-func load_options() -> void:
-    var error := _load_config(_config)
-    if error != OK:
-        _handle_error('Could not load config, error code %d' % error)
+    return ErrorPlusMessage.new()
+
+func load_options() -> ErrorPlusMessage:
+    var error_plus_msg := _load_config(_config)
+    if error_plus_msg.error != OK:
+        return error_plus_msg
 
     # If we don't have a valid config version, simply reset to the defaults for
     # the current game version. Otherwise, call the appropriate load function
@@ -60,9 +65,12 @@ func load_options() -> void:
                 '0.1.0':
                     node.load_options_version_0_1_0(_config)
                 _:
-                    _handle_error('Invalid options version: ' + Version.full())
+                    return ErrorPlusMessage.new(
+                        ERR_INVALID_DATA, 'Invalid game version: ' + Version.full())
 
     emit_signal('options_loaded')
+
+    return ErrorPlusMessage.new()
 
 func has_valid_version(config_file: ConfigFile) -> bool:
     # Config file must have 'version' section.
@@ -89,34 +97,31 @@ func get_config() -> ConfigFile:
 func _get_file_path() -> String:
     return _save_directory + 'options.cfg'
 
-func _load_config(config_file: ConfigFile) -> int:
+func _load_config(config_file: ConfigFile) -> ErrorPlusMessage:
     var path := _get_file_path()
 
     var error := config_file.load(path)
     if error == OK:
-        return OK
+        return ErrorPlusMessage.new()
 
     # It's ok if the file doesn't exist (which would be the case the first
     # time the player plays the game), but any other error here is not ok.
     if error != ERR_FILE_NOT_FOUND:
-        return error
+        return ErrorPlusMessage.new(error, 'Error loading existing options file')
 
     # Create new config file if it doesn't already exist.
     var file := File.new()
     error = file.open(path, File.WRITE)
     if error != OK:
-        return error
+        return ErrorPlusMessage.new(error, 'Error opening options file')
     file.close()
 
     # Add current game version to config.
     error = config_file.load(path)
     if error != OK:
-        return error
+        return ErrorPlusMessage.new(error, 'Error loading new options file')
     config_file.set_value('version', 'major', Version.major())
     config_file.set_value('version', 'minor', Version.minor())
     config_file.set_value('version', 'patch', Version.patch())
 
-    return OK
-
-func _handle_error(error_msg: String) -> void:
-    assert(false, error_msg)
+    return ErrorPlusMessage.new()

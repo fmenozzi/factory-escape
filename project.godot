@@ -54,6 +54,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/projectiles/energy_projectile/energy_projectile.gd"
 }, {
+"base": "Reference",
+"class": "ErrorOr",
+"language": "GDScript",
+"path": "res://custom/scripts/error_or.gd"
+}, {
+"base": "Reference",
+"class": "ErrorPlusMessage",
+"language": "GDScript",
+"path": "res://custom/scripts/error_plus_message.gd"
+}, {
 "base": "Node2D",
 "class": "FireColumn",
 "language": "GDScript",
@@ -274,6 +284,8 @@ _global_script_class_icons={
 "DemoSaveManager": "",
 "EnemyHitEffect": "",
 "EnergyProjectile": "",
+"ErrorOr": "",
+"ErrorPlusMessage": "",
 "FireColumn": "",
 "GrappleArenaSaveManager": "",
 "GrappleManager": "",

@@ -18,7 +18,7 @@ onready var _save_directory: String = ProjectSettings.get_setting('application/s
 func _ready() -> void:
     assert(_save_directory.ends_with('/'))
 
-func save_game() -> void:
+func save_game() -> ErrorPlusMessage:
     assert(save_slot != SaveSlot.UNSET)
 
     var save_data := {}
@@ -36,7 +36,9 @@ func save_game() -> void:
 
         # First element is the key, second is the value.
         if node_save_data.size() != 2:
-            _handle_error('Expected 2 fields in node_save_data, got %d' % node_save_data.size())
+            return ErrorPlusMessage.new(
+                ERR_INVALID_DATA,
+                'Expected 2 fields in node_save_data, got %d' % node_save_data.size())
 
         save_data[node_save_data[0]] = node_save_data[1]
 
@@ -44,23 +46,37 @@ func save_game() -> void:
     if not dir.dir_exists(_save_directory):
         var error := dir.make_dir_recursive(_save_directory)
         if error != OK:
-            _handle_error('Could not create save directory %s, error code %d' % [_save_directory, error])
+            return ErrorPlusMessage.new(
+                error, 'Could not create save directory %s' % _save_directory)
+
+    var error_or_path := _get_save_file_path(save_slot)
+    if error_or_path.error_plus_msg.error != OK:
+        return error_or_path.error_plus_msg
+
+    var path: String = error_or_path.value
 
     # Save data as formatted JSON using a two-space indent with sorted keys.
     var file := File.new()
-    var error := file.open(_get_save_file_path(save_slot), File.WRITE)
+    var error := file.open(path, File.WRITE)
     if error != OK:
-        _handle_error('Could not open save file for slot %d, error code %d' % [save_slot, error])
+        return ErrorPlusMessage.new(
+            error, 'Could not open save file for slot %d' % save_slot)
     file.store_string(JSON.print(save_data, '  ', true))
     file.close()
 
-func load_game() -> void:
-    load_specific_nodes(get_tree().get_nodes_in_group(GROUP))
+    return ErrorPlusMessage.new()
 
-func load_specific_nodes(nodes_to_load: Array) -> void:
+func load_game() -> ErrorPlusMessage:
+    return load_specific_nodes(get_tree().get_nodes_in_group(GROUP))
+
+func load_specific_nodes(nodes_to_load: Array) -> ErrorPlusMessage:
     assert(save_slot != SaveSlot.UNSET)
 
-    var all_save_data := _load_all_data(save_slot)
+    var error_or_all_save_data := _load_all_data(save_slot)
+    if error_or_all_save_data.error_plus_msg.error != OK:
+        return error_or_all_save_data.error_plus_msg
+
+    var all_save_data: Dictionary = error_or_all_save_data.value
 
     # In case we run in standalone mode (i.e. we don't go through the title
     # screen to check for valid save versions), check here that any non-empty
@@ -69,21 +85,38 @@ func load_specific_nodes(nodes_to_load: Array) -> void:
     # the game).
     if not all_save_data.empty():
         if not has_valid_version(save_slot):
-            _handle_error('Invalid version for save slot %d' % save_slot)
+            return ErrorPlusMessage.new(
+                ERR_INVALID_DATA, 'Invalid version for slot %d' % save_slot)
 
     for node in nodes_to_load:
         match Version.full():
             '0.1.0':
                 node.load_version_0_1_0(all_save_data)
             _:
-                _handle_error('Invalid save version: ' + Version.full())
+                return ErrorPlusMessage.new(
+                    ERR_INVALID_DATA, 'Invalid game version: ' + Version.full())
+
+    return ErrorPlusMessage.new()
 
 func has_save_data(save_slot_to_check: int) -> bool:
-    return File.new().file_exists(_get_save_file_path(save_slot_to_check))
+    # For now we just treat errors from _get_save_file_path() as indicative of
+    # not having save data.
+    var error_or_path := _get_save_file_path(save_slot_to_check)
+    if error_or_path.error_plus_msg.error != OK:
+        return false
+
+    return File.new().file_exists(error_or_path.value)
 
 func has_valid_version(save_slot_to_check: int) -> bool:
+    # For now, we treat a loading error as indicative of not having a valid
+    # version.
+    var error_or_all_save_data := _load_all_data(save_slot_to_check)
+    if error_or_all_save_data.error_plus_msg.error != OK:
+        return false
+
+    var all_save_data: Dictionary = error_or_all_save_data.value
+
     # Save data must have 'version' section.
-    var all_save_data := _load_all_data(save_slot_to_check)
     if not 'version' in all_save_data:
         return false
 
@@ -100,57 +133,75 @@ func has_valid_version(save_slot_to_check: int) -> bool:
     ]
     return full_version_from_save in Version.valid_versions()
 
-func delete_save_data(save_slot_to_delete: int) -> void:
-    var path := _get_save_file_path(save_slot_to_delete)
+func delete_save_data(save_slot_to_delete: int) -> ErrorPlusMessage:
+    var error_or_path := _get_save_file_path(save_slot_to_delete)
+    if error_or_path.error_plus_msg.error != OK:
+        return error_or_path.error_plus_msg
+
+    var path: String = error_or_path.value
 
     var dir := Directory.new()
     if not dir.file_exists(path):
-        return
+        return ErrorPlusMessage.new()
 
     var error := dir.remove(path)
     if error != OK:
-        _handle_error('Could not delete save slot %d, error code %d' % [save_slot_to_delete, error])
+        return ErrorPlusMessage.new(error, 'Could not delete save slot %d' % save_slot)
 
-func get_all_save_data() -> Dictionary:
+    return ErrorPlusMessage.new()
+
+func get_all_save_data() -> ErrorOr:
     return _load_all_data(save_slot)
 
-func _get_save_file_path(save_slot_to_use: int) -> String:
-    if save_slot_to_use == SaveSlot.UNSET:
-        _handle_error('Save slot not set in _get_save_file_path()')
-
+func _get_save_file_path(save_slot_to_use: int) -> ErrorOr:
     match save_slot_to_use:
         SaveSlot.SLOT_1:
-            return _save_directory + '1.json'
+            return ErrorOr.new(_save_directory + '1.json')
         SaveSlot.SLOT_2:
-            return _save_directory + '2.json'
+            return ErrorOr.new(_save_directory + '2.json')
         SaveSlot.SLOT_3:
-            return _save_directory + '3.json'
+            return ErrorOr.new(_save_directory + '3.json')
         _:
-            return _save_directory + 'error.json'
+            return ErrorOr.new(
+                null,
+                ErrorPlusMessage.new(
+                    ERR_DOES_NOT_EXIST, 'Save slot not set in _get_save_file_path()'))
 
-func _load_all_data(save_slot_to_use: int) -> Dictionary:
+func _load_all_data(save_slot_to_use: int) -> ErrorOr:
     var file := File.new()
 
-    var path := _get_save_file_path(save_slot_to_use)
+    var error_or_path := _get_save_file_path(save_slot_to_use)
+    if error_or_path.error_plus_msg.error != OK:
+        return error_or_path
+
+    var path: String = error_or_path.value
 
     # If the save file doesn't exist, assume that it's because the game is
     # being played for the very first time.
     if not file.file_exists(path):
-        return {}
+        return ErrorOr.new({})
 
     var error := file.open(path, File.READ)
     if error != OK:
-        _handle_error('Could not open save file for slot %d located at %s' % [save_slot, path])
+        return ErrorOr.new(
+            null,
+            ErrorPlusMessage.new(
+                error,
+                'Could not open save file for slot %d located at %s' % [save_slot, path]))
 
     var json := JSON.parse(file.get_as_text())
     if json.error != OK:
-        _handle_error('Could not parse json for slot %d, error code %d' % [save_slot, json.error])
+        return ErrorOr.new(
+            null,
+            ErrorPlusMessage.new(
+                json.error, 'Could not parse JSON for slot %d' % save_slot))
     if typeof(json.result) != TYPE_DICTIONARY:
-        _handle_error('Invalid JSON type for save slot %d: %d' % [save_slot, typeof(json.result)])
+        return ErrorOr.new(
+            null,
+            ErrorPlusMessage.new(
+                json.error,
+                'Invalid JSON type for save slot %d: %d' % [save_slot, typeof(json.result)]))
 
     file.close()
 
-    return json.result
-
-func _handle_error(error_msg: String) -> void:
-    assert(false, error_msg)
+    return ErrorOr.new(json.result)
