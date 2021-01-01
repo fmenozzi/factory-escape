@@ -58,3 +58,6 @@ const TitleScreen := preload('res://ui/title_screen/TitleScreen.tscn')
 
 # Credits screen.
 const CreditsScreen := preload('res://ui/credits_screen/CreditsScreen.tscn')
+
+# Error message screen.
+const ErrorMessageScreen := preload('res://ui/error_message_screen/ErrorMessageScreen.tscn')
