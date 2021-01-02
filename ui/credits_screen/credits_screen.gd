@@ -26,6 +26,8 @@ func _ready() -> void:
         _vbox_container.add_child(hseparator)
     for label in _get_line_labels():
         _vbox_container.add_child(label)
+    for hseparator in _generate_hseparators(5):
+        _vbox_container.add_child(hseparator)
     _vbox_container.add_child(_generate_end_marker())
     for hseparator in _generate_hseparators(10):
         _vbox_container.add_child(hseparator)
