@@ -147,7 +147,14 @@ func _generate_ability_specific_demo_rooms() -> void:
                 generated_nodes_to_load.append(node)
 
     # Load in the generated save-and-load nodes.
-    SaveAndLoad.load_specific_nodes(generated_nodes_to_load)
+    #
+    # Encountering an error here should be very rare, as errors should have
+    # been caught at the title screen (in regular mode) or by the parent
+    # _ready() function (in standalone mode). Nevertheless, it is possible
+    # that e.g. the file somehow becomes corrupt during gameplay before the
+    # player reaches the ability selection room (and thus generates the demo
+    # rooms and loads them in). Such errors are caught here.
+    SaveAndLoad.load_specific_nodes_and_report_errors(generated_nodes_to_load)
 
     # Connect all tutorial message trigger signals now that we're generating new
     # rooms with new triggers.

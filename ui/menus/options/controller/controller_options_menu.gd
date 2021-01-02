@@ -32,7 +32,7 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 func exit() -> void:
     self.visible = false
 
-    Options.save_options()
+    Options.save_options_and_report_errors()
 
 func handle_input(event: InputEvent) -> void:
     if not _input_enabled:

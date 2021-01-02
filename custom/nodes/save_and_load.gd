@@ -18,6 +18,9 @@ onready var _save_directory: String = ProjectSettings.get_setting('application/s
 func _ready() -> void:
     assert(_save_directory.ends_with('/'))
 
+func save_game_and_report_errors() -> void:
+    Error.report_if_error(save_game())
+
 func save_game() -> ErrorPlusMessage:
     assert(save_slot != SaveSlot.UNSET)
 
@@ -62,8 +65,14 @@ func save_game() -> ErrorPlusMessage:
 
     return ErrorPlusMessage.new()
 
+func load_game_and_report_errors() -> void:
+    Error.report_if_error(load_game())
+
 func load_game() -> ErrorPlusMessage:
     return load_specific_nodes(get_tree().get_nodes_in_group(GROUP))
+
+func load_specific_nodes_and_report_errors(nodes_to_load: Array) -> void:
+    Error.report_if_error(load_specific_nodes(nodes_to_load))
 
 func load_specific_nodes(nodes_to_load: Array) -> ErrorPlusMessage:
     assert(save_slot != SaveSlot.UNSET)

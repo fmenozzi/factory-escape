@@ -40,7 +40,7 @@ func _ready() -> void:
     # Start in unpaused state.
     _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED, {})
 
-    Options.load_options()
+    Options.load_options_and_report_errors()
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)

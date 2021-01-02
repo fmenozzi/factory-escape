@@ -13,7 +13,7 @@ func _ready() -> void:
     # Start boot sequence in window mode specified in options. If window mode is
     # not specified in options (e.g. the options file has not been created yet),
     # then default to fullscreen.
-    Options.load_options()
+    Options.load_options_and_report_errors()
     match Options.get_config().get_value('video', 'window_mode', 'Fullscreen'):
         'Fullscreen':
             OS.window_fullscreen = true

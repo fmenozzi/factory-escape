@@ -49,7 +49,7 @@ func _ready() -> void:
 
     Options.connect('options_saved', self, '_on_options_saved')
 
-    Options.load_options()
+    Options.load_options_and_report_errors()
 
     # Start at main menu once we finish transitioning to title screen.
     if SceneChanger.is_changing_scene():
@@ -94,7 +94,7 @@ func _on_previous_menu_requested(metadata: Dictionary) -> void:
 func _on_quit_to_desktop_requested() -> void:
     _saving_indicator.start_spinning_for(0.0)
 
-    Options.save_options()
+    Options.save_options_and_report_errors()
 
     get_tree().quit()
 

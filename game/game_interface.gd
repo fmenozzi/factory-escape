@@ -27,9 +27,12 @@ func _ready() -> void:
         _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
 
         # Use slot 1 by default if we don't go through the title screen.
+        #
+        # Encountering an error here should normally only be possible when
+        # skipping the title screen via standalone mode.
         if SaveAndLoad.save_slot == SaveAndLoad.SaveSlot.UNSET:
             SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.SLOT_1
-        SaveAndLoad.load_game()
+        SaveAndLoad.load_game_and_report_errors()
 
         # Determine player's starting state.
         if not _player.save_manager.has_completed_intro_fall_sequence:
@@ -40,7 +43,6 @@ func _ready() -> void:
             # In case the player quits and reloads the game before reaching the
             # first lamp.
             _player.change_state({'new_state': Player.State.IDLE})
-
 
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
@@ -112,10 +114,10 @@ func _set_player_starting_health_and_health_packs() -> void:
 
 func _maybe_save_game() -> void:
     if not run_standalone:
-        SaveAndLoad.save_game()
+        SaveAndLoad.save_game_and_report_errors()
 
     # Options are saved regardless of whether we're running in standalone mode.
-    Options.save_options()
+    Options.save_options_and_report_errors()
 
 func _reset_world() -> void:
     for node in get_tree().get_nodes_in_group('lamp_reset'):

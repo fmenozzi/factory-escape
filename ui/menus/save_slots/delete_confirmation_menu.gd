@@ -36,9 +36,15 @@ func handle_input(event: InputEvent) -> void:
         go_to_previous_menu()
 
 func _on_yes_pressed() -> void:
-    SaveAndLoad.delete_save_data(_save_slot)
-
-    go_to_previous_menu()
+    var error_plus_message: ErrorPlusMessage = SaveAndLoad.delete_save_data(_save_slot)
+    if error_plus_message.error != OK:
+        advance_to_menu_with_metadata(Menu.Menus.SAVE_SLOT_ERROR, {
+            'save_slot': _save_slot,
+            'error': error_plus_message.error,
+            'error_msg': error_plus_message.error_msg,
+        })
+    else:
+        go_to_previous_menu()
 
 func _on_no_pressed() -> void:
     go_to_previous_menu()

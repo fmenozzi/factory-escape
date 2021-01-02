@@ -12,6 +12,9 @@ onready var _save_directory: String = ProjectSettings.get_setting('application/s
 func _ready() -> void:
     assert(_save_directory.ends_with('/'))
 
+func save_options_and_report_errors() -> void:
+    Error.report_if_error(save_options())
+
 func save_options() -> ErrorPlusMessage:
     # Add section for game version.
     _config.set_value('version', 'major', Version.major())
@@ -42,11 +45,14 @@ func save_options() -> ErrorPlusMessage:
 
     var error := _config.save(_get_file_path())
     if error != OK:
-        return ErrorPlusMessage.new(error, 'Could not save option')
+        return ErrorPlusMessage.new(error, 'Could not save options file')
 
     emit_signal('options_saved')
 
     return ErrorPlusMessage.new()
+
+func load_options_and_report_errors() -> void:
+    Error.report_if_error(load_options())
 
 func load_options() -> ErrorPlusMessage:
     var error_plus_msg := _load_config(_config)
