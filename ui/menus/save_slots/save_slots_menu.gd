@@ -7,6 +7,8 @@ onready var _slot_container_2: HBoxContainer = $SaveSlotContainer2
 onready var _slot_container_3: HBoxContainer = $SaveSlotContainer3
 
 onready var _slot_container_1_button: Button = $SaveSlotContainer1/Slot
+onready var _slot_container_2_button: Button = $SaveSlotContainer2/Slot
+onready var _slot_container_3_button: Button = $SaveSlotContainer3/Slot
 
 onready var _back: Button = $Back
 
@@ -28,7 +30,18 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
     _slot_container_2.set_save_slot_label()
     _slot_container_3.set_save_slot_label()
 
-    _slot_container_1_button.grab_focus()
+    match previous_menu:
+        Menu.Menus.SAVE_SLOT_ERROR:
+            assert('save_slot' in metadata)
+            match metadata['save_slot']:
+                1:
+                    _slot_container_1_button.grab_focus()
+                2:
+                    _slot_container_2_button.grab_focus()
+                3:
+                    _slot_container_3_button.grab_focus()
+        _:
+            _slot_container_1_button.grab_focus()
 
 func exit() -> void:
     self.visible = false
@@ -43,6 +56,7 @@ func handle_input(event: InputEvent) -> void:
 func _on_slot_pressed(save_slot: int, error: int, error_msg: String) -> void:
     if error != OK:
         advance_to_menu_with_metadata(Menu.Menus.SAVE_SLOT_ERROR, {
+            'save_slot': save_slot,
             'error': error,
             'error_msg': error_msg,
         })
