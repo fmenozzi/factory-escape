@@ -1,5 +1,7 @@
 extends 'res://ui/menus/menu.gd'
 
+signal delete_succeeded(save_slot)
+
 onready var _delete_this_save_slot: Label = $DeleteThisSaveSlot
 onready var _yes: Button = $Yes
 onready var _no: Button = $No
@@ -44,6 +46,8 @@ func _on_yes_pressed() -> void:
             'error_msg': error_plus_message.error_msg,
         })
     else:
+        emit_signal('delete_succeeded', _save_slot)
+
         go_to_previous_menu()
 
 func _on_no_pressed() -> void:

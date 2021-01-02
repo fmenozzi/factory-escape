@@ -68,5 +68,16 @@ func _on_delete_pressed(save_slot: int) -> void:
         'save_slot': save_slot,
     })
 
+func _on_delete_succeeded(save_slot: int) -> void:
+    return
+
+    match save_slot:
+        1:
+            _slot_container_1.reset_save_slot()
+        2:
+            _slot_container_2.reset_save_slot()
+        3:
+            _slot_container_3.reset_save_slot()
+
 func _on_back_pressed() -> void:
     go_to_previous_menu()

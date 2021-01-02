@@ -44,6 +44,8 @@ func _ready() -> void:
         menu.connect('menu_navigated', _ui_sound_player, 'play_ui_navigation_sound')
 
     MENUS[Menu.Menus.SAVE_SLOTS].connect('save_slot_selected', self, '_start_game')
+    MENUS[Menu.Menus.DELETE_CONFIRMATION].connect(
+        'delete_succeeded', MENUS[Menu.Menus.SAVE_SLOTS], '_on_delete_succeeded')
     MENUS[Menu.Menus.QUIT].connect(
         'quit_to_desktop_requested', self, '_on_quit_to_desktop_requested')
 
