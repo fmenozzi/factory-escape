@@ -24,13 +24,21 @@ func set_save_slot_label() -> void:
     if not SaveAndLoad.has_save_data(save_slot):
         _slot.text = 'EMPTY'
         _delete.disabled = true
-    elif not SaveAndLoad.has_valid_version(save_slot):
-        _slot.text = 'INVALID SAVE VERSION'
+        return
+
+    # Note that we're not actually going to be calling any node-specific loading
+    # functions here, since those nodes don't exist in this scene tree. This is
+    # essentially a way to check that loading the data from disk succeeded and
+    # that the save file version is valid.
+    SaveAndLoad.save_slot = save_slot
+    var error_plus_message: ErrorPlusMessage = SaveAndLoad.load_game()
+    SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.UNSET
+    if error_plus_message.error != OK:
+        _slot.text = error_plus_message.error_msg
         _slot.disabled = true
-        _delete.disabled = false
-    else:
-        _slot.text = 'Slot %d' % save_slot
-        _delete.disabled = false
+        return
+
+    _slot.text = 'Slot %d' % save_slot
 
 func _on_slot_button_pressed() -> void:
     emit_signal('slot_requested')

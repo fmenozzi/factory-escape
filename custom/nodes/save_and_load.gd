@@ -80,7 +80,7 @@ func load_specific_nodes(nodes_to_load: Array) -> ErrorPlusMessage:
     # if the file doesn't exist, as would happen the first time the player plays
     # the game).
     if not all_save_data.empty():
-        if not has_valid_version(save_slot):
+        if not _has_valid_version(all_save_data):
             return ErrorPlusMessage.new(
                 ERR_INVALID_DATA, 'Invalid version for slot %d' % save_slot)
 
@@ -96,32 +96,6 @@ func load_specific_nodes(nodes_to_load: Array) -> ErrorPlusMessage:
 
 func has_save_data(save_slot_to_check: int) -> bool:
     return File.new().file_exists(_get_save_file_path(save_slot_to_check))
-
-func has_valid_version(save_slot_to_check: int) -> bool:
-    # For now, we treat a loading error as indicative of not having a valid
-    # version.
-    var error_or_all_save_data := _load_all_data(save_slot_to_check)
-    if error_or_all_save_data.error_plus_msg.error != OK:
-        return false
-
-    var all_save_data: Dictionary = error_or_all_save_data.value
-
-    # Save data must have 'version' section.
-    if not 'version' in all_save_data:
-        return false
-
-    # 'version' section must have 'major', 'minor', and 'patch' sections.
-    var version: Dictionary = all_save_data['version']
-    if not ('major' in version and 'minor' in version and 'patch' in version):
-        return false
-
-    # Save file version must match one of the supported versions.
-    var full_version_from_save := '%d.%d.%d' % [
-        version['major'],
-        version['minor'],
-        version['patch'],
-    ]
-    return full_version_from_save in Version.valid_versions()
 
 func delete_save_data(save_slot_to_delete: int) -> ErrorPlusMessage:
     var path := _get_save_file_path(save_slot_to_delete)
@@ -152,6 +126,24 @@ func _get_save_file_path(save_slot_to_use: int) -> String:
         _:
             # We should never get here.
             return _save_directory + 'error.json'
+
+func _has_valid_version(all_save_data: Dictionary) -> bool:
+    # Save data must have 'version' section.
+    if not 'version' in all_save_data:
+        return false
+
+    # 'version' section must have 'major', 'minor', and 'patch' sections.
+    var version: Dictionary = all_save_data['version']
+    if not ('major' in version and 'minor' in version and 'patch' in version):
+        return false
+
+    # Save file version must match one of the supported versions.
+    var full_version_from_save := '%d.%d.%d' % [
+        version['major'],
+        version['minor'],
+        version['patch'],
+    ]
+    return full_version_from_save in Version.valid_versions()
 
 func _load_all_data(save_slot_to_use: int) -> ErrorOr:
     var path := _get_save_file_path(save_slot_to_use)
