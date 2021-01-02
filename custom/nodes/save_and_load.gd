@@ -49,11 +49,7 @@ func save_game() -> ErrorPlusMessage:
             return ErrorPlusMessage.new(
                 error, 'Could not create save directory %s' % _save_directory)
 
-    var error_or_path := _get_save_file_path(save_slot)
-    if error_or_path.error_plus_msg.error != OK:
-        return error_or_path.error_plus_msg
-
-    var path: String = error_or_path.value
+    var path := _get_save_file_path(save_slot)
 
     # Save data as formatted JSON using a two-space indent with sorted keys.
     var file := File.new()
@@ -99,13 +95,7 @@ func load_specific_nodes(nodes_to_load: Array) -> ErrorPlusMessage:
     return ErrorPlusMessage.new()
 
 func has_save_data(save_slot_to_check: int) -> bool:
-    # For now we just treat errors from _get_save_file_path() as indicative of
-    # not having save data.
-    var error_or_path := _get_save_file_path(save_slot_to_check)
-    if error_or_path.error_plus_msg.error != OK:
-        return false
-
-    return File.new().file_exists(error_or_path.value)
+    return File.new().file_exists(_get_save_file_path(save_slot_to_check))
 
 func has_valid_version(save_slot_to_check: int) -> bool:
     # For now, we treat a loading error as indicative of not having a valid
@@ -134,11 +124,7 @@ func has_valid_version(save_slot_to_check: int) -> bool:
     return full_version_from_save in Version.valid_versions()
 
 func delete_save_data(save_slot_to_delete: int) -> ErrorPlusMessage:
-    var error_or_path := _get_save_file_path(save_slot_to_delete)
-    if error_or_path.error_plus_msg.error != OK:
-        return error_or_path.error_plus_msg
-
-    var path: String = error_or_path.value
+    var path := _get_save_file_path(save_slot_to_delete)
 
     var dir := Directory.new()
     if not dir.file_exists(path):
@@ -153,31 +139,26 @@ func delete_save_data(save_slot_to_delete: int) -> ErrorPlusMessage:
 func get_all_save_data() -> ErrorOr:
     return _load_all_data(save_slot)
 
-func _get_save_file_path(save_slot_to_use: int) -> ErrorOr:
+func _get_save_file_path(save_slot_to_use: int) -> String:
+    assert(save_slot_to_use in [SaveSlot.SLOT_1, SaveSlot.SLOT_2, SaveSlot.SLOT_3])
+
     match save_slot_to_use:
         SaveSlot.SLOT_1:
-            return ErrorOr.new(_save_directory + '1.json')
+            return _save_directory + '1.json'
         SaveSlot.SLOT_2:
-            return ErrorOr.new(_save_directory + '2.json')
+            return _save_directory + '2.json'
         SaveSlot.SLOT_3:
-            return ErrorOr.new(_save_directory + '3.json')
+            return _save_directory + '3.json'
         _:
-            return ErrorOr.new(
-                null,
-                ErrorPlusMessage.new(
-                    ERR_DOES_NOT_EXIST, 'Save slot not set in _get_save_file_path()'))
+            # We should never get here.
+            return _save_directory + 'error.json'
 
 func _load_all_data(save_slot_to_use: int) -> ErrorOr:
-    var file := File.new()
-
-    var error_or_path := _get_save_file_path(save_slot_to_use)
-    if error_or_path.error_plus_msg.error != OK:
-        return error_or_path
-
-    var path: String = error_or_path.value
+    var path := _get_save_file_path(save_slot_to_use)
 
     # If the save file doesn't exist, assume that it's because the game is
     # being played for the very first time.
+    var file := File.new()
     if not file.file_exists(path):
         return ErrorOr.new({})
 
