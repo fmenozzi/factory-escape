@@ -2,7 +2,7 @@ extends VBoxContainer
 class_name Menu
 
 signal menu_changed(new_menu, metadata)
-signal previous_menu_requested
+signal previous_menu_requested(metadata)
 signal menu_navigated
 
 # The possible menus that the player can navigate to in various contexts, such
@@ -61,7 +61,13 @@ func advance_to_menu_with_metadata(new_menu: int, metadata: Dictionary) -> void:
 # Convenience function for emitting the previous_menu_requested signal from
 # within a menu.
 func go_to_previous_menu() -> void:
-    emit_signal('previous_menu_requested')
+    go_to_previous_menu_with_metadata({})
+
+# Convenience function for emitting the previous_menu_requested signal from
+# within a menu. This version allows for specifying additional metadata to be
+# passed to the previous menu.
+func go_to_previous_menu_with_metadata(metadata: Dictionary) -> void:
+    emit_signal('previous_menu_requested', metadata)
 
 # Convenience function for emitting the menu_navigated signal from within a
 # menu. This signal is used to emit the click sound when navigating the various
