@@ -8,6 +8,7 @@ export(PackedScene) var game = null
 onready var MENUS := {
     Menu.Menus.MAIN:                $MenuBackground/MainMenu,
     Menu.Menus.SAVE_SLOTS:          $MenuBackground/SaveSlotsMenu,
+    Menu.Menus.SAVE_SLOT_ERROR:     $MenuBackground/SaveSlotErrorMenu,
     Menu.Menus.DELETE_CONFIRMATION: $MenuBackground/DeleteConfirmationMenu,
     Menu.Menus.OPTIONS:             $MenuBackground/OptionsMenu,
     Menu.Menus.QUIT:                $MenuBackground/MainQuitMenu,

@@ -1,9 +1,12 @@
 extends HBoxContainer
 
-signal slot_requested
-signal delete_requested
+signal slot_requested(save_slot, error, error_msg)
+signal delete_requested(save_slot)
 
 export(int, 1, 3) var save_slot := 1
+
+var error := OK
+var error_msg := ''
 
 onready var _slot: Button = $Slot
 onready var _delete: Button = $Delete
@@ -34,14 +37,16 @@ func set_save_slot_label() -> void:
     var error_plus_message: ErrorPlusMessage = SaveAndLoad.load_game()
     SaveAndLoad.save_slot = SaveAndLoad.SaveSlot.UNSET
     if error_plus_message.error != OK:
-        _slot.text = error_plus_message.error_msg
-        _slot.disabled = true
+        error = error_plus_message.error
+        error_msg = error_plus_message.error_msg
+        _slot.text = 'INVALID SAVE DATA'
+        _slot.modulate = Color('#ff4f78')
         return
 
     _slot.text = 'Slot %d' % save_slot
 
 func _on_slot_button_pressed() -> void:
-    emit_signal('slot_requested')
+    emit_signal('slot_requested', save_slot, error, error_msg)
 
 func _on_delete_button_pressed() -> void:
-    emit_signal('delete_requested')
+    emit_signal('delete_requested', save_slot)

@@ -17,6 +17,7 @@ enum Menus {
 
     MAIN,
     SAVE_SLOTS,
+    SAVE_SLOT_ERROR,
     DELETE_CONFIRMATION,
     PAUSE,
     OPTIONS,
