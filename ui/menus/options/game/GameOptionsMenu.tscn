@@ -44,6 +44,7 @@ text = "Rumble"
 
 [node name="OptionButton" parent="Rumble" index="1"]
 margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../Back")
 
 [node name="Screenshake" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -77,6 +78,7 @@ text = "Reset to Defaults"
 margin_top = 127.0
 margin_right = 320.0
 margin_bottom = 142.0
+focus_neighbour_bottom = NodePath("../Rumble/OptionButton")
 text = "Back"
 
 [editable path="Rumble"]

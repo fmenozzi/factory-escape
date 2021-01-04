@@ -28,10 +28,12 @@ margin_bottom = 81.0
 margin_top = 85.0
 margin_right = 320.0
 margin_bottom = 100.0
+focus_neighbour_top = NodePath("../No")
 text = "Yes"
 
 [node name="No" type="Button" parent="."]
 margin_top = 104.0
 margin_right = 320.0
 margin_bottom = 119.0
+focus_neighbour_bottom = NodePath("../Yes")
 text = "No"
