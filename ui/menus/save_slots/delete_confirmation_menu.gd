@@ -6,6 +6,11 @@ onready var _delete_this_save_slot: Label = $DeleteThisSaveSlot
 onready var _yes: Button = $Yes
 onready var _no: Button = $No
 
+onready var _focusable_nodes := [
+    _yes,
+    _no,
+]
+
 var _save_slot: int = -1
 
 func _ready() -> void:
@@ -27,13 +32,14 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 
     _no.grab_focus()
 
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
+
 func exit() -> void:
     self.visible = false
 
-func handle_input(event: InputEvent) -> void:
-    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        emit_menu_navigation_sound()
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, false)
 
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
 

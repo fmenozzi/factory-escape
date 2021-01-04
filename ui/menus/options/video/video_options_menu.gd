@@ -7,9 +7,19 @@ onready var _window_mode: HBoxContainer = $WindowMode
 onready var _fps_cap: HBoxContainer = $FpsCap
 
 onready var _vsync_option_button: OptionButton = $VSync/OptionButton
+onready var _window_mode_option_button: OptionButton = $WindowMode/OptionButton
+onready var _fps_cap_option_button: OptionButton = $FpsCap/OptionButton
 
 onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
+
+onready var _focusable_nodes := [
+    _vsync_option_button,
+    _window_mode_option_button,
+    _fps_cap_option_button,
+    _reset_to_defaults,
+    _back_button,
+]
 
 func _ready() -> void:
     _vsync.connect('option_changed', self, '_on_vsync_changed')
@@ -24,10 +34,14 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 
     _vsync_option_button.grab_focus()
 
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
+
 func exit() -> void:
     self.visible = false
 
     Options.save_options_and_report_errors()
+
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, false)
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
@@ -38,9 +52,6 @@ func handle_input(event: InputEvent) -> void:
            not _window_mode.is_being_set() and  \
            not _fps_cap.is_being_set():
             go_to_previous_menu()
-
-    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        emit_menu_navigation_sound()
 
 func get_options_data() -> Array:
     return [SECTION, {

@@ -10,7 +10,21 @@ onready var _slot_container_1_button: Button = $SaveSlotContainer1/Slot
 onready var _slot_container_2_button: Button = $SaveSlotContainer2/Slot
 onready var _slot_container_3_button: Button = $SaveSlotContainer3/Slot
 
+onready var _slot_container_1_delete: Button = $SaveSlotContainer1/Delete
+onready var _slot_container_2_delete: Button = $SaveSlotContainer2/Delete
+onready var _slot_container_3_delete: Button = $SaveSlotContainer3/Delete
+
 onready var _back: Button = $Back
+
+onready var _focusable_nodes := [
+    _slot_container_1_button,
+    _slot_container_2_button,
+    _slot_container_3_button,
+    _slot_container_1_delete,
+    _slot_container_2_delete,
+    _slot_container_3_delete,
+    _back,
+]
 
 func _ready() -> void:
     _slot_container_1.connect('slot_requested', self, '_on_slot_pressed')
@@ -43,13 +57,14 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
         _:
             _slot_container_1_button.grab_focus()
 
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
+
 func exit() -> void:
     self.visible = false
 
-func handle_input(event: InputEvent) -> void:
-    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        emit_menu_navigation_sound()
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, false)
 
+func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
 

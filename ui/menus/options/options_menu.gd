@@ -7,6 +7,15 @@ onready var _controller: Button = $Controller
 onready var _keyboard: Button = $Keyboard
 onready var _back: Button = $Back
 
+onready var _focusable_nodes := [
+    _game,
+    _audio,
+    _video,
+    _controller,
+    _keyboard,
+    _back,
+]
+
 func _ready() -> void:
     _game.connect('pressed', self, '_on_game_pressed')
     _audio.connect('pressed', self, '_on_audio_pressed')
@@ -31,8 +40,12 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
             # Default to first option.
             _game.grab_focus()
 
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
+
 func exit() -> void:
     self.visible = false
+
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, false)
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
@@ -40,9 +53,6 @@ func handle_input(event: InputEvent) -> void:
             advance_to_menu(Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
-
-    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        emit_menu_navigation_sound()
 
 func _on_game_pressed() -> void:
     advance_to_menu(Menu.Menus.GAME_OPTIONS)

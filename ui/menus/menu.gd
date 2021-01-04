@@ -74,3 +74,8 @@ func go_to_previous_menu_with_metadata(metadata: Dictionary) -> void:
 # menus.
 func emit_menu_navigation_sound() -> void:
     emit_signal('menu_navigated')
+
+func set_focus_signals_enabled_for_nodes(nodes: Array, enabled: bool) -> void:
+    var method := 'connect' if enabled else 'disconnect'
+    for node in nodes:
+        node.call(method, 'focus_entered', self, 'emit_menu_navigation_sound')

@@ -77,12 +77,10 @@ func _set_quit_menu_input_enabled(enabled: bool) -> void:
     MENUS[Menu.Menus.QUIT].set_input_enabled(enabled)
 
 func _on_menu_changed(new_menu: int, metadata: Dictionary) -> void:
-    _ui_sound_player.play_ui_navigation_sound()
     _change_menu(_menu_stack.back(), new_menu, metadata)
 
 func _on_previous_menu_requested(metadata: Dictionary) -> void:
     assert(_menu_stack.size() >= 2)
-    _ui_sound_player.play_ui_navigation_sound()
     _change_menu(_menu_stack.back(), Menu.Menus.PREVIOUS, metadata)
 
 func _on_quit_to_main_menu_requested() -> void:

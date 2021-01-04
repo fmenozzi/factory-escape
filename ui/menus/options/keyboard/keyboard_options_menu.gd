@@ -13,6 +13,17 @@ onready var _heal_remap_button: Button = $ContainerRow3/HealRemapContainer/Keybo
 onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
+onready var _focusable_nodes := [
+    _jump_remap_button,
+    _attack_remap_button,
+    _dash_remap_button,
+    _grapple_remap_button,
+    _interact_remap_button,
+    _heal_remap_button,
+    _reset_to_defaults,
+    _back_button,
+]
+
 var _input_enabled := true
 
 func _ready() -> void:
@@ -29,10 +40,14 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 
     self.visible = true
 
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
+
 func exit() -> void:
     self.visible = false
 
     Options.save_options_and_report_errors()
+
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, false)
 
 func handle_input(event: InputEvent) -> void:
     if not _input_enabled:
@@ -43,9 +58,6 @@ func handle_input(event: InputEvent) -> void:
             advance_to_menu(Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
-
-    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        emit_menu_navigation_sound()
 
 func get_options_data() -> Array:
     return [SECTION, {

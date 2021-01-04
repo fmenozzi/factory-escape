@@ -9,11 +9,15 @@ onready var _ui_slider: HSlider = $UI/Container/Slider
 onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
-func _ready() -> void:
-    _music_slider.connect('value_changed', self, '_on_music_value_changed')
-    _effects_slider.connect('value_changed', self, '_on_effects_value_changed')
-    _ui_slider.connect('value_changed', self, '_on_ui_value_changed')
+onready var _focusable_nodes := [
+    _music_slider,
+    _effects_slider,
+    _ui_slider,
+    _reset_to_defaults,
+    _back_button,
+]
 
+func _ready() -> void:
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
@@ -22,10 +26,14 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 
     _music_slider.grab_focus()
 
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
+
 func exit() -> void:
     self.visible = false
 
     Options.save_options_and_report_errors()
+
+    set_focus_signals_enabled_for_nodes(_focusable_nodes, false)
 
 func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_pause'):
@@ -33,9 +41,6 @@ func handle_input(event: InputEvent) -> void:
             advance_to_menu(Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
-
-    if event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        emit_menu_navigation_sound()
 
 func get_options_data() -> Array:
     return [SECTION, {
@@ -62,6 +67,10 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
         var ui: float = config.get_value(SECTION, 'ui')
         _set_bus_volume('UI', ui)
         _ui_slider.set_value(ui)
+
+    _music_slider.connect('value_changed', self, '_on_music_value_changed')
+    _effects_slider.connect('value_changed', self, '_on_effects_value_changed')
+    _ui_slider.connect('value_changed', self, '_on_ui_value_changed')
 
 func reset_to_defaults() -> void:
     _music_slider.set_value(_music_slider.max_value)
