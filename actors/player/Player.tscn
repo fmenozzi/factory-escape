@@ -616,6 +616,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("States/Walk")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_emit_walk_sound"
+}, {
+"args": [  ],
+"method": "_emit_walk_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=27]
 tracks/0/type = "value"
@@ -702,6 +719,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
+frame = 8
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {

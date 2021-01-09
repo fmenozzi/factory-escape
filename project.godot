@@ -164,6 +164,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/managers/save_manager.gd"
 }, {
+"base": "SoundManager",
+"class": "PlayerSoundManager",
+"language": "GDScript",
+"path": "res://actors/player/managers/player_sound_manager.gd"
+}, {
 "base": "Node",
 "class": "ProcessingArenaSaveManager",
 "language": "GDScript",
@@ -311,6 +316,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerHitEffect": "",
 "PlayerSaveManager": "",
+"PlayerSoundManager": "",
 "ProcessingArenaSaveManager": "",
 "ProjectileSpawner": "",
 "PushbackManager": "",

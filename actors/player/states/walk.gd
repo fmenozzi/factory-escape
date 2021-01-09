@@ -1,6 +1,10 @@
 extends 'res://actors/player/states/player_state.gd'
 
+var _player: Player = null
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
+    _player = player
+
     # Reset player velocity.
     player.velocity = Vector2.ZERO
 
@@ -56,3 +60,6 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(Vector2(input_direction * speed, 10))
 
     return {'new_state': Player.State.NO_CHANGE}
+
+func _emit_walk_sound() -> void:
+    _player.get_sound_manager().play(SoundManager.Sounds.PLAYER_WALK)

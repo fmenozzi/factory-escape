@@ -123,6 +123,7 @@ onready var _invincibility_flash_manager_enemy_hit: Node = $States/Stagger/Hit/F
 
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 onready var _health_pack_manager: HealthPackManager = $HealthPackManager
+onready var _sound_manager: PlayerSoundManager = $PlayerSoundManager
 
 onready var _dash_duration_timer: Timer = $States/Dash/DashDurationTimer
 
@@ -214,6 +215,9 @@ func get_physics_manager() -> GroundedPhysicsManager:
 
 func get_health_pack_manager() -> HealthPackManager:
     return _health_pack_manager
+
+func get_sound_manager() -> PlayerSoundManager:
+    return _sound_manager
 
 # Get the current x-axis input direction. Returns +1 if player is moving right,
 # -1 if player is moving left, and 0 if player is not moving. These conveniently
