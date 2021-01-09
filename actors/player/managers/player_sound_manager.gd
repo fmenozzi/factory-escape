@@ -4,15 +4,18 @@ class_name PlayerSoundManager
 enum Sounds {
     WALK,
     LAND_SOFT,
+    LAND_HARD,
 }
 
 onready var _walk: AudioStreamPlayer = $AudioStreamPlayers/Walk
 onready var _land_soft: AudioStreamPlayer = $AudioStreamPlayers/LandSoft
+onready var _land_hard: AudioStreamPlayer = $AudioStreamPlayers/LandHard
 
 func play(sound_enum: int) -> void:
     assert(sound_enum in [
         Sounds.WALK,
         Sounds.LAND_SOFT,
+        Sounds.LAND_HARD,
     ])
 
     match sound_enum:
@@ -21,6 +24,9 @@ func play(sound_enum: int) -> void:
 
         Sounds.LAND_SOFT:
             _land_soft.play()
+
+        Sounds.LAND_HARD:
+            _land_hard.play()
 
         _:
             Error.report_if_error(

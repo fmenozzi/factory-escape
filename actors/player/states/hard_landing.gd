@@ -2,6 +2,7 @@ extends 'res://actors/player/states/player_state.gd'
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('hard_landing')
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_HARD)
 
     Rumble.start(Rumble.Type.WEAK, 0.25)
 
