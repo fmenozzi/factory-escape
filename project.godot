@@ -229,6 +229,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/sluggish_failure/sluggish_failure.gd"
 }, {
+"base": "Node2D",
+"class": "SoundManager",
+"language": "GDScript",
+"path": "res://shared/managers/sound_manager.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "StickyDrone",
 "language": "GDScript",
@@ -319,6 +324,7 @@ _global_script_class_icons={
 "ShaderManager": "",
 "SiloArenaSaveManager": "",
 "SluggishFailure": "",
+"SoundManager": "",
 "StickyDrone": "",
 "Stopwatch": "",
 "Turret": "",
