@@ -2,13 +2,8 @@ tool
 extends Node2D
 class_name SoundManager
 
-enum SoundType {
-    POSITIONAL,
-    NON_POSITIONAL,
-}
-
 enum Sounds {
-
+    PLAYER_WALK,
 }
 
 onready var _audio_stream_players: Node = $AudioStreamPlayers
@@ -28,7 +23,3 @@ func _get_configuration_warning() -> String:
             return 'AudioStreamPlayer2Ds must have AudioStreamPlayer2D children!'
 
     return ''
-
-# Plays the sound effect corresponding to the given enum value.
-func play(sound_enum: int) -> void:
-    pass
