@@ -77,6 +77,7 @@ func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
 func _set_main_menu_input_enabled(enabled: bool) -> void:
     set_process_input(enabled)
     MENUS[Menu.Menus.MAIN].set_input_enabled(enabled)
+    MENUS[Menu.Menus.SAVE_SLOTS].set_input_enabled(enabled)
 
 func _on_options_saved() -> void:
     if _saving_indicator.is_spinning():

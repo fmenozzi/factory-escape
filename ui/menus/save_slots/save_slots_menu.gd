@@ -68,6 +68,13 @@ func handle_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_cancel'):
         go_to_previous_menu()
 
+func set_input_enabled(enabled: bool) -> void:
+    _set_focus_enabled(enabled)
+
+func _set_focus_enabled(enabled: bool) -> void:
+    for node in _focusable_nodes:
+        node.focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
+
 func _on_slot_pressed(save_slot: int, error: int, error_msg: String) -> void:
     if error != OK:
         advance_to_menu_with_metadata(Menu.Menus.SAVE_SLOT_ERROR, {
