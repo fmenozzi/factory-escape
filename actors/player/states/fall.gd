@@ -118,6 +118,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
     var wall_jump_manager := player.get_wall_jump_manager()
+    var sound_manager := player.get_sound_manager()
 
     # Once we hit the ground, emit the landing puff and either switch to idle,
     # "hard land", or perform a buffer action.
@@ -127,10 +128,13 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
             player.get_jump_manager().reset_jump()
+            sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
+            sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
             return {'new_state': Player.State.DASH}
         else:
+            sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
             return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
