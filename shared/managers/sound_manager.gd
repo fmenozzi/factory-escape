@@ -23,3 +23,17 @@ func _get_configuration_warning() -> String:
             return 'AudioStreamPlayer2Ds must have AudioStreamPlayer2D children!'
 
     return ''
+
+func _ready() -> void:
+    var all_audio_stream_players := []
+
+    for audio_stream_player in _audio_stream_players.get_children():
+        assert(audio_stream_player is AudioStreamPlayer)
+        all_audio_stream_players.append(audio_stream_player)
+
+    for audio_stream_player in _audio_stream_players_2d.get_children():
+        assert(audio_stream_player is AudioStreamPlayer2D)
+        all_audio_stream_players.append(audio_stream_player)
+
+    for audio_stream_player in all_audio_stream_players:
+        audio_stream_player.bus = 'Effects'
