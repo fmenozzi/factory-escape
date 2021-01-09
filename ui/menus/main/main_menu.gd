@@ -53,14 +53,8 @@ func set_input_enabled(enabled: bool) -> void:
         _quit.disconnect('pressed', self, '_on_quit_pressed')
 
 func _set_focus_enabled(enabled: bool) -> void:
-    if enabled:
-        _start.focus_mode = Control.FOCUS_ALL
-        _options.focus_mode = Control.FOCUS_ALL
-        _quit.focus_mode = Control.FOCUS_ALL
-    else:
-        _start.focus_mode = Control.FOCUS_NONE
-        _options.focus_mode = Control.FOCUS_NONE
-        _quit.focus_mode = Control.FOCUS_NONE
+    for node in _focusable_nodes:
+        node.focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
 
 func _on_start_pressed() -> void:
     advance_to_menu(Menu.Menus.SAVE_SLOTS)
@@ -69,6 +63,8 @@ func _on_options_pressed() -> void:
     advance_to_menu(Menu.Menus.OPTIONS)
 
 func _on_credits_pressed() -> void:
+    set_input_enabled(false)
+
     var fade_duration := 2.0
     SceneChanger.change_scene_to(Preloads.CreditsScreen, fade_duration)
 
