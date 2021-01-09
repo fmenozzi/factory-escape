@@ -2,10 +2,6 @@ tool
 extends Node2D
 class_name SoundManager
 
-enum Sounds {
-    PLAYER_WALK,
-}
-
 onready var _audio_stream_players: Node = $AudioStreamPlayers
 onready var _audio_stream_players_2d: Node2D = $AudioStreamPlayer2Ds
 

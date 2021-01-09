@@ -62,4 +62,4 @@ func update(player: Player, delta: float) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func _emit_walk_sound() -> void:
-    _player.get_sound_manager().play(SoundManager.Sounds.PLAYER_WALK)
+    _player.get_sound_manager().play(PlayerSoundManager.Sounds.WALK)

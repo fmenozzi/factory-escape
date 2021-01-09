@@ -1,15 +1,19 @@
 extends SoundManager
 class_name PlayerSoundManager
 
+enum Sounds {
+    WALK,
+}
+
 onready var _walk: AudioStreamPlayer = $AudioStreamPlayers/Walk
 
 func play(sound_enum: int) -> void:
     assert(sound_enum in [
-        Sounds.PLAYER_WALK,
+        Sounds.WALK,
     ])
 
     match sound_enum:
-        Sounds.PLAYER_WALK:
+        Sounds.WALK:
             _walk.play()
 
         _:
