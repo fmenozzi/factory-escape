@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -45,6 +45,7 @@
 [ext_resource path="res://actors/player/states/look_down.gd" type="Script" id=43]
 [ext_resource path="res://actors/player/states/look_up.gd" type="Script" id=44]
 [ext_resource path="res://actors/player/states/play_animation.gd" type="Script" id=45]
+[ext_resource path="res://actors/player/managers/PlayerSoundManager.tscn" type="PackedScene" id=46]
 [ext_resource path="res://actors/player/states/sleep.gd" type="Script" id=47]
 [ext_resource path="res://actors/player/states/fall_no_input.gd" type="Script" id=48]
 [ext_resource path="res://actors/player/states/mark_intro_fall_as_completed.gd" type="Script" id=49]
@@ -665,6 +666,8 @@ movement_speed_tiles_per_second = 6.0
 ]]
 script = ExtResource( 24 )
 
+[node name="PlayerSoundManager" parent="." instance=ExtResource( 46 )]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack_1 = SubResource( 1 )
 anims/attack_2 = SubResource( 2 )
@@ -974,3 +977,5 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector"]
 shape = SubResource( 32 )
+
+[editable path="PlayerSoundManager"]
