@@ -38,6 +38,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Play dash animation.
     player.get_animation_player().play('dash')
 
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.DASH)
+
     dash_manager.consume_dash()
 
     _previous_state_enum = previous_state_dict['previous_state']
