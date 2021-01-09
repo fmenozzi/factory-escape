@@ -84,8 +84,6 @@ func _on_delete_pressed(save_slot: int) -> void:
     })
 
 func _on_delete_succeeded(save_slot: int) -> void:
-    return
-
     match save_slot:
         1:
             _slot_container_1.reset_save_slot()
