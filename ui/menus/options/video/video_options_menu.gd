@@ -52,6 +52,9 @@ func handle_input(event: InputEvent) -> void:
            not _window_mode.is_being_set() and  \
            not _fps_cap.is_being_set():
             go_to_previous_menu()
+    elif event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
+        if _vsync.is_being_set() or _window_mode.is_being_set() or _fps_cap.is_being_set():
+            emit_menu_navigation_sound()
 
 func get_options_data() -> Array:
     return [SECTION, {
