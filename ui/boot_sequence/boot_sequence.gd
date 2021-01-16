@@ -32,6 +32,8 @@ func _ready() -> void:
     _timer.connect('timeout', self, '_on_timeout')
     _timer.start()
 
+    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_accept'):
         # Disable input until re-enabled elsewhere. This prevents the player

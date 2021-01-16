@@ -59,6 +59,8 @@ func _ready() -> void:
     _set_main_menu_input_enabled(true)
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
 
+    Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
 

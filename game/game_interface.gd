@@ -16,6 +16,17 @@ onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 onready var _player_death_transition: Control = $Layers/ScreenSpaceEffectsLayer/PlayerDeathTransition
 
+func _notification(what: int) -> void:
+    match what:
+        MainLoop.NOTIFICATION_WM_FOCUS_IN:
+            if get_tree().paused:
+                Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+            else:
+                Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+        MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+            Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 func _ready() -> void:
     if not run_standalone:
         # Before loading the game, set the last saved global position and
