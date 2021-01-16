@@ -8,6 +8,7 @@ onready var _screen_fadeout: Control = $ScreenFadeout
 onready var _timer: Timer = $Timer
 
 var _idx := 0
+var _is_fading_in_or_out := false
 
 func _ready() -> void:
     # Start boot sequence in window mode specified in options. If window mode is
@@ -36,24 +37,29 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_accept'):
-        # Disable input until re-enabled elsewhere. This prevents the player
-        # from spamming ui_accept, which might mess things up with all the
-        # yields around fading to/from black during transitions.
-        set_process_unhandled_input(false)
-        _advance()
+        if not _is_fading_in_or_out:
+            # Disable input until re-enabled elsewhere. This prevents the player
+            # from spamming ui_accept, which might mess things up with all the
+            # yields around fading to/from black during transitions.
+            set_process_unhandled_input(false)
+            _advance()
 
 func _go_to_next_screen_in_sequence() -> void:
     var fade_duration := 1.0
 
+    _is_fading_in_or_out = true
     _screen_fadeout.fade_to_black(fade_duration)
     yield(_screen_fadeout, 'fade_to_black_finished')
+    _is_fading_in_or_out = false
 
     _sequence.get_child(_idx).visible = false
     _sequence.get_child(_idx + 1).visible = true
     _idx += 1
 
+    _is_fading_in_or_out = true
     _screen_fadeout.fade_from_black(fade_duration)
     yield(_screen_fadeout, 'fade_from_black_finished')
+    _is_fading_in_or_out = false
 
     set_process_unhandled_input(true)
 
