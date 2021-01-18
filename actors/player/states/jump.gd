@@ -6,6 +6,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.velocity.y = player.get_physics_manager().get_max_jump_velocity()
 
     player.get_animation_player().play('jump')
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.JUMP)
 
     # Emit a jump puff.
     player.emit_dust_puff()

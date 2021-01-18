@@ -22,6 +22,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.velocity.y = NEW_MAX_JUMP_VELOCITY
 
     player.get_animation_player().play('jump')
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.JUMP)
 
     # Consume the jump until it is reset by e.g. hitting the ground.
     player.get_jump_manager().consume_jump()
