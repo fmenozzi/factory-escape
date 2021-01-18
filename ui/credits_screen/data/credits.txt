@@ -9,6 +9,7 @@ FONT
 Daniel Linssen (managore.itch.io)
 
 SOUND
+Despic (despic_studio@)
 Emmanuel Shiferaw
 Kenney (www.kenney.nl)
 
