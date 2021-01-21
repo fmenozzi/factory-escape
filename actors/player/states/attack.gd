@@ -23,8 +23,19 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.velocity = previous_state_dict['velocity']
         player.velocity.x = 0
 
-    player.start_attack(player.get_attack_manager().get_next_attack_animation())
-    player.get_sound_manager().play(PlayerSoundManager.Sounds.ATTACK)
+    var next_attack_animation := player.get_attack_manager().get_next_attack_animation()
+    var attack_sound := -1
+    match next_attack_animation:
+        'attack_1':
+            attack_sound = PlayerSoundManager.Sounds.ATTACK_1
+
+        'attack_2':
+            attack_sound = PlayerSoundManager.Sounds.ATTACK_2
+
+        'attack_3':
+            attack_sound = PlayerSoundManager.Sounds.ATTACK_3
+    player.start_attack(next_attack_animation)
+    player.get_sound_manager().play(attack_sound)
 
     _attack_again = false
     _transition_to = TransitionTo.NONE

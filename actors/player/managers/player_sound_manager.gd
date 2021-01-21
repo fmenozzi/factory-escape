@@ -5,7 +5,9 @@ enum Sounds {
     WALK,
     JUMP,
     DASH,
-    ATTACK,
+    ATTACK_1,
+    ATTACK_2,
+    ATTACK_3,
     LAND_SOFT,
     LAND_HARD,
 }
@@ -22,7 +24,9 @@ func play(sound_enum: int) -> void:
         Sounds.WALK,
         Sounds.JUMP,
         Sounds.DASH,
-        Sounds.ATTACK,
+        Sounds.ATTACK_1,
+        Sounds.ATTACK_2,
+        Sounds.ATTACK_3,
         Sounds.LAND_SOFT,
         Sounds.LAND_HARD,
     ])
@@ -37,7 +41,16 @@ func play(sound_enum: int) -> void:
         Sounds.DASH:
             _dash.play()
 
-        Sounds.ATTACK:
+        Sounds.ATTACK_1:
+            _attack.pitch_scale = 1
+            _attack.play()
+
+        Sounds.ATTACK_2:
+            _attack.pitch_scale = 1.1
+            _attack.play()
+
+        Sounds.ATTACK_3:
+            _attack.pitch_scale = 1.2
             _attack.play()
 
         Sounds.LAND_SOFT:

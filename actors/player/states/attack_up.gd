@@ -23,7 +23,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.velocity.x = 0
 
     player.start_attack('attack_up')
-    player.get_sound_manager().play(PlayerSoundManager.Sounds.ATTACK)
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.ATTACK_1)
 
     _transition_to = TransitionTo.NONE
 
