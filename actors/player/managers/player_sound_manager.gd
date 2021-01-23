@@ -5,9 +5,7 @@ enum Sounds {
     WALK,
     JUMP,
     DASH,
-    ATTACK_1,
-    ATTACK_2,
-    ATTACK_3,
+    ATTACK,
     LAND_SOFT,
     LAND_HARD,
 }
@@ -29,9 +27,7 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.WALK,
         Sounds.JUMP,
         Sounds.DASH,
-        Sounds.ATTACK_1,
-        Sounds.ATTACK_2,
-        Sounds.ATTACK_3,
+        Sounds.ATTACK,
         Sounds.LAND_SOFT,
         Sounds.LAND_HARD,
     ])
@@ -46,16 +42,7 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.DASH:
             return _dash
 
-        Sounds.ATTACK_1:
-            _attack.pitch_scale = 1
-            return _attack
-
-        Sounds.ATTACK_2:
-            _attack.pitch_scale = 1.1
-            return _attack
-
-        Sounds.ATTACK_3:
-            _attack.pitch_scale = 1.2
+        Sounds.ATTACK:
             return _attack
 
         Sounds.LAND_SOFT:

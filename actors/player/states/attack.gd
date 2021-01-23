@@ -12,6 +12,8 @@ enum TransitionTo {
 var _transition_to: int = TransitionTo.NONE
 var _next_grapple_point: GrapplePoint = null
 
+var _audio_stream_player: AudioStreamPlayer = null
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset velocity.
     player.velocity = Vector2.ZERO
@@ -24,24 +26,26 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         player.velocity.x = 0
 
     var next_attack_animation := player.get_attack_manager().get_next_attack_animation()
-    var attack_sound := -1
+    _audio_stream_player = player.get_sound_manager().get_player(PlayerSoundManager.Sounds.ATTACK)
     match next_attack_animation:
         'attack_1':
-            attack_sound = PlayerSoundManager.Sounds.ATTACK_1
+            _audio_stream_player.pitch_scale = 1.0
 
         'attack_2':
-            attack_sound = PlayerSoundManager.Sounds.ATTACK_2
+            _audio_stream_player.pitch_scale = 1.1
 
         'attack_3':
-            attack_sound = PlayerSoundManager.Sounds.ATTACK_3
+            _audio_stream_player.pitch_scale = 1.2
     player.start_attack(next_attack_animation)
-    player.get_sound_manager().play(attack_sound)
+    _audio_stream_player.play()
 
     _attack_again = false
     _transition_to = TransitionTo.NONE
 
 func exit(player: Player) -> void:
     player.stop_attack()
+
+    _audio_stream_player.pitch_scale = 1.0
 
     _attack_is_connecting = false
 
