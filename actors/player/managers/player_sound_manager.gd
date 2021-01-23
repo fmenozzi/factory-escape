@@ -20,6 +20,11 @@ onready var _land_soft: AudioStreamPlayer = $AudioStreamPlayers/LandSoft
 onready var _land_hard: AudioStreamPlayer = $AudioStreamPlayers/LandHard
 
 func play(sound_enum: int) -> void:
+    var audio_stream_player := get_player(sound_enum)
+
+    audio_stream_player.play()
+
+func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
         Sounds.WALK,
         Sounds.JUMP,
@@ -33,34 +38,37 @@ func play(sound_enum: int) -> void:
 
     match sound_enum:
         Sounds.WALK:
-            _walk.play()
+            return _walk
 
         Sounds.JUMP:
-            _jump.play()
+            return _jump
 
         Sounds.DASH:
-            _dash.play()
+            return _dash
 
         Sounds.ATTACK_1:
             _attack.pitch_scale = 1
-            _attack.play()
+            return _attack
 
         Sounds.ATTACK_2:
             _attack.pitch_scale = 1.1
-            _attack.play()
+            return _attack
 
         Sounds.ATTACK_3:
             _attack.pitch_scale = 1.2
-            _attack.play()
+            return _attack
 
         Sounds.LAND_SOFT:
-            _land_soft.play()
+            return _land_soft
 
         Sounds.LAND_HARD:
-            _land_hard.play()
+            return _land_hard
 
         _:
+            # Simply report the error here immediately instead of deferring to
+            # the caller, as the response would basically always be the same.
             Error.report_if_error(
                 ErrorPlusMessage.new(
                     ERR_DOES_NOT_EXIST,
                     'Sound enum value %d does not exist' % sound_enum))
+            return null
