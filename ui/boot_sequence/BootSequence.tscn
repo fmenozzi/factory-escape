@@ -134,6 +134,23 @@ margin_bottom = 117.0
 text = "Do not shut down the game when this symbol appears"
 align = 1
 
+[node name="DemoAndSubjectToChange" type="Control" parent="Sequence"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Sequence/DemoAndSubjectToChange"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_right = -9.0
+text = "This demo represents an in-progress version of the game.
+
+Everything you see here is potentially subject to change in the final release."
+align = 1
+valign = 1
+autowrap = true
+
 [node name="ScreenFadeout" parent="." instance=ExtResource( 3 )]
 
 [node name="Timer" type="Timer" parent="."]
