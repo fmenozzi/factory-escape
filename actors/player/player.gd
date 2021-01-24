@@ -219,6 +219,9 @@ func get_health_pack_manager() -> HealthPackManager:
 func get_sound_manager() -> PlayerSoundManager:
     return _sound_manager
 
+func get_hazard_hit_invincibility_flash_manager() -> Node:
+    return _invincibility_flash_manager_hazard_hit
+
 # Get the current x-axis input direction. Returns +1 if player is moving right,
 # -1 if player is moving left, and 0 if player is not moving. These conveniently
 # correspond to Util.Direction.RIGHT, Util.Direction.LEFT, and

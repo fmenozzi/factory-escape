@@ -41,6 +41,12 @@ func stop_flashing() -> void:
     _tween.reset_all()
     _tween.stop_all()
 
+    # Remove shader from sprite. This is primarily to allow for other shaders to
+    # be used on the sprite afterwards if necessary.
+    _shader_manager.clear_shader()
+
+    emit_signal('flashing_finished')
+
 func pause_timer() -> void:
     _timer.paused = true
 func resume_timer() -> void:
@@ -67,9 +73,3 @@ func _setup_tween() -> void:
 
 func _on_flashing_timeout() -> void:
     stop_flashing()
-
-    # Remove shader from sprite. This is primarily to allow for other shaders to
-    # be used on the sprite afterwards if necessary.
-    _shader_manager.clear_shader()
-
-    emit_signal('flashing_finished')

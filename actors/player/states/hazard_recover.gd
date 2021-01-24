@@ -8,7 +8,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_jump_manager().reset_jump()
 
 func exit(player: Player) -> void:
-    pass
+    player.get_hazard_hit_invincibility_flash_manager().stop_flashing()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var jump_manager := player.get_jump_manager()
