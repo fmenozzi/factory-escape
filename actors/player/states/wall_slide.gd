@@ -67,6 +67,7 @@ func update(player: Player, delta: float) -> Dictionary:
 
     # Once we hit the ground, return to idle state.
     if player.is_on_ground():
+        player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_SOFT)
         return {'new_state': Player.State.IDLE}
 
     # If we're not on the ground or the wall, the wall must have disappeared out

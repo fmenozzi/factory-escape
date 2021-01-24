@@ -102,6 +102,7 @@ func update(player: Player, delta: float) -> Dictionary:
         elif _buffer_dash_enabled:
             return {'new_state': Player.State.DASH}
         else:
+            player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_SOFT)
             return {'new_state': Player.State.IDLE}
 
     if player.is_on_wall():
