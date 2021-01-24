@@ -96,7 +96,7 @@ stretch_mode = 4
 margin_top = 101.0
 margin_right = 320.0
 margin_bottom = 114.0
-text = "This game plays best with a controller"
+text = "This game plays best with a controller."
 align = 1
 
 [node name="AutosaveFeature" type="Control" parent="Sequence"]
@@ -111,7 +111,7 @@ __meta__ = {
 margin_top = 56.0
 margin_right = 320.0
 margin_bottom = 69.0
-text = "This game uses an autosave feature"
+text = "This game uses an autosave feature."
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -131,7 +131,7 @@ margin_bottom = 94.0
 margin_top = 104.0
 margin_right = 320.0
 margin_bottom = 117.0
-text = "Do not shut down the game when this symbol appears"
+text = "Do not shut down the game when this symbol appears."
 align = 1
 
 [node name="DemoAndSubjectToChange" type="Control" parent="Sequence"]
