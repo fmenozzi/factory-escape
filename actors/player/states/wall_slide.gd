@@ -1,5 +1,7 @@
 extends 'res://actors/player/states/player_state.gd'
 
+var _wall_slide_audio_stream_player: AudioStreamPlayer = null
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Reset player velocity.
     player.velocity = Vector2.ZERO
@@ -9,6 +11,10 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 
     # Play wall slide animation.
     player.get_animation_player().play('wall_slide')
+
+    _wall_slide_audio_stream_player = player.get_sound_manager().get_player(
+        PlayerSoundManager.Sounds.WALL_SLIDE)
+    _wall_slide_audio_stream_player.play()
 
     # Start wall slide trail effect.
     player.get_wall_slide_trail().emitting = true
@@ -20,6 +26,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
 func exit(player: Player) -> void:
     # Stop wall slide trail effect.
     player.get_wall_slide_trail().emitting = false
+
+    _wall_slide_audio_stream_player.stop()
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var dash_manager := player.get_dash_manager()
