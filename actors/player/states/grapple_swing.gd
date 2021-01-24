@@ -97,9 +97,10 @@ func update(player: Player, delta: float) -> Dictionary:
     if player.is_on_ground():
         player.emit_dust_puff()
         if _buffer_jump_enabled:
-            player.get_jump_manager().reset_jump()
+            _reset_bufferable_actions(player)
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
+            _reset_bufferable_actions(player)
             return {'new_state': Player.State.DASH}
         else:
             player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_SOFT)
@@ -116,3 +117,7 @@ func update(player: Player, delta: float) -> Dictionary:
         player.get_animation_player().play('fall')
 
     return {'new_state': Player.State.NO_CHANGE}
+
+func _reset_bufferable_actions(player: Player) -> void:
+    player.get_jump_manager().reset_jump()
+    player.get_dash_manager().reset_dash()

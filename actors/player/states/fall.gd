@@ -127,10 +127,11 @@ func update(player: Player, delta: float) -> Dictionary:
         if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
-            player.get_jump_manager().reset_jump()
+            _reset_bufferable_actions(player)
             sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
+            _reset_bufferable_actions(player)
             sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
             return {'new_state': Player.State.DASH}
         else:
@@ -155,3 +156,7 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(player.velocity)
 
     return {'new_state': Player.State.NO_CHANGE}
+
+func _reset_bufferable_actions(player: Player) -> void:
+    player.get_jump_manager().reset_jump()
+    player.get_dash_manager().reset_dash()
