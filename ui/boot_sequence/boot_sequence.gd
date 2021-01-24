@@ -81,13 +81,18 @@ func _advance() -> void:
 func _setup_and_start_eye_glow_tween() -> void:
     var duration := 0.5
 
+    var glow_multiplier := 1.5
+
+    var old := Color(1, 1, 1)
+    var new := Color(glow_multiplier, glow_multiplier, glow_multiplier)
+
     _eye_glow_tween.repeat = true
     _eye_glow_tween.interpolate_property(
-        _eyes, 'modulate', Color(1, 1, 1), Color(1.3, 1.3, 1.3), duration,
-        Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+        _eyes, 'modulate', old, new, duration, Tween.TRANS_QUAD,
+        Tween.EASE_IN_OUT)
     _eye_glow_tween.interpolate_property(
-        _eyes, 'modulate', Color(1.3, 1.3, 1.3), Color(1, 1, 1), duration,
-        Tween.TRANS_QUAD, Tween.EASE_IN_OUT, duration)
+        _eyes, 'modulate', new, old, duration, Tween.TRANS_QUAD,
+        Tween.EASE_IN_OUT, duration)
     _eye_glow_tween.start()
 
 func _on_timeout() -> void:
