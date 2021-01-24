@@ -415,6 +415,20 @@ tracks/1/keys = {
 "method": "stop_flashing"
 } ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("States/Heal")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_play_heal_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=15]
 length = 1.4
@@ -719,7 +733,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 8
+frame = 68
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {

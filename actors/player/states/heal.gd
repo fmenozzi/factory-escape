@@ -2,7 +2,11 @@ extends 'res://actors/player/states/player_state.gd'
 
 onready var _flash_manager: Node = $FlashManager
 
+var _player: Player = null
+
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
+    _player = player
+
     player.get_animation_player().play('heal')
 
     player.get_health_pack_manager().consume_health_pack()
@@ -29,3 +33,6 @@ func update(player: Player, delta: float) -> Dictionary:
         player.move(Vector2(0, 10))
 
     return {'new_state': Player.State.NO_CHANGE}
+
+func _play_heal_sound() -> void:
+    _player.get_sound_manager().play(PlayerSoundManager.Sounds.HEAL)
