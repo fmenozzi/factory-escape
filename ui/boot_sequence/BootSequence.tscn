@@ -96,7 +96,7 @@ stretch_mode = 4
 margin_top = 101.0
 margin_right = 320.0
 margin_bottom = 114.0
-text = "This game plays best with a controller."
+text = "This game is best played with a controller."
 align = 1
 
 [node name="AutosaveFeature" type="Control" parent="Sequence"]
