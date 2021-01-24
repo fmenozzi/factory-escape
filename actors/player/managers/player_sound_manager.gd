@@ -9,6 +9,7 @@ enum Sounds {
     ATTACK,
     HIT,
     HAZARD_HIT,
+    DIE,
     LAND_SOFT,
     LAND_HARD,
 }
@@ -20,6 +21,7 @@ onready var _wall_slide: AudioStreamPlayer = $AudioStreamPlayers/WallSlide
 onready var _attack: AudioStreamPlayer = $AudioStreamPlayers/Attack
 onready var _hit: AudioStreamPlayer = $AudioStreamPlayers/Hit
 onready var _hazard_hit: AudioStreamPlayer = $AudioStreamPlayers/HazardHit
+onready var _die: AudioStreamPlayer = $AudioStreamPlayers/Die
 onready var _land_soft: AudioStreamPlayer = $AudioStreamPlayers/LandSoft
 onready var _land_hard: AudioStreamPlayer = $AudioStreamPlayers/LandHard
 
@@ -37,6 +39,7 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.ATTACK,
         Sounds.HIT,
         Sounds.HAZARD_HIT,
+        Sounds.DIE,
         Sounds.LAND_SOFT,
         Sounds.LAND_HARD,
     ])
@@ -62,6 +65,9 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.HAZARD_HIT:
             return _hazard_hit
+
+        Sounds.DIE:
+            return _die
 
         Sounds.LAND_SOFT:
             return _land_soft

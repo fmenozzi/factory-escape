@@ -142,6 +142,8 @@ func _on_player_died() -> void:
     # standing still during death animation.
     _player.get_health().set_status(Health.Status.INVINCIBLE)
 
+    _player.get_sound_manager().play(PlayerSoundManager.Sounds.DIE)
+
     Screenshake.start(
         Screenshake.Duration.LONG,
         Screenshake.Amplitude.MEDIUM,

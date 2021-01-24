@@ -429,6 +429,13 @@ func _check_for_hits() -> void:
                             'new_state': State.STAGGER,
                             'direction_from_hit': Util.direction(hitbox, self)
                         })
+                else:
+                    # Play the appropriate sound effect even if the hit results
+                    # in death.
+                    if Collision.in_layer(hitbox, 'hazards'):
+                        get_sound_manager().play(PlayerSoundManager.Sounds.HAZARD_HIT)
+                    elif Collision.in_layer(hitbox, 'enemy_hitbox'):
+                        get_sound_manager().play(PlayerSoundManager.Sounds.HIT)
 
 func _check_for_hazard_hit(hitbox_area_or_body) -> void:
     if not Collision.in_layer(hitbox_area_or_body, 'hazards'):
@@ -443,6 +450,9 @@ func _check_for_hazard_hit(hitbox_area_or_body) -> void:
         if player_health.get_current_health() != 0:
             change_state({'new_state': State.HAZARD_HIT})
             emit_signal('player_hit_hazard')
+        else:
+            # Play the sound effect even if the hazard hit results in death.
+            get_sound_manager().play(PlayerSoundManager.Sounds.HAZARD_HIT)
 
 func _on_invincibility_flashing_finished() -> void:
     get_health().set_status(Health.Status.NONE)
