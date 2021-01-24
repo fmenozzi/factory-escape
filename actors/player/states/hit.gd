@@ -6,6 +6,7 @@ var _hit_effect_finished := false
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('stagger')
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.HIT)
 
     _hit_effect_finished = false
 
