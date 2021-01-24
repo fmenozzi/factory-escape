@@ -33,6 +33,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Play jump animation.
     player.get_animation_player().play('jump')
 
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.JUMP)
+
     # Start the timers.
     _fixed_velocity_timer.start()
     _jump_cut_timer.start()
