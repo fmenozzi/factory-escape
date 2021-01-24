@@ -4,6 +4,7 @@ onready var _invincibility_flash_manager: Node = $FlashManager
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('hazard_hit')
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.HAZARD_HIT)
 
     Rumble.start(Rumble.Type.STRONG, 0.25, Rumble.Priority.HIGH)
     Screenshake.start(
