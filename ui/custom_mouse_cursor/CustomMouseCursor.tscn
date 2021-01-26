@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/custom_mouse_cursor/textures/mouse-cursor.png" type="Texture" id=1]
+[ext_resource path="res://ui/custom_mouse_cursor/custom_mouse_cursor.gd" type="Script" id=2]
+
+[node name="CustomMouseCursor" type="CanvasLayer"]
+pause_mode = 2
+layer = 5
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 4, 4 )

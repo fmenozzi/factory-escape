@@ -59,7 +59,13 @@ func _ready() -> void:
     _set_main_menu_input_enabled(true)
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
 
-    Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+    # Using MOUSE_MODE_HIDDEN instead of MOUSE_MODE_VISIBLE due to the use of a
+    # "software cursor". See related comment in game_interface.gd.
+    #
+    # Ideally we'd use MOUSE_MODE_CONFINED here, but that would cause the actual
+    # cursor to become visible, so we have to stick with MOUSE_MODE_HIDDEN for
+    # now.
+    Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
