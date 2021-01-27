@@ -10,7 +10,7 @@ onready var _vbox_container: VBoxContainer = $ScrollContainer/VBoxContainer
 func _ready() -> void:
     set_process_unhandled_input(false)
 
-    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+    CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.HIDDEN)
 
     SceneChanger.connect('scene_changed', self, '_on_scene_changed')
 

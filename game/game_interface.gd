@@ -17,21 +17,15 @@ onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 onready var _player_death_transition: Control = $Layers/ScreenSpaceEffectsLayer/PlayerDeathTransition
 
 func _notification(what: int) -> void:
-    # Note that we are using a "software cursor" (i.e. an autoloaded Sprite that
-    # updates its position every frame to match that of the cursor). We want the
-    # sprite to be visible but the cursor itself not to be, so in all instances
-    # where we would normally use MOUSE_MODE_VISIBLE, we instead use
-    # MOUSE_MODE_HIDDEN, counting on the custom mouse scene to detect when it
-    # should be visible or not (based on the current mouse mode).
     match what:
         MainLoop.NOTIFICATION_WM_FOCUS_IN:
             if get_tree().paused:
-                Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+                CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
             else:
-                Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+                CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.HIDDEN)
 
         MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-            Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+            CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
 
 func _ready() -> void:
     if not run_standalone:

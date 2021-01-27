@@ -97,8 +97,6 @@ func _set_paused(new_pause_state: bool) -> void:
     _black_overlay.visible = new_pause_state
 
     if new_pause_state:
-        # Using MOUSE_MODE_HIDDEN instead of MOUSE_MODE_VISIBLE due to the use
-        # of a "software cursor". See related comment in game_interface.gd.
-        Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+        CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
     else:
-        Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+        CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.HIDDEN)
