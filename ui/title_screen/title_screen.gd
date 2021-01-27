@@ -59,7 +59,7 @@ func _ready() -> void:
     _set_main_menu_input_enabled(true)
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
 
-    CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
+    MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)

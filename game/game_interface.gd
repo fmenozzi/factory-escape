@@ -20,12 +20,12 @@ func _notification(what: int) -> void:
     match what:
         MainLoop.NOTIFICATION_WM_FOCUS_IN:
             if get_tree().paused:
-                CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
+                MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
             else:
-                CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.HIDDEN)
+                MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
 
         MainLoop.NOTIFICATION_WM_FOCUS_OUT:
-            CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
+            MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
 
 func _ready() -> void:
     if not run_standalone:

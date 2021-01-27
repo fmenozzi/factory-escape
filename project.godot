@@ -368,7 +368,7 @@ SaveAndLoad="*res://custom/nodes/SaveAndLoad.tscn"
 Effects="*res://custom/scripts/effects.gd"
 Controls="*res://custom/scripts/controls.gd"
 Error="*res://custom/scripts/error.gd"
-CustomMouseCursor="*res://ui/custom_mouse_cursor/CustomMouseCursor.tscn"
+MouseCursor="*res://ui/mouse_cursor/MouseCursor.tscn"
 
 [debug]
 

@@ -97,6 +97,6 @@ func _set_paused(new_pause_state: bool) -> void:
     _black_overlay.visible = new_pause_state
 
     if new_pause_state:
-        CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.VISIBLE)
+        MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
     else:
-        CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.HIDDEN)
+        MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)

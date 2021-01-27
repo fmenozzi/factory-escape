@@ -33,7 +33,7 @@ func _ready() -> void:
     _timer.connect('timeout', self, '_on_timeout')
     _timer.start()
 
-    CustomMouseCursor.set_mouse_mode(CustomMouseCursor.MouseMode.HIDDEN)
+    MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_accept'):
