@@ -20,7 +20,9 @@ margin_bottom = 96.0
 size_flags_horizontal = 3
 align = 2
 
-[node name="OptionButton" type="OptionButton" parent="."]
+[node name="OptionButton" type="OptionButton" parent="." groups=[
+"custom_option_button",
+]]
 margin_left = 162.0
 margin_right = 320.0
 margin_bottom = 180.0
