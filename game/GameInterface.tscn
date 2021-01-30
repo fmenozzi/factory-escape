@@ -43,6 +43,13 @@ layer = 4
 
 [node name="Pause" parent="Layers/PauseLayer" instance=ExtResource( 3 )]
 
+[node name="SavingIndicator" parent="Layers/PauseLayer" instance=ExtResource( 7 )]
+pause_mode = 2
+margin_left = -40.0
+margin_top = -28.0
+margin_right = -24.0
+margin_bottom = -12.0
+
 [node name="ScreenFadeoutLayer" type="CanvasLayer" parent="Layers"]
 layer = 3
 
@@ -60,13 +67,6 @@ layer = 2
 [node name="HealthBar" parent="Layers/UILayer" instance=ExtResource( 6 )]
 
 [node name="HealthPackBar" parent="Layers/UILayer" instance=ExtResource( 10 )]
-
-[node name="SavingIndicator" parent="Layers/UILayer" instance=ExtResource( 7 )]
-pause_mode = 2
-margin_left = -40.0
-margin_top = -28.0
-margin_right = -24.0
-margin_bottom = -12.0
 
 [node name="TutorialMessage" parent="Layers/UILayer" instance=ExtResource( 13 )]
 
