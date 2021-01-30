@@ -2,7 +2,7 @@ tool
 extends Control
 
 # The actual game scene to switch to once the player starts the game. This is an
-# instance of Game.tscn.
+# instance of GameInterface.tscn.
 export(PackedScene) var game = null
 
 onready var MENUS := {
@@ -26,9 +26,9 @@ onready var _saving_indicator: Control = $SavingIndicator
 
 func _get_configuration_warning() -> String:
     if game == null:
-        return 'No instance of Game.tscn set in title screen!'
+        return 'No instance of GameInterface.tscn set in title screen!'
     if game.instance().run_standalone:
-        return 'Instance of Game.tscn must not be in run_standalone mode!'
+        return 'Instance of GameInterface.tscn must not be in run_standalone mode!'
     return ''
 
 func _ready() -> void:
