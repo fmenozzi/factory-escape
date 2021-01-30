@@ -17,7 +17,7 @@ __meta__ = {
 margin_top = 64.0
 margin_right = 320.0
 margin_bottom = 77.0
-text = "Are you sure?"
+text = "Quit to desktop?"
 align = 1
 
 [node name="Yes" type="Button" parent="."]
