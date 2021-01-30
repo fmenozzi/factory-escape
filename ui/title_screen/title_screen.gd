@@ -35,7 +35,7 @@ func _ready() -> void:
     assert(game != null)
     assert(not game.instance().run_standalone)
 
-    set_process_input(false)
+    _set_main_menu_input_enabled(false)
 
     # Intercept all menu-related signals from individual submenus.
     for menu in MENUS.values():

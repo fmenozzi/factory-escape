@@ -54,7 +54,12 @@ func set_input_enabled(enabled: bool) -> void:
 
 func _set_focus_enabled(enabled: bool) -> void:
     for node in _focusable_nodes:
-        node.focus_mode = Control.FOCUS_ALL if enabled else Control.FOCUS_NONE
+        if enabled:
+            node.focus_mode = Control.FOCUS_ALL
+            node.mouse_filter = Control.MOUSE_FILTER_PASS
+        else:
+            node.focus_mode = Control.FOCUS_NONE
+            node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _on_start_pressed() -> void:
     advance_to_menu(Menu.Menus.SAVE_SLOTS)
