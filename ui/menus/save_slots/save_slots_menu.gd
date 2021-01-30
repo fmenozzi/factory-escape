@@ -37,6 +37,9 @@ func _ready() -> void:
 
     _back.connect('pressed', self, '_on_back_pressed')
 
+    connect_mouse_entered_signals_to_menu(_focusable_nodes)
+    set_default_focusable_node(_slot_container_1_button)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
@@ -44,18 +47,19 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
     _slot_container_2.set_save_slot_label()
     _slot_container_3.set_save_slot_label()
 
-    match previous_menu:
-        Menu.Menus.SAVE_SLOT_ERROR:
-            assert('save_slot' in metadata)
-            match metadata['save_slot']:
-                1:
-                    _slot_container_1_button.grab_focus()
-                2:
-                    _slot_container_2_button.grab_focus()
-                3:
-                    _slot_container_3_button.grab_focus()
-        _:
-            _slot_container_1_button.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        match previous_menu:
+            Menu.Menus.SAVE_SLOT_ERROR:
+                assert('save_slot' in metadata)
+                match metadata['save_slot']:
+                    1:
+                        _slot_container_1_button.grab_focus()
+                    2:
+                        _slot_container_2_button.grab_focus()
+                    3:
+                        _slot_container_3_button.grab_focus()
+            _:
+                get_default_focusable_node().grab_focus()
 
     set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
 

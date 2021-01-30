@@ -20,6 +20,8 @@ signal pause_changed(new_pause_value)
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     emit_signal('pause_changed', false)
 
+    MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
+
 func exit() -> void:
     emit_signal('pause_changed', true)
 

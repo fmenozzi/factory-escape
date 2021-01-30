@@ -14,10 +14,14 @@ func _ready() -> void:
     _yes.connect('pressed', self, '_on_yes_pressed')
     _no.connect('pressed', self, '_on_no_pressed')
 
+    connect_mouse_entered_signals_to_menu(_focusable_nodes)
+    set_default_focusable_node(_no)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
-    _no.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        get_default_focusable_node().grab_focus()
 
     set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
 

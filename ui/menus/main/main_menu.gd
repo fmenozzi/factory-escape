@@ -15,18 +15,22 @@ onready var _focusable_nodes := [
 func _ready() -> void:
     set_input_enabled(true)
 
+    connect_mouse_entered_signals_to_menu(_focusable_nodes)
+    set_default_focusable_node(_start)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
-    match previous_menu:
-        Menu.Menus.SAVE_SLOTS:
-            _start.grab_focus()
-        Menu.Menus.OPTIONS:
-            _options.grab_focus()
-        Menu.Menus.QUIT:
-            _quit.grab_focus()
-        _:
-            _start.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        match previous_menu:
+            Menu.Menus.SAVE_SLOTS:
+                _start.grab_focus()
+            Menu.Menus.OPTIONS:
+                _options.grab_focus()
+            Menu.Menus.QUIT:
+                _quit.grab_focus()
+            _:
+                get_default_focusable_node().grab_focus()
 
     set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
 

@@ -10,6 +10,8 @@ var _save_slot: int
 func _ready() -> void:
     _back.connect('pressed', self, '_on_back_pressed')
 
+    set_default_focusable_node(_back)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
@@ -21,7 +23,8 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
     _error_code_label.text = 'Error Code: %d' % metadata['error']
     _error_message_label.text = metadata['error_msg']
 
-    _back.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        get_default_focusable_node().grab_focus()
 
 func exit() -> void:
     self.visible = false

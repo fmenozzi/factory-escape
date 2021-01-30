@@ -34,8 +34,13 @@ func _ready() -> void:
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
+    connect_mouse_entered_signals_to_menu(_focusable_nodes)
+    set_default_focusable_node(_jump_remap_button)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
-    _jump_remap_button.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        get_default_focusable_node().grab_focus()
+
     _set_input_enabled(true)
 
     self.visible = true

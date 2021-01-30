@@ -69,7 +69,7 @@ func _ready() -> void:
     _on_control_mode_changed(Controls.get_mode())
 
 func _input(event: InputEvent) -> void:
-    MENUS[_menu_stack.back()].handle_input(event)
+    _get_current_menu().handle_input(event)
 
 func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
     # Use a basic pushdown automaton to control menu transitions. The logic here
@@ -81,7 +81,12 @@ func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
         _menu_stack.pop_back()
     else:
         _menu_stack.push_back(new_menu)
-    MENUS[_menu_stack.back()].enter(old_menu, metadata)
+    _get_current_menu().enter(old_menu, metadata)
+
+func _get_current_menu() -> Menu:
+    assert(not _menu_stack.empty())
+
+    return MENUS[_menu_stack.back()]
 
 func _set_main_menu_input_enabled(enabled: bool) -> void:
     set_process_input(enabled)
@@ -113,9 +118,22 @@ func _on_control_mode_changed(new_mode: int) -> void:
 
     match new_mode:
         Controls.Mode.CONTROLLER:
+            # Get the UI element that last had mouse focus and have it grab focus.
+            var current_menu := _get_current_menu()
+            var last_mouse_focused_node := current_menu.get_last_mouse_focused_node()
+            if last_mouse_focused_node:
+                last_mouse_focused_node.grab_focus()
+            else:
+                current_menu.get_default_focusable_node().grab_focus()
+
             MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
 
         Controls.Mode.KEYBOARD:
+            # Get the currently-focused UI element and release its focus.
+            var currently_focused_node := get_focus_owner()
+            if currently_focused_node:
+                currently_focused_node.release_focus()
+
             MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
 
 func _start_game(save_slot: int) -> void:

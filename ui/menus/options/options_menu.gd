@@ -24,21 +24,24 @@ func _ready() -> void:
     _keyboard.connect('pressed', self, '_on_keyboard_pressed')
     _back.connect('pressed', self, '_on_back_pressed')
 
+    connect_mouse_entered_signals_to_menu(_focusable_nodes)
+    set_default_focusable_node(_game)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
-    match previous_menu:
-        Menu.Menus.AUDIO_OPTIONS:
-            _audio.grab_focus()
-        Menu.Menus.VIDEO_OPTIONS:
-            _video.grab_focus()
-        Menu.Menus.CONTROLLER_OPTIONS:
-            _controller.grab_focus()
-        Menu.Menus.KEYBOARD_OPTIONS:
-            _keyboard.grab_focus()
-        _:
-            # Default to first option.
-            _game.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        match previous_menu:
+            Menu.Menus.AUDIO_OPTIONS:
+                _audio.grab_focus()
+            Menu.Menus.VIDEO_OPTIONS:
+                _video.grab_focus()
+            Menu.Menus.CONTROLLER_OPTIONS:
+                _controller.grab_focus()
+            Menu.Menus.KEYBOARD_OPTIONS:
+                _keyboard.grab_focus()
+            _:
+                get_default_focusable_node().grab_focus()
 
     set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
 

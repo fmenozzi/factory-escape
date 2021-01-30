@@ -21,10 +21,14 @@ func _ready() -> void:
     _reset_to_defaults.connect('pressed', self, '_on_reset_to_defaults_pressed')
     _back_button.connect('pressed', self, '_on_back_pressed')
 
+    connect_mouse_entered_signals_to_menu(_focusable_nodes)
+    set_default_focusable_node(_music_slider)
+
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
 
-    _music_slider.grab_focus()
+    if Controls.get_mode() == Controls.Mode.CONTROLLER:
+        get_default_focusable_node().grab_focus()
 
     set_focus_signals_enabled_for_nodes(_focusable_nodes, true)
 

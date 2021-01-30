@@ -40,12 +40,12 @@ func _ready() -> void:
     Controls.connect('mode_changed', self, '_on_control_mode_changed')
 
     # Start in unpaused state.
-    _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED, {})
+    _menu_stack.append(Menu.Menus.UNPAUSED)
 
     Options.load_options_and_report_errors()
 
 func _input(event: InputEvent) -> void:
-    MENUS[_menu_stack.back()].handle_input(event)
+    _get_current_menu().handle_input(event)
 
 func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
     # All inputs while paused should not be propagated out of the pause menu to
@@ -72,7 +72,12 @@ func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
             _menu_stack.pop_back()
         _:
             _menu_stack.push_back(new_menu)
-    MENUS[_menu_stack.back()].enter(old_menu, metadata)
+    _get_current_menu().enter(old_menu, metadata)
+
+func _get_current_menu() -> Menu:
+    assert(not _menu_stack.empty())
+
+    return MENUS[_menu_stack.back()]
 
 func _set_quit_menu_input_enabled(enabled: bool) -> void:
     set_process_input(enabled)
@@ -101,9 +106,22 @@ func _on_control_mode_changed(new_mode: int) -> void:
 
     match new_mode:
         Controls.Mode.CONTROLLER:
+            # Get the UI element that last had mouse focus and have it grab focus.
+            var current_menu := _get_current_menu()
+            var last_mouse_focused_node := current_menu.get_last_mouse_focused_node()
+            if last_mouse_focused_node:
+                last_mouse_focused_node.grab_focus()
+            elif current_menu.get_default_focusable_node():
+                current_menu.get_default_focusable_node().grab_focus()
+
             MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
 
         Controls.Mode.KEYBOARD:
+            # Get the currently-focused UI element and release its focus.
+            var currently_focused_node := get_focus_owner()
+            if currently_focused_node:
+                currently_focused_node.release_focus()
+
             MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
 
 func _set_paused(new_pause_state: bool) -> void:

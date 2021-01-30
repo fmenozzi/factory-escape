@@ -5,6 +5,9 @@ signal menu_changed(new_menu, metadata)
 signal previous_menu_requested(metadata)
 signal menu_navigated
 
+var _last_mouse_focused_node: Control = null
+var _default_focusable_node: Control = null
+
 # The possible menus that the player can navigate to in various contexts, such
 # as from the title screen or after pressing the pause button.
 enum Menus {
@@ -79,3 +82,18 @@ func set_focus_signals_enabled_for_nodes(nodes: Array, enabled: bool) -> void:
     var method := 'connect' if enabled else 'disconnect'
     for node in nodes:
         node.call(method, 'focus_entered', self, 'emit_menu_navigation_sound')
+
+func connect_mouse_entered_signals_to_menu(nodes: Array) -> void:
+    for node in nodes:
+        node.connect('mouse_entered', self, '_on_mouse_entered', [node])
+
+func get_last_mouse_focused_node() -> Control:
+    return _last_mouse_focused_node
+
+func set_default_focusable_node(node: Control) -> void:
+    _default_focusable_node = node
+func get_default_focusable_node() -> Control:
+    return _default_focusable_node
+
+func _on_mouse_entered(new_mouse_focus_node: Control) -> void:
+    _last_mouse_focused_node = new_mouse_focus_node
