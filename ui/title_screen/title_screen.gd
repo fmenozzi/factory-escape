@@ -59,7 +59,14 @@ func _ready() -> void:
     _set_main_menu_input_enabled(true)
     _change_menu(Menu.Menus.MAIN, Menu.Menus.MAIN, {})
 
-    MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
+    # This is slightly tricky. We want to do things like show/hide the custom
+    # cursor whenever the control mode changes appropriately, but this callback
+    # will only be called when the mode actually CHANGES. This means that if the
+    # control mode is at KEYBOARD by the time we get here, moving the mouse won't
+    # show the cursor until we first change the mode to CONTROLLER. Therefore,
+    # we manually call the callback function with the current mode here.
+    Controls.connect('mode_changed', self, '_on_control_mode_changed')
+    _on_control_mode_changed(Controls.get_mode())
 
 func _input(event: InputEvent) -> void:
     MENUS[_menu_stack.back()].handle_input(event)
@@ -100,6 +107,16 @@ func _on_quit_to_desktop_requested() -> void:
     Options.save_options_and_report_errors()
 
     get_tree().quit()
+
+func _on_control_mode_changed(new_mode: int) -> void:
+    assert(new_mode in [Controls.Mode.CONTROLLER, Controls.Mode.KEYBOARD])
+
+    match new_mode:
+        Controls.Mode.CONTROLLER:
+            MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
+
+        Controls.Mode.KEYBOARD:
+            MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
 
 func _start_game(save_slot: int) -> void:
     _set_main_menu_input_enabled(false)

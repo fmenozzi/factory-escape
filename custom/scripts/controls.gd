@@ -69,6 +69,9 @@ const _KEYBOARD_REMAP_BLOCKLIST := [
     KEY_KP_ENTER,
 ]
 
+func _ready() -> void:
+    pause_mode = Node.PAUSE_MODE_PROCESS
+
 func _input(event: InputEvent) -> void:
     if event is InputEventJoypadButton or event is InputEventJoypadMotion:
         if _mode == Mode.KEYBOARD:
@@ -84,6 +87,9 @@ func _set_mode(new_mode: int) -> void:
     _mode = new_mode
 
     emit_signal('mode_changed', new_mode)
+
+func get_mode() -> int:
+    return _mode
 
 func remap_controller_action(
     player_action: String,

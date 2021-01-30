@@ -37,6 +37,8 @@ func _ready() -> void:
     MENUS[Menu.Menus.QUIT].connect(
         'quit_to_desktop_requested', self, '_on_quit_to_desktop_requested')
 
+    Controls.connect('mode_changed', self, '_on_control_mode_changed')
+
     # Start in unpaused state.
     _change_menu(Menu.Menus.UNPAUSED, Menu.Menus.UNPAUSED, {})
 
@@ -91,12 +93,24 @@ func _on_quit_to_main_menu_requested() -> void:
 func _on_quit_to_desktop_requested() -> void:
     emit_signal('quit_to_desktop_requested')
 
+func _on_control_mode_changed(new_mode: int) -> void:
+    assert(new_mode in [Controls.Mode.CONTROLLER, Controls.Mode.KEYBOARD])
+
+    if not get_tree().paused:
+        return
+
+    match new_mode:
+        Controls.Mode.CONTROLLER:
+            MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
+
+        Controls.Mode.KEYBOARD:
+            MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
+
 func _set_paused(new_pause_state: bool) -> void:
     get_tree().paused = new_pause_state
 
     _black_overlay.visible = new_pause_state
 
-    if new_pause_state:
-        MouseCursor.set_mouse_mode(MouseCursor.MouseMode.VISIBLE)
-    else:
-        MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
+    # Need to call this callback manually here, see related comment in
+    # title_screen.gd.
+    _on_control_mode_changed(Controls.get_mode())
