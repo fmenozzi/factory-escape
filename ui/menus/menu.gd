@@ -97,3 +97,5 @@ func get_default_focusable_node() -> Control:
 
 func _on_mouse_entered(new_mouse_focus_node: Control) -> void:
     _last_mouse_focused_node = new_mouse_focus_node
+
+    emit_menu_navigation_sound()
