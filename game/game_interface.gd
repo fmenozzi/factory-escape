@@ -55,6 +55,8 @@ func _ready() -> void:
             # first lamp.
             _player.change_state({'new_state': Player.State.IDLE})
 
+    MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
+
     var player_health := _player.get_health()
     player_health.connect('health_changed', _health_bar, '_on_health_changed')
     player_health.connect('health_changed', _vignette, '_on_health_changed')
