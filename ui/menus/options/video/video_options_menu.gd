@@ -90,6 +90,8 @@ func reset_to_defaults() -> void:
     _fps_cap.reset_to_default()
     _set_fps_cap()
 
+    Options.save_options_and_report_errors()
+
 # Sets OS-level vsync using the currently-selected option in the option button.
 func _set_vsync() -> void:
     OS.set_use_vsync(_vsync.get_selected_option_name() == 'Enabled')

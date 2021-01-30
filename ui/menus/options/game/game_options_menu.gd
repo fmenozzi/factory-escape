@@ -76,6 +76,8 @@ func reset_to_defaults() -> void:
     _screenshake.reset_to_default()
     _set_screenshake()
 
+    Options.save_options_and_report_errors()
+
 func _set_rumble() -> void:
     var rumble: String = _rumble.get_selected_option_name()
     assert(rumble in ['Normal', 'Less', 'None'])

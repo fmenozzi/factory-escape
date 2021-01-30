@@ -81,6 +81,8 @@ func reset_to_defaults() -> void:
     _effects_slider.set_value(_effects_slider.max_value)
     _ui_slider.set_value(_ui_slider.max_value)
 
+    Options.save_options_and_report_errors()
+
 func _set_bus_volume(bus: String, slider_value: float) -> void:
     assert(bus in ['Music', 'Effects', 'UI'])
 

@@ -152,6 +152,8 @@ func reset_to_defaults() -> void:
                 new_event.button_index = controller_option_data[action]
                 InputMap.action_add_event(action, new_event)
 
+    Options.save_options_and_report_errors()
+
 func _set_input_enabled(enabled: bool) -> void:
     _input_enabled = enabled
 
