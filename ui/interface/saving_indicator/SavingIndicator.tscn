@@ -11,7 +11,7 @@ resource_name = "spin"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("UpperLeft:modulate")
+tracks/0/path = NodePath("Sprites/UpperLeft:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -23,7 +23,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UpperRight:modulate")
+tracks/1/path = NodePath("Sprites/UpperRight:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -35,7 +35,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.723465 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("LowerRight:modulate")
+tracks/2/path = NodePath("Sprites/LowerRight:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -47,7 +47,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("LowerLeft:modulate")
+tracks/3/path = NodePath("Sprites/LowerLeft:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -74,23 +74,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpperLeft" type="Sprite" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="UpperLeft" type="Sprite" parent="Sprites"]
 position = Vector2( 4, 4 )
 texture = ExtResource( 5 )
 
-[node name="UpperRight" type="Sprite" parent="."]
+[node name="UpperRight" type="Sprite" parent="Sprites"]
 modulate = Color( 1, 1, 1, 0.861732 )
 position = Vector2( 12, 4 )
 texture = ExtResource( 3 )
 
-[node name="LowerRight" type="Sprite" parent="."]
+[node name="LowerRight" type="Sprite" parent="Sprites"]
 position = Vector2( 12, 12 )
 texture = ExtResource( 2 )
 
-[node name="LowerLeft" type="Sprite" parent="."]
+[node name="LowerLeft" type="Sprite" parent="Sprites"]
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 4, 12 )
 texture = ExtResource( 4 )
+
+[node name="VisibilityTween" type="Tween" parent="Sprites"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/spin = SubResource( 1 )
