@@ -115,6 +115,13 @@ func _load_config(config_file: ConfigFile) -> ErrorPlusMessage:
     if error != ERR_FILE_NOT_FOUND:
         return ErrorPlusMessage.new(error, 'Error loading existing options file')
 
+    # Create save directory if it does not already exist.
+    var dir := Directory.new()
+    if not dir.dir_exists(_save_directory):
+        error = dir.make_dir_recursive(_save_directory)
+        if error != OK:
+            return ErrorPlusMessage.new(error, 'Error creating save directory')
+
     # Create new config file if it doesn't already exist.
     var file := File.new()
     error = file.open(path, File.WRITE)
