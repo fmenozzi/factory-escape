@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://game/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/GameInterface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=3]
+
 
 
 
