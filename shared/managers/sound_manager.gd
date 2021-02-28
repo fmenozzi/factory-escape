@@ -33,3 +33,9 @@ func _ready() -> void:
 
     for audio_stream_player in all_audio_stream_players:
         audio_stream_player.bus = 'Effects'
+
+func pause_all() -> void:
+    for player in _audio_stream_players.get_children():
+        player.stream_paused = true
+    for player in _audio_stream_players_2d.get_children():
+        player.stream_paused = true
