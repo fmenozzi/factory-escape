@@ -38,6 +38,7 @@ onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: SentryDronePhysicsManager = $PhysicsManager
 onready var _aggro_manager: AggroManager = $AggroManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -81,6 +82,7 @@ func get_aggro_manager() -> AggroManager:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
 
     _pushback_manager.start_pushback(
         player.get_center().direction_to(global_position))

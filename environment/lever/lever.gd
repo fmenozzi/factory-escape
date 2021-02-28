@@ -5,6 +5,7 @@ signal direction_changed_to(new_direction)
 export(Util.Direction) var direction := Util.Direction.LEFT
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 
 # Treat the lever as an enemy as far as hit detection is concerned.
 #
@@ -15,6 +16,8 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 #       interactions and change _on_attack_connected() (and this method)
 #       accordingly.
 func take_hit(damage: int, player: Player) -> void:
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
+
     match direction:
         Util.Direction.LEFT:
             change_direction_to(Util.Direction.RIGHT)

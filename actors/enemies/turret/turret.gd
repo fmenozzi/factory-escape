@@ -38,6 +38,7 @@ var _rotation_direction := 0
 
 onready var _health: Health = $Health
 onready var _aggro_manager: AggroManager = $AggroManager
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
@@ -97,6 +98,7 @@ func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _body_flash_manager.start_flashing()
     _head_flash_manager.start_flashing()
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
 
 func rotate_head_to(new_rotation: float) -> void:
     _head.rotation = new_rotation

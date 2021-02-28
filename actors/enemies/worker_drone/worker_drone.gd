@@ -28,6 +28,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: PhysicsManager = $PhysicsManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
@@ -56,6 +57,7 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
     if _health.get_current_health() == 0:
         # TODO: Make death nicer (animation, effects, etc.).
         _change_state({'new_state': State.DIE})
