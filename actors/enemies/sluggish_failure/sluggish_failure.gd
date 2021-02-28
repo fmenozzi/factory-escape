@@ -42,6 +42,7 @@ var _direction_from_hit: int = Util.Direction.NONE
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 onready var _health: Health = $Health
@@ -84,6 +85,7 @@ func get_animation_player() -> AnimationPlayer:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_ORGANIC)
     if _health.get_current_health() == 0:
         # TODO: Make death nicer (animation, effects, etc.).
         _change_state({'new_state': State.DIE})

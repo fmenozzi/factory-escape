@@ -46,6 +46,7 @@ onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: LeapingFailurePhysicsManager = $PhysicsManager
 onready var _aggro_manager: AggroManager = $AggroManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -82,6 +83,7 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_ORGANIC)
     if is_on_floor():
         _pushback_manager.start_pushback(
             player.get_center().direction_to(global_position))

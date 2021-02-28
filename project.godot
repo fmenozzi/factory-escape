@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/shared/enemy_hit_effect/enemy_hit_effect.gd"
 }, {
+"base": "SoundManager",
+"class": "EnemySoundManager",
+"language": "GDScript",
+"path": "res://shared/managers/enemy_sound_manager/enemy_sound_manager.gd"
+}, {
 "base": "Node2D",
 "class": "EnergyProjectile",
 "language": "GDScript",
@@ -293,6 +298,7 @@ _global_script_class_icons={
 "DemoAbility": "",
 "DemoSaveManager": "",
 "EnemyHitEffect": "",
+"EnemySoundManager": "",
 "EnergyProjectile": "",
 "ErrorOr": "",
 "ErrorPlusMessage": "",
