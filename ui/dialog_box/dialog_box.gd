@@ -7,6 +7,7 @@ const SCROLL_SPEED: float = 0.05
 onready var _black_overlay: ColorRect = $BlackOverlay
 onready var _label: RichTextLabel = $RichTextLabel
 onready var _timer: Timer = $TextScrollTimer
+onready var _end_of_page_prompt: Control = $EndOfPagePrompt
 
 onready var _player: Player = Util.get_player()
 
@@ -74,6 +75,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_timeout() -> void:
     _label.set_visible_characters(_label.get_visible_characters() + 1)
 
+    if _label.get_visible_characters() < _label.get_total_character_count():
+        _set_end_of_page_prompt_visible(false)
+    else:
+        _set_end_of_page_prompt_visible(true)
+
 func _start_dialog() -> void:
     _page = 0
     _label.set_bbcode(_dialog[_page])
@@ -93,6 +99,7 @@ func _exit_dialog_box(fade_in_label: bool = true) -> void:
 
 func _stop_dialog() -> void:
     _set_dialog_box_visible(false)
+    _set_end_of_page_prompt_visible(false)
     _set_player_controllable(true)
 
     _timer.stop()
@@ -106,6 +113,7 @@ func _advance_dialog_to_next_page() -> void:
 func _advance_dialog_to_end_of_current_page() -> void:
     _timer.stop()
     _label.set_visible_characters(_label.get_total_character_count())
+    _set_end_of_page_prompt_visible(true)
 
 func _set_dialog_box_visible(visible: bool) -> void:
     _black_overlay.visible = visible
@@ -113,6 +121,9 @@ func _set_dialog_box_visible(visible: bool) -> void:
 
 func _set_player_controllable(controllable: bool) -> void:
     _player.set_process_unhandled_input(controllable)
+
+func _set_end_of_page_prompt_visible(visible: bool) -> void:
+    _end_of_page_prompt.visible = visible
 
 func _on_player_hit(player_health: int) -> void:
     if _current_state == State.ENABLED:

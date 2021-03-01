@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/dialog_box/dialog_box.gd" type="Script" id=2]
-
+[ext_resource path="res://ui/dialog_box/textures/end-of-page-prompt.png" type="Texture" id=3]
 
 [node name="DialogBox" type="Control"]
 anchor_right = 1.0
@@ -37,3 +37,18 @@ This is an example of some dialog in a dialog box that may wrap around."
 
 [node name="TextScrollTimer" type="Timer" parent="."]
 pause_mode = 1
+
+[node name="EndOfPagePrompt" type="Control" parent="."]
+visible = false
+margin_left = 288.0
+margin_top = 56.0
+margin_right = 304.0
+margin_bottom = 72.0
+
+[node name="TextureRect" type="TextureRect" parent="EndOfPagePrompt"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
