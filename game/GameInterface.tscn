@@ -4,7 +4,7 @@
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/Pause.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/ScreenFadeout.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ui/DialogBox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/dialog_box/DialogBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/interface/health_bar/HealthBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/interface/saving_indicator/SavingIndicator.tscn" type="PackedScene" id=7]
 [ext_resource path="res://shared/environments/glow_env.tres" type="Environment" id=8]
@@ -13,6 +13,7 @@
 [ext_resource path="res://shared/effects/screen_space_effects/player_death_transition/PlayerDeathTransition.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/ConfirmationDialog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/interface/tutorial_messages/TutorialMessage.tscn" type="PackedScene" id=13]
+
 
 [node name="GameInterface" type="Node"]
 script = ExtResource( 1 )
