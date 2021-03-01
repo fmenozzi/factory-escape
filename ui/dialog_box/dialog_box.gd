@@ -8,6 +8,7 @@ onready var _black_overlay: ColorRect = $BlackOverlay
 onready var _label: RichTextLabel = $RichTextLabel
 onready var _timer: Timer = $TextScrollTimer
 onready var _end_of_page_prompt: Control = $EndOfPagePrompt
+onready var _end_of_page_prompt_animation_player: AnimationPlayer = $EndOfPagePrompt/AnimationPlayer
 
 onready var _player: Player = Util.get_player()
 
@@ -124,6 +125,11 @@ func _set_player_controllable(controllable: bool) -> void:
 
 func _set_end_of_page_prompt_visible(visible: bool) -> void:
     _end_of_page_prompt.visible = visible
+
+    if visible:
+        _end_of_page_prompt_animation_player.play('flash')
+    else:
+        _end_of_page_prompt_animation_player.stop()
 
 func _on_player_hit(player_health: int) -> void:
     if _current_state == State.ENABLED:
