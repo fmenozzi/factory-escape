@@ -2,6 +2,8 @@ extends 'res://actors/player/states/player_state.gd'
 
 var _attack_again := false
 var _attack_is_connecting := false
+var _started_attack_while_airborne := false
+var _already_played_landing_sound := false
 
 enum TransitionTo {
     NONE,
@@ -40,6 +42,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _audio_stream_player.play()
 
     _attack_again = false
+    _started_attack_while_airborne = player.is_in_air()
+    _already_played_landing_sound = false
     _transition_to = TransitionTo.NONE
 
 func exit(player: Player) -> void:
@@ -80,6 +84,10 @@ func update(player: Player, delta: float) -> Dictionary:
 
     if _attack_is_connecting:
         player.velocity.y = 0
+
+    if _started_attack_while_airborne and player.is_on_ground() and not _already_played_landing_sound:
+        player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_SOFT)
+        _already_played_landing_sound = true
 
     if not player.get_animation_player().is_playing():
         match _transition_to:
