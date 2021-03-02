@@ -1,13 +1,11 @@
 extends 'res://actors/player/states/player_state.gd'
 
-# Reference to the player's grapple manager. Needed for draw_grapple_rope() and
-# clear_grapple_rope(), which are called from the animation player.
-var _grapple_manager: GrappleManager = null
+var _player: Player
 
 var _grapple_point: GrapplePoint = null
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
-    _grapple_manager = player.get_grapple_manager()
+    _player = player
 
     _grapple_point = previous_state_dict['grapple_point']
     assert(_grapple_point != null)
@@ -45,19 +43,26 @@ func update(player: Player, delta: float) -> Dictionary:
 func draw_grapple_rope() -> void:
     var grapple_point_pos := _grapple_point.get_attachment_pos().global_position
 
-    var grapple_rope := _grapple_manager.get_grapple_rope()
+    var grapple_manager := _player.get_grapple_manager()
+
+    var grapple_rope := grapple_manager.get_grapple_rope()
     grapple_rope.add_point(Vector2.ZERO)
     grapple_rope.add_point(grapple_point_pos - grapple_rope.global_position)
 
-    var grapple_hook: Sprite = _grapple_manager.get_grapple_hook()
+    var grapple_hook: Sprite = grapple_manager.get_grapple_hook()
     grapple_hook.position = grapple_point_pos - grapple_hook.global_position
     grapple_hook.rotation = grapple_hook.position.angle()
     grapple_hook.visible = true
 
-func clear_grapple_rope() -> void:
-    _grapple_manager.get_grapple_rope().clear_points()
+func play_grapple_launch_sound() -> void:
+    _player.get_sound_manager().play(PlayerSoundManager.Sounds.GRAPPLE_LAUNCH)
 
-    var grapple_hook = _grapple_manager.get_grapple_hook()
+func clear_grapple_rope() -> void:
+    var grapple_manager := _player.get_grapple_manager()
+
+    grapple_manager.get_grapple_rope().clear_points()
+
+    var grapple_hook = grapple_manager.get_grapple_hook()
     grapple_hook.visible = false
     grapple_hook.position = Vector2.ZERO
 

@@ -274,6 +274,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath("States/Grapple/GrappleRopeLaunch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.09 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_grapple_launch_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=9]
 length = 0.16
@@ -318,6 +332,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("States/Grapple/GrappleRopeLaunch")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.09 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_grapple_launch_sound"
+} ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -733,7 +761,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 68
+frame = 56
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -869,6 +897,7 @@ script = ExtResource( 42 )
 [node name="FlashManager" parent="States/Stagger/Hit" instance=ExtResource( 3 )]
 sprite_path = NodePath("../../../../Sprite")
 total_duration = 1.2
+single_flash_duration = 0.075
 flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
 [node name="Knockback" type="Node" parent="States/Stagger"]
@@ -881,6 +910,8 @@ script = ExtResource( 19 )
 
 [node name="FlashManager" parent="States/HazardHit" instance=ExtResource( 3 )]
 sprite_path = NodePath("../../../Sprite")
+total_duration = 2.0
+single_flash_duration = 0.075
 flash_color = Color( 1, 0.309804, 0.470588, 1 )
 
 [node name="HazardRecover" type="Node" parent="States"]
@@ -944,6 +975,8 @@ script = ExtResource( 35 )
 [node name="FlashManager" parent="States/Heal" instance=ExtResource( 3 )]
 sprite_path = NodePath("../../../Sprite")
 total_duration = 0.7
+single_flash_duration = 0.075
+flash_color = Color( 1, 1, 1, 1 )
 
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 36 )
