@@ -61,6 +61,8 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_animation_player().play('grapple_pull')
     player.get_animation_player().queue('jump')
 
+    player.get_sound_manager().play(PlayerSoundManager.Sounds.GRAPPLE_SWING)
+
     _buffer_jump_enabled = false
     _buffer_dash_enabled = false
 
