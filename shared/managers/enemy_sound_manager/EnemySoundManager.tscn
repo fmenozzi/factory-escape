@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://shared/managers/SoundManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shared/managers/enemy_sound_manager/enemy_sound_manager.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/enemy_hit_organic.wav" type="AudioStream" id=4]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/expand.wav" type="AudioStream" id=5]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/contract.wav" type="AudioStream" id=6]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/land_soft_organic.wav" type="AudioStream" id=7]
 
 [node name="EnemySoundManager" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -23,3 +24,6 @@ stream = ExtResource( 5 )
 
 [node name="ContractOrganic" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2Ds" index="1"]
 stream = ExtResource( 6 )
+
+[node name="LandSoftOrganic" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2Ds" index="2"]
+stream = ExtResource( 7 )

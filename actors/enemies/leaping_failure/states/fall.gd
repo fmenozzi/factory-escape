@@ -19,6 +19,7 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
 
     if failure.is_on_floor():
         failure.emit_dust_puff()
+        failure.get_sound_manager().play(EnemySoundManager.Sounds.LAND_SOFT_ORGANIC)
         if _aggro:
             return {'new_state': LeapingFailure.State.CONTRACT_FAST}
         else:

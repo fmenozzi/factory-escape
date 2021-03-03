@@ -52,6 +52,9 @@ func get_player(sound_enum: int) -> Node:
         Sounds.CONTRACT_ORGANIC:
             return _contract_organic
 
+        Sounds.LAND_SOFT_ORGANIC:
+            return _land_soft_organic
+
         _:
             # Simply report the error here immediately instead of deferring to
             # the caller, as the response would basically always be the same.
