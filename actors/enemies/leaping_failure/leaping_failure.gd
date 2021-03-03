@@ -68,6 +68,11 @@ func _ready() -> void:
 
     _health.connect('died', self, '_on_died')
 
+    STATES[State.EXPAND].connect(
+        'expanded', _sound_manager, 'play', [EnemySoundManager.Sounds.EXPAND_ORGANIC])
+    STATES[State.CONTRACT].connect(
+        'contracted', _sound_manager, 'play', [EnemySoundManager.Sounds.CONTRACT_ORGANIC])
+
 func _physics_process(delta: float) -> void:
     if _pushback_manager.is_being_pushed_back():
         move(_pushback_manager.get_pushback_velocity())
@@ -94,6 +99,9 @@ func get_physics_manager() -> LeapingFailurePhysicsManager:
 func get_aggro_manager() -> AggroManager:
     return _aggro_manager
 
+func get_sound_manager() -> EnemySoundManager:
+    return _sound_manager
+
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
@@ -119,10 +127,12 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
 func pause() -> void:
     set_physics_process(false)
     _animation_player.stop(false)
+    _sound_manager.set_all_paused(true)
 
 func resume() -> void:
     set_physics_process(true)
     _animation_player.play()
+    _sound_manager.set_all_paused(false)
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:

@@ -2,6 +2,9 @@ extends Node
 
 export(String, 'expand', 'contract') var animation := 'contract'
 
+signal expanded
+signal contracted
+
 const PAUSE_TIME: float = 0.2
 
 func _ready() -> void:
@@ -55,6 +58,12 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
         }
 
     return {'new_state': LeapingFailure.State.NO_CHANGE}
+
+func play_expand_sound() -> void:
+    emit_signal('expanded')
+
+func play_contract_sound() -> void:
+    emit_signal('contracted')
 
 func _get_direction_to_ledge(failure: LeapingFailure) -> int:
     var ledge_detectors: Node2D = failure.get_node('LedgeDetectorRaycasts')

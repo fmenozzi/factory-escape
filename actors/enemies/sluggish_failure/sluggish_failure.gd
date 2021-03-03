@@ -68,6 +68,11 @@ func _ready() -> void:
 
     _hurtbox.connect('area_entered', self, '_on_hazard_hit')
 
+    STATES[State.EXPAND].connect(
+        'expanded', _sound_manager, 'play', [EnemySoundManager.Sounds.EXPAND_ORGANIC])
+    STATES[State.CONTRACT].connect(
+        'contracted', _sound_manager, 'play', [EnemySoundManager.Sounds.CONTRACT_ORGANIC])
+
 func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
@@ -78,6 +83,9 @@ func get_physics_manager() -> GroundedPhysicsManager:
 
 func get_pushback_manager() -> PushbackManager:
     return _pushback_manager
+
+func get_sound_manager() -> EnemySoundManager:
+    return _sound_manager
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
@@ -122,10 +130,12 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
 func pause() -> void:
     set_physics_process(false)
     _animation_player.stop(false)
+    _sound_manager.set_all_paused(true)
 
 func resume() -> void:
     set_physics_process(true)
     _animation_player.play()
+    _sound_manager.set_all_paused(false)
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
