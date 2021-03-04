@@ -52,6 +52,9 @@ func get_player(sound_enum: int) -> Node:
         Sounds.CONTRACT_ORGANIC:
             return _contract_organic
 
+        Sounds.JUMP_ORGANIC:
+            return _jump_organic
+
         Sounds.LAND_SOFT_ORGANIC:
             return _land_soft_organic
 
