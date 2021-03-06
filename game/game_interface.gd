@@ -89,6 +89,8 @@ func _ready() -> void:
 
     _set_player_starting_health_and_health_packs()
 
+    MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
+
 func _set_player_starting_room() -> void:
     var starting_room: Room = null
 

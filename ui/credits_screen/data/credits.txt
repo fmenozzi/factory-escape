@@ -15,6 +15,7 @@ Garry Smithson
 Emmanuel Shiferaw
 Kenney (www.kenney.nl)
 OpenGameArt.org
+YouTube Audio Library
 
 Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine contributors.
 
