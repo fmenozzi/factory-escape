@@ -42,7 +42,4 @@ func _on_tween_step(obj, key, elapsed, val: float) -> void:
     # Convert current music bus volume from db to linear so that we can fade the
     # music at the same rate as the screen. Take advantage of the fact that the
     # val here (i.e. the black overlay alpha) is already in [0, 1].
-    var bus_index := AudioServer.get_bus_index('Music')
-    var old_volume_db := AudioServer.get_bus_volume_db(bus_index)
-    var new_volume_db := max(linear2db((1.0 - val) * _global_music_slider_value / 10.0), -80.0)
-    AudioServer.set_bus_volume_db(bus_index, new_volume_db)
+    Util.set_bus_volume_linear('Music', (1.0 - val) * _global_music_slider_value / 10.0)
