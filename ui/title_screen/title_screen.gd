@@ -53,6 +53,8 @@ func _ready() -> void:
 
     Options.load_options_and_report_errors()
 
+    MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
+
     # Start at main menu once we finish transitioning to title screen.
     if SceneChanger.is_changing_scene():
         yield(SceneChanger, 'scene_changed')
