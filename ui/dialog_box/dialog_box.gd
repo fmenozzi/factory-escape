@@ -9,6 +9,7 @@ onready var _label: RichTextLabel = $RichTextLabel
 onready var _timer: Timer = $TextScrollTimer
 onready var _end_of_page_prompt: Control = $EndOfPagePrompt
 onready var _end_of_page_prompt_animation_player: AnimationPlayer = $EndOfPagePrompt/AnimationPlayer
+onready var _dialog_start_sound: AudioStreamPlayer = $DialogStart
 
 onready var _player: Player = Util.get_player()
 
@@ -88,6 +89,8 @@ func _start_dialog() -> void:
 
     _set_dialog_box_visible(true)
     _set_player_controllable(false)
+
+    _dialog_start_sound.play()
 
     _timer.start()
 

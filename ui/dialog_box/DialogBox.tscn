@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/dialog_box/dialog_box.gd" type="Script" id=2]
 [ext_resource path="res://ui/dialog_box/textures/end-of-page-prompt.png" type="Texture" id=3]
+[ext_resource path="res://ui/dialog_box/audio/dialog-start.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "flash"
@@ -72,3 +73,6 @@ texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EndOfPagePrompt"]
 anims/flash = SubResource( 1 )
+
+[node name="DialogStart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
