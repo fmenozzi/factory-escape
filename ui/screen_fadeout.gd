@@ -24,7 +24,7 @@ func fade_from_black(duration: float, delay: float = 0.0, fade_music: bool = tru
     emit_signal('fade_from_black_finished')
 
 func _fade(old: float, new: float, duration: float, delay: float, fade_music: bool) -> void:
-    _global_music_slider_value = Options.get_config().get_value('audio', 'music')
+    _global_music_slider_value = Options.get_config().get_value('audio', 'music', 10)
 
     _set_fade_music(fade_music)
 
