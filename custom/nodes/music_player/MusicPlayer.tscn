@@ -11,4 +11,3 @@ script = ExtResource( 1 )
 
 [node name="FactoryBackground" type="AudioStreamPlayer" parent="AudioPlayers"]
 stream = ExtResource( 2 )
-volume_db = 4.0
