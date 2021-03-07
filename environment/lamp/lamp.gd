@@ -11,6 +11,7 @@ onready var _ripple_sprite: Sprite = $RippleSprite
 onready var _light_sprite: Sprite = $LightSprite
 onready var _rest_walk_to_points: Node2D = $RestPoints
 onready var _light_walk_to_points: Node2D = $LightPoints
+onready var _fire_sound: AudioStreamPlayer = $Fire
 onready var _player: Player = Util.get_player()
 
 func _ready() -> void:
@@ -74,6 +75,8 @@ func light() -> void:
     yield(_animation_player, 'animation_started')
     _fade_in_out_label.set_text('Rest')
     fade_in_label()
+
+    _fire_sound.play()
 
     emit_signal('lit_animation_started')
 
