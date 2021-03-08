@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/managers/attack_manager.gd"
 }, {
+"base": "Node2D",
+"class": "AudioStreamPlayerVisibility",
+"language": "GDScript",
+"path": "res://shared/managers/audio_stream_player_visibility.gd"
+}, {
 "base": "Node",
 "class": "ContainmentArenaSaveManager",
 "language": "GDScript",
@@ -293,6 +298,7 @@ _global_script_class_icons={
 "AbilitiesLampSaveManager": "",
 "AggroManager": "",
 "AttackManager": "",
+"AudioStreamPlayerVisibility": "",
 "ContainmentArenaSaveManager": "",
 "DashManager": "",
 "DemoAbility": "",
