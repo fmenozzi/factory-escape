@@ -8,7 +8,9 @@ script = ExtResource( 1 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="ObjectVisibility" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -8, -8, 16, 16 )
+rect = Rect2( 0, 0, 0, 0 )
 
 [node name="AttenuationVisibility" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -16, -16, 32, 32 )
+rect = Rect2( 0, 0, 0, 0 )
+
+[node name="VolumeTween" type="Tween" parent="."]
