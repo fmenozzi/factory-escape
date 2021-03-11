@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/beep-beep.wav-f4207e876438b3c830c35807c8c5c408.sample"
+
+[deps]
+
+source_file="res://game/testing/audio_stream_player_visibility/audio/beep-beep.wav"
+dest_files=[ "res://.import/beep-beep.wav-f4207e876438b3c830c35807c8c5c408.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
