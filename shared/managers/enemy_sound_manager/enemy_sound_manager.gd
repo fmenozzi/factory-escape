@@ -1,8 +1,6 @@
 extends SoundManager
 class_name EnemySoundManager
 
-const MAX_DISTANCE_TILES := 11
-
 enum Sounds {
     ENEMY_HIT_ORGANIC,
     ENEMY_HIT_MECHANICAL,
@@ -19,10 +17,6 @@ onready var _expand_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVi
 onready var _contract_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/ContractOrganic
 onready var _jump_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/JumpOrganic
 onready var _land_soft_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/LandSoftOrganic
-
-func _ready() -> void:
-    for player in _audio_stream_players_2d.get_children():
-        player.max_distance = Util.TILE_SIZE * MAX_DISTANCE_TILES
 
 func play(sound_enum: int) -> void:
     var audio_stream_player := get_player(sound_enum)
