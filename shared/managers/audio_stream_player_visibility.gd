@@ -40,6 +40,17 @@ func _ready() -> void:
     _attenuation_visibility.rect = Rect2(
         -att_radius, -att_radius, 2 * att_radius, 2 * att_radius)
 
+func get_player() -> AudioStreamPlayer:
+    return _audio_stream_player
+
+func set_state() -> void:
+    if _object_visibility.is_on_screen():
+        _set_state(State.VISIBLE)
+    elif _attenuation_visibility.is_on_screen():
+        _set_state(State.ATTENUATING)
+    else:
+        _set_state(State.INVISIBLE)
+
 func _set_state(new_state: int) -> void:
     assert(new_state in [State.VISIBLE, State.ATTENUATING, State.INVISIBLE])
 

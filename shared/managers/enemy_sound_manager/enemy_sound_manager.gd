@@ -15,10 +15,10 @@ enum Sounds {
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
 onready var _enemy_hit_mechanical: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitMechanical
 
-onready var _expand_organic: AudioStreamPlayer2D = $AudioStreamPlayer2Ds/ExpandOrganic
-onready var _contract_organic: AudioStreamPlayer2D = $AudioStreamPlayer2Ds/ContractOrganic
-onready var _jump_organic: AudioStreamPlayer2D = $AudioStreamPlayer2Ds/JumpOrganic
-onready var _land_soft_organic: AudioStreamPlayer2D = $AudioStreamPlayer2Ds/LandSoftOrganic
+onready var _expand_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/ExpandOrganic
+onready var _contract_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/ContractOrganic
+onready var _jump_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/JumpOrganic
+onready var _land_soft_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/LandSoftOrganic
 
 func _ready() -> void:
     for player in _audio_stream_players_2d.get_children():
@@ -29,7 +29,7 @@ func play(sound_enum: int) -> void:
 
     audio_stream_player.play()
 
-func get_player(sound_enum: int) -> Node:
+func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
         Sounds.ENEMY_HIT_ORGANIC,
         Sounds.ENEMY_HIT_MECHANICAL,
@@ -47,16 +47,16 @@ func get_player(sound_enum: int) -> Node:
             return _enemy_hit_mechanical
 
         Sounds.EXPAND_ORGANIC:
-            return _expand_organic
+            return _expand_organic.get_player()
 
         Sounds.CONTRACT_ORGANIC:
-            return _contract_organic
+            return _contract_organic.get_player()
 
         Sounds.JUMP_ORGANIC:
-            return _jump_organic
+            return _jump_organic.get_player()
 
         Sounds.LAND_SOFT_ORGANIC:
-            return _land_soft_organic
+            return _land_soft_organic.get_player()
 
         _:
             # Simply report the error here immediately instead of deferring to
@@ -66,3 +66,6 @@ func get_player(sound_enum: int) -> Node:
                     ERR_DOES_NOT_EXIST,
                     'Sound enum value %d does not exist' % sound_enum))
             return null
+
+func get_all_visibility_players() -> Array:
+    return _audio_stream_players_visibility.get_children()
