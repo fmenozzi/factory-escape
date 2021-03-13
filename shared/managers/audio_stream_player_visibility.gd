@@ -34,44 +34,53 @@ func _ready() -> void:
     _attenuation_visibility.rect = Rect2(
         -att_radius, -att_radius, 2 * att_radius, 2 * att_radius)
 
-    # Connect VisibilityNotifier2D signals to enable state transitions.
-    _object_visibility.connect('screen_entered', self, '_set_state', [State.VISIBLE])
-    _object_visibility.connect('screen_exited', self, '_set_state', [State.ATTENUATING])
-    _attenuation_visibility.connect('screen_entered', self, '_set_state', [State.ATTENUATING])
-    _attenuation_visibility.connect('screen_exited', self, '_set_state', [State.INVISIBLE])
+    # Connect VisibilityNotifier2D signals to enable state transitions. Tween to
+    # new volumes in these state transitions.
+    _object_visibility.connect(
+        'screen_entered', self, '_set_state', [State.VISIBLE, true])
+    _object_visibility.connect(
+        'screen_exited', self, '_set_state', [State.ATTENUATING, true])
+    _attenuation_visibility.connect(
+        'screen_entered', self, '_set_state', [State.ATTENUATING, true])
+    _attenuation_visibility.connect(
+        'screen_exited', self, '_set_state', [State.INVISIBLE, true])
 
-    set_state()
+    # Set initial volume immediately here (i.e. don't tween to new volume).
+    set_state(false)
 
 func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
 
-func set_state() -> void:
+func set_state(tween_to_new_volume: bool) -> void:
     if _object_visibility.is_on_screen():
-        _set_state(State.VISIBLE)
+        _set_state(State.VISIBLE, tween_to_new_volume)
     elif _attenuation_visibility.is_on_screen():
-        _set_state(State.ATTENUATING)
+        _set_state(State.ATTENUATING, tween_to_new_volume)
     else:
-        _set_state(State.INVISIBLE)
+        _set_state(State.INVISIBLE, tween_to_new_volume)
 
-func _set_state(new_state: int) -> void:
+func _set_state(new_state: int, tween_to_new_volume: bool) -> void:
     assert(new_state in [State.VISIBLE, State.ATTENUATING, State.INVISIBLE])
 
     match new_state:
         State.VISIBLE:
-            _tween_volume_to(max_volume_db)
+            _set_volume(max_volume_db, tween_to_new_volume)
 
         State.ATTENUATING:
             # Subtracting 10 dB is roughly halving perceived loudness.
-            _tween_volume_to(max_volume_db - 10.0)
+            _set_volume(max_volume_db - 10.0, tween_to_new_volume)
 
         State.INVISIBLE:
-            _tween_volume_to(-80.0)
+            _set_volume(-80.0, tween_to_new_volume)
 
     _state = new_state
 
-func _tween_volume_to(new_volume_db: float) -> void:
-    _tween.remove_all()
-    _tween.interpolate_property(_audio_stream_player, 'volume_db',
-        _audio_stream_player.volume_db, new_volume_db, 0.5, Tween.TRANS_LINEAR,
-        Tween.EASE_IN)
-    _tween.start()
+func _set_volume(new_volume_db: float, tween_to_new_volume: bool) -> void:
+    if tween_to_new_volume:
+        _tween.remove_all()
+        _tween.interpolate_property(_audio_stream_player, 'volume_db',
+            _audio_stream_player.volume_db, new_volume_db, 0.5,
+            Tween.TRANS_LINEAR, Tween.EASE_IN)
+        _tween.start()
+    else:
+        _audio_stream_player.volume_db = new_volume_db
