@@ -1,7 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
-    sticky_drone.get_animation_player().stop()
+    sticky_drone.get_animation_player().play('die')
 
     sticky_drone.set_hit_and_hurt_boxes_disabled(true)
     sticky_drone.visible = false

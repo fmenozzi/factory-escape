@@ -35,8 +35,6 @@ onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 
 func _ready() -> void:
-    _animation_player.play('idle')
-
     set_direction(initial_direction)
 
     _initial_global_position = global_position
@@ -70,6 +68,9 @@ func take_hit(damage: int, player: Player) -> void:
 
 func get_physics_manager() -> PhysicsManager:
     return _physics_manager
+
+func get_animation_player() -> AnimationPlayer:
+    return _animation_player
 
 func get_pushback_manager() -> PushbackManager:
     return _pushback_manager

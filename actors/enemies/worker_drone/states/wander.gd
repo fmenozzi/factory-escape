@@ -10,6 +10,8 @@ func _ready() -> void:
     _velocity = Vector2.RIGHT.rotated(_rng.randf_range(0.0, 2*PI))
 
 func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
+    worker_drone.get_animation_player().play('idle')
+
     var speed := worker_drone.get_physics_manager().get_movement_speed()
     _velocity = speed * _velocity.normalized()
 
