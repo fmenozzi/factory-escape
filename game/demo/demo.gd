@@ -222,7 +222,7 @@ func _on_end_of_demo_reached() -> void:
     player.set_process_unhandled_input(false)
 
     # Prevent player from making any more sounds.
-    player.get_sound_manager().set_all_paused(true)
+    player.get_sound_manager().set_all_muted(true)
 
     var fade_in_delay := 2.0
     SceneChanger.change_scene_to(EndOfDemoMessage, fade_in_delay)

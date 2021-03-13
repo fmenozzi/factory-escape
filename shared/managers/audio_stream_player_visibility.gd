@@ -59,6 +59,12 @@ func set_state(tween_to_new_volume: bool) -> void:
     else:
         _set_state(State.INVISIBLE, tween_to_new_volume)
 
+func set_muted(muted: bool) -> void:
+    if muted:
+        _set_volume(-80.0, false)
+    else:
+        set_state(false)
+
 func _set_state(new_state: int, tween_to_new_volume: bool) -> void:
     assert(new_state in [State.VISIBLE, State.ATTENUATING, State.INVISIBLE])
 

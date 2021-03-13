@@ -34,8 +34,12 @@ func _ready() -> void:
     for audio_stream_player in all_audio_stream_players:
         audio_stream_player.bus = 'Effects'
 
-func set_all_paused(paused: bool) -> void:
+func set_all_muted(muted: bool) -> void:
+    # Since AudioStreamPlayer doesn't have built-in mute functionality (i.e. it
+    # can't remember what the pre-mute volume was for when it's time to unmute),
+    # simply pause the stream for now.
     for player in _audio_stream_players.get_children():
-        player.stream_paused = paused
+        player.stream_paused = muted
+
     for player in _audio_stream_players_visibility.get_children():
-        player.get_player().stream_paused = paused
+        player.set_muted(muted)

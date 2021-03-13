@@ -127,12 +127,12 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
 func pause() -> void:
     set_physics_process(false)
     _animation_player.stop(false)
-    _sound_manager.set_all_paused(true)
+    _sound_manager.set_all_muted(true)
 
 func resume() -> void:
     set_physics_process(true)
     _animation_player.play()
-    _sound_manager.set_all_paused(false)
+    _sound_manager.set_all_muted(false)
 
     # Don't tween to new volume.
     for visibility_player in _sound_manager.get_all_visibility_players():
