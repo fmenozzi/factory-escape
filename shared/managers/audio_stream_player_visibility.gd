@@ -23,12 +23,6 @@ func _ready() -> void:
     # Set starting volume.
     _audio_stream_player.volume_db = max_volume_db
 
-    # Connect VisibilityNotifier2D signals to enable state transitions.
-    _object_visibility.connect('screen_entered', self, '_set_state', [State.VISIBLE])
-    _object_visibility.connect('screen_exited', self, '_set_state', [State.ATTENUATING])
-    _attenuation_visibility.connect('screen_entered', self, '_set_state', [State.ATTENUATING])
-    _attenuation_visibility.connect('screen_exited', self, '_set_state', [State.INVISIBLE])
-
     # Create visibility rects from radii.
     assert(object_visibility_radius_tiles > 0)
     assert(attenuation_visibility_radius_tiles > 0)
@@ -39,6 +33,14 @@ func _ready() -> void:
         -obj_radius, -obj_radius, 2 * obj_radius, 2 * obj_radius)
     _attenuation_visibility.rect = Rect2(
         -att_radius, -att_radius, 2 * att_radius, 2 * att_radius)
+
+    # Connect VisibilityNotifier2D signals to enable state transitions.
+    _object_visibility.connect('screen_entered', self, '_set_state', [State.VISIBLE])
+    _object_visibility.connect('screen_exited', self, '_set_state', [State.ATTENUATING])
+    _attenuation_visibility.connect('screen_entered', self, '_set_state', [State.ATTENUATING])
+    _attenuation_visibility.connect('screen_exited', self, '_set_state', [State.INVISIBLE])
+
+    set_state()
 
 func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
