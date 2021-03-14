@@ -3,9 +3,8 @@ class_name SiloArenaSaveManager
 
 const SAVE_KEY := 'silo_arena'
 
-var current_room_state := -1
-
 onready var _arena: Room = get_parent()
+onready var current_room_state: int = _arena.RoomState.PRE_FIGHT
 
 func get_save_data() -> Array:
     return [SAVE_KEY, {
