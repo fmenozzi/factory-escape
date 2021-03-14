@@ -62,7 +62,7 @@ func update(player: Player, delta: float) -> Dictionary:
 
     player.velocity.x = 0
 
-    if _attack_is_connecting:
+    if _attack_is_connecting and player.is_in_air():
         player.velocity.y = 0
 
     if _started_attack_while_airborne and player.is_on_ground() and not _already_played_landing_sound:
@@ -107,7 +107,7 @@ func update(player: Player, delta: float) -> Dictionary:
             player.velocity.y + physics_manager.get_gravity() * delta,
             physics_manager.get_terminal_velocity())
 
-    if not _attack_is_connecting:
+    if not (_attack_is_connecting and player.is_in_air()):
         player.move(player.velocity)
 
     return {'new_state': Player.State.NO_CHANGE}
