@@ -64,8 +64,6 @@ func _ready() -> void:
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
 
-    _health.connect('health_changed', self, '_on_health_changed')
-
     _hurtbox.connect('area_entered', self, '_on_hazard_hit')
 
     STATES[State.EXPAND].connect(

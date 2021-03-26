@@ -49,11 +49,10 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "die"
 
-[sub_resource type="Animation" id=3]
-resource_name = "expand"
+[sub_resource type="Animation" id=4]
 length = 0.6
 step = 0.2
 tracks/0/type = "value"
@@ -149,8 +148,8 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/contract = SubResource( 2 )
-anims/die = SubResource( 4 )
-anims/expand = SubResource( 3 )
+anims/die = SubResource( 3 )
+anims/expand = SubResource( 4 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
