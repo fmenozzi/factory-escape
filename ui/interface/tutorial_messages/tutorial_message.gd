@@ -131,6 +131,10 @@ func _on_player_entered_tutorial_message_area(
         MessageMode.NON_CONTROL
     ])
 
+    # Need to call this callback manually here, see related comment in
+    # title_screen.gd.
+    _on_control_mode_changed(Controls.get_mode())
+
     match message_mode:
         MessageMode.CONTROL:
             assert(not player_action.empty())
