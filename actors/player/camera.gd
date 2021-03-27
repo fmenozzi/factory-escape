@@ -8,9 +8,12 @@ onready var _player: Player = get_parent().get_parent()
 onready var _tween: Tween = $PositionTween
 
 var _original_local_anchor_pos: Vector2 = Vector2.ZERO
+var _is_detached := false
 
 func detach_and_move_to_global(new_global_pos: Vector2) -> void:
     self.set_as_toplevel(true)
+
+    _is_detached = true
 
     # Save the original local anchor position so we know where to go back to
     # when we reattach the camera.
@@ -23,6 +26,7 @@ func reattach(tween_on_reattach: bool = true) -> void:
 
     if not tween_on_reattach:
         _original_local_anchor_pos = Vector2.ZERO
+        _is_detached = false
         self.position = _original_local_anchor_pos
         return
 
@@ -43,13 +47,25 @@ func reattach(tween_on_reattach: bool = true) -> void:
     _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
     _tween.start()
 
+    yield(_tween, 'tween_completed')
+    _is_detached = false
+
 func pan_up() -> void:
+    if _is_detached:
+        return
+
     _pan_to_position(Vector2(0, -CAMERA_PAN_DISTANCE))
 
 func pan_down() -> void:
+    if _is_detached:
+        return
+
     _pan_to_position(Vector2(0, CAMERA_PAN_DISTANCE))
 
 func return_from_pan() -> void:
+    if _is_detached:
+        return
+
     _pan_to_position(Vector2.ZERO)
 
 func transition(old_room, new_room) -> void:
