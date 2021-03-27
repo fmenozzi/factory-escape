@@ -136,9 +136,9 @@ func _set_paused(new_pause_state: bool) -> void:
     _black_overlay.visible = new_pause_state
 
     if new_pause_state:
-        Util.set_bus_volume_linear('Music', 0.5)
+        Audio.set_bus_volume_linear('Music', 0.5)
     else:
-        Util.set_bus_volume_linear('Music', 1.0)
+        Audio.set_bus_volume_linear('Music', 1.0)
 
     # Need to call this callback manually here, see related comment in
     # title_screen.gd.

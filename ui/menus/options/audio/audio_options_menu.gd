@@ -96,7 +96,7 @@ func _set_bus_volume(bus: String, slider_value: float) -> void:
             slider = _ui_slider
 
     # Convert integer slider value [0, 10] to decibel value [-80, 0].
-    Util.set_bus_volume_linear(bus, slider_value / slider.max_value)
+    Audio.set_bus_volume_linear(bus, slider_value / slider.max_value)
 
 func _on_music_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()

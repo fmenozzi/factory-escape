@@ -382,6 +382,7 @@ Controls="*res://custom/scripts/controls.gd"
 Error="*res://custom/scripts/error.gd"
 MouseCursor="*res://ui/mouse_cursor/MouseCursor.tscn"
 MusicPlayer="*res://custom/nodes/music_player/MusicPlayer.tscn"
+Audio="*res://custom/scripts/audio.gd"
 
 [debug]
 
