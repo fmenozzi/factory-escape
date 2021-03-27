@@ -95,8 +95,14 @@ func _set_bus_volume(bus: String, slider_value: float) -> void:
         'UI':
             slider = _ui_slider
 
-    # Convert integer slider value [0, 10] to decibel value [-80, 0].
-    Audio.set_bus_volume_linear(bus, slider_value / slider.max_value)
+    # Convert integer slider value [0, 10] to decibel value [-80, 0]. If the
+    # game is paused (which reduces the music volume), make sure we take that
+    # into account.
+    Audio.set_bus_max_volume_linear(bus, slider_value / slider.max_value)
+    if bus == 'Music' and get_tree().paused:
+        Audio.set_bus_volume_linear(
+            'Music',
+            Pause.get_pause_volume_factor() * Audio.get_bus_max_volume_linear('Music'))
 
 func _on_music_value_changed(new_value: float) -> void:
     emit_menu_navigation_sound()

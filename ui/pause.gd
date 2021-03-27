@@ -47,6 +47,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
     _get_current_menu().handle_input(event)
 
+static func get_pause_volume_factor() -> float:
+    return 0.5
+
 func _change_menu(old_menu: int, new_menu: int, metadata: Dictionary) -> void:
     # All inputs while paused should not be propagated out of the pause menu to
     # things like the player controller, dialog boxes, etc.
@@ -135,10 +138,13 @@ func _set_paused(new_pause_state: bool) -> void:
 
     _black_overlay.visible = new_pause_state
 
+    # Reduce music volume when paused.
     if new_pause_state:
-        Audio.set_bus_volume_linear('Music', 0.5)
+        Audio.set_bus_volume_linear(
+            'Music',
+            get_pause_volume_factor() * Audio.get_bus_max_volume_linear('Music'))
     else:
-        Audio.set_bus_volume_linear('Music', 1.0)
+        Audio.reset_bus_to_max_volume_linear('Music')
 
     # Need to call this callback manually here, see related comment in
     # title_screen.gd.
