@@ -47,6 +47,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
         Player.State.DOUBLE_JUMP,
         Player.State.DASH,
         Player.State.STAGGER,
+        Player.State.HEAL,
         Player.State.ATTACK,
         Player.State.ATTACK_UP,
     ]:
