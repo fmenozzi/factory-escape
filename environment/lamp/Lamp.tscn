@@ -195,6 +195,7 @@ max_volume_db = 10.0
 
 [node name="AudioStreamPlayer" parent="FireSound" index="0"]
 stream = ExtResource( 12 )
+bus = "Effects"
 
 [editable path="RestPoints"]
 
