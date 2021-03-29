@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -55,9 +55,6 @@ tracks/1/keys = {
 "method": "play_contract_sound"
 } ]
 }
-
-[sub_resource type="Animation" id=8]
-resource_name = "die"
 
 [sub_resource type="Animation" id=3]
 resource_name = "expand"
@@ -160,6 +157,18 @@ pushback_duration = 0.15
 [node name="EnemySoundManager" parent="." instance=ExtResource( 22 )]
 position = Vector2( 0, -8 )
 
+[node name="ExpandOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="0"]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="ContractOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="1"]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="JumpOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="2"]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="LandSoftOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="3"]
+attenuation_visibility_radius_tiles = 2.0
+
 [node name="States" type="Node" parent="."]
 
 [node name="Expand" type="Node" parent="States"]
@@ -232,7 +241,6 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/contract = SubResource( 2 )
-anims/die = SubResource( 8 )
 anims/expand = SubResource( 3 )
 anims/fall = SubResource( 4 )
 anims/jump = SubResource( 5 )

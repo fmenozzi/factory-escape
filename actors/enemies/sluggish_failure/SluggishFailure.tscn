@@ -109,6 +109,15 @@ pushback_duration = 0.15
 [node name="EnemySoundManager" parent="." instance=ExtResource( 14 )]
 position = Vector2( 0, -6 )
 
+[node name="ExpandOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="0"]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="ContractOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="1"]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="LandSoftOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="3"]
+attenuation_visibility_radius_tiles = 2.0
+
 [node name="States" type="Node" parent="."]
 
 [node name="Stagger" type="Node" parent="States"]
