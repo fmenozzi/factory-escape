@@ -15,6 +15,8 @@ export(float, 0.0, 32.0) var attenuation_visibility_radius_tiles := 1.0
 onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var _object_visibility: VisibilityNotifier2D = $ObjectVisibility
 onready var _attenuation_visibility: VisibilityNotifier2D = $AttenuationVisibility
+onready var _object_radius: float = object_visibility_radius_tiles * Util.TILE_SIZE
+onready var _attenuation_radius: float = attenuation_visibility_radius_tiles * Util.TILE_SIZE
 onready var _tween: Tween = $VolumeTween
 
 var _state: int
@@ -27,66 +29,81 @@ func _ready() -> void:
     assert(object_visibility_radius_tiles > 0)
     assert(attenuation_visibility_radius_tiles > 0)
     assert(object_visibility_radius_tiles < attenuation_visibility_radius_tiles)
-    var obj_radius := object_visibility_radius_tiles * Util.TILE_SIZE
-    var att_radius := attenuation_visibility_radius_tiles * Util.TILE_SIZE
     _object_visibility.rect = Rect2(
-        -obj_radius, -obj_radius, 2 * obj_radius, 2 * obj_radius)
+        -_object_radius, -_object_radius, 2 * _object_radius, 2 * _object_radius)
     _attenuation_visibility.rect = Rect2(
-        -att_radius, -att_radius, 2 * att_radius, 2 * att_radius)
+        -_attenuation_radius, -_attenuation_radius,
+        2 * _attenuation_radius, 2 * _attenuation_radius)
 
     # Connect VisibilityNotifier2D signals to enable state transitions. Tween to
     # new volumes in these state transitions.
     _object_visibility.connect(
-        'screen_entered', self, '_set_state', [State.VISIBLE, true])
+        'screen_entered', self, '_set_state', [State.VISIBLE])
     _object_visibility.connect(
-        'screen_exited', self, '_set_state', [State.ATTENUATING, true])
+        'screen_exited', self, '_set_state', [State.ATTENUATING])
     _attenuation_visibility.connect(
-        'screen_entered', self, '_set_state', [State.ATTENUATING, true])
+        'screen_entered', self, '_set_state', [State.ATTENUATING])
     _attenuation_visibility.connect(
-        'screen_exited', self, '_set_state', [State.INVISIBLE, true])
+        'screen_exited', self, '_set_state', [State.INVISIBLE])
 
-    # Set initial volume immediately here (i.e. don't tween to new volume).
-    set_state(false)
+    # Set initial volume immediately here.
+    set_state()
+
+func _process(delta: float) -> void:
+    var distance_to_screen_edge := _get_distance_to_closest_screen_edge()
+
+    var w := (_attenuation_radius - distance_to_screen_edge) / (_attenuation_radius - _object_radius)
+
+    _set_volume_db(Audio.linear_to_db(clamp(w, 0.0, 1.0)))
 
 func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
 
-func set_state(tween_to_new_volume: bool) -> void:
+func set_state() -> void:
     if _object_visibility.is_on_screen():
-        _set_state(State.VISIBLE, tween_to_new_volume)
+        _set_state(State.VISIBLE)
     elif _attenuation_visibility.is_on_screen():
-        _set_state(State.ATTENUATING, tween_to_new_volume)
+        _set_state(State.ATTENUATING)
     else:
-        _set_state(State.INVISIBLE, tween_to_new_volume)
+        _set_state(State.INVISIBLE)
 
 func set_muted(muted: bool) -> void:
     if muted:
-        _set_volume(-80.0, false)
+        set_process(false)
+        _set_volume_db(-80.0)
     else:
-        set_state(false)
+        set_state()
 
-func _set_state(new_state: int, tween_to_new_volume: bool) -> void:
+func _set_state(new_state: int) -> void:
     assert(new_state in [State.VISIBLE, State.ATTENUATING, State.INVISIBLE])
 
     match new_state:
         State.VISIBLE:
-            _set_volume(max_volume_db, tween_to_new_volume)
+            set_process(false)
+            _set_volume_db(max_volume_db)
 
         State.ATTENUATING:
-            # Subtracting 10 dB is roughly halving perceived loudness.
-            _set_volume(max_volume_db - 10.0, tween_to_new_volume)
+            set_process(true)
 
         State.INVISIBLE:
-            _set_volume(-80.0, tween_to_new_volume)
+            set_process(false)
+            _set_volume_db(-80.0)
 
     _state = new_state
 
-func _set_volume(new_volume_db: float, tween_to_new_volume: bool) -> void:
-    if tween_to_new_volume:
-        _tween.remove_all()
-        _tween.interpolate_property(_audio_stream_player, 'volume_db',
-            _audio_stream_player.volume_db, new_volume_db, 0.5,
-            Tween.TRANS_LINEAR, Tween.EASE_IN)
-        _tween.start()
-    else:
-        _audio_stream_player.volume_db = new_volume_db
+func _set_volume_db(new_volume_db: float) -> void:
+    _audio_stream_player.volume_db = new_volume_db
+
+func _get_distance_to_closest_screen_edge() -> float:
+    var position_screen_space := get_global_transform_with_canvas().get_origin()
+
+    var screen_dims := Util.get_ingame_resolution()
+    var width := screen_dims.x
+    var height := screen_dims.y
+
+    var distance_left := abs(position_screen_space.x)
+    var distance_right := abs(width - distance_left)
+    var distance_top := abs(position_screen_space.y)
+    var distance_bottom := abs(height - distance_top)
+
+    return min(min(min(distance_left, distance_right), distance_top), distance_bottom)

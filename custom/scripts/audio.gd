@@ -7,6 +7,12 @@ func _ready() -> void:
     _bus_to_max_volume_linear['Effects'] = 1.0
     _bus_to_max_volume_linear['UI'] = 1.0
 
+func linear_to_db(volume_linear: float) -> float:
+    assert(0.0 <= volume_linear and volume_linear <= 1.0)
+
+    # Convert linear value [0, 1] to decibel value [-80, 0].
+    return max(linear2db(volume_linear), -80)
+
 func set_bus_volume_linear(bus: String, volume_linear: float) -> void:
     assert(0.0 <= volume_linear and volume_linear <= 1.0)
     assert(bus in ['Music', 'Effects', 'UI'])
@@ -15,7 +21,7 @@ func set_bus_volume_linear(bus: String, volume_linear: float) -> void:
     var volume_linear_clamped := min(_bus_to_max_volume_linear[bus], volume_linear)
 
     # Convert linear value [0, 1] to decibel value [-80, 0].
-    var volume_db := max(linear2db(volume_linear_clamped), -80)
+    var volume_db := linear_to_db(volume_linear_clamped)
     AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), volume_db)
 
 func set_bus_max_volume_linear(bus: String, max_volume_linear: float) -> void:

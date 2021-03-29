@@ -134,9 +134,8 @@ func resume() -> void:
     _animation_player.play()
     _sound_manager.set_all_muted(false)
 
-    # Don't tween to new volume.
     for visibility_player in _sound_manager.get_all_visibility_players():
-        visibility_player.set_state(false)
+        visibility_player.set_state()
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:

@@ -5,9 +5,12 @@ const SPEED := Util.TILE_SIZE * 4
 onready var obj_vis: VisibilityNotifier2D = $Sprite/AudioStreamPlayerVisibility/ObjectVisibility
 onready var att_vis: VisibilityNotifier2D = $Sprite/AudioStreamPlayerVisibility/AttenuationVisibility
 
-func _ready() -> void:
-    print("obj rect (pos, size): %s, %s" % [obj_vis.rect.position, obj_vis.rect.size])
-    print("att rect (pos, size): %s, %s" % [att_vis.rect.position, att_vis.rect.size])
+onready var obj_rad: float = obj_vis.rect.size.x / 2.0
+onready var att_rad: float = att_vis.rect.size.x / 2.0
+
+func _draw() -> void:
+    draw_rect(Rect2($Sprite.position - Vector2(obj_rad, obj_rad), obj_vis.rect.size), Color.red, false)
+    draw_rect(Rect2($Sprite.position - Vector2(att_rad, att_rad), att_vis.rect.size), Color.blue, false)
 
 func _process(delta: float) -> void:
     var direction := Vector2(
@@ -15,3 +18,5 @@ func _process(delta: float) -> void:
         int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W)))
 
     $Sprite.position += direction.normalized() * SPEED * delta
+
+    update()
