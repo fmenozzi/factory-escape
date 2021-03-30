@@ -11,6 +11,8 @@ onready var _confirmation_widget: Control = $ConfirmationWidget
 onready var _yes: Button = $ConfirmationWidget/HBoxContainer/Yes
 onready var _no: Button = $ConfirmationWidget/HBoxContainer/No
 
+onready var _ui_sound_player: UiSoundPlayer = $UiSoundPlayer
+
 func _ready() -> void:
     hide_dialog()
 
@@ -29,6 +31,8 @@ func show_dialog(msg: String) -> void:
     _message.show()
     _confirmation_widget.show()
 
+    _set_enable_ui_navigation_sounds(true)
+
     set_process_unhandled_input(true)
 
 func hide_dialog() -> void:
@@ -38,7 +42,14 @@ func hide_dialog() -> void:
     _message.hide()
     _confirmation_widget.hide()
 
+    _set_enable_ui_navigation_sounds(false)
+
     set_process_unhandled_input(false)
+
+func _set_enable_ui_navigation_sounds(enabled: bool) -> void:
+    var method := 'connect' if enabled else 'disconnect'
+    for button in [_yes, _no]:
+        button.call(method, 'focus_entered', _ui_sound_player, 'play_ui_navigation_sound')
 
 func _on_yes_pressed() -> void:
     hide_dialog()
