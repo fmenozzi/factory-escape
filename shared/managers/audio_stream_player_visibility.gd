@@ -12,6 +12,8 @@ export(float, -80.0, 24.0) var max_volume_db := 0.0
 export(float, 0.0, 32.0) var object_visibility_radius_tiles := 0.5
 export(float, 0.0, 32.0) var attenuation_visibility_radius_tiles := 1.0
 
+export(Curve) var attenuation_curve: Curve
+
 onready var _audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 onready var _object_visibility: VisibilityNotifier2D = $ObjectVisibility
 onready var _attenuation_visibility: VisibilityNotifier2D = $AttenuationVisibility
@@ -22,6 +24,8 @@ onready var _tween: Tween = $VolumeTween
 var _state: int
 
 func _ready() -> void:
+    assert(attenuation_curve != null)
+
     # Set starting volume.
     _audio_stream_player.volume_db = max_volume_db
 
@@ -54,7 +58,9 @@ func _process(delta: float) -> void:
 
     var w := (_attenuation_radius - distance_to_screen_edge) / (_attenuation_radius - _object_radius)
 
-    _set_volume_db(Audio.linear_to_db(clamp(w, 0.0, 1.0)))
+    var volume_linear := attenuation_curve.interpolate(w)
+
+    _set_volume_db(Audio.linear_to_db(clamp(volume_linear, 0.0, 1.0)))
 
 func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
