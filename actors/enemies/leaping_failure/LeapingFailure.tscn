@@ -56,11 +56,10 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=3]
 resource_name = "die"
 
-[sub_resource type="Animation" id=3]
-resource_name = "expand"
+[sub_resource type="Animation" id=4]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -89,7 +88,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -104,7 +103,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -120,10 +119,10 @@ tracks/0/keys = {
 "values": [ 2, 1, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4, 8 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 4, 8 )
 
 [node name="LeapingFailure" type="KinematicBody2D" groups=[
@@ -161,10 +160,10 @@ pushback_duration = 0.15
 position = Vector2( 0, -8 )
 
 [node name="ExpandOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="0"]
-attenuation_visibility_radius_tiles = 2.0
+attenuation_visibility_radius_tiles = 3.0
 
 [node name="ContractOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="1"]
-attenuation_visibility_radius_tiles = 2.0
+attenuation_visibility_radius_tiles = 3.0
 
 [node name="JumpOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="2"]
 attenuation_visibility_radius_tiles = 2.0
@@ -244,10 +243,10 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/contract = SubResource( 2 )
-anims/die = SubResource( 8 )
-anims/expand = SubResource( 3 )
-anims/fall = SubResource( 4 )
-anims/jump = SubResource( 5 )
+anims/die = SubResource( 3 )
+anims/expand = SubResource( 4 )
+anims/fall = SubResource( 5 )
+anims/jump = SubResource( 6 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
@@ -255,7 +254,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -8 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -263,7 +262,7 @@ collision_mask = 272
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -8 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="LedgeDetectorRaycasts" type="Node2D" parent="."]
 
