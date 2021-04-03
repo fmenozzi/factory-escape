@@ -335,6 +335,11 @@ func _on_player_pressed_switch(switch: Switch, new_state: int) -> void:
 
     switch.set_sprite_to_pressed()
 
+    # Only after all the animations and everything are finished do we emit the
+    # 'switch_pressed' signal (which is what things that are attached to the
+    # switch will be listening for).
+    switch.emit_signal('switch_pressed')
+
     _player.set_process_unhandled_input(true)
     switch.set_process_unhandled_input(true)
 

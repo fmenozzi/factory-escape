@@ -2,6 +2,7 @@ extends Node2D
 class_name Switch
 
 signal state_changed(switch, new_state)
+signal switch_pressed
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
