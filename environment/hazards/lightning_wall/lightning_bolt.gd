@@ -1,6 +1,7 @@
 extends Node2D
 class_name LightningBolt
 
+export(Color) var color := Color('#ff4f78')
 export(float) var length_tiles := 4.0
 export(float) var width := 1.0
 export(int) var num_segments := 8
@@ -16,6 +17,7 @@ func _ready() -> void:
     _starting_sign = sign(rand_range(-1.0, 1.0))
 
     _line.width = width
+    _line.default_color = color
 
     _timer.connect('timeout', self, '_on_timeout')
     _timer.start(0.05)
