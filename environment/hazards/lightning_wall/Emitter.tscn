@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://environment/hazards/lightning_wall/textures/lightning-wall-emitter.png" type="Texture" id=2]
+[ext_resource path="res://environment/hazards/lightning_wall/LightningBolt.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 5 )
+
+[node name="Emitter" type="Node2D"]
+
+[node name="Bolts" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( 8, 0 )
+
+[node name="Bolt1" parent="Bolts" instance=ExtResource( 3 )]
+
+[node name="Bolt2" parent="Bolts" instance=ExtResource( 3 )]
+num_segments = 10
+
+[node name="Bolt3" parent="Bolts" instance=ExtResource( 3 )]
+color = Color( 0.890196, 0.890196, 0.803922, 1 )
+num_segments = 5
+max_y_perturb = 2.0
+
+[node name="Bolt4" parent="Bolts" instance=ExtResource( 3 )]
+color = Color( 0.890196, 0.890196, 0.803922, 1 )
+num_segments = 6
+max_y_perturb = 3.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 8, 0 )
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 4, 0 )
+shape = SubResource( 1 )

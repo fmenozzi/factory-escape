@@ -1,88 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://environment/hazards/lightning_wall/lightning_wall.gd" type="Script" id=1]
-[ext_resource path="res://environment/hazards/lightning_wall/LightningBolt.tscn" type="PackedScene" id=2]
-[ext_resource path="res://environment/hazards/lightning_wall/textures/lightning-wall-emitter.png" type="Texture" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 5 )
+[ext_resource path="res://environment/hazards/lightning_wall/Emitter.tscn" type="PackedScene" id=2]
 
 [node name="LightningWall" type="Node2D"]
 script = ExtResource( 1 )
 
-[node name="BaseEmitter" type="Node2D" parent="."]
+[node name="BaseEmitter" parent="." instance=ExtResource( 2 )]
 
-[node name="Bolts" type="Node2D" parent="BaseEmitter"]
-show_behind_parent = true
-position = Vector2( 8, 0 )
-
-[node name="Bolt1" parent="BaseEmitter/Bolts" instance=ExtResource( 2 )]
-
-[node name="Bolt2" parent="BaseEmitter/Bolts" instance=ExtResource( 2 )]
-num_segments = 10
-
-[node name="Bolt3" parent="BaseEmitter/Bolts" instance=ExtResource( 2 )]
-color = Color( 0.890196, 0.890196, 0.803922, 1 )
-num_segments = 5
-max_y_perturb = 2.0
-
-[node name="Bolt4" parent="BaseEmitter/Bolts" instance=ExtResource( 2 )]
-color = Color( 0.890196, 0.890196, 0.803922, 1 )
-num_segments = 6
-max_y_perturb = 3.0
-
-[node name="Sprite" type="Sprite" parent="BaseEmitter"]
-position = Vector2( 8, 0 )
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 16, 16 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="BaseEmitter"]
-collision_layer = 4
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseEmitter/StaticBody2D"]
-position = Vector2( 4, 0 )
-shape = SubResource( 1 )
-
-[node name="MovableEmitter" type="Node2D" parent="."]
+[node name="MovableEmitter" parent="." instance=ExtResource( 2 )]
 position = Vector2( 64, 0 )
 rotation = 3.14159
-
-[node name="Bolts" type="Node2D" parent="MovableEmitter"]
-show_behind_parent = true
-position = Vector2( 8, -6.99382e-07 )
-
-[node name="Bolt1" parent="MovableEmitter/Bolts" instance=ExtResource( 2 )]
-
-[node name="Bolt2" parent="MovableEmitter/Bolts" instance=ExtResource( 2 )]
-num_segments = 12
-
-[node name="Bolt3" parent="MovableEmitter/Bolts" instance=ExtResource( 2 )]
-color = Color( 0.890196, 0.890196, 0.803922, 1 )
-num_segments = 4
-max_y_perturb = 2.0
-
-[node name="Bolt4" parent="MovableEmitter/Bolts" instance=ExtResource( 2 )]
-color = Color( 0.890196, 0.890196, 0.803922, 1 )
-max_y_perturb = 3.0
-
-[node name="Sprite" type="Sprite" parent="MovableEmitter"]
-position = Vector2( 8, -6.99382e-07 )
-texture = ExtResource( 3 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="MovableEmitter"]
-collision_layer = 4
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovableEmitter/StaticBody2D"]
-position = Vector2( 4, 0 )
-shape = SubResource( 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+
+[editable path="BaseEmitter"]
+
+[editable path="MovableEmitter"]
