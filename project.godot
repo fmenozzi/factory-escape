@@ -270,6 +270,11 @@ _global_script_classes=[ {
 "path": "res://custom/nodes/stopwatch.gd"
 }, {
 "base": "Node2D",
+"class": "Switch",
+"language": "GDScript",
+"path": "res://environment/switch/switch.gd"
+}, {
+"base": "Node2D",
 "class": "Turret",
 "language": "GDScript",
 "path": "res://actors/enemies/turret/turret.gd"
@@ -357,6 +362,7 @@ _global_script_class_icons={
 "SoundManager": "",
 "StickyDrone": "",
 "Stopwatch": "",
+"Switch": "",
 "Turret": "",
 "TutorialMessage": "",
 "TutorialMessageTriggerSaveManager": "",
