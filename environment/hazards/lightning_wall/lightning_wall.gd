@@ -17,3 +17,9 @@ func _ready() -> void:
         bolt.length = bolt_length
     for bolt in _movable_emitter.get_children():
         bolt.length = bolt_length
+
+func pause() -> void:
+    pass
+
+func resume() -> void:
+    pass
