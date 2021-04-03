@@ -6,7 +6,9 @@ export(float) var width := 1.0
 export(int) var num_segments := 8
 
 onready var _line: Line2D = $Line2D
+onready var _timer: Timer = $Timer
 
+var _points := []
 var _starting_sign: float
 
 func _ready() -> void:
@@ -15,14 +17,16 @@ func _ready() -> void:
 
     _line.width = width
 
-    _update_points()
+    _timer.connect('timeout', self, '_on_timeout')
+    _timer.start(0.05)
 
 func _update_points() -> void:
-    var points := [Vector2.ZERO]
     var length := length_tiles * Util.TILE_SIZE
     var segment_length := length / float(num_segments)
 
     var sgn := _starting_sign
+
+    _points= [Vector2.ZERO]
 
     for i in range(1, num_segments):
         # Initial segment, distributed uniformly on x-axis.
@@ -36,8 +40,16 @@ func _update_points() -> void:
         var y_perturb := 4.0 * sgn
         sgn *= -1
 
-        points.append(point + Vector2(x_perturb, y_perturb))
+        _points.append(point + Vector2(x_perturb, y_perturb))
 
-    points.append(Vector2(length, 0.0))
+    _points.append(Vector2(length, 0.0))
 
-    _line.points = points
+func _on_timeout() -> void:
+    if not _points.empty():
+        _points.pop_front()
+    else:
+        _update_points()
+
+    _line.points = _points
+
+    _timer.start(0.05 + rand_range(-0.01, 0.01))
