@@ -5,8 +5,10 @@ export(float) var hitbox_width := 4.0
 
 onready var _base_emitter: Node2D = $BaseEmitter
 onready var _base_emitter_bolts: Node2D = $BaseEmitter/Bolts
+onready var _base_emitter_sparks: Particles2D = $BaseEmitter/Particles2D
 onready var _movable_emitter: Node2D = $MovableEmitter
 onready var _movable_emitter_bolts: Node2D = $MovableEmitter/Bolts
+onready var _movable_emitter_sparks: Particles2D = $MovableEmitter/Particles2D
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 
 func _ready() -> void:
@@ -30,7 +32,19 @@ func _ready() -> void:
         bolt.length = bolt_length- (2 * _movable_emitter_bolts.position.length())
 
 func pause() -> void:
-    pass
+    _base_emitter_sparks.emitting = false
+    _movable_emitter_sparks.emitting = false
+
+    for bolt in _base_emitter_bolts.get_children():
+        bolt.pause()
+    for bolt in _movable_emitter_bolts.get_children():
+        bolt.pause()
 
 func resume() -> void:
-    pass
+    _base_emitter_sparks.emitting = true
+    _movable_emitter_sparks.emitting = true
+
+    for bolt in _base_emitter_bolts.get_children():
+        bolt.resume()
+    for bolt in _movable_emitter_bolts.get_children():
+        bolt.resume()

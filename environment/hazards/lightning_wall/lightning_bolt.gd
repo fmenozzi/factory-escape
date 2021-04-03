@@ -21,6 +21,11 @@ func _ready() -> void:
     _line.default_color = color
 
     _timer.connect('timeout', self, '_on_timeout')
+
+func pause() -> void:
+    _timer.stop()
+
+func resume() -> void:
     _timer.start(rand_range(0.01, 0.05))
 
 func _update_points() -> void:
