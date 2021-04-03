@@ -2,7 +2,7 @@ extends Node2D
 class_name LightningBolt
 
 export(Color) var color := Color('#ff4f78')
-export(float) var length_tiles := 4.0
+export(float) var length := 64.0
 export(float) var width := 1.0
 export(int) var num_segments := 8
 export(float) var max_y_perturb := 4.0
@@ -24,7 +24,6 @@ func _ready() -> void:
     _timer.start(rand_range(0.01, 0.05))
 
 func _update_points() -> void:
-    var length := length_tiles * Util.TILE_SIZE
     var segment_length := length / float(num_segments)
 
     var sgn := _starting_sign
