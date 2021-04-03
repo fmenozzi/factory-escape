@@ -40,3 +40,9 @@ max_y_perturb = 2.0
 [node name="Bolt4" parent="MovableEmitter" instance=ExtResource( 2 )]
 color = Color( 0.890196, 0.890196, 0.803922, 1 )
 max_y_perturb = 3.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
