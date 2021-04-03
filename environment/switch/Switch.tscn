@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://environment/switch/textures/switch.png" type="Texture" id=1]
 [ext_resource path="res://environment/switch/switch.gd" type="Script" id=2]
 [ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/WalkToPoints.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "pressed"
@@ -37,13 +38,16 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 24, 8 )
 
-[node name="Switch" type="Node2D"]
+[node name="Switch" type="Node2D" groups=[
+"switches",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 hframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/pressed = SubResource( 1 )
@@ -58,3 +62,13 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LabelArea"]
 position = Vector2( 0, -8 )
 shape = SubResource( 3 )
+
+[node name="WalkToPoints" parent="." instance=ExtResource( 4 )]
+
+[node name="Left" parent="WalkToPoints" index="0"]
+position = Vector2( -12, 0 )
+
+[node name="Right" parent="WalkToPoints" index="1"]
+position = Vector2( 12, 0 )
+
+[editable path="WalkToPoints"]

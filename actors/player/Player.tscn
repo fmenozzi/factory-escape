@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -49,6 +49,22 @@
 [ext_resource path="res://actors/player/states/sleep.gd" type="Script" id=47]
 [ext_resource path="res://actors/player/states/fall_no_input.gd" type="Script" id=48]
 [ext_resource path="res://actors/player/states/mark_intro_fall_as_completed.gd" type="Script" id=49]
+
+[sub_resource type="Animation" id=33]
+resource_name = "activate_switch"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 86, 87 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack_1"
@@ -728,6 +744,7 @@ script = ExtResource( 24 )
 [node name="PlayerSoundManager" parent="." instance=ExtResource( 46 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/activate_switch = SubResource( 33 )
 anims/attack_1 = SubResource( 1 )
 anims/attack_2 = SubResource( 2 )
 anims/attack_3 = SubResource( 3 )
@@ -761,7 +778,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 vframes = 11
 hframes = 8
-frame = 56
+frame = 86
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -965,6 +982,19 @@ script = ExtResource( 37 )
 [node name="PlayAnimation" type="Node" parent="States/TakeHealthPack"]
 script = ExtResource( 45 )
 animation_name = "take_health_pack"
+
+[node name="ActivateSwitch" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="WalkToPoint" type="Node" parent="States/ActivateSwitch"]
+script = ExtResource( 29 )
+
+[node name="FaceObject" type="Node" parent="States/ActivateSwitch"]
+script = ExtResource( 37 )
+
+[node name="PlayAnimation" type="Node" parent="States/ActivateSwitch"]
+script = ExtResource( 45 )
+animation_name = "activate_switch"
 
 [node name="HardLanding" type="Node" parent="States"]
 script = ExtResource( 30 )

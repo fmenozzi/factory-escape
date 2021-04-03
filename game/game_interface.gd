@@ -80,6 +80,9 @@ func _ready() -> void:
     for health_pack in get_tree().get_nodes_in_group('health_packs'):
         health_pack.connect('health_pack_taken', self, '_on_health_pack_taken')
 
+    for switch in get_tree().get_nodes_in_group('switches'):
+        switch.connect('state_changed', self, '_on_player_pressed_switch')
+
     Options.connect('options_saved', self, '_on_options_saved')
 
     _pause.connect('quit_to_main_menu_requested', self, '_on_quit_to_main_menu')
@@ -309,6 +312,31 @@ func _on_health_pack_taken(health_pack: Node2D) -> void:
     if old_health_packs == new_health_packs:
         _player.get_health().heal_to_full()
     _health_pack_bar.set_health_packs(new_health_packs)
+
+func _on_player_pressed_switch(switch: Switch, new_state: int) -> void:
+    assert(new_state in [Switch.State.PRESSED, Switch.State.UNPRESSED])
+
+    if new_state == Switch.State.UNPRESSED:
+        return
+
+    switch.set_process_unhandled_input(false)
+    _player.set_process_unhandled_input(false)
+
+    # Fade out label text so that it can be changed and faded back in.
+    switch.fade_out_label()
+
+    # Start the ACTIVATE_SWITCH state sequence.
+    _player.change_state({
+        'new_state': Player.State.ACTIVATE_SWITCH,
+        'stopping_point': switch.get_closest_walk_to_point(),
+        'object_to_face': switch,
+    })
+    yield(_player.current_state, 'sequence_finished')
+
+    switch.set_sprite_to_pressed()
+
+    _player.set_process_unhandled_input(true)
+    switch.set_process_unhandled_input(true)
 
 func _on_health_pack_consumed() -> void:
     _health_pack_bar.set_health_packs(

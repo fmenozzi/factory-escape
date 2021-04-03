@@ -1,11 +1,12 @@
 extends Node2D
 class_name Switch
 
-signal state_changed(new_state)
+signal state_changed(switch, new_state)
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _label_area: Area2D = $LabelArea
+onready var _walk_to_points: Node2D = $WalkToPoints
 onready var _player: Player = Util.get_player()
 
 enum State {
@@ -38,10 +39,6 @@ func change_state(new_state: int) -> void:
 
     match new_state:
         State.PRESSED:
-            _animation_player.play('pressed')
-
-            _fade_in_out_label.fade_out()
-
             # Once pressed, switches remain pressed (unless reset externally).
             _label_area.disconnect('body_entered', self, '_on_player_entered')
             _label_area.disconnect('body_exited', self, '_on_player_exited')
@@ -51,7 +48,16 @@ func change_state(new_state: int) -> void:
 
     _state = new_state
 
-    emit_signal('state_changed', new_state)
+    emit_signal('state_changed', self, new_state)
+
+func get_closest_walk_to_point() -> Position2D:
+    return _walk_to_points.get_closest_point()
+
+func fade_out_label() -> void:
+    _fade_in_out_label.fade_out()
+
+func set_sprite_to_pressed() -> void:
+    _animation_player.play('pressed')
 
 func _on_player_entered(player: Player) -> void:
     if not player:
