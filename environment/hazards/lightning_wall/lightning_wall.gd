@@ -5,10 +5,10 @@ export(float) var hitbox_width := 4.0
 
 onready var _base_emitter: Node2D = $BaseEmitter
 onready var _base_emitter_bolts: Node2D = $BaseEmitter/Bolts
-onready var _base_emitter_sparks: Particles2D = $BaseEmitter/Particles2D
+onready var _base_emitter_sparks: Particles2D = $BaseEmitter/Sparks
 onready var _movable_emitter: Node2D = $MovableEmitter
 onready var _movable_emitter_bolts: Node2D = $MovableEmitter/Bolts
-onready var _movable_emitter_sparks: Particles2D = $MovableEmitter/Particles2D
+onready var _movable_emitter_sparks: Particles2D = $MovableEmitter/Sparks
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 
 func _ready() -> void:
