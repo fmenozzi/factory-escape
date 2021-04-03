@@ -139,6 +139,7 @@ onready var _attack_manager: AttackManager = $Attackmanager
 
 var _nearby_readable_object = null
 var _nearby_lamp = null
+var _nearby_switch = null
 
 var _current_hazard_checkpoint: Area2D = null
 
@@ -323,6 +324,11 @@ func set_nearby_lamp(new_lamp: Area2D) -> void:
     _nearby_lamp = new_lamp
 func get_nearby_lamp() -> Area2D:
     return _nearby_lamp
+
+func set_nearby_switch(new_switch: Node2D) -> void:
+    _nearby_switch = new_switch
+func get_nearby_switch() -> Node2D:
+    return _nearby_switch
 
 func set_hazard_checkpoint(hazard_checkpoint: Area2D) -> void:
     _current_hazard_checkpoint = hazard_checkpoint
