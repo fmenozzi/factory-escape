@@ -139,6 +139,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/leaping_failure/leaping_failure_physics_manager.gd"
 }, {
+"base": "Node2D",
+"class": "LightningBolt",
+"language": "GDScript",
+"path": "res://environment/hazards/lightning_wall/lightning_bolt.gd"
+}, {
+"base": "Node2D",
+"class": "LightningWall",
+"language": "GDScript",
+"path": "res://environment/hazards/lightning_wall/lightning_wall.gd"
+}, {
 "base": "Node",
 "class": "MaintenanceArenaSaveManager",
 "language": "GDScript",
@@ -321,6 +331,8 @@ _global_script_class_icons={
 "Laser": "",
 "LeapingFailure": "",
 "LeapingFailurePhysicsManager": "",
+"LightningBolt": "",
+"LightningWall": "",
 "MaintenanceArenaSaveManager": "",
 "Menu": "",
 "Pause": "",
