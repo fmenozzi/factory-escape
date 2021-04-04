@@ -81,7 +81,7 @@ func _ready() -> void:
         health_pack.connect('health_pack_taken', self, '_on_health_pack_taken')
 
     for switch in get_tree().get_nodes_in_group('switches'):
-        switch.connect('state_changed', self, '_on_player_pressed_switch')
+        switch.connect('switch_press_started', self, '_on_player_pressed_switch')
 
     Options.connect('options_saved', self, '_on_options_saved')
 
@@ -313,16 +313,11 @@ func _on_health_pack_taken(health_pack: Node2D) -> void:
         _player.get_health().heal_to_full()
     _health_pack_bar.set_health_packs(new_health_packs)
 
-func _on_player_pressed_switch(switch: Switch, new_state: int) -> void:
-    assert(new_state in [Switch.State.PRESSED, Switch.State.UNPRESSED])
-
-    if new_state == Switch.State.UNPRESSED:
-        return
-
+func _on_player_pressed_switch(switch: Switch) -> void:
     switch.set_process_unhandled_input(false)
     _player.set_process_unhandled_input(false)
 
-    # Fade out label text so that it can be changed and faded back in.
+    # Fade out label text.
     switch.fade_out_label()
 
     # Start the ACTIVATE_SWITCH state sequence.
@@ -333,12 +328,12 @@ func _on_player_pressed_switch(switch: Switch, new_state: int) -> void:
     })
     yield(_player.current_state, 'sequence_finished')
 
-    switch.set_sprite_to_pressed()
+    switch.reset_state_to(Switch.State.PRESSED)
 
     # Only after all the animations and everything are finished do we emit the
-    # 'switch_pressed' signal (which is what things that are attached to the
-    # switch will be listening for).
-    switch.emit_signal('switch_pressed')
+    # 'switch_press_finished' signal (which is what things that are attached to
+    # the switch will be listening for).
+    switch.emit_signal('switch_press_finished')
 
     _player.set_process_unhandled_input(true)
     switch.set_process_unhandled_input(true)

@@ -5,10 +5,6 @@
 [ext_resource path="res://environment/elevator/Elevator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=4]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
 
@@ -51,7 +47,7 @@ position = Vector2( 240, 160 )
 [node name="Destination" parent="World/Rooms/ElevatorPlayground/Elevator" index="2"]
 position = Vector2( 0, 144 )
 
-[node name="SummonToEndLever" parent="World/Rooms/ElevatorPlayground/Elevator" index="4"]
+[node name="SummonToEndSwitch" parent="World/Rooms/ElevatorPlayground/Elevator" index="4"]
 position = Vector2( -32, 144 )
 
 [node name="Player" parent="World" index="3"]

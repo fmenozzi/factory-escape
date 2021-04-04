@@ -3,11 +3,7 @@
 [ext_resource path="res://environment/elevator/elevator.gd" type="Script" id=1]
 [ext_resource path="res://environment/elevator/textures/elevator.png" type="Texture" id=2]
 [ext_resource path="res://environment/pressure_plate/PressurePlate.tscn" type="PackedScene" id=3]
-[ext_resource path="res://environment/lever/Lever.tscn" type="PackedScene" id=4]
-
-
-
-
+[ext_resource path="res://environment/switch/Switch.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
@@ -34,8 +30,8 @@ shape = SubResource( 1 )
 [node name="Destination" type="Position2D" parent="."]
 position = Vector2( 0, -128 )
 
-[node name="SummonToStartLever" parent="." instance=ExtResource( 4 )]
+[node name="SummonToStartSwitch" parent="." instance=ExtResource( 5 )]
 position = Vector2( -32, 0 )
 
-[node name="SummonToEndLever" parent="." instance=ExtResource( 4 )]
+[node name="SummonToEndSwitch" parent="." instance=ExtResource( 5 )]
 position = Vector2( 32, 0 )

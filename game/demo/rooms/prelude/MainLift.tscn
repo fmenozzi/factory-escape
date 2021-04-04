@@ -96,7 +96,7 @@ position = Vector2( 256, 80 )
 [node name="Destination" parent="Elevator" index="2"]
 position = Vector2( 0, 256 )
 
-[node name="SummonToEndLever" parent="Elevator" index="4"]
+[node name="SummonToEndSwitch" parent="Elevator" index="4"]
 position = Vector2( -32, 256 )
 
 [node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 5 )]
