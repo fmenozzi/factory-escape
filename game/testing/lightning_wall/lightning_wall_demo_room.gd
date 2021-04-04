@@ -1,8 +1,6 @@
 extends Room
 
-onready var _lightning_wall_middle: LightningWall = $Hazards/LightningWallMiddle
-onready var _lightning_wall_bottom: LightningWall = $Hazards/LightningWallBottom
+onready var _lightning_wall_with_switch: Node2D = $Hazards/LightningWallWithSwitch
 
 func _ready() -> void:
-    _lightning_wall_middle.resume()
-    _lightning_wall_bottom.resume()
+    _lightning_wall_with_switch.resume()

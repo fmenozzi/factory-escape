@@ -10,6 +10,7 @@ onready var _movable_emitter: Node2D = $MovableEmitter
 onready var _movable_emitter_bolts: Node2D = $MovableEmitter/Bolts
 onready var _movable_emitter_sparks: Particles2D = $MovableEmitter/Sparks
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _tween: Tween = $DissipateTween
 
 func _ready() -> void:
     assert(_base_emitter.position == Vector2.ZERO)
@@ -30,6 +31,29 @@ func _ready() -> void:
         bolt.length = bolt_length - (2 * _base_emitter_bolts.position.length())
     for bolt in _movable_emitter_bolts.get_children():
         bolt.length = bolt_length- (2 * _movable_emitter_bolts.position.length())
+
+func dissipate() -> void:
+    # Stop emitting sparks.
+    _base_emitter_sparks.emitting = false
+    _movable_emitter_sparks.emitting = false
+
+    # As bolts dissipate below, fade the bolts out (this doesn't work when done
+    # in the individual bolts for some reason).
+    assert(_base_emitter_bolts.get_child_count() == _movable_emitter_bolts.get_child_count())
+    var duration := _base_emitter_bolts.get_child_count() * LightningBolt.DISSIPATE_DURATION
+    _tween.remove_all()
+    _tween.interpolate_property(_base_emitter_bolts, 'modulate:a', 1.0, 0.0, duration)
+    _tween.interpolate_property(_movable_emitter_bolts, 'modulate:a', 1.0, 0.0, duration)
+    _tween.start()
+
+    # Dissipate individual bolts one by one.
+    for i in range(_base_emitter_bolts.get_child_count()):
+        _base_emitter_bolts.get_child(i).dissipate()
+        _movable_emitter_bolts.get_child(i).dissipate()
+        yield(get_tree().create_timer(LightningBolt.DISSIPATE_DURATION), 'timeout')
+
+    # Disable hitbox.
+    _hitbox_collision_shape.set_deferred('disabled', true)
 
 func pause() -> void:
     _base_emitter_sparks.emitting = false

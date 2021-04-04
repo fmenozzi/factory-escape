@@ -7,11 +7,14 @@ export(float) var width := 1.0
 export(int) var num_segments := 8
 export(float) var max_y_perturb := 4.0
 
+const DISSIPATE_DURATION := 0.25
+
 onready var _line: Line2D = $Line2D
 onready var _timer: Timer = $Timer
 
 var _points := []
 var _starting_sign: float
+var _dissipate_called := false
 
 func _ready() -> void:
     randomize()
@@ -21,6 +24,9 @@ func _ready() -> void:
     _line.default_color = color
 
     _timer.connect('timeout', self, '_on_timeout')
+
+func dissipate() -> void:
+    _dissipate_called = true
 
 func pause() -> void:
     _timer.stop()
@@ -55,7 +61,8 @@ func _on_timeout() -> void:
     if not _points.empty():
         _points.pop_front()
     else:
-        _update_points()
+        if not _dissipate_called:
+            _update_points()
 
     _line.points = _points
 
