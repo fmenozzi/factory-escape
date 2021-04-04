@@ -91,13 +91,13 @@ shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="Elevator" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 256, 80 )
+position = Vector2( 256, 336 )
 
 [node name="Destination" parent="Elevator" index="2"]
-position = Vector2( 0, 256 )
+position = Vector2( 0, -256 )
 
 [node name="SummonToEndSwitch" parent="Elevator" index="4"]
-position = Vector2( -32, 256 )
+position = Vector2( -32, -256 )
 
 [node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 5 )]
 position = Vector2( 240, 432 )
