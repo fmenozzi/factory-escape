@@ -33,5 +33,15 @@ position = Vector2( 0, -128 )
 [node name="SummonToStartSwitch" parent="." instance=ExtResource( 5 )]
 position = Vector2( -32, 0 )
 
+[node name="FadeInOutLabel" parent="SummonToStartSwitch" index="2"]
+text = "Call Lift"
+
 [node name="SummonToEndSwitch" parent="." instance=ExtResource( 5 )]
 position = Vector2( 32, 0 )
+
+[node name="FadeInOutLabel" parent="SummonToEndSwitch" index="2"]
+text = "Call Lift"
+
+[editable path="SummonToStartSwitch"]
+
+[editable path="SummonToEndSwitch"]
