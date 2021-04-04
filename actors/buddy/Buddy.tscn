@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/buddy/buddy.gd" type="Script" id=1]
 [ext_resource path="res://actors/buddy/textures/buddy.png" type="Texture" id=2]
+[ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/WalkToPoints.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -23,6 +25,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32, 8 )
+
 [node name="Buddy" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 4
@@ -40,3 +45,17 @@ hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/idle = SubResource( 2 )
+
+[node name="DialogArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogArea"]
+position = Vector2( 0, -8 )
+shape = SubResource( 3 )
+
+[node name="FadeInOutLabel" parent="." instance=ExtResource( 3 )]
+margin_top = -32.0
+margin_bottom = -18.0
+text = "Speak"
+
+[node name="WalkToPoints" parent="." instance=ExtResource( 4 )]
