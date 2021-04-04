@@ -1,25 +1,53 @@
 extends KinematicBody2D
 class_name Buddy
 
+enum State {
+    NO_CHANGE,
+    IDLE,
+}
+
+onready var STATES := {
+    State.IDLE: $States/Idle,
+}
+
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _dialog_area: Area2D = $DialogArea
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _dialog_walk_to_points: Node2D = $WalkToPoints
 
+var _current_state: Node = null
+var _current_state_enum: int = -1
+
 func _ready() -> void:
-    _animation_player.play('idle')
+    _current_state_enum = State.IDLE
+    _current_state = STATES[_current_state_enum]
+    _change_state({'new_state': _current_state_enum})
 
-    _dialog_area.connect('body_entered', self, '_on_player_entered')
-    _dialog_area.connect('body_exited', self, '_on_player_exited')
+func _physics_process(delta: float) -> void:
+    var new_state_dict = _current_state.update(self, delta)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
-func _on_player_entered(player: Player) -> void:
-    if not player:
-        return
+func get_animation_player() -> AnimationPlayer:
+    return _animation_player
 
-    _fade_in_out_label.fade_in()
+func get_dialog_area() -> Area2D:
+    return _dialog_area
 
-func _on_player_exited(player: Player) -> void:
-    if not player:
-        return
+func get_fade_in_out_label() -> Label:
+    return _fade_in_out_label
 
-    _fade_in_out_label.fade_out()
+func _change_state(new_state_dict: Dictionary) -> void:
+    var old_state_enum := _current_state_enum
+    var new_state_enum: int = new_state_dict['new_state']
+
+    # Before passing along the new_state_dict to the new state (since we want
+    # any additional metadata keys passed too), rename the 'new_state' key to
+    # 'previous_state'.
+    new_state_dict.erase('new_state')
+    new_state_dict['previous_state'] = old_state_enum
+
+    _current_state.exit(self)
+    _current_state_enum = new_state_enum
+    _current_state = STATES[new_state_enum]
+    _current_state.enter(self, new_state_dict)

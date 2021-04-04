@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/buddy/buddy.gd" type="Script" id=1]
 [ext_resource path="res://actors/buddy/textures/buddy.png" type="Texture" id=2]
 [ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/WalkToPoints.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/buddy/states/idle.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -59,3 +60,8 @@ margin_bottom = -18.0
 text = "Speak"
 
 [node name="WalkToPoints" parent="." instance=ExtResource( 4 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource( 5 )
