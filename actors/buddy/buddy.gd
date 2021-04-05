@@ -11,9 +11,7 @@ onready var STATES := {
 }
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-onready var _dialog_area: Area2D = $DialogArea
-onready var _fade_in_out_label: Label = $FadeInOutLabel
-onready var _dialog_walk_to_points: Node2D = $WalkToPoints
+onready var _readable_object: ReadableObject = $ReadableObject
 
 var _current_state: Node = null
 var _current_state_enum: int = -1
@@ -31,11 +29,8 @@ func _physics_process(delta: float) -> void:
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
 
-func get_dialog_area() -> Area2D:
-    return _dialog_area
-
-func get_fade_in_out_label() -> Label:
-    return _fade_in_out_label
+func get_readable_object() -> ReadableObject:
+    return _readable_object
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
