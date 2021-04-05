@@ -56,3 +56,9 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state_enum = new_state_enum
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
+
+func _on_dialog_finished(readable_object: ReadableObject) -> void:
+    if readable_object != get_readable_object():
+        return
+
+    print('finished dialog with buddy!')
