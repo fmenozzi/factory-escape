@@ -1,5 +1,8 @@
 extends Control
 
+signal dialog_started(readable_object)
+signal dialog_finished(readable_object)
+
 # The amount of time in seconds that passes before the next letter shows up in
 # the dialog box.
 const SCROLL_SPEED: float = 0.05
@@ -94,12 +97,16 @@ func _start_dialog() -> void:
 
     _timer.start()
 
+    emit_signal('dialog_started', _player.get_nearby_readable_object())
+
 func _exit_dialog_box(fade_in_label: bool = true) -> void:
+    var nearby_readable_object := _player.get_nearby_readable_object()
     if fade_in_label:
-        var nearby_readable_object := _player.get_nearby_readable_object()
         nearby_readable_object.label_fade_in()
     _stop_dialog()
     _current_state = State.DISABLED
+
+    emit_signal('dialog_finished', nearby_readable_object)
 
 func _stop_dialog() -> void:
     _set_dialog_box_visible(false)
