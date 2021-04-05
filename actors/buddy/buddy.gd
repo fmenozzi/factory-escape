@@ -10,6 +10,7 @@ onready var STATES := {
     State.IDLE: $States/Idle,
 }
 
+onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _readable_object: ReadableObject = $ReadableObject
 
@@ -31,6 +32,15 @@ func get_animation_player() -> AnimationPlayer:
 
 func get_readable_object() -> ReadableObject:
     return _readable_object
+
+func set_direction(new_direction: int) -> void:
+    assert(new_direction in [
+        Util.Direction.LEFT,
+        Util.Direction.NONE,
+        Util.Direction.RIGHT,
+    ])
+
+    _sprite.flip_h = (new_direction == Util.Direction.LEFT)
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum
