@@ -9,7 +9,7 @@
 [ext_resource path="res://actors/enemies/turret/states/rotate.gd" type="Script" id=7]
 [ext_resource path="res://actors/enemies/turret/states/alerted.gd" type="Script" id=8]
 [ext_resource path="res://actors/enemies/shared/react_sprite/ReactSprite.tscn" type="PackedScene" id=9]
-[ext_resource path="res://actors/enemies/turret/states/pause.gd" type="Script" id=10]
+[ext_resource path="res://actors/enemies/turret/states/wait.gd" type="Script" id=10]
 [ext_resource path="res://actors/enemies/turret/states/shoot.gd" type="Script" id=11]
 [ext_resource path="res://actors/enemies/turret/Scanner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
@@ -77,10 +77,10 @@ script = ExtResource( 7 )
 
 [node name="RotationTween" type="Tween" parent="States/Rotate"]
 
-[node name="Pause" type="Node" parent="States"]
+[node name="Wait" type="Node" parent="States"]
 script = ExtResource( 10 )
 
-[node name="PauseDurationTimer" type="Timer" parent="States/Pause"]
+[node name="WaitDurationTimer" type="Timer" parent="States/Wait"]
 
 [node name="Alerted" type="Node" parent="States"]
 script = ExtResource( 8 )

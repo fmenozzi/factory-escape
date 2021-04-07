@@ -1,23 +1,23 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
-const PAUSE_DURATION: float = 1.0
+const WAIT_DURATION: float = 1.0
 
-onready var _pause_duration_timer: Timer = $PauseDurationTimer
+onready var _wait_duration_timer: Timer = $WaitDurationTimer
 
 func _ready() -> void:
-    _pause_duration_timer.one_shot = true
-    _pause_duration_timer.wait_time = PAUSE_DURATION
+    _wait_duration_timer.one_shot = true
+    _wait_duration_timer.wait_time = WAIT_DURATION
 
 func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     turret.change_rotation_direction()
 
-    _pause_duration_timer.start()
+    _wait_duration_timer.start()
 
     # Show scan line.
     turret.get_scanner().visible = true
 
 func exit(turret: Turret) -> void:
-    _pause_duration_timer.stop()
+    _wait_duration_timer.stop()
 
 func update(turret: Turret, delta: float) -> Dictionary:
     var scanner := turret.get_scanner()
@@ -29,7 +29,7 @@ func update(turret: Turret, delta: float) -> Dictionary:
             'already_aggroed': false
         }
 
-    if _pause_duration_timer.is_stopped():
+    if _wait_duration_timer.is_stopped():
         return {
             'new_state': Turret.State.ROTATE,
             'rotation_direction': turret.get_rotation_direction(),

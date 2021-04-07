@@ -5,7 +5,7 @@ enum State {
     NO_CHANGE,
     EXPAND,
     CONTRACT,
-    PAUSE,
+    WAIT,
     STAGGER,
     FALL,
     RETURN_TO_LEDGE,
@@ -18,7 +18,7 @@ export(State) var initial_state := State.CONTRACT
 onready var STATES := {
     State.EXPAND:          $States/Expand,
     State.CONTRACT:        $States/Contract,
-    State.PAUSE:           $States/Pause,
+    State.WAIT:            $States/Wait,
     State.STAGGER:         $States/Stagger,
     State.FALL:            $States/Fall,
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,

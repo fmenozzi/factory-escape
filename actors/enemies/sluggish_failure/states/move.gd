@@ -5,7 +5,7 @@ export(String, 'expand', 'contract') var animation := 'contract'
 signal expanded
 signal contracted
 
-const PAUSE_TIME: float = 0.2
+const WAIT_TIME: float = 0.2
 
 func _ready() -> void:
     assert(not animation.empty())
@@ -33,16 +33,16 @@ func update(failure: SluggishFailure, delta: float) -> Dictionary:
         match animation:
             'expand':
                 return {
-                    'new_state': SluggishFailure.State.PAUSE,
+                    'new_state': SluggishFailure.State.WAIT,
                     'next_move_state': SluggishFailure.State.CONTRACT,
-                    'pause_time': PAUSE_TIME / failure.speed_multiplier,
+                    'wait_time': WAIT_TIME / failure.speed_multiplier,
                 }
 
             'contract':
                 return {
-                    'new_state': SluggishFailure.State.PAUSE,
+                    'new_state': SluggishFailure.State.WAIT,
                     'next_move_state': SluggishFailure.State.EXPAND,
-                    'pause_time': PAUSE_TIME / failure.speed_multiplier,
+                    'wait_time': WAIT_TIME / failure.speed_multiplier,
                 }
 
     if failure.is_on_wall():

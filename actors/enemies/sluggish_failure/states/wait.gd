@@ -8,9 +8,9 @@ func _ready() -> void:
     _timer.one_shot = true
 
 func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
-    assert('pause_time' in previous_state_dict)
-    var pause_time: float = previous_state_dict['pause_time']
-    assert(pause_time >= 0.0)
+    assert('wait_time' in previous_state_dict)
+    var wait_time: float = previous_state_dict['wait_time']
+    assert(wait_time >= 0.0)
 
     assert('next_move_state' in previous_state_dict)
     _next_move_state = previous_state_dict['next_move_state']
@@ -19,7 +19,7 @@ func enter(failure: SluggishFailure, previous_state_dict: Dictionary) -> void:
         SluggishFailure.State.CONTRACT
     ])
 
-    _timer.wait_time = pause_time
+    _timer.wait_time = wait_time
     _timer.start()
 
 func exit(failure: SluggishFailure) -> void:

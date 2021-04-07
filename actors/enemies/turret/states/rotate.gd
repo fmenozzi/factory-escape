@@ -50,7 +50,7 @@ func update(turret: Turret, delta: float) -> Dictionary:
         }
 
     if not _rotation_tween.is_active():
-        return {'new_state': Turret.State.PAUSE}
+        return {'new_state': Turret.State.WAIT}
 
     return {'new_state': Turret.State.NO_CHANGE}
 

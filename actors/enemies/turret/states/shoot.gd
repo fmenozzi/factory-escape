@@ -40,7 +40,7 @@ func update(turret: Turret, delta: float) -> Dictionary:
                 'already_aggroed': true
             }
         else:
-            return {'new_state': Turret.State.PAUSE}
+            return {'new_state': Turret.State.WAIT}
 
     return {'new_state': Turret.State.NO_CHANGE}
 

@@ -5,7 +5,7 @@ export(String, 'expand', 'contract') var animation := 'contract'
 signal expanded
 signal contracted
 
-const PAUSE_TIME: float = 0.2
+const WAIT_TIME: float = 0.2
 
 func _ready() -> void:
     assert(not animation.empty())
@@ -29,16 +29,16 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
         match animation:
             'expand':
                 return {
-                    'new_state': LeapingFailure.State.PAUSE,
+                    'new_state': LeapingFailure.State.WAIT,
                     'next_move_state': LeapingFailure.State.CONTRACT,
-                    'pause_time': PAUSE_TIME,
+                    'wait_time': WAIT_TIME,
                 }
 
             'contract':
                 return {
-                    'new_state': LeapingFailure.State.PAUSE,
+                    'new_state': LeapingFailure.State.WAIT,
                     'next_move_state': LeapingFailure.State.EXPAND,
-                    'pause_time': PAUSE_TIME,
+                    'wait_time': WAIT_TIME,
                 }
 
     if aggro_manager.in_aggro_range() and aggro_manager.can_see_player():

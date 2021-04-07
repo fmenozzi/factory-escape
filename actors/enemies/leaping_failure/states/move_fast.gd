@@ -3,7 +3,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 export(String, 'expand', 'contract') var animation := 'contract'
 
 const SPEED_MULTIPLIER: float = 3.0
-const PAUSE_TIME: float = 0.2
+const WAIT_TIME: float = 0.2
 
 onready var _timer: Timer = $FastWalkDurationTimer
 
@@ -38,16 +38,16 @@ func update(failure: LeapingFailure, delta: float) -> Dictionary:
         match animation:
             'expand':
                 return {
-                    'new_state': LeapingFailure.State.PAUSE,
+                    'new_state': LeapingFailure.State.WAIT,
                     'next_move_state': LeapingFailure.State.CONTRACT_FAST,
-                    'pause_time': PAUSE_TIME / SPEED_MULTIPLIER,
+                    'wait_time': WAIT_TIME / SPEED_MULTIPLIER,
                 }
 
             'contract':
                 return {
-                    'new_state': LeapingFailure.State.PAUSE,
+                    'new_state': LeapingFailure.State.WAIT,
                     'next_move_state': LeapingFailure.State.EXPAND_FAST,
-                    'pause_time': PAUSE_TIME / SPEED_MULTIPLIER,
+                    'wait_time': WAIT_TIME / SPEED_MULTIPLIER,
                 }
 
     if failure.is_on_wall():

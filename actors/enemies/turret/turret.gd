@@ -11,7 +11,7 @@ enum FloorNormal {
 enum State {
     NO_CHANGE,
     ROTATE,
-    PAUSE,
+    WAIT,
     ALERTED,
     SHOOT,
     DIE,
@@ -23,7 +23,7 @@ export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
     State.ROTATE:  $States/Rotate,
-    State.PAUSE:   $States/Pause,
+    State.WAIT:    $States/Wait,
     State.ALERTED: $States/Alerted,
     State.SHOOT:   $States/Shoot,
     State.DIE:     $States/Die,
