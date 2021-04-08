@@ -19,7 +19,7 @@ enum State {
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
-export(State) var initial_state := State.ROTATE
+export(State) var initial_state := State.WAIT
 export(FloorNormal) var floor_normal := FloorNormal.UP
 
 onready var STATES := {
