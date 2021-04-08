@@ -8,6 +8,7 @@ enum Sounds {
     CONTRACT_ORGANIC,
     JUMP_ORGANIC,
     LAND_SOFT_ORGANIC,
+    TURRET_SCANNING,
 }
 
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
@@ -17,6 +18,7 @@ onready var _expand_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVi
 onready var _contract_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/ContractOrganic
 onready var _jump_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/JumpOrganic
 onready var _land_soft_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/LandSoftOrganic
+onready var _turret_scanning: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/TurretScanning
 
 func play(sound_enum: int) -> void:
     var audio_stream_player := get_player(sound_enum)
@@ -31,6 +33,7 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.CONTRACT_ORGANIC,
         Sounds.JUMP_ORGANIC,
         Sounds.LAND_SOFT_ORGANIC,
+        Sounds.TURRET_SCANNING,
     ])
 
     match sound_enum:
@@ -51,6 +54,9 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.LAND_SOFT_ORGANIC:
             return _land_soft_organic.get_player()
+
+        Sounds.TURRET_SCANNING:
+            return _turret_scanning.get_player()
 
         _:
             # Simply report the error here immediately instead of deferring to
