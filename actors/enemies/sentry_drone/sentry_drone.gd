@@ -10,6 +10,7 @@ enum State {
     FOLLOW_PLAYER,
     FLY_TO_POINT,
     ATTACK,
+    PAUSE,
     DIE,
 }
 
@@ -23,6 +24,7 @@ onready var STATES := {
     State.FOLLOW_PLAYER: $States/FollowPlayer,
     State.FLY_TO_POINT:  $States/FlyToPoint,
     State.ATTACK:        $States/Attack,
+    State.PAUSE:         $States/Pause,
     State.DIE:           $States/Die,
 }
 
@@ -117,10 +119,16 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
 func pause() -> void:
+    if _current_state_enum != State.DIE:
+        _change_state({'new_state': State.PAUSE})
+
     set_physics_process(false)
     _animation_player.stop(false)
 
 func resume() -> void:
+    if _current_state_enum != State.DIE:
+        _change_state({'new_state': initial_state})
+
     set_physics_process(true)
     _animation_player.play()
 

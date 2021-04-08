@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://actors/enemies/turret/textures/turret-body.png" type="Texture" id=1]
 [ext_resource path="res://actors/enemies/turret/textures/turret-head.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/turret/states/die.gd" type="Script" id=14]
 [ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=15]
+[ext_resource path="res://actors/enemies/turret/states/pause.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 7 )
@@ -91,6 +92,9 @@ script = ExtResource( 8 )
 script = ExtResource( 11 )
 
 [node name="ShootTimer" type="Timer" parent="States/Shoot"]
+
+[node name="Pause" type="Node" parent="States"]
+script = ExtResource( 16 )
 
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 14 )

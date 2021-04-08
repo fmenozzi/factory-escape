@@ -14,6 +14,7 @@ enum State {
     WAIT,
     ALERTED,
     SHOOT,
+    PAUSE,
     DIE,
 }
 
@@ -26,6 +27,7 @@ onready var STATES := {
     State.WAIT:    $States/Wait,
     State.ALERTED: $States/Alerted,
     State.SHOOT:   $States/Shoot,
+    State.PAUSE:   $States/Pause,
     State.DIE:     $States/Die,
 }
 
@@ -147,11 +149,20 @@ func change_rotation_direction() -> void:
     _rotation_direction *= -1
 
 func pause() -> void:
+    if _current_state_enum != State.DIE:
+        _change_state({'new_state': State.PAUSE})
+
     set_physics_process(false)
     _scanner.set_enabled(false)
     _animation_player.stop(false)
 
 func resume() -> void:
+    if _current_state_enum != State.DIE:
+        _change_state({
+            'new_state': initial_state,
+            'rotation_direction': _rotation_direction,
+        })
+
     set_physics_process(true)
     _scanner.set_enabled(true)
 

@@ -5,6 +5,7 @@ enum State {
     NO_CHANGE,
     WANDER,
     STAGGER,
+    PAUSE,
     DIE,
 }
 
@@ -14,6 +15,7 @@ export(State) var initial_state := State.WANDER
 onready var STATES := {
     State.WANDER:  $States/Wander,
     State.STAGGER: $States/Stagger,
+    State.PAUSE:   $States/Pause,
     State.DIE:     $States/Die,
 }
 
@@ -86,10 +88,16 @@ func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hurtbox_collision_shape.set_deferred('disabled', disabled)
 
 func pause() -> void:
+    if _current_state_enum != State.DIE:
+        _change_state({'new_state': State.PAUSE})
+
     set_physics_process(false)
     _animation_player.stop(false)
 
 func resume() -> void:
+    if _current_state_enum != State.DIE:
+        _change_state({'new_state': initial_state})
+
     set_physics_process(true)
     _animation_player.play()
 

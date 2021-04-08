@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://actors/enemies/leaping_failure/states/die.gd" type="Script" id=20]
 [ext_resource path="res://actors/enemies/leaping_failure/states/leap_down.gd" type="Script" id=21]
 [ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=22]
+[ext_resource path="res://actors/enemies/leaping_failure/states/pause.gd" type="Script" id=23]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 8 )
@@ -225,6 +227,9 @@ script = ExtResource( 13 )
 
 [node name="LeapDown" type="Node" parent="States/Leap"]
 script = ExtResource( 21 )
+
+[node name="Pause" type="Node" parent="States"]
+script = ExtResource( 23 )
 
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 20 )
