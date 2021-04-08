@@ -11,6 +11,8 @@ onready var _trail_particles: Particles2D = $TrailParticles
 onready var _hitbox: Area2D = $Hitbox
 onready var _lifetime_timer: Timer = $LifetimeTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _shoot_audio_stream_player: AudioStreamPlayer = $ShootAudioPlayer/AudioStreamPlayer
+onready var _impact_audio_stream_player: AudioStreamPlayer = $ImpactAudioPlayer/AudioStreamPlayer
 
 func _ready() -> void:
     pause()
@@ -38,6 +40,8 @@ func start(direction: Vector2) -> void:
 
     resume()
 
+    _shoot_audio_stream_player.play()
+
 func pause() -> void:
     set_physics_process(false)
 
@@ -50,6 +54,8 @@ func room_reset() -> void:
 func _impact() -> void:
     # Stop moving the projectile.
     set_physics_process(false)
+
+    _impact_audio_stream_player.play()
 
     # Wait for impact animation to finish.
     _animation_player.play('impact')
