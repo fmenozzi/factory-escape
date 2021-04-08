@@ -213,4 +213,5 @@ func _on_died() -> void:
     # Make sure to cancel laser shot so that an invisible-but-active laser
     # doesn't hit the player.
     _laser.cancel()
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
     _change_state({'new_state': State.DIE})

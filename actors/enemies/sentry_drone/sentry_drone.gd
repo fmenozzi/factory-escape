@@ -162,4 +162,5 @@ func _change_state(new_state_dict: Dictionary) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
     _change_state({'new_state': State.DIE})

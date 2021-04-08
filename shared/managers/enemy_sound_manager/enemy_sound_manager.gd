@@ -4,6 +4,8 @@ class_name EnemySoundManager
 enum Sounds {
     ENEMY_HIT_ORGANIC,
     ENEMY_HIT_MECHANICAL,
+    ENEMY_KILLED_ORGANIC,
+    ENEMY_KILLED_MECHANICAL,
     EXPAND_ORGANIC,
     CONTRACT_ORGANIC,
     JUMP_ORGANIC,
@@ -13,6 +15,8 @@ enum Sounds {
 
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
 onready var _enemy_hit_mechanical: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitMechanical
+onready var _enemy_killed_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyKilledOrganic
+onready var _enemy_killed_mechanical: AudioStreamPlayer = $AudioStreamPlayers/EnemyKilledMechanical
 
 onready var _expand_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/ExpandOrganic
 onready var _contract_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/ContractOrganic
@@ -29,6 +33,8 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
         Sounds.ENEMY_HIT_ORGANIC,
         Sounds.ENEMY_HIT_MECHANICAL,
+        Sounds.ENEMY_KILLED_ORGANIC,
+        Sounds.ENEMY_KILLED_MECHANICAL,
         Sounds.EXPAND_ORGANIC,
         Sounds.CONTRACT_ORGANIC,
         Sounds.JUMP_ORGANIC,
@@ -42,6 +48,12 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.ENEMY_HIT_MECHANICAL:
             return _enemy_hit_mechanical
+
+        Sounds.ENEMY_KILLED_ORGANIC:
+            return _enemy_killed_organic
+
+        Sounds.ENEMY_KILLED_MECHANICAL:
+            return _enemy_killed_mechanical
 
         Sounds.EXPAND_ORGANIC:
             return _expand_organic.get_player()

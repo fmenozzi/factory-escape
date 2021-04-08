@@ -60,6 +60,7 @@ func take_hit(damage: int, player: Player) -> void:
     _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
     if _health.get_current_health() == 0:
         # TODO: Make death nicer (animation, effects, etc.).
+        _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
         _change_state({'new_state': State.DIE})
     else:
         var direction := player.global_position.direction_to(global_position)
