@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sentry_drone_bash_missed.wav-23ab6f5e5c9f3ee9fb81498a32fbd4eb.sample"
+
+[deps]
+
+source_file="res://shared/managers/enemy_sound_manager/audio/sentry_drone_bash_missed.wav"
+dest_files=[ "res://.import/sentry_drone_bash_missed.wav-23ab6f5e5c9f3ee9fb81498a32fbd4eb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

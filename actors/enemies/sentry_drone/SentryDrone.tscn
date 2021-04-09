@@ -76,6 +76,18 @@ pushback_duration = 0.1
 
 [node name="EnemySoundManager" parent="." instance=ExtResource( 21 )]
 
+[node name="SentryDroneBashTelegraph" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="5"]
+attenuation_visibility_radius_tiles = 3.0
+
+[node name="SentryDroneBash" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="6"]
+attenuation_visibility_radius_tiles = 3.0
+
+[node name="SentryDroneBashImpact" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="7"]
+attenuation_visibility_radius_tiles = 3.0
+
+[node name="SentryDroneBashMissed" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="8"]
+attenuation_visibility_radius_tiles = 3.0
+
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
@@ -162,3 +174,5 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 1 )
+
+[editable path="EnemySoundManager"]

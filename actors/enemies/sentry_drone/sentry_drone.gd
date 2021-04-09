@@ -81,6 +81,9 @@ func get_physics_manager() -> SentryDronePhysicsManager:
 func get_aggro_manager() -> AggroManager:
     return _aggro_manager
 
+func get_sound_manager() -> EnemySoundManager:
+    return _sound_manager
+
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()

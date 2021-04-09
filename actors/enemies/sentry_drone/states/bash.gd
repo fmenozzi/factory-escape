@@ -16,8 +16,12 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     _player = Util.get_player()
     _bash_miss_distance_travelled = 0.0
 
+    sentry_drone.get_sound_manager().play(EnemySoundManager.Sounds.SENTRY_DRONE_BASH)
+
 func exit(sentry_drone: SentryDrone) -> void:
-    pass
+    sentry_drone.get_sound_manager()                            \
+        .get_player(EnemySoundManager.Sounds.SENTRY_DRONE_BASH) \
+        .stop()
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var physics_manager := sentry_drone.get_physics_manager()
@@ -28,9 +32,13 @@ func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     if _drone_missed_player(sentry_drone):
         _bash_miss_distance_travelled += bash_speed * delta
         if _bash_miss_distance_travelled > MAX_BASH_MISS_DISTANCE:
+            sentry_drone.get_sound_manager().play(
+                EnemySoundManager.Sounds.SENTRY_DRONE_BASH_MISSED)
             return {'new_state': SentryDrone.State.NEXT_STATE_IN_SEQUENCE}
 
     if sentry_drone.is_colliding():
+        sentry_drone.get_sound_manager().play(
+            EnemySoundManager.Sounds.SENTRY_DRONE_BASH_IMPACT)
         Screenshake.start(
             Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
         for i in sentry_drone.get_slide_count():

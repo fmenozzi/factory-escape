@@ -11,6 +11,10 @@ enum Sounds {
     JUMP_ORGANIC,
     LAND_SOFT_ORGANIC,
     TURRET_SCANNING,
+    SENTRY_DRONE_BASH_TELEGRAPH,
+    SENTRY_DRONE_BASH,
+    SENTRY_DRONE_BASH_IMPACT,
+    SENTRY_DRONE_BASH_MISSED,
 }
 
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
@@ -23,6 +27,10 @@ onready var _contract_organic: AudioStreamPlayerVisibility = $AudioStreamPlayers
 onready var _jump_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/JumpOrganic
 onready var _land_soft_organic: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/LandSoftOrganic
 onready var _turret_scanning: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/TurretScanning
+onready var _sentry_drone_bash_telegraph: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBashTelegraph
+onready var _sentry_drone_bash: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBash
+onready var _sentry_drone_bash_impact: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBashImpact
+onready var _sentry_drone_bash_missed: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBashMissed
 
 func play(sound_enum: int) -> void:
     var audio_stream_player := get_player(sound_enum)
@@ -40,6 +48,10 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.JUMP_ORGANIC,
         Sounds.LAND_SOFT_ORGANIC,
         Sounds.TURRET_SCANNING,
+        Sounds.SENTRY_DRONE_BASH_TELEGRAPH,
+        Sounds.SENTRY_DRONE_BASH,
+        Sounds.SENTRY_DRONE_BASH_IMPACT,
+        Sounds.SENTRY_DRONE_BASH_MISSED,
     ])
 
     match sound_enum:
@@ -69,6 +81,18 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.TURRET_SCANNING:
             return _turret_scanning.get_player()
+
+        Sounds.SENTRY_DRONE_BASH_TELEGRAPH:
+            return _sentry_drone_bash_telegraph.get_player()
+
+        Sounds.SENTRY_DRONE_BASH:
+            return _sentry_drone_bash.get_player()
+
+        Sounds.SENTRY_DRONE_BASH_IMPACT:
+            return _sentry_drone_bash_impact.get_player()
+
+        Sounds.SENTRY_DRONE_BASH_MISSED:
+            return _sentry_drone_bash_missed.get_player()
 
         _:
             # Simply report the error here immediately instead of deferring to
