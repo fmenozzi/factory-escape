@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/aggro_manager.gd"
 }, {
 "base": "Node2D",
+"class": "Arena",
+"language": "GDScript",
+"path": "res://game/room/arena.gd"
+}, {
+"base": "Node2D",
 "class": "AttackManager",
 "language": "GDScript",
 "path": "res://actors/player/managers/attack_manager.gd"
@@ -317,6 +322,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AbilitiesLampSaveManager": "",
 "AggroManager": "",
+"Arena": "",
 "AttackManager": "",
 "AudioStreamPlayerVisibility": "",
 "Buddy": "",
