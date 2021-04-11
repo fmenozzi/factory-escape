@@ -21,3 +21,6 @@ position = Vector2( 1280, 0 )
 
 [node name="MainLobby" parent="World/Rooms" index="3" instance=ExtResource( 6 )]
 position = Vector2( 1600, 0 )
+
+[node name="Player" parent="World" index="3"]
+position = Vector2( 160, -384 )
