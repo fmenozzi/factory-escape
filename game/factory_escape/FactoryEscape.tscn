@@ -9,6 +9,7 @@
 
 [node name="FactoryEscape" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+run_standalone = false
 
 [node name="FactoryEntrance" parent="World/Rooms" index="0" instance=ExtResource( 3 )]
 
