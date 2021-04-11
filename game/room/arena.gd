@@ -7,8 +7,8 @@ onready var _num_phases: int = $Phases.get_child_count()
 onready var _closing_doors: Array = $ClosingDoors.get_children()
 onready var _trigger: Area2D = $Trigger
 onready var _camera_anchor: Position2D = $CameraAnchor
+onready var _save_manager: Node = $SaveManager
 
-var _phase_index := -1
 var _phase_data := []
 var _current_phase_enemy_count := 0
 var _player_camera: Camera2D = null
@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
         _close_all_doors()
 
     if _current_phase_enemy_count == 0:
-        _phase_index += 1
+        _save_manager.current_phase_index += 1
 
         if _arena_finished():
             # Finish once all phases are completed.
@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
             set_process(false)
             return
 
-        _spawn_enemies_for_phase(_phase_index)
+        _spawn_enemies_for_phase(_save_manager.current_phase_index)
 
 func lamp_reset() -> void:
     set_process(false)
@@ -69,7 +69,7 @@ func lamp_reset() -> void:
     # Unless the player has already completed the arena, reset to PRE_FIGHT
     # state on lamp rest (e.g. if the player dies in the middle of the fight).
     if not _arena_finished():
-        _phase_index = -1
+        _save_manager.current_phase_index = -1
 
         # In case the player died while the camera was detached in the middle
         # of the arena fight, reattach the camera without tweening it (i.e. set
@@ -82,7 +82,7 @@ func _start_arena(player: Player) -> void:
     if not player:
         return
 
-    if _phase_index != -1:
+    if _save_manager.current_phase_index != -1:
         return
 
     _player_camera = player.get_camera()
@@ -128,10 +128,10 @@ func _open_all_doors() -> void:
         closing_door.open()
 
 func _arena_started() -> bool:
-    return _phase_index == -1
+    return _save_manager.current_phase_index == -1
 
 func _arena_finished() -> bool:
-    return _phase_index >= _num_phases
+    return _save_manager.current_phase_index >= _num_phases
 
 func _assert_phase_structure_is_correct() -> void:
     assert(_num_phases > 0)
