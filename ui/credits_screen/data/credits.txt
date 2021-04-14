@@ -9,6 +9,7 @@ FONT
 Daniel Linssen (managore.itch.io)
 
 SOUND
+Vincent Salgueiro
 Despic (despic_studio@)
 Carmin Bittermann
 Garry Smithson
