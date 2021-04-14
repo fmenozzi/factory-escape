@@ -7,11 +7,11 @@ func _ready() -> void:
     _bus_to_max_volume_linear['Effects'] = 1.0
     _bus_to_max_volume_linear['UI'] = 1.0
 
-func linear_to_db(volume_linear: float) -> float:
+func linear_to_db(volume_linear: float, max_volume_db: float = 0.0) -> float:
     assert(0.0 <= volume_linear and volume_linear <= 1.0)
 
-    # Convert linear value [0, 1] to decibel value [-80, 0].
-    return max(linear2db(volume_linear), -80)
+    # Convert linear value [0, 1] to decibel value [-80, max_volume_db].
+    return clamp(linear2db(volume_linear), -80.0, max_volume_db)
 
 func set_bus_volume_linear(bus: String, volume_linear: float) -> void:
     assert(0.0 <= volume_linear and volume_linear <= 1.0)

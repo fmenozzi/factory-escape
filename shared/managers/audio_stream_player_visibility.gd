@@ -60,7 +60,7 @@ func _process(delta: float) -> void:
 
     var volume_linear := attenuation_curve.interpolate(w)
 
-    _set_volume_db(Audio.linear_to_db(clamp(volume_linear, 0.0, 1.0)))
+    _set_volume_db(Audio.linear_to_db(clamp(volume_linear, 0.0, 1.0), max_volume_db))
 
 func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
