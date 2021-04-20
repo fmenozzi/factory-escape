@@ -9,6 +9,7 @@ enum LockLight {
     CENTRAL,
 }
 
+onready var _lights: Node2D = $LightSprites
 onready var _upper_left: Sprite = $LightSprites/UpperLeft
 onready var _upper_right: Sprite = $LightSprites/UpperRight
 onready var _lower_left: Sprite = $LightSprites/LowerLeft
@@ -47,6 +48,21 @@ func turn_on_light(light: int) -> void:
 
         LockLight.CENTRAL:
             _turn_light_on(_central)
+
+func pulse_all_lights() -> void:
+    _tween.repeat = true
+
+    var duration := 0.75
+    var delay := duration
+
+    for light in _lights.get_children():
+        _tween.interpolate_property(
+            light, 'modulate', Color(1, 1, 1), Color(1.2, 1.2, 1.2), duration)
+        _tween.interpolate_property(
+            light, 'modulate', Color(1.2, 1.2, 1.2), Color(1, 1, 1), duration,
+            Tween.TRANS_LINEAR, Tween.EASE_IN, delay)
+
+    _tween.start()
 
 func _turn_light_on(sprite: Sprite) -> void:
     _tween.interpolate_property(
