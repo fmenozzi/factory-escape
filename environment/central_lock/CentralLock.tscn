@@ -34,3 +34,5 @@ texture = ExtResource( 6 )
 
 [node name="Central" type="Sprite" parent="LightSprites"]
 texture = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="."]
