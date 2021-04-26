@@ -15,6 +15,10 @@ enum Sounds {
     SENTRY_DRONE_BASH,
     SENTRY_DRONE_BASH_IMPACT,
     SENTRY_DRONE_BASH_MISSED,
+    HOMING_PROJECTILE_SPAWN,
+    HOMING_PROJECTILE_SHOOT,
+    HOMING_PROJECTILE_FOLLOW,
+    HOMING_PROJECTILE_IMPACT,
 }
 
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
@@ -31,6 +35,10 @@ onready var _sentry_drone_bash_telegraph: AudioStreamPlayerVisibility = $AudioSt
 onready var _sentry_drone_bash: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBash
 onready var _sentry_drone_bash_impact: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBashImpact
 onready var _sentry_drone_bash_missed: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/SentryDroneBashMissed
+onready var _homing_projectile_spawn: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileSpawn
+onready var _homing_projectile_shoot: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileShoot
+onready var _homing_projectile_follow: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileFollow
+onready var _homing_projectile_impact: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileImpact
 
 func play(sound_enum: int) -> void:
     var audio_stream_player := get_player(sound_enum)
@@ -52,6 +60,10 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.SENTRY_DRONE_BASH,
         Sounds.SENTRY_DRONE_BASH_IMPACT,
         Sounds.SENTRY_DRONE_BASH_MISSED,
+        Sounds.HOMING_PROJECTILE_SPAWN,
+        Sounds.HOMING_PROJECTILE_SHOOT,
+        Sounds.HOMING_PROJECTILE_FOLLOW,
+        Sounds.HOMING_PROJECTILE_IMPACT,
     ])
 
     match sound_enum:
@@ -93,6 +105,18 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.SENTRY_DRONE_BASH_MISSED:
             return _sentry_drone_bash_missed.get_player()
+
+        Sounds.HOMING_PROJECTILE_SPAWN:
+            return _homing_projectile_spawn.get_player()
+
+        Sounds.HOMING_PROJECTILE_SHOOT:
+            return _homing_projectile_shoot.get_player()
+
+        Sounds.HOMING_PROJECTILE_FOLLOW:
+            return _homing_projectile_follow.get_player()
+
+        Sounds.HOMING_PROJECTILE_IMPACT:
+            return _homing_projectile_impact.get_player()
 
         _:
             # Simply report the error here immediately instead of deferring to

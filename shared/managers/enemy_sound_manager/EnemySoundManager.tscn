@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://shared/managers/SoundManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shared/managers/enemy_sound_manager/enemy_sound_manager.gd" type="Script" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/sentry_drone_bash_telegraph.wav" type="AudioStream" id=14]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/sentry_drone_bash_impact.wav" type="AudioStream" id=15]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/sentry_drone_bash_missed.wav" type="AudioStream" id=16]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_follow.wav" type="AudioStream" id=17]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_impact.wav" type="AudioStream" id=18]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_shoot.wav" type="AudioStream" id=19]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_spawn.wav" type="AudioStream" id=20]
 
 [node name="EnemySoundManager" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -83,20 +87,43 @@ stream = ExtResource( 15 )
 [node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/SentryDroneBashMissed" index="0"]
 stream = ExtResource( 16 )
 
+[node name="HomingProjectileSpawn" parent="AudioStreamPlayersVisibility" index="9" instance=ExtResource( 9 )]
+max_volume_db = -8.0
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/HomingProjectileSpawn" index="0"]
+stream = ExtResource( 20 )
+
+[node name="HomingProjectileShoot" parent="AudioStreamPlayersVisibility" index="10" instance=ExtResource( 9 )]
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/HomingProjectileShoot" index="0"]
+stream = ExtResource( 19 )
+
+[node name="HomingProjectileFollow" parent="AudioStreamPlayersVisibility" index="11" instance=ExtResource( 9 )]
+max_volume_db = -8.0
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/HomingProjectileFollow" index="0"]
+stream = ExtResource( 17 )
+
+[node name="HomingProjectileImpact" parent="AudioStreamPlayersVisibility" index="12" instance=ExtResource( 9 )]
+max_volume_db = -6.0
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/HomingProjectileImpact" index="0"]
+stream = ExtResource( 18 )
+
 [editable path="AudioStreamPlayersVisibility/ExpandOrganic"]
-
 [editable path="AudioStreamPlayersVisibility/ContractOrganic"]
-
 [editable path="AudioStreamPlayersVisibility/JumpOrganic"]
-
 [editable path="AudioStreamPlayersVisibility/LandSoftOrganic"]
-
 [editable path="AudioStreamPlayersVisibility/TurretScanning"]
-
 [editable path="AudioStreamPlayersVisibility/SentryDroneBashTelegraph"]
-
 [editable path="AudioStreamPlayersVisibility/SentryDroneBash"]
-
 [editable path="AudioStreamPlayersVisibility/SentryDroneBashImpact"]
-
 [editable path="AudioStreamPlayersVisibility/SentryDroneBashMissed"]
+[editable path="AudioStreamPlayersVisibility/HomingProjectileSpawn"]
+[editable path="AudioStreamPlayersVisibility/HomingProjectileShoot"]
+[editable path="AudioStreamPlayersVisibility/HomingProjectileFollow"]
+[editable path="AudioStreamPlayersVisibility/HomingProjectileImpact"]

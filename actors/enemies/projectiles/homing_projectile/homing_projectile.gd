@@ -15,6 +15,7 @@ onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _lifetime_timer: Timer = $LifetimeTimer
 onready var _homing_duration_timer: Timer = $HomingDurationTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 
 func _ready() -> void:
     pause()
@@ -38,8 +39,13 @@ func _physics_process(delta: float) -> void:
     position += _velocity * delta
 
 func start(direction: Vector2) -> void:
+    _sound_manager.set_all_muted(false)
+
+    _sound_manager.play(EnemySoundManager.Sounds.HOMING_PROJECTILE_SPAWN)
     _animation_player.play('spawn')
     yield(_animation_player, 'animation_finished')
+    _sound_manager.play(EnemySoundManager.Sounds.HOMING_PROJECTILE_SHOOT)
+    _sound_manager.play(EnemySoundManager.Sounds.HOMING_PROJECTILE_FOLLOW)
 
     _velocity = direction.normalized() * speed_tiles_per_second * Util.TILE_SIZE
     _lifetime_timer.start()
@@ -50,9 +56,11 @@ func start(direction: Vector2) -> void:
 
 func pause() -> void:
     set_physics_process(false)
+    _sound_manager.set_all_muted(true)
 
 func resume() -> void:
     set_physics_process(true)
+    _sound_manager.set_all_muted(false)
 
 func room_reset() -> void:
     queue_free()
@@ -94,6 +102,9 @@ func _explode() -> void:
 
     # Disable the projectile's hitbox.
     _hitbox_collision_shape.set_deferred('disabled', true)
+
+    _sound_manager.get_player(EnemySoundManager.Sounds.HOMING_PROJECTILE_FOLLOW).stop()
+    _sound_manager.play(EnemySoundManager.Sounds.HOMING_PROJECTILE_IMPACT)
 
     # Wait for explode animation to finish.
     _animation_player.play('explode')

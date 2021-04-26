@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/homing_projectile_shoot.wav-da7028f8236afdf9c396144d4b7f1ca8.sample"
+
+[deps]
+
+source_file="res://shared/managers/enemy_sound_manager/audio/homing_projectile_shoot.wav"
+dest_files=[ "res://.import/homing_projectile_shoot.wav-da7028f8236afdf9c396144d4b7f1ca8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
