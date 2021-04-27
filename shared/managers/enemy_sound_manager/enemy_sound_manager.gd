@@ -19,6 +19,9 @@ enum Sounds {
     HOMING_PROJECTILE_SHOOT,
     HOMING_PROJECTILE_FOLLOW,
     HOMING_PROJECTILE_IMPACT,
+    STICKY_DRONE_WALK,
+    STICKY_DRONE_EXPAND,
+    STICKY_DRONE_CONTRACT,
 }
 
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
@@ -39,6 +42,9 @@ onready var _homing_projectile_spawn: AudioStreamPlayerVisibility = $AudioStream
 onready var _homing_projectile_shoot: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileShoot
 onready var _homing_projectile_follow: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileFollow
 onready var _homing_projectile_impact: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/HomingProjectileImpact
+onready var _sticky_drone_walk: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/StickyDroneWalk
+onready var _sticky_drone_expand: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/StickyDroneExpand
+onready var _sticky_drone_contract: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/StickyDroneContract
 
 func play(sound_enum: int) -> void:
     var audio_stream_player := get_player(sound_enum)
@@ -64,6 +70,9 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.HOMING_PROJECTILE_SHOOT,
         Sounds.HOMING_PROJECTILE_FOLLOW,
         Sounds.HOMING_PROJECTILE_IMPACT,
+        Sounds.STICKY_DRONE_WALK,
+        Sounds.STICKY_DRONE_EXPAND,
+        Sounds.STICKY_DRONE_CONTRACT,
     ])
 
     match sound_enum:
@@ -117,6 +126,15 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.HOMING_PROJECTILE_IMPACT:
             return _homing_projectile_impact.get_player()
+
+        Sounds.STICKY_DRONE_WALK:
+            return _sticky_drone_walk.get_player()
+
+        Sounds.STICKY_DRONE_EXPAND:
+            return _sticky_drone_expand.get_player()
+
+        Sounds.STICKY_DRONE_CONTRACT:
+            return _sticky_drone_contract.get_player()
 
         _:
             # Simply report the error here immediately instead of deferring to

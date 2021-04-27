@@ -1,20 +1,22 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
+signal step_taken
+
 # The minimum number of seconds the drone walks for before returning to idle.
 # A small random value will be added to this to create the final timer
 # duration in order to avoid having all the drones walk around at the same time.
-const MIN_WALK_DURATION: float = 2.0
+# This time corresponds to two full walk cycles.
+const MIN_WALK_DURATION: float = 2.4
 
 onready var _walk_duration_timer: Timer = $WalkDurationTimer
 
 func _ready() -> void:
     _walk_duration_timer.one_shot = true
-    _walk_duration_timer.wait_time = MIN_WALK_DURATION + rand_range(0.0, 1.0)
 
 func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     sticky_drone.get_animation_player().play('walk')
 
-    _walk_duration_timer.start()
+    _walk_duration_timer.start(MIN_WALK_DURATION + rand_range(0.0, 1.2))
 
 func exit(sticky_drone: StickyDrone) -> void:
     pass
@@ -44,6 +46,9 @@ func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
     sticky_drone.move(velocity, Util.NO_SNAP, sticky_drone.get_floor_normal())
 
     return {'new_state': StickyDrone.State.NO_CHANGE}
+
+func play_walk_sound() -> void:
+    emit_signal('step_taken')
 
 func _get_direction_to_ledge(sticky_drone: StickyDrone) -> int:
     var ledge_detectors: Node2D = sticky_drone.get_node('LedgeDetectorRaycasts')

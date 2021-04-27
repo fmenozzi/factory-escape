@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://shared/managers/SoundManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shared/managers/enemy_sound_manager/enemy_sound_manager.gd" type="Script" id=2]
@@ -20,6 +20,9 @@
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_impact.wav" type="AudioStream" id=18]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_shoot.wav" type="AudioStream" id=19]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/homing_projectile_spawn.wav" type="AudioStream" id=20]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/sticky_drone_walk.wav" type="AudioStream" id=21]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/sticky_drone_expand.wav" type="AudioStream" id=22]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/sticky_drone_contract.wav" type="AudioStream" id=23]
 
 [node name="EnemySoundManager" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -114,6 +117,21 @@ attenuation_visibility_radius_tiles = 4.0
 [node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/HomingProjectileImpact" index="0"]
 stream = ExtResource( 18 )
 
+[node name="StickyDroneWalk" parent="AudioStreamPlayersVisibility" index="13" instance=ExtResource( 9 )]
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/StickyDroneWalk" index="0"]
+stream = ExtResource( 21 )
+
+[node name="StickyDroneExpand" parent="AudioStreamPlayersVisibility" index="14" instance=ExtResource( 9 )]
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/StickyDroneExpand" index="0"]
+stream = ExtResource( 22 )
+
+[node name="StickyDroneContract" parent="AudioStreamPlayersVisibility" index="15" instance=ExtResource( 9 )]
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/StickyDroneContract" index="0"]
+stream = ExtResource( 23 )
+
 [editable path="AudioStreamPlayersVisibility/ExpandOrganic"]
 [editable path="AudioStreamPlayersVisibility/ContractOrganic"]
 [editable path="AudioStreamPlayersVisibility/JumpOrganic"]
@@ -127,3 +145,9 @@ stream = ExtResource( 18 )
 [editable path="AudioStreamPlayersVisibility/HomingProjectileShoot"]
 [editable path="AudioStreamPlayersVisibility/HomingProjectileFollow"]
 [editable path="AudioStreamPlayersVisibility/HomingProjectileImpact"]
+
+[editable path="AudioStreamPlayersVisibility/StickyDroneWalk"]
+
+[editable path="AudioStreamPlayersVisibility/StickyDroneExpand"]
+
+[editable path="AudioStreamPlayersVisibility/StickyDroneContract"]

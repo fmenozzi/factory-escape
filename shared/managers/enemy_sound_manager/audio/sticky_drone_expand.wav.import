@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sticky_drone_expand.wav-0dd47b513bb2bbecd9d94b8354d0e2d6.sample"
+
+[deps]
+
+source_file="res://shared/managers/enemy_sound_manager/audio/sticky_drone_expand.wav"
+dest_files=[ "res://.import/sticky_drone_expand.wav-0dd47b513bb2bbecd9d94b8354d0e2d6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

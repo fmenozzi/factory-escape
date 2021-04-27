@@ -87,6 +87,9 @@ func _ready() -> void:
             self.rotation_degrees = 90
             _react_sprite.rotation_degrees = -90
 
+    STATES[State.WALK].connect(
+        'step_taken', _sound_manager, 'play', [EnemySoundManager.Sounds.STICKY_DRONE_WALK])
+
     _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum})
@@ -161,6 +164,7 @@ func pause() -> void:
 
     set_physics_process(false)
     _animation_player.stop(false)
+    _sound_manager.set_all_muted(true)
 
 func resume() -> void:
     if _current_state_enum != State.DIE:
@@ -168,6 +172,7 @@ func resume() -> void:
 
     set_physics_process(true)
     _animation_player.play()
+    _sound_manager.set_all_muted(false)
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
@@ -207,6 +212,12 @@ func _transition_to_shoot_state(pause_before_shooting: bool = false) -> void:
         'new_state': State.SHOOT,
         'pause_before_shooting': pause_before_shooting,
     })
+
+func _play_expand_sound() -> void:
+    _sound_manager.play(EnemySoundManager.Sounds.STICKY_DRONE_EXPAND)
+
+func _play_contract_sound() -> void:
+    _sound_manager.play(EnemySoundManager.Sounds.STICKY_DRONE_CONTRACT)
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
