@@ -22,6 +22,7 @@ onready var _attenuation_radius: float = attenuation_visibility_radius_tiles * U
 onready var _tween: Tween = $VolumeTween
 
 var _state: int
+var _muted := false
 
 func _ready() -> void:
     assert(attenuation_curve != null)
@@ -42,13 +43,13 @@ func _ready() -> void:
     # Connect VisibilityNotifier2D signals to enable state transitions. Tween to
     # new volumes in these state transitions.
     _object_visibility.connect(
-        'screen_entered', self, '_set_state', [State.VISIBLE])
+        'screen_entered', self, '_on_object_rect_screen_entered')
     _object_visibility.connect(
-        'screen_exited', self, '_set_state', [State.ATTENUATING])
+        'screen_exited', self, '_on_object_rect_screen_exited')
     _attenuation_visibility.connect(
-        'screen_entered', self, '_set_state', [State.ATTENUATING])
+        'screen_entered', self, '_on_attenuation_rect_screen_entered')
     _attenuation_visibility.connect(
-        'screen_exited', self, '_set_state', [State.INVISIBLE])
+        'screen_exited', self, '_on_attenuation_rect_screen_exited')
 
     # Set initial volume immediately here.
     set_state()
@@ -66,6 +67,9 @@ func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
 
 func set_state() -> void:
+    if _muted:
+        return
+
     if _object_visibility.is_on_screen():
         _set_state(State.VISIBLE)
     elif _attenuation_visibility.is_on_screen():
@@ -74,6 +78,8 @@ func set_state() -> void:
         _set_state(State.INVISIBLE)
 
 func set_muted(muted: bool) -> void:
+    _muted = muted
+
     if muted:
         set_process(false)
         _set_volume_db(-80.0)
@@ -113,3 +119,27 @@ func _get_distance_to_closest_screen_edge() -> float:
     var distance_bottom := abs(height - distance_top)
 
     return min(min(min(distance_left, distance_right), distance_top), distance_bottom)
+
+func _on_object_rect_screen_entered() -> void:
+    if _muted:
+        return
+
+    _set_state(State.VISIBLE)
+
+func _on_object_rect_screen_exited() -> void:
+    if _muted:
+        return
+
+    _set_state(State.ATTENUATING)
+
+func _on_attenuation_rect_screen_entered() -> void:
+    if _muted:
+        return
+
+    _set_state(State.ATTENUATING)
+
+func _on_attenuation_rect_screen_exited() -> void:
+    if _muted:
+        return
+
+    _set_state(State.INVISIBLE)
