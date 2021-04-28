@@ -22,6 +22,8 @@ enum Sounds {
     STICKY_DRONE_WALK,
     STICKY_DRONE_EXPAND,
     STICKY_DRONE_CONTRACT,
+    DRONE_IDLE,
+    DRONE_MOVE,
 }
 
 onready var _enemy_hit_organic: AudioStreamPlayer = $AudioStreamPlayers/EnemyHitOrganic
@@ -45,6 +47,8 @@ onready var _homing_projectile_impact: AudioStreamPlayerVisibility = $AudioStrea
 onready var _sticky_drone_walk: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/StickyDroneWalk
 onready var _sticky_drone_expand: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/StickyDroneExpand
 onready var _sticky_drone_contract: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/StickyDroneContract
+onready var _drone_idle: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/DroneIdle
+onready var _drone_move: AudioStreamPlayerVisibility = $AudioStreamPlayersVisibility/DroneMove
 
 func play(sound_enum: int) -> void:
     var audio_stream_player := get_player(sound_enum)
@@ -73,6 +77,8 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.STICKY_DRONE_WALK,
         Sounds.STICKY_DRONE_EXPAND,
         Sounds.STICKY_DRONE_CONTRACT,
+        Sounds.DRONE_IDLE,
+        Sounds.DRONE_MOVE,
     ])
 
     match sound_enum:
@@ -135,6 +141,12 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.STICKY_DRONE_CONTRACT:
             return _sticky_drone_contract.get_player()
+
+        Sounds.DRONE_IDLE:
+            return _drone_idle.get_player()
+
+        Sounds.DRONE_MOVE:
+            return _drone_move.get_player()
 
         _:
             # Simply report the error here immediately instead of deferring to

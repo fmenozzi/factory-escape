@@ -75,6 +75,12 @@ pushback_duration = 0.15
 
 [node name="EnemySoundManager" parent="." instance=ExtResource( 17 )]
 
+[node name="DroneIdle" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="16"]
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="DroneMove" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="17"]
+attenuation_visibility_radius_tiles = 4.0
+
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
@@ -145,3 +151,5 @@ position = Vector2( 0, -1 )
 shape = SubResource( 5 )
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource( 12 )]
+
+[editable path="EnemySoundManager"]

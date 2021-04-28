@@ -17,12 +17,16 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
 
     sentry_drone.get_animation_player().play('idle')
 
+    sentry_drone.get_sound_manager().play(EnemySoundManager.Sounds.DRONE_MOVE)
+
     # Wait 1-2 seconds before bashing.
     _bash_timer.wait_time = rand_range(1.0, 2.0)
     _bash_timer.start()
 
 func exit(sentry_drone: SentryDrone) -> void:
     _bash_timer.stop()
+
+    sentry_drone.get_sound_manager().get_player(EnemySoundManager.Sounds.DRONE_MOVE).stop()
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var aggro_manager := sentry_drone.get_aggro_manager()

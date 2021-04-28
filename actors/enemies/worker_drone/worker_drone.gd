@@ -78,6 +78,9 @@ func get_animation_player() -> AnimationPlayer:
 func get_pushback_manager() -> PushbackManager:
     return _pushback_manager
 
+func get_sound_manager() -> EnemySoundManager:
+    return _sound_manager
+
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
@@ -94,6 +97,7 @@ func pause() -> void:
 
     set_physics_process(false)
     _animation_player.stop(false)
+    _sound_manager.set_all_muted(true)
 
 func resume() -> void:
     if _current_state_enum != State.DIE:
@@ -101,6 +105,7 @@ func resume() -> void:
 
     set_physics_process(true)
     _animation_player.play()
+    _sound_manager.set_all_muted(false)
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/drone_idle.wav-a9308c3b9bf706ca523c8cad2f6e8fc5.sample"
+
+[deps]
+
+source_file="res://shared/managers/enemy_sound_manager/audio/drone_idle.wav"
+dest_files=[ "res://.import/drone_idle.wav-a9308c3b9bf706ca523c8cad2f6e8fc5.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

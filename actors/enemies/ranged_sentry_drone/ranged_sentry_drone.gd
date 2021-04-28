@@ -89,6 +89,9 @@ func get_physics_manager() -> PhysicsManager:
 func get_aggro_manager() -> AggroManager:
     return _aggro_manager
 
+func get_sound_manager() -> EnemySoundManager:
+    return _sound_manager
+
 func get_react_sprite() -> ReactSprite:
     return _react_sprite
 
@@ -111,6 +114,7 @@ func pause() -> void:
 
     set_physics_process(false)
     _animation_player.stop(false)
+    _sound_manager.set_all_muted(true)
 
 func resume() -> void:
     if _current_state_enum != State.DIE:
@@ -118,6 +122,7 @@ func resume() -> void:
 
     set_physics_process(true)
     _animation_player.play()
+    _sound_manager.set_all_muted(false)
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:

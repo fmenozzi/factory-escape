@@ -64,6 +64,12 @@ pushback_duration = 0.15
 
 [node name="EnemySoundManager" parent="." instance=ExtResource( 5 )]
 
+[node name="DroneIdle" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="16"]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="AudioStreamPlayer" parent="EnemySoundManager/AudioStreamPlayersVisibility/DroneIdle" index="0"]
+pitch_scale = 2.0
+
 [node name="States" type="Node" parent="."]
 
 [node name="Wander" type="Node" parent="States"]
@@ -105,3 +111,7 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -2.5 )
 shape = SubResource( 5 )
+
+[editable path="EnemySoundManager"]
+
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/DroneIdle"]

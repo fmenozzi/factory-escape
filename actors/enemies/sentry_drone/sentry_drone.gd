@@ -127,6 +127,7 @@ func pause() -> void:
 
     set_physics_process(false)
     _animation_player.stop(false)
+    _sound_manager.set_all_muted(true)
 
 func resume() -> void:
     if _current_state_enum != State.DIE:
@@ -134,6 +135,7 @@ func resume() -> void:
 
     set_physics_process(true)
     _animation_player.play()
+    _sound_manager.set_all_muted(false)
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:

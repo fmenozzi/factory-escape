@@ -86,6 +86,12 @@ attenuation_visibility_radius_tiles = 3.0
 [node name="SentryDroneBashMissed" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="8"]
 attenuation_visibility_radius_tiles = 3.0
 
+[node name="DroneIdle" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="16"]
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="DroneMove" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="17"]
+attenuation_visibility_radius_tiles = 4.0
+
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
