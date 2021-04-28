@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://shared/managers/SoundManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://shared/managers/enemy_sound_manager/enemy_sound_manager.gd" type="Script" id=2]
@@ -25,6 +25,9 @@
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/sticky_drone_contract.wav" type="AudioStream" id=23]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/drone_idle.wav" type="AudioStream" id=24]
 [ext_resource path="res://shared/managers/enemy_sound_manager/audio/drone_move.wav" type="AudioStream" id=25]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/laser_wind_down.wav" type="AudioStream" id=26]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/laser_telegraph.wav" type="AudioStream" id=27]
+[ext_resource path="res://shared/managers/enemy_sound_manager/audio/laser_shoot.wav" type="AudioStream" id=28]
 
 [node name="EnemySoundManager" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -146,6 +149,21 @@ max_volume_db = -12.0
 [node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/DroneMove" index="0"]
 stream = ExtResource( 25 )
 
+[node name="LaserTelegraph" parent="AudioStreamPlayersVisibility" index="18" instance=ExtResource( 9 )]
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/LaserTelegraph" index="0"]
+stream = ExtResource( 27 )
+
+[node name="LaserShoot" parent="AudioStreamPlayersVisibility" index="19" instance=ExtResource( 9 )]
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/LaserShoot" index="0"]
+stream = ExtResource( 28 )
+
+[node name="LaserWindDown" parent="AudioStreamPlayersVisibility" index="20" instance=ExtResource( 9 )]
+
+[node name="AudioStreamPlayer" parent="AudioStreamPlayersVisibility/LaserWindDown" index="0"]
+stream = ExtResource( 26 )
+
 [editable path="AudioStreamPlayersVisibility/ExpandOrganic"]
 [editable path="AudioStreamPlayersVisibility/ContractOrganic"]
 [editable path="AudioStreamPlayersVisibility/JumpOrganic"]
@@ -169,3 +187,9 @@ stream = ExtResource( 25 )
 [editable path="AudioStreamPlayersVisibility/DroneIdle"]
 
 [editable path="AudioStreamPlayersVisibility/DroneMove"]
+
+[editable path="AudioStreamPlayersVisibility/LaserTelegraph"]
+
+[editable path="AudioStreamPlayersVisibility/LaserShoot"]
+
+[editable path="AudioStreamPlayersVisibility/LaserWindDown"]

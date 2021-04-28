@@ -57,6 +57,7 @@ onready var _beam_end: Position2D = $BeamEnd
 onready var _impact_sprite: Sprite = $BeamEnd/BeamImpact
 onready var _impact_sprite_mat: ShaderMaterial = _impact_sprite.get_material()
 onready var _impact_sparks: Particles2D = $BeamEnd/ImpactSparks
+onready var _sound_manager: EnemySoundManager = $EnemySoundManager
 
 func _ready() -> void:
     _raycast.cast_to = Vector2(MAX_LENGTH, 0)
@@ -119,6 +120,16 @@ func shoot() -> void:
 func cancel() -> void:
     _current_state = State.CANCELLED
 
+    _sound_manager.get_player(EnemySoundManager.Sounds.LASER_TELEGRAPH).stop()
+    _sound_manager.get_player(EnemySoundManager.Sounds.LASER_SHOOT).stop()
+    _sound_manager.get_player(EnemySoundManager.Sounds.LASER_WIND_DOWN).stop()
+
+func pause() -> void:
+    _sound_manager.set_all_muted(true)
+
+func resume() -> void:
+    _sound_manager.set_all_muted(false)
+
 func _cast_laser_beam() -> void:
     # Get the local coordinates of the point where the laser actually makes
     # contact
@@ -176,6 +187,8 @@ func _start_telegraph() -> void:
     var telegraph_width_inner := 0.0
     var num_wobbles := 6
 
+    _sound_manager.play(EnemySoundManager.Sounds.LASER_TELEGRAPH)
+
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
     _outer_beam.modulate = TELEGRAPH_COLOR
@@ -190,6 +203,7 @@ func _start_laser_shot() -> void:
     var num_wobbles := 8
 
     if _current_state != State.CANCELLED:
+        _sound_manager.play(EnemySoundManager.Sounds.LASER_SHOOT)
         _current_state = State.SHOOT
         _hitbox_collision_shape.set_deferred('disabled', false)
         _impact_sparks.emitting = true
@@ -208,6 +222,8 @@ func _start_wind_down() -> void:
         'impact_radius_uv')
 
     _impact_sparks.emitting = false
+
+    _sound_manager.play(EnemySoundManager.Sounds.LASER_WIND_DOWN)
 
     _tween.remove_all()
     _interpolate_beam_width(_outer_beam, _outer_beam.width, 0, WIND_DOWN_DURATION)

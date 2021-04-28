@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://actors/enemies/projectiles/laser/laser.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/projectiles/laser/textures/beam.png" type="Texture" id=2]
 [ext_resource path="res://actors/enemies/projectiles/laser/shaders/laser_impact.shader" type="Shader" id=3]
 [ext_resource path="res://actors/enemies/projectiles/laser/shaders/laser_antialias.shader" type="Shader" id=4]
+[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -79,3 +80,16 @@ lifetime = 0.5
 randomness = 1.0
 draw_order = 1
 process_material = SubResource( 6 )
+
+[node name="EnemySoundManager" parent="." instance=ExtResource( 5 )]
+
+[node name="LaserTelegraph" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="18"]
+attenuation_visibility_radius_tiles = 16.0
+
+[node name="LaserShoot" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="19"]
+attenuation_visibility_radius_tiles = 16.0
+
+[node name="LaserWindDown" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="20"]
+attenuation_visibility_radius_tiles = 16.0
+
+[editable path="EnemySoundManager"]
