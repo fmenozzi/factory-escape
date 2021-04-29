@@ -9,6 +9,7 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _ripple_sprite: Sprite = $RippleSprite
 onready var _light_sprite: Sprite = $LightSprite
+onready var _embers: Particles2D = $LampEmbers
 onready var _rest_walk_to_points: Node2D = $RestPoints
 onready var _light_walk_to_points: Node2D = $LightPoints
 onready var _fire_sound: AudioStreamPlayerVisibility = $FireSound
