@@ -5,10 +5,6 @@
 [ext_resource path="res://environment/hazards/crusher/Crusher.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -53,7 +49,5 @@ shape = SubResource( 2 )
 position = Vector2( 48, 160 )
 
 [editable path="World/Rooms/Room"]
-
 [editable path="World/Rooms/Room/TileMaps"]
-
 [editable path="World/Rooms/Room/HazardCheckpoints/HazardCheckpoint"]

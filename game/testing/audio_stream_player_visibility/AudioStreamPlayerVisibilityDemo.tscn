@@ -51,7 +51,5 @@ position = Vector2( 9.05991e-06, -1.43051e-05 )
 position = Vector2( 480, 256 )
 
 [editable path="World/Rooms/AudioStreamPlayerVisibilityRoom"]
-
 [editable path="World/Rooms/AudioStreamPlayerVisibilityRoom/TileMaps"]
-
 [editable path="World/Rooms/AudioStreamPlayerVisibilityRoom/Sprite/AudioStreamPlayerVisibility"]

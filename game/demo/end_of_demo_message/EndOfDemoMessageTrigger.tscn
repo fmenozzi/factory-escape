@@ -2,7 +2,6 @@
 
 [ext_resource path="res://game/demo/end_of_demo_message/end_of_demo_message_trigger.gd" type="Script" id=1]
 
-
 [node name="EndOfDemoMessageTrigger" type="Area2D" groups=[
 "end_of_demo_message_trigger",
 ]]

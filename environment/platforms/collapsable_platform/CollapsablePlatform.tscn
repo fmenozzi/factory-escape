@@ -5,7 +5,6 @@
 [ext_resource path="res://environment/platforms/collapsable_platform/collapsable_platform.gd" type="Script" id=3]
 [ext_resource path="res://environment/platforms/collapsable_platform/textures/background.png" type="Texture" id=4]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "collapse"
 length = 0.4
@@ -77,6 +76,3 @@ one_way_collision = true
 
 [node name="FlashManager" parent="." instance=ExtResource( 2 )]
 sprite_path = NodePath("../PlatformSprite")
-total_duration = 2.0
-single_flash_duration = 0.075
-flash_color = Color( 1, 1, 1, 1 )

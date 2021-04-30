@@ -8,8 +8,6 @@
 [ext_resource path="res://game/testing/GrapplePlayground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/testing/HazardCheckpoints.tscn" type="PackedScene" id=7]
 
-
-
 [node name="TestGame" instance=ExtResource( 1 )]
 run_standalone = false
 
@@ -37,3 +35,12 @@ position = Vector2( 0, 8 )
 position = Vector2( -640, 0 )
 
 [editable path="World/Rooms/GrapplePlayground"]
+[editable path="World/Rooms/GrapplePlayground/TileMaps"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/LowerCenter"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/MidLeft"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/MidRight"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/UpperCenterLeft"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/UpperCenterRight"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/CeilingLeft"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/CeilingRight"]
+[editable path="World/Rooms/GrapplePlayground/GrapplePoints/Crates"]

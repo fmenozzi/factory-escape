@@ -82,7 +82,5 @@ focus_neighbour_bottom = NodePath("../SaveSlotContainer1/Slot")
 text = "Back"
 
 [editable path="SaveSlotContainer1"]
-
 [editable path="SaveSlotContainer2"]
-
 [editable path="SaveSlotContainer3"]

@@ -96,7 +96,6 @@ MAX_HEALTH = 3
 [node name="FlashManager" parent="." instance=ExtResource( 1 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
-single_flash_duration = 0.075
 flash_color = Color( 10, 10, 10, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 10 )]
@@ -195,3 +194,12 @@ cast_to = Vector2( 0, 10 )
 collision_mask = 4
 
 [editable path="EnemySoundManager"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/ExpandOrganic"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/ContractOrganic"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/JumpOrganic"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/LandSoftOrganic"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/TurretScanning"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashTelegraph"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBash"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashImpact"]
+[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashMissed"]

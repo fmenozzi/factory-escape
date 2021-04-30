@@ -583,6 +583,7 @@ player_heal={
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 quality/2d/use_pixel_snap=true
 
 [world]

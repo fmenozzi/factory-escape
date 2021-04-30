@@ -33,5 +33,4 @@ position = Vector2( 160, 90 )
 position = Vector2( 160, 160 )
 
 [editable path="World/Rooms/Room"]
-
 [editable path="World/Rooms/Room/TileMaps"]

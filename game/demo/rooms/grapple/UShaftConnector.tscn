@@ -5,8 +5,6 @@
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=4]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -84,5 +82,4 @@ position = Vector2( 40, 156 )
 dialog = [ "Maintenance report 290, status: HEALTHY", "Climbing pins depolyed in major maintenance shafts to ease routine repair work.", "The pins are vital for allowing personnel access to hard-to-reach areas of maintenance shafts, and serve as a more robust solution to site-wide", " power outages when compared to traditional lifts." ]
 
 [editable path="TileMaps"]
-
 [editable path="GrapplePoints/GrapplePoint"]

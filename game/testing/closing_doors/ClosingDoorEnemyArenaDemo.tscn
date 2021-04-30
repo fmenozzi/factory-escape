@@ -5,10 +5,6 @@
 [ext_resource path="res://game/testing/closing_doors/closing_door_enemy_arena.gd" type="Script" id=3]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=4]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 90 )
 
@@ -54,5 +50,4 @@ shape = SubResource( 2 )
 position = Vector2( 50, 160 )
 
 [editable path="World/Rooms/ClosingDoorEnemyArena"]
-
 [editable path="World/Rooms/ClosingDoorEnemyArena/TileMaps"]

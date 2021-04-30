@@ -194,5 +194,4 @@ max_volume_db = -10.0
 stream = ExtResource( 5 )
 
 [editable path="ShootAudioPlayer"]
-
 [editable path="ImpactAudioPlayer"]

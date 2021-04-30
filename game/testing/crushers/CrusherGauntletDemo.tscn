@@ -7,10 +7,6 @@
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/lamp/Lamp.tscn" type="PackedScene" id=6]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -178,23 +174,13 @@ position = Vector2( 160, 90 )
 position = Vector2( 232, 168 )
 
 [editable path="World/Rooms/PreGauntlet"]
-
 [editable path="World/Rooms/PreGauntlet/TileMaps"]
-
 [editable path="World/Rooms/Gauntlet"]
-
 [editable path="World/Rooms/Gauntlet/TileMaps"]
-
 [editable path="World/Rooms/Gauntlet/HazardCheckpoints/HazardCheckpointTopLeft"]
-
 [editable path="World/Rooms/Gauntlet/HazardCheckpoints/HazardCheckpointTopRight"]
-
 [editable path="World/Rooms/Gauntlet/HazardCheckpoints/HazardCheckpointMiddleLeft"]
-
 [editable path="World/Rooms/Gauntlet/HazardCheckpoints/HazardCheckpointMiddleRight"]
-
 [editable path="World/Rooms/Gauntlet/HazardCheckpoints/HazardCheckpointLedge"]
-
 [editable path="World/Rooms/PostGauntlet"]
-
 [editable path="World/Rooms/PostGauntlet/TileMaps"]

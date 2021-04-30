@@ -60,8 +60,6 @@ MAX_HEALTH = 4
 [node name="FlashManager" parent="." instance=ExtResource( 3 )]
 sprite_path = NodePath("../Sprite")
 total_duration = 0.3
-single_flash_duration = 0.075
-flash_color = Color( 1, 1, 1, 1 )
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 4 )]
 movement_speed_tiles_per_second = 4.0
