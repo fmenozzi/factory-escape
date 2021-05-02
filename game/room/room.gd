@@ -9,7 +9,7 @@ onready var _enemies: Node2D = $Enemies
 onready var _tilemaps_nav: Navigation2D = $TileMaps
 
 func _ready() -> void:
-    _room_boundaries.connect('area_entered', self, '_on_player_entered')
+    set_enable_room_transitions(true)
 
     _connect_projectile_spawner_signals()
 
@@ -96,6 +96,12 @@ func contains(obj: Node2D) -> bool:
     var bounds := Rect2(get_global_position(), get_room_dimensions())
 
     return bounds.has_point(obj.get_global_position())
+
+func set_enable_room_transitions(enabled: bool) -> void:
+    if enabled:
+        _room_boundaries.connect('area_entered', self, '_on_player_entered')
+    else:
+        _room_boundaries.disconnect('area_entered', self, '_on_player_entered')
 
 # TODO: This general idea could probably be improved by having projectile
 #       spawners figure out which room they're in (by walking up the tree) and

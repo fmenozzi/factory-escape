@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=84 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -49,6 +49,7 @@
 [ext_resource path="res://actors/player/states/sleep.gd" type="Script" id=47]
 [ext_resource path="res://actors/player/states/fall_no_input.gd" type="Script" id=48]
 [ext_resource path="res://actors/player/states/mark_intro_fall_as_completed.gd" type="Script" id=49]
+[ext_resource path="res://actors/player/states/suspended.gd" type="Script" id=50]
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -1006,6 +1007,9 @@ script = ExtResource( 36 )
 script = ExtResource( 45 )
 animation_name = "die"
 
+[node name="Suspended" type="Node" parent="States"]
+script = ExtResource( 50 )
+
 [node name="IntroFall" type="Node" parent="States"]
 script = ExtResource( 36 )
 
@@ -1017,6 +1021,15 @@ script = ExtResource( 30 )
 
 [node name="MarkIntroFallAsCompleted" type="Node" parent="States/IntroFall"]
 script = ExtResource( 49 )
+
+[node name="CentralHubFall" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="FallNoInput" type="Node" parent="States/CentralHubFall"]
+script = ExtResource( 48 )
+
+[node name="HardLanding" type="Node" parent="States/CentralHubFall"]
+script = ExtResource( 30 )
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",

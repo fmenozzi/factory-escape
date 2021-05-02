@@ -38,7 +38,9 @@ enum State {
     HARD_LANDING,
     HEAL,
     DIE,
+    SUSPENDED,
     INTRO_FALL,
+    CENTRAL_HUB_FALL,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -68,7 +70,9 @@ onready var STATES = {
     State.HARD_LANDING:     $States/HardLanding,
     State.HEAL:             $States/Heal,
     State.DIE:              $States/Die,
+    State.SUSPENDED:        $States/Suspended,
     State.INTRO_FALL:       $States/IntroFall,
+    State.CENTRAL_HUB_FALL: $States/CentralHubFall,
 }
 
 var current_state: Node = null
