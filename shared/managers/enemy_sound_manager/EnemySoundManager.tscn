@@ -177,19 +177,11 @@ stream = ExtResource( 26 )
 [editable path="AudioStreamPlayersVisibility/HomingProjectileShoot"]
 [editable path="AudioStreamPlayersVisibility/HomingProjectileFollow"]
 [editable path="AudioStreamPlayersVisibility/HomingProjectileImpact"]
-
 [editable path="AudioStreamPlayersVisibility/StickyDroneWalk"]
-
 [editable path="AudioStreamPlayersVisibility/StickyDroneExpand"]
-
 [editable path="AudioStreamPlayersVisibility/StickyDroneContract"]
-
 [editable path="AudioStreamPlayersVisibility/DroneIdle"]
-
 [editable path="AudioStreamPlayersVisibility/DroneMove"]
-
 [editable path="AudioStreamPlayersVisibility/LaserTelegraph"]
-
 [editable path="AudioStreamPlayersVisibility/LaserShoot"]
-
 [editable path="AudioStreamPlayersVisibility/LaserWindDown"]
