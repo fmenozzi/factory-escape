@@ -45,3 +45,7 @@ func _on_player_entered_cargo_lift() -> void:
 
     # Re-enable room transitions for central hub.
     _central_hub.set_enable_room_transitions(true)
+
+    # Reset previous/current room so that next room transition works properly.
+    _player.prev_room = _central_hub
+    _player.curr_room = _central_hub
