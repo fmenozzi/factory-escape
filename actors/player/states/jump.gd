@@ -5,6 +5,18 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # will cause the velocity to "cut", allowing for variable-height jumps).
     player.velocity.y = player.get_physics_manager().get_max_jump_velocity()
 
+    # If the jump button isn't being pressed upon entering the jump state, this
+    # means we must be buffer jumping, as the player may have released the jump
+    # button between triggering the buffering and entering the actual jump
+    # state. In this case, we jump cut early so that we perform a min-jump
+    # instead of a max jump.
+    #
+    # TODO: Consider whether something in-between would be optimal, as a min
+    #       jump is quite low. Maybe lerp between min-jump and max-jump with a
+    #       small weight?
+    if not Input.is_action_pressed('player_jump'):
+        _jump_cut(player)
+
     player.get_animation_player().play('jump')
     player.get_sound_manager().play(PlayerSoundManager.Sounds.JUMP)
 
@@ -18,7 +30,6 @@ func exit(player: Player) -> void:
     pass
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
-    var physics_manager := player.get_physics_manager()
     var jump_manager := player.get_jump_manager()
     var dash_manager := player.get_dash_manager()
     var grapple_manager := player.get_grapple_manager()
@@ -26,8 +37,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 
     if event.is_action_released('player_jump'):
         # "Jump cut" if the jump button is released.
-        player.velocity.y = max(
-            player.velocity.y, physics_manager.get_min_jump_velocity())
+        _jump_cut(player)
     elif event.is_action_pressed('player_jump'):
         if (wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back()) and wall_jump_manager.can_wall_jump():
             # Wall jump.
@@ -81,3 +91,7 @@ func update(player: Player, delta: float) -> Dictionary:
     player.move(player.velocity, Util.NO_SNAP)
 
     return {'new_state': Player.State.NO_CHANGE}
+
+func _jump_cut(player: Player) -> void:
+    player.velocity.y = max(
+        player.velocity.y, player.get_physics_manager().get_min_jump_velocity())
