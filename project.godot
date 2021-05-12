@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://game/demo/rooms/double_jump/containment_arena_save_manager.gd"
 }, {
 "base": "Node2D",
+"class": "DashBuffer",
+"language": "GDScript",
+"path": "res://actors/player/managers/dash_buffer.gd"
+}, {
+"base": "Node2D",
 "class": "DashManager",
 "language": "GDScript",
 "path": "res://actors/player/managers/dash_manager.gd"
@@ -128,6 +133,11 @@ _global_script_classes=[ {
 "class": "HomingProjectile",
 "language": "GDScript",
 "path": "res://actors/enemies/projectiles/homing_projectile/homing_projectile.gd"
+}, {
+"base": "Node2D",
+"class": "JumpBuffer",
+"language": "GDScript",
+"path": "res://actors/player/managers/jump_buffer.gd"
 }, {
 "base": "Node2D",
 "class": "JumpManager",
@@ -333,6 +343,7 @@ _global_script_class_icons={
 "Buddy": "",
 "CentralLock": "",
 "ContainmentArenaSaveManager": "",
+"DashBuffer": "",
 "DashManager": "",
 "DemoAbility": "",
 "DemoSaveManager": "",
@@ -349,6 +360,7 @@ _global_script_class_icons={
 "Health": "",
 "HealthPackManager": "",
 "HomingProjectile": "",
+"JumpBuffer": "",
 "JumpManager": "",
 "LampSaveManager": "",
 "Laser": "",

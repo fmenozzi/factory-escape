@@ -11,14 +11,12 @@ const COYOTE_TIME_DURATION: float = 0.1
 
 # If true, transition to jump state immediately upon landing (buffer jump). This
 # is only enabled if the player presses the jump button while falling (when
-# unable to jump normally) and the player is close to the ground (as determined
-# by the jump buffer raycast attached to the player).
+# unable to jump normally) and the player is close to the ground.
 var _buffer_jump_enabled := false
 
 # If true, transition to dash state immediately upon landing (buffer dash). This
 # is only enabled if the player presses the dash button while falling (when
-# unable to dash normally) and the player is close to the ground (as determined
-# by the dash buffer raycast attached to the player).
+# unable to dash normally) and the player is close to the ground.
 var _buffer_dash_enabled := false
 
 onready var _fall_time_stopwatch: Stopwatch = $FallTimeStopwatch
@@ -86,7 +84,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_dash') and dash_manager.has_dash():
         if dash_manager.can_dash():
             return {'new_state': Player.State.DASH}
-        elif dash_manager.get_dash_buffer_raycast().is_colliding():
+        elif dash_manager.can_buffer_dash():
             _buffer_dash_enabled = true
     elif event.is_action_pressed('player_jump'):
         if (wall_jump_manager.is_near_wall_front() or wall_jump_manager.is_near_wall_back()) and wall_jump_manager.can_wall_jump():
@@ -99,7 +97,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         elif jump_manager.can_jump():
             # Double jump.
             return {'new_state': Player.State.DOUBLE_JUMP}
-        elif jump_manager.get_jump_buffer_raycast().is_colliding():
+        elif jump_manager.can_buffer_jump():
             # Enable buffer jump if the player is close to the ground and
             # presses the jump button (and is unable to otherwise jump).
             _buffer_jump_enabled = true

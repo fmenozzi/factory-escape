@@ -9,7 +9,7 @@ const DASH_COOLDOWN: float = 0.30
 var _has_dash := false
 var _can_dash := true
 
-onready var _dash_buffer_raycast: RayCast2D = $DashBufferRaycast
+onready var _dash_buffer: DashBuffer = $DashBuffer
 onready var _dash_cooldown_timer: Timer = $DashCooldown
 
 func _ready() -> void:
@@ -42,8 +42,8 @@ func consume_dash() -> void:
 func reset_dash() -> void:
     _can_dash = true
 
-func get_dash_buffer_raycast() -> RayCast2D:
-    return _dash_buffer_raycast
+func can_buffer_dash() -> bool:
+    return _dash_buffer.can_buffer_dash()
 
 func get_dash_cooldown_timer() -> Timer:
     return _dash_cooldown_timer

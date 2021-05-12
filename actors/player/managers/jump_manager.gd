@@ -12,7 +12,7 @@ var _state: int = State.NOT_JUMPED
 
 var _has_double_jump := false
 
-onready var _jump_buffer_raycast: RayCast2D = $JumpBufferRaycast
+onready var _jump_buffer: JumpBuffer = $JumpBuffer
 
 func get_save_data() -> Array:
     return [SAVE_KEY, {
@@ -60,8 +60,8 @@ func consume_jump() -> void:
 func reset_jump() -> void:
     _state = State.NOT_JUMPED
 
-func get_jump_buffer_raycast() -> RayCast2D:
-    return _jump_buffer_raycast
+func can_buffer_jump() -> bool:
+    return _jump_buffer.can_buffer_jump()
 
 func _on_ability_chosen(chosen_ability: int) -> void:
     assert(chosen_ability in [

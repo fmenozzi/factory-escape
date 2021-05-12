@@ -6,14 +6,12 @@ var grapple_point: GrapplePoint = null
 
 # If true, transition to jump state immediately upon landing (buffer jump). This
 # is only enabled if the player presses the jump button while falling (when
-# unable to jump normally) and the player is close to the ground (as determined
-# by the jump buffer raycast attached to the player).
+# unable to jump normally) and the player is close to the ground.
 var _buffer_jump_enabled := false
 
 # If true, transition to dash state immediately upon landing (buffer dash). This
 # is only enabled if the player presses the dash button while falling (when
-# unable to dash normally) and the player is close to the ground (as determined
-# by the dash buffer raycast attached to the player).
+# unable to dash normally) and the player is close to the ground.
 var _buffer_dash_enabled := false
 
 func grapple_velocity(player: Player, grapple_point: GrapplePoint) -> Vector2:
@@ -79,10 +77,10 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
                 'grapple_point': next_grapple_point,
             }
     elif event.is_action_pressed('player_jump') and velocity.y > 0:
-        if player.get_jump_manager().get_jump_buffer_raycast().is_colliding():
+        if player.get_jump_manager().can_buffer_jump():
             _buffer_jump_enabled = true
     elif event.is_action_pressed('player_dash') and velocity.y > 0:
-        if player.get_dash_manager().get_dash_buffer_raycast().is_colliding():
+        if player.get_dash_manager().can_buffer_dash():
             _buffer_dash_enabled = true
 
     return {'new_state': Player.State.NO_CHANGE}
