@@ -12,6 +12,7 @@ onready var _yes: Button = $ConfirmationWidget/HBoxContainer/Yes
 onready var _no: Button = $ConfirmationWidget/HBoxContainer/No
 
 onready var _ui_sound_player: UiSoundPlayer = $UiSoundPlayer
+onready var _dialog_start_sound: AudioStreamPlayer = $DialogStart
 
 func _ready() -> void:
     hide_dialog()
@@ -30,6 +31,7 @@ func show_dialog(msg: String) -> void:
 
     _message.show()
     _confirmation_widget.show()
+    _dialog_start_sound.play()
 
     _set_enable_ui_navigation_sounds(true)
 
