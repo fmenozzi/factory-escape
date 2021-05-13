@@ -1,8 +1,7 @@
 extends Node2D
 class_name JumpBuffer
 
-onready var _jump_buffer_raycast: RayCast2D = $JumpBufferRaycast
+onready var _jump_buffer_area: Area2D = $JumpBufferArea
 
 func can_buffer_jump() -> bool:
-    _jump_buffer_raycast.force_raycast_update()
-    return _jump_buffer_raycast.is_colliding()
+    return not _jump_buffer_area.get_overlapping_bodies().empty()

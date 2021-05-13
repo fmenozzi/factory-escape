@@ -1,8 +1,7 @@
 extends Node2D
 class_name DashBuffer
 
-onready var _dash_buffer_raycast: RayCast2D = $DashBufferRaycast
+onready var _dash_buffer_area: Area2D = $DashBufferArea
 
 func can_buffer_dash() -> bool:
-    _dash_buffer_raycast.force_raycast_update()
-    return _dash_buffer_raycast.is_colliding()
+    return not _dash_buffer_area.get_overlapping_bodies().empty()
