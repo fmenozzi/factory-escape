@@ -142,7 +142,7 @@ func _set_paused(new_pause_state: bool) -> void:
     if new_pause_state:
         Audio.set_bus_volume_linear(
             'Music',
-            get_pause_volume_factor() * Audio.get_bus_max_volume_linear('Music'))
+            get_pause_volume_factor() * Audio.get_bus_volume_linear('Music'))
     else:
         Audio.reset_bus_to_max_volume_linear('Music')
 
