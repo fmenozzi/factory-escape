@@ -83,6 +83,9 @@ func _ready() -> void:
     for switch in get_tree().get_nodes_in_group('switches'):
         switch.connect('switch_press_started', self, '_on_player_pressed_switch')
 
+    for springboard in get_tree().get_nodes_in_group('springboards'):
+        springboard.connect('sprung', _player, '_on_landed_on_spring_board')
+
     for buddy in get_tree().get_nodes_in_group('buddy'):
         _dialog_box.connect('dialog_finished', buddy, '_on_dialog_finished')
 

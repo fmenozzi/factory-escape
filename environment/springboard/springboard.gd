@@ -1,6 +1,8 @@
 extends Node2D
 class_name Springboard
 
+signal sprung
+
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _trigger: Area2D = $TriggerArea
 
@@ -12,3 +14,5 @@ func _on_player_entered(player: Player) -> void:
         return
 
     _animation_player.play('spring')
+
+    emit_signal('sprung')

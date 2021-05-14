@@ -24,7 +24,9 @@ extents = Vector2( 8, 8 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6, 2 )
 
-[node name="Springboard" type="Node2D"]
+[node name="Springboard" type="Node2D" groups=[
+"springboards",
+]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

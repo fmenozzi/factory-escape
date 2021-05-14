@@ -501,3 +501,6 @@ func _on_hazard_area_hit(hitbox: Area2D) -> void:
 
 func _on_hazard_body_hit(hitbox: Node) -> void:
     _check_for_hazard_hit(hitbox)
+
+func _on_landed_on_spring_board() -> void:
+    change_state({'new_state': State.JUMP})
