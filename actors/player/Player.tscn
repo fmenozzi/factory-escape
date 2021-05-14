@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -51,6 +51,7 @@
 [ext_resource path="res://actors/player/states/mark_intro_fall_as_completed.gd" type="Script" id=49]
 [ext_resource path="res://actors/player/states/suspended.gd" type="Script" id=50]
 [ext_resource path="res://actors/player/states/mark_central_hub_fall_as_completed.gd" type="Script" id=51]
+[ext_resource path="res://actors/player/states/spring_jump.gd" type="Script" id=52]
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -859,6 +860,9 @@ script = ExtResource( 10 )
 
 [node name="DoubleJump" type="Node" parent="States"]
 script = ExtResource( 11 )
+
+[node name="SpringJump" type="Node" parent="States"]
+script = ExtResource( 52 )
 
 [node name="Fall" type="Node" parent="States"]
 script = ExtResource( 12 )

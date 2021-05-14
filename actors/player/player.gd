@@ -17,6 +17,7 @@ enum State {
     WALK,
     JUMP,
     DOUBLE_JUMP,
+    SPRING_JUMP,
     FALL,
     DASH,
     LOOK_DOWN,
@@ -49,6 +50,7 @@ onready var STATES = {
     State.WALK:             $States/Walk,
     State.JUMP:             $States/Jump,
     State.DOUBLE_JUMP:      $States/DoubleJump,
+    State.SPRING_JUMP:      $States/SpringJump,
     State.FALL:             $States/Fall,
     State.DASH:             $States/Dash,
     State.LOOK_DOWN:        $States/LookDown,
@@ -503,4 +505,4 @@ func _on_hazard_body_hit(hitbox: Node) -> void:
     _check_for_hazard_hit(hitbox)
 
 func _on_landed_on_spring_board() -> void:
-    change_state({'new_state': State.JUMP})
+    change_state({'new_state': State.SPRING_JUMP})
