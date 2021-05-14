@@ -14,5 +14,3 @@ func _on_player_entered(player: Player) -> void:
         return
 
     _animation_player.play('spring')
-
-    emit_signal('sprung')

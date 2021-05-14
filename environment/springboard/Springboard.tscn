@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://environment/springboard/springboard.gd" type="Script" id=1]
 [ext_resource path="res://environment/springboard/textures/springboard.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "spring"
+length = 1.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -12,14 +14,43 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25, 0.27, 0.29, 0.31, 0.33, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.95, 1.05 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 0 ]
+"values": [ 3, 2, 1, 0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 2, 3, 4, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpringHead:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25, 0.27, 0.29, 0.31, 0.33, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.95, 1.05 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 0, -17 ), Vector2( 0, -16 ), Vector2( 0, -15 ), Vector2( 0, -14 ), Vector2( 0, -15 ), Vector2( 0, -16 ), Vector2( 0, -17 ), Vector2( 0, -18 ), Vector2( 0, -19 ), Vector2( 0, -20 ), Vector2( 0, -21 ), Vector2( 0, -20 ), Vector2( 0, -19 ), Vector2( 0, -18 ), Vector2( 0, -17 ), Vector2( 0, -16 ), Vector2( 0, -15 ), Vector2( 0, -16 ), Vector2( 0, -17 ), Vector2( 0, -18 ), Vector2( 0, -17 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.27 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "sprung" ],
+"method": "emit_signal"
+} ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6, 2 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6, 2 )
@@ -33,19 +64,31 @@ script = ExtResource( 1 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
 hframes = 8
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/spring = SubResource( 1 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Base" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
 position = Vector2( 0, -8 )
 shape = SubResource( 2 )
 
+[node name="SpringHead" type="KinematicBody2D" parent="."]
+position = Vector2( 0, -17 )
+collision_layer = 4
+collision_mask = 3
+motion/sync_to_physics = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpringHead"]
+shape = SubResource( 4 )
+
 [node name="TriggerArea" type="Area2D" parent="."]
+position = Vector2( 0, -2 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
