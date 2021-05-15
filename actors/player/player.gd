@@ -346,6 +346,9 @@ func get_hazard_checkpoint() -> Area2D:
 func get_center() -> Vector2:
     return self.global_position + Vector2(0, -8)
 
+func get_slight_downward_move() -> float:
+    return 64.0
+
 func get_jump_manager() -> JumpManager:
     return _jump_manager
 
@@ -505,4 +508,12 @@ func _on_hazard_body_hit(hitbox: Node) -> void:
     _check_for_hazard_hit(hitbox)
 
 func _on_landed_on_spring_board() -> void:
-    change_state({'new_state': State.SPRING_JUMP})
+    if not is_on_ground():
+        return
+
+    # Make sure player is still on springhead by the time the spring jump is
+    # supposed to trigger.
+    for i in range(get_slide_count()):
+        var collision := get_slide_collision(i)
+        if collision.collider.is_in_group('springheads'):
+            change_state({'new_state': State.SPRING_JUMP})

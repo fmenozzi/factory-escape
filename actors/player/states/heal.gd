@@ -30,7 +30,7 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': Player.State.IDLE}
 
     if player.is_on_ground():
-        player.move(Vector2(0, 10))
+        player.move(Vector2(0, player.get_slight_downward_move()))
 
     return {'new_state': Player.State.NO_CHANGE}
 

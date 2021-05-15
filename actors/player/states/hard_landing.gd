@@ -23,6 +23,6 @@ func update(player: Player, delta: float) -> Dictionary:
     # move_and_slide() is called on every frame, which updates collisions. This
     # ensures that we move along with moving platforms if we hard land on top of
     # one.
-    player.move(Vector2(0, 10))
+    player.move(Vector2(0, player.get_slight_downward_move()))
 
     return {'new_state': Player.State.NO_CHANGE}

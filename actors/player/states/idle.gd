@@ -108,6 +108,6 @@ func update(player: Player, delta: float) -> Dictionary:
     # allows us to e.g. idle next to a wall (without pressing into it) and have
     # is_on_wall() correctly report that we're NOT on a wall, which is important
     # for not triggering wall slide when jumping up from idling next to a wall.
-    player.move(Vector2(0, 10))
+    player.move(Vector2(0, player.get_slight_downward_move()))
 
     return {'new_state': Player.State.NO_CHANGE}

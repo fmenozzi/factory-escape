@@ -52,6 +52,6 @@ func update(player: Player, delta: float) -> Dictionary:
     # additional calls to move_and_slide(), is_on_ceiling() would continue to be
     # true even after we've teleported to the hazard checkpoint and entered the
     # HAZARD_RECOVER state.
-    player.move(Vector2(0, 10))
+    player.move(Vector2(0, player.get_slight_downward_move()))
 
     return {'new_state': Player.State.NO_CHANGE}

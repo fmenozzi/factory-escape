@@ -57,7 +57,7 @@ func update(player: Player, delta: float) -> Dictionary:
     # is_on_floor() detects collisions with the floor and doesn't erroneously
     # report that we're in the air.
     var speed := player.get_physics_manager().get_movement_speed()
-    player.move(Vector2(input_direction * speed, 10))
+    player.move(Vector2(input_direction * speed, player.get_slight_downward_move()))
 
     return {'new_state': Player.State.NO_CHANGE}
 
