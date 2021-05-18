@@ -14,6 +14,8 @@ func _ready() -> void:
     _line.add_point(Vector2.ZERO)
     _line.add_point(_raycast.cast_to)
 
+    _update_raycast()
+
 func _physics_process(delta: float) -> void:
     _update_raycast()
 
