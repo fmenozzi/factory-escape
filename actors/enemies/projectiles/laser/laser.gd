@@ -96,15 +96,18 @@ func shoot() -> void:
 
     # Telegraph.
     _start_telegraph()
-    yield(_tween, 'tween_all_completed')
+    if _tween.is_active():
+        yield(_tween, 'tween_all_completed')
 
     # Actual shot.
     _start_laser_shot()
-    yield(_tween, 'tween_all_completed')
+    if _tween.is_active():
+        yield(_tween, 'tween_all_completed')
 
     # Wind down animation. Hitbox is disabled during wind down.
     _start_wind_down()
-    yield(_tween, 'tween_all_completed')
+    if _tween.is_active():
+        yield(_tween, 'tween_all_completed')
 
     # Deactivate laser.
     hide()
@@ -126,6 +129,9 @@ func cancel() -> void:
 
 func pause() -> void:
     _sound_manager.set_all_muted(true)
+    _tween.remove_all()
+    hide()
+    set_physics_process(false)
 
 func resume() -> void:
     _sound_manager.set_all_muted(false)
