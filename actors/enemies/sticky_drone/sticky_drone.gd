@@ -184,6 +184,7 @@ func lamp_reset() -> void:
     global_position = _initial_global_position
     set_direction(initial_direction)
     _health.heal_to_full()
+    _laser.lamp_reset()
     _change_state({'new_state': initial_state})
 
 func is_dead() -> bool:

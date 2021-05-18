@@ -130,6 +130,9 @@ func pause() -> void:
 func resume() -> void:
     _sound_manager.set_all_muted(false)
 
+func lamp_reset() -> void:
+    _current_state = State.INACTIVE
+
 func _cast_laser_beam() -> void:
     # Get the local coordinates of the point where the laser actually makes
     # contact
