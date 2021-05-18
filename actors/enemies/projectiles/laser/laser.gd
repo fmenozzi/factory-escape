@@ -138,6 +138,9 @@ func resume() -> void:
 
 func lamp_reset() -> void:
     _current_state = State.INACTIVE
+    _hitbox_collision_shape.set_deferred('disabled', true)
+    set_physics_process(false)
+    hide()
 
 func _cast_laser_beam() -> void:
     # Get the local coordinates of the point where the laser actually makes
