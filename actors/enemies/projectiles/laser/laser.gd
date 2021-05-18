@@ -226,7 +226,8 @@ func _start_wind_down() -> void:
 
     _impact_sparks.emitting = false
 
-    _sound_manager.play(EnemySoundManager.Sounds.LASER_WIND_DOWN)
+    if _current_state != State.CANCELLED:
+        _sound_manager.play(EnemySoundManager.Sounds.LASER_WIND_DOWN)
 
     _tween.remove_all()
     _interpolate_beam_width(_outer_beam, _outer_beam.width, 0, WIND_DOWN_DURATION)
