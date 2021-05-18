@@ -11,3 +11,11 @@ script = ExtResource( 3 )
 
 [node name="Switch" parent="." instance=ExtResource( 1 )]
 position = Vector2( -16, 0 )
+
+[node name="FadeInOutLabel" parent="Switch" index="2"]
+margin_left = -32.0
+margin_right = 32.0
+text = "Deactivate"
+
+[editable path="Switch"]
+[editable path="Switch/WalkToPoints"]
