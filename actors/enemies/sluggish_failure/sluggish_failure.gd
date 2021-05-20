@@ -67,6 +67,7 @@ func _ready() -> void:
     _change_state({'new_state': _current_state_enum})
 
     _hurtbox.connect('area_entered', self, '_on_hazard_hit')
+    _hurtbox.connect('body_entered', self, '_on_hazard_hit')
 
     STATES[State.EXPAND].connect(
         'expanded', _sound_manager, 'play', [EnemySoundManager.Sounds.EXPAND_ORGANIC])
@@ -95,9 +96,7 @@ func take_hit(damage: int, player: Player) -> void:
     _flash_manager.start_flashing()
     _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_ORGANIC)
     if _health.get_current_health() == 0:
-        # TODO: Make death nicer (animation, effects, etc.).
-        _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_ORGANIC)
-        _change_state({'new_state': State.DIE})
+        _die()
     else:
         # Once hit, the failure will attempt to flee the player by quickly
         # moving away from them.
@@ -176,8 +175,23 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
 
-# Sluggish failures insta-die when touching hazards.
-func _on_hazard_hit(area: Area2D) -> void:
-    if not area or not Collision.in_layer(area, 'hazards'):
-        return
+func _die() -> void:
+    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_ORGANIC)
+
     _change_state({'new_state': State.DIE})
+
+# Sluggish failures insta-die when touching hazards.
+func _on_hazard_hit(area_or_body) -> void:
+    if not area_or_body or not Collision.in_layer(area_or_body, 'hazards'):
+        return
+
+    Rumble.start(Rumble.Type.WEAK, 0.10)
+    Screenshake.start(
+        Screenshake.Duration.VERY_SHORT, Screenshake.Amplitude.VERY_SMALL)
+
+    var enemy_hit_effect: EnemyHitEffect = Preloads.EnemyHitEffect.instance()
+    var world := get_parent().get_parent().get_parent().get_parent()
+    world.get_node('TemporaryNodes').add_child(enemy_hit_effect)
+    enemy_hit_effect.global_position = global_position
+
+    _die()

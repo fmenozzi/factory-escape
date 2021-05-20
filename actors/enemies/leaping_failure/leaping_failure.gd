@@ -53,6 +53,7 @@ onready var _sprite: Sprite = $Sprite
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
+onready var _hurtbox: Area2D = $Hurtbox
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
@@ -66,9 +67,12 @@ func _ready() -> void:
     _current_state = STATES[_current_state_enum]
     _change_state({'new_state': _current_state_enum, 'aggro': false})
 
+    _hurtbox.connect('area_entered', self, '_on_hazard_hit')
+    _hurtbox.connect('body_entered', self, '_on_hazard_hit')
+
     _react_sprite.change_state(ReactSprite.State.NONE)
 
-    _health.connect('died', self, '_on_died')
+    _health.connect('died', self, '_die')
 
     STATES[State.EXPAND].connect(
         'expanded', _sound_manager, 'play', [EnemySoundManager.Sounds.EXPAND_ORGANIC])
@@ -173,7 +177,22 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state = STATES[new_state_enum]
     _current_state.enter(self, new_state_dict)
 
-# TODO: Make death nicer (animation, effects, etc.).
-func _on_died() -> void:
+func _die() -> void:
     _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_ORGANIC)
     _change_state({'new_state': State.DIE})
+
+# Leaping failures insta-die when touching hazards.
+func _on_hazard_hit(area_or_body) -> void:
+    if not area_or_body or not Collision.in_layer(area_or_body, 'hazards'):
+        return
+
+    Rumble.start(Rumble.Type.WEAK, 0.10)
+    Screenshake.start(
+        Screenshake.Duration.VERY_SHORT, Screenshake.Amplitude.VERY_SMALL)
+
+    var enemy_hit_effect: EnemyHitEffect = Preloads.EnemyHitEffect.instance()
+    var world := get_parent().get_parent().get_parent().get_parent()
+    world.get_node('TemporaryNodes').add_child(enemy_hit_effect)
+    enemy_hit_effect.global_position = global_position
+
+    _die()
