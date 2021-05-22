@@ -22,17 +22,21 @@ func detach_and_move_to_global(new_global_pos: Vector2) -> void:
     self.global_position = new_global_pos
 
 func reattach(tween_on_reattach: bool = true) -> void:
-    self.set_as_toplevel(false)
-
     if not tween_on_reattach:
         _original_local_anchor_pos = Vector2.ZERO
         _is_detached = false
         self.position = _original_local_anchor_pos
+        self.set_as_toplevel(false)
         return
 
-    # Now that we're no longer top-level, determine our position relative to the
-    # player for the starting value of the reattachment interpolation.
+    # Determine our position relative to the player for the starting value of
+    # the reattachment interpolation.
     self.position = _player.to_local(self.global_position)
+
+    # As of switching to Godot 3.3, this needs to be called AFTER setting the
+    # camera's position, likely because it'll now immediately go back to the
+    # global position from when it was detached.
+    self.set_as_toplevel(false)
 
     # Smoothly reattach the camera to the player by tweening to the original
     # local anchor position.
