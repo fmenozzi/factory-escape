@@ -26,4 +26,4 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
     if rested_at_lamp:
         _room._lamp.disconnect('rested_at_lamp', _room, '_on_rested_at_lamp')
         _room._door_trigger.disconnect('body_entered', _room, '_on_player_entered_room')
-        _room._closing_door.close()
+        _room._closing_door.set_closed()

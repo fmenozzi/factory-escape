@@ -9,7 +9,7 @@ onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 var _is_closed = false
 
 func _ready() -> void:
-    open()
+    set_opened()
 
 func open() -> void:
     _collision_shape.set_deferred('disabled', true)
@@ -28,6 +28,14 @@ func close() -> void:
 
     _is_closed = true
     emit_signal('door_closed')
+
+func set_opened() -> void:
+    _collision_shape.set_deferred('disabled', true)
+    _animation_player.play('set_opened')
+
+func set_closed() -> void:
+    _collision_shape.set_deferred('disabled', false)
+    _animation_player.play('set_closed')
 
 func is_closed() -> bool:
     return _is_closed
