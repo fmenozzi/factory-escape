@@ -174,11 +174,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/hazards/lightning_wall/lightning_wall.gd"
 }, {
-"base": "Node",
-"class": "MaintenanceArenaSaveManager",
-"language": "GDScript",
-"path": "res://game/demo/rooms/prelude/maintenance_arena_save_manager.gd"
-}, {
 "base": "VBoxContainer",
 "class": "Menu",
 "language": "GDScript",
@@ -373,7 +368,6 @@ _global_script_class_icons={
 "LeapingFailurePhysicsManager": "",
 "LightningBolt": "",
 "LightningWall": "",
-"MaintenanceArenaSaveManager": "",
 "Menu": "",
 "Pause": "",
 "PhysicsManager": "",
