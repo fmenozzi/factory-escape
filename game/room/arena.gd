@@ -100,7 +100,10 @@ func _spawn_enemies_for_phase(phase_idx: int) -> void:
         assert('spawn_point_local' in enemy_data)
         _spawn_enemy_at(enemy_data['enemy'], enemy_data['spawn_point_local'])
 
-func _spawn_enemy_at(enemy: KinematicBody2D, spawn_point_local: Vector2) -> void:
+    # TODO: Move this logic elsewhere.
+    get_parent()._connect_projectile_spawner_signals()
+
+func _spawn_enemy_at(enemy: Node2D, spawn_point_local: Vector2) -> void:
     enemy.get_node('Health').connect('died', self, '_on_enemy_death', [enemy])
 
     # Tween transparency so that enemies fade in as they spawn.
@@ -141,7 +144,7 @@ func _assert_phase_structure_is_correct() -> void:
 
         assert(phase.get_child_count() > 0)
         for enemy in phase.get_children():
-            assert(enemy is KinematicBody2D)
+            assert(enemy is KinematicBody2D or enemy is Turret)
 
 func _assert_closing_doors_structure_is_correct() -> void:
     assert(not _closing_doors.empty())
