@@ -94,11 +94,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/hazards/fire_column/fire_column.gd"
 }, {
-"base": "Node",
-"class": "GrappleArenaSaveManager",
-"language": "GDScript",
-"path": "res://game/demo/rooms/grapple/grapple_arena_save_manager.gd"
-}, {
 "base": "Node2D",
 "class": "GrappleManager",
 "language": "GDScript",
@@ -342,7 +337,6 @@ _global_script_class_icons={
 "ErrorOr": "",
 "ErrorPlusMessage": "",
 "FireColumn": "",
-"GrappleArenaSaveManager": "",
 "GrappleManager": "",
 "GrapplePoint": "",
 "GroundedPhysicsManager": "",
