@@ -44,11 +44,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/central_lock/central_lock.gd"
 }, {
-"base": "Node",
-"class": "ContainmentArenaSaveManager",
-"language": "GDScript",
-"path": "res://game/demo/rooms/double_jump/containment_arena_save_manager.gd"
-}, {
 "base": "Node2D",
 "class": "DashBuffer",
 "language": "GDScript",
@@ -337,7 +332,6 @@ _global_script_class_icons={
 "AudioStreamPlayerVisibility": "",
 "Buddy": "",
 "CentralLock": "",
-"ContainmentArenaSaveManager": "",
 "DashBuffer": "",
 "DashManager": "",
 "DemoAbility": "",
