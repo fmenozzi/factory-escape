@@ -23,6 +23,9 @@ const TELEGRAPH_COLOR: Color = Color('ff4f78')
 # which the player cannot be harmed.
 const TELEGRAPH_DURATION: float = 1.0
 
+# Attenuation radius to use when the laser is active.
+const ATTENUATION_RADIUS_TILES := 16.0
+
 # The color of the outer beam during the shoot phase.
 const SHOT_COLOR: Color = Color(
     TELEGRAPH_COLOR.r * 1.3,
@@ -58,6 +61,9 @@ onready var _impact_sprite: Sprite = $BeamEnd/BeamImpact
 onready var _impact_sprite_mat: ShaderMaterial = _impact_sprite.get_material()
 onready var _impact_sparks: Particles2D = $BeamEnd/ImpactSparks
 onready var _sound_manager: EnemySoundManager = $EnemySoundManager
+onready var _laser_telegraph: AudioStreamPlayerVisibility = $EnemySoundManager/AudioStreamPlayersVisibility/LaserTelegraph
+onready var _laser_shoot: AudioStreamPlayerVisibility = $EnemySoundManager/AudioStreamPlayersVisibility/LaserShoot
+onready var _laser_wind_down: AudioStreamPlayerVisibility = $EnemySoundManager/AudioStreamPlayersVisibility/LaserWindDown
 
 func _ready() -> void:
     _raycast.cast_to = Vector2(MAX_LENGTH, 0)
@@ -94,6 +100,8 @@ func shoot() -> void:
     yield(get_tree(), 'physics_frame')
     show()
 
+    _set_attenuation_radius_tiles(ATTENUATION_RADIUS_TILES)
+
     # Telegraph.
     _start_telegraph()
     if _tween.is_active():
@@ -120,18 +128,26 @@ func shoot() -> void:
 
     _current_state = State.INACTIVE
 
+    # Wait for wind down sound to end before resetting the attenuation radius.
+    if _laser_wind_down.get_player().playing:
+        yield(_laser_wind_down.get_player(), 'finished')
+    _set_attenuation_radius_tiles(1.0)
+
 func cancel() -> void:
     _current_state = State.CANCELLED
 
-    _sound_manager.get_player(EnemySoundManager.Sounds.LASER_TELEGRAPH).stop()
-    _sound_manager.get_player(EnemySoundManager.Sounds.LASER_SHOOT).stop()
-    _sound_manager.get_player(EnemySoundManager.Sounds.LASER_WIND_DOWN).stop()
+    _laser_telegraph.get_player().stop()
+    _laser_shoot.get_player().stop()
+    _laser_wind_down.get_player().stop()
+
+    _set_attenuation_radius_tiles(1.0)
 
 func pause() -> void:
     _sound_manager.set_all_muted(true)
     _tween.remove_all()
     hide()
     set_physics_process(false)
+    _set_attenuation_radius_tiles(1.0)
 
 func resume() -> void:
     _sound_manager.set_all_muted(false)
@@ -141,6 +157,7 @@ func lamp_reset() -> void:
     _hitbox_collision_shape.set_deferred('disabled', true)
     set_physics_process(false)
     hide()
+    _set_attenuation_radius_tiles(1.0)
 
 func _cast_laser_beam() -> void:
     # Get the local coordinates of the point where the laser actually makes
@@ -281,3 +298,8 @@ func _setup_impact_sprite_wobble(
         _interpolate_impact_sprite_radius(
             impact_sprite_radius_uv - 0.05, impact_sprite_radius_uv,
             wobble_duration, (i+1) * (SHOT_DURATION / float(num_wobbles)))
+
+func _set_attenuation_radius_tiles(radius_tiles: float) -> void:
+    _laser_telegraph.set_radii_tiles(0.5, radius_tiles)
+    _laser_shoot.set_radii_tiles(0.5, radius_tiles)
+    _laser_wind_down.set_radii_tiles(0.5, radius_tiles)

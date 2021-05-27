@@ -28,17 +28,10 @@ func _ready() -> void:
     assert(attenuation_curve != null)
 
     # Set starting volume.
-    _audio_stream_player.volume_db = max_volume_db
+    _set_volume_db(max_volume_db)
 
     # Create visibility rects from radii.
-    assert(object_visibility_radius_tiles > 0)
-    assert(attenuation_visibility_radius_tiles > 0)
-    assert(object_visibility_radius_tiles < attenuation_visibility_radius_tiles)
-    _object_visibility.rect = Rect2(
-        -_object_radius, -_object_radius, 2 * _object_radius, 2 * _object_radius)
-    _attenuation_visibility.rect = Rect2(
-        -_attenuation_radius, -_attenuation_radius,
-        2 * _attenuation_radius, 2 * _attenuation_radius)
+    set_radii_tiles(object_visibility_radius_tiles, attenuation_visibility_radius_tiles)
 
     # Connect VisibilityNotifier2D signals to enable state transitions. Tween to
     # new volumes in these state transitions.
@@ -65,6 +58,17 @@ func _process(delta: float) -> void:
 
 func get_player() -> AudioStreamPlayer:
     return _audio_stream_player
+
+func set_radii_tiles(vis_radius_tiles: float, att_radius_tiles: float) -> void:
+    assert(vis_radius_tiles > 0)
+    assert(att_radius_tiles > 0)
+    assert(vis_radius_tiles < att_radius_tiles)
+
+    var vr := vis_radius_tiles * Util.TILE_SIZE
+    var ar := att_radius_tiles * Util.TILE_SIZE
+
+    _object_visibility.rect = Rect2(-vr, -vr, 2 * vr, 2 * vr)
+    _attenuation_visibility.rect = Rect2(-ar, -ar, 2 * ar, 2 * ar)
 
 func set_state() -> void:
     if _muted:
