@@ -305,6 +305,16 @@ _global_script_classes=[ {
 "path": "res://custom/scripts/version.gd"
 }, {
 "base": "Node2D",
+"class": "VisibilityBasedAudioGroup",
+"language": "GDScript",
+"path": "res://shared/managers/visibility_based_audio/visibility_based_audio_group.gd"
+}, {
+"base": "Node2D",
+"class": "VisibilityBasedAudioPlayer",
+"language": "GDScript",
+"path": "res://shared/managers/visibility_based_audio/visibility_based_audio_player.gd"
+}, {
+"base": "Node2D",
 "class": "WallJumpManager",
 "language": "GDScript",
 "path": "res://actors/player/managers/wall_jump_manager.gd"
@@ -374,6 +384,8 @@ _global_script_class_icons={
 "TutorialMessageTriggerSaveManager": "",
 "UiSoundPlayer": "",
 "Version": "",
+"VisibilityBasedAudioGroup": "",
+"VisibilityBasedAudioPlayer": "",
 "WallJumpManager": "",
 "WorkerDrone": ""
 }

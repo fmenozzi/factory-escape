@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shared/managers/visibility_based_audio/visibility_based_audio_group.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 1.0, 0, 1, Vector2( 1, 1 ), 1.0, 0.0, 1, 0 ]
+
+[node name="VisibilityBasedAudioGroup" type="Node2D"]
+script = ExtResource( 1 )
+attenuation_curve = SubResource( 1 )
+
+[node name="AudioPlayers" type="Node2D" parent="."]
+
+[node name="ObjectVisibility" type="VisibilityNotifier2D" parent="."]
+
+[node name="AttenuationVisibility" type="VisibilityNotifier2D" parent="."]
+
+[node name="VolumeTween" type="Tween" parent="."]
