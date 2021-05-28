@@ -9,7 +9,7 @@ func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
 
     failure.emit_dust_puff()
 
-    failure.get_sound_manager().play(EnemySoundManager.Sounds.JUMP_ORGANIC)
+    failure.get_sound_manager().play(LeapingFailureSoundManager.Sounds.JUMP)
 
 func exit(failure: LeapingFailure) -> void:
     pass
