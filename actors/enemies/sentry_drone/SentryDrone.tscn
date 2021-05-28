@@ -20,7 +20,7 @@
 [ext_resource path="res://actors/enemies/sentry_drone/states/die.gd" type="Script" id=18]
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=19]
 [ext_resource path="res://actors/enemies/sentry_drone/states/fly_to_point.gd" type="Script" id=20]
-[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=21]
+[ext_resource path="res://actors/enemies/sentry_drone/SentryDroneSoundManager.tscn" type="PackedScene" id=21]
 [ext_resource path="res://actors/enemies/sentry_drone/states/pause.gd" type="Script" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -72,25 +72,7 @@ unaggro_radius_tiles = 16.0
 pushback_distance_tiles = 0.5
 pushback_duration = 0.1
 
-[node name="EnemySoundManager" parent="." instance=ExtResource( 21 )]
-
-[node name="SentryDroneBashTelegraph" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="5"]
-attenuation_visibility_radius_tiles = 3.0
-
-[node name="SentryDroneBash" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="6"]
-attenuation_visibility_radius_tiles = 3.0
-
-[node name="SentryDroneBashImpact" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="7"]
-attenuation_visibility_radius_tiles = 3.0
-
-[node name="SentryDroneBashMissed" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="8"]
-attenuation_visibility_radius_tiles = 3.0
-
-[node name="DroneIdle" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="16"]
-attenuation_visibility_radius_tiles = 4.0
-
-[node name="DroneMove" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="17"]
-attenuation_visibility_radius_tiles = 4.0
+[node name="SentryDroneSoundManager" parent="." instance=ExtResource( 21 )]
 
 [node name="States" type="Node" parent="."]
 
@@ -178,14 +160,3 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 1 )
-
-[editable path="EnemySoundManager"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/ExpandOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/ContractOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/JumpOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/LandSoftOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/TurretScanning"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashTelegraph"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBash"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashImpact"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashMissed"]

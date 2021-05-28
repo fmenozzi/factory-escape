@@ -12,8 +12,7 @@ onready var _shake_timer: Timer = $ShakeTimer
 func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     sentry_drone.get_animation_player().stop()
 
-    sentry_drone.get_sound_manager().play(
-        EnemySoundManager.Sounds.SENTRY_DRONE_BASH_TELEGRAPH)
+    sentry_drone.get_sound_manager().play(SentryDroneSoundManager.Sounds.BASH_TELEGRAPH)
 
     _player = Util.get_player()
 
@@ -24,9 +23,7 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
 func exit(sentry_drone: SentryDrone) -> void:
     sentry_drone.reset_sprite_position()
 
-    sentry_drone.get_sound_manager()                                      \
-        .get_player(EnemySoundManager.Sounds.SENTRY_DRONE_BASH_TELEGRAPH) \
-        .stop()
+    sentry_drone.get_sound_manager().stop(SentryDroneSoundManager.Sounds.BASH_TELEGRAPH)
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var damping := ease(

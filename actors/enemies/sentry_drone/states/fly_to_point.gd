@@ -18,10 +18,10 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
         _nav.to_local(_global_fly_to_point),
         true)
 
-    sentry_drone.get_sound_manager().play(EnemySoundManager.Sounds.DRONE_MOVE)
+    sentry_drone.get_sound_manager().play(SentryDroneSoundManager.Sounds.MOVE)
 
 func exit(sentry_drone: SentryDrone) -> void:
-    sentry_drone.get_sound_manager().get_player(EnemySoundManager.Sounds.DRONE_MOVE).stop()
+    sentry_drone.get_sound_manager().stop(SentryDroneSoundManager.Sounds.MOVE)
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var aggro_manager := sentry_drone.get_aggro_manager()

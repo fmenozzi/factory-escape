@@ -40,7 +40,7 @@ onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: SentryDronePhysicsManager = $PhysicsManager
 onready var _aggro_manager: AggroManager = $AggroManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
-onready var _sound_manager: EnemySoundManager = $EnemySoundManager
+onready var _sound_manager: SentryDroneSoundManager = $SentryDroneSoundManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -81,13 +81,13 @@ func get_physics_manager() -> SentryDronePhysicsManager:
 func get_aggro_manager() -> AggroManager:
     return _aggro_manager
 
-func get_sound_manager() -> EnemySoundManager:
+func get_sound_manager() -> SentryDroneSoundManager:
     return _sound_manager
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
+    _sound_manager.play(SentryDroneSoundManager.Sounds.HIT)
 
     _pushback_manager.start_pushback(
         player.get_center().direction_to(global_position))
@@ -137,6 +137,9 @@ func resume() -> void:
     _animation_player.play()
     _sound_manager.set_all_muted(false)
 
+    for audio_group in _sound_manager.get_all_audio_groups():
+        audio_group.set_state()
+
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
         lamp_reset()
@@ -167,5 +170,5 @@ func _change_state(new_state_dict: Dictionary) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
+    _sound_manager.play(SentryDroneSoundManager.Sounds.KILLED)
     _change_state({'new_state': State.DIE})

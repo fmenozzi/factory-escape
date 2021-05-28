@@ -14,7 +14,7 @@ func _ready() -> void:
 func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     sentry_drone.get_animation_player().play('idle')
 
-    sentry_drone.get_sound_manager().play(EnemySoundManager.Sounds.DRONE_IDLE)
+    sentry_drone.get_sound_manager().play(SentryDroneSoundManager.Sounds.IDLE)
 
     _timer.connect('timeout', self, '_on_turn_around_timeout', [sentry_drone])
     _timer.start()
@@ -22,7 +22,7 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
 func exit(sentry_drone: SentryDrone) -> void:
     _timer.stop()
 
-    sentry_drone.get_sound_manager().get_player(EnemySoundManager.Sounds.DRONE_IDLE).stop()
+    sentry_drone.get_sound_manager().stop(SentryDroneSoundManager.Sounds.IDLE)
 
 func update(sentry_drone: SentryDrone, delta: float) -> Dictionary:
     var aggro_manager := sentry_drone.get_aggro_manager()
