@@ -103,6 +103,7 @@ func _on_options_saved() -> void:
 
 func _on_menu_changed(new_menu: int, metadata: Dictionary) -> void:
     _change_menu(_menu_stack.back(), new_menu, metadata)
+    _ui_sound_player.play_menu_changed_sound()
 
 func _on_previous_menu_requested(metadata: Dictionary) -> void:
     assert(_menu_stack.size() >= 2)
@@ -149,6 +150,8 @@ func _start_game(save_slot: int) -> void:
 
     # Set the save slot to use for this session.
     SaveAndLoad.save_slot = save_slot
+
+    _ui_sound_player.play_start_game_sound()
 
     var fade_duration := 2.0
     SceneChanger.change_scene_to(game, fade_duration)
