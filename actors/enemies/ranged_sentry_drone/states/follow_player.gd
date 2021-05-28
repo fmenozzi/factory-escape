@@ -17,7 +17,7 @@ func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> 
 
     sentry_drone.get_animation_player().play('idle')
 
-    sentry_drone.get_sound_manager().play(EnemySoundManager.Sounds.DRONE_MOVE)
+    sentry_drone.get_sound_manager().play(RangedSentryDroneSoundManager.Sounds.MOVE)
 
     # Wait 1-2 seconds before shooting.
     _shoot_timer.wait_time = rand_range(1.0, 2.0)
@@ -26,7 +26,7 @@ func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> 
 func exit(sentry_drone: RangedSentryDrone) -> void:
     _shoot_timer.stop()
 
-    sentry_drone.get_sound_manager().get_player(EnemySoundManager.Sounds.DRONE_MOVE).stop()
+    sentry_drone.get_sound_manager().stop(RangedSentryDroneSoundManager.Sounds.MOVE)
 
 func update(sentry_drone: RangedSentryDrone, delta: float) -> Dictionary:
     var aggro_manager := sentry_drone.get_aggro_manager()
