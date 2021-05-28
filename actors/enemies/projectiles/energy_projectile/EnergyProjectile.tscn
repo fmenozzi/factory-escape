@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://actors/enemies/projectiles/energy_projectile/textures/energy-projectile.png" type="Texture" id=1]
 [ext_resource path="res://actors/enemies/projectiles/energy_projectile/energy_projectile.gd" type="Script" id=2]
-[ext_resource path="res://shared/managers/AudioStreamPlayerVisibility.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/enemies/projectiles/energy_projectile/audio/energy_projectile_shoot.wav" type="AudioStream" id=4]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/enemies/projectiles/energy_projectile/audio/energy_projectile_impact.wav" type="AudioStream" id=5]
+[ext_resource path="res://actors/enemies/projectiles/energy_projectile/audio/energy_projectile_shoot.wav" type="AudioStream" id=6]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.5, 1 )
@@ -182,16 +183,13 @@ shape = SubResource( 7 )
 anims/impact = SubResource( 8 )
 anims/spawn = SubResource( 9 )
 
-[node name="ShootAudioPlayer" parent="." instance=ExtResource( 3 )]
+[node name="VisibilityBasedAudioGroup" parent="." instance=ExtResource( 4 )]
 
-[node name="AudioStreamPlayer" parent="ShootAudioPlayer" index="0"]
-stream = ExtResource( 4 )
+[node name="Shoot" parent="VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 3 )]
+stream = ExtResource( 6 )
 
-[node name="ImpactAudioPlayer" parent="." instance=ExtResource( 3 )]
+[node name="Impact" parent="VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 3 )]
 max_volume_db = -10.0
-
-[node name="AudioStreamPlayer" parent="ImpactAudioPlayer" index="0"]
 stream = ExtResource( 5 )
 
-[editable path="ShootAudioPlayer"]
-[editable path="ImpactAudioPlayer"]
+[editable path="VisibilityBasedAudioGroup"]
