@@ -40,7 +40,7 @@ var _rotation_direction := 0
 
 onready var _health: Health = $Health
 onready var _aggro_manager: AggroManager = $AggroManager
-onready var _sound_manager: EnemySoundManager = $EnemySoundManager
+onready var _sound_manager: TurretSoundManager = $TurretSoundManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
@@ -100,7 +100,7 @@ func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _body_flash_manager.start_flashing()
     _head_flash_manager.start_flashing()
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
+    _sound_manager.play(TurretSoundManager.Sounds.HIT)
 
 func rotate_head_to(new_rotation: float) -> void:
     _head.rotation = new_rotation
@@ -123,7 +123,7 @@ func shoot() -> void:
 func get_aggro_manager() -> AggroManager:
     return _aggro_manager
 
-func get_sound_manager() -> EnemySoundManager:
+func get_sound_manager() -> TurretSoundManager:
     return _sound_manager
 
 func get_react_sprite() -> ReactSprite:
@@ -169,6 +169,9 @@ func resume() -> void:
     set_physics_process(true)
     _scanner.set_enabled(true)
 
+    for audio_group in _sound_manager.get_all_audio_groups():
+        audio_group.set_state()
+
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
         lamp_reset()
@@ -201,5 +204,5 @@ func _change_state(new_state_dict: Dictionary) -> void:
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
+    _sound_manager.play(TurretSoundManager.Sounds.KILLED)
     _change_state({'new_state': State.DIE})

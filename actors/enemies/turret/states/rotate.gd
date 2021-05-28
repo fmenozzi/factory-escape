@@ -36,12 +36,12 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     # Show scan line.
     turret.get_scanner().visible = true
 
-    turret.get_sound_manager().play(EnemySoundManager.Sounds.TURRET_SCANNING)
+    turret.get_sound_manager().play(TurretSoundManager.Sounds.SCANNING)
 
 func exit(turret: Turret) -> void:
     _rotation_tween.remove_all()
 
-    turret.get_sound_manager().get_player(EnemySoundManager.Sounds.TURRET_SCANNING).stop()
+    turret.get_sound_manager().stop(TurretSoundManager.Sounds.SCANNING)
 
 func update(turret: Turret, delta: float) -> Dictionary:
     var scanner := turret.get_scanner()

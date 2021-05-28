@@ -14,7 +14,7 @@
 [ext_resource path="res://actors/enemies/turret/Scanner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://actors/enemies/AggroManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/turret/states/die.gd" type="Script" id=14]
-[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=15]
+[ext_resource path="res://actors/enemies/turret/TurretSoundManager.tscn" type="PackedScene" id=15]
 [ext_resource path="res://actors/enemies/turret/states/pause.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -69,7 +69,8 @@ position = Vector2( 0, -8 )
 aggro_radius_tiles = 1.0
 unaggro_radius_tiles = 10.0
 
-[node name="EnemySoundManager" parent="." instance=ExtResource( 15 )]
+[node name="TurretSoundManager" parent="." instance=ExtResource( 15 )]
+position = Vector2( 0, -8 )
 
 [node name="States" type="Node" parent="."]
 
