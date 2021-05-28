@@ -1,0 +1,33 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedSoundManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/homing_projectile_sound_manager.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/audio/homing_projectile_impact.wav" type="AudioStream" id=5]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/audio/homing_projectile_shoot.wav" type="AudioStream" id=6]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/audio/homing_projectile_follow.wav" type="AudioStream" id=7]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/audio/homing_projectile_spawn.wav" type="AudioStream" id=8]
+
+[node name="HomingProjectileSoundManager" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="VisibilityBasedAudioGroup" parent="AudioGroups" index="0" instance=ExtResource( 2 )]
+attenuation_visibility_radius_tiles = 4.0
+
+[node name="Spawn" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 3 )]
+max_volume_db = -8.0
+stream = ExtResource( 8 )
+
+[node name="Shoot" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 3 )]
+stream = ExtResource( 6 )
+
+[node name="Follow" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 3 )]
+max_volume_db = -8.0
+stream = ExtResource( 7 )
+
+[node name="Impact" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="3" instance=ExtResource( 3 )]
+max_volume_db = -6.0
+stream = ExtResource( 5 )
+
+[editable path="AudioGroups/VisibilityBasedAudioGroup"]

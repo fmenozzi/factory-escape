@@ -124,6 +124,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/projectiles/homing_projectile/homing_projectile.gd"
 }, {
+"base": "VisibilityBasedSoundManager",
+"class": "HomingProjectileSoundManager",
+"language": "GDScript",
+"path": "res://actors/enemies/projectiles/homing_projectile/homing_projectile_sound_manager.gd"
+}, {
 "base": "Node2D",
 "class": "JumpBuffer",
 "language": "GDScript",
@@ -388,6 +393,7 @@ _global_script_class_icons={
 "Health": "",
 "HealthPackManager": "",
 "HomingProjectile": "",
+"HomingProjectileSoundManager": "",
 "JumpBuffer": "",
 "JumpManager": "",
 "LampSaveManager": "",

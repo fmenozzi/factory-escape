@@ -2,7 +2,7 @@
 
 [ext_resource path="res://actors/enemies/projectiles/homing_projectile/homing_projectile.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/projectiles/homing_projectile/textures/homing-projectile.png" type="Texture" id=2]
-[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/HomingProjectileSoundManager.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.309804, 0.470588, 0 )
@@ -224,4 +224,4 @@ shape = SubResource( 12 )
 anims/explode = SubResource( 13 )
 anims/spawn = SubResource( 14 )
 
-[node name="EnemySoundManager" parent="." instance=ExtResource( 3 )]
+[node name="HomingProjectileSoundManager" parent="." instance=ExtResource( 3 )]
