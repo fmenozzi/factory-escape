@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/expand_organic.wav-89a81f0fb3c0e2dfb18f8be9ae6bcd68.sample"
+
+[deps]
+
+source_file="res://actors/enemies/shared/audio/expand_organic.wav"
+dest_files=[ "res://.import/expand_organic.wav-89a81f0fb3c0e2dfb18f8be9ae6bcd68.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -44,7 +44,7 @@ var _direction_from_hit: int = Util.Direction.NONE
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: GroundedPhysicsManager = $PhysicsManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
-onready var _sound_manager: EnemySoundManager = $EnemySoundManager
+onready var _sound_manager: SluggishFailureSoundManager = $SluggishFailureSoundManager
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 onready var _health: Health = $Health
@@ -70,9 +70,9 @@ func _ready() -> void:
     _hurtbox.connect('body_entered', self, '_on_hazard_hit')
 
     STATES[State.EXPAND].connect(
-        'expanded', _sound_manager, 'play', [EnemySoundManager.Sounds.EXPAND_ORGANIC])
+        'expanded', _sound_manager, 'play', [SluggishFailureSoundManager.Sounds.EXPAND])
     STATES[State.CONTRACT].connect(
-        'contracted', _sound_manager, 'play', [EnemySoundManager.Sounds.CONTRACT_ORGANIC])
+        'contracted', _sound_manager, 'play', [SluggishFailureSoundManager.Sounds.CONTRACT])
 
 func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
@@ -85,7 +85,7 @@ func get_physics_manager() -> GroundedPhysicsManager:
 func get_pushback_manager() -> PushbackManager:
     return _pushback_manager
 
-func get_sound_manager() -> EnemySoundManager:
+func get_sound_manager() -> SluggishFailureSoundManager:
     return _sound_manager
 
 func get_animation_player() -> AnimationPlayer:
@@ -94,7 +94,7 @@ func get_animation_player() -> AnimationPlayer:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_ORGANIC)
+    _sound_manager.play(SluggishFailureSoundManager.Sounds.HIT)
     if _health.get_current_health() == 0:
         _die()
     else:
@@ -143,8 +143,8 @@ func resume() -> void:
     _animation_player.play()
     _sound_manager.set_all_muted(false)
 
-    for visibility_player in _sound_manager.get_all_visibility_players():
-        visibility_player.set_state()
+    for audio_group in _sound_manager.get_all_audio_groups():
+        audio_group.set_state()
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
@@ -176,7 +176,7 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state.enter(self, new_state_dict)
 
 func _die() -> void:
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_ORGANIC)
+    _sound_manager.play(SluggishFailureSoundManager.Sounds.KILLED)
 
     _change_state({'new_state': State.DIE})
 

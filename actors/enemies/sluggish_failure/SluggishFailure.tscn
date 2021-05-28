@@ -13,7 +13,7 @@
 [ext_resource path="res://actors/shared/physics_managers/grounded_physics_manager.gd" type="Script" id=11]
 [ext_resource path="res://actors/enemies/sluggish_failure/states/die.gd" type="Script" id=12]
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=13]
-[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=14]
+[ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailureSoundManager.tscn" type="PackedScene" id=14]
 [ext_resource path="res://actors/enemies/sluggish_failure/states/wait.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -106,17 +106,8 @@ movement_speed_tiles_per_second = 0.35
 pushback_distance_tiles = 0.5
 pushback_duration = 0.15
 
-[node name="EnemySoundManager" parent="." instance=ExtResource( 14 )]
+[node name="SluggishFailureSoundManager" parent="." instance=ExtResource( 14 )]
 position = Vector2( 0, -6 )
-
-[node name="ExpandOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="0"]
-attenuation_visibility_radius_tiles = 3.0
-
-[node name="ContractOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="1"]
-attenuation_visibility_radius_tiles = 3.0
-
-[node name="LandSoftOrganic" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="3"]
-attenuation_visibility_radius_tiles = 2.0
 
 [node name="States" type="Node" parent="."]
 
@@ -192,26 +183,3 @@ position = Vector2( 7, 0 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 4
-
-[editable path="EnemySoundManager"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/ExpandOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/ContractOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/JumpOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/LandSoftOrganic"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/TurretScanning"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashTelegraph"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBash"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashImpact"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/SentryDroneBashMissed"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/HomingProjectileSpawn"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/HomingProjectileShoot"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/HomingProjectileFollow"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/HomingProjectileImpact"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/StickyDroneWalk"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/StickyDroneExpand"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/StickyDroneContract"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/DroneIdle"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/DroneMove"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/LaserTelegraph"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/LaserShoot"]
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/LaserWindDown"]
