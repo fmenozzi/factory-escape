@@ -29,11 +29,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/managers/attack_manager.gd"
 }, {
-"base": "Node2D",
-"class": "AudioStreamPlayerVisibility",
-"language": "GDScript",
-"path": "res://shared/managers/audio_stream_player_visibility.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Buddy",
 "language": "GDScript",
@@ -369,7 +364,6 @@ _global_script_class_icons={
 "AggroManager": "",
 "Arena": "",
 "AttackManager": "",
-"AudioStreamPlayerVisibility": "",
 "Buddy": "",
 "CentralLock": "",
 "DashBuffer": "",
