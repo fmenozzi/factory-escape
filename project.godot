@@ -338,6 +338,11 @@ _global_script_classes=[ {
 "class": "WorkerDrone",
 "language": "GDScript",
 "path": "res://actors/enemies/worker_drone/worker_drone.gd"
+}, {
+"base": "VisibilityBasedSoundManager",
+"class": "WorkerDroneSoundManager",
+"language": "GDScript",
+"path": "res://actors/enemies/worker_drone/worker_drone_sound_manager.gd"
 } ]
 _global_script_class_icons={
 "AbilitiesLampSaveManager": "",
@@ -405,7 +410,8 @@ _global_script_class_icons={
 "VisibilityBasedAudioPlayer": "",
 "VisibilityBasedSoundManager": "",
 "WallJumpManager": "",
-"WorkerDrone": ""
+"WorkerDrone": "",
+"WorkerDroneSoundManager": ""
 }
 
 [application]

@@ -12,13 +12,13 @@ func _ready() -> void:
 func enter(worker_drone: WorkerDrone, previous_state_dict: Dictionary) -> void:
     worker_drone.get_animation_player().play('idle')
 
-    worker_drone.get_sound_manager().play(EnemySoundManager.Sounds.DRONE_IDLE)
+    worker_drone.get_sound_manager().play(WorkerDroneSoundManager.Sounds.IDLE)
 
     var speed := worker_drone.get_physics_manager().get_movement_speed()
     _velocity = speed * _velocity.normalized()
 
 func exit(worker_drone: WorkerDrone) -> void:
-    worker_drone.get_sound_manager().get_player(EnemySoundManager.Sounds.DRONE_IDLE).stop()
+    worker_drone.get_sound_manager().stop(WorkerDroneSoundManager.Sounds.IDLE)
 
 func update(worker_drone: WorkerDrone, delta: float) -> Dictionary:
     # Continue moving in a straight line until we hit an obstacle, at which

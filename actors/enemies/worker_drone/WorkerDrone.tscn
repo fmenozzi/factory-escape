@@ -4,7 +4,7 @@
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/worker_drone/textures/worker-drone.png" type="Texture" id=3]
 [ext_resource path="res://actors/enemies/worker_drone/worker_drone.gd" type="Script" id=4]
-[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/worker_drone/WorkerDroneSoundManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://actors/enemies/worker_drone/states/stagger.gd" type="Script" id=6]
 [ext_resource path="res://actors/enemies/worker_drone/states/pause.gd" type="Script" id=7]
 [ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=8]
@@ -62,13 +62,7 @@ movement_speed_tiles_per_second = 0.5
 pushback_distance_tiles = 1.5
 pushback_duration = 0.15
 
-[node name="EnemySoundManager" parent="." instance=ExtResource( 5 )]
-
-[node name="DroneIdle" parent="EnemySoundManager/AudioStreamPlayersVisibility" index="16"]
-attenuation_visibility_radius_tiles = 2.0
-
-[node name="AudioStreamPlayer" parent="EnemySoundManager/AudioStreamPlayersVisibility/DroneIdle" index="0"]
-pitch_scale = 2.0
+[node name="WorkerDroneSoundManager" parent="." instance=ExtResource( 5 )]
 
 [node name="States" type="Node" parent="."]
 
@@ -111,7 +105,3 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -2.5 )
 shape = SubResource( 5 )
-
-[editable path="EnemySoundManager"]
-
-[editable path="EnemySoundManager/AudioStreamPlayersVisibility/DroneIdle"]

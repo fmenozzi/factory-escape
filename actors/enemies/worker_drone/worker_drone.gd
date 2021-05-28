@@ -30,7 +30,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: PhysicsManager = $PhysicsManager
 onready var _pushback_manager: PushbackManager = $PushbackManager
-onready var _sound_manager: EnemySoundManager = $EnemySoundManager
+onready var _sound_manager: WorkerDroneSoundManager = $WorkerDroneSoundManager
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
@@ -57,10 +57,10 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
+    _sound_manager.play(WorkerDroneSoundManager.Sounds.HIT)
     if _health.get_current_health() == 0:
         # TODO: Make death nicer (animation, effects, etc.).
-        _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
+        _sound_manager.play(WorkerDroneSoundManager.Sounds.KILLED)
         _change_state({'new_state': State.DIE})
     else:
         var direction := player.global_position.direction_to(global_position)
@@ -78,7 +78,7 @@ func get_animation_player() -> AnimationPlayer:
 func get_pushback_manager() -> PushbackManager:
     return _pushback_manager
 
-func get_sound_manager() -> EnemySoundManager:
+func get_sound_manager() -> WorkerDroneSoundManager:
     return _sound_manager
 
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
@@ -106,6 +106,9 @@ func resume() -> void:
     set_physics_process(true)
     _animation_player.play()
     _sound_manager.set_all_muted(false)
+
+    for audio_group in _sound_manager.get_all_audio_groups():
+        audio_group.set_state()
 
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
