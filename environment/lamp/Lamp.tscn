@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://environment/WalkToPoints.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ui/FadeInOutLabel.tscn" type="PackedScene" id=2]
@@ -10,8 +10,9 @@
 [ext_resource path="res://environment/lamp/textures/lamp.png" type="Texture" id=8]
 [ext_resource path="res://environment/lamp/effects/LampEmbers.tscn" type="PackedScene" id=9]
 [ext_resource path="res://environment/lamp/save_manager.gd" type="Script" id=10]
-[ext_resource path="res://shared/managers/AudioStreamPlayerVisibility.tscn" type="PackedScene" id=11]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=11]
 [ext_resource path="res://environment/lamp/audio/fire.wav" type="AudioStream" id=12]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
@@ -190,13 +191,13 @@ position = Vector2( -10, 0 )
 [node name="Right" parent="LightPoints" index="1"]
 position = Vector2( 10, 0 )
 
-[node name="FireSound" parent="." instance=ExtResource( 11 )]
-max_volume_db = 10.0
+[node name="VisibilityBasedAudioGroup" parent="." instance=ExtResource( 13 )]
+position = Vector2( 0, -4 )
 
-[node name="AudioStreamPlayer" parent="FireSound" index="0"]
+[node name="Fire" parent="VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 11 )]
+max_volume_db = 10.0
 stream = ExtResource( 12 )
-bus = "Effects"
 
 [editable path="RestPoints"]
 [editable path="LightPoints"]
-[editable path="FireSound"]
+[editable path="VisibilityBasedAudioGroup"]
