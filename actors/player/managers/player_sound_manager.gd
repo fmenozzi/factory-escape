@@ -1,4 +1,4 @@
-extends SoundManager
+extends Node2D
 class_name PlayerSoundManager
 
 enum Sounds {
@@ -17,6 +17,7 @@ enum Sounds {
     LAND_HARD,
 }
 
+onready var _all_audio_stream_players: Array = $AudioStreamPlayers.get_children()
 onready var _walk: AudioStreamPlayer = $AudioStreamPlayers/Walk
 onready var _jump: AudioStreamPlayer = $AudioStreamPlayers/Jump
 onready var _dash: AudioStreamPlayer = $AudioStreamPlayers/Dash
@@ -31,10 +32,23 @@ onready var _die: AudioStreamPlayer = $AudioStreamPlayers/Die
 onready var _land_soft: AudioStreamPlayer = $AudioStreamPlayers/LandSoft
 onready var _land_hard: AudioStreamPlayer = $AudioStreamPlayers/LandHard
 
-func play(sound_enum: int) -> void:
-    var audio_stream_player := get_player(sound_enum)
+func _ready() -> void:
+    for audio_stream_player in _all_audio_stream_players:
+        assert(audio_stream_player is AudioStreamPlayer)
+        audio_stream_player.bus = 'Effects'
 
-    audio_stream_player.play()
+func set_all_muted(muted: bool) -> void:
+    # Since AudioStreamPlayer doesn't have built-in mute functionality (i.e. it
+    # can't remember what the pre-mute volume was for when it's time to unmute),
+    # simply pause the stream for now.
+    for audio_stream_player in _all_audio_stream_players:
+        audio_stream_player.stream_paused = muted
+
+func play(sound_enum: int) -> void:
+    get_player(sound_enum).play()
+
+func stop(sound_enum: int) -> void:
+    get_player(sound_enum).stop()
 
 func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
@@ -99,5 +113,5 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
             Error.report_if_error(
                 ErrorPlusMessage.new(
                     ERR_DOES_NOT_EXIST,
-                    'Sound enum value %d does not exist' % sound_enum))
+                    'Player sound enum value %d does not exist' % sound_enum))
             return null

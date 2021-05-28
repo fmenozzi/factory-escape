@@ -204,7 +204,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/player/managers/save_manager.gd"
 }, {
-"base": "SoundManager",
+"base": "Node2D",
 "class": "PlayerSoundManager",
 "language": "GDScript",
 "path": "res://actors/player/managers/player_sound_manager.gd"
@@ -278,11 +278,6 @@ _global_script_classes=[ {
 "class": "SluggishFailureSoundManager",
 "language": "GDScript",
 "path": "res://actors/enemies/sluggish_failure/sluggish_failure_sound_manager.gd"
-}, {
-"base": "Node2D",
-"class": "SoundManager",
-"language": "GDScript",
-"path": "res://shared/managers/sound_manager.gd"
 }, {
 "base": "Node2D",
 "class": "Springboard",
@@ -424,7 +419,6 @@ _global_script_class_icons={
 "ShaderManager": "",
 "SluggishFailure": "",
 "SluggishFailureSoundManager": "",
-"SoundManager": "",
 "Springboard": "",
 "StickyDrone": "",
 "StickyDroneSoundManager": "",
