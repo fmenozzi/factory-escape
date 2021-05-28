@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sticky_drone_walk.wav-febb6d5f39bb51aa222b744fc58ae1f4.sample"
+
+[deps]
+
+source_file="res://actors/enemies/sticky_drone/audio/sticky_drone_walk.wav"
+dest_files=[ "res://.import/sticky_drone_walk.wav-febb6d5f39bb51aa222b744fc58ae1f4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

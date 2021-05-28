@@ -17,7 +17,7 @@
 [ext_resource path="res://actors/enemies/sticky_drone/states/unalerted.gd" type="Script" id=15]
 [ext_resource path="res://actors/enemies/sticky_drone/states/die.gd" type="Script" id=16]
 [ext_resource path="res://actors/enemies/sticky_drone/states/return_to_ledge.gd" type="Script" id=17]
-[ext_resource path="res://shared/managers/enemy_sound_manager/EnemySoundManager.tscn" type="PackedScene" id=18]
+[ext_resource path="res://actors/enemies/sticky_drone/StickyDroneSoundManager.tscn" type="PackedScene" id=18]
 [ext_resource path="res://actors/enemies/sticky_drone/states/pause.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -179,7 +179,8 @@ position = Vector2( 0, -8 )
 aggro_radius_tiles = 8.0
 unaggro_radius_tiles = 14.0
 
-[node name="EnemySoundManager" parent="." instance=ExtResource( 18 )]
+[node name="StickyDroneSoundManager" parent="." instance=ExtResource( 18 )]
+position = Vector2( 0, -8 )
 
 [node name="States" type="Node" parent="."]
 

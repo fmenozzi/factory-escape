@@ -50,7 +50,7 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: PhysicsManager = $PhysicsManager
 onready var _aggro_manager: AggroManager = $AggroManager
-onready var _sound_manager: EnemySoundManager = $EnemySoundManager
+onready var _sound_manager: StickyDroneSoundManager = $StickyDroneSoundManager
 onready var _react_sprite: ReactSprite = $ReactSprite
 onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -88,7 +88,7 @@ func _ready() -> void:
             _react_sprite.rotation_degrees = -90
 
     STATES[State.WALK].connect(
-        'step_taken', _sound_manager, 'play', [EnemySoundManager.Sounds.STICKY_DRONE_WALK])
+        'step_taken', _sound_manager, 'play', [StickyDroneSoundManager.Sounds.WALK])
 
     _current_state_enum = initial_state
     _current_state = STATES[_current_state_enum]
@@ -123,7 +123,7 @@ func set_direction(new_direction: int) -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_HIT_MECHANICAL)
+    _sound_manager.play(StickyDroneSoundManager.Sounds.HIT)
 
 func get_floor_normal() -> Vector2:
     match floor_normal:
@@ -176,6 +176,9 @@ func resume() -> void:
     _sound_manager.set_all_muted(false)
     _laser.resume()
 
+    for audio_group in _sound_manager.get_all_audio_groups():
+        audio_group.set_state()
+
 func room_reset() -> void:
     if _current_state_enum != State.DIE:
         lamp_reset()
@@ -217,15 +220,15 @@ func _transition_to_shoot_state(pause_before_shooting: bool = false) -> void:
     })
 
 func _play_expand_sound() -> void:
-    _sound_manager.play(EnemySoundManager.Sounds.STICKY_DRONE_EXPAND)
+    _sound_manager.play(StickyDroneSoundManager.Sounds.EXPAND)
 
 func _play_contract_sound() -> void:
-    _sound_manager.play(EnemySoundManager.Sounds.STICKY_DRONE_CONTRACT)
+    _sound_manager.play(StickyDroneSoundManager.Sounds.CONTRACT)
 
 # TODO: Make death nicer (animation, effects, etc.).
 func _on_died() -> void:
     # Make sure to cancel laser shot so that an invisible-but-active laser
     # doesn't hit the player.
     _laser.cancel()
-    _sound_manager.play(EnemySoundManager.Sounds.ENEMY_KILLED_MECHANICAL)
+    _sound_manager.play(StickyDroneSoundManager.Sounds.KILLED)
     _change_state({'new_state': State.DIE})
