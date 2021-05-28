@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laser_wind_down.wav-90924238c3d9fa1c114ec8da1a410aa4.sample"
+
+[deps]
+
+source_file="res://actors/enemies/projectiles/laser/audio/laser_wind_down.wav"
+dest_files=[ "res://.import/laser_wind_down.wav-90924238c3d9fa1c114ec8da1a410aa4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

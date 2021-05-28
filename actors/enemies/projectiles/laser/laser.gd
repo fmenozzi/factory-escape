@@ -60,10 +60,11 @@ onready var _beam_end: Position2D = $BeamEnd
 onready var _impact_sprite: Sprite = $BeamEnd/BeamImpact
 onready var _impact_sprite_mat: ShaderMaterial = _impact_sprite.get_material()
 onready var _impact_sparks: Particles2D = $BeamEnd/ImpactSparks
-onready var _sound_manager: EnemySoundManager = $EnemySoundManager
-onready var _laser_telegraph: AudioStreamPlayerVisibility = $EnemySoundManager/AudioStreamPlayersVisibility/LaserTelegraph
-onready var _laser_shoot: AudioStreamPlayerVisibility = $EnemySoundManager/AudioStreamPlayersVisibility/LaserShoot
-onready var _laser_wind_down: AudioStreamPlayerVisibility = $EnemySoundManager/AudioStreamPlayersVisibility/LaserWindDown
+onready var _sound_manager: LaserSoundManager = $LaserSoundManager
+onready var _audio_group: VisibilityBasedAudioGroup = $LaserSoundManager/AudioGroups/VisibilityBasedAudioGroup
+onready var _laser_telegraph: AudioStreamPlayer = $LaserSoundManager/AudioGroups/VisibilityBasedAudioGroup/AudioPlayers/Telegraph/AudioStreamPlayer
+onready var _laser_shoot: AudioStreamPlayer = $LaserSoundManager/AudioGroups/VisibilityBasedAudioGroup/AudioPlayers/Shoot/AudioStreamPlayer
+onready var _laser_wind_down: AudioStreamPlayer = $LaserSoundManager/AudioGroups/VisibilityBasedAudioGroup/AudioPlayers/WindDown/AudioStreamPlayer
 
 func _ready() -> void:
     _raycast.cast_to = Vector2(MAX_LENGTH, 0)
@@ -129,16 +130,16 @@ func shoot() -> void:
     _current_state = State.INACTIVE
 
     # Wait for wind down sound to end before resetting the attenuation radius.
-    if _laser_wind_down.get_player().playing:
-        yield(_laser_wind_down.get_player(), 'finished')
+    if _laser_wind_down.playing:
+        yield(_laser_wind_down, 'finished')
     _set_attenuation_radius_tiles(1.0)
 
 func cancel() -> void:
     _current_state = State.CANCELLED
 
-    _laser_telegraph.get_player().stop()
-    _laser_shoot.get_player().stop()
-    _laser_wind_down.get_player().stop()
+    _laser_telegraph.stop()
+    _laser_shoot.stop()
+    _laser_wind_down.stop()
 
     _set_attenuation_radius_tiles(1.0)
 
@@ -216,7 +217,7 @@ func _start_telegraph() -> void:
     var telegraph_width_inner := 0.0
     var num_wobbles := 6
 
-    _sound_manager.play(EnemySoundManager.Sounds.LASER_TELEGRAPH)
+    _sound_manager.play(LaserSoundManager.Sounds.TELEGRAPH)
 
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
@@ -232,7 +233,7 @@ func _start_laser_shot() -> void:
     var num_wobbles := 8
 
     if _current_state != State.CANCELLED:
-        _sound_manager.play(EnemySoundManager.Sounds.LASER_SHOOT)
+        _sound_manager.play(LaserSoundManager.Sounds.SHOOT)
         _current_state = State.SHOOT
         _hitbox_collision_shape.set_deferred('disabled', false)
         _impact_sparks.emitting = true
@@ -253,7 +254,7 @@ func _start_wind_down() -> void:
     _impact_sparks.emitting = false
 
     if _current_state != State.CANCELLED:
-        _sound_manager.play(EnemySoundManager.Sounds.LASER_WIND_DOWN)
+        _sound_manager.play(LaserSoundManager.Sounds.WIND_DOWN)
 
     _tween.remove_all()
     _interpolate_beam_width(_outer_beam, _outer_beam.width, 0, WIND_DOWN_DURATION)
@@ -300,6 +301,4 @@ func _setup_impact_sprite_wobble(
             wobble_duration, (i+1) * (SHOT_DURATION / float(num_wobbles)))
 
 func _set_attenuation_radius_tiles(radius_tiles: float) -> void:
-    _laser_telegraph.set_radii_tiles(0.5, radius_tiles)
-    _laser_shoot.set_radii_tiles(0.5, radius_tiles)
-    _laser_wind_down.set_radii_tiles(0.5, radius_tiles)
+    _audio_group.set_radii_tiles(0.5, radius_tiles)

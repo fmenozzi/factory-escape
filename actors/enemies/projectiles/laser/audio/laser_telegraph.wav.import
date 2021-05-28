@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laser_telegraph.wav-0663bcfc9c8a487e67e159133f4c584d.sample"
+
+[deps]
+
+source_file="res://actors/enemies/projectiles/laser/audio/laser_telegraph.wav"
+dest_files=[ "res://.import/laser_telegraph.wav-0663bcfc9c8a487e67e159133f4c584d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

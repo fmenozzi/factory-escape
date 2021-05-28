@@ -25,9 +25,9 @@
 [ext_resource path="res://actors/enemies/sticky_drone/audio/sticky_drone_contract.wav" type="AudioStream" id=23]
 [ext_resource path="res://actors/enemies/shared/audio/drone_idle.wav" type="AudioStream" id=24]
 [ext_resource path="res://actors/enemies/shared/audio/drone_move.wav" type="AudioStream" id=25]
-[ext_resource path="res://shared/managers/enemy_sound_manager/audio/laser_wind_down.wav" type="AudioStream" id=26]
-[ext_resource path="res://shared/managers/enemy_sound_manager/audio/laser_telegraph.wav" type="AudioStream" id=27]
-[ext_resource path="res://shared/managers/enemy_sound_manager/audio/laser_shoot.wav" type="AudioStream" id=28]
+[ext_resource path="res://actors/enemies/projectiles/laser/audio/laser_wind_down.wav" type="AudioStream" id=26]
+[ext_resource path="res://actors/enemies/projectiles/laser/audio/laser_telegraph.wav" type="AudioStream" id=27]
+[ext_resource path="res://actors/enemies/projectiles/laser/audio/laser_shoot.wav" type="AudioStream" id=28]
 
 [node name="EnemySoundManager" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
