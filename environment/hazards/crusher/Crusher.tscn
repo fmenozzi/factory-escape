@@ -1,8 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://environment/hazards/crusher/crusher.gd" type="Script" id=1]
 [ext_resource path="res://environment/hazards/crusher/textures/crusher-background.png" type="Texture" id=2]
 [ext_resource path="res://environment/hazards/crusher/textures/crusher-head.png" type="Texture" id=3]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://environment/hazards/crusher/audio/crusher_windup.wav" type="AudioStream" id=6]
+[ext_resource path="res://environment/hazards/crusher/audio/crusher_impact.wav" type="AudioStream" id=7]
+[ext_resource path="res://environment/hazards/crusher/audio/crusher_windup_fast.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 18 )
@@ -32,9 +37,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "_windup_fast"
+}, {
 "args": [  ],
 "method": "_impact"
 } ]
@@ -62,9 +70,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "_windup_slow"
+}, {
 "args": [  ],
 "method": "_impact"
 } ]
@@ -116,3 +127,17 @@ anims/crush_loop_slow = SubResource( 4 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -2.38419e-07, -12 )
 scale = Vector2( 1.6, 1.2 )
+
+[node name="VisibilityBasedAudioGroup" parent="." instance=ExtResource( 5 )]
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="Windup" parent="VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 4 )]
+stream = ExtResource( 6 )
+
+[node name="WindupFast" parent="VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 4 )]
+stream = ExtResource( 8 )
+
+[node name="Impact" parent="VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 4 )]
+stream = ExtResource( 7 )
+
+[editable path="VisibilityBasedAudioGroup"]

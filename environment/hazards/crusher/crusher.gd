@@ -11,6 +11,9 @@ export(Speed) var speed := Speed.SLOW
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _dust_puff_spawn_positions: Array = $CrusherHead/DustPuffSpawnPositions.get_children()
 onready var _visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
+onready var _windup_sound_slow: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Windup/AudioStreamPlayer
+onready var _windup_sound_fast: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/WindupFast/AudioStreamPlayer
+onready var _impact_sound: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Impact/AudioStreamPlayer
 
 var _animation_name := ''
 
@@ -40,9 +43,17 @@ func resume() -> void:
 
     _animation_player.play(_animation_name)
 
+func _windup_slow() -> void:
+    _windup_sound_slow.play()
+
+func _windup_fast() -> void:
+    _windup_sound_fast.play()
+
 func _impact() -> void:
     if _player_is_near():
         Screenshake.start(Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
+
+    _impact_sound.play()
 
     for dust_puff_spawn_position in _dust_puff_spawn_positions:
         Effects.spawn_dust_puff_at(self.to_global(dust_puff_spawn_position.position))

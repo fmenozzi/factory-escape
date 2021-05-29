@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/crusher_windup.wav-293b9449bc6906a6c5a110dcf15f0378.sample"
+
+[deps]
+
+source_file="res://environment/hazards/crusher/audio/crusher_windup.wav"
+dest_files=[ "res://.import/crusher_windup.wav-293b9449bc6906a6c5a110dcf15f0378.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
