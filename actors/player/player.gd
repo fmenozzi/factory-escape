@@ -110,7 +110,7 @@ onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
 onready var _camera: Camera2D = $CameraAnchor/Camera2D
 
-onready var _floor_proximity_detector: RayCast2D = $FloorProximityDetector
+onready var _ceiling_proximity_detector: Area2D = $CeilingDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _dash_puff: Particles2D = $DashPuff
@@ -412,11 +412,11 @@ func unpause() -> void:
 # floor and on the ceiling to detect whether we're being crushed by a moving
 # platform. Checking for both .is_on_floor() and .is_on_ceiling() doesn't work,
 # as physics bodies are likely not allowed to be colliding with objects in
-# opposite directions at the same time. Therefore, we use a ray cast to check
-# for collisions with the floor and .is_on_ceiling() to detect collisions with
-# the ceiling.
+# opposite directions at the same time. Therefore, we use an area to check for
+# for collisions with the ceiling and is_on_ground() to detect collisions with
+# the floor.
 func _is_being_crushed() -> bool:
-    return _floor_proximity_detector.is_colliding() and .is_on_ceiling()
+    return not _ceiling_proximity_detector.get_overlapping_bodies().empty() and is_on_ground()
 
 func _check_for_hits() -> void:
     var player_health := get_health()

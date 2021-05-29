@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -718,6 +718,9 @@ extents = Vector2( 18, 7 )
 extents = Vector2( 7, 16 )
 
 [sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 3.5, 6 )
+
+[sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 0.5, 0.5 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -1055,10 +1058,12 @@ position = Vector2( 0, -8 )
 
 [node name="PlayerHitEffect" parent="." instance=ExtResource( 41 )]
 
-[node name="FloorProximityDetector" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 0, 0.5 )
+[node name="CeilingDetector" type="Area2D" parent="."]
 collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingDetector"]
+position = Vector2( 0, -8 )
+shape = SubResource( 33 )
 
 [node name="JumpManager" parent="." instance=ExtResource( 26 )]
 
@@ -1078,4 +1083,4 @@ collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector"]
-shape = SubResource( 33 )
+shape = SubResource( 34 )
