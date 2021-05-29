@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/door_close.wav-484ee99980d7c47ac1c9a5f3e1f0124a.sample"
+
+[deps]
+
+source_file="res://environment/closing_door/audio/door_close.wav"
+dest_files=[ "res://.import/door_close.wav-484ee99980d7c47ac1c9a5f3e1f0124a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -8,8 +8,8 @@ func _ready() -> void:
     _door_trigger.connect('body_entered', self, '_on_player_entered_room')
 
 func open_doors_and_keep_them_open() -> void:
-    _closing_door_left.open()
-    _closing_door_right.open()
+    _closing_door_left.set_opened()
+    _closing_door_right.set_opened()
 
     _door_trigger.disconnect('body_entered', self, '_on_player_entered_room')
 

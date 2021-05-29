@@ -5,6 +5,7 @@ signal door_closed
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _collision_shape: CollisionShape2D = $CollisionShape2D
+onready var _audio_group: VisibilityBasedAudioGroup = $VisibilityBasedAudioGroup
 
 var _is_closed = false
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 func open() -> void:
     _collision_shape.set_deferred('disabled', true)
     _animation_player.play('open')
+    _audio_group.get_player_by_name('Opened').play()
     yield(_animation_player, 'animation_finished')
     _is_closed = false
     emit_signal('door_opened')
@@ -21,6 +23,7 @@ func open() -> void:
 func close() -> void:
     _collision_shape.set_deferred('disabled', false)
     _animation_player.play('close')
+    _audio_group.get_player_by_name('Closed').play()
 
     # Small dust puff after the door closes.
     yield(_animation_player, 'animation_finished')
