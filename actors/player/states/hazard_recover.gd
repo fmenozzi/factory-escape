@@ -37,14 +37,6 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
-    # Once the animation is finished, enter the idle state.
-    if not player.get_animation_player().is_playing():
-        return {'new_state': Player.State.IDLE}
-
-    # Allow exiting early if player tries to move.
-    if player.get_input_direction() != Util.Direction.NONE:
-        return {'new_state': Player.State.WALK}
-
     # Apply slight downward movement. This is important mostly for ensuring that
     # move_and_slide() is called on every frame, which updates collisions. This
     # is important for platform crush detection, where we use is_on_ceiling() as
@@ -52,6 +44,20 @@ func update(player: Player, delta: float) -> Dictionary:
     # additional calls to move_and_slide(), is_on_ceiling() would continue to be
     # true even after we've teleported to the hazard checkpoint and entered the
     # HAZARD_RECOVER state.
+    #
+    # It's important that we call this BEFORE the possible state transitions
+    # below, as we need to update collisions first. Otherwise, holding the left
+    # stick while recovering from a hazard will immediately transition to WALK
+    # before physics have had a chance to update, which would cause continuous
+    # crushing as described above.
     player.move(Vector2(0, player.get_slight_downward_move()))
+
+    # Once the animation is finished, enter the idle state.
+    if not player.get_animation_player().is_playing():
+        return {'new_state': Player.State.IDLE}
+
+    # Allow exiting early if player tries to move.
+    if player.get_input_direction() != Util.Direction.NONE:
+        return {'new_state': Player.State.WALK}
 
     return {'new_state': Player.State.NO_CHANGE}
