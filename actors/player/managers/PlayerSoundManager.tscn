@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
+[ext_resource path="res://actors/player/audio/interact.wav" type="AudioStream" id=1]
 [ext_resource path="res://actors/player/managers/player_sound_manager.gd" type="Script" id=2]
 [ext_resource path="res://actors/player/audio/walk.wav" type="AudioStream" id=3]
 [ext_resource path="res://actors/player/audio/land_soft.wav" type="AudioStream" id=4]
@@ -62,3 +63,6 @@ stream = ExtResource( 4 )
 
 [node name="LandHard" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 5 )
+
+[node name="Interact" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+stream = ExtResource( 1 )

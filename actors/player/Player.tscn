@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -52,6 +52,7 @@
 [ext_resource path="res://actors/player/states/suspended.gd" type="Script" id=50]
 [ext_resource path="res://actors/player/states/mark_central_hub_fall_as_completed.gd" type="Script" id=51]
 [ext_resource path="res://actors/player/states/spring_jump.gd" type="Script" id=52]
+[ext_resource path="res://actors/player/states/play_animation_and_sound.gd" type="Script" id=53]
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -945,9 +946,10 @@ script = ExtResource( 29 )
 [node name="FaceObject" type="Node" parent="States/LightLamp"]
 script = ExtResource( 37 )
 
-[node name="PlayAnimation" type="Node" parent="States/LightLamp"]
-script = ExtResource( 45 )
+[node name="PlayAnimationAndSound" type="Node" parent="States/LightLamp"]
+script = ExtResource( 53 )
 animation_name = "light_lamp"
+sound = 13
 
 [node name="RestAtLamp" type="Node" parent="States"]
 script = ExtResource( 36 )
@@ -981,9 +983,10 @@ script = ExtResource( 36 )
 [node name="FaceObject" type="Node" parent="States/TakeHealthPack"]
 script = ExtResource( 37 )
 
-[node name="PlayAnimation" type="Node" parent="States/TakeHealthPack"]
-script = ExtResource( 45 )
+[node name="PlayAnimationAndSound" type="Node" parent="States/TakeHealthPack"]
+script = ExtResource( 53 )
 animation_name = "take_health_pack"
+sound = 13
 
 [node name="ActivateSwitch" type="Node" parent="States"]
 script = ExtResource( 36 )
@@ -994,9 +997,10 @@ script = ExtResource( 29 )
 [node name="FaceObject" type="Node" parent="States/ActivateSwitch"]
 script = ExtResource( 37 )
 
-[node name="PlayAnimation" type="Node" parent="States/ActivateSwitch"]
-script = ExtResource( 45 )
+[node name="PlayAnimationAndSound" type="Node" parent="States/ActivateSwitch"]
+script = ExtResource( 53 )
 animation_name = "activate_switch"
+sound = 13
 
 [node name="HardLanding" type="Node" parent="States"]
 script = ExtResource( 30 )
