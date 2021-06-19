@@ -9,7 +9,10 @@ enum Sounds {
     ATTACK,
     GRAPPLE_LAUNCH,
     GRAPPLE_SWING,
-    HEAL,
+    HEAL_STARTED,
+    HEAL_SUCCEEDED,
+    HEAL_FAILED,
+    HEAL_ATTEMPTED_NO_HEALTH_PACKS,
     HIT,
     HAZARD_HIT,
     DIE,
@@ -26,7 +29,10 @@ onready var _wall_slide: AudioStreamPlayer = $AudioStreamPlayers/WallSlide
 onready var _attack: AudioStreamPlayer = $AudioStreamPlayers/Attack
 onready var _grapple_launch: AudioStreamPlayer = $AudioStreamPlayers/GrappleLaunch
 onready var _grapple_swing: AudioStreamPlayer = $AudioStreamPlayers/GrappleSwing
-onready var _heal: AudioStreamPlayer = $AudioStreamPlayers/Heal
+onready var _heal_started: AudioStreamPlayer = $AudioStreamPlayers/HealStarted
+onready var _heal_succeeded: AudioStreamPlayer = $AudioStreamPlayers/HealSucceeded
+onready var _heal_failed: AudioStreamPlayer = $AudioStreamPlayers/HealFailed
+onready var _heal_attempted_no_health_packs: AudioStreamPlayer = $AudioStreamPlayers/HealAttemptedNoHealthPacks
 onready var _hit: AudioStreamPlayer = $AudioStreamPlayers/Hit
 onready var _hazard_hit: AudioStreamPlayer = $AudioStreamPlayers/HazardHit
 onready var _die: AudioStreamPlayer = $AudioStreamPlayers/Die
@@ -61,7 +67,10 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.ATTACK,
         Sounds.GRAPPLE_LAUNCH,
         Sounds.GRAPPLE_SWING,
-        Sounds.HEAL,
+        Sounds.HEAL_STARTED,
+        Sounds.HEAL_SUCCEEDED,
+        Sounds.HEAL_FAILED,
+        Sounds.HEAL_ATTEMPTED_NO_HEALTH_PACKS,
         Sounds.HIT,
         Sounds.HAZARD_HIT,
         Sounds.DIE,
@@ -92,8 +101,17 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.GRAPPLE_SWING:
             return _grapple_swing
 
-        Sounds.HEAL:
-            return _heal
+        Sounds.HEAL_STARTED:
+            return _heal_started
+
+        Sounds.HEAL_SUCCEEDED:
+            return _heal_succeeded
+
+        Sounds.HEAL_FAILED:
+            return _heal_failed
+
+        Sounds.HEAL_ATTEMPTED_NO_HEALTH_PACKS:
+            return _heal_attempted_no_health_packs
 
         Sounds.HIT:
             return _hit

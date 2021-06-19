@@ -470,7 +470,7 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "_play_heal_sound"
+"method": "_play_heal_started_sound"
 } ]
 }
 
@@ -781,7 +781,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 11
-frame = 86
+frame = 68
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -949,7 +949,7 @@ script = ExtResource( 37 )
 [node name="PlayAnimationAndSound" type="Node" parent="States/LightLamp"]
 script = ExtResource( 53 )
 animation_name = "light_lamp"
-sound = 13
+sound = 16
 
 [node name="RestAtLamp" type="Node" parent="States"]
 script = ExtResource( 36 )
@@ -986,7 +986,7 @@ script = ExtResource( 37 )
 [node name="PlayAnimationAndSound" type="Node" parent="States/TakeHealthPack"]
 script = ExtResource( 53 )
 animation_name = "take_health_pack"
-sound = 13
+sound = 16
 
 [node name="ActivateSwitch" type="Node" parent="States"]
 script = ExtResource( 36 )
@@ -1000,7 +1000,7 @@ script = ExtResource( 37 )
 [node name="PlayAnimationAndSound" type="Node" parent="States/ActivateSwitch"]
 script = ExtResource( 53 )
 animation_name = "activate_switch"
-sound = 13
+sound = 16
 
 [node name="HardLanding" type="Node" parent="States"]
 script = ExtResource( 30 )

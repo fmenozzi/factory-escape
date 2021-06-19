@@ -64,7 +64,11 @@ func _ready() -> void:
 
     _player.connect('player_hit_hazard', self, '_on_player_hit_hazard')
     _player.connect('player_hit_by_enemy', _dialog_box, '_on_player_hit')
-    _player.connect('player_healed', self, '_on_player_healed')
+    _player.connect('player_heal_succeeded', self, '_on_player_heal_succeeded')
+    _player.connect('player_heal_failed', self, '_on_player_heal_failed')
+    _player.connect(
+        'player_heal_attempted_no_health_packs', self,
+        '_on_player_heal_attempted_no_health_packs')
 
     var player_health_pack_manager := _player.get_health_pack_manager()
     player_health_pack_manager.connect(
@@ -348,8 +352,16 @@ func _on_health_pack_consumed() -> void:
     _health_pack_bar.set_health_packs(
         _player.get_health_pack_manager().num_health_packs())
 
-func _on_player_healed() -> void:
+func _on_player_heal_succeeded() -> void:
     _player.get_health().heal_to_full()
+    _player.get_sound_manager().play(PlayerSoundManager.Sounds.HEAL_SUCCEEDED)
+
+func _on_player_heal_failed() -> void:
+    _player.get_sound_manager().play(PlayerSoundManager.Sounds.HEAL_FAILED)
+
+func _on_player_heal_attempted_no_health_packs() -> void:
+    _player.get_sound_manager().play(
+        PlayerSoundManager.Sounds.HEAL_ATTEMPTED_NO_HEALTH_PACKS)
 
 func _on_options_saved() -> void:
     if _saving_indicator.is_spinning():

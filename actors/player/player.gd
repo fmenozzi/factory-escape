@@ -4,7 +4,9 @@ class_name Player
 signal player_state_changed(old_state_enum, new_state_enum)
 signal player_hit_by_enemy
 signal player_hit_hazard
-signal player_healed
+signal player_heal_succeeded
+signal player_heal_failed
+signal player_heal_attempted_no_health_packs
 signal player_reached_walk_to_point
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved

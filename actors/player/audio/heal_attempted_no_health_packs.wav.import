@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/heal_attempted_no_health_packs.wav-a972cf021e5607afc346cd986f7b88a1.sample"
+
+[deps]
+
+source_file="res://actors/player/audio/heal_attempted_no_health_packs.wav"
+dest_files=[ "res://.import/heal_attempted_no_health_packs.wav-a972cf021e5607afc346cd986f7b88a1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

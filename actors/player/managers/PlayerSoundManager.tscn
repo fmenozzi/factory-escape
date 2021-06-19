@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://actors/player/audio/interact.wav" type="AudioStream" id=1]
 [ext_resource path="res://actors/player/managers/player_sound_manager.gd" type="Script" id=2]
@@ -12,9 +12,12 @@
 [ext_resource path="res://actors/player/audio/hit.wav" type="AudioStream" id=10]
 [ext_resource path="res://actors/player/audio/hazard_hit.wav" type="AudioStream" id=11]
 [ext_resource path="res://actors/player/audio/die.wav" type="AudioStream" id=12]
-[ext_resource path="res://actors/player/audio/heal.wav" type="AudioStream" id=13]
+[ext_resource path="res://actors/player/audio/heal_started.wav" type="AudioStream" id=13]
 [ext_resource path="res://actors/player/audio/grapple_swing.wav" type="AudioStream" id=14]
 [ext_resource path="res://actors/player/audio/grapple_launch.wav" type="AudioStream" id=15]
+[ext_resource path="res://actors/player/audio/heal_succeeded.wav" type="AudioStream" id=16]
+[ext_resource path="res://actors/player/audio/heal_failed.wav" type="AudioStream" id=17]
+[ext_resource path="res://actors/player/audio/heal_attempted_no_health_packs.wav" type="AudioStream" id=18]
 
 [sub_resource type="AudioStreamRandomPitch" id=1]
 audio_stream = ExtResource( 3 )
@@ -46,8 +49,18 @@ volume_db = -8.0
 [node name="GrappleSwing" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 14 )
 
-[node name="Heal" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+[node name="HealStarted" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 13 )
+
+[node name="HealSucceeded" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+stream = ExtResource( 16 )
+
+[node name="HealFailed" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+stream = ExtResource( 17 )
+volume_db = 8.0
+
+[node name="HealAttemptedNoHealthPacks" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+stream = ExtResource( 18 )
 
 [node name="Hit" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 10 )

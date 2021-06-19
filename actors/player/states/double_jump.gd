@@ -62,6 +62,8 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     elif event.is_action_pressed('player_heal'):
         if player.get_health_pack_manager().can_heal():
             return {'new_state': Player.State.HEAL}
+        else:
+            player.emit_signal('player_heal_attempted_no_health_packs')
 
     return {'new_state': Player.State.NO_CHANGE}
 

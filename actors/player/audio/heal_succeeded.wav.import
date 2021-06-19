@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/heal_succeeded.wav-52c9664a74397c666b8290e94d9578c0.sample"
+
+[deps]
+
+source_file="res://actors/player/audio/heal_succeeded.wav"
+dest_files=[ "res://.import/heal_succeeded.wav-52c9664a74397c666b8290e94d9578c0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
