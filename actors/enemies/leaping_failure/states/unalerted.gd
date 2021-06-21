@@ -21,6 +21,8 @@ func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     # Display unalerted reaction.
     failure.get_react_sprite().change_state(ReactSprite.State.UNALERTED)
 
+    failure.get_sound_manager().play(LeapingFailureSoundManager.Sounds.UNALERTED)
+
     # Start timers.
     _turn_around_duration_timer.connect(
         'timeout', self, '_on_turn_around_timeout', [failure])

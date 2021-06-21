@@ -14,9 +14,10 @@ func enter(turret: Turret, previous_state_dict: Dictionary) -> void:
     assert('already_aggroed' in previous_state_dict)
     _already_aggroed = previous_state_dict['already_aggroed']
 
-    # Display alerted reaction if we weren't already aggroed.
+    # Display alerted reaction and play sound if we weren't already aggroed.
     if not _already_aggroed:
         turret.get_react_sprite().change_state(ReactSprite.State.ALERTED)
+        turret.get_sound_manager().play(TurretSoundManager.Sounds.ALERTED)
 
     # Longer pause between shots than the initial aggro alerted duration.
     if _already_aggroed:

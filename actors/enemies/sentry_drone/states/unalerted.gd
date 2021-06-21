@@ -18,6 +18,8 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     # Pause current animation.
     sentry_drone.get_animation_player().stop(false)
 
+    sentry_drone.get_sound_manager().play(SentryDroneSoundManager.Sounds.UNALERTED)
+
     # Display unalerted reaction.
     sentry_drone.get_react_sprite().change_state(ReactSprite.State.UNALERTED)
 

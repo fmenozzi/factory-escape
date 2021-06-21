@@ -5,6 +5,8 @@ enum Sounds {
     WALK,
     CONTRACT,
     EXPAND,
+    ALERTED,
+    UNALERTED,
     HIT,
     KILLED,
 }
@@ -22,6 +24,8 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.WALK,
         Sounds.CONTRACT,
         Sounds.EXPAND,
+        Sounds.ALERTED,
+        Sounds.UNALERTED,
         Sounds.HIT,
         Sounds.KILLED,
     ])
@@ -35,6 +39,12 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.EXPAND:
             return _audio_group.get_player_by_name('Expand')
+
+        Sounds.ALERTED:
+            return _audio_group.get_player_by_name('Alerted')
+
+        Sounds.UNALERTED:
+            return _audio_group.get_player_by_name('Unalerted')
 
         Sounds.HIT:
             return _audio_group.get_player_by_name('Hit')

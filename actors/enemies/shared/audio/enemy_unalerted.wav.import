@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/enemy_unalerted.wav-e75ea1b012c51b80ede54e24ce62f640.sample"
+
+[deps]
+
+source_file="res://actors/enemies/shared/audio/enemy_unalerted.wav"
+dest_files=[ "res://.import/enemy_unalerted.wav-e75ea1b012c51b80ede54e24ce62f640.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

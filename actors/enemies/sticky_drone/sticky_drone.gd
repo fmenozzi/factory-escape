@@ -145,6 +145,9 @@ func get_physics_manager() -> PhysicsManager:
 func get_aggro_manager() -> AggroManager:
     return _aggro_manager
 
+func get_sound_manager() -> StickyDroneSoundManager:
+    return _sound_manager
+
 func get_react_sprite() -> ReactSprite:
     return _react_sprite
 

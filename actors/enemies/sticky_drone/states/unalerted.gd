@@ -21,6 +21,8 @@ func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     # Display unalerted reaction.
     sticky_drone.get_react_sprite().change_state(ReactSprite.State.UNALERTED)
 
+    sticky_drone.get_sound_manager().play(StickyDroneSoundManager.Sounds.UNALERTED)
+
     # Start timers.
     _turn_around_duration_timer.connect(
         'timeout', self, '_on_turn_around_timeout', [sticky_drone])

@@ -4,6 +4,8 @@ class_name LeapingFailureSoundManager
 enum Sounds {
     EXPAND,
     CONTRACT,
+    ALERTED,
+    UNALERTED,
     JUMP,
     LAND,
     HIT,
@@ -22,6 +24,8 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
         Sounds.EXPAND,
         Sounds.CONTRACT,
+        Sounds.ALERTED,
+        Sounds.UNALERTED,
         Sounds.JUMP,
         Sounds.LAND,
         Sounds.HIT,
@@ -34,6 +38,12 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.CONTRACT:
             return _audio_group.get_player_by_name('Contract')
+
+        Sounds.ALERTED:
+            return _audio_group.get_player_by_name('Alerted')
+
+        Sounds.UNALERTED:
+            return _audio_group.get_player_by_name('Unalerted')
 
         Sounds.JUMP:
             return _audio_group.get_player_by_name('Jump')

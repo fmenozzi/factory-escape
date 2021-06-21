@@ -16,6 +16,8 @@ func enter(failure: LeapingFailure, previous_state_dict: Dictionary) -> void:
     # Pause current animation.
     failure.get_animation_player().stop(false)
 
+    failure.get_sound_manager().play(LeapingFailureSoundManager.Sounds.ALERTED)
+
     # Display alerted reaction.
     failure.get_react_sprite().change_state(ReactSprite.State.ALERTED)
 

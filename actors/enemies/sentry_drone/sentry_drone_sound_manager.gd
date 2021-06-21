@@ -4,6 +4,8 @@ class_name SentryDroneSoundManager
 enum Sounds {
     IDLE,
     MOVE,
+    ALERTED,
+    UNALERTED,
     BASH_TELEGRAPH,
     BASH,
     BASH_IMPACT,
@@ -24,6 +26,8 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
         Sounds.IDLE,
         Sounds.MOVE,
+        Sounds.ALERTED,
+        Sounds.UNALERTED,
         Sounds.BASH_TELEGRAPH,
         Sounds.BASH,
         Sounds.BASH_IMPACT,
@@ -38,6 +42,11 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.MOVE:
             return _audio_group.get_player_by_name('Move')
+        Sounds.ALERTED:
+            return _audio_group.get_player_by_name('Alerted')
+
+        Sounds.UNALERTED:
+            return _audio_group.get_player_by_name('Unalerted')
 
         Sounds.BASH_TELEGRAPH:
             return _audio_group.get_player_by_name('BashTelegraph')

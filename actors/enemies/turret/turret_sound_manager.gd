@@ -3,6 +3,8 @@ class_name TurretSoundManager
 
 enum Sounds {
     SCANNING,
+    ALERTED,
+    UNALERTED,
     HIT,
     KILLED,
 }
@@ -18,6 +20,8 @@ func stop(sound_enum: int) -> void:
 func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [
         Sounds.SCANNING,
+        Sounds.ALERTED,
+        Sounds.UNALERTED,
         Sounds.HIT,
         Sounds.KILLED,
     ])
@@ -25,6 +29,12 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
     match sound_enum:
         Sounds.SCANNING:
             return _audio_group.get_player_by_name('Scanning')
+
+        Sounds.ALERTED:
+            return _audio_group.get_player_by_name('Alerted')
+
+        Sounds.UNALERTED:
+            return _audio_group.get_player_by_name('Unalerted')
 
         Sounds.HIT:
             return _audio_group.get_player_by_name('Hit')

@@ -16,6 +16,8 @@ func enter(sticky_drone: StickyDrone, previous_state_dict: Dictionary) -> void:
     # Pause current animation.
     sticky_drone.get_animation_player().stop(false)
 
+    sticky_drone.get_sound_manager().play(StickyDroneSoundManager.Sounds.ALERTED)
+
     # Display alerted reaction.
     sticky_drone.get_react_sprite().change_state(ReactSprite.State.ALERTED)
 

@@ -21,6 +21,8 @@ func enter(sentry_drone: RangedSentryDrone, previous_state_dict: Dictionary) -> 
     # Display unalerted reaction.
     sentry_drone.get_react_sprite().change_state(ReactSprite.State.UNALERTED)
 
+    sentry_drone.get_sound_manager().play(RangedSentryDroneSoundManager.Sounds.UNALERTED)
+
     # Start timers.
     _turn_around_duration_timer.connect(
         'timeout', self, '_on_turn_around_timeout', [sentry_drone])
