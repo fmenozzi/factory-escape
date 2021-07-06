@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://game/GameInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/factory_escape/factory_escape.gd" type="Script" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://game/factory_escape/rooms/sector_1/SectorOne_16.tscn" type="PackedScene" id=42]
 [ext_resource path="res://game/factory_escape/rooms/sector_1/SectorOne_17.tscn" type="PackedScene" id=43]
 [ext_resource path="res://game/factory_escape/rooms/sector_1/SectorOne_18.tscn" type="PackedScene" id=44]
+[ext_resource path="res://game/factory_escape/rooms/sector_1/SectorOne_19.tscn" type="PackedScene" id=45]
 
 [node name="FactoryEscape" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -165,13 +166,16 @@ position = Vector2( -2880, 3584 )
 [node name="SectorOne_18" parent="World/Rooms" index="38" instance=ExtResource( 44 )]
 position = Vector2( -2560, 3584 )
 
-[node name="SectorTwoEntrance" parent="World/Rooms" index="39" instance=ExtResource( 22 )]
+[node name="SectorOne_19" parent="World/Rooms" index="39" instance=ExtResource( 45 )]
+position = Vector2( -2240, 3584 )
+
+[node name="SectorTwoEntrance" parent="World/Rooms" index="40" instance=ExtResource( 22 )]
 position = Vector2( 3840, 3944 )
 
-[node name="SectorThreeEntrance" parent="World/Rooms" index="40" instance=ExtResource( 21 )]
+[node name="SectorThreeEntrance" parent="World/Rooms" index="41" instance=ExtResource( 21 )]
 position = Vector2( 2240, 4124 )
 
-[node name="SectorFourEntrance" parent="World/Rooms" index="41" instance=ExtResource( 23 )]
+[node name="SectorFourEntrance" parent="World/Rooms" index="42" instance=ExtResource( 23 )]
 position = Vector2( 3840, 4124 )
 
 [node name="Player" parent="World" index="3"]
