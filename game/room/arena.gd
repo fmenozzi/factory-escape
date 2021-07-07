@@ -48,9 +48,7 @@ func _process(delta: float) -> void:
 
         if _arena_finished():
             # Finish once all phases are completed.
-            _player_camera.reattach()
-            _open_all_doors()
-            set_process(false)
+            _finish_arena()
             return
 
         _spawn_enemies_for_phase(_save_manager.current_phase_index)
@@ -89,6 +87,18 @@ func _start_arena(player: Player) -> void:
     assert(_player_camera != null)
 
     set_process(true)
+
+func _finish_arena() -> void:
+    # Open the doors, shake the screen slightly as the doors open, then reattach
+    # the camera.
+    set_process(false)
+    _open_all_doors()
+    Screenshake.start(
+        Screenshake.Duration.LONG, Screenshake.Amplitude.VERY_SMALL,
+        Screenshake.Priority.HIGH)
+    Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
+    yield(Screenshake, 'stopped_shaking')
+    _player_camera.reattach()
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
     _current_phase_enemy_count = 0
