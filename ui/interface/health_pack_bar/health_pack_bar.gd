@@ -2,6 +2,7 @@ extends Control
 
 onready var _health_pack_nodes: VBoxContainer = $HBoxContainer/HealthPackNodes
 onready var _flash_manager: Node = $FlashManager
+onready var _tween: Tween = $FadeInTween
 
 var _current_health_packs := 3
 
@@ -20,6 +21,13 @@ func set_health_packs(new_health_packs: int) -> void:
         _health_pack_nodes.get_child(idx).texture = Preloads.FullHealthPackTexture
 
     _current_health_packs = new_health_packs
+
+func fade_in() -> void:
+    # Fade in the health pack bar after a one second delay.
+    _tween.remove_all()
+    _tween.interpolate_property(
+        self, 'modulate:a', 0, 1, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN, 1.0)
+    _tween.start()
 
 func flash() -> void:
     _flash_manager.start_flashing()

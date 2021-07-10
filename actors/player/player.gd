@@ -8,6 +8,7 @@ signal player_heal_succeeded
 signal player_heal_failed
 signal player_heal_attempted_no_health_packs
 signal player_reached_walk_to_point
+signal player_finished_intro_fall
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does

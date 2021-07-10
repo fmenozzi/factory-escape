@@ -57,3 +57,5 @@ margin_bottom = 2.0
 [node name="FlashManager" parent="." instance=ExtResource( 3 )]
 sprite_path = NodePath("../HBoxContainer/HealthPackIcon")
 total_duration = 0.225
+
+[node name="FadeInTween" type="Tween" parent="."]

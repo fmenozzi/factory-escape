@@ -47,6 +47,12 @@ func _ready() -> void:
 
         # Determine player's starting state.
         if not _player.save_manager.has_completed_intro_fall_sequence:
+            # Main UI starts off transparent so that it can fade in after the
+            # fall sequence finishes.
+            _health_bar.modulate.a = 0
+            _health_pack_bar.modulate.a = 0
+            _player.connect(
+                'player_finished_intro_fall', self, '_on_player_finished_intro_fall')
             _player.change_state({'new_state': Player.State.INTRO_FALL})
         elif _player.save_manager.has_rested_at_any_lamp:
             _player.change_state({'new_state': Player.State.SLEEP})
@@ -151,6 +157,10 @@ func _maybe_save_game() -> void:
 func _reset_world() -> void:
     for node in get_tree().get_nodes_in_group('lamp_reset'):
         node.lamp_reset()
+
+func _on_player_finished_intro_fall() -> void:
+    _health_bar.fade_in()
+    _health_pack_bar.fade_in()
 
 func _on_player_died() -> void:
     _player.set_process_unhandled_input(false)

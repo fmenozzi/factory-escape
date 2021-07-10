@@ -27,3 +27,5 @@ __meta__ = {
 [node name="FlashManager" parent="." instance=ExtResource( 3 )]
 sprite_path = NodePath("../HealthTexture")
 total_duration = 0.225
+
+[node name="FadeInTween" type="Tween" parent="."]

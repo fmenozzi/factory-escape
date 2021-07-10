@@ -11,6 +11,7 @@ const HEALTH_TO_TEXTURE := {
 
 onready var _texture: TextureRect = $HealthTexture
 onready var _flash_manager: Node = $FlashManager
+onready var _tween: Tween = $FadeInTween
 
 func set_health(new_health: int) -> void:
     assert(0 <= new_health and new_health <= 5)
@@ -19,6 +20,11 @@ func set_health(new_health: int) -> void:
 
 func flash() -> void:
     _flash_manager.start_flashing()
+
+func fade_in() -> void:
+    _tween.remove_all()
+    _tween.interpolate_property(self, 'modulate:a', 0, 1, 1.0)
+    _tween.start()
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     set_health(new_health)

@@ -8,7 +8,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.get_health_pack_manager().update_saved_num_health_packs()
 
 func exit(player: Player) -> void:
-    pass
+    player.emit_signal('player_finished_intro_fall')
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
