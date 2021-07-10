@@ -1,17 +1,20 @@
 extends Control
 
-onready var _health_nodes: HBoxContainer = $HealthNodes
+const HEALTH_TO_TEXTURE := {
+    0: preload('res://ui/interface/health_bar/textures/health-0.png'),
+    1: preload('res://ui/interface/health_bar/textures/health-1.png'),
+    2: preload('res://ui/interface/health_bar/textures/health-2.png'),
+    3: preload('res://ui/interface/health_bar/textures/health-3.png'),
+    4: preload('res://ui/interface/health_bar/textures/health-4.png'),
+    5: preload('res://ui/interface/health_bar/textures/health-5.png'),
+}
 
-var _current_health: int = 5
+onready var _texture: TextureRect = $HealthTexture
 
 func set_health(new_health: int) -> void:
-    assert(new_health <= _health_nodes.get_child_count())
+    assert(0 <= new_health and new_health <= 5)
 
-    for health_node in _health_nodes.get_children():
-        health_node.texture = Preloads.EmptyHealthTexture
-
-    for idx in range(new_health):
-        _health_nodes.get_child(idx).texture = Preloads.FullHealthTexture
+    _texture.texture = HEALTH_TO_TEXTURE[new_health]
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     set_health(new_health)
