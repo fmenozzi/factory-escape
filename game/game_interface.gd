@@ -365,6 +365,8 @@ func _on_player_heal_attempted_no_health_packs() -> void:
     _player.get_sound_manager().play(
         PlayerSoundManager.Sounds.HEAL_ATTEMPTED_NO_HEALTH_PACKS)
 
+    _health_pack_bar.flash()
+
 func _on_options_saved() -> void:
     if _saving_indicator.is_spinning():
         return

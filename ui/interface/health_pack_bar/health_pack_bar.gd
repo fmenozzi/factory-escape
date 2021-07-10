@@ -1,6 +1,7 @@
 extends Control
 
 onready var _health_pack_nodes: VBoxContainer = $HBoxContainer/HealthPackNodes
+onready var _flash_manager: Node = $FlashManager
 
 var _current_health_packs := 3
 
@@ -19,3 +20,6 @@ func set_health_packs(new_health_packs: int) -> void:
         _health_pack_nodes.get_child(idx).texture = Preloads.FullHealthPackTexture
 
     _current_health_packs = new_health_packs
+
+func flash() -> void:
+    _flash_manager.start_flashing()

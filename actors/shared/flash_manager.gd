@@ -8,7 +8,7 @@ export(float) var total_duration := 2.0
 export(float) var single_flash_duration := 0.075
 export(Color) var flash_color := Color.white
 
-onready var _sprite: Sprite = null
+onready var _sprite: CanvasItem = null
 onready var _timer: Timer = $Timer
 onready var _tween: Tween = $Tween
 
