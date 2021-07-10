@@ -8,7 +8,6 @@ onready var _save_manager: LampSaveManager = $SaveManager
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _ripple_sprite: Sprite = $RippleSprite
-onready var _light_sprite: Sprite = $LightSprite
 onready var _embers: Particles2D = $LampEmbers
 onready var _rest_walk_to_points: Node2D = $RestPoints
 onready var _light_walk_to_points: Node2D = $LightPoints
@@ -18,10 +17,8 @@ onready var _player: Player = Util.get_player()
 func _ready() -> void:
     # Make sure each instance gets its own shader materials.
     _ripple_sprite.set_material(_ripple_sprite.get_material().duplicate(true))
-    _light_sprite.set_material(_light_sprite.get_material().duplicate(true))
 
     _fade_in_out_label.set_text('Light Lamp')
-    _light_sprite.visible = false
     _animation_player.play('unlit')
 
     self.connect('body_entered', self, '_on_player_entered')
@@ -67,7 +64,6 @@ func _on_player_exited(player: Player) -> void:
     fade_out_label()
 
 func light() -> void:
-    _light_sprite.visible = true
     _animation_player.play('unlit_to_lit')
     _animation_player.queue('lit')
 

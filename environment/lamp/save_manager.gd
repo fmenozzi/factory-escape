@@ -21,7 +21,6 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
     is_lit = lamp_save_data['is_lit']
 
     if is_lit:
-        _lamp._light_sprite.visible = true
         _lamp._embers.emitting = true
         _lamp._animation_player.play('lit')
         _lamp._fade_in_out_label.set_text('Rest')
