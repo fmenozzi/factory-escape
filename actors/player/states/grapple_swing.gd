@@ -65,7 +65,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _buffer_dash_enabled = false
 
 func exit(player: Player) -> void:
-    grapple_point.set_available(true)
     grapple_point = null
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:

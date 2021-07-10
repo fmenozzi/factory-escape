@@ -43,10 +43,3 @@ func get_launch_grapple_points() -> Array:
 
 func is_on_screen() -> bool:
     return _visibility_notifier.is_on_screen()
-
-# Grapple points can be marked as unavailable to be excluded from consideration
-# during grapple point selection.
-func set_available(available: bool) -> void:
-    _available = available
-func is_available() -> bool:
-    return _available

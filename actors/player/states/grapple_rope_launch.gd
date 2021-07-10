@@ -10,9 +10,6 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _grapple_point = previous_state_dict['grapple_point']
     assert(_grapple_point != null)
 
-    # This grapple point is no longer available for the duration of the grapple.
-    _grapple_point.set_available(false)
-
     if player.is_on_ground():
         player.get_animation_player().play('grapple_launch_long')
     else:
@@ -24,6 +21,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     player.set_direction(grapple_direction)
 
 func exit(player: Player) -> void:
+    clear_grapple_rope()
     _grapple_point = null
 
 func handle_input(player: Player, event: InputEvent) -> Dictionary:

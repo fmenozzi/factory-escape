@@ -91,9 +91,6 @@ func _can_grapple_to(grapple_point: GrapplePoint, player) -> bool:
     if not _has_grapple:
         return false
 
-    if not grapple_point.is_available():
-        return false
-
     if not _grapple_point_in_line_of_sight(grapple_point):
         return false
 
