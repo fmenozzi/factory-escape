@@ -10,11 +10,15 @@ const HEALTH_TO_TEXTURE := {
 }
 
 onready var _texture: TextureRect = $HealthTexture
+onready var _flash_manager: Node = $FlashManager
 
 func set_health(new_health: int) -> void:
     assert(0 <= new_health and new_health <= 5)
 
     _texture.texture = HEALTH_TO_TEXTURE[new_health]
+
+func flash() -> void:
+    _flash_manager.start_flashing()
 
 func _on_health_changed(old_health: int, new_health: int) -> void:
     set_health(new_health)

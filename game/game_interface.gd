@@ -361,6 +361,8 @@ func _on_player_heal_succeeded() -> void:
 func _on_player_heal_failed() -> void:
     _player.get_sound_manager().play(PlayerSoundManager.Sounds.HEAL_FAILED)
 
+    _health_bar.flash()
+
 func _on_player_heal_attempted_no_health_packs() -> void:
     _player.get_sound_manager().play(
         PlayerSoundManager.Sounds.HEAL_ATTEMPTED_NO_HEALTH_PACKS)
