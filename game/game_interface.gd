@@ -294,6 +294,8 @@ func _on_player_rested_at_lamp(lamp: Area2D) -> void:
     _player.save_manager.last_saved_direction_to_lamp = Util.direction(_player, lamp)
     _player.save_manager.has_rested_at_any_lamp = true
 
+    _player.get_health_pack_manager().update_saved_num_health_packs()
+
     _reset_world()
 
     # Spin saving indicator for two seconds to let player notice it.

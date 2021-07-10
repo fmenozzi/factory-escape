@@ -2,8 +2,8 @@
 
 [ext_resource path="res://actors/player/managers/health_pack_manager.gd" type="Script" id=1]
 
-
 [node name="HealthPackManager" type="Node" groups=[
+"lamp_reset",
 "save",
 ]]
 script = ExtResource( 1 )
