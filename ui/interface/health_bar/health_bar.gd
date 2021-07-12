@@ -2,7 +2,7 @@ extends Control
 
 const HEALTH_TO_TEXTURE := {
     0: preload('res://ui/interface/health_bar/textures/health-0.png'),
-    1: preload('res://ui/interface/health_bar/textures/health-1.png'),
+    1: preload('res://ui/interface/health_bar/textures/low_health_animation.tres'),
     2: preload('res://ui/interface/health_bar/textures/health-2.png'),
     3: preload('res://ui/interface/health_bar/textures/health-3.png'),
     4: preload('res://ui/interface/health_bar/textures/health-4.png'),
