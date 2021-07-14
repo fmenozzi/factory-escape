@@ -4,6 +4,7 @@ class_name SinkingPlatform
 enum State {
     IDLE_TOP,
     IDLE_BOTTOM,
+    PAUSE_BEFORE_GOING_UP,
     GOING_DOWN,
     GOING_UP,
 }
@@ -11,6 +12,10 @@ var _state: int = State.IDLE_TOP
 
 const SPEED_DOWN := 2.0 * Util.TILE_SIZE
 const SPEED_UP := 2.0 * SPEED_DOWN
+
+const TOTAL_PAUSE_DURATION := 1.0
+
+var _pause_duration := 0.0
 
 onready var _platform: KinematicBody2D = $Platform
 onready var _animation_player: AnimationPlayer = $Platform/AnimationPlayer
@@ -26,8 +31,18 @@ func _physics_process(delta: float) -> void:
 
         State.IDLE_BOTTOM:
             if not _player_on_platform():
+                _pause_duration = 0.0
+                _animation_player.stop()
+                _state = State.PAUSE_BEFORE_GOING_UP
+
+        State.PAUSE_BEFORE_GOING_UP:
+            _pause_duration += delta
+            if _pause_duration >= TOTAL_PAUSE_DURATION:
                 _animation_player.play('move')
-                _state = State.GOING_UP
+                if _player_on_platform():
+                    _state = State.GOING_DOWN
+                else:
+                    _state = State.GOING_UP
 
         State.GOING_DOWN:
             _platform.position.y += SPEED_DOWN * delta
@@ -37,7 +52,9 @@ func _physics_process(delta: float) -> void:
                 _state = State.IDLE_BOTTOM
 
             if not _player_on_platform():
-                _state = State.GOING_UP
+                _pause_duration = 0.0
+                _animation_player.stop()
+                _state = State.PAUSE_BEFORE_GOING_UP
 
         State.GOING_UP:
             _platform.position.y -= SPEED_UP * delta
