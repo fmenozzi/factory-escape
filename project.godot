@@ -264,6 +264,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://custom/scripts/shader_manager.gd"
 }, {
+"base": "Node2D",
+"class": "SinkingPlatform",
+"language": "GDScript",
+"path": "res://environment/platforms/sinking/sinking_platform.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "SluggishFailure",
 "language": "GDScript",
@@ -411,6 +416,7 @@ _global_script_class_icons={
 "SentryDronePhysicsManager": "",
 "SentryDroneSoundManager": "",
 "ShaderManager": "",
+"SinkingPlatform": "",
 "SluggishFailure": "",
 "SluggishFailureSoundManager": "",
 "Springboard": "",
