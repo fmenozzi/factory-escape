@@ -1,8 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://environment/platforms/sinking/textures/background.png" type="Texture" id=1]
 [ext_resource path="res://environment/platforms/sinking/textures/platform.png" type="Texture" id=2]
 [ext_resource path="res://environment/platforms/sinking/sinking_platform.gd" type="Script" id=3]
+[ext_resource path="res://environment/platforms/sinking/states/idle_top.gd" type="Script" id=4]
+[ext_resource path="res://environment/platforms/sinking/states/idle_bottom.gd" type="Script" id=5]
+[ext_resource path="res://environment/platforms/sinking/states/pause_before_going_up.gd" type="Script" id=6]
+[ext_resource path="res://environment/platforms/sinking/states/shake.gd" type="Script" id=7]
+[ext_resource path="res://environment/platforms/sinking/states/going_down.gd" type="Script" id=8]
+[ext_resource path="res://environment/platforms/sinking/states/going_up.gd" type="Script" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 2 )
@@ -57,3 +63,29 @@ shape = SubResource( 3 )
 
 [node name="Destination" type="Position2D" parent="."]
 position = Vector2( 0, 60 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="IdleTop" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="IdleBottom" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="PauseBeforeGoingUp" type="Node" parent="States"]
+script = ExtResource( 6 )
+
+[node name="PauseDuration" type="Timer" parent="States/PauseBeforeGoingUp"]
+process_mode = 0
+
+[node name="Shake" type="Node" parent="States"]
+script = ExtResource( 7 )
+
+[node name="ShakeDuration" type="Timer" parent="States/Shake"]
+process_mode = 0
+
+[node name="GoingDown" type="Node" parent="States"]
+script = ExtResource( 8 )
+
+[node name="GoingUp" type="Node" parent="States"]
+script = ExtResource( 9 )
