@@ -18,9 +18,6 @@ func exit(platform: SinkingPlatform) -> void:
 
 func update(platform: SinkingPlatform, delta: float) -> Dictionary:
     if _pause_duration_timer.is_stopped():
-        if platform.player_on_platform():
-            return {'new_state': SinkingPlatform.State.SHAKE}
-        else:
-            return {'new_state': SinkingPlatform.State.GOING_UP}
+        return {'new_state': SinkingPlatform.State.SHAKE}
 
     return {'new_state': SinkingPlatform.State.NO_CHANGE}
