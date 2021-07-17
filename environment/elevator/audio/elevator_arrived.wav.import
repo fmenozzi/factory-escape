@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/elevator_arrived.wav-51d3ac7abc906634ae159843ec755fa0.sample"
+
+[deps]
+
+source_file="res://environment/elevator/audio/elevator_arrived.wav"
+dest_files=[ "res://.import/elevator_arrived.wav-51d3ac7abc906634ae159843ec755fa0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

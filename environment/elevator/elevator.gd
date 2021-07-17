@@ -25,6 +25,7 @@ onready var _destination: Position2D = $Destination
 onready var _summon_to_start_switch: Switch = $SummonToStartSwitch
 onready var _summon_to_end_switch: Switch = $SummonToEndSwitch
 onready var _tween: Tween = $MoveTween
+onready var _audio_group: VisibilityBasedAudioGroup = $Platform/VisibilityBasedAudioGroup
 
 func _ready() -> void:
     _move_duration = _destination.position.length() / SPEED
@@ -58,8 +59,11 @@ func move_to_end() -> void:
         self, '_follow_point', Vector2.ZERO, _destination.position,
         _move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
+    _audio_group.get_player_by_name('Moving').play()
 
     yield(_tween, 'tween_completed')
+    _audio_group.get_player_by_name('Moving').stop()
+    _audio_group.get_player_by_name('Arrived').play()
     yield(get_tree().create_timer(0.5), 'timeout')
     _location = Location.END
 
@@ -76,8 +80,11 @@ func move_back_to_start() -> void:
         self, '_follow_point', _destination.position, Vector2.ZERO,
         _move_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
     _tween.start()
+    _audio_group.get_player_by_name('Moving').play()
 
     yield(_tween, 'tween_completed')
+    _audio_group.get_player_by_name('Moving').stop()
+    _audio_group.get_player_by_name('Arrived').play()
     yield(get_tree().create_timer(0.5), 'timeout')
     _location = Location.START
 

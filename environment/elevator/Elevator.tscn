@@ -1,12 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://environment/elevator/elevator.gd" type="Script" id=1]
 [ext_resource path="res://environment/elevator/textures/elevator.png" type="Texture" id=2]
 [ext_resource path="res://environment/pressure_plate/PressurePlate.tscn" type="PackedScene" id=3]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/switch/Switch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/elevator/audio/elevator_arrived.wav" type="AudioStream" id=7]
+[ext_resource path="res://environment/elevator/audio/elevator_moving.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 2 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 1.4, 0.0, 0, 0 ]
 
 [node name="Elevator" type="Node2D"]
 script = ExtResource( 1 )
@@ -25,6 +32,16 @@ shape = SubResource( 1 )
 
 [node name="PressurePlate" parent="Platform" instance=ExtResource( 3 )]
 
+[node name="VisibilityBasedAudioGroup" parent="Platform" instance=ExtResource( 6 )]
+attenuation_visibility_radius_tiles = 6.0
+attenuation_curve = SubResource( 2 )
+
+[node name="Moving" parent="Platform/VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 4 )]
+stream = ExtResource( 8 )
+
+[node name="Arrived" parent="Platform/VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 4 )]
+stream = ExtResource( 7 )
+
 [node name="MoveTween" type="Tween" parent="."]
 
 [node name="Destination" type="Position2D" parent="."]
@@ -42,6 +59,8 @@ position = Vector2( 32, 0 )
 [node name="FadeInOutLabel" parent="SummonToEndSwitch" index="2"]
 text = "Call Lift"
 
+[editable path="Platform/VisibilityBasedAudioGroup"]
 [editable path="SummonToStartSwitch"]
-
+[editable path="SummonToStartSwitch/WalkToPoints"]
 [editable path="SummonToEndSwitch"]
+[editable path="SummonToEndSwitch/WalkToPoints"]
