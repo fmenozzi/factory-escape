@@ -4,10 +4,6 @@
 [ext_resource path="res://game/GameInterface.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=3]
 
-
-
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -36,5 +32,4 @@ dialog = [ "Hello there!" ]
 position = Vector2( 48, 160 )
 
 [editable path="World/Rooms/ReadableObjectsPlayground"]
-
 [editable path="World/Rooms/ReadableObjectsPlayground/TileMaps"]

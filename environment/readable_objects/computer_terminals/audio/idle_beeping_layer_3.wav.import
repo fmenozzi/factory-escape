@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/idle_beeping_layer_3.wav-65077e09bb37d6144006279b6d4df7bb.sample"
+
+[deps]
+
+source_file="res://environment/readable_objects/computer_terminals/audio/idle_beeping_layer_3.wav"
+dest_files=[ "res://.import/idle_beeping_layer_3.wav-65077e09bb37d6144006279b6d4df7bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
