@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pressure_plate_stepped_on.wav-9ce8b9438a2a3a5a21e0c2d96cd0b014.sample"
+
+[deps]
+
+source_file="res://environment/pressure_plate/audio/pressure_plate_stepped_on.wav"
+dest_files=[ "res://.import/pressure_plate_stepped_on.wav-9ce8b9438a2a3a5a21e0c2d96cd0b014.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -11,6 +11,7 @@ var _state: int = State.RELEASED
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _trigger_area: Area2D = $TriggerArea
+onready var _audio_group: VisibilityBasedAudioGroup = $VisibilityBasedAudioGroup
 
 func _ready() -> void:
     _trigger_area.connect('body_entered', self, '_on_body_entered')
@@ -25,6 +26,7 @@ func _on_body_entered(body: KinematicBody2D) -> void:
 
     _state = State.PRESSED
     _animation_player.play('pressed')
+    _audio_group.get_player_by_name('SteppedOn').play()
     emit_signal('pressed')
 
 func _on_body_exited(body: KinematicBody2D) -> void:
@@ -36,4 +38,5 @@ func _on_body_exited(body: KinematicBody2D) -> void:
 
     _state = State.RELEASED
     _animation_player.play('released')
+    _audio_group.get_player_by_name('SteppedOff').play()
     emit_signal('released')
