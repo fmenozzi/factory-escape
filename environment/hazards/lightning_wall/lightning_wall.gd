@@ -12,6 +12,8 @@ onready var _movable_emitter_sparks: Particles2D = $MovableEmitter/Sparks
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _tween: Tween = $DissipateTween
 
+var _is_active := true
+
 func _ready() -> void:
     assert(_base_emitter.position == Vector2.ZERO)
 
@@ -33,6 +35,8 @@ func _ready() -> void:
         bolt.length = bolt_length- (2 * _movable_emitter_bolts.position.length())
 
 func dissipate() -> void:
+    _is_active = false
+
     # Stop emitting sparks.
     _base_emitter_sparks.emitting = false
     _movable_emitter_sparks.emitting = false
@@ -65,8 +69,9 @@ func pause() -> void:
         bolt.pause()
 
 func resume() -> void:
-    _base_emitter_sparks.emitting = true
-    _movable_emitter_sparks.emitting = true
+    if _is_active:
+        _base_emitter_sparks.emitting = true
+        _movable_emitter_sparks.emitting = true
 
     for bolt in _base_emitter_bolts.get_children():
         bolt.resume()
