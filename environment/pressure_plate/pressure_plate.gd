@@ -27,6 +27,7 @@ func _on_body_entered(body: KinematicBody2D) -> void:
     _state = State.PRESSED
     _animation_player.play('pressed')
     _audio_group.get_player_by_name('SteppedOn').play()
+    Rumble.start(Rumble.Type.WEAK, 0.2)
     emit_signal('pressed')
 
 func _on_body_exited(body: KinematicBody2D) -> void:
@@ -39,4 +40,5 @@ func _on_body_exited(body: KinematicBody2D) -> void:
     _state = State.RELEASED
     _animation_player.play('released')
     _audio_group.get_player_by_name('SteppedOff').play()
+    Rumble.start(Rumble.Type.WEAK, 0.2)
     emit_signal('released')
