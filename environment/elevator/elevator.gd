@@ -91,6 +91,9 @@ func move_back_to_start() -> void:
     _summon_to_end_switch.reset_state_to(Switch.State.UNPRESSED)
 
 func _on_player_pressed_plate() -> void:
+    # Wait a little bit before actually moving the elevator.
+    yield(get_tree().create_timer(0.3), 'timeout')
+
     match _location:
         Location.START:
             move_to_end()
