@@ -117,6 +117,7 @@ onready var _ceiling_proximity_detector: Area2D = $CeilingDetector
 
 onready var _wall_slide_trail_effect: Particles2D = $WallSlideTrail
 onready var _dash_puff: Particles2D = $DashPuff
+onready var _dash_puff_speed: float = abs(_dash_puff.process_material.initial_velocity)
 onready var _dash_echoes: Particles2D = $DashEchoes
 onready var _hit_effect: PlayerHitEffect = $PlayerHitEffect
 
@@ -310,8 +311,7 @@ func set_direction(direction: int) -> void:
         _wall_jump_manager.get_wall_proximity_detector().set_direction(direction)
 
     # Flip emission direction of dash puff.
-    var dash_puff_speed := abs(_dash_puff.process_material.initial_velocity)
-    _dash_puff.process_material.initial_velocity = dash_puff_speed * direction
+    _dash_puff.process_material.initial_velocity = _dash_puff_speed * direction
 
     # Use appropriate texture for dash echoes.
     match direction:
