@@ -7,6 +7,7 @@ func shoot() -> void:
     _laser.shoot()
 
 func pause() -> void:
-    pass
+    _laser.pause()
+
 func resume() -> void:
-    pass
+    _laser.resume()
