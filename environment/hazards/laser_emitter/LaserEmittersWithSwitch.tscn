@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://environment/switch/Switch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/laser_emitter/laser_emitters_with_switch.gd" type="Script" id=2]
+[ext_resource path="res://environment/hazards/laser_emitter/LaserEmitterGroup.tscn" type="PackedScene" id=3]
 
 [node name="LaserEmittersWithSwitch" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="LaserEmitters" type="Node2D" parent="."]
+[node name="LaserEmitterGroup" parent="." instance=ExtResource( 3 )]
 
 [node name="Switch" parent="." instance=ExtResource( 1 )]
 
@@ -14,8 +15,6 @@ script = ExtResource( 2 )
 margin_left = -32.0
 margin_right = 32.0
 text = "Deactivate"
-
-[node name="ShootTimer" type="Timer" parent="."]
 
 [editable path="Switch"]
 [editable path="Switch/WalkToPoints"]
