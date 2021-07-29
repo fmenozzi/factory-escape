@@ -44,7 +44,7 @@ stream = ExtResource( 8 )
 
 [node name="GrappleLaunch" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 15 )
-volume_db = -8.0
+volume_db = -16.0
 
 [node name="GrappleSwing" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 14 )
