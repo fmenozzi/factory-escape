@@ -10,7 +10,6 @@ onready var _camera_anchor: Position2D = $CameraAnchor
 onready var _save_manager: Node = $SaveManager
 
 var _phase_data := []
-var _current_phase_enemy_count := 0
 var _player_camera: Camera2D = null
 
 func _ready() -> void:
@@ -43,7 +42,7 @@ func _process(delta: float) -> void:
         _player_camera.detach_and_move_to_global(self.to_global(_camera_anchor.position))
         _close_all_doors()
 
-    if _current_phase_enemy_count == 0:
+    if _num_live_enemies() == 0:
         _save_manager.current_phase_index += 1
 
         if _arena_finished():
@@ -57,8 +56,6 @@ func lamp_reset() -> void:
     set_process(false)
 
     _open_all_doors()
-
-    _current_phase_enemy_count = 0
 
     # Despawn all enemies in case the player dies during the arena fight.
     for enemy in _enemies_node.get_children():
@@ -101,8 +98,6 @@ func _finish_arena() -> void:
     _player_camera.reattach()
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
-    _current_phase_enemy_count = 0
-
     var enemy_data_for_phase: Array = _phase_data[phase_idx]
     for enemy_data in enemy_data_for_phase:
         assert(enemy_data is Dictionary)
@@ -114,8 +109,6 @@ func _spawn_enemies_for_phase(phase_idx: int) -> void:
     get_parent()._connect_projectile_spawner_signals()
 
 func _spawn_enemy_at(enemy: Node2D, spawn_point_local: Vector2) -> void:
-    enemy.get_node('Health').connect('died', self, '_on_enemy_death', [enemy])
-
     # Tween transparency so that enemies fade in as they spawn.
     var prop := 'modulate'
     var old := Color(1, 1, 1, 0) # Transparent
@@ -125,8 +118,6 @@ func _spawn_enemy_at(enemy: Node2D, spawn_point_local: Vector2) -> void:
     var alpha_tween := Tween.new()
     alpha_tween.interpolate_property(enemy, prop, old, new, duration)
     enemy.add_child(alpha_tween)
-
-    _current_phase_enemy_count += 1
 
     _enemies_node.add_child(enemy)
     enemy.position = spawn_point_local
@@ -139,6 +130,14 @@ func _close_all_doors() -> void:
 func _open_all_doors() -> void:
     for closing_door in _closing_doors:
         closing_door.open()
+
+func _num_live_enemies() -> int:
+    var num_live_enemies := 0
+    for enemy in _enemies_node.get_children():
+        if enemy is EnergyProjectile or enemy is HomingProjectile or enemy.is_dead():
+            continue
+        num_live_enemies += 1
+    return num_live_enemies
 
 func _arena_started() -> bool:
     return _save_manager.current_phase_index == -1
@@ -162,6 +161,3 @@ func _assert_closing_doors_structure_is_correct() -> void:
     for closing_door in _closing_doors:
         assert(closing_door is StaticBody2D)
         assert(closing_door.has_method('open') and closing_door.has_method('close'))
-
-func _on_enemy_death(enemy: KinematicBody2D) -> void:
-    _current_phase_enemy_count -= 1
