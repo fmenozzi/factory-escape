@@ -64,7 +64,8 @@ position = Vector2( 248, 0 )
 attenuation_visibility_radius_tiles = 18.0
 
 [node name="Switch" parent="Hazards/LaserEmittersWithSwitch2" index="1"]
-position = Vector2( 576, 152 )
+position = Vector2( 56, -280 )
+z_index = 1
 
 [node name="HazardCheckpoint" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 1144, 152 )
