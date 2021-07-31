@@ -8,7 +8,9 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     # Emit a jump puff.
     player.emit_dust_puff()
 
-    # Consume the "jump" until it is reset by e.g. hitting the ground.
+    # Reset dash and jump, and consume one jump for the spring jump.
+    player.get_dash_manager().reset_dash()
+    player.get_jump_manager().reset_jump()
     player.get_jump_manager().consume_jump()
 
 func exit(player: Player) -> void:
