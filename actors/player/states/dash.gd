@@ -56,11 +56,15 @@ func update(player: Player, delta: float) -> Dictionary:
     # idle otherwise.
     if _dash_duration_timer.is_stopped():
         if player.is_in_air():
-            # We want to treat dashing off a ledge as similar to walking off a
-            # ledge (i.e. if we dash off a ledge we can only jump again if we
-            # have the double jump). Importantly, this should not happen if we
-            # dash in midair.
-            if _previous_state_enum in [Player.State.IDLE, Player.State.WALK]:
+            # We want to treat dashing off a ledge/wall as similar to walking
+            # off a ledge (i.e. if we dash off a ledge we can only jump again if
+            # we have the double jump). Importantly, this should not happen if
+            # we dash in midair.
+            if _previous_state_enum in [
+                Player.State.IDLE,
+                Player.State.WALK,
+                Player.State.WALL_SLIDE
+            ]:
                 player.get_jump_manager().consume_jump()
 
             return {'new_state': Player.State.FALL}
