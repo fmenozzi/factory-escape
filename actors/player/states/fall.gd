@@ -43,6 +43,7 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     if not previous_state in [
         Player.State.JUMP,
         Player.State.DOUBLE_JUMP,
+        Player.State.SPRING_JUMP,
         Player.State.DASH,
         Player.State.STAGGER,
         Player.State.HEAL,
@@ -125,7 +126,9 @@ func update(player: Player, delta: float) -> Dictionary:
     # "hard land", or perform a buffer action.
     if player.is_on_ground():
         player.emit_dust_puff()
-        if _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
+        if player.is_on_spring_head():
+            return {'new_state': Player.State.SPRING_JUMP}
+        elif _fall_time_stopwatch.stop() >= HARD_LANDING_FALL_DURATION:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
             _reset_bufferable_actions(player)

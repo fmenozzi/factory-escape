@@ -44,6 +44,9 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func update(player: Player, delta: float) -> Dictionary:
+    if player.is_on_spring_head():
+        return {'new_state': Player.State.SPRING_JUMP}
+
     # Change to idle state if we stop moving.
     var input_direction = player.get_input_direction()
     if input_direction == Util.Direction.NONE:

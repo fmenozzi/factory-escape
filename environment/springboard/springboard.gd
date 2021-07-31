@@ -1,8 +1,6 @@
 extends Node2D
 class_name Springboard
 
-signal sprung
-
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _trigger: Area2D = $TriggerArea
 
