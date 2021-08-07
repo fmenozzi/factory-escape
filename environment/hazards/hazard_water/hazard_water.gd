@@ -16,7 +16,8 @@ func _ready() -> void:
 
     # The type of texture isn't super important, as the shader will be used to
     # create the gradient, so just pick one that's easy to resize. Also make
-    # sure to center water body sprite over collision shape
+    # sure to center water body sprite over collision shape.
+    _body_sprite.set_material(_body_sprite.get_material().duplicate(true))
     _body_sprite.texture = ImageTexture.new()
     _body_sprite.texture.size = size
     _body_sprite.position = _collision_shape.position
