@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://environment/hazards/hazard_water/hazard_water.gd" type="Script" id=1]
 [ext_resource path="res://environment/hazards/hazard_water/shaders/hazard_water_body.shader" type="Shader" id=2]
@@ -21,6 +21,22 @@ frame_1/delay_sec = 0.0
 frame_2/texture = ExtResource( 5 )
 frame_2/delay_sec = 0.0
 
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, -8, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 5 )
+
 [node name="HazardWater" type="Area2D"]
 collision_layer = 256
 collision_mask = 32
@@ -42,3 +58,6 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Bubbles" type="Particles2D" parent="."]
+process_material = SubResource( 3 )
