@@ -20,7 +20,7 @@ func play(sound_enum: int) -> void:
 func stop(sound_enum: int) -> void:
     get_player(sound_enum).stop()
 
-func get_player(sound_enum: int) -> AudioStreamPlayer:
+func get_player(sound_enum: int) -> VisibilityBasedAudioPlayer:
     assert(sound_enum in [
         Sounds.EXPAND,
         Sounds.CONTRACT,

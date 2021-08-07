@@ -56,7 +56,13 @@ func play(sound_enum: int) -> void:
     get_player(sound_enum).play()
 
 func stop(sound_enum: int) -> void:
-    get_player(sound_enum).stop()
+    # Include the call to seek() to ensure that the sound stops playing when
+    # stop() is called. This was not always previously the case, as there were
+    # instances where looping audio would continue to play if stop() was called
+    # too soon after play().
+    var audio_stream_player := get_player(sound_enum)
+    audio_stream_player.seek(-1)
+    audio_stream_player.stop()
 
 func get_player(sound_enum: int) -> AudioStreamPlayer:
     assert(sound_enum in [

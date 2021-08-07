@@ -11,8 +11,8 @@ onready var _trail_particles: Particles2D = $TrailParticles
 onready var _hitbox: Area2D = $Hitbox
 onready var _lifetime_timer: Timer = $LifetimeTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
-onready var _shoot_audio_stream_player: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Shoot/AudioStreamPlayer
-onready var _impact_audio_stream_player: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Impact/AudioStreamPlayer
+onready var _shoot_audio_stream_player: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Shoot
+onready var _impact_audio_stream_player: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Impact
 
 func _ready() -> void:
     pause()

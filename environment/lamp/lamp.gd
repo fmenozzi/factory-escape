@@ -11,8 +11,8 @@ onready var _ripple_sprite: Sprite = $RippleSprite
 onready var _embers: Particles2D = $LampEmbers
 onready var _rest_walk_to_points: Node2D = $RestPoints
 onready var _light_walk_to_points: Node2D = $LightPoints
-onready var _lamp_lit_sound: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/LampLit/AudioStreamPlayer
-onready var _fire_sound: AudioStreamPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Fire/AudioStreamPlayer
+onready var _lamp_lit_sound: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/LampLit
+onready var _fire_sound: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Fire
 onready var _player: Player = Util.get_player()
 
 func _ready() -> void:

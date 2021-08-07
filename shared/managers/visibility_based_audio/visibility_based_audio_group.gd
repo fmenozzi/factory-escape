@@ -54,17 +54,17 @@ func _process(delta: float) -> void:
 
     _set_all_volumes_from_linear(clamp(volume_linear, 0.0, 1.0))
 
-func get_player_by_name(player_name: String) -> AudioStreamPlayer:
+func get_player_by_name(player_name: String) -> VisibilityBasedAudioPlayer:
     for audio_player in _audio_players:
         if audio_player.name == player_name:
-            return audio_player.get_player()
+            return audio_player
 
     return null
 
-func get_player_by_index(idx: int) -> AudioStreamPlayer:
+func get_player_by_index(idx: int) -> VisibilityBasedAudioPlayer:
     assert(0 <= idx and idx < _audio_players.size())
 
-    return _audio_players[idx].get_player()
+    return _audio_players[idx]
 
 func set_radii_tiles(vis_radius_tiles: float, att_radius_tiles: float) -> void:
     assert(vis_radius_tiles > 0)
