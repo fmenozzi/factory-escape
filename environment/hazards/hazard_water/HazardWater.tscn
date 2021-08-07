@@ -8,8 +8,8 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
-shader_param/surface_color = Color( 0.666667, 0.956863, 0.772549, 1 )
-shader_param/deep_color = Color( 0.188235, 0.568627, 0.188235, 1 )
+shader_param/surface_color = Color( 1, 0.858824, 0.894118, 1 )
+shader_param/deep_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/offset_y_uv = 0.0
 
 [sub_resource type="AnimatedTexture" id=2]
