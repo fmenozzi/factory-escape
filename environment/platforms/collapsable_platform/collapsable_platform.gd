@@ -12,6 +12,8 @@ const WARNING_DURATION: float = 1.0
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _trigger_area: Area2D = $TriggerArea
 onready var _flash_manager: Node = $FlashManager
+onready var _collapse_sound: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup.get_player_by_name('Collapse')
+onready var _reset_sound: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup.get_player_by_name('Reset')
 
 var _active: bool = true
 
@@ -34,6 +36,7 @@ func _on_player_contact(player: Player) -> void:
 
     # Wait for the flashing to finish before collapsing the platform.
     _flash_manager.start_flashing()
+    _collapse_sound.play()
     yield(_flash_manager, 'flashing_finished')
     _animation_player.play('collapse')
 
@@ -42,6 +45,7 @@ func _on_player_contact(player: Player) -> void:
     yield(_animation_player, 'animation_finished')
     yield(get_tree().create_timer(COLLAPSED_DURATION), 'timeout')
     _animation_player.play_backwards('collapse')
+    _reset_sound.play()
 
     # Once that animation finishes, mark the platform as active so that the
     # player can interact with it again.

@@ -132,14 +132,14 @@ func update(player: Player, delta: float) -> Dictionary:
             return {'new_state': Player.State.HARD_LANDING}
         elif _buffer_jump_enabled:
             _reset_bufferable_actions(player)
-            sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
+            _maybe_play_land_soft_sound(player)
             return {'new_state': Player.State.JUMP}
         elif _buffer_dash_enabled:
             _reset_bufferable_actions(player)
-            sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
+            _maybe_play_land_soft_sound(player)
             return {'new_state': Player.State.DASH}
         else:
-            sound_manager.play(PlayerSoundManager.Sounds.LAND_SOFT)
+            _maybe_play_land_soft_sound(player)
             return {'new_state': Player.State.IDLE}
 
     # Start wall sliding if we're on a wall.
@@ -164,3 +164,17 @@ func update(player: Player, delta: float) -> Dictionary:
 func _reset_bufferable_actions(player: Player) -> void:
     player.get_jump_manager().reset_jump()
     player.get_dash_manager().reset_dash()
+
+func _maybe_play_land_soft_sound(player: Player) -> void:
+    if not player.is_on_ground():
+        return
+
+    # Only play the LAND_SOFT sound if the player didn't just land on a
+    # collapsable platform, as those platforms have a separate impact sound.
+    var landed_on_collapsable_platform := false
+    for i in range(player.get_slide_count()):
+        var collision := player.get_slide_collision(i)
+        if collision.collider.is_in_group('collapsable_platforms'):
+            landed_on_collapsable_platform = true
+    if not landed_on_collapsable_platform:
+        player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_SOFT)
