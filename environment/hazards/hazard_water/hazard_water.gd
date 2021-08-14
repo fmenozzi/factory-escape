@@ -31,6 +31,7 @@ func _ready() -> void:
 
     # Match the position and emission box width to the collision shape, and set
     # the number of particles emitted based on the particle density.
+    _bubbles.set_process_material(_bubbles.get_process_material().duplicate(true))
     _bubbles.position = _collision_shape.position + Vector2(0, -half_size.y + 8)
     _bubbles.process_material.emission_box_extents.x = half_size.x - 2
     _bubbles.amount = PARTICLES_PER_PIXEL * size.x

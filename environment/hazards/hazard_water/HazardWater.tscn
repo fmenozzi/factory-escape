@@ -21,21 +21,21 @@ frame_1/delay_sec = 0.0
 frame_2/texture = ExtResource( 5 )
 frame_2/delay_sec = 0.0
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.5, 1 )
 colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
 emission_box_extents = Vector3( 1, 1, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, -8, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 5 )
+color_ramp = SubResource( 4 )
 
 [node name="HazardWater" type="Area2D"]
 collision_layer = 256
@@ -60,4 +60,4 @@ __meta__ = {
 }
 
 [node name="Bubbles" type="Particles2D" parent="."]
-process_material = SubResource( 3 )
+process_material = SubResource( 5 )
