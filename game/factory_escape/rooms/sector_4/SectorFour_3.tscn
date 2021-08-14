@@ -1,9 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/hazards/lightning_wall/LightningWallWithSwitch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 56 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 72, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 56 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 16, 8 )
 
 [node name="SectorFour_3" instance=ExtResource( 1 )]
 
@@ -29,4 +46,60 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 450 )
 
+[node name="LightningWallWithSwitch" parent="Hazards" index="0" instance=ExtResource( 2 )]
+position = Vector2( 112, 504 )
+
+[node name="MovableEmitter" parent="Hazards/LightningWallWithSwitch/LightningWall" index="1"]
+position = Vector2( 0, -112 )
+
+[node name="Switch" parent="Hazards/LightningWallWithSwitch" index="1"]
+position = Vector2( -48, 0 )
+
+[node name="Left" parent="HazardCheckpoints" index="0" instance=ExtResource( 3 )]
+position = Vector2( 24, 504 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/Left" index="0"]
+position = Vector2( -8, -56 )
+shape = SubResource( 2 )
+
+[node name="UpperRight" parent="HazardCheckpoints" index="1" instance=ExtResource( 3 )]
+position = Vector2( 160, 504 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/UpperRight" index="0"]
+position = Vector2( 72, -136 )
+shape = SubResource( 3 )
+
+[node name="Right" parent="HazardCheckpoints" index="2" instance=ExtResource( 3 )]
+position = Vector2( 160, 504 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/Right" index="0"]
+position = Vector2( 144, -56 )
+shape = SubResource( 4 )
+
+[node name="PlatformUpper" parent="HazardCheckpoints" index="3" instance=ExtResource( 3 )]
+position = Vector2( 192, 408 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/PlatformUpper" index="0"]
+shape = SubResource( 5 )
+
+[node name="PlatformLower" parent="HazardCheckpoints" index="4" instance=ExtResource( 3 )]
+position = Vector2( 240, 456 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/PlatformLower" index="0"]
+shape = SubResource( 6 )
+
 [editable path="TileMaps"]
+[editable path="Hazards/LightningWallWithSwitch"]
+[editable path="Hazards/LightningWallWithSwitch/LightningWall"]
+[editable path="Hazards/LightningWallWithSwitch/LightningWall/BaseEmitter"]
+[editable path="Hazards/LightningWallWithSwitch/LightningWall/MovableEmitter"]
+[editable path="Hazards/LightningWallWithSwitch/Switch"]
+[editable path="Hazards/LightningWallWithSwitch/Switch/WalkToPoints"]
+[editable path="HazardCheckpoints/Left"]
+[editable path="HazardCheckpoints/UpperRight"]
+[editable path="HazardCheckpoints/Right"]
+[editable path="HazardCheckpoints/PlatformUpper"]
+[editable path="HazardCheckpoints/PlatformLower"]
