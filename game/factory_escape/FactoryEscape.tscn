@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=2]
+[gd_scene load_steps=118 format=2]
 
 [ext_resource path="res://game/GameInterface.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/factory_escape/factory_escape.gd" type="Script" id=2]
@@ -116,6 +116,7 @@
 [ext_resource path="res://game/factory_escape/rooms/sector_4/SectorFour_15.tscn" type="PackedScene" id=114]
 [ext_resource path="res://game/factory_escape/rooms/sector_4/SectorFour_16.tscn" type="PackedScene" id=115]
 [ext_resource path="res://game/factory_escape/rooms/sector_4/SectorFour_17.tscn" type="PackedScene" id=116]
+[ext_resource path="res://game/factory_escape/rooms/sector_4/SectorFour_18.tscn" type="PackedScene" id=117]
 
 [node name="FactoryEscape" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -461,6 +462,9 @@ position = Vector2( 5760, 5924 )
 
 [node name="SectorFour_17" parent="World/Rooms" index="113" instance=ExtResource( 116 )]
 position = Vector2( 5440, 5924 )
+
+[node name="SectorFour_18" parent="World/Rooms" index="114" instance=ExtResource( 117 )]
+position = Vector2( 5120, 5384 )
 
 [node name="Player" parent="World" index="3"]
 position = Vector2( 160, -384 )
