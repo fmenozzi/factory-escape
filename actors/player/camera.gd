@@ -7,25 +7,17 @@ const CAMERA_PAN_DISTANCE := 4.0 * Util.TILE_SIZE
 onready var _player: Player = get_parent().get_parent()
 onready var _tween: Tween = $PositionTween
 
-var _original_local_anchor_pos: Vector2 = Vector2.ZERO
 var _is_detached := false
 
 func detach_and_move_to_global(new_global_pos: Vector2) -> void:
     self.set_as_toplevel(true)
-
     _is_detached = true
-
-    # Save the original local anchor position so we know where to go back to
-    # when we reattach the camera.
-    _original_local_anchor_pos = self.position
-
     self.global_position = new_global_pos
 
 func reattach(tween_on_reattach: bool = true) -> void:
     if not tween_on_reattach:
-        _original_local_anchor_pos = Vector2.ZERO
         _is_detached = false
-        self.position = _original_local_anchor_pos
+        self.position = Vector2.ZERO
         self.set_as_toplevel(false)
         return
 
@@ -45,7 +37,7 @@ func reattach(tween_on_reattach: bool = true) -> void:
     var trans := Tween.TRANS_QUAD
     var easing := Tween.EASE_IN_OUT
     var old := self.position
-    var new := _original_local_anchor_pos
+    var new := Vector2.ZERO
 
     _tween.remove_all()
     _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
@@ -111,16 +103,12 @@ func _transition_setup() -> void:
     # timers, etc.)
     _player.pause()
 
-    # Save the original local position of the camera relative to the anchor so
-    # that we can return to it after the transition completes.
-    _original_local_anchor_pos = self.position
-
     # Disable smoothing to avoid jitter during transition.
     self.smoothing_enabled = false
 
 func _transition_teardown(room: Room) -> void:
-    # Restore local camera position to the original anchor point.
-    self.position = _original_local_anchor_pos
+    # Restore local camera position.
+    self.position = Vector2.ZERO
 
     # Adjust camera limits to match room dimensions.
     self.fit_camera_limits_to_room(room)
