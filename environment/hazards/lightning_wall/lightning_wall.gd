@@ -50,14 +50,14 @@ func dissipate() -> void:
     _tween.interpolate_property(_movable_emitter_bolts, 'modulate:a', 1.0, 0.0, duration)
     _tween.start()
 
+    # Disable hitbox.
+    _hitbox_collision_shape.set_deferred('disabled', true)
+
     # Dissipate individual bolts one by one.
     for i in range(_base_emitter_bolts.get_child_count()):
         _base_emitter_bolts.get_child(i).dissipate()
         _movable_emitter_bolts.get_child(i).dissipate()
         yield(get_tree().create_timer(LightningBolt.DISSIPATE_DURATION), 'timeout')
-
-    # Disable hitbox.
-    _hitbox_collision_shape.set_deferred('disabled', true)
 
 func pause() -> void:
     _base_emitter_sparks.emitting = false
