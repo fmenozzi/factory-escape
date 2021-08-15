@@ -106,6 +106,12 @@ func _transition_setup() -> void:
     # Disable smoothing to avoid jitter during transition.
     self.smoothing_enabled = false
 
+    # In case we're currently in the process of returning from pan, cancel the
+    # tween and reset the position immediately.
+    _tween.reset_all()
+    _tween.remove_all()
+    self.position = Vector2.ZERO
+
 func _transition_teardown(room: Room) -> void:
     # Restore local camera position.
     self.position = Vector2.ZERO
@@ -135,7 +141,7 @@ func _get_transition_direction(old_room, new_room) -> Vector2:
     return Vector2.ZERO
 
 func _get_new_camera_global_position(old_room, new_room) -> Vector2:
-    var current_camera_position := get_camera_position()
+    var current_camera_position := global_position
     var anchor: Vector2 = new_room.get_closest_camera_anchor(_player)
     var new_room_bounds: Rect2 = new_room.get_room_bounds()
     var half_screen_size := Util.get_ingame_resolution() / 2
