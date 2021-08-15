@@ -811,6 +811,7 @@ shape = SubResource( 30 )
 
 [node name="Camera2D" type="Camera2D" parent="CameraAnchor"]
 current = true
+process_mode = 0
 smoothing_enabled = true
 smoothing_speed = 15.0
 drag_margin_left = 0.0
