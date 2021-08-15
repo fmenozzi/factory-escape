@@ -75,10 +75,10 @@ func return_from_pan() -> void:
 func transition(old_room, new_room) -> void:
     _transition_setup()
 
-    # Find closest camera anchors in both previous and current room and use
-    # their positions as interpolation points for camera position.
-    var old_global_pos = old_room.get_closest_camera_anchor(_player)
-    var new_global_pos = new_room.get_closest_camera_anchor(_player)
+    # Interpolate camera position from current viewport center to the best spot
+    # in the next room.
+    var old_global_pos = get_camera_screen_center()
+    var new_global_pos = _get_new_camera_global_position(old_room, new_room)
 
     # Move the player one pixel into the direction of the new room. This is to
     # help ensure that the room detection area does not exist in more than one
@@ -130,6 +130,50 @@ func _transition_teardown(room: Room) -> void:
 
     # Restore player processing.
     _player.unpause()
+
+func _get_transition_direction(old_room, new_room) -> Vector2:
+    var old_room_bounds: Rect2 = old_room.get_room_bounds()
+    var new_room_bounds: Rect2 = new_room.get_room_bounds()
+
+    if old_room_bounds.end.x == new_room_bounds.position.x:
+        return Vector2.RIGHT
+    elif old_room_bounds.position.x == new_room_bounds.end.x:
+        return Vector2.LEFT
+    elif old_room_bounds.end.y == new_room_bounds.position.y:
+        return Vector2.DOWN
+    elif old_room_bounds.position.y == new_room_bounds.end.y:
+        return Vector2.UP
+
+    return Vector2.ZERO
+
+func _get_new_camera_global_position(old_room, new_room) -> Vector2:
+    var current_camera_position := get_camera_position()
+    var anchor: Vector2 = new_room.get_closest_camera_anchor(_player)
+    var new_room_bounds: Rect2 = new_room.get_room_bounds()
+    var half_screen_size := Util.get_ingame_resolution() / 2
+
+    # The general direction that the player will move in during the room
+    # transition (one of Vector2.{UP, DOWN, LEFT, RIGHT}).
+    var transition_direction := _get_transition_direction(old_room, new_room)
+
+    match transition_direction:
+        Vector2.LEFT, Vector2.RIGHT:
+            var candidate := Vector2(anchor.x, current_camera_position.y)
+            if candidate.y + half_screen_size.y > (new_room_bounds.position.y + new_room_bounds.size.y):
+                candidate.y = anchor.y
+            if candidate.y - half_screen_size.y < new_room_bounds.position.y:
+                candidate.y = anchor.y
+            return candidate
+
+        Vector2.UP, Vector2.DOWN:
+            var candidate := Vector2(current_camera_position.x, anchor.y)
+            if candidate.x + half_screen_size.x > (new_room_bounds.position.x + new_room_bounds.size.x):
+                candidate.x = anchor.x
+            if candidate.x - half_screen_size.x < (new_room_bounds.position.x):
+                candidate.x = anchor.x
+            return candidate
+
+    return Vector2.ZERO
 
 func _interpolate_camera_pos(old_global_pos, new_global_pos) -> void:
     var prop := 'position'

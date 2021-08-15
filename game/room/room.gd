@@ -54,6 +54,9 @@ func get_room_dimensions() -> Vector2:
 
     return 2 * half_extents
 
+func get_room_bounds() -> Rect2:
+    return Rect2(get_global_position(), get_room_dimensions())
+
 func get_moving_platforms() -> Array:
     return _moving_platforms
 
@@ -93,9 +96,7 @@ func set_enemies_visible(enemies_visible: bool) -> void:
             enemy.visible = enemies_visible
 
 func contains(obj: Node2D) -> bool:
-    var bounds := Rect2(get_global_position(), get_room_dimensions())
-
-    return bounds.has_point(obj.get_global_position())
+    return get_room_bounds().has_point(obj.get_global_position())
 
 func set_enable_room_transitions(enabled: bool) -> void:
     if enabled:
