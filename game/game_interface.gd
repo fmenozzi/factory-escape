@@ -61,6 +61,13 @@ func _ready() -> void:
             # first lamp.
             _player.change_state({'new_state': Player.State.IDLE})
 
+    # Set the clear color to be the dark blue background color, in order to
+    # prevent accidentally seeing untiled areas when doing funky camera stuff.
+    # Set it dynamically rather than in project settings so that we don't forget
+    # to tile each room as normal when building them, which might otherwise lead
+    # to broken navtiles
+    VisualServer.set_default_clear_color(Color('#1d212d'))
+
     MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
 
     var player_health := _player.get_health()
