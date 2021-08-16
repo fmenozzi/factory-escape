@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://game/demo/rooms/prelude/abilities_lamp_save_manager.gd"
 }, {
 "base": "Node2D",
+"class": "Ability",
+"language": "GDScript",
+"path": "res://environment/abilities/factory_escape/ability.gd"
+}, {
+"base": "Node2D",
 "class": "AggroManager",
 "language": "GDScript",
 "path": "res://actors/enemies/aggro_manager.gd"
@@ -381,6 +386,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AbilitiesLampSaveManager": "",
+"Ability": "",
 "AggroManager": "",
 "Arena": "",
 "AttackManager": "",
