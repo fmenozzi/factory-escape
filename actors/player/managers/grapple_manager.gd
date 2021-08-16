@@ -120,3 +120,8 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.GRAPPLE:
         _has_grapple = true
+
+func _on_grapple_acquired(ability: int) -> void:
+    assert(ability == Ability.Kind.GRAPPLE)
+
+    _has_grapple = true

@@ -54,3 +54,8 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.WALL_JUMP:
         _has_wall_jump = true
+
+func _on_wall_jump_acquired(ability: int) -> void:
+    assert(ability == Ability.Kind.WALL_JUMP)
+
+    _has_wall_jump = true

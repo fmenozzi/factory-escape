@@ -8,6 +8,24 @@ onready var _central_hub_fall_sequence_camera_anchor: Position2D = $World/Rooms/
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
 
+    for ability in get_tree().get_nodes_in_group('abilities'):
+        match ability.ability:
+            Ability.Kind.DASH:
+                ability.connect(
+                    'ability_acquired', _player.get_dash_manager(), '_on_dash_acquired')
+
+            Ability.Kind.DOUBLE_JUMP:
+                ability.connect(
+                    'ability_acquired', _player.get_jump_manager(), '_on_double_jump_acquired')
+
+            Ability.Kind.WALL_JUMP:
+                ability.connect(
+                    'ability_acquired', _player.get_wall_jump_manager(), '_on_wall_jump_acquired')
+
+            Ability.Kind.GRAPPLE:
+                ability.connect(
+                    'ability_acquired', _player.get_grapple_manager(), '_on_grapple_acquired')
+
 func _on_player_entered_cargo_lift() -> void:
     # Move player to suspension point.
     _player.change_state({'new_state': Player.State.SUSPENDED})

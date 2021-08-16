@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/abilities/factory_escape/Ability.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -33,6 +34,10 @@ position = Vector2( 60, 48 )
 [node name="CollisionShape2D" parent="GrapplePoints/GrapplePoint/GrappleRangeArea" index="0"]
 position = Vector2( 64, 40 )
 shape = SubResource( 2 )
+
+[node name="GrappleAbility" parent="." index="9" instance=ExtResource( 3 )]
+position = Vector2( 160, 152 )
+ability = 3
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]

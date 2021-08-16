@@ -73,3 +73,8 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.DOUBLE_JUMP:
         _has_double_jump = true
+
+func _on_double_jump_acquired(ability: int) -> void:
+    assert(ability == Ability.Kind.DOUBLE_JUMP)
+
+    _has_double_jump = true

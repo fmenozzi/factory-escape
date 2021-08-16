@@ -58,3 +58,8 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.DASH:
         _has_dash = true
+
+func _on_dash_acquired(ability: int) -> void:
+    assert(ability == Ability.Kind.DASH)
+
+    _has_dash = true
