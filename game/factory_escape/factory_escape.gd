@@ -2,6 +2,10 @@ extends "res://game/game_interface.gd"
 
 onready var _cargo_lift: Room = $World/Rooms/CargoLift
 onready var _central_hub: Room = $World/Rooms/CentralHub
+onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne_17/TutorialMessageTrigger
+onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo_13/TutorialMessageTrigger
+onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/TutorialMessageTrigger
+onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/TutorialMessageTrigger
 onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
 onready var _central_hub_fall_sequence_camera_anchor: Position2D = $World/Rooms/CentralHub/FallSequenceCameraAnchor
 
@@ -74,3 +78,16 @@ func _on_ability_acquired(ability: int) -> void:
     _player.save_manager.last_saved_global_position = _player.global_position
     _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
     _maybe_save_game()
+
+    match ability:
+        Ability.Kind.DASH:
+            _dash_tutorial_trigger.set_is_active(true)
+
+        Ability.Kind.WALL_JUMP:
+            _wall_jump_tutorial_trigger.set_is_active(true)
+
+        Ability.Kind.DOUBLE_JUMP:
+            _double_jump_tutorial_trigger.set_is_active(true)
+
+        Ability.Kind.GRAPPLE:
+            _grapple_tutorial_trigger.set_is_active(true)

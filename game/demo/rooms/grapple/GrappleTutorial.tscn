@@ -4,8 +4,6 @@
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/tutorial_message_trigger/TutorialMessageTrigger.tscn" type="PackedScene" id=3]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -50,12 +48,10 @@ message_mode = 0
 message = "when in range to grapple"
 player_action = "player_grapple"
 
-[node name="CollisionShape2D" parent="TutorialMessageTriggerGrapple" index="0"]
+[node name="CollisionShape2D" parent="TutorialMessageTriggerGrapple" index="1"]
 position = Vector2( 96, 96 )
 shape = SubResource( 3 )
 
 [editable path="TileMaps"]
-
 [editable path="GrapplePoints/GrapplePoint"]
-
 [editable path="TutorialMessageTriggerGrapple"]

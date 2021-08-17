@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/abilities/factory_escape/Ability.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/tutorial_message_trigger/TutorialMessageTrigger.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 60, 72 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 88, 72 )
 
 [node name="SectorFour_13" instance=ExtResource( 1 )]
 
@@ -39,5 +43,17 @@ shape = SubResource( 2 )
 position = Vector2( 160, 152 )
 ability = 3
 
+[node name="TutorialMessageTrigger" parent="." index="10" instance=ExtResource( 4 )]
+message_mode = 0
+message = "when in range to grapple"
+player_action = "player_grapple"
+delay = 1.0
+is_active = false
+
+[node name="CollisionShape2D" parent="TutorialMessageTrigger" index="1"]
+position = Vector2( 152, 88 )
+shape = SubResource( 3 )
+
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]
+[editable path="TutorialMessageTrigger"]
