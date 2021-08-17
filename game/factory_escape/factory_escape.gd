@@ -9,6 +9,8 @@ func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
 
     for ability in get_tree().get_nodes_in_group('abilities'):
+        ability.connect('ability_acquired', self, '_on_ability_acquired')
+
         match ability.ability:
             Ability.Kind.DASH:
                 ability.connect(
@@ -67,3 +69,8 @@ func _on_player_entered_cargo_lift() -> void:
     # Reset previous/current room so that next room transition works properly.
     _player.prev_room = _central_hub
     _player.curr_room = _central_hub
+
+func _on_ability_acquired(ability: int) -> void:
+    _player.save_manager.last_saved_global_position = _player.global_position
+    _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
+    _maybe_save_game()
