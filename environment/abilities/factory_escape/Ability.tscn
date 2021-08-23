@@ -7,14 +7,14 @@
 [ext_resource path="res://environment/abilities/factory_escape/materials/particle_material_pink.tres" type="Material" id=5]
 [ext_resource path="res://environment/abilities/factory_escape/materials/particle_material_white.tres" type="Material" id=6]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 shader_param/ripple_radius_uv = 0.0
 shader_param/ripple_width_uv = 0.0
 shader_param/ripple_color = Color( 1, 0.309804, 0.470588, 1 )
 shader_param/alpha_multiplier = 0.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "hover"
 length = 2.0
 loop = true
@@ -80,7 +80,7 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1.3, 1.3, 1.3, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 5.0
 
 [node name="Ability" type="Node2D" groups=[
@@ -91,7 +91,7 @@ script = ExtResource( 1 )
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="RippleSprite" type="Sprite" parent="Visuals"]
-material = SubResource( 3 )
+material = SubResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="Particles" type="Node2D" parent="Visuals"]
@@ -112,10 +112,10 @@ process_material = ExtResource( 5 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals"]
-anims/hover = SubResource( 4 )
+anims/hover = SubResource( 2 )
 
 [node name="TriggerArea" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )

@@ -82,5 +82,4 @@ focus_neighbour_bottom = NodePath("../Rumble/OptionButton")
 text = "Back"
 
 [editable path="Rumble"]
-
 [editable path="Screenshake"]
