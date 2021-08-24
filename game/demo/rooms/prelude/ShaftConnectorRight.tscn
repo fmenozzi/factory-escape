@@ -38,7 +38,7 @@ shape = SubResource( 1 )
 position = Vector2( 160, 90 )
 
 [node name="LeapingFailure" parent="Enemies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 192, 172 )
+position = Vector2( 272, 172 )
 
 [node name="Left" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 collision_layer = 512
