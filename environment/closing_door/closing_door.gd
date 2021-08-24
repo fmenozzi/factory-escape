@@ -13,10 +13,10 @@ func _ready() -> void:
     set_opened()
 
 func open() -> void:
-    _collision_shape.set_deferred('disabled', true)
     _animation_player.play('open')
     _audio_group.get_player_by_name('Opened').play()
     yield(_animation_player, 'animation_finished')
+    _collision_shape.set_deferred('disabled', true)
     _is_closed = false
     emit_signal('door_opened')
 
