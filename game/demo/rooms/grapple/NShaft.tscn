@@ -4,18 +4,16 @@
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=3]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 64 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 40, 64 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 56, 64 )
 
 [sub_resource type="RectangleShape2D" id=5]
@@ -69,7 +67,7 @@ position = Vector2( 200, 80 )
 
 [node name="CollisionShape2D" parent="GrapplePoints/TopRight/GrappleRangeArea" index="0"]
 position = Vector2( 56, 8 )
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 
 [node name="MiddleLeft" parent="GrapplePoints" index="2" instance=ExtResource( 2 )]
 position = Vector2( 16, 136 )
@@ -77,7 +75,7 @@ rotation = 1.5708
 
 [node name="CollisionShape2D" parent="GrapplePoints/MiddleLeft/GrappleRangeArea" index="0"]
 position = Vector2( 40, -64 )
-shape = SubResource( 11 )
+shape = SubResource( 4 )
 
 [node name="MiddleRight" parent="GrapplePoints" index="3" instance=ExtResource( 2 )]
 position = Vector2( 304, 136 )
@@ -103,11 +101,8 @@ rotation = 1.5708
 position = Vector2( 39.9997, -72.0002 )
 shape = SubResource( 7 )
 
-[node name="SentryDroneLeft" parent="Enemies" index="0" instance=ExtResource( 3 )]
-position = Vector2( 64, 48 )
-
-[node name="SentryDroneRight" parent="Enemies" index="1" instance=ExtResource( 3 )]
-position = Vector2( 256, 48 )
+[node name="SentryDrone" parent="Enemies" index="0" instance=ExtResource( 3 )]
+position = Vector2( 160, 48 )
 
 [node name="Left" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 position = Vector2( -8, 264 )
@@ -130,15 +125,9 @@ shape = SubResource( 9 )
 one_way_collision = true
 
 [editable path="TileMaps"]
-
 [editable path="GrapplePoints/TopLeft"]
-
 [editable path="GrapplePoints/TopRight"]
-
 [editable path="GrapplePoints/MiddleLeft"]
-
 [editable path="GrapplePoints/MiddleRight"]
-
 [editable path="GrapplePoints/BottomLeft"]
-
 [editable path="GrapplePoints/BottomRight"]
