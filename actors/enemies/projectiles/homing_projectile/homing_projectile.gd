@@ -4,16 +4,26 @@ class_name HomingProjectile
 export(float) var speed_tiles_per_second := 8.0
 
 const MAX_LIFETIME := 20.0
-const HOMING_DURATION := 0.5
 
-var _velocity := Vector2.ZERO
-var _player: Player
+enum State {
+    NO_CHANGE,
+    SPAWN,
+    FOLLOW,
+    EXPLODE,
+}
+var _current_state: Node = null
+var _current_state_enum: int = -1
+
+onready var STATES := {
+    State.SPAWN:   $States/Spawn,
+    State.FOLLOW:  $States/Follow,
+    State.EXPLODE: $States/Explode,
+}
 
 onready var _trail_particles: Particles2D = $TrailParticles
 onready var _hitbox: Area2D = $Hitbox
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _lifetime_timer: Timer = $LifetimeTimer
-onready var _homing_duration_timer: Timer = $HomingDurationTimer
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _sound_manager: HomingProjectileSoundManager = $HomingProjectileSoundManager
 
@@ -30,29 +40,36 @@ func _ready() -> void:
     _lifetime_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
     _lifetime_timer.connect('timeout', self, '_on_lifetime_timeout')
 
-    _homing_duration_timer.one_shot = true
-    _homing_duration_timer.wait_time = HOMING_DURATION
-    _homing_duration_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
-
 func _physics_process(delta: float) -> void:
-    _update_velocity()
-    position += _velocity * delta
+    var new_state_dict = _current_state.update(self, delta)
+    if new_state_dict['new_state'] != State.NO_CHANGE:
+        _change_state(new_state_dict)
 
 func start(direction: Vector2) -> void:
     _sound_manager.set_all_muted(false)
 
-    _sound_manager.play(HomingProjectileSoundManager.Sounds.SPAWN)
-    _animation_player.play('spawn')
-    yield(_animation_player, 'animation_finished')
-    _sound_manager.play(HomingProjectileSoundManager.Sounds.SHOOT)
-    _sound_manager.play(HomingProjectileSoundManager.Sounds.FOLLOW)
+    _current_state_enum = State.SPAWN
+    _current_state = STATES[_current_state_enum]
+    _change_state({
+        'new_state': _current_state_enum,
+        'direction': direction,
+       })
 
-    _velocity = direction.normalized() * speed_tiles_per_second * Util.TILE_SIZE
     _lifetime_timer.start()
-    _homing_duration_timer.start()
-    _player = Util.get_player()
 
     resume()
+
+func get_sound_manager() -> HomingProjectileSoundManager:
+    return _sound_manager
+
+func get_animation_player() -> AnimationPlayer:
+    return _animation_player
+
+func get_hitbox_collision_shape() -> CollisionShape2D:
+    return _hitbox_collision_shape
+
+func get_trail_particles() -> Particles2D:
+    return _trail_particles
 
 func pause() -> void:
     set_physics_process(false)
@@ -68,64 +85,29 @@ func resume() -> void:
 func room_reset() -> void:
     queue_free()
 
-func _update_velocity() -> void:
-    # The homing weight is used to determine how much the projectile will home
-    # in towards the player. This is a normalized value, where 0 means the
-    # projectile continues in its current direction and 1 means it perfectly
-    # follows the player. Values in between will cause the projectile to bend in
-    # the general direction of the player.
-    var weight := _get_homing_weight()
+func _change_state(new_state_dict: Dictionary) -> void:
+    var old_state_enum := _current_state_enum
+    var new_state_enum: int = new_state_dict['new_state']
 
-    # Use the homing weight to determine how much to interpolate the homing
-    # projectile's current direction towards the player.
-    var current_dir := _velocity.normalized()
-    var player_dir := global_position.direction_to(_player.get_center()).normalized()
-    var final_dir: Vector2 = lerp(current_dir, player_dir, weight).normalized()
+    # Before passing along the new_state_dict to the new state (since we want
+    # any additional metadata keys passed too), rename the 'new_state' key to
+    # 'previous_state'.
+    new_state_dict.erase('new_state')
+    new_state_dict['previous_state'] = old_state_enum
 
-    # Update the velocity to point in the new direction.
-    _velocity += (final_dir * speed_tiles_per_second * Util.TILE_SIZE - _velocity)
-
-func _get_homing_weight() -> float:
-    # Get the elapsed time of the homing duration timer as a normalized value
-    # from 0 to 1.
-    var homing_elapsed_time_fraction := \
-        (HOMING_DURATION - _homing_duration_timer.time_left) / HOMING_DURATION
-
-    # The weight starts at 0.25 and decays exponentially over the course of the
-    # homing duration. Because exp() is asymptotic, the weight will never reach
-    # 0 exactly, which means the projectile will always be bending towards the
-    # player ever so slightly. In practice, this looks much more pleasant than
-    # interpolating linearly to zero, at which point the projectile would just
-    # continue in a straight line.
-    return 0.25 * exp(-3.0 * homing_elapsed_time_fraction)
-
-func _explode() -> void:
-    # Stop moving the projectile.
-    set_physics_process(false)
-
-    # Disable the projectile's hitbox.
-    _hitbox_collision_shape.set_deferred('disabled', true)
-
-    _sound_manager.stop(HomingProjectileSoundManager.Sounds.FOLLOW)
-    _sound_manager.play(HomingProjectileSoundManager.Sounds.IMPACT)
-
-    # Wait for explode animation to finish.
-    _animation_player.play('explode')
-    yield(_animation_player, 'animation_finished')
-
-    # Wait for the trail particles to disappear, since they last a few seconds.
-    yield(get_tree().create_timer(_trail_particles.lifetime), 'timeout')
-
-    queue_free()
+    _current_state.exit(self)
+    _current_state_enum = new_state_enum
+    _current_state = STATES[new_state_enum]
+    _current_state.enter(self, new_state_dict)
 
 func _on_impact(_player_or_environment: Node) -> void:
-    _explode()
+    _change_state({'new_state': State.EXPLODE})
 
 func _on_lifetime_timeout() -> void:
-    _explode()
+    _change_state({'new_state': State.EXPLODE})
 
 func _on_projectile_spawner_destroyed() -> void:
     # Destroy the projectile if the spawner (i.e. the enemy spawning it) is
     # destroyed during the projectile's spawn animation.
-    if _animation_player.is_playing() and _animation_player.current_animation == 'spawn':
-        _explode()
+    if _current_state_enum == State.SPAWN:
+        _change_state({'new_state': State.EXPLODE})

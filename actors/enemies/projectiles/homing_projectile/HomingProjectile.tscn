@@ -1,8 +1,11 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://actors/enemies/projectiles/homing_projectile/homing_projectile.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/projectiles/homing_projectile/textures/homing-projectile.png" type="Texture" id=2]
 [ext_resource path="res://actors/enemies/projectiles/homing_projectile/HomingProjectileSoundManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/states/spawn.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/states/follow.gd" type="Script" id=5]
+[ext_resource path="res://actors/enemies/projectiles/homing_projectile/states/explode.gd" type="Script" id=6]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.309804, 0.470588, 0 )
@@ -218,10 +221,21 @@ shape = SubResource( 12 )
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 
-[node name="HomingDurationTimer" type="Timer" parent="."]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/explode = SubResource( 13 )
 anims/spawn = SubResource( 14 )
 
 [node name="HomingProjectileSoundManager" parent="." instance=ExtResource( 3 )]
+
+[node name="States" type="Node" parent="."]
+
+[node name="Spawn" type="Node" parent="States"]
+script = ExtResource( 4 )
+
+[node name="Follow" type="Node" parent="States"]
+script = ExtResource( 5 )
+
+[node name="HomingDurationTimer" type="Timer" parent="States/Follow"]
+
+[node name="Explode" type="Node" parent="States"]
+script = ExtResource( 6 )
