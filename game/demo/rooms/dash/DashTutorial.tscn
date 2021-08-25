@@ -7,7 +7,7 @@
 extents = Vector2( 160, 90 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 64, 72 )
+extents = Vector2( 120, 72 )
 
 [node name="DashTutorial" instance=ExtResource( 1 )]
 
@@ -39,7 +39,7 @@ message = "to dash"
 player_action = "player_dash"
 
 [node name="CollisionShape2D" parent="TutorialMessageTriggerDash" index="1"]
-position = Vector2( 96, 96 )
+position = Vector2( 152, 96 )
 shape = SubResource( 2 )
 
 [editable path="TileMaps"]
