@@ -30,8 +30,10 @@ func _on_ability_chosen(chosen_ability: int) -> void:
     # opening the doors (corresponding to the time it takes for most of the
     # sound to finish, as there is "empty space" due to things like reverb and
     # echo).
+    MusicPlayer.fade_out(MusicPlayer.Music.WORLD_BASE, 0.5)
     _ability_chosen_sound.play()
     yield(get_tree().create_timer(3.5), 'timeout')
+    MusicPlayer.fade_in(MusicPlayer.Music.WORLD_BASE, 3.0)
 
     _closing_door_left.open()
     _closing_door_right.open()
