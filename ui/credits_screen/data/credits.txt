@@ -1,4 +1,4 @@
-PROGRAMMER
+PROGRAMMING
 Federico Menozzi (fmenozzi.itch.io)
 
 ART
@@ -8,12 +8,14 @@ NYKNCK (kvsr.itch.io)
 FONT
 Daniel Linssen (managore.itch.io)
 
+MUSIC
+Vincent Salgueiro
+
 SOUND
 Vincent Salgueiro
 Despic (despic_studio@)
 Carmin Bittermann
 Garry Smithson
-Emmanuel Shiferaw
 Kenney (www.kenney.nl)
 OpenGameArt.org
 FreeSound.org
