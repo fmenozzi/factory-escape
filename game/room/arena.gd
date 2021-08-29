@@ -42,6 +42,14 @@ func _process(delta: float) -> void:
         _player_camera.detach_and_move_to_global(self.to_global(_camera_anchor.position))
         _close_all_doors()
 
+        # Quickly fade out the world music and start the arena start -> arena
+        # sequence. Note that we don't use yield() here due to being inside the
+        # _process() function.
+        MusicPlayer.fade_out(MusicPlayer.Music.WORLD_BASE, 0.5)
+        var arena_start: AudioStreamPlayer = MusicPlayer.get_player(MusicPlayer.Music.ARENA_START)
+        arena_start.play()
+        arena_start.connect('finished', MusicPlayer, 'play', [MusicPlayer.Music.ARENA])
+
     if _num_live_enemies() == 0:
         _save_manager.current_phase_index += 1
 
@@ -96,6 +104,19 @@ func _finish_arena() -> void:
     Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
     yield(Screenshake, 'stopped_shaking')
     _player_camera.reattach()
+
+    # Fade out the arena music and start the arena end -> world sequence. We
+    # yield on a timer instead of waiting for the arena end music to finish
+    # because there's a several-second tail on the arena end sound, so we don't
+    # want too much musical "down time"
+    #
+    # TODO: is it possible for the player to die during this sequence and mess
+    #       up the music "state" due to the unconditional yield? Should we check
+    #       that they didn't end up in a lamp room before playing world track?
+    MusicPlayer.fade_out(MusicPlayer.Music.ARENA, 0.5)
+    MusicPlayer.play(MusicPlayer.Music.ARENA_END)
+    yield(get_tree().create_timer(5.0), 'timeout')
+    MusicPlayer.fade_in(MusicPlayer.Music.WORLD_BASE, 6.0)
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
     var enemy_data_for_phase: Array = _phase_data[phase_idx]

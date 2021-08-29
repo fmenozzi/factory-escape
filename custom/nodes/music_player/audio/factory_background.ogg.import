@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/factory_background.ogg-74fa39dd43eeb6da1053422a3e58dced.oggstr"
+
+[deps]
+
+source_file="res://custom/nodes/music_player/audio/factory_background.ogg"
+dest_files=[ "res://.import/factory_background.ogg-74fa39dd43eeb6da1053422a3e58dced.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,6 +1,9 @@
 extends Control
 
 func _ready() -> void:
+    MusicPlayer.stop_all()
+    MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
+
     set_process_unhandled_input(false)
     yield(SceneChanger, 'scene_changed')
     set_process_unhandled_input(true)

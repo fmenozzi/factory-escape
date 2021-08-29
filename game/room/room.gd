@@ -169,6 +169,11 @@ func _on_player_entered(area: Area2D) -> void:
         yield(camera, 'transition_completed')
         player.curr_room.resume()
 
+        if player.curr_room.has_node('Lamp'):
+            MusicPlayer.cross_fade(MusicPlayer.Music.WORLD_BASE, MusicPlayer.Music.LAMP_ROOM, 1.0)
+        if player.prev_room.has_node('Lamp'):
+            MusicPlayer.cross_fade(MusicPlayer.Music.LAMP_ROOM, MusicPlayer.Music.WORLD_BASE, 1.0)
+
         # Reset and hide enemies in the previous room once the transition
         # completes.
         player.prev_room.reset_enemies()

@@ -112,8 +112,7 @@ func _ready() -> void:
 
     _set_player_starting_health_and_health_packs()
 
-    if not SceneChanger.is_changing_scene():
-        MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
+    _set_player_starting_music()
 
 func _set_player_starting_room() -> void:
     var starting_room: Room = null
@@ -150,6 +149,13 @@ func _set_player_starting_health_and_health_packs() -> void:
     if not _player.save_manager.has_completed_intro_fall_sequence or not _player.save_manager.has_rested_at_any_lamp:
         _player.get_health().set_starting_health()
         _player.get_health_pack_manager().set_starting_health_packs()
+
+func _set_player_starting_music() -> void:
+    if _player.curr_room.has_node('Lamp'):
+        MusicPlayer.play(MusicPlayer.Music.LAMP_ROOM)
+    else:
+        yield(get_tree().create_timer(1.0), 'timeout')
+        MusicPlayer.fade_in(MusicPlayer.Music.WORLD_BASE, 6.0)
 
 func _maybe_save_game() -> void:
     if not run_standalone:
@@ -208,6 +214,12 @@ func _on_player_died() -> void:
     _player_death_transition.reset()
 
     _reset_world()
+
+    MusicPlayer.stop(MusicPlayer.Music.ARENA)
+    if _player.curr_room.has_node('Lamp'):
+        MusicPlayer.play(MusicPlayer.Music.LAMP_ROOM)
+    else:
+        MusicPlayer.play(MusicPlayer.Music.WORLD_BASE)
 
     var lamp := _player.get_nearby_lamp()
     if lamp != null:

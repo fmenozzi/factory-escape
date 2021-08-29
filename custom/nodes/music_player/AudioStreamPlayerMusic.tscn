@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://custom/nodes/music_player/audio_stream_player_music.gd" type="Script" id=1]
+
+[node name="AudioStreamPlayerMusic" type="AudioStreamPlayer"]
+script = ExtResource( 1 )
+
+[node name="FadeTween" type="Tween" parent="."]

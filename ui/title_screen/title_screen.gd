@@ -53,6 +53,7 @@ func _ready() -> void:
 
     Options.load_options_and_report_errors()
 
+    MusicPlayer.stop_all()
     MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
 
     # Start at main menu once we finish transitioning to title screen.

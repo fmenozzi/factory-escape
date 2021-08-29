@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/arena_start.ogg-6948e2df1ec68b46ae02ce80092d4587.oggstr"
+
+[deps]
+
+source_file="res://custom/nodes/music_player/audio/arena_start.ogg"
+dest_files=[ "res://.import/arena_start.ogg-6948e2df1ec68b46ae02ce80092d4587.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
