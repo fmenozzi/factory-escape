@@ -152,7 +152,7 @@ func _start_game(save_slot: int) -> void:
     # Set the save slot to use for this session.
     SaveAndLoad.save_slot = save_slot
 
-    _ui_sound_player.play_start_game_sound()
+    MusicPlayer.play(MusicPlayer.Music.START_GAME)
 
     var fade_duration := 2.0
     SceneChanger.change_scene_to(game, fade_duration)

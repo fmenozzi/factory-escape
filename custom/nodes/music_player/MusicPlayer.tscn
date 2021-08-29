@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -8,12 +8,17 @@
 [ext_resource path="res://custom/nodes/music_player/audio/arena_start.ogg" type="AudioStream" id=6]
 [ext_resource path="res://custom/nodes/music_player/audio/arena_end.ogg" type="AudioStream" id=7]
 [ext_resource path="res://custom/nodes/music_player/audio/world_base.ogg" type="AudioStream" id=8]
+[ext_resource path="res://ui/audio/ui_start_game.wav" type="AudioStream" id=9]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="AudioPlayers" type="Node" parent="."]
+
+[node name="StartGame" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 9 )
+bus = "UI"
 
 [node name="FactoryBackground" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 5 )

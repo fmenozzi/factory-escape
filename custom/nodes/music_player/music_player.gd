@@ -1,6 +1,7 @@
 extends Node
 
 enum Music {
+    START_GAME,
     FACTORY_BACKGROUND,
     WORLD_BASE,
     ARENA_START,
@@ -10,6 +11,7 @@ enum Music {
 }
 
 onready var _players: Array = $AudioPlayers.get_children()
+onready var _start_game: AudioStreamPlayerMusic = $AudioPlayers/StartGame
 onready var _factory_background: AudioStreamPlayerMusic = $AudioPlayers/FactoryBackground
 onready var _world_base: AudioStreamPlayerMusic = $AudioPlayers/WorldBase
 onready var _arena_start: AudioStreamPlayerMusic = $AudioPlayers/ArenaStart
@@ -34,6 +36,7 @@ func stop_all() -> void:
 
 func get_player(music_enum: int) -> AudioStreamPlayerMusic:
     assert(music_enum in [
+        Music.START_GAME,
         Music.FACTORY_BACKGROUND,
         Music.WORLD_BASE,
         Music.ARENA_START,
@@ -43,6 +46,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
     ])
 
     match music_enum:
+        Music.START_GAME:
+            return _start_game
+
         Music.FACTORY_BACKGROUND:
             return _factory_background
 
