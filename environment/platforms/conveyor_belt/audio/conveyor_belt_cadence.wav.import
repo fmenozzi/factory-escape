@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/conveyor_belt_cadence.wav-7d6192b3af2070df66000266586e686e.sample"
+
+[deps]
+
+source_file="res://environment/platforms/conveyor_belt/audio/conveyor_belt_cadence.wav"
+dest_files=[ "res://.import/conveyor_belt_cadence.wav-7d6192b3af2070df66000266586e686e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

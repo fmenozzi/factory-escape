@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/crusher/Crusher.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBelt.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
-
+[ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBeltAudioGroup.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
@@ -48,54 +48,59 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 270 )
 
-[node name="ConveyorBelts" type="Node2D" parent="." index="5"]
+[node name="ConveyorBeltAudioGroup" parent="MovingPlatforms" index="0" instance=ExtResource( 5 )]
 
-[node name="TopConveyorBelts" type="Node2D" parent="ConveyorBelts" index="0"]
+[node name="TopConveyorBelts" type="Node2D" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="0"]
 position = Vector2( 0, 16 )
 
-[node name="Right" parent="ConveyorBelts/TopConveyorBelts" index="0" instance=ExtResource( 3 )]
+[node name="Right" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/TopConveyorBelts" index="0" instance=ExtResource( 3 )]
 position = Vector2( 272, 136 )
 direction = -1
 
-[node name="MiddleRight" parent="ConveyorBelts/TopConveyorBelts" index="1" instance=ExtResource( 3 )]
+[node name="MiddleRight" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/TopConveyorBelts" index="1" instance=ExtResource( 3 )]
 position = Vector2( 208, 136 )
 direction = -1
 
-[node name="MiddleLeft" parent="ConveyorBelts/TopConveyorBelts" index="2" instance=ExtResource( 3 )]
+[node name="MiddleLeft" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/TopConveyorBelts" index="2" instance=ExtResource( 3 )]
 position = Vector2( 144, 136 )
 direction = -1
 
-[node name="Left" parent="ConveyorBelts/TopConveyorBelts" index="3" instance=ExtResource( 3 )]
+[node name="Left" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/TopConveyorBelts" index="3" instance=ExtResource( 3 )]
 position = Vector2( 80, 136 )
 direction = -1
 
-[node name="MiddleConveyorBelts" type="Node2D" parent="ConveyorBelts" index="1"]
+[node name="MiddleConveyorBelts" type="Node2D" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="1"]
 position = Vector2( 0, 2 )
 
-[node name="Left" parent="ConveyorBelts/MiddleConveyorBelts" index="0" instance=ExtResource( 3 )]
+[node name="Left" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/MiddleConveyorBelts" index="0" instance=ExtResource( 3 )]
 position = Vector2( 48, 224 )
 
-[node name="MiddleLeft" parent="ConveyorBelts/MiddleConveyorBelts" index="1" instance=ExtResource( 3 )]
+[node name="MiddleLeft" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/MiddleConveyorBelts" index="1" instance=ExtResource( 3 )]
 position = Vector2( 112, 224 )
 
-[node name="MiddleRight" parent="ConveyorBelts/MiddleConveyorBelts" index="2" instance=ExtResource( 3 )]
+[node name="MiddleRight" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/MiddleConveyorBelts" index="2" instance=ExtResource( 3 )]
 position = Vector2( 176, 224 )
 
-[node name="Right" parent="ConveyorBelts/MiddleConveyorBelts" index="3" instance=ExtResource( 3 )]
+[node name="Right" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/MiddleConveyorBelts" index="3" instance=ExtResource( 3 )]
 position = Vector2( 240, 224 )
 
-[node name="BottomConveyorBelts" type="Node2D" parent="ConveyorBelts" index="2"]
+[node name="BottomConveyorBelts" type="Node2D" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="2"]
 position = Vector2( -16, -4 )
 
-[node name="Right" parent="ConveyorBelts/BottomConveyorBelts" index="0" instance=ExtResource( 3 )]
+[node name="Right" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/BottomConveyorBelts" index="0" instance=ExtResource( 3 )]
 position = Vector2( 272, 304 )
 direction = -1
 
-[node name="Middle" parent="ConveyorBelts/BottomConveyorBelts" index="1" instance=ExtResource( 3 )]
+[node name="Middle" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/BottomConveyorBelts" index="1" instance=ExtResource( 3 )]
 position = Vector2( 192, 304 )
 
-[node name="Left" parent="ConveyorBelts/BottomConveyorBelts" index="2" instance=ExtResource( 3 )]
+[node name="Left" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts/BottomConveyorBelts" index="2" instance=ExtResource( 3 )]
 position = Vector2( 112, 304 )
+
+[node name="VisibilityBasedAudioGroup" parent="MovingPlatforms/ConveyorBeltAudioGroup" index="1"]
+position = Vector2( 160, 180 )
+object_visibility_radius_tiles = 6.0
+attenuation_visibility_radius_tiles = 7.0
 
 [node name="CrusherTop" parent="Hazards" index="0" instance=ExtResource( 2 )]
 position = Vector2( 84, 88 )
@@ -147,11 +152,9 @@ position = Vector2( 296, 264 )
 shape = SubResource( 3 )
 
 [editable path="TileMaps"]
-
+[editable path="MovingPlatforms/ConveyorBeltAudioGroup"]
+[editable path="MovingPlatforms/ConveyorBeltAudioGroup/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/TopLeft"]
-
 [editable path="HazardCheckpoints/TopRight"]
-
 [editable path="HazardCheckpoints/PlatformLeft"]
-
 [editable path="HazardCheckpoints/PlatformRight"]

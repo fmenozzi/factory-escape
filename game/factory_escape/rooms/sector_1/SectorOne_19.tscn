@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/crusher/Crusher.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBelt.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBeltAudioGroup.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 480, 90 )
@@ -44,6 +45,37 @@ position = Vector2( 160, 90 )
 [node name="Right" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 800, 90 )
 
+[node name="ConveyorBeltAudioGroup" parent="MovingPlatforms" index="0" instance=ExtResource( 5 )]
+
+[node name="ConveyorBelt1" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="0" instance=ExtResource( 3 )]
+position = Vector2( 272, 72 )
+direction = -1
+
+[node name="ConveyorBelt2" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="1" instance=ExtResource( 3 )]
+position = Vector2( 432, 72 )
+direction = -1
+
+[node name="ConveyorBelt3" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="2" instance=ExtResource( 3 )]
+position = Vector2( 624, 72 )
+direction = -1
+
+[node name="ConveyorBelt4" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="3" instance=ExtResource( 3 )]
+position = Vector2( 688, 72 )
+direction = -1
+
+[node name="ConveyorBelt5" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="4" instance=ExtResource( 3 )]
+position = Vector2( 784, 72 )
+direction = -1
+
+[node name="ConveyorBelt6" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="5" instance=ExtResource( 3 )]
+position = Vector2( 848, 72 )
+direction = -1
+
+[node name="VisibilityBasedAudioGroup" parent="MovingPlatforms/ConveyorBeltAudioGroup" index="1"]
+position = Vector2( 480, 90 )
+object_visibility_radius_tiles = 16.0
+attenuation_visibility_radius_tiles = 17.0
+
 [node name="CrusherLeft" parent="Hazards" index="0" instance=ExtResource( 2 )]
 position = Vector2( 656, 72 )
 speed = 1
@@ -74,31 +106,9 @@ requires_grounded = false
 position = Vector2( 0, -40 )
 shape = SubResource( 4 )
 
-[node name="ConveyorBelt1" parent="." index="9" instance=ExtResource( 3 )]
-position = Vector2( 272, 72 )
-direction = -1
-
-[node name="ConveyorBelt2" parent="." index="10" instance=ExtResource( 3 )]
-position = Vector2( 432, 72 )
-direction = -1
-
-[node name="ConveyorBelt3" parent="." index="11" instance=ExtResource( 3 )]
-position = Vector2( 624, 72 )
-direction = -1
-
-[node name="ConveyorBelt4" parent="." index="12" instance=ExtResource( 3 )]
-position = Vector2( 688, 72 )
-direction = -1
-
-[node name="ConveyorBelt5" parent="." index="13" instance=ExtResource( 3 )]
-position = Vector2( 784, 72 )
-direction = -1
-
-[node name="ConveyorBelt6" parent="." index="14" instance=ExtResource( 3 )]
-position = Vector2( 848, 72 )
-direction = -1
-
 [editable path="TileMaps"]
+[editable path="MovingPlatforms/ConveyorBeltAudioGroup"]
+[editable path="MovingPlatforms/ConveyorBeltAudioGroup/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/Left"]
 [editable path="HazardCheckpoints/Center"]
 [editable path="HazardCheckpoints/Right"]
