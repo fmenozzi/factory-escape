@@ -82,6 +82,12 @@ func resume() -> void:
     for audio_group in _sound_manager.get_all_audio_groups():
         audio_group.set_state()
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func room_reset() -> void:
     queue_free()
 

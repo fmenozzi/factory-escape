@@ -34,6 +34,12 @@ func pause() -> void:
 func resume() -> void:
     _timer.start(rand_range(0.01, 0.05))
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func _update_points() -> void:
     var segment_length := length / float(num_segments)
 

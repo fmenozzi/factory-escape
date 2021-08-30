@@ -43,6 +43,12 @@ func resume() -> void:
 
     _animation_player.play(_animation_name)
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func _windup_slow() -> void:
     _windup_sound_slow.play()
 

@@ -12,5 +12,11 @@ func pause() -> void:
 func resume() -> void:
     _lightning_wall.resume()
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func _on_switch_pressed() -> void:
     _lightning_wall.dissipate()

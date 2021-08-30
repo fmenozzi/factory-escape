@@ -77,3 +77,9 @@ func resume() -> void:
         bolt.resume()
     for bolt in _movable_emitter_bolts.get_children():
         bolt.resume()
+
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass

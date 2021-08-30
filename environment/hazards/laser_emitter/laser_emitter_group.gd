@@ -32,6 +32,12 @@ func resume() -> void:
 
     _shoot()
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func deactivate() -> void:
     _is_active = false
 

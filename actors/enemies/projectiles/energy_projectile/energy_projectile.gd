@@ -48,6 +48,12 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func room_reset() -> void:
     queue_free()
 

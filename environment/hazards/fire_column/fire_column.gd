@@ -11,3 +11,9 @@ func pause() -> void:
 
 func resume() -> void:
     fire()
+
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass

@@ -144,6 +144,12 @@ func pause() -> void:
 func resume() -> void:
     _sound_manager.set_all_muted(false)
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func lamp_reset() -> void:
     _current_state = State.INACTIVE
     _hitbox_collision_shape.set_deferred('disabled', true)

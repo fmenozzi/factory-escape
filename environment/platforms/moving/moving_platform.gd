@@ -46,3 +46,9 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
     _tween.resume_all()
+
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass

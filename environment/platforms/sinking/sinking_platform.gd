@@ -55,6 +55,12 @@ func pause() -> void:
 func resume() -> void:
     set_physics_process(true)
 
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass
+
 func shake_once(damping: float = 1.0) -> void:
     _sprite.position = _original_sprite_position + Vector2(
         damping * rand_range(-1.0, 1.0),

@@ -83,6 +83,26 @@ func resume() -> void:
     for enemy in $Enemies.get_children():
         enemy.resume()
 
+func show_visuals() -> void:
+    for moving_platform in get_moving_platforms():
+        moving_platform.show_visuals()
+
+    for hazard in $Hazards.get_children():
+        hazard.show_visuals()
+
+    for enemy in $Enemies.get_children():
+        enemy.show_visuals()
+
+func hide_visuals() -> void:
+    for moving_platform in get_moving_platforms():
+        moving_platform.hide_visuals()
+
+    for hazard in $Hazards.get_children():
+        hazard.hide_visuals()
+
+    for enemy in $Enemies.get_children():
+        enemy.hide_visuals()
+
 func reset_enemies() -> void:
     for enemy in $Enemies.get_children():
         enemy.room_reset()
@@ -165,8 +185,10 @@ func _on_player_entered(area: Area2D) -> void:
         # then begin processing on the new room once the transition is
         # complete.
         player.prev_room.pause()
+        player.curr_room.show_visuals()
         camera.transition(player.prev_room, player.curr_room)
         yield(camera, 'transition_completed')
+        player.prev_room.hide_visuals()
         player.curr_room.resume()
 
         if player.curr_room.has_node('Lamp'):

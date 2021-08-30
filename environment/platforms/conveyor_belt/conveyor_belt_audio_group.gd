@@ -10,3 +10,9 @@ func pause() -> void:
 func resume() -> void:
     _audio_group.get_player_by_name('Base').play()
     _audio_group.get_player_by_name('Cadence').play()
+
+func show_visuals() -> void:
+    pass
+
+func hide_visuals() -> void:
+    pass

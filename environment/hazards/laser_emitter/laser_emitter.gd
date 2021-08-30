@@ -12,3 +12,9 @@ func pause() -> void:
 
 func resume() -> void:
     _laser.resume()
+
+func show_visuals() -> void:
+    _laser.show_visuals()
+
+func hide_visuals() -> void:
+    _laser.hide_visuals()
