@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://environment/hazards/crusher/crusher.gd" type="Script" id=1]
 [ext_resource path="res://environment/hazards/crusher/textures/crusher-background.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://environment/hazards/crusher/audio/crusher_windup.wav" type="AudioStream" id=6]
 [ext_resource path="res://environment/hazards/crusher/audio/crusher_impact.wav" type="AudioStream" id=7]
 [ext_resource path="res://environment/hazards/crusher/audio/crusher_windup_fast.wav" type="AudioStream" id=8]
+[ext_resource path="res://environment/hazards/crusher/states/delay.gd" type="Script" id=9]
+[ext_resource path="res://environment/hazards/crusher/states/crush_loop.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 18 )
@@ -139,5 +141,15 @@ stream = ExtResource( 8 )
 
 [node name="Impact" parent="VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 4 )]
 stream = ExtResource( 7 )
+
+[node name="States" type="Node" parent="."]
+
+[node name="Delay" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Delay" type="Timer" parent="States/Delay"]
+
+[node name="CrushLoop" type="Node" parent="States"]
+script = ExtResource( 10 )
 
 [editable path="VisibilityBasedAudioGroup"]

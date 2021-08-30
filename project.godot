@@ -55,6 +55,11 @@ _global_script_classes=[ {
 "path": "res://environment/platforms/conveyor_belt/conveyor_belt_audio_group.gd"
 }, {
 "base": "Node2D",
+"class": "Crusher",
+"language": "GDScript",
+"path": "res://environment/hazards/crusher/crusher.gd"
+}, {
+"base": "Node2D",
 "class": "DashBuffer",
 "language": "GDScript",
 "path": "res://actors/player/managers/dash_buffer.gd"
@@ -404,6 +409,7 @@ _global_script_class_icons={
 "Buddy": "",
 "CentralLock": "",
 "ConveyorBeltAudioGroup": "",
+"Crusher": "",
 "DashBuffer": "",
 "DashManager": "",
 "DemoAbility": "",
