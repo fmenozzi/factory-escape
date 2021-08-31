@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/crusher/Crusher.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://environment/hazards/crusher/CrusherAudioGroup.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 180 )
@@ -68,18 +69,32 @@ position = Vector2( 160, 270 )
 [node name="BottomRight" type="Position2D" parent="CameraAnchors" index="3"]
 position = Vector2( 480, 270 )
 
-[node name="CrusherTop" parent="Hazards" index="0" instance=ExtResource( 3 )]
+[node name="CrusherAudioGroupDefault" parent="Hazards" index="0" instance=ExtResource( 5 )]
+
+[node name="CrusherTop" parent="Hazards/CrusherAudioGroupDefault/Crushers" index="0" instance=ExtResource( 3 )]
 position = Vector2( 496, 76 )
 
-[node name="CrusherMiddle" parent="Hazards" index="1" instance=ExtResource( 3 )]
+[node name="CrusherMiddle" parent="Hazards/CrusherAudioGroupDefault/Crushers" index="1" instance=ExtResource( 3 )]
 position = Vector2( 496, 172 )
 
-[node name="CrusherBottomLeft" parent="Hazards" index="2" instance=ExtResource( 3 )]
+[node name="CrusherBottomLeft" parent="Hazards/CrusherAudioGroupDefault/Crushers" index="2" instance=ExtResource( 3 )]
 position = Vector2( 496, 268 )
 
-[node name="CrusherBottomRight" parent="Hazards" index="3" instance=ExtResource( 3 )]
+[node name="VisibilityBasedAudioGroup" parent="Hazards/CrusherAudioGroupDefault" index="1"]
+position = Vector2( 568, 168 )
+object_visibility_radius_tiles = 4.0
+attenuation_visibility_radius_tiles = 5.0
+
+[node name="CrusherAudioGroupDelay" parent="Hazards" index="1" instance=ExtResource( 5 )]
+
+[node name="CrusherBottomRight" parent="Hazards/CrusherAudioGroupDelay/Crushers" index="0" instance=ExtResource( 3 )]
 position = Vector2( 576, 268 )
 initial_delay = 1.0
+
+[node name="VisibilityBasedAudioGroup" parent="Hazards/CrusherAudioGroupDelay" index="1"]
+position = Vector2( 576, 248 )
+object_visibility_radius_tiles = 1.0
+attenuation_visibility_radius_tiles = 2.0
 
 [node name="RangedSentryDrone" parent="Enemies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 32, 120 )
@@ -206,31 +221,21 @@ shape = SubResource( 9 )
 one_way_collision = true
 
 [editable path="TileMaps"]
-
+[editable path="Hazards/CrusherAudioGroupDefault"]
+[editable path="Hazards/CrusherAudioGroupDefault/VisibilityBasedAudioGroup"]
+[editable path="Hazards/CrusherAudioGroupDelay"]
+[editable path="Hazards/CrusherAudioGroupDelay/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/LeftBottom"]
-
 [editable path="HazardCheckpoints/LeftPlatformBottom"]
-
 [editable path="HazardCheckpoints/LeftPlatformMiddle"]
-
 [editable path="HazardCheckpoints/LeftPlatformTop"]
-
 [editable path="HazardCheckpoints/LeftPlatformRight"]
-
 [editable path="HazardCheckpoints/LeftMiddle"]
-
 [editable path="HazardCheckpoints/LeftTop"]
-
 [editable path="HazardCheckpoints/RightTopLeft"]
-
 [editable path="HazardCheckpoints/RightTopRight"]
-
 [editable path="HazardCheckpoints/RightMiddleLeft"]
-
 [editable path="HazardCheckpoints/RightMiddleRight"]
-
 [editable path="HazardCheckpoints/RightBottomLeft"]
-
 [editable path="HazardCheckpoints/RightBottomRight"]
-
 [editable path="HazardCheckpoints/RightPlatform"]

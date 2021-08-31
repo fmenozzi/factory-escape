@@ -1,6 +1,10 @@
 extends Node2D
 class_name Crusher
 
+signal windup
+signal windup_fast
+signal impact
+
 enum Speed {
     SLOW,
     FAST,
@@ -25,9 +29,6 @@ onready var STATES := {
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _dust_puff_spawn_positions: Array = $CrusherHead/DustPuffSpawnPositions.get_children()
 onready var _visibility_notifier: VisibilityNotifier2D = $VisibilityNotifier2D
-onready var _windup_sound_slow: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Windup
-onready var _windup_sound_fast: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/WindupFast
-onready var _impact_sound: VisibilityBasedAudioPlayer = $VisibilityBasedAudioGroup/AudioPlayers/Impact
 
 var _initial_state_dict := {}
 
@@ -95,16 +96,16 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state.enter(self, new_state_dict)
 
 func _windup_slow() -> void:
-    _windup_sound_slow.play()
+    emit_signal('windup')
 
 func _windup_fast() -> void:
-    _windup_sound_fast.play()
+    emit_signal('windup_fast')
 
 func _impact() -> void:
     if _player_is_near():
         Screenshake.start(Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
 
-    _impact_sound.play()
+    emit_signal('impact')
 
     for dust_puff_spawn_position in _dust_puff_spawn_positions:
         Effects.spawn_dust_puff_at(self.to_global(dust_puff_spawn_position.position))

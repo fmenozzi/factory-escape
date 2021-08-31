@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBelt.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/platforms/collapsable_platform/CollapsablePlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/platforms/conveyor_belt/ConveyorBeltAudioGroup.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/hazards/crusher/CrusherAudioGroup.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -106,15 +107,29 @@ position = Vector2( 160, 270 )
 object_visibility_radius_tiles = 5.0
 attenuation_visibility_radius_tiles = 6.0
 
-[node name="UpperCrusherRight" parent="Hazards" index="0" instance=ExtResource( 3 )]
+[node name="CrusherAudioGroupSlow" parent="Hazards" index="0" instance=ExtResource( 7 )]
+
+[node name="UpperCrusherRight" parent="Hazards/CrusherAudioGroupSlow/Crushers" index="0" instance=ExtResource( 3 )]
 position = Vector2( 192, 244 )
 
-[node name="UpperCrusherLeft" parent="Hazards" index="1" instance=ExtResource( 3 )]
+[node name="UpperCrusherLeft" parent="Hazards/CrusherAudioGroupSlow/Crushers" index="1" instance=ExtResource( 3 )]
 position = Vector2( 96, 244 )
 
-[node name="MiddleCrusher" parent="Hazards" index="2" instance=ExtResource( 3 )]
+[node name="VisibilityBasedAudioGroup" parent="Hazards/CrusherAudioGroupSlow" index="1"]
+position = Vector2( 160, 216 )
+object_visibility_radius_tiles = 1.0
+attenuation_visibility_radius_tiles = 2.0
+
+[node name="CrusherAudioGroupFast" parent="Hazards" index="1" instance=ExtResource( 7 )]
+
+[node name="MiddleCrusher" parent="Hazards/CrusherAudioGroupFast/Crushers" index="0" instance=ExtResource( 3 )]
 position = Vector2( 144, 318 )
 speed = 1
+
+[node name="VisibilityBasedAudioGroup" parent="Hazards/CrusherAudioGroupFast" index="1"]
+position = Vector2( 160, 288 )
+object_visibility_radius_tiles = 1.0
+attenuation_visibility_radius_tiles = 2.0
 
 [node name="TopRight" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 224, 72 )
@@ -159,6 +174,10 @@ position = Vector2( 160, 472 )
 [editable path="TileMaps"]
 [editable path="MovingPlatforms/ConveyorBeltAudioGroup"]
 [editable path="MovingPlatforms/ConveyorBeltAudioGroup/VisibilityBasedAudioGroup"]
+[editable path="Hazards/CrusherAudioGroupSlow"]
+[editable path="Hazards/CrusherAudioGroupSlow/VisibilityBasedAudioGroup"]
+[editable path="Hazards/CrusherAudioGroupFast"]
+[editable path="Hazards/CrusherAudioGroupFast/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/TopRight"]
 [editable path="HazardCheckpoints/MiddleRight"]
 [editable path="HazardCheckpoints/MiddleLeft"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://environment/hazards/crusher/crusher_audio_group.gd" type="Script" id=1]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=2]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/hazards/crusher/audio/crusher_windup.wav" type="AudioStream" id=4]
+[ext_resource path="res://environment/hazards/crusher/audio/crusher_impact.wav" type="AudioStream" id=5]
+[ext_resource path="res://environment/hazards/crusher/audio/crusher_windup_fast.wav" type="AudioStream" id=6]
+
+[node name="CrusherAudioGroup" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Crushers" type="Node2D" parent="."]
+
+[node name="VisibilityBasedAudioGroup" parent="." instance=ExtResource( 2 )]
+
+[node name="Windup" parent="VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 3 )]
+stream = ExtResource( 4 )
+
+[node name="WindupFast" parent="VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 3 )]
+stream = ExtResource( 6 )
+
+[node name="Impact" parent="VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 3 )]
+stream = ExtResource( 5 )
+
+[node name="SoundTimers" type="Node" parent="."]
+
+[node name="Windup" type="Timer" parent="SoundTimers"]
+process_mode = 0
+wait_time = 1.5
+one_shot = true
+
+[node name="WindupFast" type="Timer" parent="SoundTimers"]
+process_mode = 0
+wait_time = 0.75
+one_shot = true
+
+[node name="Impact" type="Timer" parent="SoundTimers"]
+process_mode = 0
+wait_time = 0.85
+one_shot = true
+
+[editable path="VisibilityBasedAudioGroup"]
