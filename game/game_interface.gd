@@ -153,6 +153,7 @@ func _set_player_starting_health_and_health_packs() -> void:
 func _set_player_starting_music() -> void:
     if _player.curr_room.has_node('Lamp'):
         MusicPlayer.play(MusicPlayer.Music.LAMP_ROOM)
+        MusicPlayer.stop(MusicPlayer.Music.FACTORY_BACKGROUND)
     else:
         yield(get_tree().create_timer(1.0), 'timeout')
         MusicPlayer.fade_in(MusicPlayer.Music.WORLD_BASE, 6.0)
