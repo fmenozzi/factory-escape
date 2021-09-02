@@ -83,5 +83,6 @@ ability = 3
 
 [node name="AbilityChosenSound" type="AudioStreamPlayer" parent="." index="16"]
 stream = ExtResource( 13 )
+bus = "Effects"
 
 [editable path="TileMaps"]
