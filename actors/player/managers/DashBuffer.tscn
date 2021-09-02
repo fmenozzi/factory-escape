@@ -3,7 +3,7 @@
 [ext_resource path="res://actors/player/managers/dash_buffer.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 8 )
+extents = Vector2( 5, 12 )
 
 [node name="DashBuffer" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,5 +13,5 @@ collision_layer = 0
 collision_mask = 260
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashBufferArea"]
-position = Vector2( 0, 8 )
+position = Vector2( 0, 12 )
 shape = SubResource( 1 )
