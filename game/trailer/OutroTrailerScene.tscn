@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/title_screen/textures/background.png" type="Texture" id=1]
+[ext_resource path="res://ui/menus/main/textures/title.png" type="Texture" id=2]
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://game/trailer/outro_trailer_scene.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_in"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TitleContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SubtitleContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 2.5, 5.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="OutroTrailerScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleContainer" type="CenterContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 28.0
+margin_right = 320.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="TextureRect" parent="TitleContainer"]
+margin_left = 96.0
+margin_right = 224.0
+margin_bottom = 48.0
+texture = ExtResource( 2 )
+
+[node name="SubtitleContainer" type="CenterContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 136.0
+
+[node name="Label" type="Label" parent="SubtitleContainer"]
+margin_left = 79.0
+margin_top = 5.0
+margin_right = 240.0
+margin_bottom = 34.0
+text = "Demo available now at
+fmenozzi.itch.io/factory-escape"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 1 )
