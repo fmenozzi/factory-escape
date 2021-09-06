@@ -54,7 +54,10 @@ func _ready() -> void:
     Options.load_options_and_report_errors()
 
     MusicPlayer.stop_all()
-    MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
+    var factory_background: AudioStreamPlayerMusic = MusicPlayer.get_player(
+        MusicPlayer.Music.FACTORY_BACKGROUND)
+    factory_background.set_max_volume_db(0.0)
+    factory_background.play()
 
     # Start at main menu once we finish transitioning to title screen.
     if SceneChanger.is_changing_scene():

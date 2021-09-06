@@ -151,6 +151,7 @@ func _set_player_starting_health_and_health_packs() -> void:
         _player.get_health_pack_manager().set_starting_health_packs()
 
 func _set_player_starting_music() -> void:
+    MusicPlayer.get_player(MusicPlayer.Music.FACTORY_BACKGROUND).set_max_volume_db(-8.0)
     if _player.curr_room.has_node('Lamp'):
         MusicPlayer.play(MusicPlayer.Music.LAMP_ROOM)
         MusicPlayer.stop(MusicPlayer.Music.FACTORY_BACKGROUND)

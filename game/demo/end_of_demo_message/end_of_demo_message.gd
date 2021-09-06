@@ -2,7 +2,10 @@ extends Control
 
 func _ready() -> void:
     MusicPlayer.stop_all()
-    MusicPlayer.play(MusicPlayer.Music.FACTORY_BACKGROUND)
+    var factory_background: AudioStreamPlayerMusic = MusicPlayer.get_player(
+        MusicPlayer.Music.FACTORY_BACKGROUND)
+    factory_background.set_max_volume_db(0.0)
+    factory_background.play()
 
     set_process_unhandled_input(false)
     yield(SceneChanger, 'scene_changed')

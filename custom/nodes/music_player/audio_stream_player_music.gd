@@ -25,6 +25,10 @@ func stop() -> void:
     seek(-1)
     .stop()
 
+func set_max_volume_db(new_max_volume_db: float) -> void:
+    max_volume_db = new_max_volume_db
+    volume_db = max_volume_db
+
 func fade_in(duration: float) -> void:
     _fade(0.0, 1.0, duration)
 
