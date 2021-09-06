@@ -100,6 +100,9 @@ func has_valid_version(config_file: ConfigFile) -> bool:
 func get_config() -> ConfigFile:
     return _config
 
+func has_config() -> bool:
+    return File.new().file_exists(_get_file_path())
+
 func _get_file_path() -> String:
     return _save_directory + 'options.cfg'
 

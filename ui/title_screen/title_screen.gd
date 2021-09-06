@@ -49,10 +49,11 @@ func _ready() -> void:
     MENUS[Menu.Menus.QUIT].connect(
         'quit_to_desktop_requested', self, '_on_quit_to_desktop_requested')
 
-    # Make sure to save options file here in order to populate it with defaults
-    # in case we're running the game for the first time and the file doesn't yet
-    # exist. Do so before connecting signal to avoid seeing a save indicator.
-    Options.save_options_and_report_errors()
+    # If the config file doesn't already exist, create it and populate it with
+    # default options. Do so before connecting signal to avoid seeing a save
+    # indicator.
+    if not Options.has_config():
+        Options.save_options_and_report_errors()
     Options.connect('options_saved', self, '_on_options_saved')
 
     Options.load_options_and_report_errors()

@@ -54,9 +54,6 @@ func get_options_data() -> Array:
     }]
 
 func load_options_version_0_1_0(config: ConfigFile) -> void:
-    if not config.has_section(SECTION):
-        return
-
     if config.has_section_key(SECTION, 'music'):
         var music: float = config.get_value(SECTION, 'music')
         _set_bus_volume('Music', music)
