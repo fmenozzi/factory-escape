@@ -101,7 +101,7 @@ position = Vector2( -32, -256 )
 
 [node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 5 )]
 position = Vector2( 240, 432 )
-dialog = [ "Maintenance report 347, status: UNHEALTHY", "Intermittant power failures are affecting all major sectors. Backup generators are not sufficient to meet current demand.", "Recommended to deploy emergency lamps as additional light sources in affected areas and along maintenance corridors.", "Additional worker drones deployed to diagnose issues, per regulations. Contact shift supervisor with questions." ]
+dialog = [ "Maintenance report 347, status: UNHEALTHY", "Intermittent power failures are affecting all major sectors. Backup generators are not sufficient to meet current demand.", "Recommended to deploy emergency lamps as additional light sources in affected areas and along maintenance corridors.", "Additional worker drones deployed to diagnose issues, per regulations. Contact shift supervisor with questions." ]
 
 [editable path="TileMaps"]
 [editable path="HazardCheckpoints/Top"]
