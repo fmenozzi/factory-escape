@@ -37,10 +37,11 @@ func set_is_active(active: bool) -> void:
     is_active = active
 
     # In case the player is inside the trigger area when we activate it.
-    if is_active:
-        for body in get_overlapping_bodies():
-            if body is Player:
-                _on_player_entered(body)
+    if is_active and _player_in_trigger_area():
+        _on_player_entered(Util.get_player())
+
+func _player_in_trigger_area() -> bool:
+    return get_overlapping_bodies().has(Util.get_player())
 
 func _on_player_entered(player: Player) -> void:
     if not player or not is_active:
@@ -66,5 +67,5 @@ func _on_player_exited(player: Player) -> void:
     self.call_deferred('disconnect', 'body_exited', self, '_on_player_exited')
 
 func _on_control_remapped(action: String, new_event: InputEvent) -> void:
-    if action == player_action and is_active:
+    if action == player_action and is_active and _player_in_trigger_area():
         emit_signal('control_remapped', player_action)
