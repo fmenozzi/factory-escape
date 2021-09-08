@@ -175,6 +175,11 @@ func _on_remap_finished() -> void:
 
     _menu_label.text = 'Controller'
 
+    # In case the remapping resulted in a swap, update the displayed textures
+    # for all controller remap buttons.
+    for remap_button in get_tree().get_nodes_in_group('controller_remap_button'):
+        remap_button.update_texture_display()
+
 func _on_reset_to_defaults_pressed() -> void:
     reset_to_defaults()
 

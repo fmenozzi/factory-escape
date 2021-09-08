@@ -11,7 +11,7 @@ func _ready() -> void:
     assert(InputMap.has_action(action))
 
     set_process_unhandled_key_input(false)
-    _display_current_key()
+    update_key_display()
 
 func _toggled(button_pressed: bool) -> void:
     # Consume event corresponding to the toggle itself; the NEXT event is the
@@ -25,7 +25,7 @@ func _toggled(button_pressed: bool) -> void:
         release_focus()
         emit_signal('remap_started')
     else:
-        _display_current_key()
+        update_key_display()
 
 func _unhandled_key_input(event: InputEventKey) -> void:
     if remap_action_to(event):
@@ -40,11 +40,11 @@ func remap_action_to(new_event: InputEventKey) -> bool:
     if not remap_succeeded:
         return false
 
-    _display_current_key()
+    update_key_display()
 
     return true
 
-func _display_current_key() -> void:
+func update_key_display() -> void:
     var current_key_scancode: int = Controls.get_scancode_for_action(action)
     if current_key_scancode == -1:
         return

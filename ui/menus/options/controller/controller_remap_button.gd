@@ -11,7 +11,7 @@ func _ready() -> void:
     assert(InputMap.has_action(action))
 
     set_process_unhandled_input(false)
-    _display_current_texture()
+    update_texture_display()
 
 func _toggled(button_pressed: bool) -> void:
     # Consume event corresponding to the toggle itself; the NEXT event is the
@@ -25,7 +25,7 @@ func _toggled(button_pressed: bool) -> void:
         release_focus()
         emit_signal('remap_started')
     else:
-        _display_current_texture()
+        update_texture_display()
 
 func _unhandled_input(event: InputEvent) -> void:
     if not event is InputEventJoypadButton:
@@ -43,11 +43,11 @@ func remap_action_to(new_event: InputEventJoypadButton) -> bool:
     if not remap_succeeded:
         return false
 
-    _display_current_texture()
+    update_texture_display()
 
     return true
 
-func _display_current_texture() -> void:
+func update_texture_display() -> void:
     var current_button_index: int = Controls.get_button_index_for_action(action)
     if current_button_index == -1:
         return

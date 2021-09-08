@@ -175,6 +175,11 @@ func _on_remap_finished() -> void:
 
     _menu_label.text = 'Keyboard'
 
+    # In case the remapping resulted in a swap, update the displayed keys for
+    # all keyboard remap buttons.
+    for remap_button in get_tree().get_nodes_in_group('keyboard_remap_button'):
+        remap_button.update_key_display()
+
 func _on_reset_to_defaults_pressed() -> void:
     reset_to_defaults()
 

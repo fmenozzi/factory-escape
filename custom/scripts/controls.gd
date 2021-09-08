@@ -99,15 +99,22 @@ func remap_controller_action(
     if not new_event.button_index in _CONTROLLER_REMAP_ALLOWLIST:
         return false
 
-    # Remove all joypad events corresponding to the player action before adding
-    # the new mapping.
-    for existing_event in InputMap.get_action_list(player_action):
-        if existing_event is InputEventJoypadButton:
-            InputMap.action_erase_event(player_action, existing_event)
-    InputMap.action_add_event(player_action, new_event)
+    # Check to see if the new event is already mapped to an existing option, and
+    # if so, swap the mappings.
+    for action in InputMap.get_actions():
+        if action == player_action:
+            continue
 
-    emit_signal('control_remapped', player_action, new_event)
+        for event in InputMap.get_action_list(action):
+            if event is InputEventJoypadButton and event.button_index == new_event.button_index:
+                # Swap the mappings.
+                _remap_controller_action(action, _get_first_joy_event_for_action(player_action))
+                _remap_controller_action(player_action, new_event)
+                return true
 
+    # If the new event is not already mapped to an existing option, perform the
+    # remapping as usual.
+    _remap_controller_action(player_action, new_event)
     return true
 
 func remap_keyboard_action(
@@ -118,15 +125,22 @@ func remap_keyboard_action(
     if new_event.scancode in _KEYBOARD_REMAP_BLOCKLIST:
         return false
 
-    # Remove all keyboard events corresponding to the player action before
-    # adding the new mapping.
-    for existing_event in InputMap.get_action_list(player_action):
-        if existing_event is InputEventKey:
-            InputMap.action_erase_event(player_action, existing_event)
-    InputMap.action_add_event(player_action, new_event)
+    # Check to see if the new event is already mapped to an existing option, and
+    # if so, swap the mappings.
+    for action in InputMap.get_actions():
+        if action == player_action:
+            continue
 
-    emit_signal('control_remapped', player_action, new_event)
+        for event in InputMap.get_action_list(action):
+            if event is InputEventKey and event.scancode == new_event.scancode:
+                # Swap the mappings.
+                _remap_keyboard_action(action, _get_first_key_event_for_action(player_action))
+                _remap_keyboard_action(player_action, new_event)
+                return true
 
+    # If the new event is not already mapped to an existing option, perform the
+    # remapping as usual.
+    _remap_keyboard_action(player_action, new_event)
     return true
 
 func get_scancode_for_action(player_action: String) -> int:
@@ -169,4 +183,34 @@ func get_joypad_texture_for_action(player_action: String) -> Texture:
 
     assert(false, 'Could not find a joypad texture for action %s' % player_action)
 
+    return null
+
+func _remap_controller_action(player_action: String, new_event: InputEventJoypadButton) -> void:
+    # Remove all joypad events corresponding to the player action before adding
+    # the new mapping.
+    for existing_event in InputMap.get_action_list(player_action):
+        if existing_event is InputEventJoypadButton:
+            InputMap.action_erase_event(player_action, existing_event)
+    InputMap.action_add_event(player_action, new_event)
+    emit_signal('control_remapped', player_action, new_event)
+
+func _remap_keyboard_action(player_action: String, new_event: InputEventKey) -> void:
+    # Remove all keyboard events corresponding to the player action before
+    # adding the new mapping.
+    for existing_event in InputMap.get_action_list(player_action):
+        if existing_event is InputEventKey:
+            InputMap.action_erase_event(player_action, existing_event)
+    InputMap.action_add_event(player_action, new_event)
+    emit_signal('control_remapped', player_action, new_event)
+
+func _get_first_joy_event_for_action(player_action: String) -> InputEventJoypadButton:
+    for event in InputMap.get_action_list(player_action):
+        if event is InputEventJoypadButton:
+            return event
+    return null
+
+func _get_first_key_event_for_action(player_action: String) -> InputEventKey:
+    for event in InputMap.get_action_list(player_action):
+        if event is InputEventKey:
+            return event
     return null
