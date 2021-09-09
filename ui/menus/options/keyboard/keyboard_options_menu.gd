@@ -9,6 +9,10 @@ onready var _dash_remap_button: Button = $ContainerRow2/DashRemapContainer/Keybo
 onready var _grapple_remap_button: Button = $ContainerRow2/GrappleRemapContainer/KeyboardRemapButton
 onready var _interact_remap_button: Button = $ContainerRow3/InteractRemapContainer/KeyboardRemapButton
 onready var _heal_remap_button: Button = $ContainerRow3/HealRemapContainer/KeyboardRemapButton
+onready var _move_left_remap_button: Button = $ContainerRow4/MoveLeftRemapContainer/KeyboardRemapButton
+onready var _move_right_remap_button: Button = $ContainerRow4/MoveRightRemapContainer/KeyboardRemapButton
+onready var _look_up_remap_button: Button = $ContainerRow5/LookUpRemapContainer/KeyboardRemapButton
+onready var _look_down_remap_button: Button = $ContainerRow5/LookDownRemapContainer/KeyboardRemapButton
 
 onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
@@ -20,6 +24,10 @@ onready var _focusable_nodes := [
     _grapple_remap_button,
     _interact_remap_button,
     _heal_remap_button,
+    _move_left_remap_button,
+    _move_right_remap_button,
+    _look_up_remap_button,
+    _look_down_remap_button,
     _reset_to_defaults,
     _back_button,
 ]
@@ -72,6 +80,10 @@ func get_options_data() -> Array:
         'player_grapple': _grapple_remap_button.get_scancode(),
         'player_interact': _interact_remap_button.get_scancode(),
         'player_heal': _heal_remap_button.get_scancode(),
+        'player_move_left': _move_left_remap_button.get_scancode(),
+        'player_move_right': _move_right_remap_button.get_scancode(),
+        'player_look_up_keyboard': _look_up_remap_button.get_scancode(),
+        'player_look_down_keyboard': _look_down_remap_button.get_scancode(),
     }]
 
 func load_options_version_0_1_0(config: ConfigFile) -> void:
@@ -111,6 +123,30 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
         var remap_succeeded: bool = _heal_remap_button.remap_action_to(event)
         assert(remap_succeeded)
 
+    if config.has_section_key(SECTION, 'player_move_left'):
+        var event := InputEventKey.new()
+        event.scancode = config.get_value(SECTION, 'player_move_left')
+        var remap_succeeeded: bool = _move_left_remap_button.remap_action_to(event)
+        assert(remap_succeeeded)
+
+    if config.has_section_key(SECTION, 'player_move_right'):
+        var event := InputEventKey.new()
+        event.scancode = config.get_value(SECTION, 'player_move_right')
+        var remap_succeeeded: bool = _move_right_remap_button.remap_action_to(event)
+        assert(remap_succeeeded)
+
+    if config.has_section_key(SECTION, 'player_look_up_keyboard'):
+        var event := InputEventKey.new()
+        event.scancode = config.get_value(SECTION, 'player_look_up_keyboard')
+        var remap_succeeeded: bool = _look_up_remap_button.remap_action_to(event)
+        assert(remap_succeeeded)
+
+    if config.has_section_key(SECTION, 'player_look_down_keyboard'):
+        var event := InputEventKey.new()
+        event.scancode = config.get_value(SECTION, 'player_look_down_keyboard')
+        var remap_succeeeded: bool = _look_down_remap_button.remap_action_to(event)
+        assert(remap_succeeeded)
+
 func reset_to_defaults() -> void:
     # Clear existing mappings and reload from project settings. The keyboard
     # bindings will be reloaded from the project settings, while the controller
@@ -125,6 +161,10 @@ func reset_to_defaults() -> void:
         _grapple_remap_button,
         _interact_remap_button,
         _heal_remap_button,
+        _move_left_remap_button,
+        _move_right_remap_button,
+        _look_up_remap_button,
+        _look_down_remap_button,
     ]
 
     # Save existing controller option data to restore later.
@@ -133,7 +173,8 @@ func reset_to_defaults() -> void:
     if config.has_section('controller'):
         for keyboard_remap_button in keyboard_remap_buttons:
             var action: String = keyboard_remap_button.action
-            controller_option_data[action] = config.get_value('controller', action)
+            if config.has_section_key('controller', action):
+                controller_option_data[action] = config.get_value('controller', action)
 
     # Restore keyboard option data to defaults from project settings.
     for keyboard_remap_button in keyboard_remap_buttons:

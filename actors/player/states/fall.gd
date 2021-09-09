@@ -72,7 +72,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     var wall_jump_manager := player.get_wall_jump_manager()
 
     if event.is_action_pressed('player_attack'):
-        if Input.is_action_pressed('player_move_up'):
+        if Controls.is_up_action_pressed():
             return {
                 'new_state': Player.State.ATTACK_UP,
                 'velocity': player.velocity,

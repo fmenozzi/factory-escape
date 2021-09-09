@@ -17,7 +17,7 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
     if event.is_action_pressed('player_jump') and jump_manager.can_jump():
         return {'new_state': Player.State.JUMP}
     elif event.is_action_pressed('player_attack'):
-        if Input.is_action_pressed('player_move_up'):
+        if Controls.is_up_action_pressed():
             return {'new_state': Player.State.ATTACK_UP}
         elif player.get_attack_manager().can_attack():
             return {'new_state': Player.State.ATTACK}

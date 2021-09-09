@@ -18,23 +18,23 @@ __meta__ = {
 }
 
 [node name="Keyboard" type="Label" parent="."]
-margin_top = 28.0
+margin_top = 9.0
 margin_right = 320.0
-margin_bottom = 41.0
+margin_bottom = 22.0
 text = "Keyboard"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 45.0
+margin_top = 26.0
 margin_right = 320.0
-margin_bottom = 49.0
+margin_bottom = 30.0
 
 [node name="ContainerRow1" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 53.0
+margin_top = 34.0
 margin_right = 320.0
-margin_bottom = 68.0
+margin_bottom = 49.0
 
 [node name="JumpRemapContainer" parent="ContainerRow1" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -86,9 +86,9 @@ action = "player_attack"
 [node name="ContainerRow2" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 72.0
+margin_top = 53.0
 margin_right = 320.0
-margin_bottom = 87.0
+margin_bottom = 68.0
 
 [node name="DashRemapContainer" parent="ContainerRow2" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -140,9 +140,9 @@ action = "player_grapple"
 [node name="ContainerRow3" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 91.0
+margin_top = 72.0
 margin_right = 320.0
-margin_bottom = 106.0
+margin_bottom = 87.0
 
 [node name="InteractRemapContainer" parent="ContainerRow3" instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -164,7 +164,7 @@ margin_bottom = 15.0
 focus_neighbour_left = NodePath("../../HealRemapContainer/KeyboardRemapButton")
 focus_neighbour_top = NodePath("../../../ContainerRow2/DashRemapContainer/KeyboardRemapButton")
 focus_neighbour_right = NodePath("../../HealRemapContainer/KeyboardRemapButton")
-focus_neighbour_bottom = NodePath("../../../ResetToDefaults")
+focus_neighbour_bottom = NodePath("../../../ContainerRow4/MoveLeftRemapContainer/KeyboardRemapButton")
 action = "player_interact"
 
 [node name="HealRemapContainer" parent="ContainerRow3" instance=ExtResource( 3 )]
@@ -188,38 +188,145 @@ margin_bottom = 15.0
 focus_neighbour_left = NodePath("../../InteractRemapContainer/KeyboardRemapButton")
 focus_neighbour_top = NodePath("../../../ContainerRow2/GrappleRemapContainer/KeyboardRemapButton")
 focus_neighbour_right = NodePath("../../InteractRemapContainer/KeyboardRemapButton")
-focus_neighbour_bottom = NodePath("../../../ResetToDefaults")
+focus_neighbour_bottom = NodePath("../../../ContainerRow4/MoveRightRemapContainer/KeyboardRemapButton")
 action = "player_heal"
 
-[node name="HSeparator2" type="HSeparator" parent="."]
+[node name="ContainerRow4" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 91.0
+margin_right = 320.0
+margin_bottom = 106.0
+
+[node name="MoveLeftRemapContainer" parent="ContainerRow4" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 158.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+label = "Left"
+
+[node name="Label" parent="ContainerRow4/MoveLeftRemapContainer" index="0"]
+margin_top = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="ContainerRow4/MoveLeftRemapContainer" index="1"]
+margin_left = 81.0
+margin_right = 158.0
+margin_bottom = 15.0
+focus_neighbour_left = NodePath("../../MoveRightRemapContainer/KeyboardRemapButton")
+focus_neighbour_top = NodePath("../../../ContainerRow3/InteractRemapContainer/KeyboardRemapButton")
+focus_neighbour_right = NodePath("../../MoveRightRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../../ContainerRow5/LookUpRemapContainer/KeyboardRemapButton")
+action = "player_move_left"
+
+[node name="MoveRightRemapContainer" parent="ContainerRow4" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+label = "Right"
+
+[node name="Label" parent="ContainerRow4/MoveRightRemapContainer" index="0"]
+margin_top = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="ContainerRow4/MoveRightRemapContainer" index="1"]
+margin_left = 81.0
+margin_right = 158.0
+margin_bottom = 15.0
+focus_neighbour_left = NodePath("../../MoveLeftRemapContainer/KeyboardRemapButton")
+focus_neighbour_top = NodePath("../../../ContainerRow3/HealRemapContainer/KeyboardRemapButton")
+focus_neighbour_right = NodePath("../../MoveLeftRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../../ContainerRow5/LookDownRemapContainer/KeyboardRemapButton")
+action = "player_move_right"
+
+[node name="ContainerRow5" parent="." instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 110.0
 margin_right = 320.0
-margin_bottom = 114.0
+margin_bottom = 125.0
 
-[node name="ResetToDefaults" type="Button" parent="."]
-margin_top = 118.0
+[node name="LookUpRemapContainer" parent="ContainerRow5" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 158.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+label = "Up"
+
+[node name="Label" parent="ContainerRow5/LookUpRemapContainer" index="0"]
+margin_top = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="ContainerRow5/LookUpRemapContainer" index="1"]
+margin_left = 81.0
+margin_right = 158.0
+margin_bottom = 15.0
+focus_neighbour_left = NodePath("../../LookDownRemapContainer/KeyboardRemapButton")
+focus_neighbour_top = NodePath("../../../ContainerRow4/MoveLeftRemapContainer/KeyboardRemapButton")
+focus_neighbour_right = NodePath("../../LookDownRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../../ResetToDefaults")
+action = "player_look_up_keyboard"
+
+[node name="LookDownRemapContainer" parent="ContainerRow5" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+label = "Down"
+
+[node name="Label" parent="ContainerRow5/LookDownRemapContainer" index="0"]
+margin_top = 1.0
+margin_right = 77.0
+margin_bottom = 14.0
+
+[node name="KeyboardRemapButton" parent="ContainerRow5/LookDownRemapContainer" index="1"]
+margin_left = 81.0
+margin_right = 158.0
+margin_bottom = 15.0
+focus_neighbour_left = NodePath("../../LookUpRemapContainer/KeyboardRemapButton")
+focus_neighbour_top = NodePath("../../../ContainerRow4/MoveRightRemapContainer/KeyboardRemapButton")
+focus_neighbour_right = NodePath("../../LookUpRemapContainer/KeyboardRemapButton")
+focus_neighbour_bottom = NodePath("../../../ResetToDefaults")
+action = "player_look_down_keyboard"
+
+[node name="HSeparator2" type="HSeparator" parent="."]
+margin_top = 129.0
 margin_right = 320.0
 margin_bottom = 133.0
-focus_neighbour_top = NodePath("../ContainerRow3/InteractRemapContainer/KeyboardRemapButton")
+
+[node name="ResetToDefaults" type="Button" parent="."]
+margin_top = 137.0
+margin_right = 320.0
+margin_bottom = 152.0
+focus_neighbour_top = NodePath("../ContainerRow5/LookUpRemapContainer/KeyboardRemapButton")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Reset To Defaults"
 
 [node name="Back" type="Button" parent="."]
-margin_top = 137.0
+margin_top = 156.0
 margin_right = 320.0
-margin_bottom = 152.0
+margin_bottom = 171.0
 focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../ContainerRow1/JumpRemapContainer/KeyboardRemapButton")
 text = "Back"
 
 [editable path="ContainerRow1/JumpRemapContainer"]
-
 [editable path="ContainerRow1/AttackRemapContainer"]
-
 [editable path="ContainerRow2/DashRemapContainer"]
-
 [editable path="ContainerRow2/GrappleRemapContainer"]
-
 [editable path="ContainerRow3/InteractRemapContainer"]
-
 [editable path="ContainerRow3/HealRemapContainer"]
+[editable path="ContainerRow4/MoveLeftRemapContainer"]
+[editable path="ContainerRow4/MoveRightRemapContainer"]
+[editable path="ContainerRow5/LookUpRemapContainer"]
+[editable path="ContainerRow5/LookDownRemapContainer"]

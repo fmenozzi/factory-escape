@@ -43,6 +43,17 @@ func set_is_active(active: bool) -> void:
 func _player_in_trigger_area() -> bool:
     return get_overlapping_bodies().has(Util.get_player())
 
+func _action_matches_player_action(action: String) -> bool:
+    var movement_actions := ['player_move_left', 'player_move_right']
+    if action in movement_actions and player_action in movement_actions:
+        return true
+
+    var looking_actions := ['player_look_up_keyboard', 'player_look_down_keyboard']
+    if action in looking_actions and player_action in looking_actions:
+        return true
+
+    return action == player_action
+
 func _on_player_entered(player: Player) -> void:
     if not player or not is_active:
         return
@@ -67,5 +78,5 @@ func _on_player_exited(player: Player) -> void:
     self.call_deferred('disconnect', 'body_exited', self, '_on_player_exited')
 
 func _on_control_remapped(action: String, new_event: InputEvent) -> void:
-    if action == player_action and is_active and _player_in_trigger_area():
+    if _action_matches_player_action(action) and is_active and _player_in_trigger_area():
         emit_signal('control_remapped', player_action)

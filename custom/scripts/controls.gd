@@ -91,6 +91,11 @@ func _set_mode(new_mode: int) -> void:
 func get_mode() -> int:
     return _mode
 
+func is_up_action_pressed() -> bool:
+    return Input.is_action_pressed('player_move_up') or \
+           Input.is_action_pressed('player_look_up_controller') or \
+           Input.is_action_pressed('player_look_up_keyboard')
+
 func remap_controller_action(
     player_action: String,
     new_event: InputEventJoypadButton
@@ -103,6 +108,11 @@ func remap_controller_action(
     # if so, swap the mappings.
     for action in InputMap.get_actions():
         if action == player_action:
+            continue
+
+        # Make sure we only looking at player_ actions (and not e.g. ui_
+        # actions).
+        if not action.begins_with('player_'):
             continue
 
         for event in InputMap.get_action_list(action):
@@ -129,6 +139,11 @@ func remap_keyboard_action(
     # if so, swap the mappings.
     for action in InputMap.get_actions():
         if action == player_action:
+            continue
+
+        # Make sure we only looking at player_ actions (and not e.g. ui_
+        # actions).
+        if not action.begins_with('player_'):
             continue
 
         for event in InputMap.get_action_list(action):
