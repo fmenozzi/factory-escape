@@ -41,7 +41,7 @@ var _joypad_motions_to_textures: Dictionary = {
 }
 
 # Controller buttons that can be used to remap actions. Controller motions (i.e.
-# sticks), and the start/options buttons cannot be remapped.
+# sticks), and the start/options/dpad buttons cannot be remapped.
 const _CONTROLLER_REMAP_ALLOWLIST := [
     # Main buttons.
     JOY_XBOX_A,
@@ -54,12 +54,6 @@ const _CONTROLLER_REMAP_ALLOWLIST := [
     JOY_R,
     JOY_L2,
     JOY_R2,
-
-    # D-pad.
-    JOY_DPAD_UP,
-    JOY_DPAD_RIGHT,
-    JOY_DPAD_DOWN,
-    JOY_DPAD_LEFT,
 ]
 
 # Keyboard scancodes that cannot be used to remap actions.
