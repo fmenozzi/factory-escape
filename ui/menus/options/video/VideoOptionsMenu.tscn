@@ -42,10 +42,10 @@ margin_top = 1.0
 margin_bottom = 14.0
 text = "Vsync"
 
-[node name="OptionButton" parent="VSync" index="1"]
+[node name="CycleOptionsButton" parent="VSync" index="1"]
 margin_bottom = 15.0
 focus_neighbour_top = NodePath("../../Back")
-focus_neighbour_bottom = NodePath("../../WindowMode/OptionButton")
+focus_neighbour_bottom = NodePath("../../WindowMode/CycleOptionsButton")
 
 [node name="WindowMode" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -61,10 +61,10 @@ margin_top = 1.0
 margin_bottom = 14.0
 text = "Window Mode"
 
-[node name="OptionButton" parent="WindowMode" index="1"]
+[node name="CycleOptionsButton" parent="WindowMode" index="1"]
 margin_bottom = 15.0
-focus_neighbour_top = NodePath("../../VSync/OptionButton")
-focus_neighbour_bottom = NodePath("../../FpsCap/OptionButton")
+focus_neighbour_top = NodePath("../../VSync/CycleOptionsButton")
+focus_neighbour_bottom = NodePath("../../FpsCap/CycleOptionsButton")
 
 [node name="FpsCap" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -80,9 +80,9 @@ margin_top = 1.0
 margin_bottom = 14.0
 text = "FPS Cap"
 
-[node name="OptionButton" parent="FpsCap" index="1"]
+[node name="CycleOptionsButton" parent="FpsCap" index="1"]
 margin_bottom = 15.0
-focus_neighbour_top = NodePath("../../WindowMode/OptionButton")
+focus_neighbour_top = NodePath("../../WindowMode/CycleOptionsButton")
 focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 
 [node name="HSeparator2" type="HSeparator" parent="."]
@@ -94,7 +94,7 @@ margin_bottom = 114.0
 margin_top = 118.0
 margin_right = 320.0
 margin_bottom = 133.0
-focus_neighbour_top = NodePath("../FpsCap/OptionButton")
+focus_neighbour_top = NodePath("../FpsCap/CycleOptionsButton")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Reset To Defaults"
 
@@ -103,11 +103,9 @@ margin_top = 137.0
 margin_right = 320.0
 margin_bottom = 152.0
 focus_neighbour_top = NodePath("../ResetToDefaults")
-focus_neighbour_bottom = NodePath("../VSync/OptionButton")
+focus_neighbour_bottom = NodePath("../VSync/CycleOptionsButton")
 text = "Back"
 
 [editable path="VSync"]
-
 [editable path="WindowMode"]
-
 [editable path="FpsCap"]

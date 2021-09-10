@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/options/video/video_option_container.gd" type="Script" id=2]
+[ext_resource path="res://ui/custom/CycleOptionsButton.tscn" type="PackedScene" id=3]
 
 [node name="VideoOptionContainer" type="HBoxContainer"]
 anchor_right = 1.0
@@ -20,11 +21,10 @@ margin_bottom = 96.0
 size_flags_horizontal = 3
 align = 2
 
-[node name="OptionButton" type="OptionButton" parent="." groups=[
-"custom_option_button",
-]]
+[node name="CycleOptionsButton" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 162.0
 margin_right = 320.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
-align = 1

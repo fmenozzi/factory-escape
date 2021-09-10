@@ -6,17 +6,17 @@ onready var _vsync: HBoxContainer = $VSync
 onready var _window_mode: HBoxContainer = $WindowMode
 onready var _fps_cap: HBoxContainer = $FpsCap
 
-onready var _vsync_option_button: OptionButton = $VSync/OptionButton
-onready var _window_mode_option_button: OptionButton = $WindowMode/OptionButton
-onready var _fps_cap_option_button: OptionButton = $FpsCap/OptionButton
+onready var _vsync_cycle_options_button: CycleOptionsButton = $VSync/CycleOptionsButton
+onready var _window_mode_cycle_options_button: CycleOptionsButton = $WindowMode/CycleOptionsButton
+onready var _fps_cap_cycle_options_button: CycleOptionsButton = $FpsCap/CycleOptionsButton
 
 onready var _reset_to_defaults: Button = $ResetToDefaults
 onready var _back_button: Button = $Back
 
 onready var _focusable_nodes := [
-    _vsync_option_button,
-    _window_mode_option_button,
-    _fps_cap_option_button,
+    _vsync_cycle_options_button,
+    _window_mode_cycle_options_button,
+    _fps_cap_cycle_options_button,
     _reset_to_defaults,
     _back_button,
 ]
@@ -30,10 +30,38 @@ func _ready() -> void:
     _back_button.connect('pressed', self, '_on_back_pressed')
 
     connect_mouse_entered_signals_to_menu(_focusable_nodes)
-    set_default_focusable_node(_vsync_option_button)
+    set_default_focusable_node(_vsync_cycle_options_button)
+
+func _process(delta: float) -> void:
+    # This has to be moved to process because InputEvent doesn't have a similar
+    # is_action_just_pressed() method, and putting this block in handle_input()
+    # causes duplication in the number of events fired for some reason (e.g. it
+    # returns true for two frames instead of one).
+    if Input.is_action_just_pressed('ui_left'):
+        if _vsync_cycle_options_button.has_focus():
+            _vsync_cycle_options_button.select_previous_option()
+            emit_menu_navigation_sound()
+        elif _window_mode_cycle_options_button.has_focus():
+            _window_mode_cycle_options_button.select_previous_option()
+            emit_menu_navigation_sound()
+        elif _fps_cap_cycle_options_button.has_focus():
+            _fps_cap_cycle_options_button.select_previous_option()
+            emit_menu_navigation_sound()
+    elif Input.is_action_just_pressed('ui_right'):
+        if _vsync_cycle_options_button.has_focus():
+            _vsync_cycle_options_button.select_next_option()
+            emit_menu_navigation_sound()
+        elif _window_mode_cycle_options_button.has_focus():
+            _window_mode_cycle_options_button.select_next_option()
+            emit_menu_navigation_sound()
+        elif _fps_cap_cycle_options_button.has_focus():
+            _fps_cap_cycle_options_button.select_next_option()
+            emit_menu_navigation_sound()
 
 func enter(previous_menu: int, metadata: Dictionary) -> void:
     self.visible = true
+
+    set_process(true)
 
     if Controls.get_mode() == Controls.Mode.CONTROLLER:
         get_default_focusable_node().grab_focus()
@@ -42,6 +70,8 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
 
 func exit() -> void:
     self.visible = false
+
+    set_process(false)
 
     Options.save_options_and_report_errors()
 
@@ -52,13 +82,7 @@ func handle_input(event: InputEvent) -> void:
         if get_tree().paused:
             advance_to_menu(Menu.Menus.UNPAUSED)
     elif event.is_action_pressed('ui_cancel'):
-        if not _vsync.is_being_set() and        \
-           not _window_mode.is_being_set() and  \
-           not _fps_cap.is_being_set():
-            go_to_previous_menu()
-    elif event.is_action_pressed('ui_up') or event.is_action_pressed('ui_down'):
-        if _vsync.is_being_set() or _window_mode.is_being_set() or _fps_cap.is_being_set():
-            emit_menu_navigation_sound()
+        go_to_previous_menu()
 
 func get_options_data() -> Array:
     return [SECTION, {

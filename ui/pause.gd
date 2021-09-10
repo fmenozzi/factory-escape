@@ -111,12 +111,6 @@ func _on_control_mode_changed(new_mode: int) -> void:
 
     match new_mode:
         Controls.Mode.CONTROLLER:
-            # In case we were in the middle of selecting an element in an
-            # OptionButton when the control mode changed, close it so that it's
-            # not visible while navigating the menu via controller.
-            for option_button in get_tree().get_nodes_in_group('custom_option_button'):
-                option_button.get_popup().hide()
-
             # Get the UI element that last had mouse focus and have it grab focus.
             var current_menu := _get_current_menu()
             var last_mouse_focused_node := current_menu.get_last_mouse_focused_node()

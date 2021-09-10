@@ -34,7 +34,7 @@ anchor_bottom = 0.0
 margin_top = 62.0
 margin_right = 320.0
 margin_bottom = 77.0
-options = [ "Normal", "Less", "None" ]
+options = [ "None", "Less", "Normal" ]
 default_option = "Normal"
 
 [node name="Label" parent="Rumble" index="0"]
@@ -42,9 +42,10 @@ margin_top = 1.0
 margin_bottom = 14.0
 text = "Rumble"
 
-[node name="OptionButton" parent="Rumble" index="1"]
+[node name="CycleOptionsButton" parent="Rumble" index="1"]
 margin_bottom = 15.0
 focus_neighbour_top = NodePath("../../Back")
+focus_neighbour_bottom = NodePath("../../Screenshake/CycleOptionsButton")
 
 [node name="Screenshake" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
@@ -52,7 +53,7 @@ anchor_bottom = 0.0
 margin_top = 81.0
 margin_right = 320.0
 margin_bottom = 96.0
-options = [ "Normal", "Less", "None" ]
+options = [ "None", "Less", "Normal" ]
 default_option = "Normal"
 
 [node name="Label" parent="Screenshake" index="0"]
@@ -60,8 +61,10 @@ margin_top = 1.0
 margin_bottom = 14.0
 text = "Screenshake"
 
-[node name="OptionButton" parent="Screenshake" index="1"]
+[node name="CycleOptionsButton" parent="Screenshake" index="1"]
 margin_bottom = 15.0
+focus_neighbour_top = NodePath("../../Rumble/CycleOptionsButton")
+focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 
 [node name="HSeparator2" type="HSeparator" parent="."]
 margin_top = 100.0
@@ -72,13 +75,16 @@ margin_bottom = 104.0
 margin_top = 108.0
 margin_right = 320.0
 margin_bottom = 123.0
+focus_neighbour_top = NodePath("../Screenshake/CycleOptionsButton")
+focus_neighbour_bottom = NodePath("../Back")
 text = "Reset to Defaults"
 
 [node name="Back" type="Button" parent="."]
 margin_top = 127.0
 margin_right = 320.0
 margin_bottom = 142.0
-focus_neighbour_bottom = NodePath("../Rumble/OptionButton")
+focus_neighbour_top = NodePath("../ResetToDefaults")
+focus_neighbour_bottom = NodePath("../Rumble/CycleOptionsButton")
 text = "Back"
 
 [editable path="Rumble"]
