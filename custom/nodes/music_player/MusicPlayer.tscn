@@ -29,13 +29,15 @@ stream = ExtResource( 8 )
 
 [node name="ArenaStart" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 6 )
-max_volume_db = 6.0
+max_volume_db = 2.0
 
 [node name="Arena" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 4 )
+max_volume_db = -4.0
 
 [node name="ArenaEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 7 )
+max_volume_db = -2.0
 
 [node name="LampRoom" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 3 )
