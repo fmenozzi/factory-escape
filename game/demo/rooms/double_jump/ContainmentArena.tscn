@@ -86,11 +86,8 @@ floor_normal = 3
 position = Vector2( 624, 96 )
 floor_normal = 2
 
-[node name="StickyDroneFloorLeft" parent="Arena/Phases/Phase2" index="2" instance=ExtResource( 9 )]
-position = Vector2( 400, 160 )
-
-[node name="StickyDroneFloorRight" parent="Arena/Phases/Phase2" index="3" instance=ExtResource( 9 )]
-position = Vector2( 560, 160 )
+[node name="SentryDrone" parent="Arena/Phases/Phase2" index="2" instance=ExtResource( 8 )]
+position = Vector2( 432, 88 )
 
 [node name="ClosingDoorLeft" parent="Arena/ClosingDoors" index="0" instance=ExtResource( 3 )]
 position = Vector2( 328, 144 )
