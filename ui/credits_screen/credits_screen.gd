@@ -1,102 +1,71 @@
 extends Control
 
-# The time to wait in seconds before incrementing the vertical scroll value.
-const SCROLL_TIMER_WAIT_TIME := 0.05
+onready var _timer: Timer = $Timer
+onready var _tween: Tween = $FadeTween
+onready var _pages: Control = $Pages
 
-onready var _timer: Timer = $ScrollSpeedTimer
-onready var _scroll_container: ScrollContainer = $ScrollContainer
-onready var _vbox_container: VBoxContainer = $ScrollContainer/VBoxContainer
+var _current_page_idx := 0
+var _is_fading_in_or_out := false
 
 func _ready() -> void:
     MouseCursor.set_mouse_mode(MouseCursor.MouseMode.HIDDEN)
 
-    # Read credits data from file and add a Label to the ScrollContainer's
-    # VBoxContainer for each line in the file. Pad the start and end of the
-    # credits with a series of HSeparator nodes so that the credits start lower
-    # on the screen and keep scrolling as we fade out (after reaching the end
-    # marker).
-    for hseparator in _generate_hseparators(10):
-        _vbox_container.add_child(hseparator)
-    _vbox_container.add_child(_generate_title_image())
-    for hseparator in _generate_hseparators(2):
-        _vbox_container.add_child(hseparator)
-    for label in _get_line_labels():
-        _vbox_container.add_child(label)
-    for hseparator in _generate_hseparators(5):
-        _vbox_container.add_child(hseparator)
-    _vbox_container.add_child(_generate_end_marker())
-    for hseparator in _generate_hseparators(10):
-        _vbox_container.add_child(hseparator)
-
-    _timer.one_shot = false
-    _timer.wait_time = SCROLL_TIMER_WAIT_TIME
-    _timer.connect('timeout', self, '_on_scroll_timeout')
-    _timer.start()
-
     set_process_unhandled_input(false)
     if SceneChanger.is_changing_scene():
         yield(SceneChanger, 'scene_changed')
+
+    _timer.one_shot = true
+    _timer.wait_time = 4.0
+    _timer.connect('timeout', self, '_on_timeout')
+    _timer.start()
+
     set_process_unhandled_input(true)
 
 func _unhandled_input(event: InputEvent) -> void:
-    # Once the scene trasition completes, any key/button press advances back to
-    # the main menu.
-    if event is InputEventKey or event is InputEventJoypadButton:
+    if event.is_action_pressed('ui_accept'):
+        if _is_fading_in_or_out:
+            return
+        _go_to_next_screen()
+    elif event.is_action_pressed('ui_cancel'):
         set_process_unhandled_input(false)
-
         _go_to_title_screen()
 
 func _go_to_title_screen() -> void:
     var fade_in_delay := 2.0
     SceneChanger.change_scene_to(Preloads.TitleScreen, fade_in_delay)
 
-func _generate_title_image() -> CenterContainer:
-    var texture_rect := TextureRect.new()
-    texture_rect.texture = Preloads.TitleImage
+func _go_to_next_screen() -> void:
+    _timer.start()
 
-    var center_container := CenterContainer.new()
-    center_container.add_child(texture_rect)
+    var current_page := _pages.get_child(_current_page_idx)
+    _tween.remove_all()
+    _tween.interpolate_property(current_page, 'modulate:a', 1.0, 0.0, 1.0)
+    _tween.start()
+    _is_fading_in_or_out = true
+    yield(_tween, 'tween_all_completed')
+    _is_fading_in_or_out = false
 
-    return center_container
+    _current_page_idx += 1
+    current_page = _pages.get_child(_current_page_idx)
 
-func _generate_hseparators(num_hseparators: int) -> Array:
-    var hseparators := []
-    for i in range(num_hseparators):
-        hseparators.append(HSeparator.new())
-    return hseparators
+    _tween.remove_all()
+    _tween.interpolate_property(current_page, 'modulate:a', 0.0, 1.0, 1.0)
+    _tween.start()
+    _is_fading_in_or_out = true
+    yield(_tween, 'tween_all_completed')
+    _is_fading_in_or_out = false
 
-func _get_line_labels() -> Array:
-    var file := File.new()
-    var status := file.open('res://ui/credits_screen/data/credits.txt', File.READ)
-    assert(status == OK)
+func _on_timeout() -> void:
+    _timer.stop()
+    if _current_page_idx >= _pages.get_child_count() - 1:
+        var current_page := _pages.get_child(_current_page_idx)
+        _tween.remove_all()
+        _tween.interpolate_property(current_page, 'modulate:a', 1.0, 0.0, 1.0)
+        _tween.start()
 
-    var line_labels := []
-
-    while not file.eof_reached():
-        var label := Label.new()
-        label.align = Label.ALIGN_CENTER
-        label.autowrap = true
-        label.text = file.get_line()
-
-        line_labels.append(label)
-
-    file.close()
-
-    return line_labels
-
-func _generate_end_marker() -> Label:
-    var label := Label.new()
-
-    var visibility_notifier := VisibilityNotifier2D.new()
-    visibility_notifier.rect = Rect2(Vector2(0, 0), Vector2(8, 8))
-    visibility_notifier.connect('screen_entered', self, '_on_credits_ended')
-
-    label.add_child(visibility_notifier)
-
-    return label
-
-func _on_scroll_timeout() -> void:
-    _scroll_container.get_v_scrollbar().value += 1
+        _on_credits_ended()
+    else:
+        _go_to_next_screen()
 
 func _on_credits_ended() -> void:
     # Once we reach the end of the credits, disable input handling to ensure

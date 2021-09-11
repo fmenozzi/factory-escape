@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/credits_screen/credits_screen.gd" type="Script" id=2]
+[ext_resource path="res://ui/menus/main/textures/title.png" type="Texture" id=3]
 
 [node name="CreditsScreen" type="Control"]
 anchor_right = 1.0
@@ -17,21 +18,265 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.113725, 0.129412, 0.176471, 1 )
 
-[node name="ScrollSpeedTimer" type="Timer" parent="."]
-
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="Pages" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_right = -32.0
-scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 256.0
-margin_bottom = 180.0
+[node name="Title" type="VBoxContainer" parent="Pages"]
+margin_left = 86.0
+margin_top = 57.0
+margin_right = 234.0
+margin_bottom = 122.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Title"]
+margin_right = 148.0
+margin_bottom = 48.0
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Pages/Title"]
+margin_top = 52.0
+margin_right = 148.0
+margin_bottom = 65.0
+text = "A game by Federico Menozzi"
+align = 1
+valign = 1
+
+[node name="ProgrammingAndArt" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 45.0
+margin_right = 320.0
+margin_bottom = 58.0
+text = "PROGRAMMING"
+align = 1
+
+[node name="Label2" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 62.0
+margin_right = 320.0
+margin_bottom = 75.0
+text = "Federico Menozzi"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Pages/ProgrammingAndArt"]
+margin_top = 79.0
+margin_right = 320.0
+margin_bottom = 83.0
+
+[node name="Label3" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 87.0
+margin_right = 320.0
+margin_bottom = 100.0
+text = "ART"
+align = 1
+
+[node name="Label4" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 104.0
+margin_right = 320.0
+margin_bottom = 117.0
+text = "Robert Norenberg (0x72.itch.io)"
+align = 1
+
+[node name="Label5" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 121.0
+margin_right = 320.0
+margin_bottom = 134.0
+text = "NYKNCK (kvsr.itch.io)"
+align = 1
+
+[node name="FontAndMusic" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pages/FontAndMusic"]
+margin_top = 54.0
+margin_right = 320.0
+margin_bottom = 67.0
+text = "FONT"
+align = 1
+
+[node name="Label2" type="Label" parent="Pages/FontAndMusic"]
+margin_top = 71.0
+margin_right = 320.0
+margin_bottom = 84.0
+text = "Daniel Linssen (managore.itch.io)"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Pages/FontAndMusic"]
+margin_top = 88.0
+margin_right = 320.0
+margin_bottom = 92.0
+
+[node name="Label3" type="Label" parent="Pages/FontAndMusic"]
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 109.0
+text = "MUSIC"
+align = 1
+
+[node name="Label4" type="Label" parent="Pages/FontAndMusic"]
+margin_top = 113.0
+margin_right = 320.0
+margin_bottom = 126.0
+text = "Vincent Salgueiro"
+align = 1
+
+[node name="Sound" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pages/Sound"]
+margin_top = 15.0
+margin_right = 320.0
+margin_bottom = 28.0
+text = "SOUND"
+align = 1
+
+[node name="Label2" type="Label" parent="Pages/Sound"]
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 45.0
+text = "Vincent Salgueiro"
+align = 1
+
+[node name="Label3" type="Label" parent="Pages/Sound"]
+margin_top = 49.0
+margin_right = 320.0
+margin_bottom = 62.0
+text = "Despic (despic_studio@)"
+align = 1
+
+[node name="Label4" type="Label" parent="Pages/Sound"]
+margin_top = 66.0
+margin_right = 320.0
+margin_bottom = 79.0
+text = "Carmin Bittermann"
+align = 1
+
+[node name="Label5" type="Label" parent="Pages/Sound"]
+margin_top = 83.0
+margin_right = 320.0
+margin_bottom = 96.0
+text = "Garry Smithson"
+align = 1
+
+[node name="Label6" type="Label" parent="Pages/Sound"]
+margin_top = 100.0
+margin_right = 320.0
+margin_bottom = 113.0
+text = "Kenney (www.kenney.nl)"
+align = 1
+
+[node name="Label7" type="Label" parent="Pages/Sound"]
+margin_top = 117.0
+margin_right = 320.0
+margin_bottom = 130.0
+text = "OpenGameArt.org"
+align = 1
+
+[node name="Label8" type="Label" parent="Pages/Sound"]
+margin_top = 134.0
+margin_right = 320.0
+margin_bottom = 147.0
+text = "FreeSound.org"
+align = 1
+
+[node name="Label9" type="Label" parent="Pages/Sound"]
+margin_top = 151.0
+margin_right = 320.0
+margin_bottom = 164.0
+text = "YouTube Audio Library"
+align = 1
+
+[node name="GodotLicense1" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_right = -24.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pages/GodotLicense1"]
+margin_top = 3.0
+margin_right = 272.0
+margin_bottom = 176.0
+text = "Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2021 Godot Engine contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to"
+align = 1
+autowrap = true
+
+[node name="GodotLicense2" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_right = -24.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pages/GodotLicense2"]
+margin_top = 3.0
+margin_right = 272.0
+margin_bottom = 176.0
+text = "whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR"
+align = 1
+autowrap = true
+
+[node name="GodotLicense3" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_right = -24.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pages/GodotLicense3"]
+margin_top = 3.0
+margin_right = 272.0
+margin_bottom = 176.0
+text = "PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Portions of this software are copyright (c) 2021 The FreeType Project (www.freetype.org). All rights reserved."
+align = 1
+autowrap = true
+
+[node name="FadeTween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
