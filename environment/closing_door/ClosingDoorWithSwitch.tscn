@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://environment/switch/Switch.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/closing_door/closing_door_with_switch.gd" type="Script" id=3]
+
+[node name="ClosingDoorWithSwitch" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="ClosingDoor" parent="." instance=ExtResource( 2 )]
+
+[node name="Switch" parent="." instance=ExtResource( 1 )]
+position = Vector2( -24, 0 )
