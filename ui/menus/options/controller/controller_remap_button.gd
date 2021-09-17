@@ -28,6 +28,13 @@ func _toggled(button_pressed: bool) -> void:
         update_texture_display()
 
 func _unhandled_input(event: InputEvent) -> void:
+    # In case the player clicks on a controller remap button without actually
+    # having a controller plugged in, allow any key press to finish the remap
+    # without actually remapping anything.
+    if event is InputEventKey:
+        self.pressed = false
+        emit_signal('remap_finished')
+
     if not event is InputEventJoypadButton:
         return
 
