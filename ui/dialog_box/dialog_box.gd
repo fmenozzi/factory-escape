@@ -35,7 +35,7 @@ func _unhandled_input(event: InputEvent) -> void:
         State.ENABLED:
             # ui_accept to skip to the end of a page and also to advance to the
             # next page.
-            if event.is_action_pressed('ui_accept'):
+            if event.is_action_pressed('ui_accept') or event.is_action_pressed('player_interact'):
                 if _label.get_visible_characters() < _label.get_total_character_count():
                     _advance_dialog_to_end_of_current_page()
                 else:
