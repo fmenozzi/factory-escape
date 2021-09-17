@@ -80,7 +80,7 @@ func _get_keyboard_button_label(player_action: String) -> String:
         var scancode_down: int = Controls.get_scancode_for_action('player_look_down_keyboard')
         assert(scancode_up != -1 and scancode_down != -1)
 
-        return '%s/%s' % [
+        return 'Hold %s/%s' % [
             OS.get_scancode_string(scancode_up),
             OS.get_scancode_string(scancode_down),
         ]
