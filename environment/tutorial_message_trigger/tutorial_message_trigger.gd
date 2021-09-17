@@ -48,7 +48,12 @@ func _action_matches_player_action(action: String) -> bool:
     if action in movement_actions and player_action in movement_actions:
         return true
 
-    var looking_actions := ['player_look_up_keyboard', 'player_look_down_keyboard']
+    var looking_actions := [
+        'player_look_up_keyboard',
+        'player_look_down_keyboard',
+        'player_look_up_controller',
+        'player_look_down_controller',
+    ]
     if action in looking_actions and player_action in looking_actions:
         return true
 
