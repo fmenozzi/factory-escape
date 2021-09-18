@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/buddy/buddy.gd"
 }, {
+"base": "Position2D",
+"class": "CameraFocusPoint",
+"language": "GDScript",
+"path": "res://environment/camera_focus_point/camera_focus_point.gd"
+}, {
 "base": "Node2D",
 "class": "CentralLock",
 "language": "GDScript",
@@ -433,6 +438,7 @@ _global_script_class_icons={
 "AudioSlider": "",
 "AudioStreamPlayerMusic": "",
 "Buddy": "",
+"CameraFocusPoint": "",
 "CentralLock": "",
 "ClosingDoorWithSwitch": "",
 "ClosingDoorWithSwitchSaveManager": "",

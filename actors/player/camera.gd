@@ -9,18 +9,29 @@ onready var _tween: Tween = $PositionTween
 
 var _is_detached := false
 
-func detach_and_move_to_global(new_global_pos: Vector2) -> void:
+func detach_and_move_to_global(new_global_pos: Vector2, tween_duration := 0.0) -> void:
+    # As of switching to Godot 3.3, this call to set_as_toplevel() needs to be
+    # immediately followed up with a call to "reset" the global position back to
+    # what it was prior to this call, as set_as_toplevel() will now update the
+    # global position itself.
+    var old_global_pos := self.global_position
     self.set_as_toplevel(true)
+    self.global_position = old_global_pos
+
     _is_detached = true
-    self.global_position = new_global_pos
 
-func reattach(tween_on_reattach: bool = true) -> void:
-    if not tween_on_reattach:
-        _is_detached = false
-        self.position = Vector2.ZERO
-        self.set_as_toplevel(false)
-        return
+    var prop := 'global_position'
+    var duration := tween_duration
+    var trans := Tween.TRANS_QUAD
+    var easing := Tween.EASE_IN_OUT
+    var old := old_global_pos
+    var new := new_global_pos
 
+    _tween.remove_all()
+    _tween.interpolate_property(self, prop, old, new, duration, trans, easing)
+    _tween.start()
+
+func reattach(tween_duration := 0.50) -> void:
     # Determine our position relative to the player for the starting value of
     # the reattachment interpolation.
     self.position = _player.to_local(self.global_position)
@@ -33,7 +44,7 @@ func reattach(tween_on_reattach: bool = true) -> void:
     # Smoothly reattach the camera to the player by tweening to the original
     # local anchor position.
     var prop := 'position'
-    var duration := 0.50
+    var duration := tween_duration
     var trans := Tween.TRANS_QUAD
     var easing := Tween.EASE_IN_OUT
     var old := self.position

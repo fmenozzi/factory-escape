@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/camera_focus_point/CameraFocusPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/central_lock/CentralLock.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -8,6 +9,9 @@ extents = Vector2( 480, 180 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 64, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 160, 46 )
 
 [node name="CentralHub" instance=ExtResource( 1 )]
 
@@ -57,4 +61,12 @@ position = Vector2( -480, 7.99878 )
 shape = SubResource( 2 )
 one_way_collision = true
 
+[node name="CameraFocusPoint" parent="." index="13" instance=ExtResource( 2 )]
+position = Vector2( 480, 120 )
+
+[node name="CollisionShape2D" parent="CameraFocusPoint/TriggerArea" index="0"]
+position = Vector2( 0, 24 )
+shape = SubResource( 3 )
+
 [editable path="TileMaps"]
+[editable path="CameraFocusPoint"]
