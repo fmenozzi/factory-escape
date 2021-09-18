@@ -13,6 +13,10 @@ func _ready() -> void:
 func _on_switch_pressed() -> void:
     _closing_door.open()
     _save_manager.is_open = true
+    Screenshake.start(
+        Screenshake.Duration.LONG, Screenshake.Amplitude.VERY_SMALL,
+        Screenshake.Priority.HIGH)
+    Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
 
 func pause() -> void:
     pass
