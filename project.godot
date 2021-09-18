@@ -224,6 +224,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/hazards/lightning_wall/lightning_wall.gd"
 }, {
+"base": "Node",
+"class": "LightningWallWithSwitchSaveManager",
+"language": "GDScript",
+"path": "res://environment/hazards/lightning_wall/lightning_wall_with_switch_save_manager.gd"
+}, {
 "base": "VBoxContainer",
 "class": "Menu",
 "language": "GDScript",
@@ -463,6 +468,7 @@ _global_script_class_icons={
 "LeapingFailureSoundManager": "",
 "LightningBolt": "",
 "LightningWall": "",
+"LightningWallWithSwitchSaveManager": "",
 "Menu": "",
 "Pause": "",
 "PhysicsManager": "",
