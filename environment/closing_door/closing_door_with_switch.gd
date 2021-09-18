@@ -3,6 +3,7 @@ class_name ClosingDoorWithSwitch
 
 onready var _closing_door: StaticBody2D = $ClosingDoor
 onready var _switch: Switch = $Switch
+onready var _save_manager: ClosingDoorWithSwitchSaveManager = $SaveManager
 
 func _ready() -> void:
     _closing_door.set_closed()
@@ -11,6 +12,7 @@ func _ready() -> void:
 
 func _on_switch_pressed() -> void:
     _closing_door.open()
+    _save_manager.is_open = true
 
 func pause() -> void:
     pass
