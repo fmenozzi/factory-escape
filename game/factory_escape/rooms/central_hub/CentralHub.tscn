@@ -46,6 +46,18 @@ position = Vector2( 800, 270 )
 [node name="CentralLock" parent="." index="5" instance=ExtResource( 3 )]
 position = Vector2( 480, 128 )
 
+[node name="SectorOneSwitch" parent="CentralLock/Switches" index="0"]
+position = Vector2( -232, 16 )
+
+[node name="SectorTwoSwitch" parent="CentralLock/Switches" index="1"]
+position = Vector2( 232, 16 )
+
+[node name="SectorThreeSwitch" parent="CentralLock/Switches" index="2"]
+position = Vector2( -152, 64 )
+
+[node name="SectorFourSwitch" parent="CentralLock/Switches" index="3"]
+position = Vector2( 152, 64 )
+
 [node name="PlayerSuspensionPoint" type="Position2D" parent="." index="10"]
 position = Vector2( 480, -320 )
 
@@ -69,4 +81,5 @@ position = Vector2( 0, 24 )
 shape = SubResource( 3 )
 
 [editable path="TileMaps"]
+[editable path="CentralLock"]
 [editable path="CameraFocusPoint"]

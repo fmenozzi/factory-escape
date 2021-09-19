@@ -60,6 +60,11 @@ _global_script_classes=[ {
 "path": "res://environment/central_lock/central_lock.gd"
 }, {
 "base": "Node2D",
+"class": "CentralLockSwitch",
+"language": "GDScript",
+"path": "res://environment/central_lock/central_lock_switch.gd"
+}, {
+"base": "Node2D",
 "class": "ClosingDoorWithSwitch",
 "language": "GDScript",
 "path": "res://environment/closing_door/closing_door_with_switch.gd"
@@ -440,6 +445,7 @@ _global_script_class_icons={
 "Buddy": "",
 "CameraFocusPoint": "",
 "CentralLock": "",
+"CentralLockSwitch": "",
 "ClosingDoorWithSwitch": "",
 "ClosingDoorWithSwitchSaveManager": "",
 "ConveyorBeltAudioGroup": "",

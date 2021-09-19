@@ -32,6 +32,9 @@ func _ready() -> void:
                 ability.connect(
                     'ability_acquired', _player.get_grapple_manager(), '_on_grapple_acquired')
 
+    for central_lock_switch in get_tree().get_nodes_in_group('central_lock_switches'):
+        central_lock_switch.connect('unlocked', self, '_on_central_lock_switch_pressed')
+
 func _on_player_entered_cargo_lift() -> void:
     # Move player to suspension point.
     _player.change_state({'new_state': Player.State.SUSPENDED})
@@ -91,3 +94,8 @@ func _on_ability_acquired(ability: int) -> void:
 
         Ability.Kind.GRAPPLE:
             _grapple_tutorial_trigger.set_is_active(true)
+
+func _on_central_lock_switch_pressed(sector_number: int) -> void:
+    assert(sector_number in [1, 2, 3, 4])
+
+    print('unlocked sector number ', sector_number)
