@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://environment/central_lock/textures/central-lock.png" type="Texture" id=1]
 [ext_resource path="res://environment/central_lock/central_lock.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://environment/central_lock/animations/pulse.tres" type="Animation" id=9]
 [ext_resource path="res://environment/central_lock/animations/turn_on.tres" type="Animation" id=10]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=11]
+[ext_resource path="res://environment/central_lock/central_lock_save_manager.gd" type="Script" id=12]
 
 [node name="CentralLock" type="Node2D"]
 script = ExtResource( 2 )
@@ -84,3 +85,8 @@ sector_number = 4
 [node name="ClosingDoor" parent="." instance=ExtResource( 11 )]
 position = Vector2( 0, 48 )
 rotation = 1.5708
+
+[node name="SaveManager" type="Node" parent="." groups=[
+"save",
+]]
+script = ExtResource( 12 )

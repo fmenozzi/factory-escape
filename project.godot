@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/central_lock/central_lock.gd"
 }, {
+"base": "Node",
+"class": "CentralLockSaveManager",
+"language": "GDScript",
+"path": "res://environment/central_lock/central_lock_save_manager.gd"
+}, {
 "base": "Node2D",
 "class": "CentralLockSwitch",
 "language": "GDScript",
@@ -445,6 +450,7 @@ _global_script_class_icons={
 "Buddy": "",
 "CameraFocusPoint": "",
 "CentralLock": "",
+"CentralLockSaveManager": "",
 "CentralLockSwitch": "",
 "ClosingDoorWithSwitch": "",
 "ClosingDoorWithSwitchSaveManager": "",
