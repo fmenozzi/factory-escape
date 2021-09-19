@@ -4,10 +4,10 @@ class_name CentralLock
 signal ready_to_turn_on_new_light
 
 enum LockLight {
-    UPPER_LEFT,
-    UPPER_RIGHT,
-    LOWER_LEFT,
-    LOWER_RIGHT,
+    UPPER_LEFT = 1,
+    UPPER_RIGHT = 2,
+    LOWER_LEFT = 3,
+    LOWER_RIGHT = 4,
     CENTRAL,
 }
 
@@ -52,7 +52,6 @@ func lights_already_pulsing() -> bool:
         LockLight.UPPER_RIGHT,
         LockLight.LOWER_LEFT,
         LockLight.LOWER_RIGHT,
-        LockLight.CENTRAL,
     ]
 
     for light in lights:
@@ -61,6 +60,21 @@ func lights_already_pulsing() -> bool:
             return true
 
     return false
+
+func all_lights_pulsing() -> bool:
+    var lights := [
+        LockLight.UPPER_LEFT,
+        LockLight.UPPER_RIGHT,
+        LockLight.LOWER_LEFT,
+        LockLight.LOWER_RIGHT,
+    ]
+
+    for light in lights:
+        var animation_player := get_animation_player(light)
+        if not animation_player.is_playing() or not animation_player.current_animation == 'pulse':
+            return false
+
+    return true
 
 func turn_on_light(light: int) -> void:
     assert(light in [

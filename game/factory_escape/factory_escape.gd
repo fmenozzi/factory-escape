@@ -121,18 +121,15 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     # that the pulses of all four lights are synchronized.
     if _central_lock.lights_already_pulsing():
         yield(_central_lock, 'ready_to_turn_on_new_light')
-    match sector_number:
-        1:
-            _central_lock.turn_on_light(CentralLock.LockLight.UPPER_LEFT)
-        2:
-            _central_lock.turn_on_light(CentralLock.LockLight.UPPER_RIGHT)
-        3:
-            _central_lock.turn_on_light(CentralLock.LockLight.LOWER_LEFT)
-        4:
-            _central_lock.turn_on_light(CentralLock.LockLight.LOWER_RIGHT)
+    _central_lock.turn_on_light(sector_number)
 
-    # Wait a few seconds.
-    yield(get_tree().create_timer(4.0), 'timeout')
+    # Wait for the light to turn on + two pulses.
+    yield(get_tree().create_timer(5.0), 'timeout')
+
+    if _central_lock.all_lights_pulsing():
+        yield(_central_lock, 'ready_to_turn_on_new_light')
+        _central_lock.turn_on_light(CentralLock.LockLight.CENTRAL)
+        yield(get_tree().create_timer(5.0), 'timeout')
 
     # Fade back to black.
     _screen_fadeout.fade_to_black(2.0)
