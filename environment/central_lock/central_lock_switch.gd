@@ -8,7 +8,7 @@ export(int, 1, 4) var sector_number := 1
 onready var _switch: Switch = $Switch
 
 func _ready() -> void:
-    _switch.connect('switch_press_started', self, '_on_switch_pressed')
+    _switch.connect('switch_press_finished', self, '_on_switch_pressed')
 
-func _on_switch_pressed(switch: Switch) -> void:
+func _on_switch_pressed() -> void:
     emit_signal('unlocked', sector_number)

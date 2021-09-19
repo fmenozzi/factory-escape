@@ -80,6 +80,9 @@ position = Vector2( 480, 120 )
 position = Vector2( 0, 24 )
 shape = SubResource( 3 )
 
+[node name="CentralLockCutsceneCamera" type="Camera2D" parent="." index="14"]
+position = Vector2( 480, 120 )
+
 [editable path="TileMaps"]
 [editable path="CentralLock"]
 [editable path="CameraFocusPoint"]

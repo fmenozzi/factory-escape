@@ -8,6 +8,7 @@ onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/
 onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/TutorialMessageTrigger
 onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
 onready var _central_hub_fall_sequence_camera_anchor: Position2D = $World/Rooms/CentralHub/FallSequenceCameraAnchor
+onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralLockCutsceneCamera
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -98,4 +99,35 @@ func _on_ability_acquired(ability: int) -> void:
 func _on_central_lock_switch_pressed(sector_number: int) -> void:
     assert(sector_number in [1, 2, 3, 4])
 
-    print('unlocked sector number ', sector_number)
+    # Pause player processing.
+    _player.set_process_unhandled_input(false)
+    _player.set_physics_process(false)
+
+    # Fade to black.
+    _screen_fadeout.fade_to_black(2.0)
+    yield(_screen_fadeout, 'fade_to_black_finished')
+
+    # Switch to cutscene camera.
+    _central_lock_cutscene_camera.make_current()
+
+    # Fade back from black.
+    _screen_fadeout.fade_from_black(2.0)
+    yield(_screen_fadeout, 'fade_from_black_finished')
+
+    # Wait two seconds.
+    yield(get_tree().create_timer(2.0), 'timeout')
+
+    # Fade back to black.
+    _screen_fadeout.fade_to_black(2.0)
+    yield(_screen_fadeout, 'fade_to_black_finished')
+
+    # Switch back to player camera.
+    _player.get_camera().make_current()
+
+    # Fade back from black.
+    _screen_fadeout.fade_from_black(2.0)
+    yield(_screen_fadeout, 'fade_from_black_finished')
+
+    # Resume player processing.
+    _player.set_process_unhandled_input(true)
+    _player.set_physics_process(true)
