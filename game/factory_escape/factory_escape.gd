@@ -115,7 +115,12 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _screen_fadeout.fade_from_black(2.0)
     yield(_screen_fadeout, 'fade_from_black_finished')
 
-    # Turn on corresponding light.
+    # Turn on corresponding light. If other lights are already playing their
+    # pulse animation, wait until the right moment in their animation to begin
+    # the animation sequence for turning on this light. This helps to ensure
+    # that the pulses of all four lights are synchronized.
+    if _central_lock.lights_already_pulsing():
+        yield(_central_lock, 'ready_to_turn_on_new_light')
     match sector_number:
         1:
             _central_lock.turn_on_light(CentralLock.LockLight.UPPER_LEFT)

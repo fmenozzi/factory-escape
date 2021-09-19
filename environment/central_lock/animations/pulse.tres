@@ -16,3 +16,17 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1.2, 1.2, 1.2, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "ready_to_turn_on_new_light" ],
+"method": "emit_signal"
+} ]
+}

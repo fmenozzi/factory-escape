@@ -1,6 +1,8 @@
 extends Node2D
 class_name CentralLock
 
+signal ready_to_turn_on_new_light
+
 enum LockLight {
     UPPER_LEFT,
     UPPER_RIGHT,
@@ -43,6 +45,22 @@ func get_animation_player(light: int) -> AnimationPlayer:
             return _central_animation_player
 
     return null
+
+func lights_already_pulsing() -> bool:
+    var lights := [
+        LockLight.UPPER_LEFT,
+        LockLight.UPPER_RIGHT,
+        LockLight.LOWER_LEFT,
+        LockLight.LOWER_RIGHT,
+        LockLight.CENTRAL,
+    ]
+
+    for light in lights:
+        var animation_player := get_animation_player(light)
+        if animation_player.is_playing() and animation_player.current_animation == 'pulse':
+            return true
+
+    return false
 
 func turn_on_light(light: int) -> void:
     assert(light in [
