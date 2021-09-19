@@ -64,8 +64,8 @@ func _on_player_entered_cargo_lift() -> void:
         yield(_player.current_state, 'sequence_finished')
 
     # Reattach camera.
-    var tween_on_reattach := false
-    _player.get_camera().reattach(tween_on_reattach)
+    var tween_duration := 0.0
+    _player.get_camera().reattach(tween_duration)
 
     # Re-enable room transitions for central hub.
     _central_hub.set_enable_room_transitions(true)

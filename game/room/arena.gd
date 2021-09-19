@@ -79,7 +79,7 @@ func lamp_reset() -> void:
         # the camera's position to (0, 0) immediately). If the player dies
         # before reaching the arena, the player camera will be null.
         if _player_camera != null:
-            _player_camera.reattach(false)
+            _player_camera.reattach(0.0)
 
 func _start_arena(player: Player) -> void:
     if not player:
