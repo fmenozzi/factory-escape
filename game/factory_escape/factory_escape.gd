@@ -111,6 +111,10 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     # Switch to cutscene camera.
     _central_lock_cutscene_camera.make_current()
 
+    # Turn off HUD elements.
+    _health_bar.modulate.a = 0
+    _health_pack_bar.modulate.a = 0
+
     # Fade back from black.
     _screen_fadeout.fade_from_black(2.0)
     yield(_screen_fadeout, 'fade_from_black_finished')
@@ -137,6 +141,10 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
 
     # Switch back to player camera.
     _player.get_camera().make_current()
+
+    # Turn HUD elements back on.
+    _health_bar.modulate.a = 1
+    _health_pack_bar.modulate.a = 1
 
     # Fade back from black.
     _screen_fadeout.fade_from_black(2.0)
