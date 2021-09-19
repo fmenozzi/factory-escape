@@ -4,10 +4,10 @@ class_name CentralLock
 signal ready_to_turn_on_new_light
 
 enum LockLight {
-    UPPER_LEFT = 1,
-    UPPER_RIGHT = 2,
-    LOWER_LEFT = 3,
-    LOWER_RIGHT = 4,
+    SECTOR_ONE = 1,
+    SECTOR_TWO = 2,
+    SECTOR_THREE = 3,
+    SECTOR_FOUR = 4,
     CENTRAL,
 }
 
@@ -33,21 +33,21 @@ func _ready() -> void:
 
 func get_animation_player(light: int) -> AnimationPlayer:
     assert(light in [
-        LockLight.UPPER_LEFT,
-        LockLight.UPPER_RIGHT,
-        LockLight.LOWER_LEFT,
-        LockLight.LOWER_RIGHT,
+        LockLight.SECTOR_ONE,
+        LockLight.SECTOR_TWO,
+        LockLight.SECTOR_THREE,
+        LockLight.SECTOR_FOUR,
         LockLight.CENTRAL,
     ])
 
     match light:
-        LockLight.UPPER_LEFT:
+        LockLight.SECTOR_ONE:
             return _upper_left_animation_player
-        LockLight.UPPER_RIGHT:
+        LockLight.SECTOR_TWO:
             return _upper_right_animation_player
-        LockLight.LOWER_LEFT:
+        LockLight.SECTOR_THREE:
             return _lower_left_animation_player
-        LockLight.LOWER_RIGHT:
+        LockLight.SECTOR_FOUR:
             return _lower_right_animation_player
         LockLight.CENTRAL:
             return _central_animation_player
@@ -55,41 +55,25 @@ func get_animation_player(light: int) -> AnimationPlayer:
     return null
 
 func lights_already_pulsing() -> bool:
-    var lights := [
-        LockLight.UPPER_LEFT,
-        LockLight.UPPER_RIGHT,
-        LockLight.LOWER_LEFT,
-        LockLight.LOWER_RIGHT,
-    ]
-
-    for light in lights:
-        var animation_player := get_animation_player(light)
+    for sector_number in [1, 2, 3, 4]:
+        var animation_player := get_animation_player(sector_number)
         if animation_player.is_playing() and animation_player.current_animation == 'pulse':
             return true
-
     return false
 
 func all_lights_pulsing() -> bool:
-    var lights := [
-        LockLight.UPPER_LEFT,
-        LockLight.UPPER_RIGHT,
-        LockLight.LOWER_LEFT,
-        LockLight.LOWER_RIGHT,
-    ]
-
-    for light in lights:
-        var animation_player := get_animation_player(light)
+    for sector_number in [1, 2, 3, 4]:
+        var animation_player := get_animation_player(sector_number)
         if not animation_player.is_playing() or not animation_player.current_animation == 'pulse':
             return false
-
     return true
 
 func turn_on_light(light: int) -> void:
     assert(light in [
-        LockLight.UPPER_LEFT,
-        LockLight.UPPER_RIGHT,
-        LockLight.LOWER_LEFT,
-        LockLight.LOWER_RIGHT,
+        LockLight.SECTOR_ONE,
+        LockLight.SECTOR_TWO,
+        LockLight.SECTOR_THREE,
+        LockLight.SECTOR_FOUR,
         LockLight.CENTRAL,
     ])
 
@@ -98,31 +82,26 @@ func turn_on_light(light: int) -> void:
     animation_player.queue('pulse')
 
     match light:
-        LockLight.UPPER_LEFT:
+        LockLight.SECTOR_ONE:
             _save_manager.sector_one_unlocked = true
-        LockLight.UPPER_RIGHT:
+        LockLight.SECTOR_TWO:
             _save_manager.sector_two_unlocked = true
-        LockLight.LOWER_LEFT:
+        LockLight.SECTOR_THREE:
             _save_manager.sector_three_unlocked = true
-        LockLight.LOWER_RIGHT:
+        LockLight.SECTOR_FOUR:
             _save_manager.sector_four_unlocked = true
 
-func deactivate_switch(light: int) -> void:
-    assert(light in [
-        LockLight.UPPER_LEFT,
-        LockLight.UPPER_RIGHT,
-        LockLight.LOWER_LEFT,
-        LockLight.LOWER_RIGHT,
-    ])
+func deactivate_switch(sector_number: int) -> void:
+    assert(sector_number in [1, 2, 3, 4])
 
-    match light:
-        LockLight.UPPER_LEFT:
+    match sector_number:
+        LockLight.SECTOR_ONE:
             _sector_one_switch.deactivate()
-        LockLight.UPPER_RIGHT:
+        LockLight.SECTOR_TWO:
             _sector_two_switch.deactivate()
-        LockLight.LOWER_LEFT:
+        LockLight.SECTOR_THREE:
             _sector_three_switch.deactivate()
-        LockLight.LOWER_RIGHT:
+        LockLight.SECTOR_FOUR:
             _sector_four_switch.deactivate()
 
 func get_closing_door() -> StaticBody2D:

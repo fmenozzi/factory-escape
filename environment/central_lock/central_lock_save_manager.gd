@@ -35,20 +35,20 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
     var unlocked_animation_players := []
     if sector_one_unlocked:
         unlocked_animation_players.append(
-            _central_lock.get_animation_player(_central_lock.LockLight.UPPER_LEFT))
-        _central_lock.deactivate_switch(_central_lock.LockLight.UPPER_LEFT)
+            _central_lock.get_animation_player(_central_lock.LockLight.SECTOR_ONE))
+        _central_lock.deactivate_switch(_central_lock.LockLight.SECTOR_ONE)
     if sector_two_unlocked:
         unlocked_animation_players.append(
-            _central_lock.get_animation_player(_central_lock.LockLight.UPPER_RIGHT))
-        _central_lock.deactivate_switch(_central_lock.LockLight.UPPER_RIGHT)
+            _central_lock.get_animation_player(_central_lock.LockLight.SECTOR_TWO))
+        _central_lock.deactivate_switch(_central_lock.LockLight.SECTOR_TWO)
     if sector_three_unlocked:
         unlocked_animation_players.append(
-            _central_lock.get_animation_player(_central_lock.LockLight.LOWER_LEFT))
-        _central_lock.deactivate_switch(_central_lock.LockLight.LOWER_LEFT)
+            _central_lock.get_animation_player(_central_lock.LockLight.SECTOR_THREE))
+        _central_lock.deactivate_switch(_central_lock.LockLight.SECTOR_THREE)
     if sector_four_unlocked:
         unlocked_animation_players.append(
-            _central_lock.get_animation_player(_central_lock.LockLight.LOWER_RIGHT))
-        _central_lock.deactivate_switch(_central_lock.LockLight.LOWER_RIGHT)
+            _central_lock.get_animation_player(_central_lock.LockLight.SECTOR_FOUR))
+        _central_lock.deactivate_switch(_central_lock.LockLight.SECTOR_FOUR)
 
     if sector_one_unlocked and sector_two_unlocked and sector_three_unlocked and sector_four_unlocked:
         unlocked_animation_players.append(
