@@ -9,6 +9,7 @@ onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/Tutor
 onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
 onready var _central_hub_fall_sequence_camera_anchor: Position2D = $World/Rooms/CentralHub/FallSequenceCameraAnchor
 onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralLockCutsceneCamera
+onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralLock
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -114,8 +115,19 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _screen_fadeout.fade_from_black(2.0)
     yield(_screen_fadeout, 'fade_from_black_finished')
 
-    # Wait two seconds.
-    yield(get_tree().create_timer(2.0), 'timeout')
+    # Turn on corresponding light.
+    match sector_number:
+        1:
+            _central_lock.turn_on_light(CentralLock.LockLight.UPPER_LEFT)
+        2:
+            _central_lock.turn_on_light(CentralLock.LockLight.UPPER_RIGHT)
+        3:
+            _central_lock.turn_on_light(CentralLock.LockLight.LOWER_LEFT)
+        4:
+            _central_lock.turn_on_light(CentralLock.LockLight.LOWER_RIGHT)
+
+    # Wait a few seconds.
+    yield(get_tree().create_timer(4.0), 'timeout')
 
     # Fade back to black.
     _screen_fadeout.fade_to_black(2.0)
