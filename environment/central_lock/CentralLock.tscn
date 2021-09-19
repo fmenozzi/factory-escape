@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://environment/central_lock/textures/central-lock.png" type="Texture" id=1]
 [ext_resource path="res://environment/central_lock/central_lock.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://environment/central_lock/CentralLockSwitch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://environment/central_lock/animations/pulse.tres" type="Animation" id=9]
 [ext_resource path="res://environment/central_lock/animations/turn_on.tres" type="Animation" id=10]
+[ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=11]
 
 [node name="CentralLock" type="Node2D"]
 script = ExtResource( 2 )
@@ -79,3 +80,7 @@ sector_number = 3
 [node name="SectorFourSwitch" parent="Switches" instance=ExtResource( 8 )]
 position = Vector2( 40, 32 )
 sector_number = 4
+
+[node name="ClosingDoor" parent="." instance=ExtResource( 11 )]
+position = Vector2( 0, 48 )
+rotation = 1.5708

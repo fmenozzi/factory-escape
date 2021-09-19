@@ -17,11 +17,14 @@ onready var _upper_right_animation_player: AnimationPlayer = $LightSprites/Upper
 onready var _lower_left_animation_player: AnimationPlayer = $LightSprites/LowerLeft/AnimationPlayer
 onready var _lower_right_animation_player: AnimationPlayer = $LightSprites/LowerRight/AnimationPlayer
 onready var _central_animation_player: AnimationPlayer = $LightSprites/Central/AnimationPlayer
+onready var _closing_door: StaticBody2D = $ClosingDoor
 
 func _ready() -> void:
     for sprite in _lights.get_children():
         assert(sprite is Sprite)
         sprite.modulate.a = 0
+
+    _closing_door.set_closed()
 
 func get_animation_player(light: int) -> AnimationPlayer:
     assert(light in [
@@ -88,3 +91,6 @@ func turn_on_light(light: int) -> void:
     var animation_player := get_animation_player(light)
     animation_player.play('turn_on')
     animation_player.queue('pulse')
+
+func get_closing_door() -> StaticBody2D:
+    return _closing_door

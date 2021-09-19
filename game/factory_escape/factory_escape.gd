@@ -127,13 +127,20 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
         yield(_central_lock, 'ready_to_turn_on_new_light')
     _central_lock.turn_on_light(sector_number)
 
-    # Wait for the light to turn on + two pulses.
-    yield(get_tree().create_timer(5.0), 'timeout')
+    # Wait for the light to turn on + one pulse.
+    yield(get_tree().create_timer(3.0), 'timeout')
 
     if _central_lock.all_lights_pulsing():
+        # Once all four sector lights are on, turn on the central light and open
+        # the door.
         yield(_central_lock, 'ready_to_turn_on_new_light')
         _central_lock.turn_on_light(CentralLock.LockLight.CENTRAL)
-        yield(get_tree().create_timer(5.0), 'timeout')
+        yield(get_tree().create_timer(3.0), 'timeout')
+        _central_lock.get_closing_door().open()
+        yield(get_tree().create_timer(2.0), 'timeout')
+    else:
+        # Wait for an additional pulse.
+        yield(get_tree().create_timer(2.0), 'timeout')
 
     # Fade back to black.
     _screen_fadeout.fade_to_black(2.0)
