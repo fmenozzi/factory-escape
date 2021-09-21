@@ -137,6 +137,10 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
         _central_lock.turn_on_light(CentralLock.LockLight.CENTRAL)
         yield(get_tree().create_timer(3.0), 'timeout')
         _central_lock.get_closing_door().open()
+        Screenshake.start(
+            Screenshake.Duration.LONG, Screenshake.Amplitude.VERY_SMALL,
+            Screenshake.Priority.HIGH)
+        Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
         yield(get_tree().create_timer(2.0), 'timeout')
     else:
         # Wait for an additional pulse.
