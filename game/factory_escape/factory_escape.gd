@@ -102,7 +102,10 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _player.set_physics_process(false)
 
     # Fade to black.
-    _screen_fadeout.fade_to_black(2.0)
+    var fade_duration := 2.0
+    var fade_delay := 0.0
+    var fade_music := false
+    _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_to_black_finished')
 
     # Switch to cutscene camera.
@@ -113,7 +116,7 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _health_pack_bar.modulate.a = 0
 
     # Fade back from black.
-    _screen_fadeout.fade_from_black(2.0)
+    _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_from_black_finished')
 
     # Turn on corresponding light. If other lights are already playing their
@@ -140,7 +143,7 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
         yield(get_tree().create_timer(2.0), 'timeout')
 
     # Fade back to black.
-    _screen_fadeout.fade_to_black(2.0)
+    _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_to_black_finished')
 
     # Switch back to player camera.
@@ -151,7 +154,7 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _health_pack_bar.modulate.a = 1
 
     # Fade back from black.
-    _screen_fadeout.fade_from_black(2.0)
+    _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_from_black_finished')
 
     # Resume player processing.
