@@ -5,7 +5,7 @@ export(float) var pan_time := 0.5
 
 onready var _trigger_area: Area2D = $TriggerArea
 
-var _is_active := false
+var _is_active := true
 
 func _ready() -> void:
     set_active(_is_active)

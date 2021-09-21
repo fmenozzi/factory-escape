@@ -7,7 +7,6 @@ onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo_13/Tuto
 onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/TutorialMessageTrigger
 onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/TutorialMessageTrigger
 onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
-onready var _central_hub_fall_sequence_camera_anchor: Position2D = $World/Rooms/CentralHub/FallSequenceCameraAnchor
 onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralLockCutsceneCamera
 onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralLock
 
@@ -55,9 +54,8 @@ func _on_player_entered_cargo_lift() -> void:
     _central_hub.set_enable_room_transitions(false)
     _player.get_camera().fit_camera_limits_to_room(_central_hub)
 
-    # Pin the camera to the central hub anchor.
-    _player.get_camera().detach_and_move_to_global(
-        _central_hub_fall_sequence_camera_anchor.global_position)
+    # Switch to cutscene camera.
+    _central_lock_cutscene_camera.make_current()
 
     # Start the fall sequence.
     _player.change_state({'new_state': Player.State.CENTRAL_HUB_FALL})
@@ -68,9 +66,8 @@ func _on_player_entered_cargo_lift() -> void:
     if _player.current_state_enum == Player.State.CENTRAL_HUB_FALL:
         yield(_player.current_state, 'sequence_finished')
 
-    # Reattach camera.
-    var tween_duration := 0.0
-    _player.get_camera().reattach(tween_duration)
+    # Switch back to player camera.
+    _player.get_camera().make_current()
 
     # Re-enable room transitions for central hub.
     _central_hub.set_enable_room_transitions(true)
