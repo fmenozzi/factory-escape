@@ -140,6 +140,11 @@ _global_script_classes=[ {
 "path": "res://environment/hazards/fire_column/fire_column.gd"
 }, {
 "base": "Node2D",
+"class": "FragilePlatform",
+"language": "GDScript",
+"path": "res://environment/platforms/fragile/fragile_platform.gd"
+}, {
+"base": "Node2D",
 "class": "GrappleManager",
 "language": "GDScript",
 "path": "res://actors/player/managers/grapple_manager.gd"
@@ -466,6 +471,7 @@ _global_script_class_icons={
 "ErrorOr": "",
 "ErrorPlusMessage": "",
 "FireColumn": "",
+"FragilePlatform": "",
 "GrappleManager": "",
 "GrapplePoint": "",
 "GroundedPhysicsManager": "",
