@@ -81,7 +81,9 @@ position = Vector2( 480, 88 )
 position = Vector2( 0, -32 )
 shape = SubResource( 3 )
 
-[node name="CentralLockCutsceneCamera" type="Camera2D" parent="." index="13"]
+[node name="CentralLockCutsceneCamera" type="Camera2D" parent="." index="13" groups=[
+"cameras",
+]]
 position = Vector2( 480, 90 )
 limit_top = 0
 

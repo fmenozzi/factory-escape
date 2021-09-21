@@ -43,7 +43,7 @@ func start(duration: int, amplitude: int, priority: int = Priority.LOW) -> void:
 
     _priority = priority
 
-    _camera = Util.get_player().get_camera()
+    _camera = Util.get_current_camera()
 
     _amplitude = _strength_multiplier * _get_amplitude(amplitude)
 

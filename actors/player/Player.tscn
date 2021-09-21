@@ -809,7 +809,9 @@ shape = SubResource( 30 )
 "mirror_y_axis",
 ]]
 
-[node name="Camera2D" type="Camera2D" parent="CameraAnchor"]
+[node name="Camera2D" type="Camera2D" parent="CameraAnchor" groups=[
+"cameras",
+]]
 current = true
 process_mode = 0
 smoothing_enabled = true

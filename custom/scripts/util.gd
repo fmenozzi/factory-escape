@@ -38,3 +38,9 @@ func get_player():
     var nodes_in_player_group := get_tree().get_nodes_in_group('player')
     assert(nodes_in_player_group.size() == 1)
     return nodes_in_player_group[0]
+
+func get_current_camera() -> Camera2D:
+    for camera in get_tree().get_nodes_in_group('cameras'):
+        if camera is Camera2D and camera.current:
+            return camera
+    return null
