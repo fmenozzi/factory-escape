@@ -435,6 +435,11 @@ _global_script_classes=[ {
 "path": "res://actors/player/managers/wall_jump_manager.gd"
 }, {
 "base": "KinematicBody2D",
+"class": "Warden",
+"language": "GDScript",
+"path": "res://actors/bosses/warden/warden.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "WorkerDrone",
 "language": "GDScript",
 "path": "res://actors/enemies/worker_drone/worker_drone.gd"
@@ -530,6 +535,7 @@ _global_script_class_icons={
 "VisibilityBasedAudioPlayer": "",
 "VisibilityBasedSoundManager": "",
 "WallJumpManager": "",
+"Warden": "",
 "WorkerDrone": "",
 "WorkerDroneSoundManager": ""
 }
