@@ -25,6 +25,12 @@ func enter(actor, previous_state_dict: Dictionary) -> void:
     _sequence_completed = false
 
 func exit(actor) -> void:
+    # In case we haven't yet assigned the active state (which can happen if the
+    # initial state of an object is a state sequence, which means that exit()
+    # would be called before enter()), return early.
+    if not _active_state:
+        return
+
     # If the state sequence was interrupted, make sure the current active state
     # gets a chance to call its exit function.
     if not _sequence_completed:

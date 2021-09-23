@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/warden-test.png-c85c2e494a2cae92278acb13fb49a398.stex"
+path="res://.import/warden.png-55c732dfd53008902be5559baedd5907.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/bosses/warden/textures/warden-test.png"
-dest_files=[ "res://.import/warden-test.png-c85c2e494a2cae92278acb13fb49a398.stex" ]
+source_file="res://actors/bosses/warden/textures/warden.png"
+dest_files=[ "res://.import/warden.png-55c732dfd53008902be5559baedd5907.stex" ]
 
 [params]
 

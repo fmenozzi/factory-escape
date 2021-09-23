@@ -7,4 +7,6 @@ func exit(warden: Warden) -> void:
     pass
 
 func update(warden: Warden, delta: float) -> Dictionary:
+    return {'new_state': Warden.State.IDLE}
+
     return {'new_state': Warden.State.NO_CHANGE}
