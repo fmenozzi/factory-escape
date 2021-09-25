@@ -13,6 +13,9 @@ const RangedSentryDrone := preload('res://actors/enemies/ranged_sentry_drone/Ran
 const StickyDrone := preload('res://actors/enemies/sticky_drone/StickyDrone.tscn')
 const Turret := preload('res://actors/enemies/turret/Turret.tscn')
 
+# Bosses.
+const Warden := preload('res://actors/bosses/warden/Warden.tscn')
+
 # Hit effect.
 const EnemyHitEffect := preload('res://actors/enemies/shared/enemy_hit_effect/EnemyHitEffect.tscn')
 

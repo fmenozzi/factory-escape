@@ -54,6 +54,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://environment/camera_focus_point/camera_focus_point.gd"
 }, {
+"base": "Room",
+"class": "CentralHub",
+"language": "GDScript",
+"path": "res://game/factory_escape/rooms/central_hub/central_hub.gd"
+}, {
+"base": "Node",
+"class": "CentralHubSaveManager",
+"language": "GDScript",
+"path": "res://game/factory_escape/rooms/central_hub/central_hub_save_manager.gd"
+}, {
 "base": "Node2D",
 "class": "CentralLock",
 "language": "GDScript",
@@ -464,6 +474,8 @@ _global_script_class_icons={
 "AudioStreamPlayerMusic": "",
 "Buddy": "",
 "CameraFocusPoint": "",
+"CentralHub": "",
+"CentralHubSaveManager": "",
 "CentralLock": "",
 "CentralLockSaveManager": "",
 "CentralLockSwitch": "",

@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name Warden
 
+signal intro_sequence_finished
+
 enum State {
     NO_CHANGE,
     NEXT_STATE_IN_SEQUENCE,
@@ -57,6 +59,9 @@ func get_animation_player() -> AnimationPlayer:
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
+
+func lamp_reset() -> void:
+    queue_free()
 
 func _change_state(new_state_dict: Dictionary) -> void:
     var old_state_enum := _current_state_enum

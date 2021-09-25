@@ -2,6 +2,9 @@ extends "res://game/game_interface.gd"
 
 onready var _cargo_lift: Room = $World/Rooms/CargoLift
 onready var _central_hub: Room = $World/Rooms/CentralHub
+onready var _central_hub_save_manager: CentralHubSaveManager = $World/Rooms/CentralHub/SaveManager
+onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/CentralHub/CameraFocusPoint
+onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/WardenSpawnPoint
 onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne_17/TutorialMessageTrigger
 onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo_13/TutorialMessageTrigger
 onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/TutorialMessageTrigger
@@ -9,6 +12,7 @@ onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/Tutor
 onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
 onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralLockCutsceneCamera
 onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralLock
+onready var _central_lock_save_manager: CentralLockSaveManager = $World/Rooms/CentralHub/CentralLock/SaveManager
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -35,6 +39,8 @@ func _ready() -> void:
 
     for central_lock_switch in get_tree().get_nodes_in_group('central_lock_switches'):
         central_lock_switch.connect('unlocked', self, '_on_central_lock_switch_pressed')
+
+    _central_hub.connect('boss_fight_triggered', self, '_on_boss_fight_triggered')
 
 func _on_player_entered_cargo_lift() -> void:
     # Move player to suspension point.
@@ -127,6 +133,15 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
         yield(_central_lock, 'ready_to_turn_on_new_light')
     _central_lock.turn_on_light(sector_number)
 
+    # Check here whether we've unlocked all four sectors in order to progress to
+    # the warden fight.
+    if _central_lock_save_manager.sector_one_unlocked and \
+       _central_lock_save_manager.sector_two_unlocked and \
+       _central_lock_save_manager.sector_three_unlocked and \
+       _central_lock_save_manager.sector_four_unlocked:
+        _central_hub_save_manager.warden_fight_state = CentralHubSaveManager.WardenFightState.FIGHT
+        _central_hub.set_enable_boss_fight_triggers(true)
+
     # Wait for the light to turn on + one pulse.
     yield(get_tree().create_timer(3.0), 'timeout')
 
@@ -160,6 +175,51 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     # Fade back from black.
     _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_from_black_finished')
+
+    # Resume player processing.
+    _player.set_process_unhandled_input(true)
+    _player.set_physics_process(true)
+
+func _on_boss_fight_triggered() -> void:
+    # Pause player processing and switch to IDLE state.
+    _player.set_process_unhandled_input(false)
+    _player.set_physics_process(false)
+    _player.change_state({'new_state': Player.State.IDLE})
+
+    # Enable boss fight walls so player can't leave.
+    _central_hub.set_enable_boss_fight_walls(true)
+
+    # Disable camera focus point to keep the camera fixed.
+    _central_hub_camera_focus_point.set_active(false)
+
+    # Wait a bit and then close the doors.
+    yield(get_tree().create_timer(0.75), 'timeout')
+    _central_lock.get_closing_door().close()
+    Screenshake.start(
+        Screenshake.Duration.LONG, Screenshake.Amplitude.VERY_SMALL,
+        Screenshake.Priority.HIGH)
+    Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
+    yield(Screenshake, 'stopped_shaking')
+
+    # Wait a bit, then two big shakes.
+    yield(get_tree().create_timer(1.0), 'timeout')
+    Screenshake.start(
+        Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
+        Screenshake.Priority.HIGH)
+    Rumble.start(Rumble.Type.WEAK, 0.75, Rumble.Priority.HIGH)
+    yield(get_tree().create_timer(1.5), 'timeout')
+    Screenshake.start(
+        Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
+        Screenshake.Priority.HIGH)
+    Rumble.start(Rumble.Type.WEAK, 0.75, Rumble.Priority.HIGH)
+    yield(get_tree().create_timer(1.5), 'timeout')
+
+    # Spawn warden and wait for intro sequence to finish.
+    var warden: Warden = Preloads.Warden.instance()
+    _central_hub.add_child(warden)
+    warden.global_position = _warden_spawn_point.global_position
+    warden.set_direction(Util.direction(warden, _player))
+    yield(warden, 'intro_sequence_finished')
 
     # Resume player processing.
     _player.set_process_unhandled_input(true)
