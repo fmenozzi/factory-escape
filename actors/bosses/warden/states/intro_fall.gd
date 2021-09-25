@@ -5,6 +5,8 @@ var _velocity := Vector2.ZERO
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     _velocity = Vector2.ZERO
 
+    warden.get_animation_player().play('intro_fall')
+
 func exit(warden: Warden) -> void:
     pass
 
