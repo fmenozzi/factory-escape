@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://actors/bosses/warden/states/charge_knockback.gd" type="Script" id=18]
 [ext_resource path="res://actors/bosses/warden/states/charge_recover_slide.gd" type="Script" id=19]
 [ext_resource path="res://actors/bosses/warden/curves/slide.tres" type="Curve" id=20]
+[ext_resource path="res://actors/bosses/warden/states/backstep_land.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 15.5 )
@@ -57,7 +58,7 @@ tracks/0/keys = {
 "values": [ 5, 5, 6, 7, 8, 9, 10, 11, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=4]
 resource_name = "charge_recover_slide"
 length = 1.5
 step = 0.05
@@ -74,7 +75,7 @@ tracks/0/keys = {
 "values": [ 38, 39, 40, 41, 42, 43, 43, 42, 41, 40, 39, 38 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.64
 loop = true
 step = 0.01
@@ -91,7 +92,7 @@ tracks/0/keys = {
 "values": [ 29, 30, 31, 32, 33, 34, 35, 36 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -106,7 +107,7 @@ tracks/0/keys = {
 "values": [ 24 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -120,7 +121,7 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -136,7 +137,7 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -150,7 +151,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 4.0
 step = 0.05
 tracks/0/type = "value"
@@ -166,7 +167,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 2, 2, 1, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -182,10 +183,27 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 49, 48 ]
 }
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="Animation" id=12]
+resource_name = "land"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.25, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 50, 49, 48 ]
+}
+
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 6, 15.5 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 7, 15.5 )
 
 [node name="Warden" type="KinematicBody2D" groups=[
@@ -239,6 +257,9 @@ script = ExtResource( 13 )
 [node name="BackstepDown" type="Node" parent="States/Backstep"]
 script = ExtResource( 14 )
 
+[node name="BackstepLand" type="Node" parent="States/Backstep"]
+script = ExtResource( 21 )
+
 [node name="Charge" type="Node" parent="States"]
 script = ExtResource( 9 )
 
@@ -271,6 +292,7 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 4 )
 hframes = 24
 vframes = 16
+frame = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -15.5 )
@@ -279,14 +301,15 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/charge_knockback = SubResource( 2 )
 anims/charge_knockback_recover = SubResource( 3 )
-anims/charge_recover_slide = SubResource( 13 )
-anims/charge_run = SubResource( 4 )
-anims/charge_telegraph = SubResource( 5 )
-anims/fall = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/intro_fall = SubResource( 8 )
-anims/intro_uncrouch = SubResource( 9 )
-anims/jump = SubResource( 10 )
+anims/charge_recover_slide = SubResource( 4 )
+anims/charge_run = SubResource( 5 )
+anims/charge_telegraph = SubResource( 6 )
+anims/fall = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/intro_fall = SubResource( 9 )
+anims/intro_uncrouch = SubResource( 10 )
+anims/jump = SubResource( 11 )
+anims/land = SubResource( 12 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
@@ -294,7 +317,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -15.5 )
-shape = SubResource( 11 )
+shape = SubResource( 13 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -302,4 +325,4 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -15.5 )
-shape = SubResource( 12 )
+shape = SubResource( 14 )
