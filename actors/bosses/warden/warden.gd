@@ -8,6 +8,7 @@ enum State {
     NEXT_STATE_IN_SEQUENCE,
     INTRO_SEQUENCE,
     IDLE,
+    BACKSTEP,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -16,6 +17,7 @@ export(State) var initial_state := State.INTRO_SEQUENCE
 onready var STATES := {
     State.INTRO_SEQUENCE: $States/IntroSequence,
     State.IDLE:           $States/Idle,
+    State.BACKSTEP:       $States/Backstep,
 }
 
 var direction: int

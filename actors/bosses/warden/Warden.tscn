@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -11,9 +11,27 @@
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=9]
 [ext_resource path="res://actors/bosses/warden/warden_physics_manager.gd" type="Script" id=10]
 [ext_resource path="res://actors/bosses/warden/states/idle.gd" type="Script" id=11]
+[ext_resource path="res://actors/bosses/warden/states/backstep_takeoff.gd" type="Script" id=12]
+[ext_resource path="res://actors/bosses/warden/states/backstep_up.gd" type="Script" id=13]
+[ext_resource path="res://actors/bosses/warden/states/backstep_down.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 15.5 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 48 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -64,6 +82,23 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 2, 2, 1, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "jump"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 49, 48 ]
+}
+
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 15.5 )
 
@@ -85,6 +120,9 @@ total_duration = 0.3
 
 [node name="PhysicsManager" parent="." instance=ExtResource( 3 )]
 script = ExtResource( 10 )
+horizontal_backstep_speed_tiles_per_second = 14.0
+max_backstep_height_tiles = 2.5
+backstep_duration = 0.25
 
 [node name="States" type="Node" parent="."]
 
@@ -105,6 +143,18 @@ script = ExtResource( 8 )
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 11 )
 
+[node name="Backstep" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="BackstepTakeoff" type="Node" parent="States/Backstep"]
+script = ExtResource( 12 )
+
+[node name="BackstepUp" type="Node" parent="States/Backstep"]
+script = ExtResource( 13 )
+
+[node name="BackstepDown" type="Node" parent="States/Backstep"]
+script = ExtResource( 14 )
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 4 )
@@ -116,9 +166,11 @@ position = Vector2( 0, -15.5 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fall = SubResource( 8 )
 anims/idle = SubResource( 2 )
 anims/intro_fall = SubResource( 3 )
 anims/intro_uncrouch = SubResource( 4 )
+anims/jump = SubResource( 7 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64
