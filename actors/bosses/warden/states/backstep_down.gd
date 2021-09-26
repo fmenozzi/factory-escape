@@ -12,7 +12,7 @@ func exit(warden: Warden) -> void:
 
 func update(warden: Warden, delta: float) -> Dictionary:
     if warden.is_on_floor():
-        return {'new_state': Warden.State.IDLE}
+        return {'new_state': Warden.State.CHARGE}
 
     # Make sure we're falling backwards.
     var physics_manager := warden.get_physics_manager()

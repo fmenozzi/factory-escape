@@ -9,15 +9,21 @@ enum State {
     INTRO_SEQUENCE,
     IDLE,
     BACKSTEP,
+    CHARGE,
+    CHARGE_RECOVER_SLIDE,
+    CHARGE_IMPACT,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.INTRO_SEQUENCE
 
 onready var STATES := {
-    State.INTRO_SEQUENCE: $States/IntroSequence,
-    State.IDLE:           $States/Idle,
-    State.BACKSTEP:       $States/Backstep,
+    State.INTRO_SEQUENCE:       $States/IntroSequence,
+    State.IDLE:                 $States/Idle,
+    State.BACKSTEP:             $States/Backstep,
+    State.CHARGE:               $States/Charge,
+    State.CHARGE_RECOVER_SLIDE: $States/ChargeRecoverSlide,
+    State.CHARGE_IMPACT:        $States/ChargeImpact,
 }
 
 var direction: int
