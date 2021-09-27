@@ -237,7 +237,7 @@ script = ExtResource( 7 )
 [node name="IntroLand" type="Node" parent="States/IntroSequence"]
 script = ExtResource( 6 )
 
-[node name="Timer" type="Timer" parent="States/IntroSequence/IntroLand"]
+[node name="LandDuration" type="Timer" parent="States/IntroSequence/IntroLand"]
 
 [node name="IntroUncrouch" type="Node" parent="States/IntroSequence"]
 script = ExtResource( 8 )

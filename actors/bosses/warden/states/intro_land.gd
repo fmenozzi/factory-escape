@@ -2,7 +2,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 const LAND_DURATION := 2.0
 
-onready var _timer: Timer = $Timer
+onready var _timer: Timer = $LandDuration
 
 func _ready() -> void:
     _timer.one_shot = true
