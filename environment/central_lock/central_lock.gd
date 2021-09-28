@@ -78,8 +78,12 @@ func turn_on_light(light: int) -> void:
     ])
 
     var animation_player := get_animation_player(light)
-    animation_player.play('turn_on')
-    animation_player.queue('pulse')
+    if light == LockLight.CENTRAL:
+        animation_player.play('turn_on_central')
+        animation_player.queue('pulse_central')
+    else:
+        animation_player.play('turn_on')
+        animation_player.queue('pulse')
 
     match light:
         LockLight.SECTOR_ONE:
