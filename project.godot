@@ -250,6 +250,16 @@ _global_script_classes=[ {
 "path": "res://environment/hazards/lightning_wall/lightning_bolt.gd"
 }, {
 "base": "Node2D",
+"class": "LightningFloor",
+"language": "GDScript",
+"path": "res://environment/hazards/lightning_floor/lightning_floor.gd"
+}, {
+"base": "Node2D",
+"class": "LightningFloorIndicatorLights",
+"language": "GDScript",
+"path": "res://environment/hazards/lightning_floor/lightning_floor_indicator_lights.gd"
+}, {
+"base": "Node2D",
 "class": "LightningWall",
 "language": "GDScript",
 "path": "res://environment/hazards/lightning_wall/lightning_wall.gd"
@@ -513,6 +523,8 @@ _global_script_class_icons={
 "LeapingFailurePhysicsManager": "",
 "LeapingFailureSoundManager": "",
 "LightningBolt": "",
+"LightningFloor": "",
+"LightningFloorIndicatorLights": "",
 "LightningWall": "",
 "LightningWallWithSwitchSaveManager": "",
 "Menu": "",

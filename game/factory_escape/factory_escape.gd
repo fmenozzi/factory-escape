@@ -5,6 +5,7 @@ onready var _central_hub: Room = $World/Rooms/CentralHub
 onready var _central_hub_save_manager: CentralHubSaveManager = $World/Rooms/CentralHub/SaveManager
 onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/CentralHub/CameraFocusPoint
 onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/WardenSpawnPoint
+onready var _lightning_floor: LightningFloor = $World/Rooms/CentralHub/LightningFloor
 onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne_17/TutorialMessageTrigger
 onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo_13/TutorialMessageTrigger
 onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/TutorialMessageTrigger
@@ -41,6 +42,10 @@ func _ready() -> void:
         central_lock_switch.connect('unlocked', self, '_on_central_lock_switch_pressed')
 
     _central_hub.connect('boss_fight_triggered', self, '_on_boss_fight_triggered')
+
+func _connect_warden_lightning_floor_signals(warden: Warden) -> void:
+    warden.connect('lightning_floor_activated', _lightning_floor, 'start')
+    # TODO: connect warden's death signal to lightning floor's stop() function.
 
 func _on_player_entered_cargo_lift() -> void:
     # Move player to suspension point.
@@ -219,6 +224,7 @@ func _on_boss_fight_triggered() -> void:
     _central_hub.add_child(warden)
     warden.global_position = _warden_spawn_point.global_position
     warden.set_direction(Util.direction(warden, _player))
+    _connect_warden_lightning_floor_signals(warden)
     yield(warden, 'intro_sequence_finished')
 
     # Resume player processing.

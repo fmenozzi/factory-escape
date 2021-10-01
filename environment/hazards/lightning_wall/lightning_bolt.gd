@@ -28,6 +28,9 @@ func _ready() -> void:
 func dissipate() -> void:
     _dissipate_called = true
 
+func reactivate() -> void:
+    _dissipate_called = false
+
 func pause() -> void:
     _timer.stop()
 

@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Warden
 
 signal intro_sequence_finished
+signal lightning_floor_activated
 
 enum State {
     NO_CHANGE,
@@ -13,6 +14,7 @@ enum State {
     CHARGE,
     CHARGE_RECOVER_SLIDE,
     CHARGE_IMPACT,
+    LIGHTNING_FLOOR,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -26,6 +28,7 @@ onready var STATES := {
     State.CHARGE:               $States/Charge,
     State.CHARGE_RECOVER_SLIDE: $States/ChargeRecoverSlide,
     State.CHARGE_IMPACT:        $States/ChargeImpact,
+    State.LIGHTNING_FLOOR:      $States/LightningFloor,
 }
 
 var direction: int
