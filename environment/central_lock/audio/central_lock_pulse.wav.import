@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/central_lock_pulse.wav-a370a82c880e3d93c6ca175e5d6fd3ba.sample"
+
+[deps]
+
+source_file="res://environment/central_lock/audio/central_lock_pulse.wav"
+dest_files=[ "res://.import/central_lock_pulse.wav-a370a82c880e3d93c6ca175e5d6fd3ba.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

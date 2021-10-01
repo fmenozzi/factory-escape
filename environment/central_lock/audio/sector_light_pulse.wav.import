@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sector_light_pulse.wav-ba0c57cccae9e505876c1e6f035d5b02.sample"
+
+[deps]
+
+source_file="res://environment/central_lock/audio/sector_light_pulse.wav"
+dest_files=[ "res://.import/sector_light_pulse.wav-ba0c57cccae9e505876c1e6f035d5b02.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

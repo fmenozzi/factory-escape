@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sector_light_activated.wav-ac981280c60853c4019a430aad085035.sample"
+
+[deps]
+
+source_file="res://environment/central_lock/audio/sector_light_activated.wav"
+dest_files=[ "res://.import/sector_light_activated.wav-ac981280c60853c4019a430aad085035.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -22,6 +22,7 @@ onready var _sector_two_switch: CentralLockSwitch = $Switches/SectorTwoSwitch
 onready var _sector_three_switch: CentralLockSwitch = $Switches/SectorThreeSwitch
 onready var _sector_four_switch: CentralLockSwitch = $Switches/SectorFourSwitch
 onready var _closing_door: StaticBody2D = $ClosingDoor
+onready var _audio_group: VisibilityBasedAudioGroup = $VisibilityBasedAudioGroup
 onready var _save_manager: CentralLockSaveManager = $SaveManager
 
 func _ready() -> void:
@@ -110,3 +111,15 @@ func deactivate_switch(sector_number: int) -> void:
 
 func get_closing_door() -> StaticBody2D:
     return _closing_door
+
+func _play_sector_activated_sound() -> void:
+    _audio_group.get_player_by_name('SectorLightActivated').play()
+
+func _play_sector_pulse_sound() -> void:
+    _audio_group.get_player_by_name('SectorLightPulse').play()
+
+func _play_central_lock_activated_sound() -> void:
+    _audio_group.get_player_by_name('CentralLockActivated').play()
+
+func _play_central_lock_pulse_sound() -> void:
+    _audio_group.get_player_by_name('CentralLockPulse').play()
