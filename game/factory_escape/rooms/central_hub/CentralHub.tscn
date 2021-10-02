@@ -103,63 +103,66 @@ shape = SubResource( 3 )
 position = Vector2( 480, 90 )
 limit_top = 0
 
-[node name="FragilePlatform" parent="." index="14" instance=ExtResource( 4 )]
+[node name="BossFight" type="Node2D" parent="." index="14"]
+
+[node name="FragilePlatform" parent="BossFight" index="0" instance=ExtResource( 4 )]
 position = Vector2( 480, 48 )
 
-[node name="BossFightWalls" type="Node2D" parent="." index="15"]
+[node name="Walls" type="Node2D" parent="BossFight" index="1"]
 
-[node name="Left" type="StaticBody2D" parent="BossFightWalls" index="0"]
+[node name="Left" type="StaticBody2D" parent="BossFight/Walls" index="0"]
 collision_layer = 4
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFightWalls/Left" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Walls/Left" index="0"]
 position = Vector2( 312, 88 )
 rotation = 1.5708
 shape = SubResource( 4 )
 disabled = true
 one_way_collision = true
 
-[node name="Right" type="StaticBody2D" parent="BossFightWalls" index="1"]
+[node name="Right" type="StaticBody2D" parent="BossFight/Walls" index="1"]
 collision_layer = 4
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFightWalls/Right" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Walls/Right" index="0"]
 position = Vector2( 648, 88 )
 rotation = -1.5708
 shape = SubResource( 5 )
 disabled = true
 one_way_collision = true
 
-[node name="BossFightTriggers" type="Node2D" parent="." index="16"]
+[node name="Triggers" type="Node2D" parent="BossFight" index="2"]
 
-[node name="Left" type="Area2D" parent="BossFightTriggers" index="0"]
+[node name="Left" type="Area2D" parent="BossFight/Triggers" index="0"]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFightTriggers/Left" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Triggers/Left" index="0"]
 position = Vector2( 352, 88 )
 shape = SubResource( 6 )
 disabled = true
 
-[node name="Right" type="Area2D" parent="BossFightTriggers" index="1"]
+[node name="Right" type="Area2D" parent="BossFight/Triggers" index="1"]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFightTriggers/Right" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Triggers/Right" index="0"]
 position = Vector2( 608, 88 )
 shape = SubResource( 7 )
 disabled = true
 
-[node name="WardenSpawnPoint" type="Position2D" parent="." index="17"]
+[node name="WardenSpawnPoint" type="Position2D" parent="BossFight" index="3"]
 position = Vector2( 480, -104 )
 
-[node name="LightningFloor" parent="." index="18" instance=ExtResource( 7 )]
+[node name="LightningFloor" parent="BossFight" index="4" instance=ExtResource( 7 )]
 position = Vector2( 480, 160 )
 
-[node name="SaveManager" type="Node" parent="." index="19" groups=[
+[node name="SaveManager" type="Node" parent="." index="15" groups=[
 "save",
 ]]
 script = ExtResource( 5 )
 
 [editable path="TileMaps"]
 [editable path="CentralLock"]
+[editable path="CentralLock/VisibilityBasedAudioGroup"]
 [editable path="CameraFocusPoint"]
-[editable path="LightningFloor"]
+[editable path="BossFight/LightningFloor"]
