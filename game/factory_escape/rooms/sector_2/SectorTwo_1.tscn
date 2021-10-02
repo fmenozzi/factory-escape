@@ -76,6 +76,7 @@ shape = SubResource( 3 )
 [editable path="Hazards/LightningWallWithSwitch/LightningWall"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall/BaseEmitter"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall/MovableEmitter"]
+[editable path="Hazards/LightningWallWithSwitch/LightningWall/VisibilityBasedAudioGroup"]
 [editable path="Hazards/LightningWallWithSwitch/Switch"]
 [editable path="Hazards/LightningWallWithSwitch/Switch/WalkToPoints"]
 [editable path="HazardCheckpoints/Left"]

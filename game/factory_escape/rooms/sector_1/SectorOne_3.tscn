@@ -42,6 +42,9 @@ position = Vector2( 64, 476 )
 [node name="MovableEmitter" parent="Hazards/LightningWallWithSwitch/LightningWall" index="1"]
 position = Vector2( 0, -96 )
 
+[node name="VisibilityBasedAudioGroup" parent="Hazards/LightningWallWithSwitch/LightningWall" index="2"]
+position = Vector2( 0, -60 )
+
 [node name="Switch" parent="Hazards/LightningWallWithSwitch" index="1"]
 position = Vector2( 0, -416 )
 
@@ -64,4 +67,7 @@ shape = SubResource( 2 )
 [editable path="Hazards/LightningWallWithSwitch/LightningWall"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall/BaseEmitter"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall/MovableEmitter"]
+[editable path="Hazards/LightningWallWithSwitch/LightningWall/VisibilityBasedAudioGroup"]
+[editable path="Hazards/LightningWallWithSwitch/Switch"]
+[editable path="Hazards/LightningWallWithSwitch/Switch/WalkToPoints"]
 [editable path="HazardCheckpoints/Bottom"]

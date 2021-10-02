@@ -9,6 +9,7 @@ onready var _base_emitter_sparks: Particles2D = $BaseEmitter/Sparks
 onready var _movable_emitter: Node2D = $MovableEmitter
 onready var _movable_emitter_bolts: Node2D = $MovableEmitter/Bolts
 onready var _movable_emitter_sparks: Particles2D = $MovableEmitter/Sparks
+onready var _audio_group: VisibilityBasedAudioGroup = $VisibilityBasedAudioGroup
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _tween: Tween = $DissipateTween
 
@@ -34,6 +35,8 @@ func _ready() -> void:
     for bolt in _movable_emitter_bolts.get_children():
         bolt.length = bolt_length- (2 * _movable_emitter_bolts.position.length())
 
+    _audio_group.get_player_by_name('Active').play()
+
 func dissipate() -> void:
     _is_active = false
 
@@ -50,6 +53,9 @@ func dissipate() -> void:
     _tween.interpolate_property(_movable_emitter_bolts, 'modulate:a', 1.0, 0.0, duration)
     _tween.start()
 
+    _audio_group.get_player_by_name('PowerDown').play()
+    _audio_group.get_player_by_name('Active').stop()
+
     # Disable hitbox.
     _hitbox_collision_shape.set_deferred('disabled', true)
 
@@ -63,6 +69,8 @@ func pause() -> void:
     _base_emitter_sparks.emitting = false
     _movable_emitter_sparks.emitting = false
 
+    _audio_group.get_player_by_name('Active').stop()
+
     for bolt in _base_emitter_bolts.get_children():
         bolt.pause()
     for bolt in _movable_emitter_bolts.get_children():
@@ -72,6 +80,7 @@ func resume() -> void:
     if _is_active:
         _base_emitter_sparks.emitting = true
         _movable_emitter_sparks.emitting = true
+        _audio_group.get_player_by_name('Active').play()
 
     for bolt in _base_emitter_bolts.get_children():
         bolt.resume()

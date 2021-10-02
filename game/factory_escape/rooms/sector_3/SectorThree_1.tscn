@@ -10,10 +10,10 @@ extents = Vector2( 160, 270 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 24 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 24 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 24 )
 
 [node name="SectorThree_1" instance=ExtResource( 1 )]
@@ -63,7 +63,7 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/TopLeft" index="0"]
 position = Vector2( 0, -24 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="TopPlatform" parent="HazardCheckpoints" index="2" instance=ExtResource( 3 )]
 position = Vector2( 160, 108 )
@@ -71,13 +71,14 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/TopPlatform" index="0"]
 position = Vector2( -72, -72 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [editable path="TileMaps"]
 [editable path="Hazards/LightningWallWithSwitch"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall/BaseEmitter"]
 [editable path="Hazards/LightningWallWithSwitch/LightningWall/MovableEmitter"]
+[editable path="Hazards/LightningWallWithSwitch/LightningWall/VisibilityBasedAudioGroup"]
 [editable path="Hazards/LightningWallWithSwitch/Switch"]
 [editable path="Hazards/LightningWallWithSwitch/Switch/WalkToPoints"]
 [editable path="HazardCheckpoints/TopRight"]

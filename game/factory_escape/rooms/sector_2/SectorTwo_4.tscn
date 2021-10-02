@@ -80,6 +80,9 @@ num_segments = 20
 [node name="Bolt4" parent="Hazards/LightningWallLeft/MovableEmitter/Bolts" index="3"]
 num_segments = 12
 
+[node name="VisibilityBasedAudioGroup" parent="Hazards/LightningWallLeft" index="2"]
+position = Vector2( 144, 0 )
+
 [node name="LightningWallRight" parent="Hazards" index="1" instance=ExtResource( 2 )]
 position = Vector2( 336, 112 )
 
@@ -91,6 +94,9 @@ position = Vector2( 288, 0 )
 
 [node name="Bolt1" parent="Hazards/LightningWallRight/MovableEmitter/Bolts" index="0"]
 num_segments = 16
+
+[node name="VisibilityBasedAudioGroup" parent="Hazards/LightningWallRight" index="2"]
+position = Vector2( 144, 0 )
 
 [node name="Left" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 32, 72 )
@@ -118,9 +124,11 @@ shape = SubResource( 4 )
 [editable path="Hazards/LightningWallLeft"]
 [editable path="Hazards/LightningWallLeft/BaseEmitter"]
 [editable path="Hazards/LightningWallLeft/MovableEmitter"]
+[editable path="Hazards/LightningWallLeft/VisibilityBasedAudioGroup"]
 [editable path="Hazards/LightningWallRight"]
 [editable path="Hazards/LightningWallRight/BaseEmitter"]
 [editable path="Hazards/LightningWallRight/MovableEmitter"]
+[editable path="Hazards/LightningWallRight/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/Left"]
 [editable path="HazardCheckpoints/Middle"]
 [editable path="HazardCheckpoints/Right"]

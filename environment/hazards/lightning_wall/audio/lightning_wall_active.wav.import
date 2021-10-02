@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/lightning_wall_active.wav-a3c9e969469453d2af91d3fa3fc259f9.sample"
+
+[deps]
+
+source_file="res://environment/hazards/lightning_wall/audio/lightning_wall_active.wav"
+dest_files=[ "res://.import/lightning_wall_active.wav-a3c9e969469453d2af91d3fa3fc259f9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
