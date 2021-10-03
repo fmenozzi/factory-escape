@@ -11,6 +11,7 @@ enum State {
     IDLE,
     BACKSTEP,
     LEAP,
+    LEAP_TO_CENTER,
     CHARGE,
     CHARGE_RECOVER_SLIDE,
     CHARGE_IMPACT,
@@ -25,6 +26,7 @@ onready var STATES := {
     State.IDLE:                 $States/Idle,
     State.BACKSTEP:             $States/Backstep,
     State.LEAP:                 $States/Leap,
+    State.LEAP_TO_CENTER:       $States/LeapToCenter,
     State.CHARGE:               $States/Charge,
     State.CHARGE_RECOVER_SLIDE: $States/ChargeRecoverSlide,
     State.CHARGE_IMPACT:        $States/ChargeImpact,
@@ -69,6 +71,9 @@ func get_physics_manager() -> WardenPhysicsManager:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_room_center_global_position() -> Vector2:
+    return Vector2(3360, 4104)
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)

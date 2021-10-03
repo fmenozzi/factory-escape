@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://actors/bosses/warden/states/lightning_floor_crouch.gd" type="Script" id=26]
 [ext_resource path="res://actors/bosses/warden/states/lightning_floor_activate.gd" type="Script" id=27]
 [ext_resource path="res://actors/bosses/warden/states/lightning_floor_uncrouch.gd" type="Script" id=28]
+[ext_resource path="res://actors/bosses/warden/states/leap_to_center.gd" type="Script" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 15.5 )
@@ -314,6 +315,18 @@ script = ExtResource( 24 )
 script = ExtResource( 25 )
 
 [node name="LeapLand" type="Node" parent="States/Leap"]
+script = ExtResource( 22 )
+
+[node name="LeapToCenter" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="LeapTakeoff" type="Node" parent="States/LeapToCenter"]
+script = ExtResource( 23 )
+
+[node name="Leap" type="Node" parent="States/LeapToCenter"]
+script = ExtResource( 29 )
+
+[node name="LeapLand" type="Node" parent="States/LeapToCenter"]
 script = ExtResource( 22 )
 
 [node name="Charge" type="Node" parent="States"]
