@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -29,6 +29,9 @@
 [ext_resource path="res://actors/bosses/warden/states/lightning_floor_activate.gd" type="Script" id=27]
 [ext_resource path="res://actors/bosses/warden/states/lightning_floor_uncrouch.gd" type="Script" id=28]
 [ext_resource path="res://actors/bosses/warden/states/leap_to_center.gd" type="Script" id=29]
+[ext_resource path="res://actors/bosses/warden/states/spawn_projectiles_crouch.gd" type="Script" id=30]
+[ext_resource path="res://actors/bosses/warden/states/spawn_projectiles_uncrouch.gd" type="Script" id=31]
+[ext_resource path="res://actors/bosses/warden/states/spawn_projectiles_activate.gd" type="Script" id=32]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 15.5 )
@@ -369,6 +372,20 @@ script = ExtResource( 27 )
 
 [node name="LightningFloorUncrouch" type="Node" parent="States/LightningFloor"]
 script = ExtResource( 28 )
+
+[node name="SpawnProjectiles" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Crouch" type="Node" parent="States/SpawnProjectiles"]
+script = ExtResource( 30 )
+
+[node name="Activate" type="Node" parent="States/SpawnProjectiles"]
+script = ExtResource( 32 )
+
+[node name="ActivateDuration" type="Timer" parent="States/SpawnProjectiles/Activate"]
+
+[node name="Uncrouch" type="Node" parent="States/SpawnProjectiles"]
+script = ExtResource( 31 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )

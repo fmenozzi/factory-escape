@@ -3,6 +3,7 @@ class_name Warden
 
 signal intro_sequence_finished
 signal lightning_floor_activated
+signal projectiles_spawn_activated
 
 enum State {
     NO_CHANGE,
@@ -16,6 +17,7 @@ enum State {
     CHARGE_RECOVER_SLIDE,
     CHARGE_IMPACT,
     LIGHTNING_FLOOR,
+    SPAWN_PROJECTILES,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -31,6 +33,7 @@ onready var STATES := {
     State.CHARGE_RECOVER_SLIDE: $States/ChargeRecoverSlide,
     State.CHARGE_IMPACT:        $States/ChargeImpact,
     State.LIGHTNING_FLOOR:      $States/LightningFloor,
+    State.SPAWN_PROJECTILES:    $States/SpawnProjectiles,
 }
 
 var direction: int

@@ -6,6 +6,7 @@ onready var _central_hub_save_manager: CentralHubSaveManager = $World/Rooms/Cent
 onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/CentralHub/CameraFocusPoint
 onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/BossFight/WardenSpawnPoint
 onready var _lightning_floor: LightningFloor = $World/Rooms/CentralHub/BossFight/LightningFloor
+onready var _projectile_spawners: Array = $World/Rooms/CentralHub/BossFight/ProjectileSpawners.get_children()
 onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne_17/TutorialMessageTrigger
 onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo_13/TutorialMessageTrigger
 onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/TutorialMessageTrigger
@@ -43,9 +44,17 @@ func _ready() -> void:
 
     _central_hub.connect('boss_fight_triggered', self, '_on_boss_fight_triggered')
 
-func _connect_warden_lightning_floor_signals(warden: Warden) -> void:
+func _connect_warden_signals(warden: Warden) -> void:
     warden.connect('lightning_floor_activated', _lightning_floor, 'start')
     # TODO: connect warden's death signal to lightning floor's stop() function.
+
+    warden.connect('projectiles_spawn_activated', self, '_on_projectile_spawn_activated')
+    # TODO: connect warden's death signal to spawner's queue_free() function.
+
+func _on_projectile_spawn_activated() -> void:
+    for spawner in _projectile_spawners:
+        spawner.shoot_homing_projectile(
+            spawner.global_position.direction_to(_player.get_center()))
 
 func _on_player_entered_cargo_lift() -> void:
     # Move player to suspension point.
@@ -224,7 +233,7 @@ func _on_boss_fight_triggered() -> void:
     _central_hub.add_child(warden)
     warden.global_position = _warden_spawn_point.global_position
     warden.set_direction(Util.direction(warden, _player))
-    _connect_warden_lightning_floor_signals(warden)
+    _connect_warden_signals(warden)
     yield(warden, 'intro_sequence_finished')
 
     # Resume player processing.
