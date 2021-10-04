@@ -9,6 +9,6 @@ func exit(warden: Warden) -> void:
 func update(warden: Warden, delta: float) -> Dictionary:
     if not warden.get_animation_player().is_playing():
         warden.emit_signal('intro_sequence_finished')
-        return {'new_state': Warden.State.SPAWN_PROJECTILES}
+        return {'new_state': Warden.State.DISPATCH}
 
     return {'new_state': Warden.State.NO_CHANGE}

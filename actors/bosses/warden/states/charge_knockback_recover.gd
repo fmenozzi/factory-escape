@@ -20,7 +20,7 @@ func exit(warden: Warden) -> void:
 
 func update(warden: Warden, delta: float) -> Dictionary:
     if not warden.get_animation_player().is_playing():
-        return {'new_state': Warden.State.IDLE}
+        return {'new_state': Warden.State.DISPATCH}
 
     var w := (_timer.wait_time - _timer.time_left) / _timer.wait_time
     var speed_multiplier := slide_easing.interpolate(w)

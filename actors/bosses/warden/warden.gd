@@ -9,6 +9,7 @@ enum State {
     NO_CHANGE,
     NEXT_STATE_IN_SEQUENCE,
     INTRO_SEQUENCE,
+    DISPATCH,
     IDLE,
     BACKSTEP,
     LEAP,
@@ -25,6 +26,7 @@ export(State) var initial_state := State.INTRO_SEQUENCE
 
 onready var STATES := {
     State.INTRO_SEQUENCE:       $States/IntroSequence,
+    State.DISPATCH:             $States/Dispatch,
     State.IDLE:                 $States/Idle,
     State.BACKSTEP:             $States/Backstep,
     State.LEAP:                 $States/Leap,
