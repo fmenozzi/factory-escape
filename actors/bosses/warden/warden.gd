@@ -17,25 +17,25 @@ enum State {
     CHARGE,
     CHARGE_RECOVER_SLIDE,
     CHARGE_IMPACT,
-    LIGHTNING_FLOOR,
     SPAWN_PROJECTILES,
+    COMBO_LIGHTNING_FLOOR,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.INTRO_SEQUENCE
 
 onready var STATES := {
-    State.INTRO_SEQUENCE:       $States/IntroSequence,
-    State.DISPATCH:             $States/Dispatch,
-    State.IDLE:                 $States/Idle,
-    State.BACKSTEP:             $States/Backstep,
-    State.LEAP:                 $States/Leap,
-    State.LEAP_TO_CENTER:       $States/LeapToCenter,
-    State.CHARGE:               $States/Charge,
-    State.CHARGE_RECOVER_SLIDE: $States/ChargeRecoverSlide,
-    State.CHARGE_IMPACT:        $States/ChargeImpact,
-    State.LIGHTNING_FLOOR:      $States/LightningFloor,
-    State.SPAWN_PROJECTILES:    $States/SpawnProjectiles,
+    State.INTRO_SEQUENCE:        $States/IntroSequence,
+    State.DISPATCH:              $States/Dispatch,
+    State.IDLE:                  $States/Idle,
+    State.BACKSTEP:              $States/Backstep,
+    State.LEAP:                  $States/Leap,
+    State.LEAP_TO_CENTER:        $States/LeapToCenter,
+    State.CHARGE:                $States/Charge,
+    State.CHARGE_RECOVER_SLIDE:  $States/ChargeRecoverSlide,
+    State.CHARGE_IMPACT:         $States/ChargeImpact,
+    State.SPAWN_PROJECTILES:     $States/SpawnProjectiles,
+    State.COMBO_LIGHTNING_FLOOR: $States/ComboLightningFloor,
 }
 
 var direction: int

@@ -3,8 +3,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 var _velocity := Vector2.ZERO
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
-    assert('center_global_position' in previous_state_dict)
-    _velocity = _calculate_velocity(warden, previous_state_dict['center_global_position'])
+    _velocity = _calculate_velocity(warden)
 
 func exit(warden: Warden) -> void:
     pass
@@ -22,8 +21,8 @@ func update(warden: Warden, delta: float) -> Dictionary:
 
     return {'new_state': Warden.State.NO_CHANGE}
 
-func _calculate_velocity(warden: Warden, center_global_position: Vector2) -> Vector2:
-    var dest := center_global_position
+func _calculate_velocity(warden: Warden) -> Vector2:
+    var dest := warden.get_room_center_global_position()
     var disp := dest - warden.global_position
 
     # The height from the higher of the two points to the highest point in the

@@ -15,14 +15,11 @@ func update(warden: Warden, delta: float) -> Dictionary:
         2:
             return {'new_state': Warden.State.LEAP}
         3:
-            return {
-                'new_state': Warden.State.LEAP_TO_CENTER,
-                'center_global_position': warden.get_room_center_global_position(),
-            }
+            return {'new_state': Warden.State.LEAP_TO_CENTER}
         4:
             return {'new_state': Warden.State.CHARGE}
         5:
-            return {'new_state': Warden.State.LIGHTNING_FLOOR}
+            return {'new_state': Warden.State.COMBO_LIGHTNING_FLOOR}
         6:
             return {'new_state': Warden.State.SPAWN_PROJECTILES}
 

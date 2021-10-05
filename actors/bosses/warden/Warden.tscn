@@ -309,9 +309,14 @@ slide_easing = ExtResource( 20 )
 
 [node name="SlideDuration" type="Timer" parent="States/ChargeImpact/KnockbackRecover"]
 
-[node name="LightningFloor" parent="States" instance=ExtResource( 16 )]
-
 [node name="SpawnProjectiles" parent="States" instance=ExtResource( 15 )]
+
+[node name="ComboLightningFloor" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="LeapToCenter" parent="States/ComboLightningFloor" instance=ExtResource( 14 )]
+
+[node name="LightningFloor" parent="States/ComboLightningFloor" instance=ExtResource( 16 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
