@@ -323,6 +323,13 @@ script = ExtResource( 9 )
 
 [node name="Leap2" parent="States/ComboLeap" instance=ExtResource( 21 )]
 
+[node name="ComboChargeBackstep" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Backstep" parent="States/ComboChargeBackstep" instance=ExtResource( 12 )]
+
+[node name="Charge" parent="States/ComboChargeBackstep" instance=ExtResource( 13 )]
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
 texture = ExtResource( 4 )

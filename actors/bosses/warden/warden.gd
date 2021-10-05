@@ -19,6 +19,7 @@ enum State {
     SPAWN_PROJECTILES,
     COMBO_LIGHTNING_FLOOR,
     COMBO_LEAP,
+    COMBO_CHARGE_BACKSTEP,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -36,6 +37,7 @@ onready var STATES := {
     State.SPAWN_PROJECTILES:     $States/SpawnProjectiles,
     State.COMBO_LIGHTNING_FLOOR: $States/ComboLightningFloor,
     State.COMBO_LEAP:            $States/ComboLeap,
+    State.COMBO_CHARGE_BACKSTEP: $States/ComboChargeBackstep,
 }
 
 var direction: int

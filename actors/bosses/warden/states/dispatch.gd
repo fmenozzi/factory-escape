@@ -9,7 +9,7 @@ func exit(warden: Warden) -> void:
     pass
 
 func update(warden: Warden, delta: float) -> Dictionary:
-    match _rng.randi_range(1, 6):
+    match _rng.randi_range(1, 7):
         1:
             return {'new_state': Warden.State.BACKSTEP}
         2:
@@ -22,5 +22,7 @@ func update(warden: Warden, delta: float) -> Dictionary:
             return {'new_state': Warden.State.COMBO_LIGHTNING_FLOOR}
         6:
             return {'new_state': Warden.State.SPAWN_PROJECTILES}
+        7:
+            return {'new_state': Warden.State.COMBO_CHARGE_BACKSTEP}
 
     return {'new_state': Warden.State.NO_CHANGE}
