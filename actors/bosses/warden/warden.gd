@@ -12,13 +12,13 @@ enum State {
     DISPATCH,
     IDLE,
     BACKSTEP,
-    LEAP,
     LEAP_TO_CENTER,
     CHARGE,
     CHARGE_RECOVER_SLIDE,
     CHARGE_IMPACT,
     SPAWN_PROJECTILES,
     COMBO_LIGHTNING_FLOOR,
+    COMBO_LEAP,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -29,13 +29,13 @@ onready var STATES := {
     State.DISPATCH:              $States/Dispatch,
     State.IDLE:                  $States/Idle,
     State.BACKSTEP:              $States/Backstep,
-    State.LEAP:                  $States/Leap,
     State.LEAP_TO_CENTER:        $States/LeapToCenter,
     State.CHARGE:                $States/Charge,
     State.CHARGE_RECOVER_SLIDE:  $States/ChargeRecoverSlide,
     State.CHARGE_IMPACT:         $States/ChargeImpact,
     State.SPAWN_PROJECTILES:     $States/SpawnProjectiles,
     State.COMBO_LIGHTNING_FLOOR: $States/ComboLightningFloor,
+    State.COMBO_LEAP:            $States/ComboLeap,
 }
 
 var direction: int

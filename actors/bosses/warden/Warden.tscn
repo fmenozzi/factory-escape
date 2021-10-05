@@ -285,8 +285,6 @@ script = ExtResource( 11 )
 
 [node name="Backstep" parent="States" instance=ExtResource( 12 )]
 
-[node name="Leap" parent="States" instance=ExtResource( 21 )]
-
 [node name="LeapToCenter" parent="States" instance=ExtResource( 14 )]
 
 [node name="Charge" parent="States" instance=ExtResource( 13 )]
@@ -317,6 +315,13 @@ script = ExtResource( 9 )
 [node name="LeapToCenter" parent="States/ComboLightningFloor" instance=ExtResource( 14 )]
 
 [node name="LightningFloor" parent="States/ComboLightningFloor" instance=ExtResource( 16 )]
+
+[node name="ComboLeap" type="Node" parent="States"]
+script = ExtResource( 9 )
+
+[node name="Leap1" parent="States/ComboLeap" instance=ExtResource( 21 )]
+
+[node name="Leap2" parent="States/ComboLeap" instance=ExtResource( 21 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )

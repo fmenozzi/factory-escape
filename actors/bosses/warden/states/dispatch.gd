@@ -13,7 +13,7 @@ func update(warden: Warden, delta: float) -> Dictionary:
         1:
             return {'new_state': Warden.State.BACKSTEP}
         2:
-            return {'new_state': Warden.State.LEAP}
+            return {'new_state': Warden.State.COMBO_LEAP}
         3:
             return {'new_state': Warden.State.LEAP_TO_CENTER}
         4:
