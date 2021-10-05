@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=1]
+[ext_resource path="res://actors/bosses/warden/states/leap_land.gd" type="Script" id=2]
+[ext_resource path="res://actors/bosses/warden/states/leap_takeoff.gd" type="Script" id=3]
+[ext_resource path="res://actors/bosses/warden/states/leap_up.gd" type="Script" id=4]
+[ext_resource path="res://actors/bosses/warden/states/leap_down.gd" type="Script" id=5]
+
+[node name="Leap" type="Node"]
+script = ExtResource( 1 )
+
+[node name="LeapTakeoff" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="LeapUp" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="LeapDown" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="LeapLand" type="Node" parent="."]
+script = ExtResource( 2 )

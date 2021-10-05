@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -11,27 +11,16 @@
 [ext_resource path="res://actors/enemies/enemy_state_sequence.gd" type="Script" id=9]
 [ext_resource path="res://actors/bosses/warden/warden_physics_manager.gd" type="Script" id=10]
 [ext_resource path="res://actors/bosses/warden/states/idle.gd" type="Script" id=11]
-[ext_resource path="res://actors/bosses/warden/states/backstep_takeoff.gd" type="Script" id=12]
-[ext_resource path="res://actors/bosses/warden/states/backstep_up.gd" type="Script" id=13]
-[ext_resource path="res://actors/bosses/warden/states/backstep_down.gd" type="Script" id=14]
-[ext_resource path="res://actors/bosses/warden/states/charge_run.gd" type="Script" id=15]
-[ext_resource path="res://actors/bosses/warden/states/charge_telegraph.gd" type="Script" id=16]
+[ext_resource path="res://actors/bosses/warden/states/Backstep.tscn" type="PackedScene" id=12]
+[ext_resource path="res://actors/bosses/warden/states/Charge.tscn" type="PackedScene" id=13]
+[ext_resource path="res://actors/bosses/warden/states/LeapToCenter.tscn" type="PackedScene" id=14]
+[ext_resource path="res://actors/bosses/warden/states/SpawnProjectiles.tscn" type="PackedScene" id=15]
+[ext_resource path="res://actors/bosses/warden/states/LightningFloor.tscn" type="PackedScene" id=16]
 [ext_resource path="res://actors/bosses/warden/states/charge_knockback_recover.gd" type="Script" id=17]
 [ext_resource path="res://actors/bosses/warden/states/charge_knockback.gd" type="Script" id=18]
 [ext_resource path="res://actors/bosses/warden/states/charge_recover_slide.gd" type="Script" id=19]
 [ext_resource path="res://actors/bosses/warden/curves/slide.tres" type="Curve" id=20]
-[ext_resource path="res://actors/bosses/warden/states/backstep_land.gd" type="Script" id=21]
-[ext_resource path="res://actors/bosses/warden/states/leap_land.gd" type="Script" id=22]
-[ext_resource path="res://actors/bosses/warden/states/leap_takeoff.gd" type="Script" id=23]
-[ext_resource path="res://actors/bosses/warden/states/leap_up.gd" type="Script" id=24]
-[ext_resource path="res://actors/bosses/warden/states/leap_down.gd" type="Script" id=25]
-[ext_resource path="res://actors/bosses/warden/states/lightning_floor_crouch.gd" type="Script" id=26]
-[ext_resource path="res://actors/bosses/warden/states/lightning_floor_activate.gd" type="Script" id=27]
-[ext_resource path="res://actors/bosses/warden/states/lightning_floor_uncrouch.gd" type="Script" id=28]
-[ext_resource path="res://actors/bosses/warden/states/leap_to_center.gd" type="Script" id=29]
-[ext_resource path="res://actors/bosses/warden/states/spawn_projectiles_crouch.gd" type="Script" id=30]
-[ext_resource path="res://actors/bosses/warden/states/spawn_projectiles_uncrouch.gd" type="Script" id=31]
-[ext_resource path="res://actors/bosses/warden/states/spawn_projectiles_activate.gd" type="Script" id=32]
+[ext_resource path="res://actors/bosses/warden/states/Leap.tscn" type="PackedScene" id=21]
 [ext_resource path="res://actors/bosses/warden/states/dispatch.gd" type="Script" id=33]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -294,56 +283,13 @@ script = ExtResource( 33 )
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource( 11 )
 
-[node name="Backstep" type="Node" parent="States"]
-script = ExtResource( 9 )
+[node name="Backstep" parent="States" instance=ExtResource( 12 )]
 
-[node name="BackstepTakeoff" type="Node" parent="States/Backstep"]
-script = ExtResource( 12 )
+[node name="Leap" parent="States" instance=ExtResource( 21 )]
 
-[node name="BackstepUp" type="Node" parent="States/Backstep"]
-script = ExtResource( 13 )
+[node name="LeapToCenter" parent="States" instance=ExtResource( 14 )]
 
-[node name="BackstepDown" type="Node" parent="States/Backstep"]
-script = ExtResource( 14 )
-
-[node name="BackstepLand" type="Node" parent="States/Backstep"]
-script = ExtResource( 21 )
-
-[node name="Leap" type="Node" parent="States"]
-script = ExtResource( 9 )
-
-[node name="LeapTakeoff" type="Node" parent="States/Leap"]
-script = ExtResource( 23 )
-
-[node name="LeapUp" type="Node" parent="States/Leap"]
-script = ExtResource( 24 )
-
-[node name="LeapDown" type="Node" parent="States/Leap"]
-script = ExtResource( 25 )
-
-[node name="LeapLand" type="Node" parent="States/Leap"]
-script = ExtResource( 22 )
-
-[node name="LeapToCenter" type="Node" parent="States"]
-script = ExtResource( 9 )
-
-[node name="LeapTakeoff" type="Node" parent="States/LeapToCenter"]
-script = ExtResource( 23 )
-
-[node name="Leap" type="Node" parent="States/LeapToCenter"]
-script = ExtResource( 29 )
-
-[node name="LeapLand" type="Node" parent="States/LeapToCenter"]
-script = ExtResource( 22 )
-
-[node name="Charge" type="Node" parent="States"]
-script = ExtResource( 9 )
-
-[node name="Telegraph" type="Node" parent="States/Charge"]
-script = ExtResource( 16 )
-
-[node name="Run" type="Node" parent="States/Charge"]
-script = ExtResource( 15 )
+[node name="Charge" parent="States" instance=ExtResource( 13 )]
 
 [node name="ChargeRecoverSlide" type="Node" parent="States"]
 script = ExtResource( 19 )
@@ -363,33 +309,9 @@ slide_easing = ExtResource( 20 )
 
 [node name="SlideDuration" type="Timer" parent="States/ChargeImpact/KnockbackRecover"]
 
-[node name="LightningFloor" type="Node" parent="States"]
-script = ExtResource( 9 )
+[node name="LightningFloor" parent="States" instance=ExtResource( 16 )]
 
-[node name="LightningFloorCrouch" type="Node" parent="States/LightningFloor"]
-script = ExtResource( 26 )
-
-[node name="LightningFloorActivate" type="Node" parent="States/LightningFloor"]
-script = ExtResource( 27 )
-
-[node name="ActivateDuration" type="Timer" parent="States/LightningFloor/LightningFloorActivate"]
-
-[node name="LightningFloorUncrouch" type="Node" parent="States/LightningFloor"]
-script = ExtResource( 28 )
-
-[node name="SpawnProjectiles" type="Node" parent="States"]
-script = ExtResource( 9 )
-
-[node name="Crouch" type="Node" parent="States/SpawnProjectiles"]
-script = ExtResource( 30 )
-
-[node name="Activate" type="Node" parent="States/SpawnProjectiles"]
-script = ExtResource( 32 )
-
-[node name="ActivateDuration" type="Timer" parent="States/SpawnProjectiles/Activate"]
-
-[node name="Uncrouch" type="Node" parent="States/SpawnProjectiles"]
-script = ExtResource( 31 )
+[node name="SpawnProjectiles" parent="States" instance=ExtResource( 15 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -16 )
