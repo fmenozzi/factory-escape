@@ -20,24 +20,26 @@ enum State {
     COMBO_LIGHTNING_FLOOR,
     COMBO_LEAP,
     COMBO_CHARGE_BACKSTEP,
+    COMBO_CHARGE_LEAP_TO_CENTER,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
 export(State) var initial_state := State.INTRO_SEQUENCE
 
 onready var STATES := {
-    State.INTRO_SEQUENCE:        $States/IntroSequence,
-    State.DISPATCH:              $States/Dispatch,
-    State.IDLE:                  $States/Idle,
-    State.BACKSTEP:              $States/Backstep,
-    State.LEAP_TO_CENTER:        $States/LeapToCenter,
-    State.CHARGE:                $States/Charge,
-    State.CHARGE_RECOVER_SLIDE:  $States/ChargeRecoverSlide,
-    State.CHARGE_IMPACT:         $States/ChargeImpact,
-    State.SPAWN_PROJECTILES:     $States/SpawnProjectiles,
-    State.COMBO_LIGHTNING_FLOOR: $States/ComboLightningFloor,
-    State.COMBO_LEAP:            $States/ComboLeap,
-    State.COMBO_CHARGE_BACKSTEP: $States/ComboChargeBackstep,
+    State.INTRO_SEQUENCE:              $States/IntroSequence,
+    State.DISPATCH:                    $States/Dispatch,
+    State.IDLE:                        $States/Idle,
+    State.BACKSTEP:                    $States/Backstep,
+    State.LEAP_TO_CENTER:              $States/LeapToCenter,
+    State.CHARGE:                      $States/Charge,
+    State.CHARGE_RECOVER_SLIDE:        $States/ChargeRecoverSlide,
+    State.CHARGE_IMPACT:               $States/ChargeImpact,
+    State.SPAWN_PROJECTILES:           $States/SpawnProjectiles,
+    State.COMBO_LIGHTNING_FLOOR:       $States/ComboLightningFloor,
+    State.COMBO_LEAP:                  $States/ComboLeap,
+    State.COMBO_CHARGE_BACKSTEP:       $States/ComboChargeBackstep,
+    State.COMBO_CHARGE_LEAP_TO_CENTER: $States/ComboChargeLeapToCenter,
 }
 
 var direction: int
