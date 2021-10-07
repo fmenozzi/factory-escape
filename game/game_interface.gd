@@ -215,6 +215,13 @@ func _on_player_died() -> void:
     # without having to worry about weird graphical artifacts.
     _player_death_transition.reset()
 
+    # We can also reset/reattach the player camera, which only matters if the
+    # player dies during a cutscene in which a different camera has been marked
+    # as current (or if the camera was detached).
+    var player_camera := _player.get_camera()
+    player_camera.make_current()
+    player_camera.reattach()
+
     _reset_world()
 
     MusicPlayer.stop(MusicPlayer.Music.ARENA)

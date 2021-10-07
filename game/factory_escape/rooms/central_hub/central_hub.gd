@@ -11,6 +11,7 @@ onready var _left_trigger: Area2D = $BossFight/Triggers/Left
 onready var _right_trigger: Area2D = $BossFight/Triggers/Right
 onready var _left_trigger_collision_shape: CollisionShape2D = $BossFight/Triggers/Left/CollisionShape2D
 onready var _right_trigger_collision_shape: CollisionShape2D = $BossFight/Triggers/Right/CollisionShape2D
+onready var _lightning_floor: LightningFloor = $BossFight/LightningFloor
 onready var _save_manager: CentralHubSaveManager = $SaveManager
 
 func _ready() -> void:
@@ -30,6 +31,23 @@ func get_camera_focus_point() -> CameraFocusPoint:
 
 func get_fragile_platform() -> FragilePlatform:
     return _fragile_platform
+
+func lamp_reset() -> void:
+    if _save_manager.warden_fight_state == CentralHubSaveManager.WardenFightState.POST_FIGHT:
+        return
+
+    # Reset boss walls/triggers.
+    set_enable_boss_fight_triggers(true)
+    set_enable_boss_fight_walls(false)
+
+    # Reset lightning floor, in case it was active at the time of death.
+    _lightning_floor.stop()
+
+    # Reset fragile platform.
+    _fragile_platform.reset()
+
+    # Reset focus point.
+    _camera_focus_point.set_active(true)
 
 func _on_player_triggered_boss_fight(player: Player) -> void:
     if not player:
