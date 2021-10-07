@@ -6,11 +6,12 @@ var _started_with_player_on_platform := false
 
 func enter(platform: SinkingPlatform, previous_state_dict: Dictionary) -> void:
     platform.get_animation_player().play_backwards('move')
+    platform.get_audio_group().get_player_by_name('Reset').play()
 
     _started_with_player_on_platform = platform.player_on_platform()
 
 func exit(platform: SinkingPlatform) -> void:
-    pass
+    platform.get_audio_group().get_player_by_name('Reset').stop()
 
 func update(platform: SinkingPlatform, delta: float) -> Dictionary:
     var platform_body := platform.get_platform()

@@ -27,6 +27,7 @@ onready var _platform: KinematicBody2D = $Platform
 onready var _sprite: Sprite = $Platform/Sprite
 onready var _animation_player: AnimationPlayer = $Platform/AnimationPlayer
 onready var _trigger_area: Area2D = $Platform/TriggerArea
+onready var _audio_group: VisibilityBasedAudioGroup = $Platform/VisibilityBasedAudioGroup
 onready var _destination: Position2D = $Destination
 
 onready var _original_sprite_position: Vector2 = _sprite.position
@@ -43,6 +44,9 @@ func _physics_process(delta: float) -> void:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_audio_group() -> VisibilityBasedAudioGroup:
+    return _audio_group
 
 func get_platform() -> KinematicBody2D:
     return _platform

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://environment/platforms/sinking/textures/background.png" type="Texture" id=1]
 [ext_resource path="res://environment/platforms/sinking/textures/platform.png" type="Texture" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://environment/platforms/sinking/states/shake.gd" type="Script" id=7]
 [ext_resource path="res://environment/platforms/sinking/states/going_down.gd" type="Script" id=8]
 [ext_resource path="res://environment/platforms/sinking/states/going_up.gd" type="Script" id=9]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=10]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://environment/platforms/sinking/audio/sinking_platform_creak.wav" type="AudioStream" id=12]
+[ext_resource path="res://environment/platforms/sinking/audio/sinking_platform_reset.wav" type="AudioStream" id=13]
+[ext_resource path="res://environment/platforms/sinking/audio/sinking_platform_sinking.wav" type="AudioStream" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13, 2 )
@@ -61,6 +66,20 @@ anims/move = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/TriggerArea"]
 shape = SubResource( 3 )
 
+[node name="VisibilityBasedAudioGroup" parent="Platform" instance=ExtResource( 11 )]
+
+[node name="Creak" parent="Platform/VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 10 )]
+max_volume_db = -4.0
+stream = ExtResource( 12 )
+
+[node name="Sinking" parent="Platform/VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 10 )]
+max_volume_db = -4.0
+stream = ExtResource( 14 )
+
+[node name="Reset" parent="Platform/VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 10 )]
+max_volume_db = -4.0
+stream = ExtResource( 13 )
+
 [node name="Destination" type="Position2D" parent="."]
 position = Vector2( 0, 60 )
 
@@ -89,3 +108,5 @@ script = ExtResource( 8 )
 
 [node name="GoingUp" type="Node" parent="States"]
 script = ExtResource( 9 )
+
+[editable path="Platform/VisibilityBasedAudioGroup"]

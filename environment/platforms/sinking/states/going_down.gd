@@ -4,9 +4,10 @@ const SPEED := 2.0 * Util.TILE_SIZE
 
 func enter(platform: SinkingPlatform, previous_state_dict: Dictionary) -> void:
     platform.get_animation_player().play('move')
+    platform.get_audio_group().get_player_by_name('Sinking').play()
 
 func exit(platform: SinkingPlatform) -> void:
-    pass
+    platform.get_audio_group().get_player_by_name('Sinking').stop()
 
 func update(platform: SinkingPlatform, delta: float) -> Dictionary:
     var platform_body := platform.get_platform()

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sinking_platform_creak.wav-8c4a0da5ee94108b4cab9b76ff282dab.sample"
+
+[deps]
+
+source_file="res://environment/platforms/sinking/audio/sinking_platform_creak.wav"
+dest_files=[ "res://.import/sinking_platform_creak.wav-8c4a0da5ee94108b4cab9b76ff282dab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

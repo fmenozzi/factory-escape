@@ -10,6 +10,7 @@ func _ready() -> void:
 
 func enter(platform: SinkingPlatform, previous_state_dict: Dictionary) -> void:
     platform.get_animation_player().stop()
+    platform.get_audio_group().get_player_by_name('Creak').play()
 
     _shake_duration_timer.start()
 
