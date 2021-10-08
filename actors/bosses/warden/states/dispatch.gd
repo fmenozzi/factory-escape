@@ -3,8 +3,9 @@ extends 'res://actors/enemies/enemy_state.gd'
 onready var rng_table := {
     Warden.State.BACKSTEP:                    10,
     Warden.State.LEAP_TO_CENTER:              10,
+    Warden.State.STOMP:                       10,
     Warden.State.CHARGE:                      10,
-    Warden.State.SPAWN_PROJECTILES:           20,
+    Warden.State.SPAWN_PROJECTILES:           10,
     Warden.State.COMBO_LIGHTNING_FLOOR:       20,
     Warden.State.COMBO_LEAP:                  10,
     Warden.State.COMBO_CHARGE_BACKSTEP:       10,

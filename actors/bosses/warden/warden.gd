@@ -13,6 +13,7 @@ enum State {
     IDLE,
     BACKSTEP,
     LEAP_TO_CENTER,
+    STOMP,
     CHARGE,
     CHARGE_RECOVER_SLIDE,
     CHARGE_IMPACT,
@@ -32,6 +33,7 @@ onready var STATES := {
     State.IDLE:                        $States/Idle,
     State.BACKSTEP:                    $States/Backstep,
     State.LEAP_TO_CENTER:              $States/LeapToCenter,
+    State.STOMP:                       $States/Stomp,
     State.CHARGE:                      $States/Charge,
     State.CHARGE_RECOVER_SLIDE:        $States/ChargeRecoverSlide,
     State.CHARGE_IMPACT:               $States/ChargeImpact,
@@ -51,7 +53,9 @@ onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: WardenPhysicsManager = $PhysicsManager
 onready var _sprite: Sprite = $Sprite
+onready var _stomp_dust_sprite: Sprite = $StompDustSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _stomp_hitbox: CollisionShape2D = $Hitboxes/Stomp/CollisionShape2D
 
 func _ready() -> void:
     set_direction(initial_direction)
@@ -78,11 +82,17 @@ func take_hit(damage: int, player: Player) -> void:
 func get_physics_manager() -> WardenPhysicsManager:
     return _physics_manager
 
+func get_stomp_dust_sprite() -> Sprite:
+    return _stomp_dust_sprite
+
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
 
 func get_room_center_global_position() -> Vector2:
     return Vector2(3360, 4104)
+
+func get_stomp_hitbox() -> CollisionShape2D:
+    return _stomp_hitbox
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
