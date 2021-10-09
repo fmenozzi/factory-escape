@@ -9,6 +9,8 @@ func _ready() -> void:
     _timer.wait_time = LAND_DURATION
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
+    warden.get_animation_player().play('intro_land')
+
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
         Screenshake.Priority.HIGH)
