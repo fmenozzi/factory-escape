@@ -215,13 +215,14 @@ func _on_boss_fight_triggered() -> void:
     Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
     yield(Screenshake, 'stopped_shaking')
 
-    # Wait a bit, then two big shakes.
+    # Wait a bit, then two big shakes, timed to the light pulse.
     yield(get_tree().create_timer(1.0), 'timeout')
+    yield(_central_lock, 'ready_to_turn_on_new_light')
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
         Screenshake.Priority.HIGH)
     Rumble.start(Rumble.Type.WEAK, 0.75, Rumble.Priority.HIGH)
-    yield(get_tree().create_timer(1.5), 'timeout')
+    yield(get_tree().create_timer(2.0), 'timeout')
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
         Screenshake.Priority.HIGH)
