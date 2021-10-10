@@ -81,6 +81,9 @@ func emit_dust_puff_takeoff() -> void:
 func emit_dust_puff_land() -> void:
     Effects.spawn_warden_dust_puff_land_at(global_position)
 
+func emit_dust_puff_slide() -> void:
+    Effects.spawn_warden_dust_puff_slide_at(global_position, direction)
+
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()

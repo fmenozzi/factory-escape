@@ -24,6 +24,14 @@ func spawn_warden_dust_puff_takeoff_at(global_pos: Vector2) -> void:
     dust_puff_warden.global_position = global_pos
     dust_puff_warden.start_and_queue_free()
 
+func spawn_warden_dust_puff_slide_at(global_pos: Vector2, direction: int) -> void:
+    var dust_puff_warden: Node2D = Preloads.DustPuffWardenSlide.instance()
+
+    _get_temporary_nodes_node().add_child(dust_puff_warden)
+
+    dust_puff_warden.global_position = global_pos
+    dust_puff_warden.start_and_queue_free(direction)
+
 func _get_temporary_nodes_node() -> Node2D:
     var nodes_in_temporary_nodes_node_group := \
         get_tree().get_nodes_in_group('temporary_nodes_node')

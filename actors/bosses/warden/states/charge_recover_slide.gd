@@ -12,6 +12,7 @@ func _ready() -> void:
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('charge_recover_slide')
+    warden.emit_dust_puff_slide()
 
     _timer.start()
 
