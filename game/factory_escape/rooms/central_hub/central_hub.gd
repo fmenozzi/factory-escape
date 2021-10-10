@@ -3,6 +3,7 @@ class_name CentralHub
 
 signal boss_fight_triggered
 
+onready var _central_lock: CentralLock = $CentralLock
 onready var _camera_focus_point: CameraFocusPoint = $CameraFocusPoint
 onready var _fragile_platform: FragilePlatform = $BossFight/FragilePlatform
 onready var _left_wall_collision_shape: CollisionShape2D = $BossFight/Walls/Left/CollisionShape2D
@@ -48,6 +49,9 @@ func lamp_reset() -> void:
 
     # Reset focus point.
     _camera_focus_point.set_active(true)
+
+    # Reset central lock door.
+    _central_lock.get_closing_door().set_opened()
 
 func _on_player_triggered_boss_fight(player: Player) -> void:
     if not player:
