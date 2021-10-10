@@ -75,6 +75,12 @@ func set_direction(new_direction: int) -> void:
     direction = new_direction
     _sprite.flip_h = (new_direction == Util.Direction.LEFT)
 
+func emit_dust_puff_takeoff() -> void:
+    Effects.spawn_warden_dust_puff_takeoff_at(global_position)
+
+func emit_dust_puff_land() -> void:
+    Effects.spawn_warden_dust_puff_land_at(global_position)
+
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()

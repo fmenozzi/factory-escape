@@ -3,6 +3,8 @@ extends 'res://actors/enemies/enemy_state.gd'
 var _velocity := Vector2.ZERO
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
+    warden.emit_dust_puff_takeoff()
+
     _velocity.y = warden.get_physics_manager().get_max_jump_velocity()
 
 func exit(warden: Warden) -> void:

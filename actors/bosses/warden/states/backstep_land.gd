@@ -2,6 +2,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('land')
+    warden.emit_dust_puff_land()
 
 func exit(warden: Warden) -> void:
     pass
