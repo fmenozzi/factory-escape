@@ -6,6 +6,7 @@ var _velocity := Vector2.ZERO
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('charge_knockback')
+    warden.emit_dust_puff_impact()
 
     Screenshake.start(Screenshake.Duration.MEDIUM, Screenshake.Amplitude.SMALL)
     Rumble.start(Rumble.Type.WEAK, 0.3)

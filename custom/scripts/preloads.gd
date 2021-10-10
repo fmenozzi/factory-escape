@@ -24,6 +24,7 @@ const DustPuff := preload('res://shared/effects/dust_puff/DustPuff.tscn')
 const DustPuffWardenLand := preload('res://shared/effects/dust_puffs_warden/DustPuffWardenLand.tscn')
 const DustPuffWardenTakeoff := preload('res://shared/effects/dust_puffs_warden/DustPuffWardenTakeoff.tscn')
 const DustPuffWardenSlide := preload('res://shared/effects/dust_puffs_warden/DustPuffWardenSlide.tscn')
+const DustPuffWardenImpact := preload('res://shared/effects/dust_puffs_warden/DustPuffWardenImpact.tscn')
 
 # Projectiles.
 const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
