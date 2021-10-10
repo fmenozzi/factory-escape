@@ -195,10 +195,9 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _player.set_physics_process(true)
 
 func _on_boss_fight_triggered() -> void:
-    # Pause player processing and switch to IDLE state.
-    _player.set_process_unhandled_input(false)
-    _player.set_physics_process(false)
-    _player.change_state({'new_state': Player.State.IDLE})
+    # Pause player processing and switch to IDLE state once the player is on the
+    # ground but not near the door.
+    _central_hub.set_process(true)
 
     # Enable boss fight walls so player can't leave.
     _central_hub.set_enable_boss_fight_walls(true)
@@ -207,7 +206,7 @@ func _on_boss_fight_triggered() -> void:
     _central_hub_camera_focus_point.set_active(false)
 
     # Wait a bit and then close the doors.
-    yield(get_tree().create_timer(0.75), 'timeout')
+    yield(get_tree().create_timer(0.35), 'timeout')
     _central_lock.get_closing_door().close()
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.VERY_SMALL,
@@ -238,5 +237,6 @@ func _on_boss_fight_triggered() -> void:
     yield(warden, 'intro_sequence_finished')
 
     # Resume player processing.
+    _central_hub.set_process(false)
     _player.set_process_unhandled_input(true)
     _player.set_physics_process(true)
