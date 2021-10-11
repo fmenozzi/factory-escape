@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://actors/bosses/warden/curves/slide.tres" type="Curve" id=20]
 [ext_resource path="res://actors/bosses/warden/states/Leap.tscn" type="PackedScene" id=21]
 [ext_resource path="res://actors/bosses/warden/states/Stomp.tscn" type="PackedScene" id=22]
+[ext_resource path="res://actors/bosses/warden/textures/warden-head.png" type="Texture" id=23]
+[ext_resource path="res://actors/bosses/warden/textures/warden-legs.png" type="Texture" id=24]
 [ext_resource path="res://actors/bosses/warden/textures/stomp.png" type="Texture" id=25]
 [ext_resource path="res://actors/bosses/warden/states/dispatch.gd" type="Script" id=33]
 
@@ -93,21 +95,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 29, 30, 31, 32, 33, 34, 35, 36 ]
-}
-
-[sub_resource type="Animation" id=6]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 24 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -446,6 +433,7 @@ position = Vector2( 0, -16 )
 texture = ExtResource( 4 )
 hframes = 24
 vframes = 16
+frame = 9
 
 [node name="StompDustSprite" type="Sprite" parent="."]
 visible = false
@@ -462,7 +450,6 @@ anims/charge_knockback = SubResource( 2 )
 anims/charge_knockback_recover = SubResource( 3 )
 anims/charge_recover_slide = SubResource( 4 )
 anims/charge_run = SubResource( 5 )
-anims/charge_telegraph = SubResource( 6 )
 anims/fall = SubResource( 7 )
 anims/idle = SubResource( 8 )
 anims/intro_fall = SubResource( 9 )
@@ -473,6 +460,16 @@ anims/land = SubResource( 13 )
 anims/lightning_floor_crouch = SubResource( 14 )
 anims/lightning_floor_uncrouch = SubResource( 15 )
 anims/stomp_land = SubResource( 16 )
+
+[node name="ShakeableSprites" type="Node2D" parent="."]
+visible = false
+position = Vector2( 0, -16 )
+
+[node name="Legs" type="Sprite" parent="ShakeableSprites"]
+texture = ExtResource( 24 )
+
+[node name="Head" type="Sprite" parent="ShakeableSprites"]
+texture = ExtResource( 23 )
 
 [node name="Hitboxes" type="Node2D" parent="."]
 

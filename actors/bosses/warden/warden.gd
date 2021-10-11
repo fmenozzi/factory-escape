@@ -55,6 +55,9 @@ onready var _physics_manager: WardenPhysicsManager = $PhysicsManager
 onready var _sprite: Sprite = $Sprite
 onready var _stomp_dust_sprite: Sprite = $StompDustSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _shakeable_sprites: Node2D = $ShakeableSprites
+onready var _shakeable_head_sprite: Sprite = $ShakeableSprites/Head
+onready var _shakeable_legs_sprite: Sprite = $ShakeableSprites/Legs
 onready var _stomp_hitbox: CollisionShape2D = $Hitboxes/Stomp/CollisionShape2D
 
 func _ready() -> void:
@@ -74,6 +77,8 @@ func _physics_process(delta: float) -> void:
 func set_direction(new_direction: int) -> void:
     direction = new_direction
     _sprite.flip_h = (new_direction == Util.Direction.LEFT)
+    _shakeable_head_sprite.flip_h = (new_direction == Util.Direction.LEFT)
+    _shakeable_legs_sprite.flip_h = (new_direction == Util.Direction.LEFT)
 
 func emit_dust_puff_takeoff() -> void:
     Effects.spawn_warden_dust_puff_takeoff_at(global_position)
@@ -94,11 +99,25 @@ func take_hit(damage: int, player: Player) -> void:
 func get_physics_manager() -> WardenPhysicsManager:
     return _physics_manager
 
+func get_sprite() -> Sprite:
+    return _sprite
+
 func get_stomp_dust_sprite() -> Sprite:
     return _stomp_dust_sprite
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_shakeable_sprites() -> Node2D:
+    return _shakeable_sprites
+
+func shake_once(damping: float = 1.0) -> void:
+    _shakeable_head_sprite.position = Vector2(
+        damping * rand_range(-1.0, 1.0),
+        damping * rand_range(-1.0, 1.0))
+
+func reset_shakeable_sprite_position() -> void:
+    _shakeable_head_sprite.position = Vector2.ZERO
 
 func get_room_center_global_position() -> Vector2:
     return Vector2(3360, 4104)
