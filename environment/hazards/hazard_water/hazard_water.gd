@@ -7,6 +7,7 @@ onready var _collision_shape: CollisionShape2D = $CollisionShape2D
 onready var _body_sprite: Sprite = $BodySprite
 onready var _surface_foam: TextureRect = $SurfaceFoam
 onready var _bubbles: Particles2D = $Bubbles
+onready var _audio_group: VisibilityBasedAudioGroup = $VisibilityBasedAudioGroup
 
 func _ready() -> void:
     assert(_collision_shape.shape is RectangleShape2D)
@@ -36,11 +37,15 @@ func _ready() -> void:
     _bubbles.process_material.emission_box_extents.x = half_size.x - 2
     _bubbles.amount = PARTICLES_PER_PIXEL * size.x
 
+    # Play bubbling sound and center audio player on water.
+    _audio_group.position = _collision_shape.position
+    _audio_group.get_player_by_name('Bubbling').play()
+
 func pause() -> void:
-    pass
+    _audio_group.get_player_by_name('Bubbling').stop()
 
 func resume() -> void:
-    pass
+    _audio_group.get_player_by_name('Bubbling').play()
 
 func show_visuals() -> void:
     pass

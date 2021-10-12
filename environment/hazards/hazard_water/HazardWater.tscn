@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://environment/hazards/hazard_water/hazard_water.gd" type="Script" id=1]
 [ext_resource path="res://environment/hazards/hazard_water/shaders/hazard_water_body.shader" type="Shader" id=2]
 [ext_resource path="res://environment/hazards/hazard_water/textures/hazard-water-surface-1.png" type="Texture" id=3]
 [ext_resource path="res://environment/hazards/hazard_water/textures/hazard-water-surface-2.png" type="Texture" id=4]
 [ext_resource path="res://environment/hazards/hazard_water/textures/hazard-water-surface-3.png" type="Texture" id=5]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioPlayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedAudioGroup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://environment/hazards/hazard_water/audio/hazard_water_bubbling.wav" type="AudioStream" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -61,3 +64,11 @@ __meta__ = {
 
 [node name="Bubbles" type="Particles2D" parent="."]
 process_material = SubResource( 5 )
+
+[node name="VisibilityBasedAudioGroup" parent="." instance=ExtResource( 7 )]
+
+[node name="Bubbling" parent="VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 6 )]
+max_volume_db = -8.0
+stream = ExtResource( 8 )
+
+[editable path="VisibilityBasedAudioGroup"]
