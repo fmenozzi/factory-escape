@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -327,6 +327,9 @@ extents = Vector2( 32, 8 )
 [sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 7, 15.5 )
 
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 40, 8 )
+
 [node name="Warden" type="KinematicBody2D" groups=[
 "lamp_reset",
 ]]
@@ -497,3 +500,10 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -15.5 )
 shape = SubResource( 18 )
+
+[node name="PlayerProximityDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerProximityDetector"]
+position = Vector2( 0, -8 )
+shape = SubResource( 19 )

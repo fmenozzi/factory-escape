@@ -60,6 +60,7 @@ onready var _shakeable_sprites: Node2D = $ShakeableSprites
 onready var _shakeable_head_sprite: Sprite = $ShakeableSprites/Head
 onready var _shakeable_legs_sprite: Sprite = $ShakeableSprites/Legs
 onready var _stomp_hitbox: CollisionShape2D = $Hitboxes/Stomp/CollisionShape2D
+onready var _player_proximity_detector: Area2D = $PlayerProximityDetector
 
 func _ready() -> void:
     set_direction(initial_direction)
@@ -128,6 +129,9 @@ func get_stomp_hitbox() -> CollisionShape2D:
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
+
+func player_is_near() -> bool:
+    return _player_proximity_detector.get_overlapping_bodies().has(Util.get_player())
 
 func lamp_reset() -> void:
     queue_free()
