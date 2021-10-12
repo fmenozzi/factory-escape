@@ -893,6 +893,11 @@ script = ExtResource( 15 )
 
 [node name="JumpCutTimer" type="Timer" parent="States/WallJump"]
 
+[node name="KnockedFromWall" type="Node" parent="States"]
+script = ExtResource( 18 )
+
+[node name="KnockbackDurationTimer" type="Timer" parent="States/KnockedFromWall"]
+
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource( 38 )
 

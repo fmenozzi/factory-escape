@@ -27,6 +27,7 @@ enum State {
     LOOK_UP,
     WALL_SLIDE,
     WALL_JUMP,
+    KNOCKED_FROM_WALL,
     ATTACK,
     ATTACK_UP,
     GRAPPLE,
@@ -49,35 +50,36 @@ enum State {
 
 # Maps State enum to corresponding state scripts.
 onready var STATES = {
-    State.IDLE:             $States/Idle,
-    State.WALK:             $States/Walk,
-    State.JUMP:             $States/Jump,
-    State.DOUBLE_JUMP:      $States/DoubleJump,
-    State.SPRING_JUMP:      $States/SpringJump,
-    State.FALL:             $States/Fall,
-    State.DASH:             $States/Dash,
-    State.LOOK_DOWN:        $States/LookDown,
-    State.LOOK_UP:          $States/LookUp,
-    State.WALL_SLIDE:       $States/WallSlide,
-    State.WALL_JUMP:        $States/WallJump,
-    State.ATTACK:           $States/Attack,
-    State.ATTACK_UP:        $States/AttackUp,
-    State.GRAPPLE:          $States/Grapple,
-    State.STAGGER:          $States/Stagger,
-    State.HAZARD_HIT:       $States/HazardHit,
-    State.HAZARD_RECOVER:   $States/HazardRecover,
-    State.LIGHT_LAMP:       $States/LightLamp,
-    State.REST_AT_LAMP:     $States/RestAtLamp,
-    State.SLEEP:            $States/Sleep,
-    State.READ_SIGN:        $States/ReadSign,
-    State.TAKE_HEALTH_PACK: $States/TakeHealthPack,
-    State.ACTIVATE_SWITCH:  $States/ActivateSwitch,
-    State.HARD_LANDING:     $States/HardLanding,
-    State.HEAL:             $States/Heal,
-    State.DIE:              $States/Die,
-    State.SUSPENDED:        $States/Suspended,
-    State.INTRO_FALL:       $States/IntroFall,
-    State.CENTRAL_HUB_FALL: $States/CentralHubFall,
+    State.IDLE:              $States/Idle,
+    State.WALK:              $States/Walk,
+    State.JUMP:              $States/Jump,
+    State.DOUBLE_JUMP:       $States/DoubleJump,
+    State.SPRING_JUMP:       $States/SpringJump,
+    State.FALL:              $States/Fall,
+    State.DASH:              $States/Dash,
+    State.LOOK_DOWN:         $States/LookDown,
+    State.LOOK_UP:           $States/LookUp,
+    State.WALL_SLIDE:        $States/WallSlide,
+    State.WALL_JUMP:         $States/WallJump,
+    State.KNOCKED_FROM_WALL: $States/KnockedFromWall,
+    State.ATTACK:            $States/Attack,
+    State.ATTACK_UP:         $States/AttackUp,
+    State.GRAPPLE:           $States/Grapple,
+    State.STAGGER:           $States/Stagger,
+    State.HAZARD_HIT:        $States/HazardHit,
+    State.HAZARD_RECOVER:    $States/HazardRecover,
+    State.LIGHT_LAMP:        $States/LightLamp,
+    State.REST_AT_LAMP:      $States/RestAtLamp,
+    State.SLEEP:             $States/Sleep,
+    State.READ_SIGN:         $States/ReadSign,
+    State.TAKE_HEALTH_PACK:  $States/TakeHealthPack,
+    State.ACTIVATE_SWITCH:   $States/ActivateSwitch,
+    State.HARD_LANDING:      $States/HardLanding,
+    State.HEAL:              $States/Heal,
+    State.DIE:               $States/Die,
+    State.SUSPENDED:         $States/Suspended,
+    State.INTRO_FALL:        $States/IntroFall,
+    State.CENTRAL_HUB_FALL:  $States/CentralHubFall,
 }
 
 var current_state: Node = null
@@ -520,3 +522,10 @@ func _on_hazard_area_hit(hitbox: Area2D) -> void:
 
 func _on_hazard_body_hit(hitbox: Node) -> void:
     _check_for_hazard_hit(hitbox)
+
+func _on_warden_crashed_into_wall() -> void:
+    if current_state_enum == State.WALL_SLIDE:
+        change_state({
+            'new_state': State.KNOCKED_FROM_WALL,
+            'direction_from_hit': -get_direction(),
+        })

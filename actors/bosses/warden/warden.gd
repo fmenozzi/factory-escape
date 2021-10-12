@@ -4,6 +4,7 @@ class_name Warden
 signal intro_sequence_finished
 signal lightning_floor_activated
 signal projectiles_spawn_activated
+signal crashed_into_wall
 
 enum State {
     NO_CHANGE,

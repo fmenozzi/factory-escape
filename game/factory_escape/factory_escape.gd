@@ -51,6 +51,8 @@ func _connect_warden_signals(warden: Warden) -> void:
     warden.connect('projectiles_spawn_activated', self, '_on_projectile_spawn_activated')
     # TODO: connect warden's death signal to spawner's queue_free() function.
 
+    warden.connect('crashed_into_wall', _player, '_on_warden_crashed_into_wall')
+
 func _on_projectile_spawn_activated() -> void:
     for spawner in _projectile_spawners:
         spawner.shoot_homing_projectile(

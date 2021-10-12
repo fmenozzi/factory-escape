@@ -97,7 +97,7 @@ tracks/0/keys = {
 "values": [ 29, 30, 31, 32, 33, 34, 35, 36 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -111,7 +111,7 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -127,7 +127,7 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -141,7 +141,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "intro_land"
 step = 0.05
 tracks/0/type = "value"
@@ -181,7 +181,7 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 4.0
 step = 0.05
 tracks/0/type = "value"
@@ -197,7 +197,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 2, 2, 1, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -213,7 +213,7 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 49, 48 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 length = 0.35
 step = 0.05
 tracks/0/type = "value"
@@ -229,7 +229,7 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 50, 49, 48 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -243,7 +243,7 @@ tracks/0/keys = {
 "values": [ 9, 8, 7, 6, 5 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -258,7 +258,7 @@ tracks/0/keys = {
 "values": [ 5, 5, 6, 7, 8, 9, 10 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 resource_name = "stomp_land"
 step = 0.05
 tracks/0/type = "value"
@@ -318,13 +318,13 @@ tracks/3/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
 }
 
-[sub_resource type="RectangleShape2D" id=17]
+[sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 6, 15.5 )
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=17]
 extents = Vector2( 32, 8 )
 
-[sub_resource type="RectangleShape2D" id=19]
+[sub_resource type="RectangleShape2D" id=18]
 extents = Vector2( 7, 15.5 )
 
 [node name="Warden" type="KinematicBody2D" groups=[
@@ -450,16 +450,16 @@ anims/charge_knockback = SubResource( 2 )
 anims/charge_knockback_recover = SubResource( 3 )
 anims/charge_recover_slide = SubResource( 4 )
 anims/charge_run = SubResource( 5 )
-anims/fall = SubResource( 7 )
-anims/idle = SubResource( 8 )
-anims/intro_fall = SubResource( 9 )
-anims/intro_land = SubResource( 10 )
-anims/intro_uncrouch = SubResource( 11 )
-anims/jump = SubResource( 12 )
-anims/land = SubResource( 13 )
-anims/lightning_floor_crouch = SubResource( 14 )
-anims/lightning_floor_uncrouch = SubResource( 15 )
-anims/stomp_land = SubResource( 16 )
+anims/fall = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/intro_fall = SubResource( 8 )
+anims/intro_land = SubResource( 9 )
+anims/intro_uncrouch = SubResource( 10 )
+anims/jump = SubResource( 11 )
+anims/land = SubResource( 12 )
+anims/lightning_floor_crouch = SubResource( 13 )
+anims/lightning_floor_uncrouch = SubResource( 14 )
+anims/stomp_land = SubResource( 15 )
 
 [node name="ShakeableSprites" type="Node2D" parent="."]
 visible = false
@@ -479,7 +479,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/Contact"]
 position = Vector2( 0, -15.5 )
-shape = SubResource( 17 )
+shape = SubResource( 16 )
 
 [node name="Stomp" type="Area2D" parent="Hitboxes"]
 collision_layer = 64
@@ -487,7 +487,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/Stomp"]
 position = Vector2( 0, -8 )
-shape = SubResource( 18 )
+shape = SubResource( 17 )
 disabled = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -496,4 +496,4 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -15.5 )
-shape = SubResource( 19 )
+shape = SubResource( 18 )
