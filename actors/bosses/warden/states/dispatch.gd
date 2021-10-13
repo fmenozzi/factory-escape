@@ -1,5 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
+const MAX_NUM_RETRIES := 5
+
 enum RngTableKey {
     PLAYER_NEAR,
     PLAYER_FAR,
@@ -28,6 +30,7 @@ onready var rng_tables := {
 onready var _rng := RandomNumberGenerator.new()
 
 var _range_tables := {}
+var _last_attack := -1
 
 func _ready() -> void:
     _rng.randomize()
@@ -58,15 +61,32 @@ func exit(warden: Warden) -> void:
     pass
 
 func update(warden: Warden, delta: float) -> Dictionary:
+    var next_attack := _get_next_attack(warden)
+
+    return {'new_state': next_attack}
+
+func _get_next_attack(warden: Warden) -> int:
+    # If the next attack is the same as the previous one, retry attack selection
+    # (up to MAX_NUM_RETRIES times) until a different one is selected.
+    var next_attack := _select_random_attack(warden)
+    if next_attack == _last_attack:
+        for i in range(MAX_NUM_RETRIES):
+            next_attack = _select_random_attack(warden)
+            if next_attack == _last_attack:
+                continue
+    _last_attack = next_attack
+    return next_attack
+
+func _select_random_attack(warden: Warden) -> int:
     var rng_table_key := _get_rng_table_key(warden)
     var range_table: Dictionary = _range_tables[rng_table_key]
 
     var rng_value := _rng.randi_range(1, 100)
     for rng_range in range_table:
         if rng_value in rng_range:
-            return {'new_state': range_table[rng_range]}
+            return range_table[rng_range]
 
-    return {'new_state': Warden.State.NO_CHANGE}
+    return Warden.State.NO_CHANGE
 
 func _get_rng_table_key(warden: Warden) -> int:
     if warden.player_is_near():
