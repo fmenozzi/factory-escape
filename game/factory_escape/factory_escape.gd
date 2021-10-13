@@ -46,12 +46,9 @@ func _ready() -> void:
 
 func _connect_warden_signals(warden: Warden) -> void:
     warden.connect('lightning_floor_activated', _lightning_floor, 'start')
-    # TODO: connect warden's death signal to lightning floor's stop() function.
-
     warden.connect('projectiles_spawn_activated', self, '_on_projectile_spawn_activated')
-    # TODO: connect warden's death signal to spawner's queue_free() function.
-
     warden.connect('crashed_into_wall', _player, '_on_warden_crashed_into_wall')
+    warden.connect('died', self, '_on_warden_died')
 
 func _on_projectile_spawn_activated() -> void:
     for spawner in _projectile_spawners:
@@ -240,5 +237,46 @@ func _on_boss_fight_triggered() -> void:
 
     # Resume player processing.
     _central_hub.set_process(false)
+    _player.set_process_unhandled_input(true)
+    _player.set_physics_process(true)
+
+func _on_warden_died(warden: Warden) -> void:
+    # Pause player processing and switch to IDLE state.
+    _player.set_process_unhandled_input(false)
+    _player.set_physics_process(false)
+    _player.change_state({'new_state': Player.State.IDLE})
+
+    # Stop the lightning floor in case it was active at time of death.
+    _lightning_floor.stop()
+
+    # Remove the projectiles and spawners.
+    for spawner in _projectile_spawners:
+        spawner.queue_free()
+    for enemy in _central_hub.get_node('Enemies').get_children():
+        if enemy is Warden:
+            continue
+        enemy.queue_free()
+
+    # Save warden fight state.
+    _central_hub._save_manager.warden_fight_state = CentralHubSaveManager.WardenFightState.POST_FIGHT
+
+    # Boom.
+    warden._change_state({'new_state': Warden.State.DIE})
+    yield(warden._current_state, 'sequence_finished')
+    warden.queue_free()
+
+    # Re-enable camera focus point.
+    _central_hub_camera_focus_point.set_active(true)
+
+    # Disable boss walls/triggers.
+    _central_hub.set_enable_boss_fight_triggers(false)
+    _central_hub.set_enable_boss_fight_walls(false)
+
+    # Wait a bit and then open the door.
+    yield(get_tree().create_timer(1.0), 'timeout')
+    _central_lock.get_closing_door().open()
+    yield(_central_lock.get_closing_door(), 'door_opened')
+
+    # Resume player processing.
     _player.set_process_unhandled_input(true)
     _player.set_physics_process(true)

@@ -5,6 +5,7 @@ signal intro_sequence_finished
 signal lightning_floor_activated
 signal projectiles_spawn_activated
 signal crashed_into_wall
+signal died(warden)
 
 enum State {
     NO_CHANGE,
@@ -23,6 +24,7 @@ enum State {
     COMBO_LEAP,
     COMBO_CHARGE_BACKSTEP,
     COMBO_CHARGE_LEAP_TO_CENTER,
+    DIE,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -43,6 +45,7 @@ onready var STATES := {
     State.COMBO_LEAP:                  $States/ComboLeap,
     State.COMBO_CHARGE_BACKSTEP:       $States/ComboChargeBackstep,
     State.COMBO_CHARGE_LEAP_TO_CENTER: $States/ComboChargeLeapToCenter,
+    State.DIE:                         $States/Die,
 }
 
 var direction: int
@@ -152,4 +155,4 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state.enter(self, new_state_dict)
 
 func _die() -> void:
-    pass
+    emit_signal('died', self)

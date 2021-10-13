@@ -18,19 +18,19 @@ extents = Vector2( 64, 8 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 144, 104 )
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 32, 120 )
-
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 72, 8 )
+extents = Vector2( 32, 120 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 72, 8 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 72 )
+extents = Vector2( 72, 8 )
 
 [sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 72 )
+
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 8, 72 )
 
 [node name="CentralHub" groups=[
@@ -116,7 +116,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/DoorArea" index="0"]
 position = Vector2( 480, 72 )
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 
 [node name="FragilePlatform" parent="BossFight" index="1" instance=ExtResource( 4 )]
 position = Vector2( 480, 48 )
@@ -130,7 +130,7 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Walls/Left" index="0"]
 position = Vector2( 312, 88 )
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 disabled = true
 one_way_collision = true
 
@@ -141,7 +141,7 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Walls/Right" index="0"]
 position = Vector2( 648, 88 )
 rotation = -1.5708
-shape = SubResource( 5 )
+shape = SubResource( 6 )
 disabled = true
 one_way_collision = true
 
@@ -152,7 +152,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Triggers/Left" index="0"]
 position = Vector2( 352, 88 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="Right" type="Area2D" parent="BossFight/Triggers" index="1"]
@@ -160,7 +160,7 @@ collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/Triggers/Right" index="0"]
 position = Vector2( 608, 88 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 disabled = true
 
 [node name="WardenSpawnPoint" type="Position2D" parent="BossFight" index="4"]
