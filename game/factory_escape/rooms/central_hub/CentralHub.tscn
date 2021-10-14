@@ -112,10 +112,11 @@ limit_top = 0
 [node name="BossFight" type="Node2D" parent="." index="14"]
 
 [node name="DoorArea" type="Area2D" parent="BossFight" index="0"]
+position = Vector2( 480, 160 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossFight/DoorArea" index="0"]
-position = Vector2( 480, 72 )
+position = Vector2( 0, -72 )
 shape = SubResource( 4 )
 
 [node name="FragilePlatform" parent="BossFight" index="1" instance=ExtResource( 4 )]

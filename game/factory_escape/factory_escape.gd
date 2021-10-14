@@ -246,6 +246,16 @@ func _on_warden_died(warden: Warden) -> void:
     _player.set_physics_process(false)
     _player.change_state({'new_state': Player.State.IDLE})
 
+    # Switch warden to IDLE state temporarily so that it doesn't keep attacking
+    # during the fadeout.
+    warden._change_state({'new_state': Warden.State.IDLE})
+
+    # Flash white on the screen to hide the fact that we may need to move some
+    # stuff around a bit.
+    var fade_duration := 0.1
+    _screen_fadeout.fade_to_white(fade_duration)
+    yield(_screen_fadeout, 'fade_to_white_finished')
+
     # Stop the lightning floor in case it was active at time of death.
     _lightning_floor.stop()
 
@@ -259,6 +269,26 @@ func _on_warden_died(warden: Warden) -> void:
 
     # Save warden fight state.
     _central_hub._save_manager.warden_fight_state = CentralHubSaveManager.WardenFightState.POST_FIGHT
+
+    # Ensure warden is grounded. It's not important to ensure that it is not
+    # over the door, since it will explode and die before the door opens.
+    var warden_ground_detector := warden.get_ground_detector()
+    warden_ground_detector.force_raycast_update()
+    warden.global_position = warden_ground_detector.get_collision_point()
+
+    # Ensure player is grounded and not over the door.
+    _player.set_physics_process(true)
+    _player.change_state({
+        'new_state': Player.State.POST_WARDEN_ADJUSTMENTS,
+        'door_area': _central_hub.get_door_area(),
+        'warden': warden,
+    })
+    yield(_player.current_state, 'sequence_finished')
+    _player.set_physics_process(false)
+
+    # Fade it back in now that we're done.
+    _screen_fadeout.fade_from_white(fade_duration)
+    yield(_screen_fadeout, 'fade_from_white_finished')
 
     # Boom.
     warden._change_state({'new_state': Warden.State.DIE})

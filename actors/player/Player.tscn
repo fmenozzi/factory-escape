@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -53,6 +53,8 @@
 [ext_resource path="res://actors/player/states/mark_central_hub_fall_as_completed.gd" type="Script" id=51]
 [ext_resource path="res://actors/player/states/spring_jump.gd" type="Script" id=52]
 [ext_resource path="res://actors/player/states/play_animation_and_sound.gd" type="Script" id=53]
+[ext_resource path="res://actors/player/states/move_away_from_door.gd" type="Script" id=54]
+[ext_resource path="res://actors/player/states/get_grounded.gd" type="Script" id=55]
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -1048,6 +1050,15 @@ script = ExtResource( 30 )
 [node name="MarkCentralHubFallAsCompleted" type="Node" parent="States/CentralHubFall"]
 script = ExtResource( 51 )
 
+[node name="PostWardenAdjustments" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="GetGrounded" type="Node" parent="States/PostWardenAdjustments"]
+script = ExtResource( 55 )
+
+[node name="MoveAwayFromDoor" type="Node" parent="States/PostWardenAdjustments"]
+script = ExtResource( 54 )
+
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
 ] instance=ExtResource( 22 )]
@@ -1090,3 +1101,8 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector"]
 shape = SubResource( 34 )
+
+[node name="GroundDetector" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 256 )
+collision_mask = 4

@@ -2,10 +2,13 @@ extends Control
 
 signal fade_to_black_finished
 signal fade_from_black_finished
+signal fade_to_white_finished
+signal fade_from_white_finished
 
 const TRANSPARENT_ALPHA := 0.0
 const OPAQUE_ALPHA := 1.0
 
+onready var _white_overlay: ColorRect = $WhiteOverlay
 onready var _black_overlay: ColorRect = $BlackOverlay
 onready var _fade_tween: Tween = $FadeTween
 
@@ -16,7 +19,7 @@ func fade_to_black(duration: float, delay: float = 0.0, fade_music: bool = true)
     _volume_multiplier_music = Audio.get_bus_volume_linear('Music')
     _volume_multiplier_effects = Audio.get_bus_volume_linear('Effects')
 
-    _fade(TRANSPARENT_ALPHA, OPAQUE_ALPHA, duration, delay, fade_music)
+    _fade(_black_overlay, TRANSPARENT_ALPHA, OPAQUE_ALPHA, duration, delay, fade_music)
     yield(_fade_tween, 'tween_all_completed')
 
     emit_signal('fade_to_black_finished')
@@ -25,17 +28,36 @@ func fade_from_black(duration: float, delay: float = 0.0, fade_music: bool = tru
     _volume_multiplier_music = Audio.get_bus_max_volume_linear('Music')
     _volume_multiplier_effects = Audio.get_bus_max_volume_linear('Effects')
 
-    _fade(OPAQUE_ALPHA, TRANSPARENT_ALPHA, duration, delay, fade_music)
+    _fade(_black_overlay, OPAQUE_ALPHA, TRANSPARENT_ALPHA, duration, delay, fade_music)
     yield(_fade_tween, 'tween_all_completed')
 
     emit_signal('fade_from_black_finished')
 
-func _fade(old: float, new: float, duration: float, delay: float, fade_music: bool) -> void:
+func fade_to_white(duration: float) -> void:
+    var delay := 0.0
+    var fade_music := false
+    _fade(_white_overlay, TRANSPARENT_ALPHA, OPAQUE_ALPHA, duration, delay, fade_music)
+    yield(_fade_tween, 'tween_all_completed')
+
+    emit_signal('fade_to_white_finished')
+
+func fade_from_white(duration: float) -> void:
+    var delay := 0.0
+    var fade_music := false
+    _fade(_white_overlay, OPAQUE_ALPHA, TRANSPARENT_ALPHA, duration, delay, fade_music)
+    yield(_fade_tween, 'tween_all_completed')
+
+    emit_signal('fade_from_white_finished')
+
+func _fade(
+    overlay: ColorRect, old: float, new: float, duration: float, delay: float,
+    fade_music: bool
+) -> void:
     _set_fade_music(fade_music)
 
     _fade_tween.remove_all()
     _fade_tween.interpolate_property(
-        _black_overlay, 'modulate:a', old, new, duration, Tween.TRANS_LINEAR,
+        overlay, 'modulate:a', old, new, duration, Tween.TRANS_LINEAR,
         Tween.EASE_IN, delay)
     _fade_tween.start()
 

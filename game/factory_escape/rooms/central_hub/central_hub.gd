@@ -49,6 +49,9 @@ func get_camera_focus_point() -> CameraFocusPoint:
 func get_fragile_platform() -> FragilePlatform:
     return _fragile_platform
 
+func get_door_area() -> Area2D:
+    return _door_area
+
 func lamp_reset() -> void:
     if _save_manager.warden_fight_state == CentralHubSaveManager.WardenFightState.POST_FIGHT:
         return
