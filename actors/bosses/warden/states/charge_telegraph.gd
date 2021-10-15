@@ -12,6 +12,7 @@ func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.set_direction(Util.direction(warden, Util.get_player()))
     warden.get_sprite().visible = false
     warden.get_shakeable_sprites().visible = true
+    warden.get_sound_manager().play(WardenSoundManager.Sounds.CHARGE_TELEGRAPH)
 
     _timer.start()
 

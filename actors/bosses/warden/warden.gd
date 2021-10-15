@@ -56,6 +56,7 @@ var _current_state_enum: int = -1
 onready var _health: Health = $Health
 onready var _flash_manager: Node = $FlashManager
 onready var _physics_manager: WardenPhysicsManager = $PhysicsManager
+onready var _sound_manager: WardenSoundManager = $WardenSoundManager
 onready var _sprite: Sprite = $Sprite
 onready var _stomp_dust_sprite: Sprite = $StompDustSprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
@@ -101,9 +102,13 @@ func emit_dust_puff_impact() -> void:
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)
     _flash_manager.start_flashing()
+    _sound_manager.play(WardenSoundManager.Sounds.HIT)
 
 func get_physics_manager() -> WardenPhysicsManager:
     return _physics_manager
+
+func get_sound_manager() -> WardenSoundManager:
+    return _sound_manager
 
 func get_sprite() -> Sprite:
     return _sprite
@@ -159,4 +164,6 @@ func _change_state(new_state_dict: Dictionary) -> void:
     _current_state.enter(self, new_state_dict)
 
 func _die() -> void:
+    _sound_manager.play(WardenSoundManager.Sounds.KILLED)
+
     emit_signal('died', self)
