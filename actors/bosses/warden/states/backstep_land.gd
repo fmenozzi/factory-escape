@@ -4,6 +4,9 @@ func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('land')
     warden.emit_dust_puff_land()
 
+    Screenshake.start(Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
+    Rumble.start(Rumble.Type.WEAK, 0.2)
+
 func exit(warden: Warden) -> void:
     pass
 
