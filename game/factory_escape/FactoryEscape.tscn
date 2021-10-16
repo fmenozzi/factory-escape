@@ -177,6 +177,22 @@ position = Vector2( 3200, 1080 )
 [node name="CentralHub" parent="World/Rooms" index="16" instance=ExtResource( 19 )]
 position = Vector2( 2880, 3944 )
 
+[node name="SectorOneSwitch" parent="World/Rooms/CentralHub/CentralLock/Switches" index="0"]
+position = Vector2( -4480, -288 )
+z_index = 1
+
+[node name="SectorTwoSwitch" parent="World/Rooms/CentralHub/CentralLock/Switches" index="1"]
+position = Vector2( 3680, 16 )
+z_index = 1
+
+[node name="SectorThreeSwitch" parent="World/Rooms/CentralHub/CentralLock/Switches" index="2"]
+position = Vector2( -2080, 176 )
+z_index = 1
+
+[node name="SectorFourSwitch" parent="World/Rooms/CentralHub/CentralLock/Switches" index="3"]
+position = Vector2( 2240, 736 )
+z_index = 1
+
 [node name="SectorOneEntrance" parent="World/Rooms" index="17" instance=ExtResource( 20 )]
 position = Vector2( 2240, 3944 )
 
@@ -488,3 +504,10 @@ position = Vector2( 5120, 4664 )
 
 [node name="Player" parent="World" index="3"]
 position = Vector2( 160, -384 )
+
+[editable path="World/Rooms/CentralHub"]
+[editable path="World/Rooms/CentralHub/TileMaps"]
+[editable path="World/Rooms/CentralHub/CentralLock"]
+[editable path="World/Rooms/CentralHub/CentralLock/VisibilityBasedAudioGroup"]
+[editable path="World/Rooms/CentralHub/CameraFocusPoint"]
+[editable path="World/Rooms/CentralHub/BossFight/LightningFloor"]
