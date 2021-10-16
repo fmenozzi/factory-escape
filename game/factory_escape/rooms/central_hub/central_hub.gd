@@ -56,9 +56,16 @@ func lamp_reset() -> void:
     if _save_manager.warden_fight_state == CentralHubSaveManager.WardenFightState.POST_FIGHT:
         return
 
-    # Reset boss walls/triggers.
-    set_enable_boss_fight_triggers(true)
-    set_enable_boss_fight_walls(false)
+    match _save_manager.warden_fight_state:
+        CentralHubSaveManager.WardenFightState.PRE_FIGHT:
+            set_enable_boss_fight_triggers(false)
+            set_enable_boss_fight_walls(false)
+
+        CentralHubSaveManager.WardenFightState.FIGHT:
+            set_enable_boss_fight_triggers(true)
+            set_enable_boss_fight_walls(false)
+
+            _central_lock.get_closing_door().set_opened()
 
     # Reset lightning floor, in case it was active at the time of death.
     _lightning_floor.stop()
@@ -68,9 +75,6 @@ func lamp_reset() -> void:
 
     # Reset focus point.
     _camera_focus_point.set_active(true)
-
-    # Reset central lock door.
-    _central_lock.get_closing_door().set_opened()
 
 func _player_standing_over_door() -> bool:
     return _door_area.get_overlapping_bodies().has(_player)
