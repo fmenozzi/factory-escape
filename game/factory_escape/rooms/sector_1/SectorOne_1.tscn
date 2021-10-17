@@ -9,22 +9,22 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 58 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 8, 24 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 8, 24 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 58, 8 )
-
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 24, 8 )
+extents = Vector2( 8, 24 )
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 24 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 58, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 24, 8 )
 
 [node name="SectorOne_1" instance=ExtResource( 1 )]
@@ -58,7 +58,7 @@ position = Vector2( 256, 180 )
 position = Vector2( 64, 272 )
 
 [node name="WorkerDroneTop" parent="Enemies" index="2" instance=ExtResource( 3 )]
-position = Vector2( 192, 64 )
+position = Vector2( 56, 120 )
 
 [node name="Bottom" parent="HazardCheckpoints" index="0" instance=ExtResource( 5 )]
 position = Vector2( 256, 308 )
@@ -66,7 +66,7 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Bottom" index="0"]
 position = Vector2( 24, -58 )
-shape = SubResource( 5 )
+shape = SubResource( 2 )
 
 [node name="TopLeft" parent="HazardCheckpoints" index="1" instance=ExtResource( 5 )]
 position = Vector2( 64, 68 )
@@ -74,7 +74,7 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/TopLeft" index="0"]
 position = Vector2( 0, -24 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="TopRight" parent="HazardCheckpoints" index="2" instance=ExtResource( 5 )]
 position = Vector2( 256, 68 )
@@ -82,7 +82,7 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/TopRight" index="0"]
 position = Vector2( 0, -24 )
-shape = SubResource( 7 )
+shape = SubResource( 4 )
 
 [node name="Bottom" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 collision_layer = 512
@@ -91,7 +91,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/Bottom" index="0"]
 position = Vector2( 328, 250 )
 rotation = -1.5708
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 one_way_collision = true
 
 [node name="TopLeft" type="StaticBody2D" parent="EnemyBarriers" index="1"]
@@ -101,7 +101,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/TopLeft" index="0"]
 position = Vector2( -8, 44 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 one_way_collision = true
 
 [node name="TopRight" type="StaticBody2D" parent="EnemyBarriers" index="2"]
@@ -111,7 +111,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/TopRight" index="0"]
 position = Vector2( 328, 44 )
 rotation = -1.5708
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 one_way_collision = true
 
 [node name="Elevator" parent="." index="9" instance=ExtResource( 4 )]
