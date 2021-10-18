@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 64, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 24, 8 )
 
 [node name="SectorTwo_6" instance=ExtResource( 1 )]
 
@@ -35,6 +42,30 @@ position = Vector2( 176, 104 )
 
 [node name="Destination" parent="MovingPlatforms/MovingPlatformSmall" index="2"]
 position = Vector2( 0, 80 )
+
+[node name="SentryDrone" parent="Enemies" index="0" instance=ExtResource( 3 )]
+position = Vector2( 248, 184 )
+initial_direction = -1
+
+[node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerLeft" index="0"]
+position = Vector2( -8, 268 )
+rotation = 1.5708
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="UpperRight" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperRight" index="0"]
+position = Vector2( 328, 52 )
+rotation = -1.5708
+shape = SubResource( 3 )
+one_way_collision = true
 
 [editable path="TileMaps"]
 [editable path="MovingPlatforms/MovingPlatformSmall"]

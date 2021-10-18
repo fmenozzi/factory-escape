@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/moving/MovingPlatformSmall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/platforms/moving/MovingHazardPlatformSmall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/enemies/worker_drone/WorkerDrone.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -16,6 +17,12 @@ extents = Vector2( 72, 4 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 72 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 72, 8 )
 
 [node name="SectorTwo_1-4" instance=ExtResource( 1 )]
 
@@ -80,6 +87,12 @@ position = Vector2( 224, 480 )
 [node name="Destination" parent="MovingPlatforms/MovingPlatformSmall5" index="2"]
 position = Vector2( -104, 0 )
 
+[node name="WorkerDrone1" parent="Enemies" index="0" instance=ExtResource( 5 )]
+position = Vector2( 256, 56 )
+
+[node name="WorkerDrone2" parent="Enemies" index="1" instance=ExtResource( 5 )]
+position = Vector2( 80, 416 )
+
 [node name="Top" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 128, 204 )
 requires_grounded = false
@@ -101,6 +114,26 @@ requires_grounded = false
 [node name="CollisionShape2D" parent="HazardCheckpoints/Bottom" index="0"]
 position = Vector2( 40, -72 )
 shape = SubResource( 4 )
+
+[node name="UpperLeft" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperLeft" index="0"]
+position = Vector2( -8, 44 )
+rotation = 1.5708
+shape = SubResource( 5 )
+one_way_collision = true
+
+[node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerLeft" index="0"]
+position = Vector2( -8, 452 )
+rotation = 1.5708
+shape = SubResource( 6 )
+one_way_collision = true
 
 [editable path="TileMaps"]
 [editable path="MovingPlatforms/MovingPlatformSmall2"]
