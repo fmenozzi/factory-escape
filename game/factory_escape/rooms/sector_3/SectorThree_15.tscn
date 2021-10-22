@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/springboard/Springboard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -10,17 +11,23 @@ extents = Vector2( 160, 270 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 72 )
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 40, 8 )
+
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 40, 8 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 40, 8 )
-
-[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 32 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 72, 8 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 32, 8 )
 
 [node name="SectorThree_15" instance=ExtResource( 1 )]
 
@@ -46,6 +53,9 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 450 )
 
+[node name="SluggishFailure" parent="Enemies" index="0" instance=ExtResource( 4 )]
+position = Vector2( 168, 128 )
+
 [node name="Bottom" parent="HazardCheckpoints" index="0" instance=ExtResource( 3 )]
 position = Vector2( 64, 528 )
 requires_grounded = false
@@ -59,20 +69,20 @@ position = Vector2( 72, 352 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/MiddleLeft" index="0"]
 position = Vector2( -16, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MiddleRight" parent="HazardCheckpoints" index="2" instance=ExtResource( 3 )]
 position = Vector2( 232, 304 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/MiddleRight" index="0"]
 position = Vector2( 32, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="MiddleTop" parent="HazardCheckpoints" index="3" instance=ExtResource( 3 )]
 position = Vector2( 168, 128 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/MiddleTop" index="0"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Top" parent="HazardCheckpoints" index="4" instance=ExtResource( 3 )]
 position = Vector2( 272, 80 )
@@ -80,7 +90,27 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Top" index="0"]
 position = Vector2( -24, -32 )
-shape = SubResource( 3 )
+shape = SubResource( 6 )
+
+[node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerLeft" index="0"]
+position = Vector2( -8, 456 )
+rotation = 1.5708
+shape = SubResource( 7 )
+one_way_collision = true
+
+[node name="UpperRight" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperRight" index="0"]
+position = Vector2( 328, 48 )
+rotation = -1.5708
+shape = SubResource( 8 )
+one_way_collision = true
 
 [node name="Springboard" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 176, 496 )

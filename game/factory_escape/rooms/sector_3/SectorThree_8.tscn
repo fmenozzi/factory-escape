@@ -1,10 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/springboard/Springboard.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 40, 24 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 112, 8 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 48, 8 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 16, 8 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 8, 64 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 72, 8 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 72, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 8 )
 
 [node name="SectorThree_8" instance=ExtResource( 1 )]
 
@@ -30,7 +66,103 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 450 )
 
+[node name="RangedSentryDrone" parent="Enemies" index="0" instance=ExtResource( 3 )]
+position = Vector2( 200, 160 )
+
+[node name="StickyDrone" parent="Enemies" index="1" instance=ExtResource( 4 )]
+position = Vector2( 80, 264 )
+floor_normal = 1
+
+[node name="UpperRight" parent="HazardCheckpoints" index="0" instance=ExtResource( 5 )]
+position = Vector2( 272, 72 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/UpperRight" index="0"]
+position = Vector2( 8, -24 )
+shape = SubResource( 4 )
+
+[node name="UpperPlatform" parent="HazardCheckpoints" index="1" instance=ExtResource( 5 )]
+position = Vector2( 128, 104 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/UpperPlatform" index="0"]
+shape = SubResource( 5 )
+
+[node name="MiddlePlatform" parent="HazardCheckpoints" index="2" instance=ExtResource( 5 )]
+position = Vector2( 128, 232 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/MiddlePlatform" index="0"]
+shape = SubResource( 6 )
+
+[node name="LowerRightPlatformSmall" parent="HazardCheckpoints" index="3" instance=ExtResource( 5 )]
+position = Vector2( 296, 312 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerRightPlatformSmall" index="0"]
+shape = SubResource( 7 )
+
+[node name="LowerRightPlatformLarge" parent="HazardCheckpoints" index="4" instance=ExtResource( 5 )]
+position = Vector2( 256, 360 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerRightPlatformLarge" index="0"]
+shape = SubResource( 8 )
+
+[node name="LowerLeftPlatform" parent="HazardCheckpoints" index="5" instance=ExtResource( 5 )]
+position = Vector2( 96, 408 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerLeftPlatform" index="0"]
+shape = SubResource( 9 )
+
+[node name="LowerLeft" parent="HazardCheckpoints" index="6" instance=ExtResource( 5 )]
+position = Vector2( 16, 504 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerLeft" index="0"]
+position = Vector2( -8, -64 )
+shape = SubResource( 10 )
+
+[node name="BottomFloorLeft" parent="HazardCheckpoints" index="7" instance=ExtResource( 5 )]
+position = Vector2( 96, 504 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/BottomFloorLeft" index="0"]
+position = Vector2( -8, 0 )
+shape = SubResource( 11 )
+
+[node name="BottomFloorRight" parent="HazardCheckpoints" index="8" instance=ExtResource( 5 )]
+position = Vector2( 224, 504 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/BottomFloorRight" index="0"]
+position = Vector2( 8, 0 )
+shape = SubResource( 12 )
+
+[node name="UpperRight" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperRight" index="0"]
+position = Vector2( 328, 48 )
+rotation = -1.5708
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerLeft" index="0"]
+position = Vector2( -8, 440 )
+rotation = 1.5708
+shape = SubResource( 3 )
+one_way_collision = true
+
 [node name="Springboard" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 160, 504 )
 
 [editable path="TileMaps"]
+[editable path="HazardCheckpoints/UpperRight"]
+[editable path="HazardCheckpoints/UpperPlatform"]
+[editable path="HazardCheckpoints/MiddlePlatform"]
+[editable path="HazardCheckpoints/LowerRightPlatformSmall"]
+[editable path="HazardCheckpoints/LowerRightPlatformLarge"]
+[editable path="HazardCheckpoints/LowerLeftPlatform"]
+[editable path="HazardCheckpoints/LowerLeft"]
+[editable path="HazardCheckpoints/BottomFloorLeft"]
+[editable path="HazardCheckpoints/BottomFloorRight"]

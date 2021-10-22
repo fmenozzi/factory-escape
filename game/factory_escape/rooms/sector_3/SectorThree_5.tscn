@@ -1,9 +1,32 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 48, 32 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32, 4 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 64 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8, 64 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 64, 8 )
 
 [node name="SectorThree_5" instance=ExtResource( 1 )]
 
@@ -29,4 +52,86 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 270 )
 
+[node name="StickyDrone1" parent="Enemies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 48, 12 )
+floor_normal = 1
+
+[node name="AggroManager" parent="Enemies/StickyDrone1" index="3"]
+aggro_radius_tiles = 7.0
+
+[node name="StickyDrone2" parent="Enemies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 304, 144 )
+floor_normal = 2
+
+[node name="AggroManager" parent="Enemies/StickyDrone2" index="3"]
+aggro_radius_tiles = 7.0
+
+[node name="TopRight" parent="HazardCheckpoints" index="0" instance=ExtResource( 3 )]
+position = Vector2( 256, 76 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/TopRight" index="0"]
+position = Vector2( 16, -32 )
+shape = SubResource( 5 )
+
+[node name="MiddlePlatform" parent="HazardCheckpoints" index="1" instance=ExtResource( 3 )]
+position = Vector2( 144, 124 )
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/MiddlePlatform" index="0"]
+shape = SubResource( 6 )
+
+[node name="LowerLeft" parent="HazardCheckpoints" index="2" instance=ExtResource( 3 )]
+position = Vector2( 32, 332 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerLeft" index="0"]
+position = Vector2( -24, -64 )
+shape = SubResource( 7 )
+
+[node name="LowerRight" parent="HazardCheckpoints" index="3" instance=ExtResource( 3 )]
+position = Vector2( 288, 332 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/LowerRight" index="0"]
+position = Vector2( 24, -64 )
+shape = SubResource( 8 )
+
+[node name="UpperRight" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperRight" index="0"]
+position = Vector2( 328, 44 )
+rotation = -1.5708
+shape = SubResource( 2 )
+one_way_collision = true
+
+[node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerLeft" index="0"]
+position = Vector2( -8, 268 )
+rotation = 1.5708
+shape = SubResource( 3 )
+one_way_collision = true
+
+[node name="LowerRight" type="StaticBody2D" parent="EnemyBarriers" index="2"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerRight" index="0"]
+position = Vector2( 328, 268 )
+rotation = -1.5708
+shape = SubResource( 4 )
+one_way_collision = true
+
 [editable path="TileMaps"]
+[editable path="Enemies/StickyDrone1"]
+[editable path="Enemies/StickyDrone1/AggroManager"]
+[editable path="Enemies/StickyDrone2"]
+[editable path="Enemies/StickyDrone2/AggroManager"]
+[editable path="HazardCheckpoints/TopRight"]
+[editable path="HazardCheckpoints/MiddlePlatform"]
+[editable path="HazardCheckpoints/LowerLeft"]
+[editable path="HazardCheckpoints/LowerRight"]
