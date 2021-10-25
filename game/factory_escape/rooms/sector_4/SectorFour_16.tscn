@@ -77,7 +77,7 @@ position = Vector2( 40, -8 )
 shape = SubResource( 5 )
 
 [node name="SluggishFailure" parent="Enemies" index="0" instance=ExtResource( 4 )]
-position = Vector2( 320, 100 )
+position = Vector2( 304, 100 )
 
 [node name="LeapingFailureLeftLeft" parent="Enemies" index="1" instance=ExtResource( 5 )]
 position = Vector2( 104, 164 )

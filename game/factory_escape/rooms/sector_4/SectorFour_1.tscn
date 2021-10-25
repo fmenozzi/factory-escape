@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/enemies/turret/Turret.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
@@ -14,6 +15,12 @@ extents = Vector2( 40, 80 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 104, 48 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 24, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 72, 8 )
 
 [node name="SectorFour_1" instance=ExtResource( 1 )]
 
@@ -59,6 +66,30 @@ position = Vector2( 184, 60 )
 [node name="CollisionShape2D" parent="GrapplePoints/Upper/GrappleRangeArea" index="0"]
 position = Vector2( 16, 4 )
 shape = SubResource( 4 )
+
+[node name="Turret" parent="Enemies" index="0" instance=ExtResource( 3 )]
+position = Vector2( 192, 188 )
+floor_normal = 1
+
+[node name="UpperLeft" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperLeft" index="0"]
+position = Vector2( -8, 36 )
+rotation = 1.5708
+shape = SubResource( 5 )
+one_way_collision = true
+
+[node name="LowerRight" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerRight" index="0"]
+position = Vector2( 328, 276 )
+rotation = -1.5708
+shape = SubResource( 6 )
+one_way_collision = true
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/Lower"]

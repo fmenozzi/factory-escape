@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/hazard_water/HazardWater.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/turret/Turret.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 180 )
@@ -15,6 +16,15 @@ extents = Vector2( 8, 48 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 48 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 64, 8 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 64, 8 )
 
 [node name="SectorFour_10" instance=ExtResource( 1 )]
 
@@ -43,6 +53,10 @@ position = Vector2( 160, 270 )
 position = Vector2( 232, 148 )
 shape = SubResource( 2 )
 
+[node name="Turret" parent="Enemies" index="0" instance=ExtResource( 4 )]
+position = Vector2( 232, 192 )
+floor_normal = 1
+
 [node name="PlatformLeft" parent="HazardCheckpoints" index="0" instance=ExtResource( 3 )]
 position = Vector2( 192, 112 )
 requires_grounded = false
@@ -59,7 +73,38 @@ requires_grounded = false
 position = Vector2( -8, -48 )
 shape = SubResource( 4 )
 
+[node name="UpperLeft" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperLeft" index="0"]
+position = Vector2( -8, 48 )
+rotation = 1.5708
+shape = SubResource( 5 )
+one_way_collision = true
+
+[node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerLeft" index="0"]
+position = Vector2( -8, 272 )
+rotation = 1.5708
+shape = SubResource( 6 )
+one_way_collision = true
+
+[node name="LowerRight" type="StaticBody2D" parent="EnemyBarriers" index="2"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/LowerRight" index="0"]
+position = Vector2( 328, 272 )
+rotation = -1.5708
+shape = SubResource( 7 )
+one_way_collision = true
+
 [editable path="TileMaps"]
 [editable path="Hazards/HazardWater"]
+[editable path="Hazards/HazardWater/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/PlatformLeft"]
 [editable path="HazardCheckpoints/PlatformRight"]

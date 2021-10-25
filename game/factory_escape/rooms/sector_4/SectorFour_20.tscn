@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/hazard_water/HazardWater.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -34,6 +35,12 @@ extents = Vector2( 16, 8 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 8, 32 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 32, 8 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 72, 8 )
 
 [node name="SectorFour_20" instance=ExtResource( 1 )]
 
@@ -74,6 +81,9 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" parent="Hazards/HazardWater" index="0"]
 position = Vector2( 160, 284 )
 shape = SubResource( 3 )
+
+[node name="SluggishFailure" parent="Enemies" index="0" instance=ExtResource( 5 )]
+position = Vector2( 112, 120 )
 
 [node name="WaterLeft" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 96, 264 )
@@ -123,9 +133,30 @@ requires_grounded = false
 position = Vector2( -16, -32 )
 shape = SubResource( 10 )
 
+[node name="UpperRight" type="StaticBody2D" parent="EnemyBarriers" index="0"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperRight" index="0"]
+position = Vector2( 328, 40 )
+rotation = -1.5708
+shape = SubResource( 11 )
+one_way_collision = true
+
+[node name="UpperLeft" type="StaticBody2D" parent="EnemyBarriers" index="1"]
+collision_layer = 512
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBarriers/UpperLeft" index="0"]
+position = Vector2( 328, 448 )
+rotation = -1.5708
+shape = SubResource( 12 )
+one_way_collision = true
+
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]
 [editable path="Hazards/HazardWater"]
+[editable path="Hazards/HazardWater/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/WaterLeft"]
 [editable path="HazardCheckpoints/WaterRight"]
 [editable path="HazardCheckpoints/WaterPlatformLeft"]
