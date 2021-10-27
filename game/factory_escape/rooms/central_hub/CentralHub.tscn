@@ -17,7 +17,7 @@ extents = Vector2( 480, 180 )
 extents = Vector2( 64, 8 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 144, 104 )
+extents = Vector2( 144, 216 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 120 )
@@ -101,7 +101,7 @@ one_way_collision = true
 position = Vector2( 480, 88 )
 
 [node name="CollisionShape2D" parent="CameraFocusPoint/TriggerArea" index="0"]
-position = Vector2( 0, -32 )
+position = Vector2( 0, 80 )
 shape = SubResource( 3 )
 
 [node name="CentralLockCutsceneCamera" type="Camera2D" parent="." index="13" groups=[
