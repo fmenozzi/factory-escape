@@ -724,6 +724,7 @@ extents = Vector2( 0.5, 0.5 )
 "lamp_reset",
 "player",
 ]]
+z_index = 2
 collision_mask = 4
 script = ExtResource( 1 )
 
