@@ -216,6 +216,7 @@ func _on_boss_fight_triggered() -> void:
     # Wait a bit, then two big shakes, timed to the light pulse.
     yield(get_tree().create_timer(1.0), 'timeout')
     yield(_central_lock, 'ready_to_turn_on_new_light')
+    _central_hub.get_offscreen_rumble_audio_player().play(0.3)
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
         Screenshake.Priority.HIGH)

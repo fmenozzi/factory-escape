@@ -2,6 +2,8 @@ extends VisibilityBasedSoundManager
 class_name WardenSoundManager
 
 enum Sounds {
+    INTRO_LAND,
+    INTRO_UNCROUCH,
     CHARGE_TELEGRAPH,
     CHARGE_IMPACT,
     HIT,
@@ -18,6 +20,8 @@ func stop(sound_enum: int) -> void:
 
 func get_player(sound_enum: int) -> VisibilityBasedAudioPlayer:
     assert(sound_enum in [
+        Sounds.INTRO_LAND,
+        Sounds.INTRO_UNCROUCH,
         Sounds.CHARGE_TELEGRAPH,
         Sounds.CHARGE_IMPACT,
         Sounds.HIT,
@@ -25,6 +29,12 @@ func get_player(sound_enum: int) -> VisibilityBasedAudioPlayer:
     ])
 
     match sound_enum:
+        Sounds.INTRO_LAND:
+            return _audio_group.get_player_by_name('IntroLand')
+
+        Sounds.INTRO_UNCROUCH:
+            return _audio_group.get_player_by_name('IntroUncrouch')
+
         Sounds.CHARGE_TELEGRAPH:
             return _audio_group.get_player_by_name('ChargeTelegraph')
 

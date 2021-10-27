@@ -14,6 +14,7 @@ onready var _right_trigger: Area2D = $BossFight/Triggers/Right
 onready var _left_trigger_collision_shape: CollisionShape2D = $BossFight/Triggers/Left/CollisionShape2D
 onready var _right_trigger_collision_shape: CollisionShape2D = $BossFight/Triggers/Right/CollisionShape2D
 onready var _lightning_floor: LightningFloor = $BossFight/LightningFloor
+onready var _warden_offscreen_rumble: AudioStreamPlayer = $WardenOffscreenRumble
 onready var _save_manager: CentralHubSaveManager = $SaveManager
 
 var _player: Player = null
@@ -51,6 +52,9 @@ func get_fragile_platform() -> FragilePlatform:
 
 func get_door_area() -> Area2D:
     return _door_area
+
+func get_offscreen_rumble_audio_player() -> AudioStreamPlayer:
+    return _warden_offscreen_rumble
 
 func lamp_reset() -> void:
     if _save_manager.warden_fight_state == CentralHubSaveManager.WardenFightState.POST_FIGHT:

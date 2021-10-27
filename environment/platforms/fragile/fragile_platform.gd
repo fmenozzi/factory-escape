@@ -4,6 +4,7 @@ class_name FragilePlatform
 onready var _dust_puff_spawn_positions: Array = $DustPuffSpawnPositions.get_children()
 onready var _break_trigger: Area2D = $BreakTrigger
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _break_sound: AudioStreamPlayer = $Break
 
 func _ready() -> void:
     for position2d in _dust_puff_spawn_positions:
@@ -16,6 +17,7 @@ func break_platform() -> void:
     Screenshake.start(
         Screenshake.Duration.SHORT, Screenshake.Amplitude.VERY_SMALL)
     Rumble.start(Rumble.Type.WEAK, 0.3)
+    _break_sound.play()
 
 func reset() -> void:
     _break_trigger.connect('body_entered', self, '_on_break_triggered')

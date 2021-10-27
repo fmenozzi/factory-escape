@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/warden_offscreen_rumble.wav-2f93f0212d11cdc03434a76fecd55294.sample"
+
+[deps]
+
+source_file="res://game/factory_escape/rooms/central_hub/audio/warden_offscreen_rumble.wav"
+dest_files=[ "res://.import/warden_offscreen_rumble.wav-2f93f0212d11cdc03434a76fecd55294.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
