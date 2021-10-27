@@ -16,7 +16,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthTexture" type="TextureRect" parent="."]
+[node name="HealthTexture" type="TextureRect" parent="." groups=[
+"possibly_animated_texture_rects",
+]]
 margin_right = 40.0
 margin_bottom = 8.0
 texture = ExtResource( 1 )

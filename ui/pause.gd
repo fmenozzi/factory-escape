@@ -142,6 +142,11 @@ func _set_paused(new_pause_state: bool) -> void:
     else:
         Audio.reset_bus_to_max_volume_linear('Music')
 
+    # Manually pause/resume animated textures.
+    for texture_rect in get_tree().get_nodes_in_group('possibly_animated_texture_rects'):
+        if texture_rect.texture is AnimatedTexture:
+            texture_rect.texture.pause = new_pause_state
+
     # Need to call this callback manually here, see related comment in
     # title_screen.gd.
     _on_control_mode_changed(Controls.get_mode())
