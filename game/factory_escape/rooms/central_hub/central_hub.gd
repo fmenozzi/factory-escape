@@ -6,6 +6,11 @@ signal player_entered_central_hub_shaft
 
 onready var _central_lock: CentralLock = $CentralLock
 onready var _camera_focus_point: CameraFocusPoint = $CameraFocusPoint
+onready var _pre_warden_hard_save_areas: Array = $PreWardenHardSavePoints.get_children()
+onready var _hard_save_area_1: Area2D = $PreWardenHardSavePoints/ToSectorOne
+onready var _hard_save_area_2: Area2D = $PreWardenHardSavePoints/ToSectorTwo
+onready var _hard_save_area_3: Area2D = $PreWardenHardSavePoints/ToSectorThree
+onready var _hard_save_area_4: Area2D = $PreWardenHardSavePoints/ToSectorFour
 onready var _door_area: Area2D = $BossFight/DoorArea
 onready var _fragile_platform: FragilePlatform = $BossFight/FragilePlatform
 onready var _left_wall_collision_shape: CollisionShape2D = $BossFight/Walls/Left/CollisionShape2D
@@ -27,6 +32,12 @@ func _ready() -> void:
 
     _transition_trigger.connect(
         'body_entered', self, '_on_player_entered_transition_trigger_area')
+
+    assert(not _pre_warden_hard_save_areas.empty())
+    for hard_save_area in _pre_warden_hard_save_areas:
+        assert(hard_save_area is Area2D)
+        hard_save_area.connect(
+            'body_entered', self, '_on_player_entered_hard_save_area', [hard_save_area])
 
     set_process(false)
 
@@ -92,6 +103,30 @@ func _trigger_boss_fight() -> void:
     _save_manager.warden_fight_state = CentralHubSaveManager.WardenFightState.FIGHT
     set_enable_boss_fight_triggers(false)
     emit_signal('boss_fight_triggered')
+
+func _on_player_entered_hard_save_area(player: Player, hard_save_area: Area2D) -> void:
+    # Make sure player is facing the center of the room, so that it looks more
+    # "correct" if they're respawning after dying to the warden without having
+    # rested anywhere else first.
+    var direction_to_save: int = Util.Direction.LEFT
+    match hard_save_area:
+        _hard_save_area_1, _hard_save_area_3:
+            direction_to_save = Util.Direction.RIGHT
+
+        _hard_save_area_2, _hard_save_area_4:
+            direction_to_save = Util.Direction.LEFT
+
+    # Save relevant details.
+    player.save_manager.last_saved_global_position = hard_save_area.global_position
+    player.save_manager.last_saved_direction_to_lamp = direction_to_save
+    player.get_health_pack_manager().update_saved_num_health_packs()
+
+    # Permanently disable all four hard save areas.
+    _save_manager.player_entered_hard_save_area = true
+    for area in _pre_warden_hard_save_areas:
+        area.call_deferred(
+            'disconnect', 'body_entered', self, '_on_player_entered_hard_save_area')
+        area.get_node('CollisionShape2D').set_deferred('disabled', true)
 
 func _on_player_triggered_boss_fight(player: Player) -> void:
     if not player:

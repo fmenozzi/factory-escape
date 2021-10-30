@@ -8,13 +8,15 @@ enum WardenFightState {
 }
 
 var warden_fight_state: int = WardenFightState.PRE_FIGHT
+var player_entered_hard_save_area: bool = false
 
 onready var _central_hub = get_parent()
 onready var _save_key: String = get_parent().get_path()
 
 func get_save_data() -> Array:
     return [_save_key, {
-        'warden_fight_state': warden_fight_state
+        'warden_fight_state': warden_fight_state,
+        'player_entered_hard_save_area': player_entered_hard_save_area,
     }]
 
 func load_version_0_1_0(all_save_data: Dictionary) -> void:
@@ -23,8 +25,17 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
 
     var central_hub_save_data: Dictionary = all_save_data[_save_key]
     assert('warden_fight_state' in central_hub_save_data)
+    assert('player_entered_hard_save_area' in central_hub_save_data)
 
     warden_fight_state = central_hub_save_data['warden_fight_state']
+    player_entered_hard_save_area = central_hub_save_data['player_entered_hard_save_area']
+
+    # Disable all hard save areas if player has already passed through one.
+    if player_entered_hard_save_area:
+        for hard_save_area in _central_hub._pre_warden_hard_save_areas:
+            hard_save_area.disconnect(
+                'body_entered', self, '_on_player_entered_hard_save_area')
+            hard_save_area.get_node('CollisionShape2D').set_deferred('disabled', true)
 
     # Regardless of what state we're in, the camera focus point should always
     # start out as active and only deactivate as part of the intro fight
