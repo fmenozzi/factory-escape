@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -55,6 +55,7 @@
 [ext_resource path="res://actors/player/states/play_animation_and_sound.gd" type="Script" id=53]
 [ext_resource path="res://actors/player/states/move_away_from_door.gd" type="Script" id=54]
 [ext_resource path="res://actors/player/states/get_grounded.gd" type="Script" id=55]
+[ext_resource path="res://actors/player/states/mark_sector_five_lift_fall_as_completed.gd" type="Script" id=56]
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -1059,6 +1060,18 @@ script = ExtResource( 55 )
 
 [node name="MoveAwayFromDoor" type="Node" parent="States/PostWardenAdjustments"]
 script = ExtResource( 54 )
+
+[node name="SectorFiveLiftFall" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="FallNoInput" type="Node" parent="States/SectorFiveLiftFall"]
+script = ExtResource( 48 )
+
+[node name="HardLanding" type="Node" parent="States/SectorFiveLiftFall"]
+script = ExtResource( 30 )
+
+[node name="MarkSectorFiveLiftFallAsCompleted" type="Node" parent="States/SectorFiveLiftFall"]
+script = ExtResource( 56 )
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",

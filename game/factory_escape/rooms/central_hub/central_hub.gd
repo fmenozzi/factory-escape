@@ -2,6 +2,7 @@ extends Room
 class_name CentralHub
 
 signal boss_fight_triggered
+signal player_entered_central_hub_shaft
 
 onready var _central_lock: CentralLock = $CentralLock
 onready var _camera_focus_point: CameraFocusPoint = $CameraFocusPoint
@@ -15,6 +16,7 @@ onready var _left_trigger_collision_shape: CollisionShape2D = $BossFight/Trigger
 onready var _right_trigger_collision_shape: CollisionShape2D = $BossFight/Triggers/Right/CollisionShape2D
 onready var _lightning_floor: LightningFloor = $BossFight/LightningFloor
 onready var _warden_offscreen_rumble: AudioStreamPlayer = $WardenOffscreenRumble
+onready var _transition_trigger: Area2D = $TransitionTrigger
 onready var _save_manager: CentralHubSaveManager = $SaveManager
 
 var _player: Player = null
@@ -22,6 +24,9 @@ var _player: Player = null
 func _ready() -> void:
     _left_trigger.connect('body_entered', self, '_on_player_triggered_boss_fight')
     _right_trigger.connect('body_entered', self, '_on_player_triggered_boss_fight')
+
+    _transition_trigger.connect(
+        'body_entered', self, '_on_player_entered_transition_trigger_area')
 
     set_process(false)
 
@@ -105,3 +110,9 @@ func _on_player_triggered_boss_fight(player: Player) -> void:
 
     _player = player
     _trigger_boss_fight()
+
+func _on_player_entered_transition_trigger_area(player: Player) -> void:
+    if not player:
+        return
+
+    emit_signal('player_entered_central_hub_shaft')

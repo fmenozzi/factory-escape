@@ -47,6 +47,7 @@ enum State {
     INTRO_FALL,
     CENTRAL_HUB_FALL,
     POST_WARDEN_ADJUSTMENTS,
+    SECTOR_FIVE_LIFT_FALL,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -82,6 +83,7 @@ onready var STATES = {
     State.INTRO_FALL:              $States/IntroFall,
     State.CENTRAL_HUB_FALL:        $States/CentralHubFall,
     State.POST_WARDEN_ADJUSTMENTS: $States/PostWardenAdjustments,
+    State.SECTOR_FIVE_LIFT_FALL:   $States/SectorFiveLiftFall,
 }
 
 var current_state: Node = null

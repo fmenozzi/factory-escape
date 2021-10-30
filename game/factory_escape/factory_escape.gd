@@ -14,10 +14,16 @@ onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/Tutor
 onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
 onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralLockCutsceneCamera
 onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralLock
+onready var _suspend_point_post_warden: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPointPostWarden
 onready var _central_lock_save_manager: CentralLockSaveManager = $World/Rooms/CentralHub/CentralLock/SaveManager
+onready var _sector_five_lift: Room = $World/Rooms/SectorFiveLift
+onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFiveLift/PlayerSuspensionPoint
+onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFiveLift/CutsceneCamera
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
+    _central_hub.connect(
+        'player_entered_central_hub_shaft', self, '_on_player_entered_central_hub_shaft')
 
     for ability in get_tree().get_nodes_in_group('abilities'):
         ability.connect('ability_acquired', self, '_on_ability_acquired')
@@ -311,3 +317,49 @@ func _on_warden_died(warden: Warden) -> void:
     # Resume player processing.
     _player.set_process_unhandled_input(true)
     _player.set_physics_process(true)
+
+func _on_player_entered_central_hub_shaft() -> void:
+    # Move player to first suspension point, which is within the camera focus
+    # point's trigger area. This is to prevent the camera from behaving weirdly
+    # when the player is moved to a suspension point outside the camera focus\
+    # point trigger area before we've had a chance to fade to black.
+    _player.change_state({'new_state': Player.State.SUSPENDED})
+    _player.global_position = _suspend_point_post_warden.global_position
+    yield(get_tree(), 'physics_frame')
+
+    # Fade to black.
+    var fade_duration := 2.0
+    var fade_delay := 0.0
+    var fade_music := true
+    _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
+    yield(_screen_fadeout, 'fade_to_black_finished')
+
+    # Disable room transitions for sector five lift. Make sure we also update
+    # the camera limits accordingly.
+    _sector_five_lift.set_enable_room_transitions(false)
+    _player.get_camera().fit_camera_limits_to_room(_sector_five_lift)
+
+    # Switch to cutscene camera.
+    _sector_five_lift_cutscene_camera.make_current()
+
+    # Start the fall sequence from the second suspension point.
+    _player.global_position = _sector_five_lift_suspend_point.global_position
+    _player.set_direction(Util.Direction.RIGHT)
+    yield(get_tree(), 'physics_frame')
+    _player.change_state({'new_state': Player.State.SECTOR_FIVE_LIFT_FALL})
+
+    # Fade from black.
+    _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
+
+    if _player.current_state_enum == Player.State.SECTOR_FIVE_LIFT_FALL:
+        yield(_player.current_state, 'sequence_finished')
+
+    # Switch back to player camera.
+    _player.get_camera().make_current()
+
+    # Re-enable room transitions for sector five lift.
+    _sector_five_lift.set_enable_room_transitions(true)
+
+    # Reset previous/current room so that next room transition works properly.
+    _player.prev_room = _sector_five_lift
+    _player.curr_room = _sector_five_lift
