@@ -5,6 +5,7 @@ onready var _room_boundaries: Area2D = $RoomBoundaries
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
+onready var _enemy_barriers: Array = $EnemyBarriers.get_children()
 onready var _enemies: Node2D = $Enemies
 onready var _tilemaps_nav: Navigation2D = $TileMaps
 
@@ -73,6 +74,9 @@ func pause() -> void:
     for enemy in $Enemies.get_children():
         enemy.pause()
 
+    for barrier in _enemy_barriers:
+        barrier.get_node('CollisionShape2D').set_deferred('disabled', true)
+
 func resume() -> void:
     for moving_platform in get_moving_platforms():
         moving_platform.resume()
@@ -82,6 +86,9 @@ func resume() -> void:
 
     for enemy in $Enemies.get_children():
         enemy.resume()
+
+    for barrier in _enemy_barriers:
+        barrier.get_node('CollisionShape2D').set_deferred('disabled', false)
 
 func show_visuals() -> void:
     for moving_platform in get_moving_platforms():
