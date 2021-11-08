@@ -4,6 +4,7 @@ var _velocity := Vector2.ZERO
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.emit_dust_puff_takeoff()
+    warden.get_sound_manager().play(WardenSoundManager.Sounds.TAKEOFF)
 
     _velocity = _calculate_velocity(warden)
 

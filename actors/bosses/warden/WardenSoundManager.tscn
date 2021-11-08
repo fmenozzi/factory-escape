@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://shared/managers/visibility_based_audio/VisibilityBasedSoundManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/bosses/warden/warden_sound_manager.gd" type="Script" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://actors/enemies/sentry_drone/audio/sentry_drone_bash_impact.wav" type="AudioStream" id=8]
 [ext_resource path="res://actors/bosses/warden/audio/warden_intro_land.wav" type="AudioStream" id=9]
 [ext_resource path="res://actors/bosses/warden/audio/warden_intro_uncrouch.wav" type="AudioStream" id=10]
+[ext_resource path="res://actors/bosses/warden/audio/warden_takeoff.wav" type="AudioStream" id=11]
+[ext_resource path="res://actors/bosses/warden/audio/warden_land.wav" type="AudioStream" id=12]
+[ext_resource path="res://actors/bosses/warden/audio/warden_charge.wav" type="AudioStream" id=13]
+[ext_resource path="res://actors/bosses/warden/audio/lightning_floor_telegraph.wav" type="AudioStream" id=14]
+[ext_resource path="res://actors/bosses/warden/audio/warden_charge_slide.wav" type="AudioStream" id=15]
 
 [node name="WardenSoundManager" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -23,17 +28,34 @@ stream = ExtResource( 9 )
 [node name="IntroUncrouch" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 4 )]
 stream = ExtResource( 10 )
 
-[node name="ChargeTelegraph" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 4 )]
+[node name="Takeoff" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 4 )]
+stream = ExtResource( 11 )
+
+[node name="Land" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="3" instance=ExtResource( 4 )]
+stream = ExtResource( 12 )
+
+[node name="ChargeTelegraph" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="4" instance=ExtResource( 4 )]
 stream = ExtResource( 7 )
 
-[node name="ChargeImpact" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="3" instance=ExtResource( 4 )]
+[node name="ChargeStep" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="5" instance=ExtResource( 4 )]
+max_volume_db = 4.0
+stream = ExtResource( 13 )
+
+[node name="ChargeSlide" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="6" instance=ExtResource( 4 )]
+max_volume_db = 4.0
+stream = ExtResource( 15 )
+
+[node name="ChargeImpact" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="7" instance=ExtResource( 4 )]
 stream = ExtResource( 8 )
 
-[node name="Hit" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="4" instance=ExtResource( 4 )]
+[node name="LightningFloorTelegraphCrouch" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="8" instance=ExtResource( 4 )]
+stream = ExtResource( 14 )
+
+[node name="Hit" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="9" instance=ExtResource( 4 )]
 max_volume_db = -8.0
 stream = ExtResource( 5 )
 
-[node name="Killed" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="5" instance=ExtResource( 4 )]
+[node name="Killed" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="10" instance=ExtResource( 4 )]
 stream = ExtResource( 6 )
 
 [editable path="AudioGroups/VisibilityBasedAudioGroup"]

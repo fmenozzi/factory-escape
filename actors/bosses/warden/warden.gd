@@ -130,6 +130,9 @@ func shake_once(damping: float = 1.0) -> void:
         damping * rand_range(-1.0, 1.0),
         damping * rand_range(-1.0, 1.0))
 
+func play_charge_step_sound() -> void:
+    _sound_manager.play(WardenSoundManager.Sounds.CHARGE_STEP)
+
 func reset_shakeable_sprite_position() -> void:
     _shakeable_head_sprite.position = Vector2.ZERO
 

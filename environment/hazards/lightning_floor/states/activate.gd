@@ -3,6 +3,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 const ATTACK_DURATION := 0.5
 
 onready var _timer: Timer = $AttackDuration
+onready var _sound: AudioStreamPlayer = $ActivateSound
 
 func _ready() -> void:
     _timer.one_shot = true
@@ -16,6 +17,7 @@ func enter(lightning_floor: LightningFloor, previous_state_dict: Dictionary) -> 
     lightning_floor.get_bolts_node().modulate.a = 1
 
     _timer.start()
+    _sound.play()
 
 func exit(lightning_floor: LightningFloor) -> void:
     lightning_floor.get_hitbox_collision_shape().set_deferred('disabled', true)

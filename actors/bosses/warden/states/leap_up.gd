@@ -5,6 +5,7 @@ var _speed_multiplier := 1.0
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.emit_dust_puff_takeoff()
+    warden.get_sound_manager().play(WardenSoundManager.Sounds.TAKEOFF)
 
     _velocity.y = warden.get_physics_manager().get_max_jump_velocity()
     _speed_multiplier = rand_range(0.7, 1.2)

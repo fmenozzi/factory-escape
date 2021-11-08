@@ -1,7 +1,10 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
+onready var _sound: AudioStreamPlayer = $TelegraphSound
+
 func enter(lightning_floor: LightningFloor, previous_state_dict: Dictionary) -> void:
     lightning_floor.get_indicator_lights().get_animation_player().play('telegraph')
+    _sound.play()
 
 func exit(lightning_floor: LightningFloor) -> void:
     pass

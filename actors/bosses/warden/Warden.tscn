@@ -100,6 +100,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 29, 30, 31, 32, 33, 34, 35, 36 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.01, 0.32 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_charge_step_sound"
+}, {
+"args": [  ],
+"method": "play_charge_step_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=6]
 resource_name = "explode"

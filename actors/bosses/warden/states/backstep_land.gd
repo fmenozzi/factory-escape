@@ -2,6 +2,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('land')
+    warden.get_sound_manager().play(WardenSoundManager.Sounds.LAND)
     warden.emit_dust_puff_land()
 
     Screenshake.start(Screenshake.Duration.SHORT, Screenshake.Amplitude.SMALL)
