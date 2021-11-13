@@ -1,24 +1,24 @@
 extends "res://game/game_interface.gd"
 
-onready var _cargo_lift: Room = $World/Rooms/CargoLift
-onready var _central_hub: Room = $World/Rooms/CentralHub
-onready var _central_hub_save_manager: CentralHubSaveManager = $World/Rooms/CentralHub/SaveManager
-onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/CentralHub/CameraFocusPoint
-onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/BossFight/WardenSpawnPoint
-onready var _lightning_floor: LightningFloor = $World/Rooms/CentralHub/BossFight/LightningFloor
-onready var _projectile_spawners: Array = $World/Rooms/CentralHub/BossFight/ProjectileSpawners.get_children()
-onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne_17/TutorialMessageTrigger
-onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo_13/TutorialMessageTrigger
-onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree_11/TutorialMessageTrigger
-onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour_13/TutorialMessageTrigger
-onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPoint
-onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralLockCutsceneCamera
-onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralLock
-onready var _suspend_point_post_warden: Position2D = $World/Rooms/CentralHub/PlayerSuspensionPointPostWarden
-onready var _central_lock_save_manager: CentralLockSaveManager = $World/Rooms/CentralHub/CentralLock/SaveManager
-onready var _sector_five_lift: Room = $World/Rooms/SectorFiveLift
-onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFiveLift/PlayerSuspensionPoint
-onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFiveLift/CutsceneCamera
+onready var _cargo_lift: Room = $World/Rooms/Prelude/CargoLift
+onready var _central_hub: Room = $World/Rooms/CentralHub/CentralHub
+onready var _central_hub_save_manager: CentralHubSaveManager = $World/Rooms/CentralHub/CentralHub/SaveManager
+onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/CentralHub/CentralHub/CameraFocusPoint
+onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/CentralHub/BossFight/WardenSpawnPoint
+onready var _lightning_floor: LightningFloor = $World/Rooms/CentralHub/CentralHub/BossFight/LightningFloor
+onready var _projectile_spawners: Array = $World/Rooms/CentralHub/CentralHub/BossFight/ProjectileSpawners.get_children()
+onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne/SectorOne_17/TutorialMessageTrigger
+onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo/SectorTwo_13/TutorialMessageTrigger
+onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree/SectorThree_11/TutorialMessageTrigger
+onready var _grapple_tutorial_trigger: Area2D = $World/Rooms/SectorFour/SectorFour_13/TutorialMessageTrigger
+onready var _central_hub_suspend_point: Position2D = $World/Rooms/CentralHub/CentralHub/PlayerSuspensionPoint
+onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/CentralHub/CentralLockCutsceneCamera
+onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralHub/CentralLock
+onready var _suspend_point_post_warden: Position2D = $World/Rooms/CentralHub/CentralHub/PlayerSuspensionPointPostWarden
+onready var _central_lock_save_manager: CentralLockSaveManager = $World/Rooms/CentralHub/CentralHub/CentralLock/SaveManager
+onready var _sector_five_lift: Room = $World/Rooms/SectorFive/SectorFiveLift
+onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFive/SectorFiveLift/PlayerSuspensionPoint
+onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFive/SectorFiveLift/CutsceneCamera
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')

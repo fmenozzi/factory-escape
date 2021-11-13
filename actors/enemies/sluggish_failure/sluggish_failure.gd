@@ -196,7 +196,7 @@ func _on_hazard_hit(area_or_body) -> void:
         Screenshake.Duration.VERY_SHORT, Screenshake.Amplitude.VERY_SMALL)
 
     var enemy_hit_effect: EnemyHitEffect = Preloads.EnemyHitEffect.instance()
-    var world := get_parent().get_parent().get_parent().get_parent()
+    var world := get_parent().get_parent().get_parent().get_parent().get_parent()
     world.get_node('TemporaryNodes').add_child(enemy_hit_effect)
     enemy_hit_effect.global_position = global_position
 

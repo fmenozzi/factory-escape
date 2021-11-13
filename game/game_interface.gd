@@ -113,7 +113,14 @@ func _ready() -> void:
 func _set_player_starting_room() -> void:
     var starting_room: Room = null
 
-    var rooms := $World/Rooms.get_children()
+    # Get all the rooms from each set of rooms.
+    var rooms := $World/Rooms/Prelude.get_children()
+    rooms.append_array($World/Rooms/CentralHub.get_children())
+    rooms.append_array($World/Rooms/SectorOne.get_children())
+    rooms.append_array($World/Rooms/SectorTwo.get_children())
+    rooms.append_array($World/Rooms/SectorThree.get_children())
+    rooms.append_array($World/Rooms/SectorFour.get_children())
+    rooms.append_array($World/Rooms/SectorFive.get_children())
 
     if not run_standalone and not _player.save_manager.has_completed_intro_fall_sequence:
         # If we're running a "real" game (i.e. not a standalone demo) and we
