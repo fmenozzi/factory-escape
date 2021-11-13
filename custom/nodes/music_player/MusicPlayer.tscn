@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://custom/nodes/music_player/audio/arena_end.ogg" type="AudioStream" id=7]
 [ext_resource path="res://custom/nodes/music_player/audio/world_base.ogg" type="AudioStream" id=8]
 [ext_resource path="res://ui/audio/ui_start_game.wav" type="AudioStream" id=9]
+[ext_resource path="res://custom/nodes/music_player/audio/sector-1.ogg" type="AudioStream" id=10]
+[ext_resource path="res://custom/nodes/music_player/audio/sector-2.ogg" type="AudioStream" id=11]
+[ext_resource path="res://custom/nodes/music_player/audio/sector-3.ogg" type="AudioStream" id=12]
+[ext_resource path="res://custom/nodes/music_player/audio/sector-4.ogg" type="AudioStream" id=13]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
@@ -26,6 +30,18 @@ bus = "Effects"
 
 [node name="WorldBase" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 8 )
+
+[node name="WorldSectorOne" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 10 )
+
+[node name="WorldSectorTwo" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 11 )
+
+[node name="WorldSectorThree" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 12 )
+
+[node name="WorldSectorFour" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 13 )
 
 [node name="ArenaStart" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 6 )

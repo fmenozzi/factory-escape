@@ -4,6 +4,10 @@ enum Music {
     START_GAME,
     FACTORY_BACKGROUND,
     WORLD_BASE,
+    WORLD_SECTOR_1,
+    WORLD_SECTOR_2,
+    WORLD_SECTOR_3,
+    WORLD_SECTOR_4,
     ARENA_START,
     ARENA,
     ARENA_END,
@@ -14,6 +18,10 @@ onready var _players: Array = $AudioPlayers.get_children()
 onready var _start_game: AudioStreamPlayerMusic = $AudioPlayers/StartGame
 onready var _factory_background: AudioStreamPlayerMusic = $AudioPlayers/FactoryBackground
 onready var _world_base: AudioStreamPlayerMusic = $AudioPlayers/WorldBase
+onready var _world_sector_1: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorOne
+onready var _world_sector_2: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorTwo
+onready var _world_sector_3: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorThree
+onready var _world_sector_4: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorFour
 onready var _arena_start: AudioStreamPlayerMusic = $AudioPlayers/ArenaStart
 onready var _arena: AudioStreamPlayerMusic = $AudioPlayers/Arena
 onready var _arena_end: AudioStreamPlayerMusic = $AudioPlayers/ArenaEnd
@@ -39,6 +47,10 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.START_GAME,
         Music.FACTORY_BACKGROUND,
         Music.WORLD_BASE,
+        Music.WORLD_SECTOR_1,
+        Music.WORLD_SECTOR_2,
+        Music.WORLD_SECTOR_3,
+        Music.WORLD_SECTOR_4,
         Music.ARENA_START,
         Music.ARENA,
         Music.ARENA_END,
@@ -54,6 +66,18 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.WORLD_BASE:
             return _world_base
+
+        Music.WORLD_SECTOR_1:
+            return _world_sector_1
+
+        Music.WORLD_SECTOR_2:
+            return _world_sector_2
+
+        Music.WORLD_SECTOR_3:
+            return _world_sector_3
+
+        Music.WORLD_SECTOR_4:
+            return _world_sector_4
 
         Music.ARENA_START:
             return _arena_start
