@@ -24,6 +24,7 @@ enum Menus {
     DELETE_CONFIRMATION,
     PAUSE,
     OPTIONS,
+    INFO,
     QUIT,
 
     GAME_OPTIONS,

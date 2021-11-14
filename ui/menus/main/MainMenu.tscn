@@ -38,11 +38,11 @@ margin_right = 320.0
 margin_bottom = 114.0
 text = "Options"
 
-[node name="Credits" type="Button" parent="."]
+[node name="Info" type="Button" parent="."]
 margin_top = 118.0
 margin_right = 320.0
 margin_bottom = 133.0
-text = "Credits"
+text = "Info"
 
 [node name="Quit" type="Button" parent="."]
 margin_top = 137.0

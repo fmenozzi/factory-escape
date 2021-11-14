@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/menus/info/info_menu.gd" type="Script" id=1]
+[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=2]
+
+[node name="InfoMenu" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+alignment = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="."]
+margin_top = 51.0
+margin_right = 320.0
+margin_bottom = 64.0
+text = "Info"
+align = 1
+
+[node name="Credits" type="Button" parent="."]
+margin_top = 68.0
+margin_right = 320.0
+margin_bottom = 83.0
+text = "Credits"
+
+[node name="Licenses" type="Button" parent="."]
+margin_top = 87.0
+margin_right = 320.0
+margin_bottom = 102.0
+text = "Licenses"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 106.0
+margin_right = 320.0
+margin_bottom = 110.0
+
+[node name="Back" type="Button" parent="."]
+margin_top = 114.0
+margin_right = 320.0
+margin_bottom = 129.0
+text = "Back"

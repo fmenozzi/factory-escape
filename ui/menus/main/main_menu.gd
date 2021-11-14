@@ -2,13 +2,13 @@ extends 'res://ui/menus/menu.gd'
 
 onready var _start: Button = $Start
 onready var _options: Button = $Options
-onready var _credits: Button = $Credits
+onready var _info: Button = $Info
 onready var _quit: Button = $Quit
 
 onready var _focusable_nodes := [
     _start,
     _options,
-    _credits,
+    _info,
     _quit,
 ]
 
@@ -27,6 +27,8 @@ func enter(previous_menu: int, metadata: Dictionary) -> void:
                 _start.grab_focus()
             Menu.Menus.OPTIONS:
                 _options.grab_focus()
+            Menu.Menus.INFO:
+                _info.grab_focus()
             Menu.Menus.QUIT:
                 _quit.grab_focus()
             _:
@@ -48,12 +50,12 @@ func set_input_enabled(enabled: bool) -> void:
     if enabled:
         _start.connect('pressed', self, '_on_start_pressed')
         _options.connect('pressed', self, '_on_options_pressed')
-        _credits.connect('pressed', self, '_on_credits_pressed')
+        _info.connect('pressed', self, '_on_info_pressed')
         _quit.connect('pressed', self, '_on_quit_pressed')
     else:
         _start.disconnect('pressed', self, '_on_start_pressed')
         _options.disconnect('pressed', self, '_on_options_pressed')
-        _credits.disconnect('pressed', self, '_on_credits_pressed')
+        _info.disconnect('pressed', self, '_on_info_pressed')
         _quit.disconnect('pressed', self, '_on_quit_pressed')
 
 func _set_focus_enabled(enabled: bool) -> void:
@@ -71,11 +73,8 @@ func _on_start_pressed() -> void:
 func _on_options_pressed() -> void:
     advance_to_menu(Menu.Menus.OPTIONS)
 
-func _on_credits_pressed() -> void:
-    set_input_enabled(false)
-
-    var fade_duration := 2.0
-    SceneChanger.change_scene_to(Preloads.CreditsScreen, fade_duration)
+func _on_info_pressed() -> void:
+    advance_to_menu(Menu.Menus.INFO)
 
 func _on_quit_pressed() -> void:
     advance_to_menu(Menu.Menus.QUIT)

@@ -11,6 +11,7 @@ onready var MENUS := {
     Menu.Menus.SAVE_SLOT_ERROR:     $MenuBackground/SaveSlotErrorMenu,
     Menu.Menus.DELETE_CONFIRMATION: $MenuBackground/DeleteConfirmationMenu,
     Menu.Menus.OPTIONS:             $MenuBackground/OptionsMenu,
+    Menu.Menus.INFO:                $MenuBackground/InfoMenu,
     Menu.Menus.QUIT:                $MenuBackground/MainQuitMenu,
 
     Menu.Menus.GAME_OPTIONS:       $MenuBackground/GameOptionsMenu,
