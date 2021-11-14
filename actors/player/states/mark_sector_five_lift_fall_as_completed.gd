@@ -1,6 +1,7 @@
 extends 'res://actors/player/states/player_state.gd'
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
+    player.save_manager.has_completed_sector_five_fall_sequence = true
     player.save_manager.last_saved_global_position = player.global_position
     player.save_manager.last_saved_direction_to_lamp = player.get_direction()
 

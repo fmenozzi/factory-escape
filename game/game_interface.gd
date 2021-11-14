@@ -142,7 +142,9 @@ func _set_player_starting_health_and_health_packs() -> void:
     if run_standalone:
         return
 
-    if not _player.save_manager.has_completed_intro_fall_sequence or not _player.save_manager.has_rested_at_any_lamp:
+    var psm: PlayerSaveManager = _player.save_manager
+    if not psm.has_completed_intro_fall_sequence or \
+       (not psm.has_rested_at_any_lamp and not psm.has_completed_central_hub_fall_sequence):
         _player.get_health().set_starting_health()
         _player.get_health_pack_manager().set_starting_health_packs()
 
