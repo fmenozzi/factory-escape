@@ -54,12 +54,8 @@ func _ready() -> void:
             _player.connect(
                 'player_finished_intro_fall', self, '_on_player_finished_intro_fall')
             _player.change_state({'new_state': Player.State.INTRO_FALL})
-        elif _player.save_manager.has_rested_at_any_lamp:
-            _player.change_state({'new_state': Player.State.SLEEP})
         else:
-            # In case the player quits and reloads the game before reaching the
-            # first lamp.
-            _player.change_state({'new_state': Player.State.IDLE})
+            _player.change_state({'new_state': Player.State.SLEEP})
 
     # Set the clear color to be the dark blue background color, in order to
     # prevent accidentally seeing untiled areas when doing funky camera stuff.
