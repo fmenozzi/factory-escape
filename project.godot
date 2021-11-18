@@ -344,11 +344,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://actors/enemies/turret/scanner.gd"
 }, {
-"base": "Node2D",
-"class": "SectorMusicFade",
-"language": "GDScript",
-"path": "res://environment/sector_music_fade/sector_music_fade.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "SentryDrone",
 "language": "GDScript",
@@ -552,7 +547,6 @@ _global_script_class_icons={
 "ReadableObject": "",
 "Room": "",
 "Scanner": "",
-"SectorMusicFade": "",
 "SentryDrone": "",
 "SentryDronePhysicsManager": "",
 "SentryDroneSoundManager": "",

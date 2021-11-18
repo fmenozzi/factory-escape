@@ -269,10 +269,10 @@ func _on_player_entered(area: Area2D) -> void:
         player.prev_room.hide_visuals()
         player.curr_room.resume()
 
-        # TODO: Should these cross fades be synced?
         var curr_section_track: int = player.curr_room.get_section_track()
+        var prev_section_track: int = player.prev_room.get_section_track()
         if player.curr_room.has_node('Lamp'):
-            MusicPlayer.cross_fade(curr_section_track, MusicPlayer.Music.LAMP_ROOM, 1.0)
+            MusicPlayer.cross_fade(prev_section_track, MusicPlayer.Music.LAMP_ROOM, 1.0)
             MusicPlayer.fade_out(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
         if player.prev_room.has_node('Lamp'):
             MusicPlayer.cross_fade(MusicPlayer.Music.LAMP_ROOM, curr_section_track, 1.0)
