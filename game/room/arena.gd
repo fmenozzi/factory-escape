@@ -1,6 +1,7 @@
 extends Node2D
 class_name Arena
 
+onready var _room: Room = get_parent()
 onready var _enemies_node: Node2D = get_parent().get_node('Enemies')
 onready var _phases: Node2D = $Phases
 onready var _num_phases: int = $Phases.get_child_count()
@@ -13,7 +14,7 @@ var _phase_data := []
 var _player_camera: Camera2D = null
 
 func _ready() -> void:
-    assert(get_parent() is Room)
+    assert(_room != null)
 
     _assert_phase_structure_is_correct()
     _assert_closing_doors_structure_is_correct()
@@ -45,7 +46,7 @@ func _process(delta: float) -> void:
         # Quickly fade out the world music and start the arena start -> arena
         # sequence. Note that we don't use yield() here due to being inside the
         # _process() function.
-        MusicPlayer.fade_out(MusicPlayer.Music.WORLD_BASE, 0.5)
+        MusicPlayer.fade_out(_room.get_section_track(), 0.5)
         var arena_start: AudioStreamPlayer = MusicPlayer.get_player(MusicPlayer.Music.ARENA_START)
         arena_start.play()
         arena_start.connect('finished', MusicPlayer, 'play', [MusicPlayer.Music.ARENA])
@@ -116,7 +117,7 @@ func _finish_arena() -> void:
     MusicPlayer.fade_out(MusicPlayer.Music.ARENA, 0.5)
     MusicPlayer.play(MusicPlayer.Music.ARENA_END)
     yield(get_tree().create_timer(5.0), 'timeout')
-    MusicPlayer.fade_in(MusicPlayer.Music.WORLD_BASE, 6.0)
+    MusicPlayer.fade_in(_room.get_section_track(), 6.0)
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
     var enemy_data_for_phase: Array = _phase_data[phase_idx]

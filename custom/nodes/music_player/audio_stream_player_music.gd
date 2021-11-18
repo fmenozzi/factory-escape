@@ -29,17 +29,17 @@ func set_max_volume_db(new_max_volume_db: float) -> void:
     max_volume_db = new_max_volume_db
     volume_db = max_volume_db
 
-func fade_in(duration: float) -> void:
-    _fade(0.0, 1.0, duration)
+func fade_in(duration: float, from_position: float = 0.0) -> void:
+    _fade(0.0, 1.0, duration, from_position)
 
-func fade_out(duration: float) -> void:
-    _fade(1.0, 0.0, duration)
+func fade_out(duration: float, from_position: float = 0.0) -> void:
+    _fade(1.0, 0.0, duration, from_position)
 
-func _fade(old_volume_linear: float, new_volume_linear: float, duration: float) -> void:
+func _fade(old_volume_linear: float, new_volume_linear: float, duration: float, from_position: float) -> void:
     _fade_volume_linear = old_volume_linear
 
     if not playing:
-        play()
+        play(from_position)
 
     tween.interpolate_property(
         self, '_fade_volume_linear', old_volume_linear, new_volume_linear, duration)

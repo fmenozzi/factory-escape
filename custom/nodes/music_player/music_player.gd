@@ -103,9 +103,14 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 func fade_out(music_enum: int, duration: float) -> void:
     get_player(music_enum).fade_out(duration)
 
-func fade_in(music_enum: int, duration: float) -> void:
-    get_player(music_enum).fade_in(duration)
+func fade_in(music_enum: int, duration: float, playback_pos: float = 0.0) -> void:
+    get_player(music_enum).fade_in(duration, playback_pos)
 
 func cross_fade(music_enum_out: int, music_enum_in: int, duration: float) -> void:
     fade_out(music_enum_out, duration)
     fade_in(music_enum_in, duration)
+
+func cross_fade_synced(music_enum_out: int, music_enum_in: int, duration: float) -> void:
+    var playback_position := get_player(music_enum_out).get_playback_position()
+    fade_out(music_enum_out, duration)
+    fade_in(music_enum_in, duration, playback_position)

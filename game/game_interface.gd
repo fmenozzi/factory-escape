@@ -162,7 +162,8 @@ func _set_player_starting_music() -> void:
         MusicPlayer.stop(MusicPlayer.Music.FACTORY_BACKGROUND)
     else:
         yield(get_tree().create_timer(1.0), 'timeout')
-        MusicPlayer.fade_in(MusicPlayer.Music.WORLD_BASE, 6.0)
+        MusicPlayer.fade_in(_player.curr_room.get_section_track(), 6.0)
+        # TODO: Am I supposed to be fading in factory background as well?
 
 func _maybe_save_game() -> void:
     if not run_standalone:

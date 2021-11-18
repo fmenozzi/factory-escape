@@ -1,6 +1,16 @@
 extends Node2D
 class_name Room
 
+enum Section {
+    PRELUDE,
+    CENTRAL_HUB,
+    SECTOR_1,
+    SECTOR_2,
+    SECTOR_3,
+    SECTOR_4,
+    SECTOR_5,
+}
+
 onready var _room_boundaries: Area2D = $RoomBoundaries
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
@@ -63,6 +73,67 @@ func get_moving_platforms() -> Array:
 
 func get_tilemaps_nav() -> Navigation2D:
     return _tilemaps_nav
+
+func get_section() -> int:
+    var section_node: Node2D = get_parent()
+    assert(section_node != null)
+
+    match section_node.name:
+        'Prelude':
+            return Section.PRELUDE
+
+        'CentralHub':
+            return Section.CENTRAL_HUB
+
+        'SectorOne':
+            return Section.SECTOR_1
+
+        'SectorTwo':
+            return Section.SECTOR_2
+
+        'SectorThree':
+            return Section.SECTOR_3
+
+        'SectorFour':
+            return Section.SECTOR_4
+
+        'SectorFive':
+            return Section.SECTOR_5
+
+        _:
+            Error.report_if_error(
+                ErrorPlusMessage.new(
+                    ERR_DOES_NOT_EXIST,
+                    'Section node with name %s does not exist' % section_node.name))
+            return -1
+
+func get_section_track() -> int:
+    match get_section():
+        Section.PRELUDE, Section.CENTRAL_HUB:
+            return MusicPlayer.Music.WORLD_BASE
+
+        Section.SECTOR_1:
+            return MusicPlayer.Music.WORLD_SECTOR_1
+
+        Section.SECTOR_2:
+            return MusicPlayer.Music.WORLD_SECTOR_2
+
+        Section.SECTOR_3:
+            return MusicPlayer.Music.WORLD_SECTOR_3
+
+        Section.SECTOR_4:
+            return MusicPlayer.Music.WORLD_SECTOR_4
+
+        Section.SECTOR_5:
+            # TODO: Replace with dedicated music once available.
+            return MusicPlayer.Music.WORLD_BASE
+
+        _:
+            Error.report_if_error(
+                ErrorPlusMessage.new(
+                    ERR_DOES_NOT_EXIST,
+                    'Section %d does not exist' % get_section()))
+            return -1
 
 func pause() -> void:
     for moving_platform in get_moving_platforms():
@@ -198,11 +269,13 @@ func _on_player_entered(area: Area2D) -> void:
         player.prev_room.hide_visuals()
         player.curr_room.resume()
 
+        # TODO: Should these cross fades be synced?
+        var curr_section_track: int = player.curr_room.get_section_track()
         if player.curr_room.has_node('Lamp'):
-            MusicPlayer.cross_fade(MusicPlayer.Music.WORLD_BASE, MusicPlayer.Music.LAMP_ROOM, 1.0)
+            MusicPlayer.cross_fade(curr_section_track, MusicPlayer.Music.LAMP_ROOM, 1.0)
             MusicPlayer.fade_out(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
         if player.prev_room.has_node('Lamp'):
-            MusicPlayer.cross_fade(MusicPlayer.Music.LAMP_ROOM, MusicPlayer.Music.WORLD_BASE, 1.0)
+            MusicPlayer.cross_fade(MusicPlayer.Music.LAMP_ROOM, curr_section_track, 1.0)
             MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
 
         # Reset and hide enemies in the previous room once the transition
