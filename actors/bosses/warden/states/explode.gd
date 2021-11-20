@@ -2,6 +2,7 @@ extends 'res://actors/enemies/enemy_state.gd'
 
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('explode')
+    warden.get_sound_manager().play(WardenSoundManager.Sounds.DEATH_EXPLODE)
 
     Screenshake.start(
         Screenshake.Duration.MEDIUM, Screenshake.Amplitude.MEDIUM,

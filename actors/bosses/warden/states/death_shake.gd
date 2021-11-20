@@ -1,6 +1,7 @@
 extends 'res://actors/enemies/enemy_state.gd'
 
 export(float, EASE) var damp_easing := 1.0
+export(bool) var play_sound_effect := false
 
 onready var _timer: Timer = $ShakeDuration
 
@@ -12,6 +13,9 @@ func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.set_direction(Util.direction(warden, Util.get_player()))
     warden.get_sprite().visible = false
     warden.get_shakeable_sprites().visible = true
+
+    if play_sound_effect:
+        warden.get_sound_manager().play(WardenSoundManager.Sounds.DEATH_SHAKE)
 
     Screenshake.start(
         Screenshake.Duration.MEDIUM, Screenshake.Amplitude.SMALL,

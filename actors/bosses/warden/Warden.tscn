@@ -511,6 +511,7 @@ script = ExtResource( 9 )
 [node name="ShakeOnce1" type="Node" parent="States/Die"]
 script = ExtResource( 29 )
 damp_easing = 1.5
+play_sound_effect = true
 
 [node name="ShakeDuration" type="Timer" parent="States/Die/ShakeOnce1"]
 

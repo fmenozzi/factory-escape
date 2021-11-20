@@ -13,6 +13,8 @@ enum Sounds {
     LIGHTNING_FLOOR_TELEGRAPH_CROUCH,
     HIT,
     KILLED,
+    DEATH_SHAKE,
+    DEATH_EXPLODE,
 }
 
 onready var _audio_group: VisibilityBasedAudioGroup = $AudioGroups/VisibilityBasedAudioGroup
@@ -36,6 +38,8 @@ func get_player(sound_enum: int) -> VisibilityBasedAudioPlayer:
         Sounds.LIGHTNING_FLOOR_TELEGRAPH_CROUCH,
         Sounds.HIT,
         Sounds.KILLED,
+        Sounds.DEATH_SHAKE,
+        Sounds.DEATH_EXPLODE,
     ])
 
     match sound_enum:
@@ -71,6 +75,12 @@ func get_player(sound_enum: int) -> VisibilityBasedAudioPlayer:
 
         Sounds.KILLED:
             return _audio_group.get_player_by_name('Killed')
+
+        Sounds.DEATH_SHAKE:
+            return _audio_group.get_player_by_name('DeathShake')
+
+        Sounds.DEATH_EXPLODE:
+            return _audio_group.get_player_by_name('Explode')
 
         _:
             # Simply report the error here immediately instead of deferring to

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/warden_death_explode.wav-6d1872610b6859a99f1e3fe866ee4d1a.sample"
+
+[deps]
+
+source_file="res://actors/bosses/warden/audio/warden_death_explode.wav"
+dest_files=[ "res://.import/warden_death_explode.wav-6d1872610b6859a99f1e3fe866ee4d1a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
