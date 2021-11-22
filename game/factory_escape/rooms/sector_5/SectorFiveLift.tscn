@@ -20,6 +20,9 @@ visible = false
 position = Vector2( 160, 90 )
 shape = SubResource( 1 )
 
+[node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
+position = Vector2( 160, 90 )
+
 [node name="PlayerSuspensionPoint" type="Position2D" parent="." index="9"]
 position = Vector2( 160, -256 )
 
