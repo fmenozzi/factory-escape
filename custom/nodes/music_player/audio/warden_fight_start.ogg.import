@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/warden_fight_start.ogg-3e5d62ceb81552a47fa581c0f217d0b5.oggstr"
+
+[deps]
+
+source_file="res://custom/nodes/music_player/audio/warden_fight_start.ogg"
+dest_files=[ "res://.import/warden_fight_start.ogg-3e5d62ceb81552a47fa581c0f217d0b5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -11,6 +11,9 @@ enum Music {
     ARENA_START,
     ARENA,
     ARENA_END,
+    WARDEN_FIGHT_START,
+    WARDEN_FIGHT,
+    WARDEN_FIGHT_END,
     LAMP_ROOM,
 }
 
@@ -25,6 +28,9 @@ onready var _world_sector_4: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorF
 onready var _arena_start: AudioStreamPlayerMusic = $AudioPlayers/ArenaStart
 onready var _arena: AudioStreamPlayerMusic = $AudioPlayers/Arena
 onready var _arena_end: AudioStreamPlayerMusic = $AudioPlayers/ArenaEnd
+onready var _warden_fight_start: AudioStreamPlayerMusic = $AudioPlayers/WardenFightStart
+onready var _warden_fight: AudioStreamPlayerMusic = $AudioPlayers/WardenFight
+onready var _warden_fight_end: AudioStreamPlayerMusic = $AudioPlayers/WardenFightEnd
 onready var _lamp_room: AudioStreamPlayerMusic = $AudioPlayers/LampRoom
 
 func _ready() -> void:
@@ -54,6 +60,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.ARENA_START,
         Music.ARENA,
         Music.ARENA_END,
+        Music.WARDEN_FIGHT_START,
+        Music.WARDEN_FIGHT,
+        Music.WARDEN_FIGHT_END,
         Music.LAMP_ROOM,
     ])
 
@@ -87,6 +96,15 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.ARENA_END:
             return _arena_end
+
+        Music.WARDEN_FIGHT_START:
+            return _warden_fight_start
+
+        Music.WARDEN_FIGHT:
+            return _warden_fight
+
+        Music.WARDEN_FIGHT_END:
+            return _warden_fight_end
 
         Music.LAMP_ROOM:
             return _lamp_room

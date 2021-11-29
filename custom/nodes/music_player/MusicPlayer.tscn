@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://custom/nodes/music_player/audio/sector-2.ogg" type="AudioStream" id=11]
 [ext_resource path="res://custom/nodes/music_player/audio/sector-3.ogg" type="AudioStream" id=12]
 [ext_resource path="res://custom/nodes/music_player/audio/sector-4.ogg" type="AudioStream" id=13]
+[ext_resource path="res://custom/nodes/music_player/audio/warden_fight_start.ogg" type="AudioStream" id=14]
+[ext_resource path="res://custom/nodes/music_player/audio/warden_fight.ogg" type="AudioStream" id=15]
+[ext_resource path="res://custom/nodes/music_player/audio/warden_fight_end.ogg" type="AudioStream" id=16]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
@@ -54,6 +57,15 @@ max_volume_db = -4.0
 [node name="ArenaEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 7 )
 max_volume_db = -2.0
+
+[node name="WardenFightStart" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 14 )
+
+[node name="WardenFight" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 15 )
+
+[node name="WardenFightEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 16 )
 
 [node name="LampRoom" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 3 )

@@ -1,6 +1,7 @@
 extends KinematicBody2D
 class_name Warden
 
+signal intro_sequence_landed_on_floor
 signal intro_sequence_finished
 signal lightning_floor_activated
 signal projectiles_spawn_activated

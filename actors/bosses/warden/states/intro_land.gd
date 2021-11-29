@@ -11,6 +11,7 @@ func _ready() -> void:
 func enter(warden: Warden, previous_state_dict: Dictionary) -> void:
     warden.get_animation_player().play('intro_land')
     warden.get_sound_manager().play(WardenSoundManager.Sounds.INTRO_LAND)
+    warden.emit_signal('intro_sequence_landed_on_floor')
 
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,

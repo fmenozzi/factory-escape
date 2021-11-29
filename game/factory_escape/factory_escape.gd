@@ -234,12 +234,18 @@ func _on_boss_fight_triggered() -> void:
     Rumble.start(Rumble.Type.WEAK, 0.75, Rumble.Priority.HIGH)
     yield(get_tree().create_timer(1.5), 'timeout')
 
-    # Spawn warden and wait for intro sequence to finish.
+    # Spawn warden and wait for intro sequence to finish. Start playing music
+    # once it lands on the floor.
     var warden: Warden = Preloads.Warden.instance()
     _central_hub.add_child(warden)
     warden.global_position = _warden_spawn_point.global_position
     warden.set_direction(Util.direction(warden, _player))
     _connect_warden_signals(warden)
+    yield(warden, 'intro_sequence_landed_on_floor')
+    MusicPlayer.fade_out(_central_hub.get_section_track(), 0.5)
+    var warden_fight_start: AudioStreamPlayer = MusicPlayer.get_player(MusicPlayer.Music.WARDEN_FIGHT_START)
+    warden_fight_start.play()
+    warden_fight_start.connect('finished', MusicPlayer, 'play', [MusicPlayer.Music.WARDEN_FIGHT])
     yield(warden, 'intro_sequence_finished')
 
     # Resume player processing.
@@ -296,6 +302,12 @@ func _on_warden_died(warden: Warden) -> void:
     # Fade it back in now that we're done.
     _screen_fadeout.fade_from_white(fade_duration)
     yield(_screen_fadeout, 'fade_from_white_finished')
+
+    # Play end music and fade back into section track.
+    MusicPlayer.fade_out(MusicPlayer.Music.WARDEN_FIGHT, 0.5)
+    var warden_fight_end: AudioStreamPlayer = MusicPlayer.get_player(MusicPlayer.Music.WARDEN_FIGHT_END)
+    warden_fight_end.play()
+    warden_fight_end.connect('finished', MusicPlayer, 'play', [_central_hub.get_section_track()])
 
     # Boom.
     warden._change_state({'new_state': Warden.State.DIE})
