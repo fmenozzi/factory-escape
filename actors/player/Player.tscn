@@ -472,7 +472,7 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=16]
-length = 1.4
+length = 1.2
 loop = true
 step = 0.2
 tracks/0/type = "value"
@@ -482,10 +482,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 3, 2, 1 ]
+"values": [ 1, 2, 3, 3, 2, 1 ]
 }
 
 [sub_resource type="Animation" id=17]
@@ -779,7 +779,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 11
-frame = 56
+frame = 1
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
