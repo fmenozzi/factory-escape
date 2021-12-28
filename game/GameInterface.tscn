@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game/game_interface.gd" type="Script" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://shared/effects/screen_space_effects/player_death_transition/PlayerDeathTransition.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/ConfirmationDialog.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/interface/tutorial_messages/TutorialMessage.tscn" type="PackedScene" id=13]
+[ext_resource path="res://shared/effects/screen_space_effects/escape_sequence_alarm_light/EscapeSequenceAlarmLight.tscn" type="PackedScene" id=14]
 
 [node name="GameInterface" type="Node"]
 script = ExtResource( 1 )
@@ -72,6 +73,8 @@ layer = 2
 
 [node name="ScreenSpaceEffectsLayer" type="CanvasLayer" parent="Layers"]
 layer = 0
+
+[node name="EscapeSequenceAlarmLight" parent="Layers/ScreenSpaceEffectsLayer" instance=ExtResource( 14 )]
 
 [node name="Vignette" parent="Layers/ScreenSpaceEffectsLayer" instance=ExtResource( 9 )]
 

@@ -13,6 +13,7 @@ onready var _health_bar: Control = $Layers/UILayer/HealthBar
 onready var _health_pack_bar: Control = $Layers/UILayer/HealthPackBar
 onready var _saving_indicator: Control = $Layers/PauseLayer/SavingIndicator
 onready var _screen_fadeout: Control = $Layers/ScreenFadeoutLayer/ScreenFadeout
+onready var _escape_sequence_alarm_light: Control = $Layers/ScreenSpaceEffectsLayer/EscapeSequenceAlarmLight
 onready var _vignette: Control = $Layers/ScreenSpaceEffectsLayer/Vignette
 onready var _player_death_transition: Control = $Layers/ScreenSpaceEffectsLayer/PlayerDeathTransition
 
@@ -98,6 +99,11 @@ func _ready() -> void:
 
     for buddy in get_tree().get_nodes_in_group('buddy'):
         _dialog_box.connect('dialog_finished', buddy, '_on_dialog_finished')
+
+    EscapeSequenceEffects.connect(
+        'escape_sequence_started', _escape_sequence_alarm_light, 'start')
+    EscapeSequenceEffects.connect(
+        'escape_sequence_stopped', _escape_sequence_alarm_light, 'stop')
 
     Options.connect('options_saved', self, '_on_options_saved')
 

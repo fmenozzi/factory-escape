@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+signal escape_sequence_started
+signal escape_sequence_stopped
+
 onready var _shake_timer: Timer = $ShakeTimer
 onready var _debris_spawn_point: Position2D = $DebrisSpawnPoint
 
@@ -10,8 +13,12 @@ func _ready() -> void:
 func start() -> void:
     _shake_timer.start(0.1)
 
+    emit_signal('escape_sequence_started')
+
 func stop() -> void:
     _shake_timer.stop()
+
+    emit_signal('escape_sequence_stopped')
 
 func lamp_reset() -> void:
     stop()
