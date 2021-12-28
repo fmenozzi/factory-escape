@@ -26,6 +26,9 @@ const DustPuffWardenTakeoff := preload('res://shared/effects/dust_puffs_warden/D
 const DustPuffWardenSlide := preload('res://shared/effects/dust_puffs_warden/DustPuffWardenSlide.tscn')
 const DustPuffWardenImpact := preload('res://shared/effects/dust_puffs_warden/DustPuffWardenImpact.tscn')
 
+# Escape sequence debris
+const Debris := preload('res://custom/nodes/escape_sequence/Debris.tscn')
+
 # Projectiles.
 const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
 const EnergyProjectile := preload('res://actors/enemies/projectiles/energy_projectile/EnergyProjectile.tscn')

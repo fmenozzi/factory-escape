@@ -40,6 +40,14 @@ func spawn_warden_dust_puff_impact_at(global_pos: Vector2, direction: int) -> vo
     dust_puff_warden.global_position = global_pos
     dust_puff_warden.start_and_queue_free(direction)
 
+func spawn_debris_at(global_pos: Vector2) -> void:
+    var debris: Particles2D = Preloads.Debris.instance()
+
+    _get_temporary_nodes_node().add_child(debris)
+
+    debris.global_position = global_pos
+    debris.start_and_queue_free()
+
 func _get_temporary_nodes_node() -> Node2D:
     var nodes_in_temporary_nodes_node_group := \
         get_tree().get_nodes_in_group('temporary_nodes_node')
