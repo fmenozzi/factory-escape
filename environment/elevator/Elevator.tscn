@@ -43,6 +43,7 @@ stream = ExtResource( 8 )
 stream = ExtResource( 7 )
 
 [node name="MoveTween" type="Tween" parent="."]
+playback_process_mode = 0
 
 [node name="Destination" type="Position2D" parent="."]
 position = Vector2( 0, -128 )
