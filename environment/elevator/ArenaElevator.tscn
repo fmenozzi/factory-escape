@@ -7,7 +7,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 144, 8 )
 
-[node name="ArenaElevator" type="Node2D"]
+[node name="ArenaElevator" type="Node2D" groups=[
+"lamp_reset",
+]]
 script = ExtResource( 3 )
 
 [node name="Platform" type="KinematicBody2D" parent="."]

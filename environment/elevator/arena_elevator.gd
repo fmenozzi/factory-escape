@@ -34,6 +34,11 @@ func _physics_process(delta: float) -> void:
     _platform.position = _platform.position.linear_interpolate(
         _follow_point, 0.1)
 
+func lamp_reset() -> void:
+    _platform.position = Vector2.ZERO
+    _switch.reset_state_to(switch_state)
+    set_physics_process(false)
+
 func _on_switch_pressed() -> void:
     set_physics_process(true)
 
