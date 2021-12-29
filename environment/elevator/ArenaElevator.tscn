@@ -27,5 +27,11 @@ texture = ExtResource( 2 )
 [node name="FadeInOutLabel" parent="Platform/Switch" index="2"]
 text = "Activate"
 
+[node name="Destination" type="Position2D" parent="."]
+position = Vector2( 0, -32 )
+
+[node name="MoveTween" type="Tween" parent="."]
+playback_process_mode = 0
+
 [editable path="Platform/Switch"]
 [editable path="Platform/Switch/WalkToPoints"]
