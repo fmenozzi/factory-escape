@@ -40,4 +40,10 @@ shape = SubResource( 2 )
 [node name="ArenaElevator" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( 160, 172 )
 
+[node name="Destination" parent="ArenaElevator" index="1"]
+position = Vector2( 0, -140 )
+
 [editable path="TileMaps"]
+[editable path="ArenaElevator"]
+[editable path="ArenaElevator/Platform/Switch"]
+[editable path="ArenaElevator/Platform/Switch/WalkToPoints"]

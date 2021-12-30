@@ -25,6 +25,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Switch" parent="Platform" instance=ExtResource( 1 )]
+resume_player_processing_after_pressed = false
 
 [node name="FadeInOutLabel" parent="Platform/Switch" index="2"]
 text = "Activate"

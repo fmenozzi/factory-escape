@@ -19,6 +19,9 @@ onready var _central_lock_save_manager: CentralLockSaveManager = $World/Rooms/Ce
 onready var _sector_five_lift: Room = $World/Rooms/SectorFive/SectorFiveLift
 onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFive/SectorFiveLift/PlayerSuspensionPoint
 onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFive/SectorFiveLift/CutsceneCamera
+onready var _arena_elevator_start: Node2D = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator
+onready var _arena_elevator_start_switch: Switch = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator/Platform/Switch
+onready var _arena_elevator_arena: Node2D = $World/Rooms/SectorFive/SectorFive_21/ArenaElevator
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -49,6 +52,9 @@ func _ready() -> void:
         central_lock_switch.connect('unlocked', self, '_on_central_lock_switch_pressed')
 
     _central_hub.connect('boss_fight_triggered', self, '_on_boss_fight_triggered')
+
+    _arena_elevator_start_switch.connect(
+        'switch_press_finished', self, '_on_arena_elevator_switch_pressed')
 
 func _connect_warden_signals(warden: Warden) -> void:
     warden.connect('lightning_floor_activated', _lightning_floor, 'start')
@@ -375,3 +381,34 @@ func _on_player_entered_central_hub_shaft() -> void:
     # Reset previous/current room so that next room transition works properly.
     _player.prev_room = _sector_five_lift
     _player.curr_room = _sector_five_lift
+
+func _on_arena_elevator_switch_pressed() -> void:
+    # Pause player processing and switch to IDLE state. Note that we do not
+    # pause physics processing because the player will be on a KinematicBody2D
+    # elevator that has sync_to_physics enabled, so we need to ensure that
+    # physics is still being processed on the player to avoid the elevator
+    # moving right through the player.
+    _player.set_process_unhandled_input(false)
+    _player.change_state({'new_state': Player.State.IDLE})
+
+    # Fade to black
+    var fade_duration := 2.0
+    var fade_delay := 1.0
+    var fade_music := false
+    _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
+    yield(_screen_fadeout, 'fade_to_black_finished')
+
+    # Move player to elevator arena room.
+    _player.global_position = _arena_elevator_arena.global_position
+
+    # Wait a bit to give the player camera time to catch up, thus avoiding weird
+    # visual artifacts during the fade back from black.
+    yield(get_tree().create_timer(0.5), 'timeout')
+
+    # Fade back from black.
+    fade_delay = 0.0
+    _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
+    yield(_screen_fadeout, 'fade_from_black_finished')
+
+    # Resume player processing.
+    _player.set_process_unhandled_input(true)

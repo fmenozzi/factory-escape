@@ -42,6 +42,9 @@ func lamp_reset() -> void:
 func _on_switch_pressed() -> void:
     set_physics_process(true)
 
+    # Wait a little bit before actually moving the elevator.
+    yield(get_tree().create_timer(0.3), 'timeout')
+
     _tween.remove_all()
     _tween.interpolate_property(
         self, '_follow_point', Vector2.ZERO, _destination.position, _move_duration)
