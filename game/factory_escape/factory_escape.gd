@@ -21,6 +21,7 @@ onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFiv
 onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFive/SectorFiveLift/CutsceneCamera
 onready var _arena_elevator_start: Node2D = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator
 onready var _arena_elevator_start_switch: Switch = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator/Platform/Switch
+onready var _elevator_arena: Room = $World/Rooms/SectorFive/SectorFive_21
 onready var _arena_elevator_arena: Node2D = $World/Rooms/SectorFive/SectorFive_21/ArenaElevator
 
 func _ready() -> void:
@@ -404,6 +405,10 @@ func _on_arena_elevator_switch_pressed() -> void:
     # Wait a bit to give the player camera time to catch up, thus avoiding weird
     # visual artifacts during the fade back from black.
     yield(get_tree().create_timer(0.5), 'timeout')
+
+    # Start scrolling the elevator arena background to give the illusion of
+    # motion.
+    _elevator_arena.start_background_scrolling()
 
     # Fade back from black.
     fade_delay = 0.0

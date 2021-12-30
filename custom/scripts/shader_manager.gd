@@ -3,8 +3,11 @@ class_name ShaderManager
 
 var _object: Node = null
 
-func add_shader(shader: Shader, object: Node) -> void:
+func set_object(object: Node) -> void:
     _object = object
+
+func add_shader(shader: Shader, object: Node) -> void:
+    set_object(object)
 
     var shader_material := ShaderMaterial.new()
     shader_material.set_shader(shader)
