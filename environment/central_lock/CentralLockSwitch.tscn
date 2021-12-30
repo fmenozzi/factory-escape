@@ -9,6 +9,7 @@
 script = ExtResource( 2 )
 
 [node name="Switch" parent="." instance=ExtResource( 1 )]
+resume_player_processing_after_pressed = false
 
 [node name="FadeInOutLabel" parent="Switch" index="2"]
 text = "Unlock"

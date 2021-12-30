@@ -372,7 +372,7 @@ func _on_health_pack_taken(health_pack: Node2D) -> void:
         _player.get_health().heal_to_full()
     _health_pack_bar.set_health_packs(new_health_packs)
 
-func _on_player_pressed_switch(switch: Switch) -> void:
+func _on_player_pressed_switch(switch: Switch, resume_player_processing: bool) -> void:
     switch.set_process_unhandled_input(false)
     _player.set_process_unhandled_input(false)
 
@@ -394,7 +394,8 @@ func _on_player_pressed_switch(switch: Switch) -> void:
     # the switch will be listening for).
     switch.emit_signal('switch_press_finished')
 
-    _player.set_process_unhandled_input(true)
+    if resume_player_processing:
+        _player.set_process_unhandled_input(true)
     switch.set_process_unhandled_input(true)
 
 func _on_health_pack_consumed() -> void:

@@ -1,8 +1,10 @@
 extends Node2D
 class_name Switch
 
-signal switch_press_started(switch, new_state)
+signal switch_press_started(switch, resume_player_processing_after_pressed)
 signal switch_press_finished
+
+export(bool) var resume_player_processing_after_pressed := true
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
@@ -37,7 +39,7 @@ func _unhandled_input(event: InputEvent) -> void:
         if _state == State.PRESSED:
             return
 
-        emit_signal('switch_press_started', self)
+        emit_signal('switch_press_started', self, resume_player_processing_after_pressed)
 
 func reset_state_to(new_state: int) -> void:
     assert(new_state in [State.PRESSED, State.UNPRESSED])
