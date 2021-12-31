@@ -147,6 +147,10 @@ func _set_paused(new_pause_state: bool) -> void:
         if texture_rect.texture is AnimatedTexture:
             texture_rect.texture.pause = new_pause_state
 
+    # Manually pause/resume elevator arena, if necessary.
+    for elevator_arena_room in get_tree().get_nodes_in_group('elevator_arena_room'):
+        elevator_arena_room.set_background_scrolling_paused(new_pause_state)
+
     # Need to call this callback manually here, see related comment in
     # title_screen.gd.
     _on_control_mode_changed(Controls.get_mode())
