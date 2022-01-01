@@ -1,14 +1,21 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/elevator/ArenaElevator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/elevator_arena/textures/elevator-arena-background.png" type="Texture" id=3]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/elevator_arena/sector_five_21.gd" type="Script" id=4]
+[ext_resource path="res://actors/enemies/leaping_failure/LeapingFailure.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/factory_escape/rooms/sector_5/elevator_arena/ElevatorArena.tscn" type="PackedScene" id=7]
+[ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 160, 90 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 144, 48 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 8, 88 )
@@ -40,9 +47,20 @@ shape = SubResource( 2 )
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
 
+[node name="HazardCheckpoint" parent="HazardCheckpoints" index="0" instance=ExtResource( 8 )]
+position = Vector2( 160, 168 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/HazardCheckpoint" index="0"]
+position = Vector2( 0, -48 )
+shape = SubResource( 6 )
+
 [node name="ArenaElevator" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( 160, 168 )
 switch_state = 0
+
+[node name="Destination" parent="ArenaElevator" index="1"]
+position = Vector2( 0, -104 )
 
 [node name="WallLeft" type="StaticBody2D" parent="." index="11"]
 collision_layer = 4
@@ -65,4 +83,21 @@ collision_layer = 4
 position = Vector2( 160, -8 )
 shape = SubResource( 5 )
 
+[node name="ElevatorArena" parent="." index="14" instance=ExtResource( 7 )]
+
+[node name="Phase0" type="Node2D" parent="ElevatorArena/Phases" index="0"]
+
+[node name="SluggishFailure" parent="ElevatorArena/Phases/Phase0" index="0" instance=ExtResource( 6 )]
+position = Vector2( 64, 168 )
+
+[node name="Phase1" type="Node2D" parent="ElevatorArena/Phases" index="1"]
+
+[node name="LeapingFailure" parent="ElevatorArena/Phases/Phase1" index="0" instance=ExtResource( 5 )]
+position = Vector2( 256, 168 )
+
 [editable path="TileMaps"]
+[editable path="HazardCheckpoints/HazardCheckpoint"]
+[editable path="ArenaElevator"]
+[editable path="ArenaElevator/Platform/Switch"]
+[editable path="ArenaElevator/Platform/Switch/WalkToPoints"]
+[editable path="ElevatorArena"]

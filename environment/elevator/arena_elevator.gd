@@ -36,10 +36,11 @@ func _physics_process(delta: float) -> void:
 
 func lamp_reset() -> void:
     _platform.position = Vector2.ZERO
+    _follow_point = Vector2.ZERO
     _switch.reset_state_to(switch_state)
     set_physics_process(false)
 
-func _on_switch_pressed() -> void:
+func move_to_destination() -> void:
     set_physics_process(true)
 
     # Wait a little bit before actually moving the elevator.
@@ -49,3 +50,6 @@ func _on_switch_pressed() -> void:
     _tween.interpolate_property(
         self, '_follow_point', Vector2.ZERO, _destination.position, _move_duration)
     _tween.start()
+
+func _on_switch_pressed() -> void:
+    move_to_destination()

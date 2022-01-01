@@ -21,8 +21,11 @@ onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFiv
 onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFive/SectorFiveLift/CutsceneCamera
 onready var _arena_elevator_start: Node2D = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator
 onready var _arena_elevator_start_switch: Switch = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator/Platform/Switch
-onready var _elevator_arena: Room = $World/Rooms/SectorFive/SectorFive_21
-onready var _arena_elevator_arena: Node2D = $World/Rooms/SectorFive/SectorFive_21/ArenaElevator
+onready var _elevator_arena_room: Room = $World/Rooms/SectorFive/SectorFive_21
+onready var _elevator_arena_room_arena: ElevatorArena = $World/Rooms/SectorFive/SectorFive_21/ElevatorArena
+onready var _elevator_arena_room_elevator: Node2D = $World/Rooms/SectorFive/SectorFive_21/ArenaElevator
+onready var _arena_elevator_end: Node2D = $World/Rooms/SectorFive/SectorFive_22/ArenaElevator
+onready var _arena_elevator_end_room: Room = $World/Rooms/SectorFive/SectorFive_22
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -56,6 +59,9 @@ func _ready() -> void:
 
     _arena_elevator_start_switch.connect(
         'switch_press_finished', self, '_on_arena_elevator_switch_pressed')
+
+    _elevator_arena_room_arena.connect(
+        'elevator_arena_finished', self, '_on_elevator_arena_finished')
 
 func _connect_warden_signals(warden: Warden) -> void:
     warden.connect('lightning_floor_activated', _lightning_floor, 'start')
@@ -400,7 +406,7 @@ func _on_arena_elevator_switch_pressed() -> void:
     yield(_screen_fadeout, 'fade_to_black_finished')
 
     # Move player to elevator arena room.
-    _player.global_position = _arena_elevator_arena.global_position
+    _player.global_position = _elevator_arena_room_elevator.global_position
 
     # Wait a bit to give the player camera time to catch up, thus avoiding weird
     # visual artifacts during the fade back from black.
@@ -408,10 +414,57 @@ func _on_arena_elevator_switch_pressed() -> void:
 
     # Start scrolling the elevator arena background to give the illusion of
     # motion.
-    _elevator_arena.start_background_scrolling()
+    _elevator_arena_room.start_background_scrolling()
 
     # Fade back from black.
     fade_delay = 0.0
+    _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
+    yield(_screen_fadeout, 'fade_from_black_finished')
+
+    # Resume player processing.
+    _player.set_process_unhandled_input(true)
+
+    # Start arena after waiting a bit.
+    yield(get_tree().create_timer(1.0), 'timeout')
+    _elevator_arena_room.start_arena()
+
+func _on_elevator_arena_finished() -> void:
+    # Start moving the arena's elevator upwards.
+    _elevator_arena_room_elevator.move_to_destination()
+
+    # Fade to black
+    var fade_duration := 2.0
+    var fade_delay := 1.0
+    var fade_music := false
+    _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
+    yield(_screen_fadeout, 'fade_to_black_finished')
+
+    # Pause player processing and switch to IDLE state. Note that we do not
+    # pause physics processing because the player will be on a KinematicBody2D
+    # elevator that has sync_to_physics enabled, so we need to ensure that
+    # physics is still being processed on the player to avoid the elevator
+    # moving right through the player.
+    _player.set_process_unhandled_input(false)
+    _player.change_state({'new_state': Player.State.IDLE})
+    yield(get_tree(), 'physics_frame')
+
+    # Disable room transitions on the destination room to avoid wonkiness with
+    # the camera.
+    _arena_elevator_end_room.set_enable_room_transitions(false)
+    _player.get_camera().fit_camera_limits_to_room(_arena_elevator_end_room)
+
+    # Move player to final elevator arena room (i.e. elevator's "destination").
+    _player.global_position = _arena_elevator_end.global_position
+
+    # Wait a bit to give the player camera time to catch up, thus avoiding weird
+    # visual artifacts during the fade back from black.
+    yield(get_tree().create_timer(0.5), 'timeout')
+
+    # Start moving the final elevator upwards.
+    _arena_elevator_end.move_to_destination()
+
+    # Fade back from black.
+    fade_delay = 1.0
     _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_from_black_finished')
 

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/factory_escape/rooms/sector_5/elevator_arena/elevator_arena.gd" type="Script" id=1]
+
+[node name="ElevatorArena" type="Node2D" groups=[
+"lamp_reset",
+]]
+script = ExtResource( 1 )
+
+[node name="Phases" type="Node2D" parent="."]

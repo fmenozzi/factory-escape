@@ -3,6 +3,7 @@ extends Room
 const SCROLL_SPEED_UV := 0.15
 
 onready var _background: Sprite = $ScrollingBackground
+onready var _arena: ElevatorArena = $ElevatorArena
 
 var _shader_manager := ShaderManager.new()
 var _active := false
@@ -20,6 +21,9 @@ func start_background_scrolling() -> void:
     _active = true
     set_process(true)
     _shader_manager.add_shader(Preloads.ScrollShader, _background)
+
+func start_arena() -> void:
+    _arena.start()
 
 func stop() -> void:
     _offset_uv = 0.0
