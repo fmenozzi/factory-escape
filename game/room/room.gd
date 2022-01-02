@@ -1,6 +1,8 @@
 extends Node2D
 class_name Room
 
+signal entered_room(old_room, new_room)
+
 enum Section {
     PRELUDE,
     CENTRAL_HUB,
@@ -9,6 +11,7 @@ enum Section {
     SECTOR_3,
     SECTOR_4,
     SECTOR_5,
+    SURFACE,
 }
 
 onready var _room_boundaries: Area2D = $RoomBoundaries
@@ -100,6 +103,9 @@ func get_section() -> int:
         'SectorFive':
             return Section.SECTOR_5
 
+        'Surface':
+            return Section.SURFACE
+
         _:
             Error.report_if_error(
                 ErrorPlusMessage.new(
@@ -127,6 +133,10 @@ func get_section_track() -> int:
         Section.SECTOR_5:
             # TODO: Replace with dedicated music once available.
             return MusicPlayer.Music.WORLD_BASE
+
+        Section.SURFACE:
+            # TODO: Replace with dedicated music?
+            return MusicPlayer.Music.LAMP_ROOM
 
         _:
             Error.report_if_error(
@@ -282,3 +292,5 @@ func _on_player_entered(area: Area2D) -> void:
         # completes.
         player.prev_room.reset_enemies()
         player.prev_room.set_enemies_visible(false)
+
+        emit_signal('entered_room', player.prev_room, player.curr_room)

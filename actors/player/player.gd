@@ -9,6 +9,7 @@ signal player_heal_failed
 signal player_heal_attempted_no_health_packs
 signal player_reached_walk_to_point
 signal player_finished_intro_fall
+signal player_sat_down
 
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
@@ -48,6 +49,7 @@ enum State {
     CENTRAL_HUB_FALL,
     POST_WARDEN_ADJUSTMENTS,
     SECTOR_FIVE_LIFT_FALL,
+    SURFACE_CUTSCENE,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -84,6 +86,7 @@ onready var STATES = {
     State.CENTRAL_HUB_FALL:        $States/CentralHubFall,
     State.POST_WARDEN_ADJUSTMENTS: $States/PostWardenAdjustments,
     State.SECTOR_FIVE_LIFT_FALL:   $States/SectorFiveLiftFall,
+    State.SURFACE_CUTSCENE:        $States/SurfaceCutscene,
 }
 
 var current_state: Node = null

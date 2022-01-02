@@ -26,6 +26,7 @@ onready var _elevator_arena_room_arena: ElevatorArena = $World/Rooms/SectorFive/
 onready var _elevator_arena_room_elevator: Node2D = $World/Rooms/SectorFive/SectorFive_21/ArenaElevator
 onready var _arena_elevator_end: Node2D = $World/Rooms/SectorFive/SectorFive_22/ArenaElevator
 onready var _arena_elevator_end_room: Room = $World/Rooms/SectorFive/SectorFive_22
+onready var _surface_exit: Room = $World/Rooms/Surface/SurfaceExit
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -62,6 +63,8 @@ func _ready() -> void:
 
     _elevator_arena_room_arena.connect(
         'elevator_arena_finished', self, '_on_elevator_arena_finished')
+
+    _surface_exit.connect('entered_room', self, '_on_player_reached_surface')
 
 func _connect_warden_signals(warden: Warden) -> void:
     warden.connect('lightning_floor_activated', _lightning_floor, 'start')
@@ -470,3 +473,27 @@ func _on_elevator_arena_finished() -> void:
 
     # Resume player processing.
     _player.set_process_unhandled_input(true)
+
+func _on_player_reached_surface(old_room: Room, new_room: Room) -> void:
+    if new_room != _surface_exit:
+        return
+
+    # TODO: Maybe make this stop more gradual (e.g. lower volume gradually as
+    #       player walks to the rest point).
+    EscapeSequenceEffects.stop()
+
+    # Switch to surface cutscene state, which will ground the player, have them
+    # walk to a predetermined point, and then sit down.
+    _player.change_state({
+        'new_state': Player.State.SURFACE_CUTSCENE,
+        'stopping_point': _surface_exit.get_stopping_point(),
+    })
+
+    # Wait a bit and then close the door behind the player.
+    yield(get_tree().create_timer(0.5), 'timeout')
+    _surface_exit.get_closing_door().close()
+
+    # Wait until the player has sat down before eventually fading to credits.
+    yield(_player, 'player_sat_down')
+    yield(get_tree().create_timer(2.0), 'timeout')
+    SceneChanger.change_scene_to(Preloads.CreditsScreen, 2.0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -56,6 +56,8 @@
 [ext_resource path="res://actors/player/states/move_away_from_door.gd" type="Script" id=54]
 [ext_resource path="res://actors/player/states/get_grounded.gd" type="Script" id=55]
 [ext_resource path="res://actors/player/states/mark_sector_five_lift_fall_as_completed.gd" type="Script" id=56]
+[ext_resource path="res://actors/player/states/fall_to_ground.gd" type="Script" id=57]
+[ext_resource path="res://actors/player/states/sit_down.gd" type="Script" id=58]
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -779,7 +781,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 11
-frame = 1
+frame = 80
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -1072,6 +1074,18 @@ script = ExtResource( 30 )
 
 [node name="MarkSectorFiveLiftFallAsCompleted" type="Node" parent="States/SectorFiveLiftFall"]
 script = ExtResource( 56 )
+
+[node name="SurfaceCutscene" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="FallToGround" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 57 )
+
+[node name="WalkToPoint" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 29 )
+
+[node name="SitDown" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 58 )
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",
