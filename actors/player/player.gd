@@ -50,6 +50,7 @@ enum State {
     POST_WARDEN_ADJUSTMENTS,
     SECTOR_FIVE_LIFT_FALL,
     SURFACE_CUTSCENE,
+    ACQUIRE_ABILITY,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -87,6 +88,7 @@ onready var STATES = {
     State.POST_WARDEN_ADJUSTMENTS: $States/PostWardenAdjustments,
     State.SECTOR_FIVE_LIFT_FALL:   $States/SectorFiveLiftFall,
     State.SURFACE_CUTSCENE:        $States/SurfaceCutscene,
+    State.ACQUIRE_ABILITY:         $States/AcquireAbility,
 }
 
 var current_state: Node = null
@@ -162,6 +164,7 @@ onready var _attack_manager: AttackManager = $Attackmanager
 var _nearby_readable_object = null
 var _nearby_lamp = null
 var _nearby_switch = null
+var _nearby_ability = null
 
 var _current_hazard_checkpoint: Area2D = null
 
@@ -361,6 +364,11 @@ func set_nearby_switch(new_switch: Node2D) -> void:
     _nearby_switch = new_switch
 func get_nearby_switch() -> Node2D:
     return _nearby_switch
+
+func set_nearby_ability(new_ability: Node2D) -> void:
+    _nearby_ability = new_ability
+func get_nearby_ability() -> Node2D:
+    return _nearby_ability
 
 func set_hazard_checkpoint(hazard_checkpoint: Area2D) -> void:
     _current_hazard_checkpoint = hazard_checkpoint

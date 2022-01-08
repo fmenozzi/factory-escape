@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -58,6 +58,22 @@
 [ext_resource path="res://actors/player/states/mark_sector_five_lift_fall_as_completed.gd" type="Script" id=56]
 [ext_resource path="res://actors/player/states/fall_to_ground.gd" type="Script" id=57]
 [ext_resource path="res://actors/player/states/sit_down.gd" type="Script" id=58]
+
+[sub_resource type="Animation" id=35]
+resource_name = "acquire_ability"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 86, 87 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "activate_switch"
@@ -747,6 +763,7 @@ script = ExtResource( 24 )
 [node name="PlayerSoundManager" parent="." instance=ExtResource( 46 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/acquire_ability = SubResource( 35 )
 anims/activate_switch = SubResource( 1 )
 anims/attack_1 = SubResource( 2 )
 anims/attack_2 = SubResource( 3 )
@@ -781,7 +798,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 11
-frame = 80
+frame = 86
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -1086,6 +1103,19 @@ script = ExtResource( 29 )
 
 [node name="SitDown" type="Node" parent="States/SurfaceCutscene"]
 script = ExtResource( 58 )
+
+[node name="AcquireAbility" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="WalkToPoint" type="Node" parent="States/AcquireAbility"]
+script = ExtResource( 29 )
+
+[node name="FaceObject" type="Node" parent="States/AcquireAbility"]
+script = ExtResource( 37 )
+
+[node name="PlayAnimation" type="Node" parent="States/AcquireAbility"]
+script = ExtResource( 45 )
+animation_name = "acquire_ability"
 
 [node name="WallSlideTrail" parent="." groups=[
 "mirror_y_axis",

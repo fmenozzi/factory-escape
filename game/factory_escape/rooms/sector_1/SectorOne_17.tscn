@@ -32,7 +32,7 @@ shape = SubResource( 1 )
 position = Vector2( 160, 90 )
 
 [node name="DashAbility" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 160, 144 )
+position = Vector2( 160, 152 )
 
 [node name="TutorialMessageTrigger" parent="." index="10" instance=ExtResource( 3 )]
 message_mode = 0

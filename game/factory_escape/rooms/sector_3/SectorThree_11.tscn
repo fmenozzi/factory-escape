@@ -29,7 +29,7 @@ shape = SubResource( 1 )
 position = Vector2( 160, 90 )
 
 [node name="DoubleJumpAbility" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 160, 152 )
+position = Vector2( 160, 160 )
 ability = 1
 
 [node name="TutorialMessageTrigger" parent="." index="10" instance=ExtResource( 3 )]

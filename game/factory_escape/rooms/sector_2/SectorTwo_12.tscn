@@ -31,7 +31,7 @@ position = Vector2( 160, 90 )
 position = Vector2( 160, 450 )
 
 [node name="WallJumpAbility" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 160, 500 )
+position = Vector2( 160, 508 )
 ability = 2
 
 [editable path="TileMaps"]

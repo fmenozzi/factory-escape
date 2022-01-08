@@ -102,10 +102,22 @@ func _on_player_entered_cargo_lift() -> void:
     _player.curr_room = _central_hub
 
 func _on_ability_acquired(ability: Ability) -> void:
-    # Save game.
-    _player.save_manager.last_saved_global_position = _player.global_position
-    _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
-    _maybe_save_game()
+    # TODO: Acquire ability/save immediately?
+
+    # Pause player/ability processing.
+    ability.set_process_unhandled_input(false)
+    _player.set_process_unhandled_input(false)
+
+    # Start ability acquired sequence.
+    _player.change_state({
+        'new_state': Player.State.ACQUIRE_ABILITY,
+        'stopping_point': ability.get_closest_walk_to_point(),
+        'object_to_face': ability,
+    })
+    yield(_player.current_state, 'sequence_finished')
+
+    # Hide ability visuals
+    ability.hide()
 
     # Quickly flash white and fade back more slowly.
     var fade_duration := 0.1
@@ -130,6 +142,7 @@ func _on_ability_acquired(ability: Ability) -> void:
     yield(_ability_acquired_message, 'message_shown')
 
     # Activate tutorial trigger and acquire ability.
+    ability.mark_as_acquired()
     match ability.ability:
         Ability.Kind.DASH:
             _dash_tutorial_trigger.set_is_active(true)
@@ -146,6 +159,14 @@ func _on_ability_acquired(ability: Ability) -> void:
         Ability.Kind.GRAPPLE:
             _grapple_tutorial_trigger.set_is_active(true)
             _player.get_grapple_manager().acquire_grapple()
+
+    # Save game.
+    _player.save_manager.last_saved_global_position = _player.global_position
+    _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
+    _maybe_save_game()
+
+    # Resume player processing.
+    _player.set_process_unhandled_input(true)
 
 func _on_central_lock_switch_pressed(sector_number: int) -> void:
     assert(sector_number in [1, 2, 3, 4])
