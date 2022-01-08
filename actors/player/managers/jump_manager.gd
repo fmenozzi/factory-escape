@@ -63,6 +63,9 @@ func reset_jump() -> void:
 func can_buffer_jump() -> bool:
     return _jump_buffer.can_buffer_jump()
 
+func acquire_double_jump() -> void:
+    _has_double_jump = true
+
 func _on_ability_chosen(chosen_ability: int) -> void:
     assert(chosen_ability in [
         DemoAbility.Ability.DASH,
@@ -73,8 +76,3 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.DOUBLE_JUMP:
         _has_double_jump = true
-
-func _on_double_jump_acquired(ability: int) -> void:
-    assert(ability == Ability.Kind.DOUBLE_JUMP)
-
-    _has_double_jump = true

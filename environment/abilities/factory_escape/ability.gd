@@ -32,4 +32,4 @@ func _on_acquired_by_player(player: KinematicBody2D) -> void:
 
     hide()
 
-    emit_signal('ability_acquired', ability)
+    emit_signal('ability_acquired', self)

@@ -71,6 +71,9 @@ func get_grapple_rope() -> Line2D:
 func get_grapple_hook() -> Sprite:
     return _grapple_hook
 
+func acquire_grapple() -> void:
+    _has_grapple = true
+
 func _grapple_point_in_line_of_sight(grapple_point: GrapplePoint) -> bool:
     _grapple_line_of_sight.set_cast_to(
         _grapple_line_of_sight.to_local(
@@ -120,8 +123,3 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.GRAPPLE:
         _has_grapple = true
-
-func _on_grapple_acquired(ability: int) -> void:
-    assert(ability == Ability.Kind.GRAPPLE)
-
-    _has_grapple = true

@@ -36,23 +36,6 @@ func _ready() -> void:
     for ability in get_tree().get_nodes_in_group('abilities'):
         ability.connect('ability_acquired', self, '_on_ability_acquired')
 
-        match ability.ability:
-            Ability.Kind.DASH:
-                ability.connect(
-                    'ability_acquired', _player.get_dash_manager(), '_on_dash_acquired')
-
-            Ability.Kind.DOUBLE_JUMP:
-                ability.connect(
-                    'ability_acquired', _player.get_jump_manager(), '_on_double_jump_acquired')
-
-            Ability.Kind.WALL_JUMP:
-                ability.connect(
-                    'ability_acquired', _player.get_wall_jump_manager(), '_on_wall_jump_acquired')
-
-            Ability.Kind.GRAPPLE:
-                ability.connect(
-                    'ability_acquired', _player.get_grapple_manager(), '_on_grapple_acquired')
-
     for central_lock_switch in get_tree().get_nodes_in_group('central_lock_switches'):
         central_lock_switch.connect('unlocked', self, '_on_central_lock_switch_pressed')
 
@@ -117,23 +100,27 @@ func _on_player_entered_cargo_lift() -> void:
     _player.prev_room = _central_hub
     _player.curr_room = _central_hub
 
-func _on_ability_acquired(ability: int) -> void:
+func _on_ability_acquired(ability: Ability) -> void:
     _player.save_manager.last_saved_global_position = _player.global_position
     _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
     _maybe_save_game()
 
-    match ability:
+    match ability.ability:
         Ability.Kind.DASH:
             _dash_tutorial_trigger.set_is_active(true)
+            _player.get_dash_manager().acquire_dash()
 
         Ability.Kind.WALL_JUMP:
             _wall_jump_tutorial_trigger.set_is_active(true)
+            _player.get_wall_jump_manager().acquire_wall_jump()
 
         Ability.Kind.DOUBLE_JUMP:
             _double_jump_tutorial_trigger.set_is_active(true)
+            _player.get_jump_manager().acquire_double_jump()
 
         Ability.Kind.GRAPPLE:
             _grapple_tutorial_trigger.set_is_active(true)
+            _player.get_grapple_manager().acquire_grapple()
 
 func _on_central_lock_switch_pressed(sector_number: int) -> void:
     assert(sector_number in [1, 2, 3, 4])

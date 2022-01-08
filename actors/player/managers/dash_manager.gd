@@ -48,6 +48,9 @@ func can_buffer_dash() -> bool:
 func get_dash_cooldown_timer() -> Timer:
     return _dash_cooldown_timer
 
+func acquire_dash() -> void:
+    _has_dash = true
+
 func _on_ability_chosen(chosen_ability: int) -> void:
     assert(chosen_ability in [
         DemoAbility.Ability.DASH,
@@ -58,8 +61,3 @@ func _on_ability_chosen(chosen_ability: int) -> void:
 
     if chosen_ability == DemoAbility.Ability.DASH:
         _has_dash = true
-
-func _on_dash_acquired(ability: int) -> void:
-    assert(ability == Ability.Kind.DASH)
-
-    _has_dash = true
