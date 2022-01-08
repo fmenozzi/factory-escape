@@ -28,6 +28,12 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
 
     _has_double_jump = jump_manager_save_data['has_double_jump']
 
+    # If double jump has been acquired then free the associated ability.
+    if _has_double_jump:
+        for ability in get_tree().get_nodes_in_group('abilities'):
+            if ability.ability == 1: # Ability.Kind.DOUBLE_JUMP
+                ability.queue_free()
+
 func can_jump() -> bool:
     assert(_state in [State.NOT_JUMPED, State.JUMPED, State.DOUBLE_JUMPED])
 
@@ -55,7 +61,6 @@ func consume_jump() -> void:
         State.JUMPED:
             if _has_double_jump:
                 _state = State.DOUBLE_JUMPED
-
 
 func reset_jump() -> void:
     _state = State.NOT_JUMPED

@@ -21,6 +21,12 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
 
     _has_wall_jump = wall_jump_manager_save_data['has_wall_jump']
 
+    # If wall jump has been acquired then free the associated ability.
+    if _has_wall_jump:
+        for ability in get_tree().get_nodes_in_group('abilities'):
+            if ability.ability == 2: # Ability.Kind.WALL_JUMP
+                ability.queue_free()
+
 func can_wall_jump() -> bool:
     return _has_wall_jump
 

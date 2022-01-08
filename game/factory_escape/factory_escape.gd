@@ -169,6 +169,9 @@ func _on_ability_acquired(ability: Ability) -> void:
     # Resume player processing.
     _player.set_process_unhandled_input(true)
 
+    # Free ability.
+    ability.queue_free()
+
 func _on_central_lock_switch_pressed(sector_number: int) -> void:
     assert(sector_number in [1, 2, 3, 4])
 

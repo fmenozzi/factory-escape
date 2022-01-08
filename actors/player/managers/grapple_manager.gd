@@ -29,6 +29,12 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
 
     _has_grapple = grapple_manager_save_data['has_grapple']
 
+    # If grapple has been acquired then free the associated ability.
+    if _has_grapple:
+        for ability in get_tree().get_nodes_in_group('abilities'):
+            if ability.ability == 3: # Ability.Kind.GRAPPLE
+                ability.queue_free()
+
 func update_next_grapple_point(player, curr_room) -> void:
     _next_grapple_point = null
 

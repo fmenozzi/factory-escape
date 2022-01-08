@@ -30,6 +30,12 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
 
     _has_dash = dash_manager_save_data['has_dash']
 
+    # If dash as been acquired then free the associated ability.
+    if _has_dash:
+        for ability in get_tree().get_nodes_in_group('abilities'):
+            if ability.ability == 0: # Ability.Kind.DASH
+                ability.queue_free()
+
 func has_dash() -> bool:
     return _has_dash
 
