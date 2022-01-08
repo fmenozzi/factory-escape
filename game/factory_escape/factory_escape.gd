@@ -102,7 +102,21 @@ func _on_player_entered_cargo_lift() -> void:
     _player.curr_room = _central_hub
 
 func _on_ability_acquired(ability: Ability) -> void:
-    # TODO: Acquire ability/save immediately?
+    # Acquire ability and save game immediately (in case player quits out during
+    # cutscene).
+    _player.save_manager.last_saved_global_position = _player.global_position
+    _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
+    match ability.ability:
+        Ability.Kind.DASH:
+            _player.get_dash_manager().acquire_dash()
+        Ability.Kind.WALL_JUMP:
+            _player.get_wall_jump_manager().acquire_wall_jump()
+        Ability.Kind.DOUBLE_JUMP:
+            _player.get_jump_manager().acquire_double_jump()
+        Ability.Kind.GRAPPLE:
+            _player.get_grapple_manager().acquire_grapple()
+    ability.mark_as_acquired()
+    _maybe_save_game()
 
     # Pause player/ability processing.
     ability.set_process_unhandled_input(false)
@@ -141,29 +155,16 @@ func _on_ability_acquired(ability: Ability) -> void:
     _ability_acquired_message.show_message(message)
     yield(_ability_acquired_message, 'message_shown')
 
-    # Activate tutorial trigger and acquire ability.
-    ability.mark_as_acquired()
+    # Activate tutorial trigger.
     match ability.ability:
         Ability.Kind.DASH:
             _dash_tutorial_trigger.set_is_active(true)
-            _player.get_dash_manager().acquire_dash()
-
         Ability.Kind.WALL_JUMP:
             _wall_jump_tutorial_trigger.set_is_active(true)
-            _player.get_wall_jump_manager().acquire_wall_jump()
-
         Ability.Kind.DOUBLE_JUMP:
             _double_jump_tutorial_trigger.set_is_active(true)
-            _player.get_jump_manager().acquire_double_jump()
-
         Ability.Kind.GRAPPLE:
             _grapple_tutorial_trigger.set_is_active(true)
-            _player.get_grapple_manager().acquire_grapple()
-
-    # Save game.
-    _player.save_manager.last_saved_global_position = _player.global_position
-    _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
-    _maybe_save_game()
 
     # Resume player processing.
     _player.set_process_unhandled_input(true)
