@@ -101,10 +101,20 @@ func _on_player_entered_cargo_lift() -> void:
     _player.curr_room = _central_hub
 
 func _on_ability_acquired(ability: Ability) -> void:
+    # Save game.
     _player.save_manager.last_saved_global_position = _player.global_position
     _player.save_manager.last_saved_direction_to_lamp = _player.get_direction()
     _maybe_save_game()
 
+    # Quickly flash white and fade back more slowly.
+    var fade_duration := 0.1
+    _screen_fadeout.fade_to_white(fade_duration)
+    yield(_screen_fadeout, 'fade_to_white_finished')
+    fade_duration = 1.0
+    _screen_fadeout.fade_from_white(fade_duration)
+    yield(_screen_fadeout, 'fade_from_white_finished')
+
+    # Activate tutorial trigger and acquire ability.
     match ability.ability:
         Ability.Kind.DASH:
             _dash_tutorial_trigger.set_is_active(true)
