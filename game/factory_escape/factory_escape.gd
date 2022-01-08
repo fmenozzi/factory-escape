@@ -7,6 +7,7 @@ onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/Cen
 onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/CentralHub/BossFight/WardenSpawnPoint
 onready var _lightning_floor: LightningFloor = $World/Rooms/CentralHub/CentralHub/BossFight/LightningFloor
 onready var _projectile_spawners: Array = $World/Rooms/CentralHub/CentralHub/BossFight/ProjectileSpawners.get_children()
+onready var _ability_acquired_message: Control = $Layers/UILayer/AbilityAcquiredMessage
 onready var _dash_tutorial_trigger: Area2D = $World/Rooms/SectorOne/SectorOne_17/TutorialMessageTrigger
 onready var _wall_jump_tutorial_trigger: Area2D = $World/Rooms/SectorTwo/SectorTwo_13/TutorialMessageTrigger
 onready var _double_jump_tutorial_trigger: Area2D = $World/Rooms/SectorThree/SectorThree_11/TutorialMessageTrigger
@@ -113,6 +114,20 @@ func _on_ability_acquired(ability: Ability) -> void:
     fade_duration = 1.0
     _screen_fadeout.fade_from_white(fade_duration)
     yield(_screen_fadeout, 'fade_from_white_finished')
+
+    # Show ability acquired message.
+    var message := ''
+    match ability.ability:
+        Ability.Kind.DASH:
+            message = 'Dash Acquired'
+        Ability.Kind.WALL_JUMP:
+            message = 'Wall Jump Acquired'
+        Ability.Kind.DOUBLE_JUMP:
+            message = 'Double Jump Acquired'
+        Ability.Kind.GRAPPLE:
+            message = 'Grapple Acquired'
+    _ability_acquired_message.show_message(message)
+    yield(_ability_acquired_message, 'message_shown')
 
     # Activate tutorial trigger and acquire ability.
     match ability.ability:
