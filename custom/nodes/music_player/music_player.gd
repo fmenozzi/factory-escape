@@ -15,6 +15,7 @@ enum Music {
     WARDEN_FIGHT,
     WARDEN_FIGHT_END,
     LAMP_ROOM,
+    ABILITY_IDLE_LOOP,
 }
 
 onready var _players: Array = $AudioPlayers.get_children()
@@ -32,6 +33,7 @@ onready var _warden_fight_start: AudioStreamPlayerMusic = $AudioPlayers/WardenFi
 onready var _warden_fight: AudioStreamPlayerMusic = $AudioPlayers/WardenFight
 onready var _warden_fight_end: AudioStreamPlayerMusic = $AudioPlayers/WardenFightEnd
 onready var _lamp_room: AudioStreamPlayerMusic = $AudioPlayers/LampRoom
+onready var _ability_idle_loop: AudioStreamPlayerMusic = $AudioPlayers/AbilityIdleLoop
 
 func _ready() -> void:
     for player in _players:
@@ -64,6 +66,7 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.WARDEN_FIGHT,
         Music.WARDEN_FIGHT_END,
         Music.LAMP_ROOM,
+        Music.ABILITY_IDLE_LOOP,
     ])
 
     match music_enum:
@@ -108,6 +111,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.LAMP_ROOM:
             return _lamp_room
+
+        Music.ABILITY_IDLE_LOOP:
+            return _ability_idle_loop
 
         _:
             # Simply report the error here immediately instead of deferring to

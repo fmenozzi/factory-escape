@@ -156,6 +156,12 @@ func _on_ability_acquired(ability: Ability) -> void:
     _ability_acquired_message.show_message(message)
     yield(_ability_acquired_message, 'message_shown')
 
+    # Fade back to actual music.
+    var music_fade_duration := 1.0
+    MusicPlayer.cross_fade(
+        MusicPlayer.Music.ABILITY_IDLE_LOOP, _player.curr_room.get_section_track(), music_fade_duration)
+    MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, music_fade_duration)
+
     # Activate tutorial trigger.
     match ability.ability:
         Ability.Kind.DASH:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://custom/nodes/music_player/audio/warden_fight_start.ogg" type="AudioStream" id=14]
 [ext_resource path="res://custom/nodes/music_player/audio/warden_fight.ogg" type="AudioStream" id=15]
 [ext_resource path="res://custom/nodes/music_player/audio/warden_fight_end.ogg" type="AudioStream" id=16]
+[ext_resource path="res://environment/abilities/factory_escape/audio/ability_idle_loop.wav" type="AudioStream" id=17]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
@@ -69,3 +70,7 @@ stream = ExtResource( 16 )
 
 [node name="LampRoom" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 3 )
+
+[node name="AbilityIdleLoop" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 17 )
+max_volume_db = -24.0

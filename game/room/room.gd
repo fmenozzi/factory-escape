@@ -206,6 +206,12 @@ func set_enemies_visible(enemies_visible: bool) -> void:
 func contains(obj: Node2D) -> bool:
     return get_room_bounds().has_point(obj.get_global_position())
 
+func has_ability() -> bool:
+    for child in get_children():
+        if child is Ability:
+            return true
+    return false
+
 func set_enable_room_transitions(enabled: bool) -> void:
     if enabled:
         _room_boundaries.connect('area_entered', self, '_on_player_entered')
@@ -286,6 +292,12 @@ func _on_player_entered(area: Area2D) -> void:
             MusicPlayer.fade_out(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
         if player.prev_room.has_node('Lamp'):
             MusicPlayer.cross_fade(MusicPlayer.Music.LAMP_ROOM, curr_section_track, 1.0)
+            MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
+        if player.curr_room.has_ability():
+            MusicPlayer.cross_fade(curr_section_track, MusicPlayer.Music.ABILITY_IDLE_LOOP, 1.0)
+            MusicPlayer.fade_out(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
+        if player.prev_room.has_ability():
+            MusicPlayer.cross_fade(MusicPlayer.Music.ABILITY_IDLE_LOOP, curr_section_track, 1.0)
             MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
 
         # Reset and hide enemies in the previous room once the transition
