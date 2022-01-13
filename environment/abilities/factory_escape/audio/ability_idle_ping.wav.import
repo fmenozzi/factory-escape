@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ability_idle_ping.wav-cf06ee644210d5b6382b27aa90c9c227.sample"
+
+[deps]
+
+source_file="res://environment/abilities/factory_escape/audio/ability_idle_ping.wav"
+dest_files=[ "res://.import/ability_idle_ping.wav-cf06ee644210d5b6382b27aa90c9c227.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

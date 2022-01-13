@@ -2,6 +2,7 @@ extends Node2D
 class_name Ability
 
 signal ability_acquired(ability)
+signal finished_playing_acquired_sound
 
 enum Kind {
     DASH,
@@ -22,6 +23,7 @@ onready var _animation_player: AnimationPlayer = $Visuals/AnimationPlayer
 onready var _fade_in_out_label: Label = $FadeInOutLabel
 onready var _label_area: Area2D = $LabelArea
 onready var _walk_to_points: Node2D = $WalkToPoints
+onready var _audio_group: VisibilityBasedAudioGroup = $VisibilityBasedAudioGroup
 onready var _player: Player = Util.get_player()
 
 var _state: int
@@ -50,6 +52,20 @@ func _unhandled_input(event: InputEvent) -> void:
             return
 
         emit_signal('ability_acquired', self)
+
+func hide() -> void:
+    .hide()
+    _animation_player.stop()
+
+func play_idle_ping_sound() -> void:
+    _audio_group.get_player_by_name('IdlePing').play()
+
+func play_acquired_sound() -> void:
+    var audio_stream_player: AudioStreamPlayer = \
+        _audio_group.get_player_by_name('Acquired').get_player()
+    audio_stream_player.play()
+    yield(audio_stream_player, 'finished')
+    emit_signal('finished_playing_acquired_sound')
 
 func mark_as_acquired() -> void:
     _state = State.ACQUIRED

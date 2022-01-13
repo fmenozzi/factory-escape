@@ -130,8 +130,9 @@ func _on_ability_acquired(ability: Ability) -> void:
     })
     yield(_player.current_state, 'sequence_finished')
 
-    # Hide ability visuals
+    # Hide ability visuals and play acquired sound.
     ability.hide()
+    ability.play_acquired_sound()
 
     # Quickly flash white and fade back more slowly.
     var fade_duration := 0.1
@@ -169,7 +170,8 @@ func _on_ability_acquired(ability: Ability) -> void:
     # Resume player processing.
     _player.set_process_unhandled_input(true)
 
-    # Free ability.
+    # Free ability once the acquired sound is finished playing.
+    yield(ability, 'finished_playing_acquired_sound')
     ability.queue_free()
 
 func _on_central_lock_switch_pressed(sector_number: int) -> void:
