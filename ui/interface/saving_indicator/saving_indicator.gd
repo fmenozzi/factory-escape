@@ -6,8 +6,17 @@ signal spinning_finished
 const TRANSPARENT := 0.0
 const OPAQUE := 1.0
 
+const UpperLeftSectorFive := preload('res://ui/interface/saving_indicator/textures/saving-indicator-upper-left-sector-5.png')
+const UpperRightSectorFive := preload('res://ui/interface/saving_indicator/textures/saving-indicator-upper-right-sector-5.png')
+const LowerRightSectorFive := preload('res://ui/interface/saving_indicator/textures/saving-indicator-lower-right-sector-5.png')
+const LowerLeftSectorFive := preload('res://ui/interface/saving_indicator/textures/saving-indicator-lower-left-sector-5.png')
+
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _sprites: Node2D = $Sprites
+onready var _upper_left: Sprite = $Sprites/UpperLeft
+onready var _upper_right: Sprite = $Sprites/UpperRight
+onready var _lower_right: Sprite = $Sprites/LowerRight
+onready var _lower_left: Sprite = $Sprites/LowerLeft
 onready var _tween: Tween = $Sprites/VisibilityTween
 onready var _timer: Timer = $Timer
 
@@ -40,6 +49,12 @@ func stop_spinning() -> void:
 
 func is_spinning() -> bool:
     return _animation_player.is_playing()
+
+func switch_to_sector_5_textures() -> void:
+    _upper_left.texture = UpperLeftSectorFive
+    _upper_right.texture = UpperRightSectorFive
+    _lower_right.texture = LowerRightSectorFive
+    _lower_left.texture = LowerLeftSectorFive
 
 func _fade_spinner(old: float, new: float) -> void:
     var duration := 0.25
