@@ -178,6 +178,12 @@ func _set_sector_five_visuals() -> void:
     # Character spritesheet.
     _player.switch_to_sector_5_spritesheet()
 
+    # Health bar.
+    _health_bar.switch_to_sector_5_textures()
+
+    # Health pack bar.
+    _health_pack_bar.switch_to_sector_5_textures()
+
     # Clear color.
     VisualServer.set_default_clear_color(Color('#262626'))
 

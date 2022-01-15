@@ -59,6 +59,8 @@ const XboxRs := preload('res://ui/menus/options/controller/textures/xbox-rs.png'
 # Health pack sprites.
 const EmptyHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-empty.png')
 const FullHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-full.png')
+const EmptyHealthPackTextureSectorFive := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-empty-sector-5.png')
+const FullHealthPackTextureSectorFive := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-full-sector-5.png')
 
 # Title image.
 const TitleImage := preload('res://ui/menus/main/textures/title.png')
