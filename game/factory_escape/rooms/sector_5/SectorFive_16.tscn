@@ -11,25 +11,25 @@ extents = Vector2( 160, 270 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 72, 88 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 112, 80 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 80 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 32, 4 )
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 24, 4 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 72, 4 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 16, 4 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 32, 32 )
 
 [node name="SectorFive_16" instance=ExtResource( 1 )]
@@ -44,7 +44,7 @@ tile_data = PoolIntArray( 65536, 9, 0, 65537, 9, 0, 65538, 9, 0, 65539, 9, 0, 65
 tile_data = PoolIntArray( -65536, 79, 0, -65535, 75, 0, -65534, 76, 0, -65533, 79, 0, -65532, 75, 0, -65531, 76, 0, -65530, 79, 0, -65529, 75, 0, -65528, 76, 0, -65527, 79, 0, -65526, 75, 0, -65525, 76, 0, -65524, 79, 0, -65523, 75, 0, -65522, 76, 0, -65521, 79, 0, -65520, 75, 0, -65519, 76, 0, -65518, 79, 0, -65517, 75, 0, -65516, 79, 0, 0, 79, 0, 1, 75, 0, 2, 76, 0, 3, 79, 0, 4, 75, 0, 5, 76, 0, 6, 79, 0, 7, 75, 0, 8, 76, 0, 9, 79, 0, 10, 75, 0, 11, 76, 0, 12, 79, 0, 13, 75, 0, 14, 76, 0, 15, 79, 0, 16, 75, 0, 17, 76, 0, 18, 79, 0, 19, 66, 0, 20, 68, 0, 65554, 86, 0, 65555, 66, 0, 65556, 68, 0, 131091, 66, 0, 131092, 68, 0, 196627, 66, 0, 196628, 68, 0, 262163, 66, 0, 262164, 68, 0, 327680, 68, 0, 327681, 66, 0, 327682, 67, 0, 327683, 68, 0, 327699, 66, 0, 327700, 68, 0, 393216, 68, 0, 393217, 87, 0, 393235, 66, 0, 393236, 68, 0, 458752, 68, 0, 458766, 94, 0, 458767, 95, 0, 458771, 66, 0, 458772, 68, 0, 524288, 68, 0, 524307, 66, 0, 524308, 68, 0, 589824, 68, 0, 589843, 66, 0, 589844, 68, 0, 655360, 68, 0, 655379, 66, 0, 655380, 68, 0, 720896, 68, 0, 720915, 66, 0, 720916, 68, 0, 851967, 66, 0, 786432, 68, 0, 786451, 66, 0, 786452, 68, 0, 917503, 66, 0, 851968, 68, 0, 851975, 57, 0, 851976, 58, 0, 851977, 59, 0, 851987, 66, 0, 851988, 68, 0, 983039, 66, 0, 917504, 68, 0, 917511, 60, 0, 917512, 61, 0, 917513, 62, 0, 917523, 66, 0, 917524, 68, 0, 1048575, 66, 0, 983040, 68, 0, 983047, 60, 0, 983048, 61, 0, 983049, 62, 0, 983059, 66, 0, 983060, 68, 0, 1114111, 66, 0, 1048576, 68, 0, 1048583, 60, 0, 1048584, 61, 0, 1048585, 62, 0, 1048595, 66, 0, 1048596, 68, 0, 1179647, 66, 0, 1114112, 68, 0, 1114119, 60, 0, 1114120, 61, 0, 1114121, 62, 0, 1114131, 66, 0, 1114132, 68, 0, 1245183, 66, 0, 1179648, 68, 0, 1179655, 63, 0, 1179656, 64, 0, 1179657, 65, 0, 1179667, 66, 0, 1179668, 68, 0, 1310719, 66, 0, 1245184, 68, 0, 1245191, 66, 0, 1245192, 67, 0, 1245193, 68, 0, 1245194, 66, 0, 1245195, 67, 0, 1245196, 68, 0, 1245197, 66, 0, 1245198, 67, 0, 1245199, 68, 0, 1245200, 66, 0, 1245201, 67, 0, 1245202, 68, 0, 1245203, 66, 0, 1245204, 68, 0, 1376255, 66, 0, 1310720, 68, 0, 1310738, 86, 0, 1310739, 66, 0, 1310740, 68, 0, 1376256, 68, 0, 1376275, 66, 0, 1376276, 68, 0, 1441792, 68, 0, 1441799, 66, 0, 1441800, 67, 0, 1441801, 68, 0, 1441811, 66, 0, 1441812, 68, 0, 1507347, 66, 0, 1507348, 68, 0, 1572883, 66, 0, 1572884, 68, 0, 1638415, 90, 0, 1638416, 66, 0, 1638417, 67, 0, 1638418, 68, 0, 1638419, 66, 0, 1638420, 68, 0, 1703954, 86, 0, 1703955, 66, 0, 1703956, 68, 0, 1769491, 66, 0, 1769492, 68, 0, 1835027, 66, 0, 1835028, 68, 0, 1900563, 66, 0, 1900564, 68, 0, 1966099, 66, 0, 1966100, 68, 0, 2031635, 66, 0, 2031636, 68, 0, 2097171, 66, 0, 2097172, 68, 0, 2162688, 68, 0, 2162689, 66, 0, 2162690, 67, 0, 2162691, 68, 0, 2162692, 66, 0, 2162693, 67, 0, 2162694, 68, 0, 2162695, 66, 0, 2162696, 67, 0, 2162697, 68, 0, 2162698, 66, 0, 2162699, 67, 0, 2162700, 68, 0, 2162701, 66, 0, 2162702, 67, 0, 2162703, 68, 0, 2162704, 66, 0, 2162705, 67, 0, 2162706, 68, 0, 2162707, 66, 0, 2162708, 68, 0, 2228224, 68, 0, 2228225, 66, 0, 2228226, 67, 0, 2228227, 68, 0, 2228228, 66, 0, 2228229, 67, 0, 2228230, 68, 0, 2228231, 66, 0, 2228232, 67, 0, 2228233, 68, 0, 2228234, 66, 0, 2228235, 67, 0, 2228236, 68, 0, 2228237, 66, 0, 2228238, 67, 0, 2228239, 68, 0, 2228240, 66, 0, 2228241, 67, 0, 2228242, 68, 0, 2228243, 66, 0, 2228244, 68, 0 )
 
 [node name="Hazards" parent="TileMaps" index="4"]
-tile_data = PoolIntArray( 851974, -1073741824, 0, 917510, -1073741824, 0, 983046, -1073741824, 0, 1048582, -1073741824, 0, 1114118, -1073741824, 0, 1179654, -1073741824, 0, 1310727, 1073741824, 0, 1310728, 1073741824, 0, 1310729, 1073741824, 0, 1376263, 0, 0, 1376264, 0, 0, 1376265, 0, 0 )
+tile_data = PoolIntArray( 851974, -1073741823, 0, 917510, -1073741823, 0, 983046, -1073741823, 0, 1048582, -1073741823, 0, 1114118, -1073741823, 0, 1179654, -1073741823, 0, 1310727, 1073741825, 0, 1310728, 1073741825, 0, 1310729, 1073741825, 0, 1376263, 1, 0, 1376264, 1, 0, 1376265, 1, 0 )
 
 [node name="RoomBoundaries" parent="." index="1"]
 visible = false
@@ -71,7 +71,7 @@ position = Vector2( 232, 116 )
 
 [node name="CollisionShape2D" parent="GrapplePoints/GrapplePointUpper/GrappleRangeArea" index="0"]
 position = Vector2( -56, -20 )
-shape = SubResource( 6 )
+shape = SubResource( 3 )
 
 [node name="Bottom" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 32, 532 )
@@ -79,32 +79,32 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Bottom" index="0"]
 position = Vector2( -24, -80 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="GrapplePlatformLower" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
 position = Vector2( 264, 404 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/GrapplePlatformLower" index="0"]
 position = Vector2( 8, -4 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="CentralPlatform" parent="HazardCheckpoints" index="2" instance=ExtResource( 4 )]
 position = Vector2( 136, 212 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/CentralPlatform" index="0"]
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [node name="CentralPlatformLower" parent="HazardCheckpoints" index="3" instance=ExtResource( 4 )]
 position = Vector2( 232, 308 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/CentralPlatformLower" index="0"]
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="GrapplePlatformUpper" parent="HazardCheckpoints" index="4" instance=ExtResource( 4 )]
 position = Vector2( 240, 116 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/GrapplePlatformUpper" index="0"]
-shape = SubResource( 9 )
+shape = SubResource( 8 )
 
 [node name="Top" parent="HazardCheckpoints" index="5" instance=ExtResource( 4 )]
 position = Vector2( 32, 84 )
@@ -112,7 +112,7 @@ requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/Top" index="0"]
 position = Vector2( 0, -32 )
-shape = SubResource( 5 )
+shape = SubResource( 9 )
 
 [node name="Springboard" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 64, 416 )
