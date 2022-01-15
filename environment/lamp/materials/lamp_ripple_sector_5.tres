@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://environment/lamp/shaders/lamp_ripple.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/ripple_radius_uv = 0.5
+shader_param/ripple_width_uv = 0.1
+shader_param/ripple_color = Color( 0.992157, 0.576471, 0.34902, 1 )
+shader_param/alpha_multiplier = 0.0
