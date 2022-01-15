@@ -3,7 +3,7 @@
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/sector_five_13.gd" type="Script" id=2]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=3]
-[ext_resource path="res://environment/switch/Switch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://environment/switch/SwitchSectorFive.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
@@ -41,12 +41,12 @@ position = Vector2( 328, 152 )
 [node name="ClosingDoorRight" parent="." index="10" instance=ExtResource( 3 )]
 position = Vector2( 632, 152 )
 
-[node name="Switch" parent="." index="11" instance=ExtResource( 4 )]
+[node name="SwitchSectorFive" parent="." index="11" instance=ExtResource( 5 )]
 position = Vector2( 480, 168 )
 
-[node name="FadeInOutLabel" parent="Switch" index="2"]
+[node name="FadeInOutLabel" parent="SwitchSectorFive" index="2"]
 text = "Overload"
 
 [editable path="TileMaps"]
-[editable path="Switch"]
-[editable path="Switch/WalkToPoints"]
+[editable path="SwitchSectorFive"]
+[editable path="SwitchSectorFive/WalkToPoints"]

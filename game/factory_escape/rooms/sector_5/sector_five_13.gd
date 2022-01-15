@@ -2,7 +2,7 @@ extends Room
 
 onready var _closing_door_left: StaticBody2D = $ClosingDoorLeft
 onready var _closing_door_right: StaticBody2D = $ClosingDoorRight
-onready var _switch: Switch = $Switch
+onready var _switch: Switch = $SwitchSectorFive
 
 func _ready() -> void:
     lamp_reset()

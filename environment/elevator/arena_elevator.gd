@@ -5,7 +5,7 @@ export(Switch.State) var switch_state: int = Switch.State.UNPRESSED
 const SPEED := 2.0 * Util.TILE_SIZE
 
 onready var _platform: KinematicBody2D = $Platform
-onready var _switch: Switch = $Platform/Switch
+onready var _switch: Switch = $Platform/SwitchSectorFive
 onready var _destination: Position2D = $Destination
 onready var _tween: Tween = $MoveTween
 
