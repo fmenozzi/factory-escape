@@ -11,6 +11,10 @@ signal player_reached_walk_to_point
 signal player_finished_intro_fall
 signal player_sat_down
 
+const DashEchoesSectorFive = preload('res://actors/player/effects/materials/dash_echoes_sector_5.tres')
+const DashPuffSectorFive = preload('res://actors/player/effects/materials/dash_puff_sector_5.tres')
+const HitEffectSectorFive = preload('res://actors/player/effects/player_hit_effect/textures/player-hit-effect-sector-5.png')
+
 # The possible states that the player can be in. The NO_CHANGE state is reserved
 # for states indicating that the current state should not be changed and does
 # not itself constitute a valid player state.
@@ -308,8 +312,16 @@ func stop_attack() -> void:
         var collision_shape: CollisionShape2D = hitbox.get_child(0)
         collision_shape.set_deferred('disabled', true)
 
-func switch_to_sector_5_spritesheet() -> void:
+func switch_to_sector_5_visuals() -> void:
     _sprite.texture = Preloads.PlayerSpritesheetSectorFive
+
+    _dash_echoes.process_material = DashEchoesSectorFive
+    _dash_puff.process_material = DashPuffSectorFive
+
+    _hit_effect.set_texture(HitEffectSectorFive)
+
+    _invincibility_flash_manager_hazard_hit.flash_color = Color('#fd9359')
+    _invincibility_flash_manager_enemy_hit.flash_color = Color('#fd9359')
 
 func get_health() -> Health:
     return _health

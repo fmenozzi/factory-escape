@@ -175,8 +175,8 @@ func _set_player_starting_music() -> void:
         # TODO: Am I supposed to be fading in factory background as well?
 
 func _set_sector_five_visuals() -> void:
-    # Character spritesheet.
-    _player.switch_to_sector_5_spritesheet()
+    # Character textures, particles, effects, etc.
+    _player.switch_to_sector_5_visuals()
 
     # Health bar.
     _health_bar.switch_to_sector_5_textures()
