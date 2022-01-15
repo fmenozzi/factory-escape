@@ -112,6 +112,9 @@ func _ready() -> void:
 
     _set_player_starting_room()
 
+    if _player.curr_room.get_section() == Room.Section.SECTOR_5:
+        _set_sector_five_visuals()
+
     _set_player_starting_health_and_health_packs()
 
     _set_player_starting_music()
@@ -170,6 +173,13 @@ func _set_player_starting_music() -> void:
         yield(get_tree().create_timer(1.0), 'timeout')
         MusicPlayer.fade_in(_player.curr_room.get_section_track(), 6.0)
         # TODO: Am I supposed to be fading in factory background as well?
+
+func _set_sector_five_visuals() -> void:
+    # Character spritesheet.
+    _player.switch_to_sector_5_spritesheet()
+
+    # Clear color.
+    VisualServer.set_default_clear_color(Color('#262626'))
 
 func _maybe_save_game() -> void:
     if not run_standalone:

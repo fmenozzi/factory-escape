@@ -308,6 +308,9 @@ func stop_attack() -> void:
         var collision_shape: CollisionShape2D = hitbox.get_child(0)
         collision_shape.set_deferred('disabled', true)
 
+func switch_to_sector_5_spritesheet() -> void:
+    _sprite.texture = Preloads.PlayerSpritesheetSectorFive
+
 func get_health() -> Health:
     return _health
 

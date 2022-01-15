@@ -415,6 +415,9 @@ func _on_player_entered_central_hub_shaft() -> void:
     # Switch to cutscene camera.
     _sector_five_lift_cutscene_camera.make_current()
 
+    # Switch to sector-specific visuals.
+    _set_sector_five_visuals()
+
     # Start the fall sequence from the second suspension point.
     _player.global_position = _sector_five_lift_suspend_point.global_position
     _player.set_direction(Util.Direction.RIGHT)

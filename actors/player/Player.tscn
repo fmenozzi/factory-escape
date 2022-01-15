@@ -59,7 +59,7 @@
 [ext_resource path="res://actors/player/states/fall_to_ground.gd" type="Script" id=57]
 [ext_resource path="res://actors/player/states/sit_down.gd" type="Script" id=58]
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=1]
 resource_name = "acquire_ability"
 length = 0.4
 tracks/0/type = "value"
@@ -75,8 +75,7 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "activate_switch"
+[sub_resource type="Animation" id=2]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -91,7 +90,7 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.24
 step = 0.01
 tracks/0/type = "value"
@@ -124,7 +123,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.24
 step = 0.01
 tracks/0/type = "value"
@@ -157,7 +156,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.24
 step = 0.01
 tracks/0/type = "value"
@@ -190,7 +189,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.24
 step = 0.01
 tracks/0/type = "value"
@@ -223,7 +222,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -237,7 +236,7 @@ tracks/0/keys = {
 "values": [ 32 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.75
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -252,7 +251,7 @@ tracks/0/keys = {
 "values": [ 65 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -267,7 +266,7 @@ tracks/0/keys = {
 "values": [ 24 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.24
 step = 0.01
 tracks/0/type = "value"
@@ -323,7 +322,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.16
 step = 0.01
 tracks/0/type = "value"
@@ -379,7 +378,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.15
 step = 0.05
 tracks/0/type = "value"
@@ -395,7 +394,7 @@ tracks/0/keys = {
 "values": [ 59, 58, 57 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=13]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -410,7 +409,7 @@ tracks/0/keys = {
 "values": [ 21, 22, 23, 22, 21 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=14]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -426,7 +425,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 2.0
 step = 0.05
 tracks/0/type = "value"
@@ -442,7 +441,7 @@ tracks/0/keys = {
 "values": [ 72, 73, 74, 75, 76, 77, 78, 79, 76, 77, 78, 79 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
@@ -489,7 +488,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 1.2
 loop = true
 step = 0.2
@@ -506,7 +505,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 3, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 length = 1.4
 loop = true
 step = 0.2
@@ -523,7 +522,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 7, 6, 5 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.1
 step = 0.05
 tracks/0/type = "value"
@@ -539,7 +538,7 @@ tracks/0/keys = {
 "values": [ 17, 18 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=20]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -554,7 +553,7 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=21]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -569,7 +568,7 @@ tracks/0/keys = {
 "values": [ 30 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=22]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -584,7 +583,7 @@ tracks/0/keys = {
 "values": [ 31 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=23]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -599,7 +598,7 @@ tracks/0/keys = {
 "values": [ 73, 72 ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=24]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -615,7 +614,7 @@ tracks/0/keys = {
 "values": [ 80, 81, 82, 81 ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=25]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -643,7 +642,7 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=26]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -659,7 +658,7 @@ tracks/0/keys = {
 "values": [ 64, 65 ]
 }
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=27]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -674,7 +673,7 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=28]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -707,7 +706,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=29]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -721,22 +720,22 @@ tracks/0/keys = {
 "values": [ 36 ]
 }
 
-[sub_resource type="RectangleShape2D" id=29]
+[sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 5, 7 )
 
-[sub_resource type="RectangleShape2D" id=30]
+[sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="RectangleShape2D" id=31]
+[sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 18, 7 )
 
-[sub_resource type="RectangleShape2D" id=32]
+[sub_resource type="RectangleShape2D" id=33]
 extents = Vector2( 7, 16 )
 
-[sub_resource type="RectangleShape2D" id=33]
+[sub_resource type="RectangleShape2D" id=34]
 extents = Vector2( 3.5, 6 )
 
-[sub_resource type="RectangleShape2D" id=34]
+[sub_resource type="RectangleShape2D" id=35]
 extents = Vector2( 0.5, 0.5 )
 
 [node name="Player" type="KinematicBody2D" groups=[
@@ -763,35 +762,35 @@ script = ExtResource( 24 )
 [node name="PlayerSoundManager" parent="." instance=ExtResource( 46 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/acquire_ability = SubResource( 35 )
-anims/activate_switch = SubResource( 1 )
-anims/attack_1 = SubResource( 2 )
-anims/attack_2 = SubResource( 3 )
-anims/attack_3 = SubResource( 4 )
-anims/attack_up = SubResource( 5 )
-anims/dash = SubResource( 6 )
-anims/die = SubResource( 7 )
-anims/fall = SubResource( 8 )
-anims/grapple_launch_long = SubResource( 9 )
-anims/grapple_launch_short = SubResource( 10 )
-anims/grapple_pull = SubResource( 11 )
-anims/hard_landing = SubResource( 12 )
-anims/hazard_hit = SubResource( 13 )
-anims/hazard_recover = SubResource( 14 )
-anims/heal = SubResource( 15 )
-anims/idle = SubResource( 16 )
-anims/idle_low_health = SubResource( 17 )
-anims/jump = SubResource( 18 )
-anims/light_lamp = SubResource( 19 )
-anims/look_down = SubResource( 20 )
-anims/look_up = SubResource( 21 )
-anims/pre_rest = SubResource( 22 )
-anims/rest = SubResource( 23 )
-anims/sleep = SubResource( 24 )
-anims/stagger = SubResource( 25 )
-anims/take_health_pack = SubResource( 26 )
-anims/walk = SubResource( 27 )
-anims/wall_slide = SubResource( 28 )
+anims/acquire_ability = SubResource( 1 )
+anims/activate_switch = SubResource( 2 )
+anims/attack_1 = SubResource( 3 )
+anims/attack_2 = SubResource( 4 )
+anims/attack_3 = SubResource( 5 )
+anims/attack_up = SubResource( 6 )
+anims/dash = SubResource( 7 )
+anims/die = SubResource( 8 )
+anims/fall = SubResource( 9 )
+anims/grapple_launch_long = SubResource( 10 )
+anims/grapple_launch_short = SubResource( 11 )
+anims/grapple_pull = SubResource( 12 )
+anims/hard_landing = SubResource( 13 )
+anims/hazard_hit = SubResource( 14 )
+anims/hazard_recover = SubResource( 15 )
+anims/heal = SubResource( 16 )
+anims/idle = SubResource( 17 )
+anims/idle_low_health = SubResource( 18 )
+anims/jump = SubResource( 19 )
+anims/light_lamp = SubResource( 20 )
+anims/look_down = SubResource( 21 )
+anims/look_up = SubResource( 22 )
+anims/pre_rest = SubResource( 23 )
+anims/rest = SubResource( 24 )
+anims/sleep = SubResource( 25 )
+anims/stagger = SubResource( 26 )
+anims/take_health_pack = SubResource( 27 )
+anims/walk = SubResource( 28 )
+anims/wall_slide = SubResource( 29 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -818,7 +817,7 @@ region_rect = Rect2( 0, 0, 48, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -7 )
-shape = SubResource( 29 )
+shape = SubResource( 30 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -826,7 +825,7 @@ collision_mask = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -6.5 )
-shape = SubResource( 30 )
+shape = SubResource( 31 )
 
 [node name="CameraAnchor" type="Position2D" parent="." groups=[
 "mirror_y_axis",
@@ -857,7 +856,7 @@ collision_layer = 16
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/SideAttack"]
-shape = SubResource( 31 )
+shape = SubResource( 32 )
 disabled = true
 
 [node name="UpAttack" type="Area2D" parent="Hitboxes"]
@@ -866,7 +865,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxes/UpAttack"]
 position = Vector2( 0, -28 )
-shape = SubResource( 32 )
+shape = SubResource( 33 )
 disabled = true
 
 [node name="States" type="Node" parent="."]
@@ -1138,7 +1137,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CeilingDetector"]
 position = Vector2( 0, -8 )
-shape = SubResource( 33 )
+shape = SubResource( 34 )
 
 [node name="JumpManager" parent="." instance=ExtResource( 26 )]
 
@@ -1158,7 +1157,7 @@ collision_layer = 1024
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector"]
-shape = SubResource( 34 )
+shape = SubResource( 35 )
 
 [node name="GroundDetector" type="RayCast2D" parent="."]
 enabled = true
