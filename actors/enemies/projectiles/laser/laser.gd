@@ -4,6 +4,10 @@ class_name Laser
 signal shot_finished
 signal shot_cancelled
 
+export(Color) var telegraph_color := Color('#ff4f78')
+
+export(float) var color_multiplier := 1.3
+
 # The maximum length of the laser beam.
 const MAX_LENGTH: float = 100.0 * Util.TILE_SIZE
 
@@ -16,20 +20,9 @@ const MAX_WIDTH_INNER: float = 2.0
 # The maximum radius of the impact sprite in UV coordinates.
 const MAX_IMPACT_SPRITE_RADIUS_UV: float = 0.35
 
-# The color of the outer beam during the telegraph phase.
-const TELEGRAPH_COLOR: Color = Color('ff4f78')
-
 # The amount of time the laser spends telegraphing the subsequent shot, during
 # which the player cannot be harmed.
 const TELEGRAPH_DURATION: float = 1.0
-
-# The color of the outer beam during the shoot phase.
-const SHOT_COLOR: Color = Color(
-    TELEGRAPH_COLOR.r * 1.3,
-    TELEGRAPH_COLOR.g * 1.3,
-    TELEGRAPH_COLOR.b * 1.3,
-    TELEGRAPH_COLOR.a
-)
 
 # The amount of time the laser spends shooting, during which it remains active
 # and can harm the player.
@@ -47,6 +40,7 @@ enum State {
 }
 
 var _current_state: int = State.INACTIVE
+var _shot_color: Color
 
 onready var _raycast: RayCast2D = $RayCast2D
 onready var _outer_beam: Line2D = $OuterBeam
@@ -79,6 +73,13 @@ func _ready() -> void:
 
     _beam_end.position.x = MAX_LENGTH
     _beam_end.hide()
+
+    _shot_color = Color(
+        telegraph_color.a * color_multiplier,
+        telegraph_color.g * color_multiplier,
+        telegraph_color.b * color_multiplier,
+        telegraph_color.a
+    )
 
     set_physics_process(false)
     hide()
@@ -217,7 +218,7 @@ func _start_telegraph() -> void:
 
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
-    _outer_beam.modulate = TELEGRAPH_COLOR
+    _outer_beam.modulate = telegraph_color
     _beam_end.hide()
 
     _tween.remove_all()
@@ -233,7 +234,7 @@ func _start_laser_shot() -> void:
         _current_state = State.SHOOT
         _hitbox_collision_shape.set_deferred('disabled', false)
         _impact_sparks.emitting = true
-        _outer_beam.modulate = SHOT_COLOR
+        _outer_beam.modulate = _shot_color
         _beam_end.show()
 
     _tween.remove_all()

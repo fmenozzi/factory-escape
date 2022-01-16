@@ -1,36 +1,17 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/enemies/projectiles/laser/laser.gd" type="Script" id=1]
 [ext_resource path="res://actors/enemies/projectiles/laser/textures/beam.png" type="Texture" id=2]
-[ext_resource path="res://actors/enemies/projectiles/laser/shaders/laser_impact.shader" type="Shader" id=3]
+[ext_resource path="res://actors/enemies/projectiles/laser/materials/impact_shader.tres" type="Material" id=3]
 [ext_resource path="res://actors/enemies/projectiles/laser/shaders/laser_antialias.shader" type="Shader" id=4]
 [ext_resource path="res://actors/enemies/projectiles/laser/LaserSoundManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/projectiles/laser/materials/impact_sparks.tres" type="Material" id=6]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 4 )
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 3 )
-shader_param/impact_color = Color( 1, 0.309804, 0.470588, 1 )
-shader_param/impact_radius_uv = 0.5
-
-[sub_resource type="Gradient" id=4]
-colors = PoolColorArray( 1, 0.309804, 0.470588, 1, 1, 0.309804, 0.470588, 0 )
-
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
-
-[sub_resource type="ParticlesMaterial" id=6]
-flag_disable_z = true
-spread = 40.0
-gravity = Vector3( 1, 0, 0 )
-initial_velocity = -50.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-color_ramp = SubResource( 5 )
 
 [node name="Laser" type="Node2D"]
 script = ExtResource( 1 )
@@ -70,7 +51,7 @@ visible = false
 position = Vector2( 10, 0 )
 
 [node name="BeamImpact" type="Sprite" parent="BeamEnd"]
-material = SubResource( 3 )
+material = ExtResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="ImpactSparks" type="Particles2D" parent="BeamEnd"]
@@ -79,6 +60,6 @@ amount = 10
 lifetime = 0.5
 randomness = 1.0
 draw_order = 1
-process_material = SubResource( 6 )
+process_material = ExtResource( 6 )
 
 [node name="LaserSoundManager" parent="." instance=ExtResource( 5 )]

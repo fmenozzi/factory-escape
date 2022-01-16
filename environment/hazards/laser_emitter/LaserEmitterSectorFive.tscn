@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://environment/hazards/laser_emitter/LaserEmitter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/hazards/laser_emitter/textures/laser-emitter-sector-5.png" type="Texture" id=2]
+[ext_resource path="res://actors/enemies/projectiles/laser/materials/impact_shader_sector_5.tres" type="Material" id=3]
+[ext_resource path="res://actors/enemies/projectiles/laser/materials/impact_sparks_sector_5.tres" type="Material" id=4]
+
+[node name="LaserEmitterSectorFive" instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource( 2 )
+
+[node name="Laser" parent="." index="2"]
+telegraph_color = Color( 0.992157, 0.576471, 0.34902, 1 )
+
+[node name="BeamImpact" parent="Laser/BeamEnd" index="0"]
+material = ExtResource( 3 )
+
+[node name="ImpactSparks" parent="Laser/BeamEnd" index="1"]
+process_material = ExtResource( 4 )
+
+[editable path="Laser"]

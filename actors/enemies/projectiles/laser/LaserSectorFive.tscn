@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/enemies/projectiles/laser/Laser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://actors/enemies/projectiles/laser/materials/impact_sparks_sector_5.tres" type="Material" id=2]
+
+[node name="LaserSectorFive" instance=ExtResource( 1 )]
+telegraph_color = Color( 0.992157, 0.576471, 0.34902, 1 )
+
+[node name="ImpactSparks" parent="BeamEnd" index="1"]
+process_material = ExtResource( 2 )
