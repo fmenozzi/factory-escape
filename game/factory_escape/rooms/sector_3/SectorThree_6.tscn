@@ -50,6 +50,10 @@ position = Vector2( 640, 96 )
 position = Vector2( 248, 0 )
 attenuation_visibility_radius_tiles = 18.0
 
+[node name="VisibilityBasedAudioGroup" parent="Hazards/LaserEmittersWithSwitch/LaserEmitterGroup" index="1"]
+position = Vector2( 896, 96 )
+attenuation_visibility_radius_tiles = 18.0
+
 [node name="Switch" parent="Hazards/LaserEmittersWithSwitch" index="1"]
 position = Vector2( 1232, 344 )
 z_index = 1
@@ -61,6 +65,10 @@ position = Vector2( 64, 96 )
 
 [node name="VisibilityBasedAudioGroup" parent="Hazards/LaserEmittersWithSwitch2/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser/LaserSoundManager/AudioGroups" index="0"]
 position = Vector2( 248, 0 )
+attenuation_visibility_radius_tiles = 18.0
+
+[node name="VisibilityBasedAudioGroup" parent="Hazards/LaserEmittersWithSwitch2/LaserEmitterGroup" index="1"]
+position = Vector2( 320, 96 )
 attenuation_visibility_radius_tiles = 18.0
 
 [node name="Switch" parent="Hazards/LaserEmittersWithSwitch2" index="1"]
@@ -98,6 +106,7 @@ shape = SubResource( 4 )
 [editable path="Hazards/LaserEmittersWithSwitch/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser"]
 [editable path="Hazards/LaserEmittersWithSwitch/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser/LaserSoundManager"]
 [editable path="Hazards/LaserEmittersWithSwitch/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser/LaserSoundManager/AudioGroups/VisibilityBasedAudioGroup"]
+[editable path="Hazards/LaserEmittersWithSwitch/LaserEmitterGroup/VisibilityBasedAudioGroup"]
 [editable path="Hazards/LaserEmittersWithSwitch/Switch"]
 [editable path="Hazards/LaserEmittersWithSwitch/Switch/WalkToPoints"]
 [editable path="Hazards/LaserEmittersWithSwitch2"]
@@ -106,6 +115,7 @@ shape = SubResource( 4 )
 [editable path="Hazards/LaserEmittersWithSwitch2/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser"]
 [editable path="Hazards/LaserEmittersWithSwitch2/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser/LaserSoundManager"]
 [editable path="Hazards/LaserEmittersWithSwitch2/LaserEmitterGroup/LaserEmitters/LaserEmitter/Laser/LaserSoundManager/AudioGroups/VisibilityBasedAudioGroup"]
+[editable path="Hazards/LaserEmittersWithSwitch2/LaserEmitterGroup/VisibilityBasedAudioGroup"]
 [editable path="Hazards/LaserEmittersWithSwitch2/Switch"]
 [editable path="Hazards/LaserEmittersWithSwitch2/Switch/WalkToPoints"]
 [editable path="HazardCheckpoints/HazardCheckpoint"]

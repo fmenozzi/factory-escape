@@ -3,6 +3,7 @@ class_name Laser
 
 signal shot_finished
 signal shot_cancelled
+signal audio_playback_requested(track)
 
 export(Color) var telegraph_color := Color('#ff4f78')
 
@@ -41,6 +42,7 @@ enum State {
 
 var _current_state: int = State.INACTIVE
 var _shot_color: Color
+var _enable_audio := true
 
 onready var _raycast: RayCast2D = $RayCast2D
 onready var _outer_beam: Line2D = $OuterBeam
@@ -157,6 +159,21 @@ func lamp_reset() -> void:
     set_physics_process(false)
     hide()
 
+func set_enable_audio(enable_audio: bool) -> void:
+    _enable_audio = enable_audio
+
+func _maybe_play_audio(track: int) -> void:
+    assert(track in [
+        LaserSoundManager.Sounds.TELEGRAPH,
+        LaserSoundManager.Sounds.SHOOT,
+        LaserSoundManager.Sounds.WIND_DOWN,
+    ])
+
+    if _enable_audio:
+        _sound_manager.play(track)
+    else:
+        emit_signal('audio_playback_requested', track)
+
 func _cast_laser_beam() -> void:
     # Get the local coordinates of the point where the laser actually makes
     # contact
@@ -214,7 +231,7 @@ func _start_telegraph() -> void:
     var telegraph_width_inner := 0.0
     var num_wobbles := 6
 
-    _sound_manager.play(LaserSoundManager.Sounds.TELEGRAPH)
+    _maybe_play_audio(LaserSoundManager.Sounds.TELEGRAPH)
 
     _current_state = State.TELEGRAPH
     _hitbox_collision_shape.set_deferred('disabled', true)
@@ -230,7 +247,7 @@ func _start_laser_shot() -> void:
     var num_wobbles := 8
 
     if _current_state != State.CANCELLED:
-        _sound_manager.play(LaserSoundManager.Sounds.SHOOT)
+        _maybe_play_audio(LaserSoundManager.Sounds.SHOOT)
         _current_state = State.SHOOT
         _hitbox_collision_shape.set_deferred('disabled', false)
         _impact_sparks.emitting = true
@@ -251,7 +268,7 @@ func _start_wind_down() -> void:
     _impact_sparks.emitting = false
 
     if _current_state != State.CANCELLED:
-        _sound_manager.play(LaserSoundManager.Sounds.WIND_DOWN)
+        _maybe_play_audio(LaserSoundManager.Sounds.WIND_DOWN)
 
     _tween.remove_all()
     _interpolate_beam_width(_outer_beam, _outer_beam.width, 0, WIND_DOWN_DURATION)

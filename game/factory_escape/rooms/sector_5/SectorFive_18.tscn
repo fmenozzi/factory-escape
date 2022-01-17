@@ -70,6 +70,9 @@ position = Vector2( 0, 8 )
 [node name="LaserEmitterSectorFive2" parent="Hazards/LaserEmitterGroup/LaserEmitters" index="1" instance=ExtResource( 6 )]
 position = Vector2( 0, -8 )
 
+[node name="VisibilityBasedAudioGroup" parent="Hazards/LaserEmitterGroup" index="1"]
+attenuation_visibility_radius_tiles = 8.0
+
 [node name="LeftOfSpikes" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
 position = Vector2( 152, 220 )
 requires_grounded = false
@@ -111,6 +114,7 @@ shape = SubResource( 7 )
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]
 [editable path="Hazards/LaserEmitterGroup"]
+[editable path="Hazards/LaserEmitterGroup/VisibilityBasedAudioGroup"]
 [editable path="HazardCheckpoints/LeftOfSpikes"]
 [editable path="HazardCheckpoints/GrapplePoint"]
 [editable path="HazardCheckpoints/BetweenCrushers"]

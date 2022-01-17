@@ -3,6 +3,9 @@ class_name LaserEmitter
 
 onready var _laser: Laser = $Laser
 
+func get_laser() -> Laser:
+    return _laser
+
 func shoot() -> void:
     _laser.shoot()
 
