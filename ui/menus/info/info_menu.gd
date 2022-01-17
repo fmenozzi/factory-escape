@@ -81,8 +81,13 @@ func _copy_licenses_file_to_user() -> void:
     res_file.close()
 
 func _on_credits_pressed() -> void:
-    # DO NOT SUBMIT: THIS DOESN'T SEEM TO BE WORKING
+    # Disable input in order to prevent navigating menus during the screen
+    # fadeout. Note that we have to disable input/focus both here and in the
+    # title screen itself.
+    #
+    # TODO: Make this cleaner (i.e. no chained get_parent() calls).
     set_input_enabled(false)
+    get_parent().get_parent().set_process_input(false)
 
     var fade_duration := 2.0
     SceneChanger.change_scene_to(Preloads.CreditsScreen, fade_duration)
