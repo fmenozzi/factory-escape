@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/room/Arena.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/enemies/leaping_failure/LeapingFailure.tscn" type="PackedScene" id=5]
+[ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 64 )
 
 [node name="SectorTwo_11" instance=ExtResource( 1 )]
 
@@ -29,4 +37,54 @@ position = Vector2( 160, 90 )
 [node name="Right" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 480, 90 )
 
+[node name="Arena" parent="." index="9" instance=ExtResource( 3 )]
+
+[node name="Phase0" type="Node2D" parent="Arena/Phases" index="0"]
+
+[node name="SluggishFailure1" parent="Arena/Phases/Phase0" index="0" instance=ExtResource( 4 )]
+position = Vector2( 200, 156 )
+
+[node name="SluggishFailure2" parent="Arena/Phases/Phase0" index="1" instance=ExtResource( 4 )]
+position = Vector2( 248, 156 )
+
+[node name="SluggishFailure3" parent="Arena/Phases/Phase0" index="2" instance=ExtResource( 4 )]
+position = Vector2( 384, 156 )
+initial_direction = -1
+
+[node name="SluggishFailure4" parent="Arena/Phases/Phase0" index="3" instance=ExtResource( 4 )]
+position = Vector2( 440, 156 )
+initial_direction = -1
+
+[node name="Phase1" type="Node2D" parent="Arena/Phases" index="1"]
+
+[node name="SentryDrone" parent="Arena/Phases/Phase1" index="0" instance=ExtResource( 6 )]
+position = Vector2( 208, 64 )
+
+[node name="LeapingFailure" parent="Arena/Phases/Phase1" index="1" instance=ExtResource( 5 )]
+position = Vector2( 360, 156 )
+initial_direction = -1
+
+[node name="Phase2" type="Node2D" parent="Arena/Phases" index="2"]
+
+[node name="SentryDrone" parent="Arena/Phases/Phase2" index="0" instance=ExtResource( 6 )]
+position = Vector2( 256, 120 )
+
+[node name="SentryDrone2" parent="Arena/Phases/Phase2" index="1" instance=ExtResource( 6 )]
+position = Vector2( 384, 120 )
+initial_direction = -1
+
+[node name="ClosingDoorLeft" parent="Arena/ClosingDoors" index="0" instance=ExtResource( 2 )]
+position = Vector2( 168, 140 )
+
+[node name="ClosingDoorRight" parent="Arena/ClosingDoors" index="1" instance=ExtResource( 2 )]
+position = Vector2( 472, 140 )
+
+[node name="CollisionShape2D" parent="Arena/Trigger" index="0"]
+position = Vector2( 336, 92 )
+shape = SubResource( 2 )
+
+[node name="CameraAnchor" parent="Arena" index="3"]
+position = Vector2( 320, 90 )
+
 [editable path="TileMaps"]
+[editable path="Arena"]
