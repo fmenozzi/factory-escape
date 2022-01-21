@@ -25,7 +25,7 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed('ui_accept'):
         if _is_fading_in_or_out:
             return
-        _go_to_next_screen()
+        _on_timeout()
     elif event.is_action_pressed('ui_cancel'):
         set_process_unhandled_input(false)
         _go_to_title_screen()
