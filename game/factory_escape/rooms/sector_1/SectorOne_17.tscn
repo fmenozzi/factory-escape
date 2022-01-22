@@ -38,7 +38,7 @@ position = Vector2( 160, 152 )
 message_mode = 0
 message = "to dash"
 player_action = "player_dash"
-delay = 1.0
+delay = 0.5
 is_active = false
 
 [node name="CollisionShape2D" parent="TutorialMessageTrigger" index="1"]
