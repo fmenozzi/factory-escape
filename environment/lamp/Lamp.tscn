@@ -16,7 +16,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 1.6
 loop = true
 tracks/0/type = "value"
@@ -32,7 +32,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath("LampSprite:frame")
 tracks/0/interp = 1
@@ -46,7 +46,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.6
 step = 0.05
 tracks/0/type = "value"
@@ -138,9 +138,9 @@ vframes = 2
 frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/lit = SubResource( 3 )
-anims/unlit = SubResource( 4 )
-anims/unlit_to_lit = SubResource( 5 )
+anims/lit = SubResource( 2 )
+anims/unlit = SubResource( 3 )
+anims/unlit_to_lit = SubResource( 4 )
 
 [node name="FadeInOutLabel" parent="." instance=ExtResource( 2 )]
 margin_left = -32.0
