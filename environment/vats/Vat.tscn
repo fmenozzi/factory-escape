@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://environment/vats/textures/vat-empty.png" type="Texture" id=1]
+[ext_resource path="res://environment/vats/vat.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.75, 1 )
+colors = PoolColorArray( 0.211765, 0.211765, 0.211765, 1, 0.211765, 0.211765, 0.211765, 1, 0.211765, 0.211765, 0.211765, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 10, 0, 1 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, -4, 0 )
+initial_velocity = 0.5
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.5
+scale_random = 1.0
+color_ramp = SubResource( 3 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "suspend"
+length = 3.0
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("VatSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75, 1.5, 2.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Vat" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Bubbles" type="Particles2D" parent="."]
+position = Vector2( 0, -1 )
+amount = 16
+lifetime = 5.5
+preprocess = 3.0
+process_material = SubResource( 4 )
+
+[node name="VatSprite" type="Sprite" parent="."]
+position = Vector2( 0, -24 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/suspend = SubResource( 1 )
+
+[node name="BubbleBlocker" type="ColorRect" parent="."]
+margin_left = -16.0
+margin_top = -64.0
+margin_right = 16.0
+margin_bottom = -48.0
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
