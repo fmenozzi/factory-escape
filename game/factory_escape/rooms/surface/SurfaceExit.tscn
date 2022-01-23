@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
-[ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/closing_door/ClosingDoorSectorFive.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/factory_escape/rooms/surface/surface_exit.gd" type="Script" id=3]
+[ext_resource path="res://game/factory_escape/rooms/surface/textures/surface.png" type="Texture" id=4]
+[ext_resource path="res://game/factory_escape/rooms/surface/textures/closing-door-surface.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 90 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 240, 8 )
+
 [node name="SurfaceExit" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="Platforms" parent="TileMaps" index="3"]
-tile_data = PoolIntArray( -65510, 75, 0, -65509, 76, 0, -65508, 79, 0, -65507, 75, 0, 26, 75, 0, 27, 76, 0, 28, 79, 0, 29, 66, 0, 65562, 75, 0, 65563, 76, 0, 65564, 79, 0, 65565, 66, 0, 131098, 75, 0, 131099, 76, 0, 131100, 79, 0, 131101, 66, 0, 196634, 75, 0, 196635, 76, 0, 196636, 79, 0, 196637, 66, 0, 262170, 75, 0, 262171, 76, 0, 262172, 79, 0, 262173, 66, 0, 327706, 75, 0, 327707, 78, 0, 327708, 79, 0, 327709, 66, 0, 393244, 86, 0, 393245, 66, 0, 589824, 67, 0, 589825, 67, 0, 589826, 67, 0, 589827, 67, 0, 589828, 67, 0, 589829, 67, 0, 589830, 67, 0, 589831, 67, 0, 589832, 67, 0, 589833, 67, 0, 589834, 67, 0, 589835, 67, 0, 589836, 67, 0, 589837, 67, 0, 589838, 67, 0, 589839, 67, 0, 589840, 67, 0, 589841, 67, 0, 589842, 67, 0, 589843, 67, 0, 589844, 67, 0, 589845, 67, 0, 589846, 67, 0, 589847, 67, 0, 589848, 67, 0, 589849, 67, 0, 589850, 66, 0, 589851, 67, 0, 589852, 68, 0, 589853, 66, 0, 655386, 66, 0, 655387, 67, 0, 655388, 68, 0, 655389, 66, 0, 720922, 66, 0, 720923, 67, 0, 720924, 68, 0, 720925, 66, 0 )
+[node name="RoomBoundaries" parent="." index="1"]
+visible = false
 
 [node name="CollisionShape2D" parent="RoomBoundaries" index="0"]
 position = Vector2( 240, 90 )
@@ -23,10 +28,26 @@ position = Vector2( 160, 90 )
 [node name="Right" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 320, 90 )
 
-[node name="ClosingDoor" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 472, 128 )
+[node name="Surface" type="Sprite" parent="." index="9"]
+texture = ExtResource( 4 )
+centered = false
 
-[node name="StoppingPoint" type="Position2D" parent="." index="10"]
-position = Vector2( 160, 144 )
+[node name="ClosingDoorSectorFive" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 472, 144 )
+
+[node name="Sprite" parent="ClosingDoorSectorFive" index="0"]
+texture = ExtResource( 5 )
+
+[node name="StoppingPoint" type="Position2D" parent="." index="11"]
+position = Vector2( 160, 160 )
+
+[node name="Floor" type="StaticBody2D" parent="." index="12"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="0"]
+position = Vector2( 240, 168 )
+shape = SubResource( 2 )
 
 [editable path="TileMaps"]
+[editable path="ClosingDoorSectorFive"]
+[editable path="ClosingDoorSectorFive/VisibilityBasedAudioGroup"]

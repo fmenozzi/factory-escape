@@ -2,6 +2,7 @@ extends Node
 
 # Extra player spritesheets.
 const PlayerSpritesheetSectorFive := preload('res://actors/player/textures/character-spritesheet-sector-5.png')
+const PlayerSpritesheetSurface := preload('res://actors/player/textures/character-spritesheet-surface.png')
 
 # Player dash echo sprites.
 const DashEchoLeft := preload('res://actors/player/textures/dash-echo-left.png')

@@ -44,5 +44,10 @@ func fade_in() -> void:
         self, 'modulate:a', 0, 1, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN, 1.0)
     _tween.start()
 
+func fade_out() -> void:
+    _tween.remove_all()
+    _tween.interpolate_property(self, 'modulate:a', 1, 0, 1.0)
+    _tween.start()
+
 func flash() -> void:
     _flash_manager.start_flashing()

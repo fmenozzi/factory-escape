@@ -526,6 +526,11 @@ func _on_player_reached_surface(old_room: Room, new_room: Room) -> void:
     if new_room != _surface_exit:
         return
 
+    # Switch to surface visuals (e.g. character spritesheet) and fade out UI.
+    _player.switch_to_surface_visuals()
+    _health_bar.fade_out()
+    _health_pack_bar.fade_out()
+
     # TODO: Maybe make this stop more gradual (e.g. lower volume gradually as
     #       player walks to the rest point).
     EscapeSequenceEffects.stop()

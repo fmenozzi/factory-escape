@@ -323,6 +323,9 @@ func switch_to_sector_5_visuals() -> void:
     _invincibility_flash_manager_hazard_hit.flash_color = Color('#fd9359')
     _invincibility_flash_manager_enemy_hit.flash_color = Color('#fd9359')
 
+func switch_to_surface_visuals() -> void:
+    _sprite.texture = Preloads.PlayerSpritesheetSurface
+
 func get_health() -> Health:
     return _health
 

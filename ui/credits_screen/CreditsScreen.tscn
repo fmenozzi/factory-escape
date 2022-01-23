@@ -58,50 +58,57 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Pages/ProgrammingAndArt"]
-margin_top = 37.0
+[node name="Programming" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 28.0
 margin_right = 320.0
-margin_bottom = 50.0
+margin_bottom = 41.0
 text = "PROGRAMMING"
 align = 1
 
-[node name="Label2" type="Label" parent="Pages/ProgrammingAndArt"]
-margin_top = 54.0
+[node name="Federico Menozzi" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 45.0
 margin_right = 320.0
-margin_bottom = 67.0
+margin_bottom = 58.0
 text = "Federico Menozzi"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="Pages/ProgrammingAndArt"]
-margin_top = 71.0
+margin_top = 62.0
 margin_right = 320.0
-margin_bottom = 75.0
+margin_bottom = 66.0
 
-[node name="Label3" type="Label" parent="Pages/ProgrammingAndArt"]
-margin_top = 79.0
+[node name="Art" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 70.0
 margin_right = 320.0
-margin_bottom = 92.0
+margin_bottom = 83.0
 text = "ART"
 align = 1
 
-[node name="Label4" type="Label" parent="Pages/ProgrammingAndArt"]
-margin_top = 96.0
+[node name="Robert Norenberg" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 87.0
 margin_right = 320.0
-margin_bottom = 109.0
+margin_bottom = 100.0
 text = "Robert Norenberg (0x72.itch.io)"
 align = 1
 
-[node name="Label5" type="Label" parent="Pages/ProgrammingAndArt"]
-margin_top = 113.0
+[node name="Penusbmic" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 104.0
 margin_right = 320.0
-margin_bottom = 126.0
+margin_bottom = 117.0
+text = "penusbmic (penusbmic.itch.io)"
+align = 1
+
+[node name="NYKNCK" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 121.0
+margin_right = 320.0
+margin_bottom = 134.0
 text = "NYKNCK (kvsr.itch.io)"
 align = 1
 
-[node name="Label6" type="Label" parent="Pages/ProgrammingAndArt"]
-margin_top = 130.0
+[node name="Pimen" type="Label" parent="Pages/ProgrammingAndArt"]
+margin_top = 138.0
 margin_right = 320.0
-margin_bottom = 143.0
+margin_bottom = 151.0
 text = "Pimen (pimen.itch.io)"
 align = 1
 

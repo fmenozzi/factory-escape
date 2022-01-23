@@ -44,5 +44,10 @@ func fade_in() -> void:
     _tween.interpolate_property(self, 'modulate:a', 0, 1, 1.0)
     _tween.start()
 
+func fade_out() -> void:
+    _tween.remove_all()
+    _tween.interpolate_property(self, 'modulate:a', 1, 0, 1.0)
+    _tween.start()
+
 func _on_health_changed(old_health: int, new_health: int) -> void:
     set_health(new_health)
