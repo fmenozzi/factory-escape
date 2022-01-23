@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/background/broken_elevator/BrokenElevator.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -30,5 +31,8 @@ position = Vector2( 160, -256 )
 "cameras",
 ]]
 position = Vector2( 160, 90 )
+
+[node name="BrokenElevator" parent="." index="11" instance=ExtResource( 2 )]
+position = Vector2( 120, 160 )
 
 [editable path="TileMaps"]
