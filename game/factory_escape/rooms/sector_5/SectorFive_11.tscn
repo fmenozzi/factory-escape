@@ -27,33 +27,31 @@ visible = false
 position = Vector2( 320, 90 )
 shape = SubResource( 1 )
 
+[node name="Vat1" parent="Background" index="0" instance=ExtResource( 2 )]
+position = Vector2( 168, 84 )
+
+[node name="Vat2" parent="Background" index="1" instance=ExtResource( 2 )]
+position = Vector2( 216, 84 )
+texture = ExtResource( 4 )
+
+[node name="Vat3" parent="Background" index="2" instance=ExtResource( 2 )]
+position = Vector2( 264, 84 )
+texture = ExtResource( 5 )
+
+[node name="Vat4" parent="Background" index="3" instance=ExtResource( 2 )]
+position = Vector2( 376, 84 )
+
+[node name="Vat5" parent="Background" index="4" instance=ExtResource( 2 )]
+position = Vector2( 424, 84 )
+texture = ExtResource( 3 )
+
+[node name="Vat6" parent="Background" index="5" instance=ExtResource( 2 )]
+position = Vector2( 472, 84 )
+
 [node name="Left" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
 
 [node name="Right" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 480, 90 )
-
-[node name="Vats" type="Node2D" parent="." index="9"]
-
-[node name="Vat1" parent="Vats" index="0" instance=ExtResource( 2 )]
-position = Vector2( 168, 84 )
-
-[node name="Vat2" parent="Vats" index="1" instance=ExtResource( 2 )]
-position = Vector2( 216, 84 )
-texture = ExtResource( 4 )
-
-[node name="Vat3" parent="Vats" index="2" instance=ExtResource( 2 )]
-position = Vector2( 264, 84 )
-texture = ExtResource( 5 )
-
-[node name="Vat4" parent="Vats" index="3" instance=ExtResource( 2 )]
-position = Vector2( 376, 84 )
-
-[node name="Vat5" parent="Vats" index="4" instance=ExtResource( 2 )]
-position = Vector2( 424, 84 )
-texture = ExtResource( 3 )
-
-[node name="Vat6" parent="Vats" index="5" instance=ExtResource( 2 )]
-position = Vector2( 472, 84 )
 
 [editable path="TileMaps"]

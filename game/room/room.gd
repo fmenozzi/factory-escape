@@ -15,6 +15,7 @@ enum Section {
 }
 
 onready var _room_boundaries: Area2D = $RoomBoundaries
+onready var _background_objects: Array = $Background.get_children()
 onready var _camera_anchors: Array = $CameraAnchors.get_children()
 onready var _grapple_points: Array = $GrapplePoints.get_children()
 onready var _moving_platforms: Array = $MovingPlatforms.get_children()
@@ -146,6 +147,9 @@ func get_section_track() -> int:
             return -1
 
 func pause() -> void:
+    for background_object in _background_objects:
+        background_object.pause()
+
     for moving_platform in get_moving_platforms():
         moving_platform.pause()
 
@@ -159,6 +163,9 @@ func pause() -> void:
         barrier.get_node('CollisionShape2D').set_deferred('disabled', true)
 
 func resume() -> void:
+    for background_object in _background_objects:
+        background_object.resume()
+
     for moving_platform in get_moving_platforms():
         moving_platform.resume()
 
@@ -172,6 +179,9 @@ func resume() -> void:
         barrier.get_node('CollisionShape2D').set_deferred('disabled', false)
 
 func show_visuals() -> void:
+    for background_object in _background_objects:
+        background_object.show_visuals()
+
     for moving_platform in get_moving_platforms():
         moving_platform.show_visuals()
 
@@ -182,6 +192,9 @@ func show_visuals() -> void:
         enemy.show_visuals()
 
 func hide_visuals() -> void:
+    for background_object in _background_objects:
+        background_object.hide_visuals()
+
     for moving_platform in get_moving_platforms():
         moving_platform.hide_visuals()
 
