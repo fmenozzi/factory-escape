@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vat-leaping-failure-3.png-00ef2b473019f7f40b15b8f0c59a74a0.stex"
+path="res://.import/vat-leaping-failure-2.png-77e24039579501c79227a3f5be9b8338.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/vats/textures/vat-leaping-failure-3.png"
-dest_files=[ "res://.import/vat-leaping-failure-3.png-00ef2b473019f7f40b15b8f0c59a74a0.stex" ]
+source_file="res://environment/background/vats/textures/vat-leaping-failure-2.png"
+dest_files=[ "res://.import/vat-leaping-failure-2.png-77e24039579501c79227a3f5be9b8338.stex" ]
 
 [params]
 
