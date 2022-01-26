@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/springboard/Springboard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://environment/background/vents/Vent.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 360 )
@@ -33,6 +34,12 @@ visible = false
 position = Vector2( 160, 360 )
 shape = SubResource( 1 )
 
+[node name="Vent1" parent="Background" index="0" instance=ExtResource( 6 )]
+position = Vector2( 40, 32 )
+
+[node name="Vent2" parent="Background" index="1" instance=ExtResource( 6 )]
+position = Vector2( 72, 32 )
+
 [node name="Top" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
 
@@ -48,6 +55,12 @@ position = Vector2( 96, 296 )
 [node name="SentryDrone" parent="Enemies" index="2" instance=ExtResource( 5 )]
 position = Vector2( 264, 48 )
 initial_direction = -1
+
+[node name="Springboard" parent="." index="9" instance=ExtResource( 2 )]
+position = Vector2( 160, 668 )
+
+[node name="Springboard2" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 168, 220 )
 
 [node name="LowerLeft" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 collision_layer = 512
@@ -68,11 +81,5 @@ position = Vector2( 328, 44 )
 rotation = -1.5708
 shape = SubResource( 3 )
 one_way_collision = true
-
-[node name="Springboard" parent="." index="9" instance=ExtResource( 2 )]
-position = Vector2( 160, 668 )
-
-[node name="Springboard2" parent="." index="10" instance=ExtResource( 2 )]
-position = Vector2( 168, 220 )
 
 [editable path="TileMaps"]
