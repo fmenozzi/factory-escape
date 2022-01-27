@@ -132,8 +132,7 @@ func get_section_track() -> int:
             return MusicPlayer.Music.WORLD_SECTOR_4
 
         Section.SECTOR_5:
-            # TODO: Replace with dedicated music once available.
-            return MusicPlayer.Music.WORLD_BASE
+            return MusicPlayer.Music.WORLD_SECTOR_5
 
         Section.SURFACE:
             # TODO: Replace with dedicated music?
@@ -148,12 +147,18 @@ func get_section_track() -> int:
 
 func get_room_track() -> int:
     if has_node('Lamp'):
-        return MusicPlayer.Music.LAMP_ROOM
+        return get_lamp_track()
 
     if has_ability():
         return MusicPlayer.Music.ABILITY_IDLE_LOOP
 
     return get_section_track()
+
+func get_lamp_track() -> int:
+    if get_section() == Section.SECTOR_5:
+        return MusicPlayer.Music.LAMP_ROOM_SECTOR_5
+
+    return MusicPlayer.Music.LAMP_ROOM
 
 func pause() -> void:
     for background_object in _background_objects:
@@ -310,10 +315,10 @@ func _on_player_entered(area: Area2D) -> void:
         var curr_section_track: int = player.curr_room.get_section_track()
         var prev_section_track: int = player.prev_room.get_section_track()
         if player.curr_room.has_node('Lamp'):
-            MusicPlayer.cross_fade(prev_section_track, MusicPlayer.Music.LAMP_ROOM, 1.0)
+            MusicPlayer.cross_fade(prev_section_track, get_lamp_track(), 1.0)
             MusicPlayer.fade_out(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
         if player.prev_room.has_node('Lamp'):
-            MusicPlayer.cross_fade(MusicPlayer.Music.LAMP_ROOM, curr_section_track, 1.0)
+            MusicPlayer.cross_fade(get_lamp_track(), curr_section_track, 1.0)
             MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
         if player.curr_room.has_ability():
             MusicPlayer.cross_fade(curr_section_track, MusicPlayer.Music.ABILITY_IDLE_LOOP, 1.0)

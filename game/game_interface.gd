@@ -167,7 +167,7 @@ func _set_player_starting_health_and_health_packs() -> void:
 func _set_player_starting_music() -> void:
     MusicPlayer.get_player(MusicPlayer.Music.FACTORY_BACKGROUND).set_max_volume_db(-8.0)
     if _player.curr_room.has_node('Lamp'):
-        MusicPlayer.play(MusicPlayer.Music.LAMP_ROOM)
+        MusicPlayer.play(_player.curr_room.get_lamp_track())
         MusicPlayer.stop(MusicPlayer.Music.FACTORY_BACKGROUND)
     else:
         yield(get_tree().create_timer(1.0), 'timeout')

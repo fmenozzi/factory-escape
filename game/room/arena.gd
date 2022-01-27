@@ -120,6 +120,7 @@ func _finish_arena() -> void:
         MusicPlayer.Music.WORLD_SECTOR_3,
         MusicPlayer.Music.WORLD_SECTOR_4,
         MusicPlayer.Music.LAMP_ROOM,
+        MusicPlayer.Music.LAMP_ROOM_SECTOR_5,
     ])
     if not Util.get_player().is_dying() and not playing_any_sector_or_lamp_tracks:
         MusicPlayer.fade_in(_room.get_room_track(), 1.0)

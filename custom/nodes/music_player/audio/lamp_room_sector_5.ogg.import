@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/lamp_room_sector_5.ogg-3a9286b28c72c628a010144fd0c727bd.oggstr"
+
+[deps]
+
+source_file="res://custom/nodes/music_player/audio/lamp_room_sector_5.ogg"
+dest_files=[ "res://.import/lamp_room_sector_5.ogg-3a9286b28c72c628a010144fd0c727bd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

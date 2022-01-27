@@ -418,6 +418,10 @@ func _on_player_entered_central_hub_shaft() -> void:
     # Switch to sector-specific visuals.
     _set_sector_five_visuals()
 
+    # Switch to sector-specific music.
+    MusicPlayer.stop(MusicPlayer.Music.WORLD_BASE)
+    MusicPlayer.play(MusicPlayer.Music.WORLD_SECTOR_5)
+
     # Start the fall sequence from the second suspension point.
     _player.global_position = _sector_five_lift_suspend_point.global_position
     _player.set_direction(Util.Direction.RIGHT)

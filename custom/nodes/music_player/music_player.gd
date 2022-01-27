@@ -8,6 +8,7 @@ enum Music {
     WORLD_SECTOR_2,
     WORLD_SECTOR_3,
     WORLD_SECTOR_4,
+    WORLD_SECTOR_5,
     ARENA_START,
     ARENA,
     ARENA_END,
@@ -15,6 +16,7 @@ enum Music {
     WARDEN_FIGHT,
     WARDEN_FIGHT_END,
     LAMP_ROOM,
+    LAMP_ROOM_SECTOR_5,
     ABILITY_IDLE_LOOP,
 }
 
@@ -26,6 +28,7 @@ onready var _world_sector_1: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorO
 onready var _world_sector_2: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorTwo
 onready var _world_sector_3: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorThree
 onready var _world_sector_4: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorFour
+onready var _world_sector_5: AudioStreamPlayerMusic = $AudioPlayers/WorldSectorFive
 onready var _arena_start: AudioStreamPlayerMusic = $AudioPlayers/ArenaStart
 onready var _arena: AudioStreamPlayerMusic = $AudioPlayers/Arena
 onready var _arena_end: AudioStreamPlayerMusic = $AudioPlayers/ArenaEnd
@@ -33,6 +36,7 @@ onready var _warden_fight_start: AudioStreamPlayerMusic = $AudioPlayers/WardenFi
 onready var _warden_fight: AudioStreamPlayerMusic = $AudioPlayers/WardenFight
 onready var _warden_fight_end: AudioStreamPlayerMusic = $AudioPlayers/WardenFightEnd
 onready var _lamp_room: AudioStreamPlayerMusic = $AudioPlayers/LampRoom
+onready var _lamp_room_sector_5: AudioStreamPlayerMusic = $AudioPlayers/LampRoomSectorFive
 onready var _ability_idle_loop: AudioStreamPlayerMusic = $AudioPlayers/AbilityIdleLoop
 
 func _ready() -> void:
@@ -68,6 +72,7 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.WORLD_SECTOR_2,
         Music.WORLD_SECTOR_3,
         Music.WORLD_SECTOR_4,
+        Music.WORLD_SECTOR_5,
         Music.ARENA_START,
         Music.ARENA,
         Music.ARENA_END,
@@ -75,6 +80,7 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.WARDEN_FIGHT,
         Music.WARDEN_FIGHT_END,
         Music.LAMP_ROOM,
+        Music.LAMP_ROOM_SECTOR_5,
         Music.ABILITY_IDLE_LOOP,
     ])
 
@@ -100,6 +106,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.WORLD_SECTOR_4:
             return _world_sector_4
 
+        Music.WORLD_SECTOR_5:
+            return _world_sector_5
+
         Music.ARENA_START:
             return _arena_start
 
@@ -120,6 +129,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.LAMP_ROOM:
             return _lamp_room
+
+        Music.LAMP_ROOM_SECTOR_5:
+            return _lamp_room_sector_5
 
         Music.ABILITY_IDLE_LOOP:
             return _ability_idle_loop
