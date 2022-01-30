@@ -4,7 +4,6 @@
 [ext_resource path="res://environment/lamp/Lamp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/tutorial_message_trigger/TutorialMessageTrigger.tscn" type="PackedScene" id=3]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
 
@@ -38,10 +37,9 @@ position = Vector2( 160, 128 )
 [node name="TutorialMessageTriggerLamp" parent="." index="10" instance=ExtResource( 3 )]
 message = "Rest at lamps to save your game and reset enemies"
 
-[node name="CollisionShape2D" parent="TutorialMessageTriggerLamp" index="0"]
+[node name="CollisionShape2D" parent="TutorialMessageTriggerLamp" index="1"]
 position = Vector2( 80, 72 )
 shape = SubResource( 2 )
 
 [editable path="TileMaps"]
-
 [editable path="TutorialMessageTriggerLamp"]
