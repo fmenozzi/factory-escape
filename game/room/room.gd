@@ -146,6 +146,15 @@ func get_section_track() -> int:
                     'Section %d does not exist' % get_section()))
             return -1
 
+func get_room_track() -> int:
+    if has_node('Lamp'):
+        return MusicPlayer.Music.LAMP_ROOM
+
+    if has_ability():
+        return MusicPlayer.Music.ABILITY_IDLE_LOOP
+
+    return get_section_track()
+
 func pause() -> void:
     for background_object in _background_objects:
         background_object.pause()

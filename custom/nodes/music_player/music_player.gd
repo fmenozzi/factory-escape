@@ -43,6 +43,15 @@ func _ready() -> void:
 func play(music_enum: int) -> void:
     get_player(music_enum).play()
 
+func is_playing(music_enum: int) -> bool:
+    return get_player(music_enum).playing
+
+func is_playing_any_of(music_enums: Array) -> bool:
+    for music_enum in music_enums:
+        if is_playing(music_enum):
+            return true
+    return false
+
 func stop(music_enum: int) -> void:
     get_player(music_enum).stop()
 

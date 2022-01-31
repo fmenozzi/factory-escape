@@ -177,6 +177,8 @@ var _current_hazard_checkpoint: Area2D = null
 var prev_room = null
 var curr_room = null
 
+var _is_dying := false
+
 onready var save_manager: PlayerSaveManager = $SaveManager
 
 func _ready() -> void:
@@ -392,6 +394,11 @@ func set_hazard_checkpoint(hazard_checkpoint: Area2D) -> void:
     _current_hazard_checkpoint = hazard_checkpoint
 func get_hazard_checkpoint() -> Area2D:
     return _current_hazard_checkpoint
+
+func set_is_dying(is_dying: bool) -> void:
+    _is_dying = is_dying
+func is_dying() -> bool:
+    return _is_dying
 
 func get_center() -> Vector2:
     return self.global_position + Vector2(0, -8)

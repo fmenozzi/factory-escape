@@ -106,18 +106,23 @@ func _finish_arena() -> void:
     yield(Screenshake, 'stopped_shaking')
     _player_camera.reattach()
 
-    # Fade out the arena music and start the arena end -> world sequence. We
-    # yield on a timer instead of waiting for the arena end music to finish
+    # Fade out the arena music and start the arena end -> room music sequence.
+    # We yield on a timer instead of waiting for the arena end music to finish
     # because there's a several-second tail on the arena end sound, so we don't
     # want too much musical "down time"
-    #
-    # TODO: is it possible for the player to die during this sequence and mess
-    #       up the music "state" due to the unconditional yield? Should we check
-    #       that they didn't end up in a lamp room before playing world track?
     MusicPlayer.fade_out(MusicPlayer.Music.ARENA, 0.5)
     MusicPlayer.play(MusicPlayer.Music.ARENA_END)
     yield(get_tree().create_timer(5.0), 'timeout')
-    MusicPlayer.fade_in(_room.get_section_track(), 6.0)
+    var playing_any_sector_or_lamp_tracks: bool = MusicPlayer.is_playing_any_of([
+        MusicPlayer.Music.WORLD_BASE,
+        MusicPlayer.Music.WORLD_SECTOR_1,
+        MusicPlayer.Music.WORLD_SECTOR_2,
+        MusicPlayer.Music.WORLD_SECTOR_3,
+        MusicPlayer.Music.WORLD_SECTOR_4,
+        MusicPlayer.Music.LAMP_ROOM,
+    ])
+    if not Util.get_player().is_dying() and not playing_any_sector_or_lamp_tracks:
+        MusicPlayer.fade_in(_room.get_room_track(), 1.0)
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
     var enemy_data_for_phase: Array = _phase_data[phase_idx]

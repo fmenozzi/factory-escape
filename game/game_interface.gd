@@ -208,6 +208,8 @@ func _on_player_finished_intro_fall() -> void:
 func _on_player_died() -> void:
     _player.set_process_unhandled_input(false)
 
+    _player.set_is_dying(true)
+
     # Make player invincible for duration of death transition so that they don't
     # trigger an infinite loop by continuously taking contact damage while
     # standing still during death animation.
@@ -255,11 +257,8 @@ func _on_player_died() -> void:
 
     _reset_world()
 
-    MusicPlayer.stop(MusicPlayer.Music.ARENA)
-    if _player.curr_room.has_node('Lamp'):
-        MusicPlayer.play(MusicPlayer.Music.LAMP_ROOM)
-    else:
-        MusicPlayer.play(MusicPlayer.Music.WORLD_BASE)
+    MusicPlayer.stop_all()
+    MusicPlayer.play(_player.curr_room.get_room_track())
 
     var lamp := _player.get_nearby_lamp()
     if lamp != null:
@@ -280,6 +279,8 @@ func _on_player_died() -> void:
     Rumble.stop()
 
     _player.get_health().set_status(Health.Status.NONE)
+
+    _player.set_is_dying(false)
 
     _screen_fadeout.fade_from_black(2.0)
     yield(_screen_fadeout, 'fade_from_black_finished')
