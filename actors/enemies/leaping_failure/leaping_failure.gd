@@ -16,6 +16,7 @@ enum State {
     LEAP,
     PAUSE,
     DIE,
+    SPAWN,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -34,6 +35,7 @@ onready var STATES := {
     State.LEAP:            $States/Leap,
     State.PAUSE:           $States/Pause,
     State.DIE:             $States/Die,
+    State.SPAWN:           $States/Spawn,
 }
 
 var direction: int
@@ -107,6 +109,12 @@ func get_aggro_manager() -> AggroManager:
 
 func get_sound_manager() -> LeapingFailureSoundManager:
     return _sound_manager
+
+func get_spawn_shader_sprite() -> Sprite:
+    return _sprite
+
+func spawn() -> void:
+    _change_state({'new_state': State.SPAWN})
 
 func move(velocity: Vector2, snap: Vector2 = Util.SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)

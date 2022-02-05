@@ -16,6 +16,7 @@ enum State {
     SHOOT,
     PAUSE,
     DIE,
+    SPAWN,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -29,6 +30,7 @@ onready var STATES := {
     State.SHOOT:   $States/Shoot,
     State.PAUSE:   $States/Pause,
     State.DIE:     $States/Die,
+    State.SPAWN:   $States/Spawn,
 }
 
 var direction: int
@@ -42,6 +44,7 @@ onready var _health: Health = $Health
 onready var _aggro_manager: AggroManager = $AggroManager
 onready var _sound_manager: TurretSoundManager = $TurretSoundManager
 onready var _react_sprite: ReactSprite = $ReactSprite
+onready var _body: Node2D = $Body
 onready var _body_flash_manager: Node = $Body/FlashManager
 onready var _head: Node2D = $Head
 onready var _projectile_spawner: ProjectileSpawner = $Head/ProjectileSpawner
@@ -51,6 +54,7 @@ onready var _scanner: Scanner = $Head/Scanner
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
+onready var _spawn_shader_sprite: Sprite = $SpawnShaderSprite
 
 func _ready() -> void:
     _health.connect('died', self, '_on_died')
@@ -90,6 +94,9 @@ func _physics_process(delta: float) -> void:
     var new_state_dict = _current_state.update(self, delta)
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
+
+func spawn() -> void:
+    _change_state({'new_state': State.SPAWN})
 
 func set_direction(new_direction: int) -> void:
     direction = new_direction
@@ -143,6 +150,15 @@ func get_animation_player() -> AnimationPlayer:
 
 func get_projectile_spawner() -> Position2D:
     return _projectile_spawner
+
+func get_head() -> Node2D:
+    return _head
+
+func get_body() -> Node2D:
+    return _body
+
+func get_spawn_shader_sprite() -> Sprite:
+    return _spawn_shader_sprite
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)

@@ -11,6 +11,7 @@ enum State {
     RETURN_TO_LEDGE,
     PAUSE,
     DIE,
+    SPAWN,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -25,6 +26,7 @@ onready var STATES := {
     State.RETURN_TO_LEDGE: $States/ReturnToLedge,
     State.PAUSE:           $States/Pause,
     State.DIE:             $States/Die,
+    State.SPAWN:           $States/Spawn,
 }
 
 # The speed multiplier to apply once the failure becomes frightened (i.e. after
@@ -90,6 +92,12 @@ func get_sound_manager() -> SluggishFailureSoundManager:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_spawn_shader_sprite() -> Sprite:
+    return _sprite
+
+func spawn() -> void:
+    _change_state({'new_state': State.SPAWN})
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)

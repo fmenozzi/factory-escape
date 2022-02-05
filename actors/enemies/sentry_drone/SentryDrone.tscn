@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://actors/enemies/sentry_drone/states/fly_to_point.gd" type="Script" id=20]
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDroneSoundManager.tscn" type="PackedScene" id=21]
 [ext_resource path="res://actors/enemies/sentry_drone/states/pause.gd" type="Script" id=22]
+[ext_resource path="res://actors/enemies/sentry_drone/states/spawn.gd" type="Script" id=23]
+[ext_resource path="res://actors/enemies/shared/ArenaSpawner.tscn" type="PackedScene" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 7 )
@@ -44,6 +46,21 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [node name="SentryDrone" type="KinematicBody2D" groups=[
@@ -130,6 +147,11 @@ script = ExtResource( 22 )
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 18 )
 
+[node name="Spawn" type="Node" parent="States"]
+script = ExtResource( 23 )
+
+[node name="ArenaSpawner" parent="States/Spawn" instance=ExtResource( 24 )]
+
 [node name="ReactSprite" parent="." instance=ExtResource( 16 )]
 position = Vector2( 0, -20 )
 
@@ -144,6 +166,7 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/die = SubResource( 2 )
 anims/idle = SubResource( 3 )
+anims/spawn = SubResource( 4 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64

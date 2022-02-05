@@ -20,4 +20,5 @@ func get_shader_material() -> ShaderMaterial:
     return _object.get_material()
 
 func clear_shader() -> void:
-    _object.set_material(null)
+    if _object != null:
+        _object.set_material(null)

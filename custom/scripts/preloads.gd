@@ -40,6 +40,7 @@ const EnergyProjectile := preload('res://actors/enemies/projectiles/energy_proje
 # Shaders.
 const FlashShader := preload('res://shared/shaders/flash.shader')
 const ScrollShader := preload('res://game/factory_escape/rooms/sector_5/elevator_arena/shaders/scroll.shader')
+const GlitchShader := preload('res://actors/enemies/shared/shaders/glitch.shader')
 
 # Xbox controller button sprites.
 const XboxA := preload('res://ui/menus/options/controller/textures/xbox-a.png')

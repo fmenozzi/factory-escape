@@ -12,6 +12,7 @@ enum State {
     ATTACK,
     PAUSE,
     DIE,
+    SPAWN,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -26,6 +27,7 @@ onready var STATES := {
     State.ATTACK:        $States/Attack,
     State.PAUSE:         $States/Pause,
     State.DIE:           $States/Die,
+    State.SPAWN:         $States/Spawn,
 }
 
 var direction: int
@@ -83,6 +85,12 @@ func get_aggro_manager() -> AggroManager:
 
 func get_sound_manager() -> SentryDroneSoundManager:
     return _sound_manager
+
+func get_spawn_shader_sprite() -> Sprite:
+    return _sprite
+
+func spawn() -> void:
+    _change_state({'new_state': State.SPAWN})
 
 func take_hit(damage: int, player: Player) -> void:
     _health.take_damage(damage)

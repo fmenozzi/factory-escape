@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://actors/shared/FlashManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://actors/enemies/PushbackManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailureSoundManager.tscn" type="PackedScene" id=14]
 [ext_resource path="res://actors/enemies/sluggish_failure/states/wait.gd" type="Script" id=15]
+[ext_resource path="res://actors/enemies/sluggish_failure/states/spawn.gd" type="Script" id=16]
+[ext_resource path="res://actors/enemies/shared/ArenaSpawner.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 6 )
@@ -83,6 +85,21 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
 [node name="SluggishFailure" type="KinematicBody2D" groups=[
 "lamp_reset",
 ]]
@@ -138,6 +155,11 @@ script = ExtResource( 15 )
 
 [node name="Timer" type="Timer" parent="States/Wait"]
 
+[node name="Spawn" type="Node" parent="States"]
+script = ExtResource( 16 )
+
+[node name="ArenaSpawner" parent="States/Spawn" instance=ExtResource( 17 )]
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 6 )
@@ -153,6 +175,7 @@ shape = SubResource( 1 )
 anims/contract = SubResource( 2 )
 anims/die = SubResource( 3 )
 anims/expand = SubResource( 4 )
+anims/spawn = SubResource( 5 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 64

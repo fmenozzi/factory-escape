@@ -136,19 +136,9 @@ func _spawn_enemies_for_phase(phase_idx: int) -> void:
     get_parent()._connect_projectile_spawner_signals()
 
 func _spawn_enemy_at(enemy: Node2D, spawn_point_local: Vector2) -> void:
-    # Tween transparency so that enemies fade in as they spawn.
-    var prop := 'modulate'
-    var old := Color(1, 1, 1, 0) # Transparent
-    var new := Color(1, 1, 1, 1) # Opaque
-    var duration := 0.5
-
-    var alpha_tween := Tween.new()
-    alpha_tween.interpolate_property(enemy, prop, old, new, duration)
-    enemy.add_child(alpha_tween)
-
     _enemies_node.add_child(enemy)
     enemy.position = spawn_point_local
-    alpha_tween.start()
+    enemy.spawn()
 
 func _close_all_doors() -> void:
     for closing_door in _closing_doors:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://actors/shared/physics_managers/PhysicsManager.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/enemies/sticky_drone/states/idle.gd" type="Script" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://actors/enemies/sticky_drone/states/return_to_ledge.gd" type="Script" id=17]
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDroneSoundManager.tscn" type="PackedScene" id=18]
 [ext_resource path="res://actors/enemies/sticky_drone/states/pause.gd" type="Script" id=19]
+[ext_resource path="res://actors/enemies/shared/ArenaSpawner.tscn" type="PackedScene" id=20]
+[ext_resource path="res://actors/enemies/sticky_drone/states/spawn.gd" type="Script" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.5, 6.5 )
@@ -226,6 +228,11 @@ script = ExtResource( 19 )
 
 [node name="Die" type="Node" parent="States"]
 script = ExtResource( 16 )
+
+[node name="Spawn" type="Node" parent="States"]
+script = ExtResource( 21 )
+
+[node name="ArenaSpawner" parent="States/Spawn" instance=ExtResource( 20 )]
 
 [node name="ReactSprite" parent="." instance=ExtResource( 13 )]
 position = Vector2( -1, -26 )

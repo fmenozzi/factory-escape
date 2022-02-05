@@ -11,6 +11,7 @@ enum State {
     SHOOT,
     PAUSE,
     DIE,
+    SPAWN,
 }
 
 export(Util.Direction) var initial_direction := Util.Direction.RIGHT
@@ -25,6 +26,7 @@ onready var STATES := {
     State.SHOOT:         $States/Shoot,
     State.PAUSE:         $States/Pause,
     State.DIE:           $States/Die,
+    State.SPAWN:         $States/Spawn,
 }
 
 var direction: int
@@ -68,6 +70,9 @@ func _physics_process(delta: float) -> void:
     if new_state_dict['new_state'] != State.NO_CHANGE:
         _change_state(new_state_dict)
 
+func spawn() -> void:
+    _change_state({'new_state': State.SPAWN})
+
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)
 
@@ -103,6 +108,9 @@ func get_projectile_spawner() -> Position2D:
 
 func get_initial_global_position() -> Vector2:
     return _initial_global_position
+
+func get_spawn_shader_sprite() -> Sprite:
+    return _sprite
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)
