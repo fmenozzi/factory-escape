@@ -95,6 +95,16 @@ _global_script_classes=[ {
 "path": "res://environment/closing_door/closing_door_with_switch_save_manager.gd"
 }, {
 "base": "Node2D",
+"class": "ClosingDoorWithSwitchSectorFive",
+"language": "GDScript",
+"path": "res://environment/closing_door/closing_door_with_switch_sector_five.gd"
+}, {
+"base": "Node",
+"class": "ClosingDoorWithSwitchSectorFiveSaveManager",
+"language": "GDScript",
+"path": "res://environment/closing_door/closing_door_with_switch_sector_five_save_manager.gd"
+}, {
+"base": "Node2D",
 "class": "ConveyorBeltAudioGroup",
 "language": "GDScript",
 "path": "res://environment/platforms/conveyor_belt/conveyor_belt_audio_group.gd"
@@ -507,6 +517,8 @@ _global_script_class_icons={
 "CentralLockSwitch": "",
 "ClosingDoorWithSwitch": "",
 "ClosingDoorWithSwitchSaveManager": "",
+"ClosingDoorWithSwitchSectorFive": "",
+"ClosingDoorWithSwitchSectorFiveSaveManager": "",
 "ConveyorBeltAudioGroup": "",
 "Crusher": "",
 "CycleOptionsButton": "",
