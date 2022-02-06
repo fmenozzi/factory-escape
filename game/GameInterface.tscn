@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://game/game_interface.gd" type="Script" id=1]
 [ext_resource path="res://actors/player/Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://ui/interface/tutorial_messages/TutorialMessage.tscn" type="PackedScene" id=13]
 [ext_resource path="res://shared/effects/screen_space_effects/escape_sequence_alarm_light/EscapeSequenceAlarmLight.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ui/interface/ability_acquired_message/AbilityAcquiredMessage.tscn" type="PackedScene" id=15]
+[ext_resource path="res://ui/dialog_box/OneOffDialogBox.tscn" type="PackedScene" id=16]
 
 [node name="GameInterface" type="Node"]
 script = ExtResource( 1 )
@@ -63,6 +64,8 @@ layer = 2
 [node name="DialogBox" parent="Layers/DialogBoxLayer" instance=ExtResource( 5 )]
 
 [node name="ConfirmationDialog" parent="Layers/DialogBoxLayer" instance=ExtResource( 12 )]
+
+[node name="OneOffDialogBox" parent="Layers/DialogBoxLayer" instance=ExtResource( 16 )]
 
 [node name="UILayer" type="CanvasLayer" parent="Layers"]
 

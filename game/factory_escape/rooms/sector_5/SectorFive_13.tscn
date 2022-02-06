@@ -47,6 +47,7 @@ position = Vector2( 632, 152 )
 
 [node name="SwitchSectorFive" parent="." index="11" instance=ExtResource( 5 )]
 position = Vector2( 480, 168 )
+resume_player_processing_after_pressed = false
 
 [node name="FadeInOutLabel" parent="SwitchSectorFive" index="2"]
 text = "Overload"
