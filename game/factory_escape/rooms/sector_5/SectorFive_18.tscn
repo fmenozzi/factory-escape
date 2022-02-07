@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
@@ -13,18 +13,15 @@ extents = Vector2( 160, 270 )
 extents = Vector2( 72, 88 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 24, 32 )
+extents = Vector2( 8, 24 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 48, 4 )
+extents = Vector2( 24, 32 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 32, 32 )
+extents = Vector2( 48, 4 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 56, 64 )
-
-[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 8, 16 )
 
 [node name="SectorFive_18" instance=ExtResource( 1 )]
@@ -73,50 +70,41 @@ position = Vector2( 0, -8 )
 [node name="VisibilityBasedAudioGroup" parent="Hazards/LaserEmitterGroup" index="1"]
 attenuation_visibility_radius_tiles = 8.0
 
-[node name="LeftOfSpikes" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
+[node name="AfterLasers" parent="HazardCheckpoints" index="0" instance=ExtResource( 4 )]
+position = Vector2( 136, 60 )
+requires_grounded = false
+
+[node name="CollisionShape2D" parent="HazardCheckpoints/AfterLasers" index="0"]
+position = Vector2( -16, -24 )
+shape = SubResource( 3 )
+
+[node name="LeftOfSpikes" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
 position = Vector2( 152, 220 )
 requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/LeftOfSpikes" index="0"]
 position = Vector2( 0, -32 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
-[node name="GrapplePoint" parent="HazardCheckpoints" index="1" instance=ExtResource( 4 )]
+[node name="GrapplePoint" parent="HazardCheckpoints" index="2" instance=ExtResource( 4 )]
 position = Vector2( 64, 396 )
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/GrapplePoint" index="0"]
-shape = SubResource( 4 )
-
-[node name="BetweenCrushers" parent="HazardCheckpoints" index="2" instance=ExtResource( 4 )]
-position = Vector2( 232, 140 )
-requires_grounded = false
-
-[node name="CollisionShape2D" parent="HazardCheckpoints/BetweenCrushers" index="0"]
-position = Vector2( -40, -32 )
 shape = SubResource( 5 )
 
-[node name="LeftOfCrushers" parent="HazardCheckpoints" index="3" instance=ExtResource( 4 )]
-position = Vector2( 88, 140 )
-requires_grounded = false
-
-[node name="CollisionShape2D" parent="HazardCheckpoints/LeftOfCrushers" index="0"]
-position = Vector2( -24, -64 )
-shape = SubResource( 6 )
-
-[node name="LowerRight" parent="HazardCheckpoints" index="4" instance=ExtResource( 4 )]
+[node name="LowerRight" parent="HazardCheckpoints" index="3" instance=ExtResource( 4 )]
 position = Vector2( 248, 524 )
 requires_grounded = false
 
 [node name="CollisionShape2D" parent="HazardCheckpoints/LowerRight" index="0"]
 position = Vector2( 64, -16 )
-shape = SubResource( 7 )
+shape = SubResource( 6 )
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]
 [editable path="Hazards/LaserEmitterGroup"]
 [editable path="Hazards/LaserEmitterGroup/VisibilityBasedAudioGroup"]
+[editable path="HazardCheckpoints/AfterLasers"]
 [editable path="HazardCheckpoints/LeftOfSpikes"]
 [editable path="HazardCheckpoints/GrapplePoint"]
-[editable path="HazardCheckpoints/BetweenCrushers"]
-[editable path="HazardCheckpoints/LeftOfCrushers"]
 [editable path="HazardCheckpoints/LowerRight"]
