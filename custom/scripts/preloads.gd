@@ -22,6 +22,7 @@ const Warden := preload('res://actors/bosses/warden/Warden.tscn')
 
 # Hit effect.
 const EnemyHitEffect := preload('res://actors/enemies/shared/enemy_hit_effect/EnemyHitEffect.tscn')
+const EnemyHitEffectSectorFive := preload('res://actors/enemies/shared/enemy_hit_effect/EnemyHitEffectSectorFive.tscn')
 
 # Dust puffs.
 const DustPuff := preload('res://shared/effects/dust_puff/DustPuff.tscn')

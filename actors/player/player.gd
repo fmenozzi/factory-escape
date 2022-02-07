@@ -549,7 +549,11 @@ func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
 
     var enemy = enemy_hurtbox.get_parent()
 
-    var enemy_hit_effect: EnemyHitEffect = Preloads.EnemyHitEffect.instance()
+    var enemy_hit_effect: EnemyHitEffect
+    if curr_room.get_section() == 6: # Room.Section.SECTOR_5
+        enemy_hit_effect = Preloads.EnemyHitEffectSectorFive.instance()
+    else:
+        enemy_hit_effect = Preloads.EnemyHitEffect.instance()
     get_parent().get_node('TemporaryNodes').add_child(enemy_hit_effect)
     enemy_hit_effect.global_position = enemy.global_position
     if current_state() == State.ATTACK_UP:
