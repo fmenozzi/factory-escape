@@ -7,3 +7,6 @@
 
 [node name="Sprite" parent="." index="8"]
 texture = ExtResource( 2 )
+
+[node name="ProjectileSpawner" parent="." index="13"]
+sector_five = true

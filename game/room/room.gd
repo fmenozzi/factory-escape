@@ -264,9 +264,13 @@ func _connect_projectile_spawner_signals() -> void:
             [spawner])
 
 func _on_homing_projectile_fired(
-    global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner
+    global_pos: Vector2, dir: Vector2, sector_five: bool, spawner: ProjectileSpawner
 ) -> void:
-    var homing_projectile: HomingProjectile = Preloads.HomingProjectile.instance()
+    var homing_projectile: HomingProjectile
+    if sector_five:
+        homing_projectile = Preloads.HomingProjectileSectorFive.instance()
+    else:
+        homing_projectile = Preloads.HomingProjectile.instance()
     _enemies.add_child(homing_projectile)
 
     spawner.connect(
@@ -277,9 +281,13 @@ func _on_homing_projectile_fired(
     homing_projectile.start(dir)
 
 func _on_energy_projectile_fired(
-    global_pos: Vector2, dir: Vector2, spawner: ProjectileSpawner
+    global_pos: Vector2, dir: Vector2, sector_five: bool, spawner: ProjectileSpawner
 ) -> void:
-    var energy_projectile: EnergyProjectile = Preloads.EnergyProjectile.instance()
+    var energy_projectile: EnergyProjectile
+    if sector_five:
+        energy_projectile = Preloads.EnergyProjectileSectorFive.instance()
+    else:
+        energy_projectile = Preloads.EnergyProjectile.instance()
     _enemies.add_child(energy_projectile)
 
     spawner.connect(

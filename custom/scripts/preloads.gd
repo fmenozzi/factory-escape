@@ -36,7 +36,9 @@ const Debris := preload('res://custom/nodes/escape_sequence/Debris.tscn')
 
 # Projectiles.
 const HomingProjectile := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectile.tscn')
+const HomingProjectileSectorFive := preload('res://actors/enemies/projectiles/homing_projectile/HomingProjectileSectorFive.tscn')
 const EnergyProjectile := preload('res://actors/enemies/projectiles/energy_projectile/EnergyProjectile.tscn')
+const EnergyProjectileSectorFive := preload('res://actors/enemies/projectiles/energy_projectile/EnergyProjectileSectorFive.tscn')
 
 # Shaders.
 const FlashShader := preload('res://shared/shaders/flash.shader')

@@ -10,8 +10,16 @@
 [node name="Sprite" parent="Body" index="0"]
 texture = ExtResource( 2 )
 
+[node name="ProjectileSpawner" parent="Head" index="0"]
+sector_five = true
+
 [node name="Sprite" parent="Head" index="1"]
 texture = ExtResource( 4 )
 
+[node name="Line2D" parent="Head/Scanner" index="1"]
+default_color = Color( 0.992157, 0.576471, 0.34902, 1 )
+
 [node name="SpawnShaderSprite" parent="." index="10"]
 texture = ExtResource( 3 )
+
+[editable path="Head/Scanner"]
