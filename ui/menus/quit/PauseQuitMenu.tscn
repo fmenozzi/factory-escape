@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/quit/pause_quit_menu.gd" type="Script" id=2]
 
 [node name="PauseQuitMenu" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
 alignment = 1
 script = ExtResource( 2 )
 __meta__ = {
@@ -14,28 +12,28 @@ __meta__ = {
 }
 
 [node name="AreYouSure" type="Label" parent="."]
-margin_top = 55.0
+margin_top = 47.0
 margin_right = 320.0
-margin_bottom = 68.0
+margin_bottom = 61.0
 text = "Are you sure?"
 align = 1
 
 [node name="QuitToMainMenu" type="Button" parent="."]
-margin_top = 72.0
+margin_top = 65.0
 margin_right = 320.0
-margin_bottom = 87.0
+margin_bottom = 85.0
 focus_neighbour_top = NodePath("../No")
 text = "Quit to main menu"
 
 [node name="QuitToDesktop" type="Button" parent="."]
-margin_top = 91.0
+margin_top = 89.0
 margin_right = 320.0
-margin_bottom = 106.0
+margin_bottom = 109.0
 text = "Quit to desktop"
 
 [node name="No" type="Button" parent="."]
-margin_top = 110.0
+margin_top = 113.0
 margin_right = 320.0
-margin_bottom = 125.0
+margin_bottom = 133.0
 focus_neighbour_bottom = NodePath("../QuitToMainMenu")
 text = "No"

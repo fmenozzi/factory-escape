@@ -1,0 +1,122 @@
+[gd_resource type="Theme" load_steps=14 format=2]
+
+[ext_resource path="res://ui/themes/button/sector_5/focus.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/themes/button/sector_5/hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/themes/button/sector_5/normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/themes/button/sector_5/pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/themes/textures/checkbutton-on.png" type="Texture" id=5]
+[ext_resource path="res://ui/themes/textures/checkbutton-off.png" type="Texture" id=6]
+[ext_resource path="res://ui/fonts/m5x7.tres" type="DynamicFont" id=7]
+[ext_resource path="res://ui/themes/textures/grabber-unhighlighted.png" type="Texture" id=8]
+[ext_resource path="res://ui/themes/textures/grabber-highlighted.png" type="Texture" id=9]
+[ext_resource path="res://ui/themes/button/sector_5/disabled.tres" type="StyleBox" id=13]
+[ext_resource path="res://ui/themes/hseparator/separator.tres" type="StyleBox" id=14]
+[ext_resource path="res://ui/themes/textures/option-button-arrow.png" type="Texture" id=15]
+[ext_resource path="res://ui/themes/vscrollbar/empty.tres" type="StyleBox" id=21]
+
+[resource]
+default_font = ExtResource( 7 )
+Button/colors/font_color = Color( 0.956863, 0.956863, 0.894118, 1 )
+Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+Button/colors/font_color_hover = Color( 0.956863, 0.956863, 0.894118, 1 )
+Button/colors/font_color_pressed = Color( 0.956863, 0.956863, 0.894118, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = null
+Button/styles/disabled = ExtResource( 13 )
+Button/styles/focus = ExtResource( 1 )
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 3 )
+Button/styles/pressed = ExtResource( 4 )
+CheckBox/colors/font_color = Color( 0.956863, 0.956863, 0.894118, 1 )
+CheckBox/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+CheckBox/colors/font_color_hover = Color( 0.956863, 0.956863, 0.894118, 1 )
+CheckBox/colors/font_color_hover_pressed = Color( 0.956863, 0.956863, 0.894118, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.956863, 0.956863, 0.894118, 1 )
+CheckBox/constants/check_vadjust = 0
+CheckBox/constants/hseparation = 4
+CheckBox/fonts/font = null
+CheckBox/icons/checked = ExtResource( 5 )
+CheckBox/icons/radio_checked = null
+CheckBox/icons/radio_unchecked = null
+CheckBox/icons/unchecked = ExtResource( 6 )
+CheckBox/styles/disabled = null
+CheckBox/styles/focus = null
+CheckBox/styles/hover = null
+CheckBox/styles/hover_pressed = null
+CheckBox/styles/normal = null
+CheckBox/styles/pressed = null
+HSeparator/constants/separation = 4
+HSeparator/styles/separator = ExtResource( 14 )
+HSlider/icons/grabber = ExtResource( 8 )
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource( 9 )
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
+HSlider/styles/slider = null
+Label/colors/font_color = Color( 0.956863, 0.956863, 0.894118, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 0.956863, 0.956863, 0.894118, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+OptionButton/colors/font_color = Color( 0.956863, 0.956863, 0.894118, 1 )
+OptionButton/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
+OptionButton/colors/font_color_hover = Color( 0.956863, 0.956863, 0.894118, 1 )
+OptionButton/colors/font_color_pressed = Color( 0.956863, 0.956863, 0.894118, 1 )
+OptionButton/constants/arrow_margin = 1
+OptionButton/constants/hseparation = 1
+OptionButton/fonts/font = null
+OptionButton/icons/arrow = ExtResource( 15 )
+OptionButton/styles/disabled = null
+OptionButton/styles/focus = null
+OptionButton/styles/hover = null
+OptionButton/styles/normal = null
+OptionButton/styles/pressed = null
+PopupMenu/colors/font_color = Color( 0.956863, 0.956863, 0.894118, 1 )
+PopupMenu/colors/font_color_accel = Color( 0.956863, 0.956863, 0.894118, 1 )
+PopupMenu/colors/font_color_disabled = Color( 0.4, 0.4, 0.4, 0.8 )
+PopupMenu/colors/font_color_hover = Color( 0.956863, 0.956863, 0.894118, 1 )
+PopupMenu/constants/hseparation = 0
+PopupMenu/constants/vseparation = 0
+PopupMenu/fonts/font = null
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = ExtResource( 5 )
+PopupMenu/icons/radio_unchecked = ExtResource( 6 )
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = null
+PopupMenu/styles/labeled_separator_left = null
+PopupMenu/styles/labeled_separator_right = null
+PopupMenu/styles/panel = null
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = null
+RichTextLabel/colors/default_color = Color( 0.956863, 0.956863, 0.894118, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0.49, 0.49, 0.49, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+RichTextLabel/colors/selection_color = Color( 0.1, 0.1, 1, 0.8 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = null
+VScrollBar/icons/decrement = null
+VScrollBar/icons/decrement_highlight = null
+VScrollBar/icons/increment = null
+VScrollBar/icons/increment_highlight = null
+VScrollBar/styles/grabber = ExtResource( 21 )
+VScrollBar/styles/grabber_highlight = ExtResource( 21 )
+VScrollBar/styles/grabber_pressed = ExtResource( 21 )
+VScrollBar/styles/scroll = ExtResource( 21 )
+VScrollBar/styles/scroll_focus = ExtResource( 21 )

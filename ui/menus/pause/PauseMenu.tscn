@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/pause/pause_menu.gd" type="Script" id=2]
 
 [node name="PauseMenu" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
 custom_constants/separation = 5
 alignment = 1
 script = ExtResource( 2 )
@@ -15,28 +13,28 @@ __meta__ = {
 }
 
 [node name="Paused" type="Label" parent="."]
-margin_top = 53.0
+margin_top = 45.0
 margin_right = 320.0
-margin_bottom = 66.0
+margin_bottom = 59.0
 text = "Paused"
 align = 1
 
 [node name="Resume" type="Button" parent="."]
-margin_top = 71.0
+margin_top = 64.0
 margin_right = 320.0
-margin_bottom = 86.0
+margin_bottom = 84.0
 focus_neighbour_top = NodePath("../Quit")
 text = "Resume"
 
 [node name="Options" type="Button" parent="."]
-margin_top = 91.0
+margin_top = 89.0
 margin_right = 320.0
-margin_bottom = 106.0
+margin_bottom = 109.0
 text = "Options"
 
 [node name="Quit" type="Button" parent="."]
-margin_top = 111.0
+margin_top = 114.0
 margin_right = 320.0
-margin_bottom = 126.0
+margin_bottom = 134.0
 focus_neighbour_bottom = NodePath("../Paused")
 text = "Quit"

@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/options/video/video_options_menu.gd" type="Script" id=2]
 [ext_resource path="res://ui/menus/options/video/VideoOptionContainer.tscn" type="PackedScene" id=3]
 
@@ -9,7 +8,6 @@
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
 alignment = 1
 script = ExtResource( 2 )
 __meta__ = {
@@ -17,23 +15,23 @@ __meta__ = {
 }
 
 [node name="Video" type="Label" parent="."]
-margin_top = 28.0
+margin_top = 22.0
 margin_right = 320.0
-margin_bottom = 41.0
+margin_bottom = 36.0
 text = "Video"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 45.0
+margin_top = 40.0
 margin_right = 320.0
-margin_bottom = 49.0
+margin_bottom = 44.0
 
 [node name="VSync" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 53.0
+margin_top = 48.0
 margin_right = 320.0
-margin_bottom = 68.0
+margin_bottom = 63.0
 options = [ "Enabled", "Disabled" ]
 default_option = "Enabled"
 
@@ -50,9 +48,9 @@ focus_neighbour_bottom = NodePath("../../WindowMode/CycleOptionsButton")
 [node name="WindowMode" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 72.0
+margin_top = 67.0
 margin_right = 320.0
-margin_bottom = 87.0
+margin_bottom = 82.0
 options = [ "Windowed", "Fullscreen" ]
 default_option = "Fullscreen"
 
@@ -69,9 +67,9 @@ focus_neighbour_bottom = NodePath("../../FpsCap/CycleOptionsButton")
 [node name="FpsCap" parent="." instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 91.0
+margin_top = 86.0
 margin_right = 320.0
-margin_bottom = 106.0
+margin_bottom = 101.0
 options = [ "None", "30", "60" ]
 default_option = "60"
 
@@ -86,12 +84,12 @@ focus_neighbour_top = NodePath("../../WindowMode/CycleOptionsButton")
 focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 110.0
+margin_top = 105.0
 margin_right = 320.0
-margin_bottom = 114.0
+margin_bottom = 109.0
 
 [node name="ResetToDefaults" type="Button" parent="."]
-margin_top = 118.0
+margin_top = 113.0
 margin_right = 320.0
 margin_bottom = 133.0
 focus_neighbour_top = NodePath("../FpsCap/CycleOptionsButton")
@@ -101,7 +99,7 @@ text = "Reset To Defaults"
 [node name="Back" type="Button" parent="."]
 margin_top = 137.0
 margin_right = 320.0
-margin_bottom = 152.0
+margin_bottom = 157.0
 focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../VSync/CycleOptionsButton")
 text = "Back"

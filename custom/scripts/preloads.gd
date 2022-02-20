@@ -61,6 +61,9 @@ const XboxDpadLeft := preload('res://ui/menus/options/controller/textures/xbox-d
 const XboxLs := preload('res://ui/menus/options/controller/textures/xbox-ls.png')
 const XboxRs := preload('res://ui/menus/options/controller/textures/xbox-rs.png')
 
+# UI themes.
+const ThemeSectorFive := preload('res://ui/themes/default_theme_sector_5.tres')
+
 # Health pack sprites.
 const EmptyHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-empty.png')
 const FullHealthPackTexture := preload('res://ui/interface/health_pack_bar/textures/health-pack-node-full.png')

@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://ui/themes/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/menus/options/audio/audio_options_menu.gd" type="Script" id=2]
 [ext_resource path="res://ui/menus/options/audio/AudioSlider.tscn" type="PackedScene" id=3]
 
@@ -9,7 +8,6 @@
 ]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
 alignment = 1
 script = ExtResource( 2 )
 __meta__ = {
@@ -17,19 +15,20 @@ __meta__ = {
 }
 
 [node name="Audio" type="Label" parent="."]
-margin_top = 28.0
+margin_top = 22.0
 margin_right = 320.0
-margin_bottom = 41.0
+margin_bottom = 36.0
 text = "Audio"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 45.0
+margin_top = 40.0
 margin_right = 320.0
-margin_bottom = 49.0
+margin_bottom = 44.0
 
 [node name="Music" parent="." instance=ExtResource( 3 )]
-margin_top = 53.0
+margin_top = 48.0
+margin_bottom = 63.0
 
 [node name="Label" parent="Music" index="0"]
 text = "Music"
@@ -40,8 +39,8 @@ focus_neighbour_top = NodePath("../../Back")
 focus_neighbour_bottom = NodePath("../../Effects/CycleOptionsButton")
 
 [node name="Effects" parent="." instance=ExtResource( 3 )]
-margin_top = 72.0
-margin_bottom = 87.0
+margin_top = 67.0
+margin_bottom = 82.0
 
 [node name="Label" parent="Effects" index="0"]
 text = "Effects"
@@ -52,8 +51,8 @@ focus_neighbour_top = NodePath("../../Music/CycleOptionsButton")
 focus_neighbour_bottom = NodePath("../../UI/CycleOptionsButton")
 
 [node name="UI" parent="." instance=ExtResource( 3 )]
-margin_top = 91.0
-margin_bottom = 106.0
+margin_top = 86.0
+margin_bottom = 101.0
 
 [node name="Label" parent="UI" index="0"]
 text = "UI"
@@ -64,12 +63,12 @@ focus_neighbour_top = NodePath("../../Effects/CycleOptionsButton")
 focus_neighbour_bottom = NodePath("../../ResetToDefaults")
 
 [node name="HSeparator2" type="HSeparator" parent="."]
-margin_top = 110.0
+margin_top = 105.0
 margin_right = 320.0
-margin_bottom = 114.0
+margin_bottom = 109.0
 
 [node name="ResetToDefaults" type="Button" parent="."]
-margin_top = 118.0
+margin_top = 113.0
 margin_right = 320.0
 margin_bottom = 133.0
 focus_neighbour_top = NodePath("../UI/CycleOptionsButton")
@@ -79,7 +78,7 @@ text = "Reset To Defaults"
 [node name="Back" type="Button" parent="."]
 margin_top = 137.0
 margin_right = 320.0
-margin_bottom = 152.0
+margin_bottom = 157.0
 focus_neighbour_top = NodePath("../ResetToDefaults")
 focus_neighbour_bottom = NodePath("../Music/CycleOptionsButton")
 text = "Back"

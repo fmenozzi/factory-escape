@@ -178,6 +178,9 @@ func _set_sector_five_visuals() -> void:
     # Character textures, particles, effects, etc.
     _player.switch_to_sector_5_visuals()
 
+    # Pause menu theme.
+    _pause.theme = Preloads.ThemeSectorFive
+
     # Health bar.
     _health_bar.switch_to_sector_5_textures()
 
