@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=117 format=2]
+[gd_resource type="TileSet" load_steps=120 format=2]
 
 [ext_resource path="res://shared/textures/industrial.v2.png" type="Texture" id=1]
 
@@ -83,6 +83,18 @@ vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [sub_resource type="NavigationPolygon" id=21]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=116]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=117]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=118]
 vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
@@ -2216,3 +2228,48 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 116/shape_one_way_margin = 0.0
 116/shapes = [  ]
 116/z_index = 0
+117/name = "BigPipeCapSectorFive"
+117/texture = ExtResource( 1 )
+117/tex_offset = Vector2( 0, 0 )
+117/modulate = Color( 1, 1, 1, 1 )
+117/region = Rect2( 432, 464, 16, 16 )
+117/tile_mode = 0
+117/occluder_offset = Vector2( 0, 0 )
+117/navigation_offset = Vector2( 0, 0 )
+117/navigation = SubResource( 116 )
+117/shape_offset = Vector2( 0, 0 )
+117/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+117/shape_one_way = false
+117/shape_one_way_margin = 0.0
+117/shapes = [  ]
+117/z_index = 0
+118/name = "BigPipeSectorFive"
+118/texture = ExtResource( 1 )
+118/tex_offset = Vector2( 0, 0 )
+118/modulate = Color( 1, 1, 1, 1 )
+118/region = Rect2( 432, 480, 16, 16 )
+118/tile_mode = 0
+118/occluder_offset = Vector2( 0, 0 )
+118/navigation_offset = Vector2( 0, 0 )
+118/navigation = SubResource( 117 )
+118/shape_offset = Vector2( 0, 0 )
+118/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+118/shape_one_way = false
+118/shape_one_way_margin = 0.0
+118/shapes = [  ]
+118/z_index = 0
+119/name = "BigPipeBendSectorFive"
+119/texture = ExtResource( 1 )
+119/tex_offset = Vector2( 0, 0 )
+119/modulate = Color( 1, 1, 1, 1 )
+119/region = Rect2( 432, 496, 16, 16 )
+119/tile_mode = 0
+119/occluder_offset = Vector2( 0, 0 )
+119/navigation_offset = Vector2( 0, 0 )
+119/navigation = SubResource( 118 )
+119/shape_offset = Vector2( 0, 0 )
+119/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+119/shape_one_way = false
+119/shape_one_way_margin = 0.0
+119/shapes = [  ]
+119/z_index = 0
