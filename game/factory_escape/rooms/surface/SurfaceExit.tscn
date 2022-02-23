@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/closing_door/ClosingDoorSectorFive.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/factory_escape/rooms/surface/surface_exit.gd" type="Script" id=3]
-[ext_resource path="res://game/factory_escape/rooms/surface/textures/surface.png" type="Texture" id=4]
+[ext_resource path="res://game/factory_escape/rooms/surface/textures/surface-no-moon.png" type="Texture" id=4]
 [ext_resource path="res://game/factory_escape/rooms/surface/textures/closing-door-surface.png" type="Texture" id=5]
+[ext_resource path="res://game/factory_escape/rooms/surface/textures/moon.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 240, 90 )
@@ -32,19 +33,25 @@ position = Vector2( 320, 90 )
 texture = ExtResource( 4 )
 centered = false
 
-[node name="ClosingDoorSectorFive" parent="." index="10" instance=ExtResource( 2 )]
+[node name="Moon" type="Sprite" parent="." index="10"]
+modulate = Color( 1.2, 1.2, 1.2, 1 )
+self_modulate = Color( 1.23, 1.23, 1.23, 1 )
+position = Vector2( 121, 29 )
+texture = ExtResource( 6 )
+
+[node name="ClosingDoorSectorFive" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( 472, 144 )
 
 [node name="Sprite" parent="ClosingDoorSectorFive" index="0"]
 texture = ExtResource( 5 )
 
-[node name="PausePoint" type="Position2D" parent="." index="11"]
+[node name="PausePoint" type="Position2D" parent="." index="12"]
 position = Vector2( 392, 160 )
 
-[node name="StoppingPoint" type="Position2D" parent="." index="12"]
+[node name="StoppingPoint" type="Position2D" parent="." index="13"]
 position = Vector2( 160, 160 )
 
-[node name="Floor" type="StaticBody2D" parent="." index="13"]
+[node name="Floor" type="StaticBody2D" parent="." index="14"]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="0"]
