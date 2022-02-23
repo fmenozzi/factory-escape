@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -57,7 +57,10 @@
 [ext_resource path="res://actors/player/states/get_grounded.gd" type="Script" id=55]
 [ext_resource path="res://actors/player/states/mark_sector_five_lift_fall_as_completed.gd" type="Script" id=56]
 [ext_resource path="res://actors/player/states/fall_to_ground.gd" type="Script" id=57]
-[ext_resource path="res://actors/player/states/sit_down.gd" type="Script" id=58]
+[ext_resource path="res://actors/player/states/look_at_moon.gd" type="Script" id=58]
+[ext_resource path="res://actors/player/states/pause_idle.gd" type="Script" id=59]
+[ext_resource path="res://actors/player/states/face_door.gd" type="Script" id=60]
+[ext_resource path="res://actors/player/states/walk_to_pause_point.gd" type="Script" id=61]
 
 [sub_resource type="Animation" id=1]
 resource_name = "acquire_ability"
@@ -553,6 +556,21 @@ tracks/0/keys = {
 "values": [ 86, 87 ]
 }
 
+[sub_resource type="Animation" id=36]
+resource_name = "look_at_moon"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 61, 62 ]
+}
+
 [sub_resource type="Animation" id=21]
 loop = true
 tracks/0/type = "value"
@@ -782,6 +800,7 @@ anims/idle = SubResource( 17 )
 anims/idle_low_health = SubResource( 18 )
 anims/jump = SubResource( 19 )
 anims/light_lamp = SubResource( 20 )
+anims/look_at_moon = SubResource( 36 )
 anims/look_down = SubResource( 21 )
 anims/look_up = SubResource( 22 )
 anims/pre_rest = SubResource( 23 )
@@ -797,7 +816,7 @@ position = Vector2( 0, -8 )
 texture = ExtResource( 5 )
 hframes = 8
 vframes = 11
-frame = 86
+frame = 60
 region_enabled = true
 region_rect = Rect2( 0, 0, 640, 880 )
 __meta__ = {
@@ -1097,10 +1116,36 @@ script = ExtResource( 36 )
 [node name="FallToGround" type="Node" parent="States/SurfaceCutscene"]
 script = ExtResource( 57 )
 
-[node name="WalkToPoint" type="Node" parent="States/SurfaceCutscene"]
+[node name="WalkToPausePoint" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 61 )
+
+[node name="Pause" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 59 )
+duration = 0.75
+
+[node name="Duration" type="Timer" parent="States/SurfaceCutscene/Pause"]
+
+[node name="TurnAroundToFaceDoor" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 60 )
+
+[node name="Duration" type="Timer" parent="States/SurfaceCutscene/TurnAroundToFaceDoor"]
+
+[node name="PauseAgain" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 59 )
+duration = 1.0
+
+[node name="Duration" type="Timer" parent="States/SurfaceCutscene/PauseAgain"]
+
+[node name="WalkToStopPoint" type="Node" parent="States/SurfaceCutscene"]
 script = ExtResource( 29 )
 
-[node name="SitDown" type="Node" parent="States/SurfaceCutscene"]
+[node name="FinalShortPause" type="Node" parent="States/SurfaceCutscene"]
+script = ExtResource( 59 )
+duration = 0.5
+
+[node name="Duration" type="Timer" parent="States/SurfaceCutscene/FinalShortPause"]
+
+[node name="LookAtMoon" type="Node" parent="States/SurfaceCutscene"]
 script = ExtResource( 58 )
 
 [node name="AcquireAbility" type="Node" parent="States"]

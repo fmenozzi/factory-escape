@@ -9,7 +9,7 @@ signal player_heal_failed
 signal player_heal_attempted_no_health_packs
 signal player_reached_walk_to_point
 signal player_finished_intro_fall
-signal player_sat_down
+signal player_looked_at_moon
 
 const DashEchoesSectorFive = preload('res://actors/player/effects/materials/dash_echoes_sector_5.tres')
 const DashPuffSectorFive = preload('res://actors/player/effects/materials/dash_puff_sector_5.tres')

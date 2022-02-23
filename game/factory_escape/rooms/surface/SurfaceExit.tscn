@@ -38,10 +38,13 @@ position = Vector2( 472, 144 )
 [node name="Sprite" parent="ClosingDoorSectorFive" index="0"]
 texture = ExtResource( 5 )
 
-[node name="StoppingPoint" type="Position2D" parent="." index="11"]
+[node name="PausePoint" type="Position2D" parent="." index="11"]
+position = Vector2( 392, 160 )
+
+[node name="StoppingPoint" type="Position2D" parent="." index="12"]
 position = Vector2( 160, 160 )
 
-[node name="Floor" type="StaticBody2D" parent="." index="12"]
+[node name="Floor" type="StaticBody2D" parent="." index="13"]
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="0"]

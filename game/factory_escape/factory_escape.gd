@@ -540,9 +540,10 @@ func _on_player_reached_surface(old_room: Room, new_room: Room) -> void:
     EscapeSequenceEffects.stop()
 
     # Switch to surface cutscene state, which will ground the player, have them
-    # walk to a predetermined point, and then sit down.
+    # walk to some predetermined points, and then face the moon.
     _player.change_state({
         'new_state': Player.State.SURFACE_CUTSCENE,
+        'pause_point': _surface_exit.get_pause_point(),
         'stopping_point': _surface_exit.get_stopping_point(),
     })
 
@@ -550,7 +551,8 @@ func _on_player_reached_surface(old_room: Room, new_room: Room) -> void:
     yield(get_tree().create_timer(0.5), 'timeout')
     _surface_exit.get_closing_door().close()
 
-    # Wait until the player has sat down before eventually fading to credits.
-    yield(_player, 'player_sat_down')
-    yield(get_tree().create_timer(2.0), 'timeout')
+    # Wait until the player has turned to look at the moon before eventually
+    # fading to credits.
+    yield(_player, 'player_looked_at_moon')
+    yield(get_tree().create_timer(3.0), 'timeout')
     SceneChanger.change_scene_to(Preloads.CreditsScreen, 2.0)
