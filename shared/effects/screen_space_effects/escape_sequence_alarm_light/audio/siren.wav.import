@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/siren.wav-bf92e07ed7799ec1bc44348b5de5cd66.sample"
+
+[deps]
+
+source_file="res://shared/effects/screen_space_effects/escape_sequence_alarm_light/audio/siren.wav"
+dest_files=[ "res://.import/siren.wav-bf92e07ed7799ec1bc44348b5de5cd66.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://custom/nodes/escape_sequence/escape_sequence_effects.gd" type="Script" id=1]
+[ext_resource path="res://custom/nodes/escape_sequence/audio/rumble_3.wav" type="AudioStream" id=2]
+[ext_resource path="res://custom/nodes/escape_sequence/audio/rumble_2.wav" type="AudioStream" id=3]
+[ext_resource path="res://custom/nodes/escape_sequence/audio/rumble_1.wav" type="AudioStream" id=4]
 
 [node name="EscapeSequenceEffects" type="CanvasLayer" groups=[
 "lamp_reset",
@@ -11,3 +14,17 @@ script = ExtResource( 1 )
 
 [node name="DebrisSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 160, -45 )
+
+[node name="RumbleSounds" type="Node" parent="."]
+
+[node name="Rumble1" type="AudioStreamPlayer" parent="RumbleSounds"]
+stream = ExtResource( 4 )
+bus = "Effects"
+
+[node name="Rumble2" type="AudioStreamPlayer" parent="RumbleSounds"]
+stream = ExtResource( 3 )
+bus = "Effects"
+
+[node name="Rumble3" type="AudioStreamPlayer" parent="RumbleSounds"]
+stream = ExtResource( 2 )
+bus = "Effects"

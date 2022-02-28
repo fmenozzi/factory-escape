@@ -5,6 +5,13 @@ signal escape_sequence_stopped
 
 onready var _shake_timer: Timer = $ShakeTimer
 onready var _debris_spawn_point: Position2D = $DebrisSpawnPoint
+onready var _rumble_sounds: Array = [
+    $RumbleSounds/Rumble1,
+    $RumbleSounds/Rumble2,
+    $RumbleSounds/Rumble3,
+]
+
+var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
     _shake_timer.one_shot = false
@@ -32,6 +39,8 @@ func _on_shake_timeout() -> void:
         Screenshake.Duration.MEDIUM, Screenshake.Amplitude.SMALL,
         Screenshake.Priority.HIGH)
     Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
+
+    _rumble_sounds[_rng.randi_range(0, 2)].play()
 
     Effects.spawn_debris_at(_get_global_debris_spawn_point())
 

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rumble_3.wav-b79df0e59f372b70e8b633ea2ce489cc.sample"
+
+[deps]
+
+source_file="res://custom/nodes/escape_sequence/audio/rumble_3.wav"
+dest_files=[ "res://.import/rumble_3.wav-b79df0e59f372b70e8b633ea2ce489cc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=false
+compress/mode=0
