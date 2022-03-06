@@ -119,6 +119,7 @@ func _finish_arena() -> void:
         MusicPlayer.Music.WORLD_SECTOR_2,
         MusicPlayer.Music.WORLD_SECTOR_3,
         MusicPlayer.Music.WORLD_SECTOR_4,
+        MusicPlayer.Music.WORLD_SECTOR_5,
         MusicPlayer.Music.LAMP_ROOM,
         MusicPlayer.Music.LAMP_ROOM_SECTOR_5,
     ])

@@ -25,6 +25,9 @@ func stop() -> void:
     seek(-1)
     .stop()
 
+func is_playing() -> bool:
+    return playing and volume_db > -80.0
+
 func set_max_volume_db(new_max_volume_db: float) -> void:
     max_volume_db = new_max_volume_db
     volume_db = max_volume_db
