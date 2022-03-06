@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/springboard/Springboard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDrone.tscn" type="PackedScene" id=4]

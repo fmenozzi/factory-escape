@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/textures/sector-5.png" type="Texture" id=2]
 [ext_resource path="res://environment/closing_door/ClosingDoorWithSwitchSectorFive.tscn" type="PackedScene" id=3]
 

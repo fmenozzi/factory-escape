@@ -1,7 +1,7 @@
 extends Node2D
 class_name Arena
 
-onready var _room: Room = get_parent()
+onready var _room: RoomFe = get_parent()
 onready var _enemies_node: Node2D = get_parent().get_node('Enemies')
 onready var _phases: Node2D = $Phases
 onready var _num_phases: int = $Phases.get_child_count()

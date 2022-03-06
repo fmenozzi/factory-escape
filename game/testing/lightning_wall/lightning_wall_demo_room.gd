@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _lightning_wall_with_switch: Node2D = $Hazards/LightningWallWithSwitch
 

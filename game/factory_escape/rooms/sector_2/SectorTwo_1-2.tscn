@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/platforms/sinking/SinkingPlatform.tscn" type="PackedScene" id=2]
 [ext_resource path="res://actors/enemies/worker_drone/WorkerDrone.tscn" type="PackedScene" id=3]
 

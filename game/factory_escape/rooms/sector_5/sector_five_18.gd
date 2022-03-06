@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _music_trigger: Area2D = $MusicTrigger
 

@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 const SCROLL_SPEED_UV := 0.15
 

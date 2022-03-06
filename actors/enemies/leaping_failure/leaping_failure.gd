@@ -205,7 +205,7 @@ func _on_hazard_hit(area_or_body) -> void:
         Screenshake.Duration.VERY_SHORT, Screenshake.Amplitude.VERY_SMALL)
 
     var enemy_hit_effect: EnemyHitEffect
-    if Util.get_player().curr_room.get_section() == Room.Section.SECTOR_5:
+    if Util.get_player().curr_room.get_section() == RoomFe.Section.SECTOR_5:
         enemy_hit_effect = Preloads.EnemyHitEffectSectorFive.instance()
     else:
         enemy_hit_effect = Preloads.EnemyHitEffect.instance()

@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 enum RoomState {
     PRE_FIGHT,

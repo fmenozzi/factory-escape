@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 signal player_entered_cargo_lift
 

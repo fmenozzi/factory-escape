@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _closing_door_left: StaticBody2D = $ClosingDoorLeft
 onready var _closing_door_right: StaticBody2D = $ClosingDoorRight

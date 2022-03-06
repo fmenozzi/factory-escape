@@ -101,7 +101,7 @@ func transition(old_room, new_room) -> void:
 
     emit_signal('transition_completed')
 
-func fit_camera_limits_to_room(room: Room) -> void:
+func fit_camera_limits_to_room(room: RoomFe) -> void:
     var room_dims := room.get_room_dimensions()
 
     self.limit_left = room.global_position.x
@@ -123,7 +123,7 @@ func _transition_setup() -> void:
     _tween.remove_all()
     self.position = Vector2.ZERO
 
-func _transition_teardown(room: Room) -> void:
+func _transition_teardown(room: RoomFe) -> void:
     # Restore local camera position.
     self.position = Vector2.ZERO
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/camera_focus_point/CameraFocusPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/central_lock/CentralLock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/platforms/fragile/FragilePlatform.tscn" type="PackedScene" id=4]

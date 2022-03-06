@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 class_name CentralHub
 
 signal boss_fight_triggered

@@ -112,7 +112,7 @@ func _ready() -> void:
 
     _set_player_starting_room()
 
-    if _player.curr_room.get_section() == Room.Section.SECTOR_5:
+    if _player.curr_room.get_section() == RoomFe.Section.SECTOR_5:
         _set_sector_five_visuals()
 
     _set_player_starting_health_and_health_packs()
@@ -120,7 +120,7 @@ func _ready() -> void:
     _set_player_starting_music()
 
 func _set_player_starting_room() -> void:
-    var starting_room: Room = null
+    var starting_room: RoomFe = null
 
     # Get all the rooms from each set of rooms.
     var rooms := $World/Rooms/Prelude.get_children()

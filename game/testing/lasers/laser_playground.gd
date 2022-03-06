@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 const ROTATION_SPEED_DEG := 45.0
 

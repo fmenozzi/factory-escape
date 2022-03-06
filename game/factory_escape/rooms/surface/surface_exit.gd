@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _closing_door: StaticBody2D = $ClosingDoorSectorFive
 onready var _pause_point: Position2D = $PausePoint

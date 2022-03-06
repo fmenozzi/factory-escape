@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _duration_options: OptionButton = $OptionButtons/DurationOptions
 onready var _amplitude_options: OptionButton = $OptionButtons/AmplitudeOptions

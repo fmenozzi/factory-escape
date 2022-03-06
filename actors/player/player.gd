@@ -550,7 +550,7 @@ func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
     var enemy = enemy_hurtbox.get_parent()
 
     var enemy_hit_effect: EnemyHitEffect
-    if curr_room.get_section() == 6: # Room.Section.SECTOR_5
+    if curr_room.get_section() == 6: # RoomFe.Section.SECTOR_5
         enemy_hit_effect = Preloads.EnemyHitEffectSectorFive.instance()
     else:
         enemy_hit_effect = Preloads.EnemyHitEffect.instance()

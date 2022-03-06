@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/GameInterface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/closing_door/ClosingDoor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/testing/ranged_sentry_drones/ranged_sentry_drone_arena_playground.gd" type="Script" id=4]
 

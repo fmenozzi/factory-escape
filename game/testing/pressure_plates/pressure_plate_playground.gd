@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _pressure_plate: Node2D = $PressurePlate
 onready var _label: Label = $Label

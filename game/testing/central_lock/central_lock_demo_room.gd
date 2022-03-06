@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _central_lock: CentralLock = $CentralLock
 

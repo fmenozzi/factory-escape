@@ -73,7 +73,7 @@ const EndOfDemoMessage := preload('res://game/demo/end_of_demo_message/EndOfDemo
 
 onready var _confirmation_dialog: Control = $Layers/DialogBoxLayer/ConfirmationDialog
 onready var _rooms_node: Node2D = $World/Rooms
-onready var _ability_selection_room: Room = $World/Rooms/AbilitySelection
+onready var _ability_selection_room: RoomFe = $World/Rooms/AbilitySelection
 onready var _save_manager: DemoSaveManager = $SaveManager
 
 func _ready() -> void:
@@ -121,7 +121,7 @@ func _generate_ability_specific_demo_rooms() -> void:
         var room_packed_scene: PackedScene = room_position_pair[0]
         var position: Vector2 = room_position_pair[1]
 
-        var room: Room = room_packed_scene.instance()
+        var room: RoomFe = room_packed_scene.instance()
         room.position = position
 
         all_generated_rooms.append(room)

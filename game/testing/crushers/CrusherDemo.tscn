@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/GameInterface.tscn" type="PackedScene" id=1]
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/crusher/Crusher.tscn" type="PackedScene" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/testing/crushers/crusher_demo_playground.gd" type="Script" id=5]

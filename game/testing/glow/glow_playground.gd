@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 export(float) var glow_period := 2.0
 export(float, 1.0, 2.0) var max_glow_multiplier := 1.5

@@ -1,7 +1,7 @@
 extends "res://game/game_interface.gd"
 
-onready var _cargo_lift: Room = $World/Rooms/Prelude/CargoLift
-onready var _central_hub: Room = $World/Rooms/CentralHub/CentralHub
+onready var _cargo_lift: RoomFe = $World/Rooms/Prelude/CargoLift
+onready var _central_hub: RoomFe = $World/Rooms/CentralHub/CentralHub
 onready var _central_hub_save_manager: CentralHubSaveManager = $World/Rooms/CentralHub/CentralHub/SaveManager
 onready var _central_hub_camera_focus_point: CameraFocusPoint = $World/Rooms/CentralHub/CentralHub/CameraFocusPoint
 onready var _warden_spawn_point: Position2D = $World/Rooms/CentralHub/CentralHub/BossFight/WardenSpawnPoint
@@ -17,17 +17,17 @@ onready var _central_lock_cutscene_camera: Camera2D = $World/Rooms/CentralHub/Ce
 onready var _central_lock: CentralLock = $World/Rooms/CentralHub/CentralHub/CentralLock
 onready var _suspend_point_post_warden: Position2D = $World/Rooms/CentralHub/CentralHub/PlayerSuspensionPointPostWarden
 onready var _central_lock_save_manager: CentralLockSaveManager = $World/Rooms/CentralHub/CentralHub/CentralLock/SaveManager
-onready var _sector_five_lift: Room = $World/Rooms/SectorFive/SectorFiveLift
+onready var _sector_five_lift: RoomFe = $World/Rooms/SectorFive/SectorFiveLift
 onready var _sector_five_lift_suspend_point: Position2D = $World/Rooms/SectorFive/SectorFiveLift/PlayerSuspensionPoint
 onready var _sector_five_lift_cutscene_camera: Camera2D = $World/Rooms/SectorFive/SectorFiveLift/CutsceneCamera
 onready var _arena_elevator_start: Node2D = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator
 onready var _arena_elevator_start_switch: Switch = $World/Rooms/SectorFive/SectorFive_20/ArenaElevator/Platform/SwitchSectorFive
-onready var _elevator_arena_room: Room = $World/Rooms/SectorFive/SectorFive_21
+onready var _elevator_arena_room: RoomFe = $World/Rooms/SectorFive/SectorFive_21
 onready var _elevator_arena_room_arena: ElevatorArena = $World/Rooms/SectorFive/SectorFive_21/ElevatorArena
 onready var _elevator_arena_room_elevator: Node2D = $World/Rooms/SectorFive/SectorFive_21/ArenaElevator
 onready var _arena_elevator_end: Node2D = $World/Rooms/SectorFive/SectorFive_22/ArenaElevator
-onready var _arena_elevator_end_room: Room = $World/Rooms/SectorFive/SectorFive_22
-onready var _surface_exit: Room = $World/Rooms/Surface/SurfaceExit
+onready var _arena_elevator_end_room: RoomFe = $World/Rooms/SectorFive/SectorFive_22
+onready var _surface_exit: RoomFe = $World/Rooms/Surface/SurfaceExit
 
 func _ready() -> void:
     _cargo_lift.connect('player_entered_cargo_lift', self, '_on_player_entered_cargo_lift')
@@ -537,7 +537,7 @@ func _on_elevator_arena_finished() -> void:
     # Resume player processing.
     _player.set_process_unhandled_input(true)
 
-func _on_player_reached_surface(old_room: Room, new_room: Room) -> void:
+func _on_player_reached_surface(old_room: RoomFe, new_room: RoomFe) -> void:
     if new_room != _surface_exit:
         return
 

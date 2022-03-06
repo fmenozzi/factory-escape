@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _fire_column: FireColumn = $Hazards/FireColumn
 onready var _fire_column_timer: Timer = $FireColumnTimer

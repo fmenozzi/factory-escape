@@ -1,5 +1,5 @@
 extends Node2D
-class_name Room
+class_name RoomFe
 
 signal entered_room(old_room, new_room)
 

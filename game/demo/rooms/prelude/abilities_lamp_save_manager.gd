@@ -5,7 +5,7 @@ const SAVE_KEY := 'abilities_lamp'
 
 var rested_at_lamp := false
 
-onready var _room: Room = get_parent()
+onready var _room: RoomFe = get_parent()
 
 func get_save_data() -> Array:
     return [SAVE_KEY, {

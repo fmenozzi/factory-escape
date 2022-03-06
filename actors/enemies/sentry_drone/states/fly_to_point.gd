@@ -9,7 +9,7 @@ func enter(sentry_drone: SentryDrone, previous_state_dict: Dictionary) -> void:
     _global_fly_to_point = previous_state_dict['fly_to_point']
     assert(_global_fly_to_point != null)
 
-    var room: Room = sentry_drone.get_parent().get_parent()
+    var room: RoomFe = sentry_drone.get_parent().get_parent()
     assert(room != null)
 
     _nav = room.get_tilemaps_nav()

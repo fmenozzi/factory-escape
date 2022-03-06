@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _fragile_platform: FragilePlatform = $FragilePlatform
 

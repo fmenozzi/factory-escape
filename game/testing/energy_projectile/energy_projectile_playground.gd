@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _projectile_spawner: Position2D = $ProjectileSpawner
 onready var _shoot_timer: Timer = $ShootTimer

@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/elevator/ArenaElevator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/elevator_arena/textures/elevator-arena-background.png" type="Texture" id=3]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/elevator_arena/sector_five_21.gd" type="Script" id=4]

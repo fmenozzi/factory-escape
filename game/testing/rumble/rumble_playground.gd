@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _type_option: OptionButton = $RumbleControls/Container/Settings/Type
 onready var _duration: SpinBox = $RumbleControls/Container/Settings/Duration

@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 const SPEED := Util.TILE_SIZE * 4
 

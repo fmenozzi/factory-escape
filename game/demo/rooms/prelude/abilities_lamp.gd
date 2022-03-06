@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 onready var _lamp: Area2D = $Lamp
 onready var _closing_door: StaticBody2D = $ClosingDoor

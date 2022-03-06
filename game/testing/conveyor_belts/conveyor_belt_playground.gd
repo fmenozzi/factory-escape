@@ -1,4 +1,4 @@
-extends Room
+extends RoomFe
 
 func _ready() -> void:
     resume()
