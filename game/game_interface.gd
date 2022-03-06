@@ -165,14 +165,11 @@ func _set_player_starting_health_and_health_packs() -> void:
         _player.get_health_pack_manager().set_starting_health_packs()
 
 func _set_player_starting_music() -> void:
-    MusicPlayer.get_player(MusicPlayer.Music.FACTORY_BACKGROUND).set_max_volume_db(-8.0)
     if _player.curr_room.has_node('Lamp'):
         MusicPlayer.play(_player.curr_room.get_lamp_track())
-        MusicPlayer.stop(MusicPlayer.Music.FACTORY_BACKGROUND)
     else:
         yield(get_tree().create_timer(1.0), 'timeout')
         MusicPlayer.fade_in(_player.curr_room.get_section_track(), 6.0)
-        # TODO: Am I supposed to be fading in factory background as well?
 
 func _set_sector_five_visuals() -> void:
     # Character textures, particles, effects, etc.
