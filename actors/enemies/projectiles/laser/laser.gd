@@ -138,6 +138,9 @@ func cancel() -> void:
     _laser_shoot.stop()
     _laser_wind_down.stop()
 
+func deactivate_immediately() -> void:
+    _hitbox_collision_shape.disabled = true
+
 func pause() -> void:
     _sound_manager.set_all_muted(true)
     _tween.remove_all()

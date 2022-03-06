@@ -11,4 +11,6 @@ func exit(sticky_drone: StickyDrone) -> void:
     sticky_drone.visible = true
 
 func update(sticky_drone: StickyDrone, delta: float) -> Dictionary:
+    sticky_drone.get_laser().deactivate_immediately()
+
     return {'new_state': StickyDrone.State.NO_CHANGE}
