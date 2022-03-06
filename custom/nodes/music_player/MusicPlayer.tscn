@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -19,6 +19,12 @@
 [ext_resource path="res://environment/abilities/factory_escape/audio/ability_idle_loop.wav" type="AudioStream" id=17]
 [ext_resource path="res://custom/nodes/music_player/audio/sector_5.ogg" type="AudioStream" id=18]
 [ext_resource path="res://custom/nodes/music_player/audio/lamp_room_sector_5.ogg" type="AudioStream" id=19]
+[ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_2.ogg" type="AudioStream" id=20]
+[ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_1.ogg" type="AudioStream" id=21]
+[ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_3.ogg" type="AudioStream" id=22]
+[ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_pre_activation.ogg" type="AudioStream" id=23]
+[ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_elevator_end.ogg" type="AudioStream" id=24]
+[ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_elevator.ogg" type="AudioStream" id=25]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
@@ -83,3 +89,22 @@ max_volume_db = 16.0
 [node name="AbilityIdleLoop" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 17 )
 max_volume_db = -24.0
+
+[node name="EscapeSequencePreActivation" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 23 )
+max_volume_db = -4.0
+
+[node name="EscapeSequence1" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 21 )
+
+[node name="EscapeSequence2" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 20 )
+
+[node name="EscapeSequence3" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 22 )
+
+[node name="EscapeSequenceElevator" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 25 )
+
+[node name="EscapeSequenceElevatorEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 24 )

@@ -37,6 +37,10 @@ func _on_switch_pressed() -> void:
     _closing_door_left.close()
     _closing_door_right.open()
     EscapeSequenceEffects.start()
+    MusicPlayer.cross_fade(
+        MusicPlayer.Music.ESCAPE_SEQUENCE_PRE_ACTIVATION,
+        MusicPlayer.Music.ESCAPE_SEQUENCE_1,
+        0.5)
 
     # Resume player processing.
     var player: Player = Util.get_player()

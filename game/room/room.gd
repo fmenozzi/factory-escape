@@ -334,6 +334,14 @@ func _on_player_entered(area: Area2D) -> void:
         if player.prev_room.has_ability():
             MusicPlayer.cross_fade(MusicPlayer.Music.ABILITY_IDLE_LOOP, curr_section_track, 1.0)
             MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
+        if player.curr_room.name == 'SectorFive_13' and not EscapeSequenceEffects.is_active():
+            MusicPlayer.cross_fade(
+                prev_section_track, MusicPlayer.Music.ESCAPE_SEQUENCE_PRE_ACTIVATION, 1.0)
+            MusicPlayer.fade_out(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
+        if player.prev_room.name == 'SectorFive_13' and not EscapeSequenceEffects.is_active():
+            MusicPlayer.cross_fade(
+               MusicPlayer.Music.ESCAPE_SEQUENCE_PRE_ACTIVATION, curr_section_track, 1.0)
+            MusicPlayer.fade_in(MusicPlayer.Music.FACTORY_BACKGROUND, 1.0)
 
         # Reset and hide enemies in the previous room once the transition
         # completes.

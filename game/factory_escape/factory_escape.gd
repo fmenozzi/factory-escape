@@ -471,6 +471,12 @@ func _on_arena_elevator_switch_pressed() -> void:
     # motion.
     _elevator_arena_room.start_background_scrolling()
 
+    # Switch to elevator music.
+    MusicPlayer.cross_fade(
+        MusicPlayer.Music.ESCAPE_SEQUENCE_3,
+        MusicPlayer.Music.ESCAPE_SEQUENCE_ELEVATOR,
+        1.0)
+
     # Fade back from black.
     fade_delay = 0.0
     _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
@@ -522,6 +528,12 @@ func _on_elevator_arena_finished() -> void:
     fade_delay = 1.0
     _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_from_black_finished')
+
+    # Switch to elevator end music.
+    MusicPlayer.cross_fade(
+        MusicPlayer.Music.ESCAPE_SEQUENCE_ELEVATOR,
+        MusicPlayer.Music.ESCAPE_SEQUENCE_ELEVATOR_END,
+        0.5)
 
     # Resume player processing.
     _player.set_process_unhandled_input(true)

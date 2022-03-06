@@ -12,6 +12,7 @@ onready var _rumble_sounds: Array = [
 ]
 
 var _rng := RandomNumberGenerator.new()
+var _active := false
 
 func _ready() -> void:
     _shake_timer.one_shot = false
@@ -19,13 +20,18 @@ func _ready() -> void:
 
 func start() -> void:
     _shake_timer.start(0.1)
+    _active = true
 
     emit_signal('escape_sequence_started')
 
 func stop() -> void:
     _shake_timer.stop()
+    _active = false
 
     emit_signal('escape_sequence_stopped')
+
+func is_active() -> bool:
+    return _active
 
 func lamp_reset() -> void:
     stop()

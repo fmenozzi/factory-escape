@@ -18,6 +18,12 @@ enum Music {
     LAMP_ROOM,
     LAMP_ROOM_SECTOR_5,
     ABILITY_IDLE_LOOP,
+    ESCAPE_SEQUENCE_PRE_ACTIVATION,
+    ESCAPE_SEQUENCE_1,
+    ESCAPE_SEQUENCE_2,
+    ESCAPE_SEQUENCE_3,
+    ESCAPE_SEQUENCE_ELEVATOR,
+    ESCAPE_SEQUENCE_ELEVATOR_END,
 }
 
 onready var _players: Array = $AudioPlayers.get_children()
@@ -38,6 +44,12 @@ onready var _warden_fight_end: AudioStreamPlayerMusic = $AudioPlayers/WardenFigh
 onready var _lamp_room: AudioStreamPlayerMusic = $AudioPlayers/LampRoom
 onready var _lamp_room_sector_5: AudioStreamPlayerMusic = $AudioPlayers/LampRoomSectorFive
 onready var _ability_idle_loop: AudioStreamPlayerMusic = $AudioPlayers/AbilityIdleLoop
+onready var _escape_sequence_pre_activation: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequencePreActivation
+onready var _escape_sequence_1: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequence1
+onready var _escape_sequence_2: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequence2
+onready var _escape_sequence_3: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequence3
+onready var _escape_sequence_elevator: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequenceElevator
+onready var _escape_sequence_elevator_end: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequenceElevatorEnd
 
 func _ready() -> void:
     for player in _players:
@@ -82,6 +94,12 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.LAMP_ROOM,
         Music.LAMP_ROOM_SECTOR_5,
         Music.ABILITY_IDLE_LOOP,
+        Music.ESCAPE_SEQUENCE_PRE_ACTIVATION,
+        Music.ESCAPE_SEQUENCE_1,
+        Music.ESCAPE_SEQUENCE_2,
+        Music.ESCAPE_SEQUENCE_3,
+        Music.ESCAPE_SEQUENCE_ELEVATOR,
+        Music.ESCAPE_SEQUENCE_ELEVATOR_END,
     ])
 
     match music_enum:
@@ -135,6 +153,24 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.ABILITY_IDLE_LOOP:
             return _ability_idle_loop
+
+        Music.ESCAPE_SEQUENCE_PRE_ACTIVATION:
+            return _escape_sequence_pre_activation
+
+        Music.ESCAPE_SEQUENCE_1:
+            return _escape_sequence_1
+
+        Music.ESCAPE_SEQUENCE_2:
+            return _escape_sequence_2
+
+        Music.ESCAPE_SEQUENCE_3:
+            return _escape_sequence_3
+
+        Music.ESCAPE_SEQUENCE_ELEVATOR:
+            return _escape_sequence_elevator
+
+        Music.ESCAPE_SEQUENCE_ELEVATOR_END:
+            return _escape_sequence_elevator_end
 
         _:
             # Simply report the error here immediately instead of deferring to

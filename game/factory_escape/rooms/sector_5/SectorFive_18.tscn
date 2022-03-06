@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/factory_escape/rooms/sector_5/sector_five_18.gd" type="Script" id=3]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/hazards/laser_emitter/LaserEmitterGroup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/hazards/laser_emitter/LaserEmitterSectorFive.tscn" type="PackedScene" id=6]
@@ -24,7 +25,11 @@ extents = Vector2( 48, 4 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 16 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 8, 16 )
+
 [node name="SectorFive_18" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
 [node name="TileMaps" parent="." index="0"]
 position = Vector2( 0, -4 )
@@ -105,6 +110,12 @@ requires_grounded = false
 [node name="CollisionShape2D" parent="HazardCheckpoints/LowerRight" index="0"]
 position = Vector2( 64, -16 )
 shape = SubResource( 6 )
+
+[node name="MusicTrigger" type="Area2D" parent="." index="10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MusicTrigger" index="0"]
+position = Vector2( 296, 508 )
+shape = SubResource( 7 )
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]

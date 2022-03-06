@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://game/room/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/background/vents/VentSectorFive.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/springboard/SpringboardSectorFive.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/platforms/collapsable_platform/CollapsablePlatformSectorFive.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/factory_escape/rooms/sector_5/sector_five_16.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -28,7 +29,13 @@ extents = Vector2( 24, 4 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 32, 32 )
 
-[node name="SectorFive_16" instance=ExtResource( 1 )]
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 8, 80 )
+
+[node name="SectorFive_16" groups=[
+"lamp_reset",
+] instance=ExtResource( 1 )]
+script = ExtResource( 7 )
 
 [node name="TileMaps" parent="." index="0"]
 position = Vector2( 0, 4 )
@@ -115,6 +122,12 @@ position = Vector2( 64, 416 )
 
 [node name="CollapsablePlatformSectorFive" parent="." index="11" instance=ExtResource( 6 )]
 position = Vector2( 232, 128 )
+
+[node name="MusicTrigger" type="Area2D" parent="." index="12"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MusicTrigger" index="0"]
+position = Vector2( 24, 452 )
+shape = SubResource( 8 )
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePointLower"]

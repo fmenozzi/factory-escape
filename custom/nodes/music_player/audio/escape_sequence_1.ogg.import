@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/escape_sequence_1.ogg-be6e0ff038882d6bbc3a75672797d8ef.oggstr"
+
+[deps]
+
+source_file="res://custom/nodes/music_player/audio/escape_sequence_1.ogg"
+dest_files=[ "res://.import/escape_sequence_1.ogg-be6e0ff038882d6bbc3a75672797d8ef.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
