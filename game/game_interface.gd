@@ -168,7 +168,7 @@ func _set_player_starting_music() -> void:
     if _player.curr_room.has_node('Lamp'):
         MusicPlayer.play(_player.curr_room.get_lamp_track())
     else:
-        yield(get_tree().create_timer(1.0), 'timeout')
+        MusicPlayer.stop(MusicPlayer.Music.FACTORY_BACKGROUND)
         MusicPlayer.fade_in(_player.curr_room.get_section_track(), 6.0)
 
 func _set_sector_five_visuals() -> void:
