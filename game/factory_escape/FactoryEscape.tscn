@@ -615,12 +615,12 @@ position = Vector2( 10880, 6624 )
 position = Vector2( 10880, 0 )
 
 [node name="SectorFive_23" parent="World/Rooms/SectorFive" index="24" instance=ExtResource( 147 )]
-position = Vector2( 10240, 0 )
+position = Vector2( 10560, 0 )
 
 [node name="Surface" type="Node2D" parent="World/Rooms" index="7"]
 
 [node name="SurfaceExit" parent="World/Rooms/Surface" index="0" instance=ExtResource( 148 )]
-position = Vector2( 9760, 0 )
+position = Vector2( 10080, 0 )
 
 [node name="Player" parent="World" index="3"]
 position = Vector2( 160, -384 )
