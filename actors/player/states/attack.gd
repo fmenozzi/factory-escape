@@ -127,12 +127,10 @@ func update(player: Player, delta: float) -> Dictionary:
         player.velocity.x = input_direction * physics_manager.get_movement_speed()
 
     # Fall.
-    if not _attack_is_connecting:
+    if not _attack_is_connecting or player.is_on_ground():
         player.velocity.y = min(
             player.velocity.y + physics_manager.get_gravity() * delta,
             physics_manager.get_terminal_velocity())
-
-    if not _attack_is_connecting:
         player.move(player.velocity)
 
     return {'new_state': Player.State.NO_CHANGE}
