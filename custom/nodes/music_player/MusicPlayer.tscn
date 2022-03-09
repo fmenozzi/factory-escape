@@ -84,7 +84,7 @@ stream = ExtResource( 3 )
 
 [node name="LampRoomSectorFive" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 19 )
-max_volume_db = 16.0
+max_volume_db = 8.0
 
 [node name="AbilityIdleLoop" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 17 )
