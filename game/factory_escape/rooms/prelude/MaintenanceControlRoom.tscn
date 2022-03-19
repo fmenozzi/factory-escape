@@ -48,6 +48,10 @@ initial_direction = -1
 [node name="WorkerDrone" parent="Enemies" index="2" instance=ExtResource( 3 )]
 position = Vector2( 216, 80 )
 
+[node name="ComputerTerminalSmall" parent="." index="9" instance=ExtResource( 4 )]
+position = Vector2( 64, 164 )
+dialog = [ "Maintenance Report: Minor Breach", "Subjects from restricted areas have somehow made their way into maintenance and public areas.", "Recommended to deploy emergency spike hazards to prevent further proliferation into non-secure areas." ]
+
 [node name="Left" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 position = Vector2( -8, 48 )
 collision_layer = 512
@@ -69,9 +73,5 @@ position = Vector2( 0, 4 )
 rotation = -1.5708
 shape = SubResource( 3 )
 one_way_collision = true
-
-[node name="ComputerTerminalSmall" parent="." index="9" instance=ExtResource( 4 )]
-position = Vector2( 64, 164 )
-dialog = [ "Maintenance report 383, status: SEVERE", "Subjects from restricted areas have somehow made their way into maintenance and public areas.", "Recommended to deploy emergency spike hazards to prevent further proliferation into non-secure areas." ]
 
 [editable path="TileMaps"]

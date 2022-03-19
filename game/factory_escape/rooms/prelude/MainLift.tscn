@@ -83,7 +83,7 @@ position = Vector2( -32, -256 )
 
 [node name="ComputerTerminalSmall" parent="." index="11" instance=ExtResource( 5 )]
 position = Vector2( 240, 432 )
-dialog = [ "Maintenance report 347, status: UNHEALTHY", "Intermittent power failures are affecting all major sectors. Backup generators are not sufficient to meet current demand.", "Recommended to deploy emergency lamps as additional light sources in affected areas and along maintenance corridors.", "Additional worker drones deployed to diagnose issues, per regulations. Contact shift supervisor with questions." ]
+dialog = [ "Maintenance Report: Power Failures", "Intermittent power failures are affecting all major sectors. Backup generators are not sufficient to meet current demand.", "Recommended to deploy emergency lamps as additional light sources in affected areas and along maintenance corridors.", "Additional worker drones deployed to diagnose issues, per regulations. Contact shift supervisor with questions." ]
 
 [node name="Top" type="StaticBody2D" parent="EnemyBarriers" index="0"]
 position = Vector2( 0, 48 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/lightning_wall/LightningWallWithSwitch.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/factory_escape/rooms/sector_4/textures/sector-4-exit-sign.png" type="Texture" id=9]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -191,6 +192,10 @@ position = Vector2( 328, 448 )
 rotation = -1.5708
 shape = SubResource( 12 )
 one_way_collision = true
+
+[node name="ComputerTerminalSmall" parent="." index="12" instance=ExtResource( 10 )]
+position = Vector2( 64, 248 )
+dialog = [ "Maintenance Report: Climbing Pins", "Climbing pins deployed in major maintenance shafts to ease routine repair work.", "The pins are vital for allowing personnel access to hard-to-reach areas of maintenance shafts, and serve as a more robust solution to site-wide", "power outages when compared to traditional lifts." ]
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/Lower"]

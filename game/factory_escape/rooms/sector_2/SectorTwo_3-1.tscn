@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/background/vents/Vent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -35,5 +36,9 @@ position = Vector2( 72, 48 )
 
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 3 )]
+position = Vector2( 40, 168 )
+dialog = [ "Reminder to all personnel: please return misplaced medical packs to the nearest medbay for redistribution." ]
 
 [editable path="TileMaps"]

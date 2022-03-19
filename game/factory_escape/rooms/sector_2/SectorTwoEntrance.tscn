@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/factory_escape/rooms/sector_2/textures/sector-2-entrance-sign.png" type="Texture" id=2]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
@@ -33,5 +34,9 @@ position = Vector2( 480, 90 )
 [node name="EntranceSign" type="Sprite" parent="." index="10"]
 position = Vector2( 320, 48 )
 texture = ExtResource( 2 )
+
+[node name="ComputerTerminalSmall" parent="." index="11" instance=ExtResource( 3 )]
+position = Vector2( 368, 128 )
+dialog = [ "Progress Report: Benzitrate Refinement", "The discovery of benzitrate changed everything. While acidic and volatile in its pure form, basic refinement produces an energy-dense slurry that", "serves as a phenomenal fuel source.", "Command has instructed all core operations to immediately pivot to benzitrate collection and refinement, and is eager to see what other uses", "we might find for this miraculous substance." ]
 
 [editable path="TileMaps"]

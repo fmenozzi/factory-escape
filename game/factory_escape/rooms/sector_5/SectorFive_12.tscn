@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/background/vats/Vat.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://environment/background/vats/textures/vat-leaping-failure-1.png" type="Texture" id=5]
 [ext_resource path="res://environment/background/vats/textures/vat-leaping-failure-4.png" type="Texture" id=6]
 [ext_resource path="res://environment/background/vents/VentSectorFive.tscn" type="PackedScene" id=7]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmallSectorFive.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 180 )
@@ -86,5 +87,9 @@ position = Vector2( 160, 270 )
 
 [node name="UpperRight" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 480, 90 )
+
+[node name="ComputerTerminalSmallSectorFive" parent="." index="10" instance=ExtResource( 8 )]
+position = Vector2( 520, 344 )
+dialog = [ "Incubation Status: Batch No. 65", "Subject 4: Incubation progressing normally.", "Subject 5: Died during gestation, cause of death unknown.", "Subject 7: Died during larval stage due to insufficient nutrient intake, on-site technician disciplined accordingly.", "Subject 10: Finished second stage gestation, vital signs normal, ready for assessment." ]
 
 [editable path="TileMaps"]

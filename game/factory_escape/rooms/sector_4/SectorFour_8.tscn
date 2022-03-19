@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/hazard_water/HazardWater.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/hazards/HazardCheckpoint.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/enemies/leaping_failure/LeapingFailure.tscn" type="PackedScene" id=4]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -139,6 +140,10 @@ position = Vector2( 328, 440 )
 rotation = -1.5708
 shape = SubResource( 10 )
 one_way_collision = true
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 5 )]
+position = Vector2( 48, 504 )
+dialog = [ "Progress Report: Subject Alpha", "Subject Alpha represents the pinnacle of our research and development as part of Project GENESIS.", "Being the only subject to make it past the third stage, he is the ideal candidate for the variety of advanced infusion-based experiments that ", "we have been striving toward.", "Care should be taken when handling this subject, as his morphology has progressed to the point of requiring additional security precautions." ]
 
 [editable path="TileMaps"]
 [editable path="Hazards/HazardWaterMiddle"]

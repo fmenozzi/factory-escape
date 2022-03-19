@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -31,5 +32,9 @@ shape = SubResource( 1 )
 
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 96, 152 )
+dialog = [ "Progress Report: Sticky Drone Testing", "The Mk. III, affectionately dubbed the \"sticky drone\" by the lab techs, is an interesting addition to our portfolio of security systems.", "What it lacks in mobility, it makes up for in range, as we were successfully able to create a portable version of our existing laser system and", "affix it to its head.", "Command is pleased with our progress but wants continued research and development improvements, especially regarding the unit's", "slow movement speed." ]
 
 [editable path="TileMaps"]

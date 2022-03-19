@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/springboard/SpringboardSectorFive.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmallSectorFive.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 180 )
@@ -49,6 +50,10 @@ position = Vector2( 384, 332 )
 
 [node name="SpringboardSectorFive2" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( 454, 220 )
+
+[node name="ComputerTerminalSmallSectorFive" parent="." index="12" instance=ExtResource( 4 )]
+position = Vector2( 472, 332 )
+dialog = [ "Security Report: Defense System Recalibration", "Subject Alpha's breach has proven far more difficult to contain than initially believed.", "The total site-wide lockdown has ground benzitrate production to a halt, further exacerbating issues related to powering our", "already-taxed security systems.", "It is therefore recommended that all existing active defense systems, including drones and turrets, be recalibrated to exclusively target", "Subject Alpha, until power shortage issues are properly addressed." ]
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/GrapplePoint"]

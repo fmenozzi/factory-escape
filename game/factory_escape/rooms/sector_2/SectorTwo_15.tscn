@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 90 )
@@ -58,5 +59,9 @@ position = Vector2( 648, 104 )
 rotation = -1.5708
 shape = SubResource( 3 )
 one_way_collision = true
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 3 )]
+position = Vector2( 40, 160 )
+dialog = [ "Progress Report: Enhanced Breach Containment", "The development of security drones has proven to be invaluable for dealing with occasional breaches in containment.", "The Mk. II and Mk. III are especially effective, as their ranged offensive systems are perfect for safely dispatching rogue subjects from a", "distance. ", "When combined with existing passive defense systems, drones allow for most breaches to be resolved in a matter of minutes." ]
 
 [editable path="TileMaps"]

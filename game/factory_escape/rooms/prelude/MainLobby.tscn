@@ -44,7 +44,7 @@ position = Vector2( 400, 160 )
 
 [node name="ComputerTerminalSmall" parent="." index="9" instance=ExtResource( 2 )]
 position = Vector2( 72, 160 )
-dialog = [ "Welcome!", "If you're here by appointment, a representative will be with you shortly." ]
+dialog = [ "Welcome!", "If you are here by appointment, a representative will be with you shortly." ]
 
 [node name="WelcomeSign" type="Sprite" parent="." index="11"]
 position = Vector2( 368, 40 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/hazards/lightning_wall/LightningWallWithSwitch.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://actors/enemies/sluggish_failure/SluggishFailure.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/background/vents/Vent.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 270 )
@@ -97,6 +98,10 @@ position = Vector2( 328, 428 )
 rotation = -1.5708
 shape = SubResource( 4 )
 one_way_collision = true
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 7 )]
+position = Vector2( 224, 252 )
+dialog = [ "Progress Report: Sentry Drone Calibration", "Calibration continues at a brisk pace, and we are set to produce another batch of Mk. I sentry drones by the deadline next week.", "The sentry drones are proving to be just as cheap yet reliable as promised, and Command has ordered several new batches to be produced", "immediately. ", "Research on the more advanced ranged variant is also progressing, though it is not yet as cost-effective to produce, as the Mk. II's", "navigation chip and guided projectile system are currently bottlenecks in our supply chain.", "Recommended to continue to use turret-based ranged solutions to supplement existing security systems in the meantime." ]
 
 [editable path="TileMaps"]
 [editable path="Hazards/LightningWallWithSwitch"]

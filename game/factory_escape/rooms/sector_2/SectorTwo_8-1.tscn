@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -28,5 +29,9 @@ shape = SubResource( 1 )
 
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 160, 132 )
+dialog = [ "Progress Report: Benzitrate Infusions", "In addition to the standard regimen, specialized benzitrate infusions have shown promising results in many subjects.", "The addition of specialized reagents has the potential to make subjects faster, stronger, and more well-suited for handling high-stress", "environments, though it seems that such infusions rarely take with more primitive subjects." ]
 
 [editable path="TileMaps"]

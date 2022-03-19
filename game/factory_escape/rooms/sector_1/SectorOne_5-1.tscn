@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/readable_objects/computer_terminals/ComputerTerminalSmall.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 90 )
@@ -28,5 +29,9 @@ shape = SubResource( 1 )
 
 [node name="Anchor" type="Position2D" parent="CameraAnchors" index="0"]
 position = Vector2( 160, 90 )
+
+[node name="ComputerTerminalSmall" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 64, 100 )
+dialog = [ "Security Report: Central Lock", "While appearing to be little more than an elaborate latch, the central lock is in fact a technological marvel in its own right.", "In reality, the lock is a sophisticated energy store, capable of both transmitting and receiving enormous amounts of power. This allows its use", "as a means of redirecting energy to specific sectors in case of power spikes or other load imbalances.", "Its role as a security device was little more than an afterthought, as we realized that it could be used to power large doors, with a distributed", "series of switches providing ample security against unauthorized entry." ]
 
 [editable path="TileMaps"]
