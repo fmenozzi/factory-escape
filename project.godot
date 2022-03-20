@@ -382,7 +382,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "ShaderManager",
 "language": "GDScript",
-"path": "res://custom/scripts/shader_manager.gd"
+"path": "res://custom/nodes/shader_manager.gd"
 }, {
 "base": "Node2D",
 "class": "SinkingPlatform",

@@ -5,8 +5,8 @@ onready var _pause_point: Position2D = $PausePoint
 onready var _stopping_point: Position2D = $StoppingPoint
 onready var _camera_trigger_area: Area2D = $CameraTrigger
 onready var _stars: Sprite = $Stars
+onready var _shader_manager: ShaderManager = $ShaderManager
 
-var _shader_manager: ShaderManager = ShaderManager.new()
 var _elapsed_time := 0.0
 
 func _ready() -> void:

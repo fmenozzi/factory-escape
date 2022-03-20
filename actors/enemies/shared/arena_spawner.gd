@@ -6,9 +6,9 @@ signal spawn_finished
 const DURATION := 1.0
 
 onready var _tween: Tween = $Tween
+onready var _shader_manager: ShaderManager = $ShaderManager
 
 var _time := 0.0
-var _shader_manager := ShaderManager.new()
 
 func _ready() -> void:
     set_process(false)

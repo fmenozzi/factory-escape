@@ -4,8 +4,8 @@ const SCROLL_SPEED_UV := 0.15
 
 onready var _background: Sprite = $ScrollingBackground
 onready var _arena: ElevatorArena = $ElevatorArena
+onready var _shader_manager: ShaderManager = $ShaderManager
 
-var _shader_manager := ShaderManager.new()
 var _active := false
 var _offset_uv := 0.0
 

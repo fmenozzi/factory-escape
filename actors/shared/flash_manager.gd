@@ -11,8 +11,7 @@ export(Color) var flash_color := Color.white
 onready var _sprite: CanvasItem = null
 onready var _timer: Timer = $Timer
 onready var _tween: Tween = $Tween
-
-var _shader_manager := ShaderManager.new()
+onready var _shader_manager: ShaderManager = $ShaderManager
 
 func _get_configuration_warning() -> String:
     if sprite_path == "":

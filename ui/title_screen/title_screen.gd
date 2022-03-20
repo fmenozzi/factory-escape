@@ -1,10 +1,6 @@
 tool
 extends Control
 
-# The actual game scene to switch to once the player starts the game. This is an
-# instance of GameInterface.tscn.
-export(PackedScene) var game = null
-
 onready var MENUS := {
     Menu.Menus.MAIN:                $MenuBackground/MainMenu,
     Menu.Menus.SAVE_SLOTS:          $MenuBackground/SaveSlotsMenu,
@@ -25,17 +21,7 @@ var _menu_stack := []
 onready var _ui_sound_player: Node = $UiSoundPlayer
 onready var _saving_indicator: Control = $SavingIndicator
 
-func _get_configuration_warning() -> String:
-    if game == null:
-        return 'No instance of GameInterface.tscn set in title screen!'
-    if game.instance().run_standalone:
-        return 'Instance of GameInterface.tscn must not be in run_standalone mode!'
-    return ''
-
 func _ready() -> void:
-    assert(game != null)
-    assert(not game.instance().run_standalone)
-
     _set_main_menu_input_enabled(false)
 
     # Intercept all menu-related signals from individual submenus.
@@ -157,5 +143,6 @@ func _start_game(save_slot: int) -> void:
 
     MusicPlayer.play(MusicPlayer.Music.START_GAME)
 
+    var game := preload('res://game/factory_escape/FactoryEscape.tscn')
     var fade_duration := 2.0
     SceneChanger.change_scene_to(game, fade_duration)

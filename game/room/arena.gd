@@ -31,7 +31,6 @@ func _ready() -> void:
                 'spawn_point_local': enemy.position,
             })
             phase.remove_child(enemy)
-        _phases.remove_child(phase)
 
     _trigger.connect('body_entered', self, '_start_arena')
 
@@ -60,6 +59,13 @@ func _process(delta: float) -> void:
             return
 
         _spawn_enemies_for_phase(_save_manager.current_phase_index)
+
+func _exit_tree() -> void:
+    for phase in _phase_data:
+        for enemy in phase:
+            enemy['enemy'].queue_free()
+        phase.clear()
+    _phase_data.clear()
 
 func lamp_reset() -> void:
     set_process(false)
