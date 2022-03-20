@@ -34,6 +34,9 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
             if ability.ability == 1: # Ability.Kind.DOUBLE_JUMP
                 ability.queue_free()
 
+func get_jump_state() -> int:
+    return _state
+
 func can_jump() -> bool:
     assert(_state in [State.NOT_JUMPED, State.JUMPED, State.DOUBLE_JUMPED])
 

@@ -106,7 +106,10 @@ func update(player: Player, delta: float) -> Dictionary:
     # state), so include direct transition to fall state. Otherwise, the slight
     # downward movement below will cause us to fall very slowly in the air.
     if player.is_in_air():
-        return {'new_state': Player.State.FALL}
+        return {
+            'new_state': Player.State.FALL,
+            'off_ledge': true,
+        }
 
     # Apply slight downward movement. This is important mostly for ensuring that
     # move_and_slide() is called on every frame, which updates collisions. This

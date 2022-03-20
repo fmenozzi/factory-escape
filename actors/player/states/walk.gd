@@ -54,7 +54,10 @@ func update(player: Player, delta: float) -> Dictionary:
 
     # If we've walked off a platform, start falling.
     if player.is_in_air():
-        return {'new_state': Player.State.FALL}
+        return {
+            'new_state': Player.State.FALL,
+            'off_ledge': true,
+        }
 
     player.set_direction(input_direction)
 

@@ -756,10 +756,7 @@ extents = Vector2( 3.5, 6 )
 [sub_resource type="RectangleShape2D" id=35]
 extents = Vector2( 0.5, 0.5 )
 
-[node name="Player" type="KinematicBody2D" groups=[
-"lamp_reset",
-"player",
-]]
+[node name="Player" type="KinematicBody2D" groups=["lamp_reset", "player"]]
 z_index = 2
 collision_mask = 4
 script = ExtResource( 1 )
@@ -772,9 +769,7 @@ movement_speed_tiles_per_second = 6.0
 
 [node name="HealthPackManager" parent="." instance=ExtResource( 40 )]
 
-[node name="SaveManager" type="Node" parent="." groups=[
-"save",
-]]
+[node name="SaveManager" type="Node" parent="." groups=["save"]]
 script = ExtResource( 24 )
 
 [node name="PlayerSoundManager" parent="." instance=ExtResource( 46 )]
@@ -824,9 +819,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Zzz" type="Sprite" parent="." groups=[
-"mirror_y_axis",
-]]
+[node name="Zzz" type="Sprite" parent="." groups=["mirror_y_axis"]]
 visible = false
 position = Vector2( 10, -20 )
 texture = ExtResource( 6 )
@@ -846,13 +839,9 @@ collision_mask = 320
 position = Vector2( -0.5, -6.5 )
 shape = SubResource( 31 )
 
-[node name="CameraAnchor" type="Position2D" parent="." groups=[
-"mirror_y_axis",
-]]
+[node name="CameraAnchor" type="Position2D" parent="." groups=["mirror_y_axis"]]
 
-[node name="Camera2D" type="Camera2D" parent="CameraAnchor" groups=[
-"cameras",
-]]
+[node name="Camera2D" type="Camera2D" parent="CameraAnchor" groups=["cameras"]]
 current = true
 process_mode = 0
 smoothing_enabled = true
@@ -867,9 +856,7 @@ script = ExtResource( 7 )
 
 [node name="Hitboxes" type="Node2D" parent="."]
 
-[node name="SideAttack" type="Area2D" parent="Hitboxes" groups=[
-"mirror_y_axis",
-]]
+[node name="SideAttack" type="Area2D" parent="Hitboxes" groups=["mirror_y_axis"]]
 position = Vector2( 18, -8 )
 collision_layer = 16
 collision_mask = 128
@@ -1161,9 +1148,7 @@ script = ExtResource( 37 )
 script = ExtResource( 45 )
 animation_name = "acquire_ability"
 
-[node name="WallSlideTrail" parent="." groups=[
-"mirror_y_axis",
-] instance=ExtResource( 22 )]
+[node name="WallSlideTrail" parent="." groups=["mirror_y_axis"] instance=ExtResource( 22 )]
 show_behind_parent = true
 position = Vector2( 5, -10 )
 emitting = false
@@ -1194,9 +1179,7 @@ shape = SubResource( 34 )
 
 [node name="Attackmanager" parent="." instance=ExtResource( 28 )]
 
-[node name="RoomDetector" type="Area2D" parent="." groups=[
-"mirror_y_axis",
-]]
+[node name="RoomDetector" type="Area2D" parent="." groups=["mirror_y_axis"]]
 position = Vector2( 0.5, -0.5 )
 collision_layer = 1024
 collision_mask = 0

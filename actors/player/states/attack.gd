@@ -80,11 +80,6 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
 func update(player: Player, delta: float) -> Dictionary:
     var physics_manager := player.get_physics_manager()
 
-    player.velocity.x = 0
-
-    if _attack_is_connecting:
-        player.velocity.y = 0
-
     if _started_attack_while_airborne and player.is_on_ground() and not _already_played_landing_sound:
         player.get_sound_manager().play(PlayerSoundManager.Sounds.LAND_SOFT)
         _already_played_landing_sound = true
@@ -92,10 +87,33 @@ func update(player: Player, delta: float) -> Dictionary:
     if not player.get_animation_player().is_playing():
         match _transition_to:
             TransitionTo.JUMP:
+                # Insist that the jump button is being held so that the player
+                # can jump cut later by releasing.
                 if Input.is_action_pressed('player_jump'):
-                    # Insist that the jump button is being held so that the
-                    # player can jump cut later by releasing.
-                    return {'new_state': Player.State.JUMP}
+                    # We don't want to allow this transition in the event that
+                    # the player started attacking on the ground and then falls
+                    # off the ledge (i.e. don't interfere with off ledge/coyote
+                    # time logic in fall state).
+                    if _started_attack_while_airborne or not player.is_in_air():
+                        # Make sure that we transition to the right kind of jump
+                        # (don't do a second full jump, don't jump if we can't
+                        # do so, etc.)
+                        match player.get_jump_manager().get_jump_state():
+                            JumpManager.State.NOT_JUMPED:
+                                return {'new_state': Player.State.JUMP}
+
+                            JumpManager.State.JUMPED:
+                                if player.get_jump_manager().can_jump():
+                                    return {'new_state': Player.State.DOUBLE_JUMP}
+
+                            _:
+                                if player.is_in_air():
+                                    return {
+                                        'new_state': Player.State.FALL,
+                                        'velocity': player.velocity,
+                                    }
+                                else:
+                                    return {'new_state': Player.State.IDLE} 
 
             TransitionTo.DASH:
                 return {'new_state': Player.State.DASH}
@@ -115,19 +133,26 @@ func update(player: Player, delta: float) -> Dictionary:
             return {
                 'new_state': Player.State.FALL,
                 'velocity': player.velocity,
+                'off_ledge': not _started_attack_while_airborne,
             }
         else:
             return {'new_state': Player.State.IDLE}
 
-    # Move left or right if airborne.
-    if player.is_in_air():
+    # Move left/right only if attack is not connecting with an enemy.
+    if _attack_is_connecting:
+        player.velocity.x = 0
+    else:
         var input_direction = player.get_input_direction()
         if input_direction != Util.Direction.NONE:
             player.set_direction(input_direction)
         player.velocity.x = input_direction * physics_manager.get_movement_speed()
 
-    # Fall.
-    if not _attack_is_connecting or player.is_on_ground():
+    # Fall only if attack not connecting with an enemy or if the player is
+    # grounded (to prevent bugs when player attacks enemy on moving platform or
+    # elevator).
+    if _attack_is_connecting and not player.is_on_ground():
+        player.velocity.y = 0
+    else:
         player.velocity.y = min(
             player.velocity.y + physics_manager.get_gravity() * delta,
             physics_manager.get_terminal_velocity())

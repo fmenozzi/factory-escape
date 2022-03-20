@@ -66,8 +66,15 @@ func update(player: Player, delta: float) -> Dictionary:
                 Player.State.WALL_SLIDE
             ]:
                 player.get_jump_manager().consume_jump()
+                return {
+                    'new_state': Player.State.FALL,
+                    'off_ledge': true,
+                }
 
-            return {'new_state': Player.State.FALL}
+            return {
+                    'new_state': Player.State.FALL,
+                    'off_ledge': false,
+                }
         else:
             return {'new_state': Player.State.IDLE}
 

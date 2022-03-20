@@ -34,27 +34,21 @@ func enter(player: Player, previous_state_dict: Dictionary) -> void:
     if 'velocity' in previous_state_dict:
         player.velocity = previous_state_dict['velocity']
 
-    player.get_animation_player().play('fall')
-
-    # Treat falling off a ledge as consuming a jump (i.e. can only jump again if
-    # we have the double jump). Also, start the coyote timer to allow for jumps
-    # after walking off a ledge.
-    var previous_state: int = previous_state_dict['previous_state']
-    if not previous_state in [
-        Player.State.JUMP,
-        Player.State.DOUBLE_JUMP,
-        Player.State.SPRING_JUMP,
-        Player.State.DASH,
-        Player.State.STAGGER,
-        Player.State.HEAL,
-        Player.State.ATTACK,
-        Player.State.ATTACK_UP,
-    ]:
+    # If we just walked/dashed/attacked off a ledge, prevent additional jumps
+    # unless the player has double jump.
+    if 'off_ledge' in previous_state_dict and previous_state_dict['off_ledge']:
         var jump_manager := player.get_jump_manager()
         jump_manager.reset_jump()
         jump_manager.consume_jump()
 
-        _coyote_timer.start()
+        # If we specifically walked off the ledge then start the coyote timer.
+        if previous_state_dict['previous_state'] in [
+            Player.State.IDLE,
+            Player.State.WALK,    
+        ]:
+            _coyote_timer.start()
+
+    player.get_animation_player().play('fall')
 
     # Start the fall time stopwatch.
     _fall_time_stopwatch.start()
