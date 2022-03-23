@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/surface_ambience.wav-4e0a1cd8199c44a03dc79835acf4ff28.sample"
+
+[deps]
+
+source_file="res://game/factory_escape/rooms/surface/audio/surface_ambience.wav"
+dest_files=[ "res://.import/surface_ambience.wav-4e0a1cd8199c44a03dc79835acf4ff28.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

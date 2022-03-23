@@ -7,6 +7,7 @@ onready var _room: RoomFe = get_parent()
 onready var _enemies_node: Node2D = get_parent().get_node('Enemies')
 onready var _phases: Node2D = $Phases
 onready var _num_phases: int = $Phases.get_child_count()
+onready var _spawn_sound: AudioStreamPlayer = $SpawnSound
 
 var _current_phase_idx := -1
 var _phase_data := []
@@ -68,6 +69,8 @@ func _finish_arena() -> void:
     emit_signal('elevator_arena_finished')
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
+    _spawn_sound.play()
+
     var enemy_data_for_phase: Array = _phase_data[phase_idx]
     for enemy_data in enemy_data_for_phase:
         assert(enemy_data is Dictionary)

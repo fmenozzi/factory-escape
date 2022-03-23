@@ -6,6 +6,7 @@ onready var _stopping_point: Position2D = $StoppingPoint
 onready var _camera_trigger_area: Area2D = $CameraTrigger
 onready var _stars: Sprite = $Stars
 onready var _shader_manager: ShaderManager = $ShaderManager
+onready var _ambience: AudioStreamPlayer = $Ambience
 
 var _elapsed_time := 0.0
 
@@ -29,6 +30,9 @@ func get_pause_point() -> Position2D:
 
 func get_stopping_point() -> Position2D:
     return _stopping_point
+
+func play_ambient_sounds() -> void:
+    _ambience.play()
 
 func _get_normalized_player_x_pos() -> float:
     return (Util.get_player().global_position - global_position).x / _stars.texture.get_width()

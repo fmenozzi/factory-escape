@@ -24,6 +24,7 @@ enum Music {
     ESCAPE_SEQUENCE_3,
     ESCAPE_SEQUENCE_ELEVATOR,
     ESCAPE_SEQUENCE_ELEVATOR_END,
+    CREDITS,
 }
 
 onready var _players: Array = $AudioPlayers.get_children()
@@ -50,6 +51,7 @@ onready var _escape_sequence_2: AudioStreamPlayerMusic = $AudioPlayers/EscapeSeq
 onready var _escape_sequence_3: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequence3
 onready var _escape_sequence_elevator: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequenceElevator
 onready var _escape_sequence_elevator_end: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequenceElevatorEnd
+onready var _credits: AudioStreamPlayerMusic = $AudioPlayers/Credits
 
 func _ready() -> void:
     for player in _players:
@@ -100,6 +102,7 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.ESCAPE_SEQUENCE_3,
         Music.ESCAPE_SEQUENCE_ELEVATOR,
         Music.ESCAPE_SEQUENCE_ELEVATOR_END,
+        Music.CREDITS,
     ])
 
     match music_enum:
@@ -171,6 +174,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.ESCAPE_SEQUENCE_ELEVATOR_END:
             return _escape_sequence_elevator_end
+
+        Music.CREDITS:
+            return _credits
 
         _:
             # Simply report the error here immediately instead of deferring to

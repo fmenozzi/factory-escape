@@ -541,6 +541,9 @@ func _on_player_reached_surface(old_room: RoomFe, new_room: RoomFe) -> void:
     if new_room != _surface_exit:
         return
 
+    # Play ambient sounds.
+    _surface_exit.play_ambient_sounds()
+
     # Switch to surface visuals (e.g. character spritesheet) and fade out UI.
     _player.switch_to_surface_visuals()
     _health_bar.fade_out()
@@ -562,8 +565,14 @@ func _on_player_reached_surface(old_room: RoomFe, new_room: RoomFe) -> void:
     yield(get_tree().create_timer(0.5), 'timeout')
     _surface_exit.get_closing_door().close()
 
+    # Start credits music.
+    yield(_player, 'player_reached_walk_to_point')
+    MusicPlayer.play(MusicPlayer.Music.CREDITS)
+
     # Wait until the player has turned to look at the moon before eventually
     # fading to credits.
     yield(_player, 'player_looked_at_moon')
-    yield(get_tree().create_timer(3.0), 'timeout')
-    SceneChanger.change_scene_to(Preloads.CreditsScreen, 2.0)
+    yield(get_tree().create_timer(4.0), 'timeout')
+    var fade_duration := 2.0
+    var fade_music := false
+    SceneChanger.change_scene_to(Preloads.CreditsScreen, fade_duration, fade_music)

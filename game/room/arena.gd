@@ -9,6 +9,7 @@ onready var _closing_doors: Array = $ClosingDoors.get_children()
 onready var _trigger: Area2D = $Trigger
 onready var _camera_anchor: Position2D = $CameraAnchor
 onready var _save_manager: Node = $SaveManager
+onready var _spawn_sound: AudioStreamPlayer = $SpawnSound
 
 var _phase_data := []
 var _player_camera: Camera2D = null
@@ -133,6 +134,8 @@ func _finish_arena() -> void:
         MusicPlayer.fade_in(_room.get_room_track(), 1.0)
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:
+    _spawn_sound.play()
+
     var enemy_data_for_phase: Array = _phase_data[phase_idx]
     for enemy_data in enemy_data_for_phase:
         assert(enemy_data is Dictionary)

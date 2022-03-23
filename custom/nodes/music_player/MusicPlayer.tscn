@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -25,6 +25,7 @@
 [ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_pre_activation.ogg" type="AudioStream" id=23]
 [ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_elevator_end.ogg" type="AudioStream" id=24]
 [ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_elevator.ogg" type="AudioStream" id=25]
+[ext_resource path="res://custom/nodes/music_player/audio/credits.ogg" type="AudioStream" id=26]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
@@ -108,3 +109,6 @@ stream = ExtResource( 25 )
 
 [node name="EscapeSequenceElevatorEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 24 )
+
+[node name="Credits" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 26 )
