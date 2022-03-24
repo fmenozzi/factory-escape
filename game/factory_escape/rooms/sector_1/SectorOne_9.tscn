@@ -65,7 +65,6 @@ direction = -1
 
 [node name="ConveyorBeltLeftMiddle" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="4" instance=ExtResource( 2 )]
 position = Vector2( 256, 96 )
-direction = -1
 
 [node name="ConveyorBeltLeftLeft" parent="MovingPlatforms/ConveyorBeltAudioGroup/ConveyorBelts" index="5" instance=ExtResource( 2 )]
 position = Vector2( 136, 96 )
