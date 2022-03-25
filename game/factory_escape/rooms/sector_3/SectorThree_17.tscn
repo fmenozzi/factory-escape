@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/springboard/Springboard.tscn" type="PackedScene" id=2]
@@ -6,9 +6,16 @@
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDrone.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/enemies/sentry_drone/SentryDrone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/background/vents/Vent.tscn" type="PackedScene" id=6]
+[ext_resource path="res://environment/grapple_point/GrapplePoint.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160, 360 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 56, 52 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 56, 52 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 72, 8 )
@@ -49,6 +56,20 @@ position = Vector2( 160, 90 )
 [node name="Bottom" type="Position2D" parent="CameraAnchors" index="1"]
 position = Vector2( 160, 630 )
 
+[node name="Left" parent="GrapplePoints" index="0" instance=ExtResource( 7 )]
+position = Vector2( 136, 396 )
+
+[node name="CollisionShape2D" parent="GrapplePoints/Left/GrappleRangeArea" index="0"]
+position = Vector2( -64, 40 )
+shape = SubResource( 4 )
+
+[node name="Right" parent="GrapplePoints" index="1" instance=ExtResource( 7 )]
+position = Vector2( 184, 396 )
+
+[node name="CollisionShape2D" parent="GrapplePoints/Right/GrappleRangeArea" index="0"]
+position = Vector2( 64, 40 )
+shape = SubResource( 5 )
+
 [node name="SluggishFailure" parent="Enemies" index="0" instance=ExtResource( 3 )]
 position = Vector2( 160, 396 )
 
@@ -86,3 +107,5 @@ shape = SubResource( 3 )
 one_way_collision = true
 
 [editable path="TileMaps"]
+[editable path="GrapplePoints/Left"]
+[editable path="GrapplePoints/Right"]
