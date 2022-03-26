@@ -610,7 +610,7 @@ config/windows_native_icon="res://icon.ico"
 version/major=0
 version/minor=1
 version/patch=0
-save_directory="user://save_data/demo/"
+save_directory="user://save_data/factory_escape/"
 version/valid_versions=[ "0.1.0" ]
 
 [autoload]
