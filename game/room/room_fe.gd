@@ -152,6 +152,12 @@ func get_room_track() -> int:
     if has_ability():
         return MusicPlayer.Music.ABILITY_IDLE_LOOP
 
+    if name == 'CentralHub':
+        var warden_fight_state: int = get_node('SaveManager').warden_fight_state
+        var all_sectors_unlocked: bool = get_node('CentralLock/SaveManager').all_sectors_unlocked()
+        if all_sectors_unlocked and warden_fight_state != CentralHubSaveManager.WardenFightState.POST_FIGHT:
+            return MusicPlayer.Music.ANTICIPATION
+
     return get_section_track()
 
 func get_lamp_track() -> int:
@@ -336,6 +342,13 @@ func _on_player_entered(area: Area2D) -> void:
         if player.prev_room.name == 'SectorFive_13' and not EscapeSequenceEffects.is_active():
             MusicPlayer.cross_fade(
                MusicPlayer.Music.ESCAPE_SEQUENCE_PRE_ACTIVATION, curr_section_track, 1.0)
+        if player.curr_room.name == 'CentralHub':
+            if curr_section_track != get_room_track():
+                MusicPlayer.cross_fade(curr_section_track, get_room_track(), 0.5)
+        if player.prev_room.name == 'CentralHub':
+            if curr_section_track != player.prev_room.get_room_track():
+                MusicPlayer.cross_fade(
+                    player.prev_room.get_room_track(), curr_section_track, 0.5)
 
         # Reset and hide enemies in the previous room once the transition
         # completes.

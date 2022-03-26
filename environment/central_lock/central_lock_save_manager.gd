@@ -51,7 +51,7 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
         _central_lock.deactivate_switch(_central_lock.LockLight.SECTOR_FOUR)
 
     var central_lock_animation_player: AnimationPlayer = null
-    if sector_one_unlocked and sector_two_unlocked and sector_three_unlocked and sector_four_unlocked:
+    if all_sectors_unlocked():
         central_lock_animation_player = \
             _central_lock.get_animation_player(_central_lock.LockLight.CENTRAL)
         _central_lock.get_closing_door().set_opened()
@@ -60,3 +60,6 @@ func load_version_0_1_0(all_save_data: Dictionary) -> void:
         animation_player.play('pulse')
     if central_lock_animation_player:
         central_lock_animation_player.play('pulse_central')
+
+func all_sectors_unlocked() -> bool:
+    return sector_one_unlocked and sector_two_unlocked and sector_three_unlocked and sector_four_unlocked
