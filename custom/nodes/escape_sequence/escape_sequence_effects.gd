@@ -30,6 +30,9 @@ func stop() -> void:
 
     emit_signal('escape_sequence_stopped')
 
+func stop_debris() -> void:
+    _shake_timer.stop()
+
 func is_active() -> bool:
     return _active
 

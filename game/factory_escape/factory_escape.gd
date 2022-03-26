@@ -503,6 +503,11 @@ func _on_elevator_arena_finished() -> void:
     _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_to_black_finished')
 
+    # Disable the escape sequence debris effects, since we don't want debris to
+    # accidentally fall from the actual sky when we exit to the surface. The
+    # alarm siren will continue to play as normal.
+    EscapeSequenceEffects.stop_debris()
+
     # Pause player processing and switch to IDLE state. Note that we do not
     # pause physics processing because the player will be on a KinematicBody2D
     # elevator that has sync_to_physics enabled, so we need to ensure that
