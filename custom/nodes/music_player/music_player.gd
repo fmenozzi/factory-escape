@@ -18,6 +18,7 @@ enum Music {
     LAMP_ROOM,
     LAMP_ROOM_SECTOR_5,
     ABILITY_IDLE_LOOP,
+    ANTICIPATION,
     ESCAPE_SEQUENCE_PRE_ACTIVATION,
     ESCAPE_SEQUENCE_1,
     ESCAPE_SEQUENCE_2,
@@ -45,6 +46,7 @@ onready var _warden_fight_end: AudioStreamPlayerMusic = $AudioPlayers/WardenFigh
 onready var _lamp_room: AudioStreamPlayerMusic = $AudioPlayers/LampRoom
 onready var _lamp_room_sector_5: AudioStreamPlayerMusic = $AudioPlayers/LampRoomSectorFive
 onready var _ability_idle_loop: AudioStreamPlayerMusic = $AudioPlayers/AbilityIdleLoop
+onready var _anticipation: AudioStreamPlayerMusic = $AudioPlayers/Anticipation
 onready var _escape_sequence_pre_activation: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequencePreActivation
 onready var _escape_sequence_1: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequence1
 onready var _escape_sequence_2: AudioStreamPlayerMusic = $AudioPlayers/EscapeSequence2
@@ -96,6 +98,7 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
         Music.LAMP_ROOM,
         Music.LAMP_ROOM_SECTOR_5,
         Music.ABILITY_IDLE_LOOP,
+        Music.ANTICIPATION,
         Music.ESCAPE_SEQUENCE_PRE_ACTIVATION,
         Music.ESCAPE_SEQUENCE_1,
         Music.ESCAPE_SEQUENCE_2,
@@ -156,6 +159,9 @@ func get_player(music_enum: int) -> AudioStreamPlayerMusic:
 
         Music.ABILITY_IDLE_LOOP:
             return _ability_idle_loop
+
+        Music.ANTICIPATION:
+            return _anticipation
 
         Music.ESCAPE_SEQUENCE_PRE_ACTIVATION:
             return _escape_sequence_pre_activation

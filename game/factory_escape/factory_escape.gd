@@ -200,8 +200,10 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
     _health_bar.modulate.a = 0
     _health_pack_bar.modulate.a = 0
 
-    # Fade back from black.
+    # Fade back from black. Cross fade to anticipation track during fade.
     _screen_fadeout.fade_from_black(fade_duration, fade_delay, fade_music)
+    MusicPlayer.cross_fade(
+        _player.curr_room.get_section_track(), MusicPlayer.Music.ANTICIPATION, fade_duration/2.0)
     yield(_screen_fadeout, 'fade_from_black_finished')
 
     # Turn on corresponding light. If other lights are already playing their
@@ -240,9 +242,11 @@ func _on_central_lock_switch_pressed(sector_number: int) -> void:
         # Wait for an additional pulse.
         yield(get_tree().create_timer(2.0), 'timeout')
 
-    # Fade back to black.
+    # Fade back to black. Cross fade back to section track after fade to black.
     _screen_fadeout.fade_to_black(fade_duration, fade_delay, fade_music)
     yield(_screen_fadeout, 'fade_to_black_finished')
+    MusicPlayer.cross_fade(
+        MusicPlayer.Music.ANTICIPATION, _player.curr_room.get_section_track(), fade_duration/2.0)
 
     # Switch back to player camera.
     _player.get_camera().make_current()

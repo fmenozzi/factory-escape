@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://custom/nodes/music_player/music_player.gd" type="Script" id=1]
 [ext_resource path="res://custom/nodes/music_player/AudioStreamPlayerMusic.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_elevator_end.ogg" type="AudioStream" id=24]
 [ext_resource path="res://custom/nodes/music_player/audio/escape_sequence_elevator.ogg" type="AudioStream" id=25]
 [ext_resource path="res://custom/nodes/music_player/audio/credits.ogg" type="AudioStream" id=26]
+[ext_resource path="res://custom/nodes/music_player/audio/anticipation.ogg" type="AudioStream" id=27]
 
 [node name="MusicPlayer" type="Node"]
 pause_mode = 2
@@ -90,6 +91,10 @@ max_volume_db = 8.0
 [node name="AbilityIdleLoop" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 17 )
 max_volume_db = -24.0
+
+[node name="Anticipation" parent="AudioPlayers" instance=ExtResource( 2 )]
+stream = ExtResource( 27 )
+max_volume_db = -10.0
 
 [node name="EscapeSequencePreActivation" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 23 )
