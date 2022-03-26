@@ -60,7 +60,9 @@ position = Vector2( 584, 168 )
 resume_player_processing_after_pressed = false
 
 [node name="FadeInOutLabel" parent="SwitchSectorFive" index="2"]
-text = "Overload"
+margin_left = -40.0
+margin_right = 40.0
+text = "Divert Power"
 
 [node name="CameraFocusPoint" parent="." index="14" instance=ExtResource( 3 )]
 position = Vector2( 480, 90 )
