@@ -35,6 +35,7 @@ onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
+onready var _hit_effect_position: Position2D = $HitEffectPosition
 
 func _ready() -> void:
     set_direction(initial_direction)
@@ -80,6 +81,9 @@ func get_pushback_manager() -> PushbackManager:
 
 func get_sound_manager() -> WorkerDroneSoundManager:
     return _sound_manager
+
+func get_hit_effect_position_global() -> Vector2:
+    return to_global(_hit_effect_position.position)
 
 func move(velocity: Vector2, snap: Vector2 = Util.NO_SNAP) -> void:
     .move_and_slide_with_snap(velocity, snap, Util.FLOOR_NORMAL)

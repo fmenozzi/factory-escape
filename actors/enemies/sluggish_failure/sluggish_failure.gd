@@ -59,6 +59,8 @@ onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
 
+onready var _hit_effect_position: Position2D = $HitEffectPosition
+
 func _ready() -> void:
     set_direction(initial_direction)
 
@@ -95,6 +97,9 @@ func get_animation_player() -> AnimationPlayer:
 
 func get_spawn_shader_sprite() -> Sprite:
     return _sprite
+
+func get_hit_effect_position_global() -> Vector2:
+    return to_global(_hit_effect_position.position)
 
 func spawn() -> void:
     _change_state({'new_state': State.SPAWN})

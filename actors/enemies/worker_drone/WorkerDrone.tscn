@@ -41,9 +41,7 @@ extents = Vector2( 4.5, 3.5 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4.5, 3.5 )
 
-[node name="WorkerDrone" type="KinematicBody2D" groups=[
-"lamp_reset",
-]]
+[node name="WorkerDrone" type="KinematicBody2D" groups=["lamp_reset"]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 4 )
@@ -105,3 +103,6 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( -0.5, -2.5 )
 shape = SubResource( 5 )
+
+[node name="HitEffectPosition" type="Position2D" parent="."]
+position = Vector2( 0, -2 )

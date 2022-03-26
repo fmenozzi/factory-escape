@@ -555,11 +555,10 @@ func _on_attack_connected(enemy_hurtbox: Area2D) -> void:
     else:
         enemy_hit_effect = Preloads.EnemyHitEffect.instance()
     get_parent().get_node('TemporaryNodes').add_child(enemy_hit_effect)
-    enemy_hit_effect.global_position = enemy.global_position
+    enemy_hit_effect.global_position = enemy.get_hit_effect_position_global()
     if current_state() == State.ATTACK_UP:
         enemy_hit_effect.rotation_degrees = -90
     else:
-        enemy_hit_effect.position.y -= 8
         enemy_hit_effect.scale.x = Util.direction(self, enemy)
 
     # TODO: This is kind of hacky, find a way around this.

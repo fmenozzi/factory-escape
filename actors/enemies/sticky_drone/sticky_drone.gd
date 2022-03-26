@@ -61,6 +61,7 @@ onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape
 onready var _laser: Laser = $Laser
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
+onready var _hit_effect_position: Position2D = $HitEffectPosition
 
 func _ready() -> void:
     _health.connect('died', self, '_on_died')
@@ -164,6 +165,9 @@ func get_laser() -> Laser:
 
 func get_spawn_shader_sprite() -> Sprite:
     return _sprite
+
+func get_hit_effect_position_global() -> Vector2:
+    return to_global(_hit_effect_position.position)
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)

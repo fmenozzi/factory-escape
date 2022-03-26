@@ -63,9 +63,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[node name="SentryDrone" type="KinematicBody2D" groups=[
-"lamp_reset",
-]]
+[node name="SentryDrone" type="KinematicBody2D" groups=["lamp_reset"]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 4 )
@@ -183,3 +181,6 @@ collision_mask = 272
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 1 )
+
+[node name="HitEffectPosition" type="Position2D" parent="."]
+position = Vector2( 0, -1 )

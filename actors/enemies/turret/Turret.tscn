@@ -58,9 +58,7 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="Turret" type="Node2D" groups=[
-"lamp_reset",
-]]
+[node name="Turret" type="Node2D" groups=["lamp_reset"]]
 script = ExtResource( 4 )
 
 [node name="Health" parent="." instance=ExtResource( 5 )]
@@ -162,3 +160,6 @@ anims/shoot = SubResource( 4 )
 visible = false
 position = Vector2( 0, -8 )
 texture = ExtResource( 19 )
+
+[node name="HitEffectPosition" type="Position2D" parent="."]
+position = Vector2( 0, -8 )

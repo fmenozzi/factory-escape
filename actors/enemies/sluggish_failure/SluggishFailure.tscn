@@ -100,9 +100,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[node name="SluggishFailure" type="KinematicBody2D" groups=[
-"lamp_reset",
-]]
+[node name="SluggishFailure" type="KinematicBody2D" groups=["lamp_reset"]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 4 )
@@ -206,3 +204,6 @@ position = Vector2( 7, 0 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 4
+
+[node name="HitEffectPosition" type="Position2D" parent="."]
+position = Vector2( 0, -6 )

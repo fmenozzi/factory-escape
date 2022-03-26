@@ -48,6 +48,7 @@ onready var _sprite: Sprite = $Sprite
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 onready var _hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
+onready var _hit_effect_position: Position2D = $HitEffectPosition
 
 func _ready() -> void:
     _health.connect('died', self, '_on_died')
@@ -124,6 +125,9 @@ func get_react_sprite() -> ReactSprite:
 
 func get_initial_global_position() -> Vector2:
     return _initial_global_position
+
+func get_hit_effect_position_global() -> Vector2:
+    return to_global(_hit_effect_position.position)
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)

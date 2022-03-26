@@ -67,6 +67,7 @@ onready var _shakeable_legs_sprite: Sprite = $ShakeableSprites/Legs
 onready var _stomp_hitbox: CollisionShape2D = $Hitboxes/Stomp/CollisionShape2D
 onready var _player_proximity_detector: Area2D = $PlayerProximityDetector
 onready var _ground_detector: RayCast2D = $GroundDetector
+onready var _hit_effect_position: Position2D = $HitEffectPosition
 
 func _ready() -> void:
     set_direction(initial_direction)
@@ -125,6 +126,9 @@ func get_shakeable_sprites() -> Node2D:
 
 func get_ground_detector() -> RayCast2D:
     return _ground_detector
+
+func get_hit_effect_position_global() -> Vector2:
+    return to_global(_hit_effect_position.position)
 
 func shake_once(damping: float = 1.0) -> void:
     _shakeable_head_sprite.position = Vector2(

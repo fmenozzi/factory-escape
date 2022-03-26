@@ -143,9 +143,7 @@ extents = Vector2( 4, 8 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 4, 8 )
 
-[node name="LeapingFailure" type="KinematicBody2D" groups=[
-"lamp_reset",
-]]
+[node name="LeapingFailure" type="KinematicBody2D" groups=["lamp_reset"]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 4 )
@@ -290,3 +288,6 @@ position = Vector2( 4, 0 )
 enabled = true
 cast_to = Vector2( 0, 10 )
 collision_mask = 4
+
+[node name="HitEffectPosition" type="Position2D" parent="."]
+position = Vector2( 0, -8 )

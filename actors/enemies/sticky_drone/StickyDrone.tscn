@@ -159,9 +159,7 @@ extents = Vector2( 6.5, 6.5 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 6.5, 6.5 )
 
-[node name="StickyDrone" type="KinematicBody2D" groups=[
-"lamp_reset",
-]]
+[node name="StickyDrone" type="KinematicBody2D" groups=["lamp_reset"]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 3 )
@@ -289,5 +287,8 @@ collision_mask = 4
 [node name="Laser" parent="." instance=ExtResource( 8 )]
 show_behind_parent = true
 position = Vector2( 0, -12 )
+
+[node name="HitEffectPosition" type="Position2D" parent="."]
+position = Vector2( 0, -7 )
 
 [editable path="AggroManager"]

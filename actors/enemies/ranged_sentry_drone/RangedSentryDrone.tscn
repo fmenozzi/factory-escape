@@ -64,9 +64,7 @@ extents = Vector2( 6, 6 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 6, 6 )
 
-[node name="RangedSentryDrone" type="KinematicBody2D" groups=[
-"lamp_reset",
-]]
+[node name="RangedSentryDrone" type="KinematicBody2D" groups=["lamp_reset"]]
 collision_layer = 2
 collision_mask = 516
 script = ExtResource( 1 )
@@ -168,3 +166,5 @@ position = Vector2( 0, -1 )
 shape = SubResource( 6 )
 
 [node name="ProjectileSpawner" parent="." instance=ExtResource( 12 )]
+
+[node name="HitEffectPosition" type="Position2D" parent="."]

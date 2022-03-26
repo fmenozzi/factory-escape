@@ -59,6 +59,7 @@ onready var _hurtbox: Area2D = $Hurtbox
 onready var _hurtbox_collision_shape: CollisionShape2D = $Hurtbox/CollisionShape2D
 onready var _edge_raycast_left: RayCast2D = $LedgeDetectorRaycasts/Left
 onready var _edge_raycast_right: RayCast2D = $LedgeDetectorRaycasts/Right
+onready var _hit_effect_position: Position2D = $HitEffectPosition
 
 func _ready() -> void:
     set_direction(initial_direction)
@@ -133,6 +134,9 @@ func get_react_sprite() -> ReactSprite:
 
 func get_animation_player() -> AnimationPlayer:
     return _animation_player
+
+func get_hit_effect_position_global() -> Vector2:
+    return to_global(_hit_effect_position.position)
 
 func set_hit_and_hurt_boxes_disabled(disabled: bool) -> void:
     _hitbox_collision_shape.set_deferred('disabled', disabled)
