@@ -120,7 +120,7 @@ func _finish_arena() -> void:
     MusicPlayer.fade_out(MusicPlayer.Music.ARENA, 0.5)
     MusicPlayer.play(MusicPlayer.Music.ARENA_END)
     yield(get_tree().create_timer(5.0), 'timeout')
-    var playing_any_sector_or_lamp_tracks: bool = MusicPlayer.is_playing_any_of([
+    var playing_any_sector_or_lamp_or_ability_tracks: bool = MusicPlayer.is_playing_any_of([
         MusicPlayer.Music.WORLD_BASE,
         MusicPlayer.Music.WORLD_SECTOR_1,
         MusicPlayer.Music.WORLD_SECTOR_2,
@@ -129,8 +129,9 @@ func _finish_arena() -> void:
         MusicPlayer.Music.WORLD_SECTOR_5,
         MusicPlayer.Music.LAMP_ROOM,
         MusicPlayer.Music.LAMP_ROOM_SECTOR_5,
+        MusicPlayer.Music.ABILITY_IDLE_LOOP,
     ])
-    if not Util.get_player().is_dying() and not playing_any_sector_or_lamp_tracks:
+    if not Util.get_player().is_dying() and not playing_any_sector_or_lamp_or_ability_tracks:
         MusicPlayer.fade_in(_room.get_room_track(), 1.0)
 
 func _spawn_enemies_for_phase(phase_idx: int) -> void:

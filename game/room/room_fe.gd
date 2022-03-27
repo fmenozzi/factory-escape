@@ -333,6 +333,8 @@ func _on_player_entered(area: Area2D) -> void:
         if player.prev_room.has_node('Lamp'):
             MusicPlayer.cross_fade(get_lamp_track(), curr_section_track, 1.0)
         if player.curr_room.has_ability():
+            if MusicPlayer.get_player(MusicPlayer.Music.ARENA_END).is_playing():
+                MusicPlayer.fade_out(MusicPlayer.Music.ARENA_END, 1.0)
             MusicPlayer.cross_fade(curr_section_track, MusicPlayer.Music.ABILITY_IDLE_LOOP, 1.0)
         if player.prev_room.has_ability():
             MusicPlayer.cross_fade(MusicPlayer.Music.ABILITY_IDLE_LOOP, curr_section_track, 1.0)
