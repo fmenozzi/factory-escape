@@ -37,9 +37,7 @@ position = Vector2( 160, 90 )
 [node name="PlayerSuspensionPoint" type="Position2D" parent="." index="9"]
 position = Vector2( 160, -256 )
 
-[node name="CutsceneCamera" type="Camera2D" parent="." index="10" groups=[
-"cameras",
-]]
+[node name="CutsceneCamera" type="Camera2D" parent="." index="10" groups=["cameras"]]
 position = Vector2( 160, 90 )
 
 [node name="BrokenElevator" parent="." index="11" instance=ExtResource( 2 )]

@@ -123,7 +123,7 @@
 [ext_resource path="res://game/factory_escape/rooms/sector_4/SectorFour_22.tscn" type="PackedScene" id=121]
 [ext_resource path="res://game/factory_escape/rooms/sector_4/SectorFour_23.tscn" type="PackedScene" id=122]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/SectorFiveLift.tscn" type="PackedScene" id=123]
-[ext_resource path="res://game/factory_escape/rooms/sector_5/SectorFiveEntranceLamp.tscn" type="PackedScene" id=124]
+[ext_resource path="res://game/factory_escape/rooms/sector_5/SectorFiveEntrance.tscn" type="PackedScene" id=124]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/SectorFive_1.tscn" type="PackedScene" id=125]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/SectorFive_2.tscn" type="PackedScene" id=126]
 [ext_resource path="res://game/factory_escape/rooms/sector_5/SectorFive_3.tscn" type="PackedScene" id=127]
@@ -545,7 +545,7 @@ position = Vector2( 5120, 4664 )
 [node name="SectorFiveLift" parent="World/Rooms/SectorFive" index="0" instance=ExtResource( 123 )]
 position = Vector2( 3200, 10632 )
 
-[node name="SectorFiveEntranceLamp" parent="World/Rooms/SectorFive" index="1" instance=ExtResource( 124 )]
+[node name="SectorFiveEntrance" parent="World/Rooms/SectorFive" index="1" instance=ExtResource( 124 )]
 position = Vector2( 3520, 10632 )
 
 [node name="SectorFive_1" parent="World/Rooms/SectorFive" index="2" instance=ExtResource( 125 )]
