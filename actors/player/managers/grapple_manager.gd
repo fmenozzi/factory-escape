@@ -118,14 +118,3 @@ func _grapple_distance_comparator(a: GrapplePoint, b: GrapplePoint) -> bool:
     var distance_to_a := a.global_position.distance_to(self.global_position)
     var distance_to_b := b.global_position.distance_to(self.global_position)
     return distance_to_a < distance_to_b
-
-func _on_ability_chosen(chosen_ability: int) -> void:
-    assert(chosen_ability in [
-        DemoAbility.Ability.DASH,
-        DemoAbility.Ability.DOUBLE_JUMP,
-        DemoAbility.Ability.GRAPPLE,
-        DemoAbility.Ability.WALL_JUMP
-    ])
-
-    if chosen_ability == DemoAbility.Ability.GRAPPLE:
-        _has_grapple = true

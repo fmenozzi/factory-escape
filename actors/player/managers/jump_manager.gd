@@ -73,14 +73,3 @@ func can_buffer_jump() -> bool:
 
 func acquire_double_jump() -> void:
     _has_double_jump = true
-
-func _on_ability_chosen(chosen_ability: int) -> void:
-    assert(chosen_ability in [
-        DemoAbility.Ability.DASH,
-        DemoAbility.Ability.DOUBLE_JUMP,
-        DemoAbility.Ability.GRAPPLE,
-        DemoAbility.Ability.WALL_JUMP
-    ])
-
-    if chosen_ability == DemoAbility.Ability.DOUBLE_JUMP:
-        _has_double_jump = true

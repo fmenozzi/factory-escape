@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
-"class": "AbilitiesLampSaveManager",
-"language": "GDScript",
-"path": "res://game/demo/rooms/prelude/abilities_lamp_save_manager.gd"
-}, {
 "base": "Node2D",
 "class": "Ability",
 "language": "GDScript",
@@ -128,16 +123,6 @@ _global_script_classes=[ {
 "class": "DashManager",
 "language": "GDScript",
 "path": "res://actors/player/managers/dash_manager.gd"
-}, {
-"base": "Node2D",
-"class": "DemoAbility",
-"language": "GDScript",
-"path": "res://environment/abilities/demo/demo_ability.gd"
-}, {
-"base": "Node",
-"class": "DemoSaveManager",
-"language": "GDScript",
-"path": "res://game/demo/save_manager.gd"
 }, {
 "base": "Node2D",
 "class": "ElevatorArena",
@@ -500,7 +485,6 @@ _global_script_classes=[ {
 "path": "res://actors/enemies/worker_drone/worker_drone_sound_manager.gd"
 } ]
 _global_script_class_icons={
-"AbilitiesLampSaveManager": "",
 "Ability": "",
 "AggroManager": "",
 "Arena": "",
@@ -524,8 +508,6 @@ _global_script_class_icons={
 "CycleOptionsButton": "",
 "DashBuffer": "",
 "DashManager": "",
-"DemoAbility": "",
-"DemoSaveManager": "",
 "ElevatorArena": "",
 "EnemyHitEffect": "",
 "EnergyProjectile": "",
