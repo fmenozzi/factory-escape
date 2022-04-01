@@ -19,6 +19,7 @@ enum Sounds {
     LAND_SOFT,
     LAND_HARD,
     INTERACT,
+    WALK_GRASS,
 }
 
 onready var _all_audio_stream_players: Array = $AudioStreamPlayers.get_children()
@@ -39,6 +40,7 @@ onready var _die: AudioStreamPlayer = $AudioStreamPlayers/Die
 onready var _land_soft: AudioStreamPlayer = $AudioStreamPlayers/LandSoft
 onready var _land_hard: AudioStreamPlayer = $AudioStreamPlayers/LandHard
 onready var _interact: AudioStreamPlayer = $AudioStreamPlayers/Interact
+onready var _walk_grass: AudioStreamPlayer = $AudioStreamPlayers/WalkGrass
 
 func _ready() -> void:
     for audio_stream_player in _all_audio_stream_players:
@@ -83,6 +85,7 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
         Sounds.LAND_SOFT,
         Sounds.LAND_HARD,
         Sounds.INTERACT,
+        Sounds.WALK_GRASS,
     ])
 
     match sound_enum:
@@ -136,6 +139,9 @@ func get_player(sound_enum: int) -> AudioStreamPlayer:
 
         Sounds.INTERACT:
             return _interact
+
+        Sounds.WALK_GRASS:
+            return _walk_grass
 
         _:
             # Simply report the error here immediately instead of deferring to

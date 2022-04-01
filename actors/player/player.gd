@@ -400,6 +400,9 @@ func set_is_dying(is_dying: bool) -> void:
 func is_dying() -> bool:
     return _is_dying
 
+func set_walk_sound(new_walk_sound: int) -> void:
+    STATES[State.WALK]._walk_sound = new_walk_sound
+
 func get_center() -> Vector2:
     return self.global_position + Vector2(0, -8)
 

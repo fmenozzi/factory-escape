@@ -553,6 +553,9 @@ func _on_player_reached_surface(old_room: RoomFe, new_room: RoomFe) -> void:
     # Play ambient sounds.
     _surface_exit.play_ambient_sounds()
 
+    # Switch to grassy walk sound.
+    _player.set_walk_sound(PlayerSoundManager.Sounds.WALK_GRASS)
+
     # Switch to surface visuals (e.g. character spritesheet) and fade out UI.
     _player.switch_to_surface_visuals()
     _health_bar.fade_out()

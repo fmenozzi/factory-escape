@@ -1,6 +1,7 @@
 extends 'res://actors/player/states/player_state.gd'
 
 var _player: Player = null
+var _walk_sound: int = PlayerSoundManager.Sounds.WALK
 
 func enter(player: Player, previous_state_dict: Dictionary) -> void:
     _player = player
@@ -70,4 +71,4 @@ func update(player: Player, delta: float) -> Dictionary:
     return {'new_state': Player.State.NO_CHANGE}
 
 func _emit_walk_sound() -> void:
-    _player.get_sound_manager().play(PlayerSoundManager.Sounds.WALK)
+    _player.get_sound_manager().play(_walk_sound)
