@@ -29,6 +29,7 @@ script = ExtResource( 2 )
 
 [node name="Walk" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = SubResource( 1 )
+volume_db = -16.0
 
 [node name="Jump" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 7 )
