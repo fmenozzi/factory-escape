@@ -116,6 +116,7 @@ func _on_ability_acquired(ability: Ability) -> void:
         Ability.Kind.GRAPPLE:
             _player.get_grapple_manager().acquire_grapple()
     ability.mark_as_acquired()
+    _player.get_health_pack_manager().update_saved_num_health_packs()
     _maybe_save_game()
 
     # Pause player/ability processing.
@@ -366,6 +367,10 @@ func _on_warden_died(warden: Warden) -> void:
     # Fade it back in now that we're done.
     _screen_fadeout.fade_from_white(fade_duration)
     yield(_screen_fadeout, 'fade_from_white_finished')
+
+    # Save game.
+    _player.get_health_pack_manager().update_saved_num_health_packs()
+    _maybe_save_game()
 
     # Play end music and fade back into section track.
     MusicPlayer.fade_out(MusicPlayer.Music.WARDEN_FIGHT, 0.5)
