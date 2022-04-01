@@ -213,6 +213,19 @@ margin_bottom = 164.0
 text = "YouTube Audio Library"
 align = 1
 
+[node name="ThanksForPlaying" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Thanks For Playing" type="Label" parent="Pages/ThanksForPlaying"]
+margin_top = 83.0
+margin_right = 320.0
+margin_bottom = 96.0
+text = "Thanks for playing!"
+align = 1
+
 [node name="FadeTween" type="Tween" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
