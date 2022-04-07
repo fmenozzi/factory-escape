@@ -33,7 +33,7 @@ script = ExtResource( 2 )
 
 [node name="Walk" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = SubResource( 1 )
-volume_db = -16.0
+volume_db = -12.0
 
 [node name="Jump" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 7 )
@@ -79,6 +79,7 @@ stream = ExtResource( 12 )
 
 [node name="LandSoft" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 4 )
+volume_db = -4.0
 
 [node name="LandHard" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 5 )
