@@ -50,16 +50,21 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Programming" type="Label" parent="Pages/Programming"]
-margin_top = 75.0
+margin_top = 71.0
 margin_right = 320.0
-margin_bottom = 88.0
+margin_bottom = 84.0
 text = "PROGRAMMING"
 align = 1
 
-[node name="Federico Menozzi" type="Label" parent="Pages/Programming"]
-margin_top = 92.0
+[node name="HSeparator" type="HSeparator" parent="Pages/Programming"]
+margin_top = 88.0
 margin_right = 320.0
-margin_bottom = 105.0
+margin_bottom = 92.0
+
+[node name="Federico Menozzi" type="Label" parent="Pages/Programming"]
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 109.0
 text = "Federico Menozzi"
 align = 1
 
@@ -70,37 +75,42 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Art" type="Label" parent="Pages/Art"]
-margin_top = 49.0
+margin_top = 45.0
 margin_right = 320.0
-margin_bottom = 62.0
+margin_bottom = 58.0
 text = "ART"
 align = 1
 
-[node name="Robert Norenberg" type="Label" parent="Pages/Art"]
-margin_top = 66.0
+[node name="HSeparator" type="HSeparator" parent="Pages/Art"]
+margin_top = 62.0
 margin_right = 320.0
-margin_bottom = 79.0
+margin_bottom = 66.0
+
+[node name="Robert Norenberg" type="Label" parent="Pages/Art"]
+margin_top = 70.0
+margin_right = 320.0
+margin_bottom = 83.0
 text = "Robert Norenberg (0x72.itch.io)"
 align = 1
 
 [node name="Penusbmic" type="Label" parent="Pages/Art"]
-margin_top = 83.0
+margin_top = 87.0
 margin_right = 320.0
-margin_bottom = 96.0
+margin_bottom = 100.0
 text = "penusbmic (penusbmic.itch.io)"
 align = 1
 
 [node name="NYKNCK" type="Label" parent="Pages/Art"]
-margin_top = 100.0
+margin_top = 104.0
 margin_right = 320.0
-margin_bottom = 113.0
+margin_bottom = 117.0
 text = "NYKNCK (kvsr.itch.io)"
 align = 1
 
 [node name="Pimen" type="Label" parent="Pages/Art"]
-margin_top = 117.0
+margin_top = 121.0
 margin_right = 320.0
-margin_bottom = 130.0
+margin_bottom = 134.0
 text = "Pimen (pimen.itch.io)"
 align = 1
 
@@ -111,16 +121,21 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Font" type="Label" parent="Pages/Font"]
-margin_top = 75.0
+margin_top = 71.0
 margin_right = 320.0
-margin_bottom = 88.0
+margin_bottom = 84.0
 text = "FONT"
 align = 1
 
-[node name="Daniel Linssen" type="Label" parent="Pages/Font"]
-margin_top = 92.0
+[node name="HSeparator" type="HSeparator" parent="Pages/Font"]
+margin_top = 88.0
 margin_right = 320.0
-margin_bottom = 105.0
+margin_bottom = 92.0
+
+[node name="Daniel Linssen" type="Label" parent="Pages/Font"]
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 109.0
 text = "Daniel Linssen (managore.itch.io)"
 align = 1
 
@@ -131,16 +146,21 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Music" type="Label" parent="Pages/Music"]
-margin_top = 75.0
+margin_top = 71.0
 margin_right = 320.0
-margin_bottom = 88.0
+margin_bottom = 84.0
 text = "MUSIC"
 align = 1
 
-[node name="Vincent Salgueiro" type="Label" parent="Pages/Music"]
-margin_top = 92.0
+[node name="HSeparator" type="HSeparator" parent="Pages/Music"]
+margin_top = 88.0
 margin_right = 320.0
-margin_bottom = 105.0
+margin_bottom = 92.0
+
+[node name="Vincent Salgueiro" type="Label" parent="Pages/Music"]
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 109.0
 text = "Vincent Salgueiro"
 align = 1
 
@@ -151,66 +171,138 @@ anchor_bottom = 1.0
 alignment = 1
 
 [node name="Sound" type="Label" parent="Pages/Sound"]
-margin_top = 15.0
+margin_top = 11.0
 margin_right = 320.0
-margin_bottom = 28.0
+margin_bottom = 24.0
 text = "SOUND"
 align = 1
 
-[node name="Vincent Salgueiro" type="Label" parent="Pages/Sound"]
-margin_top = 32.0
+[node name="HSeparator" type="HSeparator" parent="Pages/Sound"]
+margin_top = 28.0
 margin_right = 320.0
-margin_bottom = 45.0
+margin_bottom = 32.0
+
+[node name="Vincent Salgueiro" type="Label" parent="Pages/Sound"]
+margin_top = 36.0
+margin_right = 320.0
+margin_bottom = 49.0
 text = "Vincent Salgueiro"
 align = 1
 
 [node name="Despic" type="Label" parent="Pages/Sound"]
-margin_top = 49.0
+margin_top = 53.0
 margin_right = 320.0
-margin_bottom = 62.0
+margin_bottom = 66.0
 text = "Despic (despic_studio@)"
 align = 1
 
 [node name="Carmin Bittermann" type="Label" parent="Pages/Sound"]
-margin_top = 66.0
+margin_top = 70.0
 margin_right = 320.0
-margin_bottom = 79.0
+margin_bottom = 83.0
 text = "Carmin Bittermann"
 align = 1
 
 [node name="Garry Smithson" type="Label" parent="Pages/Sound"]
-margin_top = 83.0
+margin_top = 87.0
 margin_right = 320.0
-margin_bottom = 96.0
+margin_bottom = 100.0
 text = "Garry Smithson"
 align = 1
 
 [node name="Kenney" type="Label" parent="Pages/Sound"]
-margin_top = 100.0
+margin_top = 104.0
 margin_right = 320.0
-margin_bottom = 113.0
+margin_bottom = 117.0
 text = "Kenney (www.kenney.nl)"
 align = 1
 
 [node name="OpenGameArt" type="Label" parent="Pages/Sound"]
-margin_top = 117.0
+margin_top = 121.0
 margin_right = 320.0
-margin_bottom = 130.0
+margin_bottom = 134.0
 text = "OpenGameArt.org"
 align = 1
 
 [node name="FreeSound" type="Label" parent="Pages/Sound"]
-margin_top = 134.0
+margin_top = 138.0
 margin_right = 320.0
-margin_bottom = 147.0
+margin_bottom = 151.0
 text = "FreeSound.org"
 align = 1
 
 [node name="Youtube Audio Library" type="Label" parent="Pages/Sound"]
-margin_top = 151.0
+margin_top = 155.0
 margin_right = 320.0
-margin_bottom = 164.0
+margin_bottom = 168.0
 text = "YouTube Audio Library"
+align = 1
+
+[node name="Playtesters" type="VBoxContainer" parent="Pages"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Playtesters" type="Label" parent="Pages/Playtesters"]
+margin_top = 20.0
+margin_right = 320.0
+margin_bottom = 33.0
+text = "PLAYTESTERS"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="Pages/Playtesters"]
+margin_top = 37.0
+margin_right = 320.0
+margin_bottom = 41.0
+
+[node name="Chris Boyd" type="Label" parent="Pages/Playtesters"]
+margin_top = 45.0
+margin_right = 320.0
+margin_bottom = 58.0
+text = "Chris Boyd"
+align = 1
+
+[node name="Brad Carson" type="Label" parent="Pages/Playtesters"]
+margin_top = 62.0
+margin_right = 320.0
+margin_bottom = 75.0
+text = "Brad Carson"
+align = 1
+
+[node name="Brady Morris" type="Label" parent="Pages/Playtesters"]
+margin_top = 79.0
+margin_right = 320.0
+margin_bottom = 92.0
+text = "Brady Morris"
+align = 1
+
+[node name="Rachel Morris" type="Label" parent="Pages/Playtesters"]
+margin_top = 96.0
+margin_right = 320.0
+margin_bottom = 109.0
+text = "Rachel Morris"
+align = 1
+
+[node name="Maureen Pittman" type="Label" parent="Pages/Playtesters"]
+margin_top = 113.0
+margin_right = 320.0
+margin_bottom = 126.0
+text = "Maureen Pittman"
+align = 1
+
+[node name="Thomas Pittman" type="Label" parent="Pages/Playtesters"]
+margin_top = 130.0
+margin_right = 320.0
+margin_bottom = 143.0
+text = "Thomas Pittman"
+align = 1
+
+[node name="Annemarieke de Vlaming" type="Label" parent="Pages/Playtesters"]
+margin_top = 147.0
+margin_right = 320.0
+margin_bottom = 160.0
+text = "Annemarieke de Vlaming"
 align = 1
 
 [node name="ThanksForPlaying" type="VBoxContainer" parent="Pages"]
