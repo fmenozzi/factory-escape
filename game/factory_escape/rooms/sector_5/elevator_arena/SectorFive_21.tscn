@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://game/room/RoomFe.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/elevator/ArenaElevator.tscn" type="PackedScene" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://actors/enemies/leaping_failure/LeapingFailureSectorFive.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/enemies/ranged_sentry_drone/RangedSentryDroneSectorFive.tscn" type="PackedScene" id=10]
 [ext_resource path="res://actors/enemies/sticky_drone/StickyDroneSectorFive.tscn" type="PackedScene" id=11]
-[ext_resource path="res://actors/enemies/turret/TurretSectorFive.tscn" type="PackedScene" id=12]
 [ext_resource path="res://custom/nodes/ShaderManager.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -88,6 +87,7 @@ shape = SubResource( 6 )
 [node name="ElevatorArena" parent="." index="14" instance=ExtResource( 7 )]
 
 [node name="Phase0" type="Node2D" parent="ElevatorArena/Phases" index="0"]
+visible = false
 
 [node name="SluggishFailureSectorFive" parent="ElevatorArena/Phases/Phase0" index="0" instance=ExtResource( 6 )]
 position = Vector2( 64, 168 )
@@ -96,7 +96,11 @@ position = Vector2( 64, 168 )
 position = Vector2( 256, 168 )
 initial_direction = -1
 
+[node name="SentryDroneSectorFive" parent="ElevatorArena/Phases/Phase0" index="2" instance=ExtResource( 5 )]
+position = Vector2( 160, 104 )
+
 [node name="Phase1" type="Node2D" parent="ElevatorArena/Phases" index="1"]
+visible = false
 
 [node name="SentryDroneSectorFive" parent="ElevatorArena/Phases/Phase1" index="0" instance=ExtResource( 5 )]
 position = Vector2( 80, 96 )
@@ -105,14 +109,70 @@ position = Vector2( 80, 96 )
 position = Vector2( 232, 96 )
 initial_direction = -1
 
+[node name="SluggishFailureSectorFive" parent="ElevatorArena/Phases/Phase1" index="2" instance=ExtResource( 6 )]
+position = Vector2( 216, 168 )
+initial_direction = -1
+
 [node name="Phase2" type="Node2D" parent="ElevatorArena/Phases" index="2"]
+visible = false
 
 [node name="StickyDroneSectorFive" parent="ElevatorArena/Phases/Phase2" index="0" instance=ExtResource( 11 )]
-position = Vector2( 112, 168 )
+position = Vector2( 136, 168 )
 
-[node name="TurretSectorFive" parent="ElevatorArena/Phases/Phase2" index="1" instance=ExtResource( 12 )]
-position = Vector2( 304, 128 )
-floor_normal = 2
+[node name="RangedSentryDroneSectorFive" parent="ElevatorArena/Phases/Phase2" index="1" instance=ExtResource( 10 )]
+position = Vector2( 240, 128 )
+
+[node name="LeapingFailureSectorFive" parent="ElevatorArena/Phases/Phase2" index="2" instance=ExtResource( 9 )]
+position = Vector2( 56, 168 )
+
+[node name="Phase3" type="Node2D" parent="ElevatorArena/Phases" index="3"]
+visible = false
+
+[node name="LeapingFailureSectorFive" parent="ElevatorArena/Phases/Phase3" index="0" instance=ExtResource( 9 )]
+position = Vector2( 72, 168 )
+
+[node name="LeapingFailureSectorFive2" parent="ElevatorArena/Phases/Phase3" index="1" instance=ExtResource( 9 )]
+position = Vector2( 128, 168 )
+
+[node name="SentryDroneSectorFive" parent="ElevatorArena/Phases/Phase3" index="2" instance=ExtResource( 5 )]
+position = Vector2( 240, 128 )
+initial_direction = -1
+
+[node name="SluggishFailureSectorFive" parent="ElevatorArena/Phases/Phase3" index="3" instance=ExtResource( 6 )]
+position = Vector2( 240, 168 )
+initial_direction = -1
+
+[node name="Phase4" type="Node2D" parent="ElevatorArena/Phases" index="4"]
+visible = false
+
+[node name="StickyDroneSectorFive" parent="ElevatorArena/Phases/Phase4" index="0" instance=ExtResource( 11 )]
+position = Vector2( 80, 168 )
+
+[node name="StickyDroneSectorFive2" parent="ElevatorArena/Phases/Phase4" index="1" instance=ExtResource( 11 )]
+position = Vector2( 248, 168 )
+initial_direction = -1
+
+[node name="LeapingFailureSectorFive" parent="ElevatorArena/Phases/Phase4" index="2" instance=ExtResource( 9 )]
+position = Vector2( 128, 168 )
+
+[node name="SentryDroneSectorFive" parent="ElevatorArena/Phases/Phase4" index="3" instance=ExtResource( 5 )]
+position = Vector2( 200, 120 )
+
+[node name="Phase5" type="Node2D" parent="ElevatorArena/Phases" index="5"]
+
+[node name="SentryDroneSectorFive" parent="ElevatorArena/Phases/Phase5" index="0" instance=ExtResource( 5 )]
+position = Vector2( 72, 136 )
+
+[node name="SentryDroneSectorFive2" parent="ElevatorArena/Phases/Phase5" index="1" instance=ExtResource( 5 )]
+position = Vector2( 264, 96 )
+initial_direction = -1
+
+[node name="RangedSentryDroneSectorFive" parent="ElevatorArena/Phases/Phase5" index="2" instance=ExtResource( 10 )]
+position = Vector2( 136, 96 )
+
+[node name="SentryDroneSectorFive3" parent="ElevatorArena/Phases/Phase5" index="3" instance=ExtResource( 5 )]
+position = Vector2( 176, 144 )
+initial_direction = -1
 
 [node name="ShaderManager" parent="." index="16" instance=ExtResource( 13 )]
 
