@@ -5,6 +5,7 @@ onready var _siren: AudioStreamPlayer = $Siren
 onready var _siren_volume_tween: Tween = $SirenVolumeTween
 
 func start() -> void:
+    _siren.volume_db = 0.0
     _animation_player.play('start')
 
 func stop() -> void:

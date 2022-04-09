@@ -28,7 +28,7 @@ extents = Vector2( 8, 16 )
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 8, 16 )
 
-[node name="SectorFive_18" instance=ExtResource( 1 )]
+[node name="SectorFive_18" groups=["lamp_reset"] instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="TileMaps" parent="." index="0"]
