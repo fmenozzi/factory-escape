@@ -128,12 +128,12 @@ func _on_ability_acquired(ability: Ability) -> void:
         'new_state': Player.State.ACQUIRE_ABILITY,
         'stopping_point': ability.get_closest_walk_to_point(),
         'object_to_face': ability,
+        'ability': ability,
     })
     yield(_player.current_state, 'sequence_finished')
 
-    # Hide ability visuals and play acquired sound.
+    # Hide ability visuals.
     ability.hide()
-    ability.play_acquired_sound()
 
     # Quickly flash white and fade back more slowly.
     var fade_duration := 0.1

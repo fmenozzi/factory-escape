@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -61,6 +61,7 @@
 [ext_resource path="res://actors/player/states/pause_idle.gd" type="Script" id=59]
 [ext_resource path="res://actors/player/states/face_door.gd" type="Script" id=60]
 [ext_resource path="res://actors/player/states/walk_to_pause_point.gd" type="Script" id=61]
+[ext_resource path="res://actors/player/states/play_ability_acquired_sound.gd" type="Script" id=62]
 
 [sub_resource type="Animation" id=1]
 resource_name = "acquire_ability"
@@ -1143,6 +1144,9 @@ script = ExtResource( 29 )
 
 [node name="FaceObject" type="Node" parent="States/AcquireAbility"]
 script = ExtResource( 37 )
+
+[node name="PlayAbilityAcquiredSound" type="Node" parent="States/AcquireAbility"]
+script = ExtResource( 62 )
 
 [node name="PlayAnimation" type="Node" parent="States/AcquireAbility"]
 script = ExtResource( 45 )
