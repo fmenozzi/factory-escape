@@ -39,19 +39,6 @@ func _ready() -> void:
         hard_save_area.connect(
             'body_entered', self, '_on_player_entered_hard_save_area', [hard_save_area])
 
-    set_process(false)
-
-func _process(delta: float) -> void:
-    # Processing is enabled once the player triggers the boss fight, but we wait
-    # until the player is grounded not near the door before actually pausing
-    # player processing (in case they are airborne when they trigger the fight).
-    if _player.is_on_ground() and not _player_standing_over_door():
-        _player.set_process_unhandled_input(false)
-        _player.set_physics_process(false)
-        _player.set_direction(Util.direction(_player, _central_lock))
-        _player.change_state({'new_state': Player.State.IDLE})
-        set_process(false)
-
 func set_enable_boss_fight_walls(enabled: bool) -> void:
     _left_wall_collision_shape.set_deferred('disabled', not enabled)
     _right_wall_collision_shape.set_deferred('disabled', not enabled)
@@ -95,9 +82,6 @@ func lamp_reset() -> void:
 
     # Reset focus point.
     _camera_focus_point.set_active(true)
-
-func _player_standing_over_door() -> bool:
-    return _door_area.get_overlapping_bodies().has(_player)
 
 func _trigger_boss_fight() -> void:
     _save_manager.warden_fight_state = CentralHubSaveManager.WardenFightState.FIGHT

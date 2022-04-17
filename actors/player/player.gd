@@ -55,6 +55,7 @@ enum State {
     SECTOR_FIVE_LIFT_FALL,
     SURFACE_CUTSCENE,
     ACQUIRE_ABILITY,
+    WARDEN_INTRO_CUTSCENE,
 }
 
 # Maps State enum to corresponding state scripts.
@@ -93,6 +94,7 @@ onready var STATES = {
     State.SECTOR_FIVE_LIFT_FALL:   $States/SectorFiveLiftFall,
     State.SURFACE_CUTSCENE:        $States/SurfaceCutscene,
     State.ACQUIRE_ABILITY:         $States/AcquireAbility,
+    State.WARDEN_INTRO_CUTSCENE:   $States/WardenIntroCutscene,
 }
 
 var current_state: Node = null

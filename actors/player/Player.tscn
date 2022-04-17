@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://actors/player/player.gd" type="Script" id=1]
 [ext_resource path="res://actors/shared/Health.tscn" type="PackedScene" id=2]
@@ -62,6 +62,7 @@
 [ext_resource path="res://actors/player/states/face_door.gd" type="Script" id=60]
 [ext_resource path="res://actors/player/states/walk_to_pause_point.gd" type="Script" id=61]
 [ext_resource path="res://actors/player/states/play_ability_acquired_sound.gd" type="Script" id=62]
+[ext_resource path="res://actors/player/states/no_op.gd" type="Script" id=63]
 
 [sub_resource type="Animation" id=1]
 resource_name = "acquire_ability"
@@ -1151,6 +1152,15 @@ script = ExtResource( 62 )
 [node name="PlayAnimation" type="Node" parent="States/AcquireAbility"]
 script = ExtResource( 45 )
 animation_name = "acquire_ability"
+
+[node name="WardenIntroCutscene" type="Node" parent="States"]
+script = ExtResource( 36 )
+
+[node name="FallToGround" type="Node" parent="States/WardenIntroCutscene"]
+script = ExtResource( 57 )
+
+[node name="NoOp" type="Node" parent="States/WardenIntroCutscene"]
+script = ExtResource( 63 )
 
 [node name="WallSlideTrail" parent="." groups=["mirror_y_axis"] instance=ExtResource( 22 )]
 show_behind_parent = true
