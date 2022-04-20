@@ -98,16 +98,13 @@ modulate = Color( 1, 1, 1, 0 )
 margin_top = 112.0
 margin_right = 320.0
 margin_bottom = 152.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="DemoAvailableNow"]
 margin_left = 79.0
 margin_top = 5.0
 margin_right = 240.0
 margin_bottom = 34.0
-text = "Demo available now at
+text = "Available now at
 fmenozzi.itch.io/factory-escape"
 align = 1
 
