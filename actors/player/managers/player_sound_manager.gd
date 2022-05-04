@@ -47,6 +47,8 @@ func _ready() -> void:
         assert(audio_stream_player is AudioStreamPlayer)
         audio_stream_player.bus = 'Effects'
 
+    _die.bus = 'Death'
+
 func set_all_muted(muted: bool) -> void:
     # Since AudioStreamPlayer doesn't have built-in mute functionality (i.e. it
     # can't remember what the pre-mute volume was for when it's time to unmute),

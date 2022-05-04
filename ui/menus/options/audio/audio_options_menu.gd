@@ -115,13 +115,13 @@ func reset_to_defaults() -> void:
     Options.save_options_and_report_errors()
 
 func _set_bus_volume(bus: String, slider_value: float) -> void:
-    assert(bus in ['Music', 'Effects', 'UI'])
+    assert(bus in ['Music', 'Effects', 'Death', 'UI'])
 
     var slider: AudioSlider
     match bus:
         'Music':
             slider = _music_slider
-        'Effects':
+        'Effects', 'Death':
             slider = _effects_slider
         'UI':
             slider = _ui_slider
@@ -142,6 +142,7 @@ func _on_music_value_changed() -> void:
 func _on_effects_value_changed() -> void:
     emit_menu_navigation_sound()
     _set_bus_volume('Effects', _effects_slider.get_value())
+    _set_bus_volume('Death', _effects_slider.get_value())
 
 func _on_ui_value_changed() -> void:
     emit_menu_navigation_sound()

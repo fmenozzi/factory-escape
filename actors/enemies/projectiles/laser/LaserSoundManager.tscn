@@ -15,9 +15,11 @@ script = ExtResource( 3 )
 attenuation_visibility_radius_tiles = 16.0
 
 [node name="Telegraph" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="0" instance=ExtResource( 4 )]
+max_volume_db = -4.0
 stream = ExtResource( 7 )
 
 [node name="Shoot" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="1" instance=ExtResource( 4 )]
+max_volume_db = 1.0
 stream = ExtResource( 6 )
 
 [node name="WindDown" parent="AudioGroups/VisibilityBasedAudioGroup/AudioPlayers" index="2" instance=ExtResource( 4 )]

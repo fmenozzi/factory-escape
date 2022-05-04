@@ -76,6 +76,7 @@ stream = ExtResource( 11 )
 
 [node name="Die" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 12 )
+volume_db = 8.0
 
 [node name="LandSoft" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 stream = ExtResource( 4 )
