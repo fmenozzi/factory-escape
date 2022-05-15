@@ -73,5 +73,5 @@ anims/deactivate = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = 8.0
+volume_db = 2.0
 bus = "Effects"
