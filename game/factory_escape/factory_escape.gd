@@ -567,9 +567,9 @@ func _on_player_reached_surface(old_room: RoomFe, new_room: RoomFe) -> void:
     _health_bar.fade_out()
     _health_pack_bar.fade_out()
 
-    # TODO: Maybe make this stop more gradual (e.g. lower volume gradually as
-    #       player walks to the rest point).
+    # Stop escape sequence effects and the low-health vignette/heartbeat.
     EscapeSequenceEffects.stop()
+    _vignette.stop()
 
     # Switch to surface cutscene state, which will ground the player, have them
     # walk to some predetermined points, and then face the moon.

@@ -6,6 +6,9 @@ const TWEEN_DURATION := 0.5
 
 onready var _animation_player: AnimationPlayer = $AnimationPlayer
 
+func stop() -> void:
+    _deactivate_vignette()
+
 func _on_health_changed(old_health: int, new_health: int) -> void:
     if new_health == 1:
         # Activate vignette effect on low health.
