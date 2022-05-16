@@ -74,6 +74,7 @@ max_volume_db = -2.0
 
 [node name="WardenFightStart" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 14 )
+max_volume_db = -6.0
 
 [node name="WardenFight" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 15 )

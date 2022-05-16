@@ -289,6 +289,7 @@ func _on_boss_fight_triggered() -> void:
     # Wait a bit, then two big shakes, timed to the light pulse.
     yield(get_tree().create_timer(1.0), 'timeout')
     yield(_central_lock, 'ready_to_turn_on_new_light')
+    MusicPlayer.fade_out(_central_hub.get_room_track(), 0.5)
     _central_hub.get_offscreen_rumble_audio_player().play(0.3)
     Screenshake.start(
         Screenshake.Duration.LONG, Screenshake.Amplitude.SMALL,
@@ -309,7 +310,6 @@ func _on_boss_fight_triggered() -> void:
     warden.set_direction(Util.direction(warden, _player))
     _connect_warden_signals(warden)
     yield(warden, 'intro_sequence_landed_on_floor')
-    MusicPlayer.fade_out(_central_hub.get_room_track(), 0.5)
     var warden_fight_start: AudioStreamPlayer = MusicPlayer.get_player(MusicPlayer.Music.WARDEN_FIGHT_START)
     warden_fight_start.play()
     warden_fight_start.connect('finished', MusicPlayer, 'play', [MusicPlayer.Music.WARDEN_FIGHT])
