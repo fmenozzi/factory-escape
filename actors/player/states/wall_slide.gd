@@ -42,12 +42,18 @@ func handle_input(player: Player, event: InputEvent) -> Dictionary:
         if player.get_direction() == Util.Direction.RIGHT:
             player.set_direction(Util.Direction.LEFT)
             player.move(Vector2(-10, 0))
-            return {'new_state': Player.State.FALL}
+            return {
+                'new_state': Player.State.FALL,
+                'off_ledge': true,
+            }
     elif event.is_action_pressed('player_move_right'):
         if player.get_direction() == Util.Direction.LEFT:
             player.set_direction(Util.Direction.RIGHT)
             player.move(Vector2(10, 0))
-            return {'new_state': Player.State.FALL}
+            return {
+                'new_state': Player.State.FALL,
+                'off_ledge': true,
+            }
     elif event.is_action_pressed('player_grapple'):
         var next_grapple_point := grapple_manager.get_next_grapple_point()
         if next_grapple_point != null:
@@ -73,7 +79,10 @@ func update(player: Player, delta: float) -> Dictionary:
     # the wall without hitting our heads.
     if not player.is_on_wall():
         player.move(Vector2(-10 * player.get_direction(), 0))
-        return {'new_state': Player.State.FALL}
+        return {
+            'new_state': Player.State.FALL,
+            'off_ledge': true,
+        }
 
     # Slide down with constant speed after a slight acceleration. Also move the
     # character slightly into the wall to maintain collision with the wall so
