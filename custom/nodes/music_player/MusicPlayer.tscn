@@ -44,29 +44,33 @@ bus = "Effects"
 
 [node name="WorldBase" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 8 )
+max_volume_db = -4.0
 
 [node name="WorldSectorOne" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 10 )
+max_volume_db = -4.0
 
 [node name="WorldSectorTwo" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 11 )
+max_volume_db = -4.0
 
 [node name="WorldSectorThree" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 12 )
+max_volume_db = -4.0
 
 [node name="WorldSectorFour" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 13 )
+max_volume_db = -4.0
 
 [node name="WorldSectorFive" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 18 )
+max_volume_db = -4.0
 
 [node name="ArenaStart" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 6 )
-max_volume_db = 2.0
 
 [node name="Arena" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 4 )
-max_volume_db = 2.0
 
 [node name="ArenaEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 7 )
@@ -84,6 +88,7 @@ stream = ExtResource( 16 )
 
 [node name="LampRoom" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 3 )
+max_volume_db = -4.0
 
 [node name="LampRoomSectorFive" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 19 )
@@ -99,22 +104,27 @@ max_volume_db = -10.0
 
 [node name="EscapeSequencePreActivation" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 23 )
-max_volume_db = -4.0
+max_volume_db = -6.0
 
 [node name="EscapeSequence1" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 21 )
+max_volume_db = -1.0
 
 [node name="EscapeSequence2" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 20 )
+max_volume_db = -1.0
 
 [node name="EscapeSequence3" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 22 )
+max_volume_db = -1.0
 
 [node name="EscapeSequenceElevator" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 25 )
+max_volume_db = -1.0
 
 [node name="EscapeSequenceElevatorEnd" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 24 )
+max_volume_db = -1.0
 
 [node name="Credits" parent="AudioPlayers" instance=ExtResource( 2 )]
 stream = ExtResource( 26 )
