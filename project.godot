@@ -592,6 +592,8 @@ _global_script_class_icons={
 
 config/name="Factory Escape"
 run/main_scene="res://ui/boot_sequence/BootSequence.tscn"
+boot_splash/image="res://splash.png"
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/macos_native_icon="res://icon.ico"
 config/windows_native_icon="res://icon.ico"
