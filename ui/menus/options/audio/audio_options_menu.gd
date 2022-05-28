@@ -96,6 +96,7 @@ func load_options_version_0_1_0(config: ConfigFile) -> void:
     if config.has_section_key(SECTION, 'effects'):
         var effects: float = config.get_value(SECTION, 'effects')
         _set_bus_volume('Effects', effects)
+        _set_bus_volume('Death', effects)
         _effects_slider.set_value(effects)
 
     if config.has_section_key(SECTION, 'ui'):
