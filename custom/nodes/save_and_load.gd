@@ -95,7 +95,7 @@ func load_specific_nodes(nodes_to_load: Array) -> ErrorPlusMessage:
 
     for node in nodes_to_load:
         match Version.full():
-            '0.1.0':
+            '0.1.0', '1.0.0':
                 node.load_version_0_1_0(all_save_data)
             _:
                 return ErrorPlusMessage.new(

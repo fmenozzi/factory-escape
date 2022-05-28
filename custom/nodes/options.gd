@@ -68,7 +68,7 @@ func load_options() -> ErrorPlusMessage:
     else:
         for node in get_tree().get_nodes_in_group(GROUP):
             match Version.full():
-                '0.1.0':
+                '0.1.0', '1.0.0':
                     node.load_options_version_0_1_0(_config)
                 _:
                     return ErrorPlusMessage.new(

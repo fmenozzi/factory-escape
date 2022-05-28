@@ -597,11 +597,11 @@ boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/macos_native_icon="res://icon.ico"
 config/windows_native_icon="res://icon.ico"
-version/major=0
-version/minor=1
+version/major=1
+version/minor=0
 version/patch=0
 save_directory="user://save_data/factory_escape/"
-version/valid_versions=[ "0.1.0" ]
+version/valid_versions=[ "0.1.0", "1.0.0" ]
 
 [autoload]
 
