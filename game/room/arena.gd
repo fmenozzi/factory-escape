@@ -112,6 +112,7 @@ func _finish_arena() -> void:
     Rumble.start(Rumble.Type.WEAK, 0.5, Rumble.Priority.HIGH)
     yield(Screenshake, 'stopped_shaking')
     _player_camera.reattach()
+    Util.get_player().get_health_pack_manager().update_saved_num_health_packs()
 
     # Fade out the arena music and start the arena end -> room music sequence.
     # We yield on a timer instead of waiting for the arena end music to finish
