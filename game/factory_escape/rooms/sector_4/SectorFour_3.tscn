@@ -195,7 +195,7 @@ one_way_collision = true
 
 [node name="ComputerTerminalSmall" parent="." index="12" instance=ExtResource( 10 )]
 position = Vector2( 64, 248 )
-dialog = [ "Maintenance Report: Climbing Pins", "Climbing pins deployed in major maintenance shafts to ease routine repair work.", "The pins are vital for allowing personnel access to hard-to-reach areas of maintenance shafts, and serve as a more robust solution to site-wide", "power outages when compared to traditional lifts." ]
+dialog = [ "Maintenance Report: Climbing Pins", "Climbing pins have been deployed in major maintenance shafts to ease routine repair work.", "The pins are vital for allowing personnel access to hard-to-reach areas of maintenance shafts, and serve as a more robust solution to site-wide", "power outages when compared to traditional lifts." ]
 
 [editable path="TileMaps"]
 [editable path="GrapplePoints/Lower"]
