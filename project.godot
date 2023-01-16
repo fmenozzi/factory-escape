@@ -599,9 +599,9 @@ config/macos_native_icon="res://icon.ico"
 config/windows_native_icon="res://icon.ico"
 version/major=1
 version/minor=0
-version/patch=0
+version/patch=1
 save_directory="user://save_data/factory_escape/"
-version/valid_versions=[ "0.1.0", "1.0.0" ]
+version/valid_versions=[ "0.1.0", "1.0.0", "1.0.1" ]
 
 [autoload]
 
