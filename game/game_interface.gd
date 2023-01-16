@@ -444,6 +444,8 @@ func _on_options_saved() -> void:
     _saving_indicator.start_spinning_for(1.0)
 
 func _on_quit_to_main_menu() -> void:
+    EscapeSequenceEffects.stop()
+
     var fade_duration := 2.0
     _saving_indicator.start_spinning_for(fade_duration)
     _maybe_save_game()

@@ -27,9 +27,7 @@ environment = ExtResource( 8 )
 
 [node name="Rooms" type="Node2D" parent="World"]
 
-[node name="TemporaryNodes" type="Node2D" parent="World" groups=[
-"temporary_nodes_node",
-]]
+[node name="TemporaryNodes" type="Node2D" parent="World" groups=["temporary_nodes_node"]]
 
 [node name="Player" parent="World" instance=ExtResource( 2 )]
 position = Vector2( 50, 144 )
